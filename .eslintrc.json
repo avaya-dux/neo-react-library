@@ -19,11 +19,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "jsx-a11y",
-    "react",
-    "@typescript-eslint"
-  ],
+  "plugins": ["jsx-a11y", "react", "@typescript-eslint"],
   "settings": {
     "react": {
       "version": "detect"
