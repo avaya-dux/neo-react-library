@@ -17,6 +17,7 @@ export default defineConfig({
       name: "@avaya/neo-react",
       fileName: "avaya-neo-react",
     },
+    // TODO: the css files doesn't seem to usable via the dp, need to figure out why
 
     // TODO: I'm (Joe) a big confused about how/why we need `rollupOptions`. Should probably do further research.
     // most likely has to do with "library-mode"
