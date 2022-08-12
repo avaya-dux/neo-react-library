@@ -3,7 +3,7 @@
   "description": "This is the React version of the shared library called 'NEO' buit by Avaya",
   "repository": "github:avaya-dux/neo-react-library",
   "homepage": "https://design.avayacloud.com/components/web/setup-web#InstallReactviaNodePackageManager",
-  "version": "0.6.0",
+  "version": "0.5.6-alpha.6",
   "license": "SEE LICENSE IN LICENSE.md",
   "source": "src/index.ts",
   "types": "./dist/index.d.ts",
