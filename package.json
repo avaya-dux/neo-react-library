@@ -36,7 +36,6 @@
     "clean": "rm -rf dist storybook-static",
     "lint": "eslint src",
     "dev": "vite",
-    "start": "vite",
     "format": "yarn prettier --write ./src --loglevel warn",
     "build": "tsc && vite build",
     "storybook": "start-storybook -p 6006",

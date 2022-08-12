@@ -1,0 +1,114 @@
+import { composeStories } from "@storybook/testing-react";
+import { render } from "@testing-library/react";
+import { axe } from "jest-axe";
+
+import * as ChipsStories from "./AvatarChip.stories";
+
+jest.spyOn(console, "warn").mockImplementation(() => {});
+
+const { Default, Success, Info, AlertWithTooltip, Warning, TooltipTopLeft } =
+  composeStories(ChipsStories);
+
+describe("Avatar Chip: ", () => {
+  describe("Default", () => {
+    let renderResult;
+    beforeEach(() => {
+      renderResult = render(<Default />);
+    });
+    it("should render ok", () => {
+      const { container } = renderResult;
+      expect(container).not.toBe(null);
+    });
+
+    it("passes basic axe compliance", async () => {
+      const { container } = renderResult;
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+  });
+  describe("Success", () => {
+    let renderResult;
+    beforeEach(() => {
+      renderResult = render(<Success />);
+    });
+    it("should render ok", () => {
+      const { container } = renderResult;
+      expect(container).not.toBe(null);
+    });
+
+    it("passes basic axe compliance", async () => {
+      const { container } = renderResult;
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+  });
+  describe("Info", () => {
+    let renderResult;
+    beforeEach(() => {
+      renderResult = render(<Info />);
+    });
+    it("should render ok", () => {
+      const { container } = renderResult;
+      expect(container).not.toBe(null);
+    });
+
+    it("passes basic axe compliance", async () => {
+      const { container } = renderResult;
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+  });
+  describe("Alert", () => {
+    let renderResult;
+    beforeEach(() => {
+      renderResult = render(<AlertWithTooltip />);
+    });
+    it("should render ok", () => {
+      const { container } = renderResult;
+      expect(container).not.toBe(null);
+    });
+
+    it("passes basic axe compliance", async () => {
+      const { container } = renderResult;
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+    it("should render tooltip", async () => {
+      const { getByRole } = renderResult;
+      const tooltip = await getByRole("tooltip");
+      expect(tooltip).toHaveTextContent(/Alert/i);
+    });
+  });
+  describe("Warning", () => {
+    let renderResult;
+    beforeEach(() => {
+      renderResult = render(<Warning />);
+    });
+    it("should render ok", () => {
+      const { container } = renderResult;
+      expect(container).not.toBe(null);
+    });
+
+    it("passes basic axe compliance", async () => {
+      const { container } = renderResult;
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+  });
+  describe("TooltipTopLeft", () => {
+    let renderResult;
+    beforeEach(() => {
+      renderResult = render(<TooltipTopLeft />);
+    });
+    it("should render ok", () => {
+      const { container } = renderResult;
+      expect(container).not.toBe(null);
+    });
+
+    it("passes basic axe compliance", async () => {
+      const { container } = renderResult;
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+  });
+});

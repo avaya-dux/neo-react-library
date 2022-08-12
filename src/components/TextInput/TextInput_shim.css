@@ -1,0 +1,20 @@
+.neo-input-editable__wrapper .neo-icon-view-on:before {
+  font-size: x-large;
+}
+
+.neo-input-editable__wrapper .neo-icon-view-off:before {
+  font-size: x-large;
+}
+
+.neo-input-editable__wrapper .neo-icon-view-on,
+.neo-input-editable__wrapper .neo-icon-view-off {
+  background: none;
+  border: none;
+  padding: 0 10px;
+  border-left: 1px solid var(--input-border-color);
+}
+
+.neo-input-editable__wrapper input::-ms-reveal,
+.neo-input-editable__wrapper input::-ms-clear {
+  display: none;
+}
