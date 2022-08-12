@@ -3,19 +3,30 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "clean": "rm -rf dist",
+    "lint": "eslint src",
     "dev": "vite",
+    "start": "vite",
+    "format": "yarn prettier --write ./src --loglevel warn",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build"
   },
   "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^1.3.0",
-    "typescript": "^4.6.3",
-    "vite": "^2.9.15"
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "@vitejs/plugin-react": "^2.0.1",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.30.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.7"
   }
 }

@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
+    "strict": true,
     "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "useDefineForClassFields": true,
     "lib": [
       "DOM",
@@ -12,10 +15,7 @@
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
