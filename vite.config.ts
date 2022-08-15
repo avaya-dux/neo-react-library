@@ -33,6 +33,10 @@ export default defineConfig({
           // other "globals" from old lib:
           // "loglevel": "log",
         },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name == "style.css") return "avaya-neo-react.css";
+          return assetInfo.name;
+        },
       },
     },
   },

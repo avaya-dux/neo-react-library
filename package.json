@@ -12,6 +12,7 @@
   "source": "src/index.ts",
   "types": "./dist/index.d.ts",
   "exports": {
+    "./avaya-neo-react.css": "./dist/avaya-neo-react.css",
     ".": {
       "import": "./dist/avaya-neo-react.mjs",
       "require": "./dist/avaya-neo-react.umd.js"
@@ -47,7 +48,6 @@
     "react-focus-lock": "^2.9.1"
   },
   "peerDependencies": {
-    "@avaya/neo": "^3.59.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

@@ -5,13 +5,13 @@
 ## Install
 
 ```bash
-npm i @avaya/neo-react @avaya/neo
+npm i @avaya/neo-react
 ```
 
 or
 
 ```bash
-yarn add @avaya/neo-react @avaya/neo
+yarn add @avaya/neo-react
 ```
 
 ## License
