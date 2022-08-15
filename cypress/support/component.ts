@@ -1,3 +1,5 @@
+import { mount } from "cypress/react";
+
 // ***********************************************************
 // This example support/component.ts is processed and
 // loaded automatically before your test files.
@@ -14,5 +16,7 @@
 // ***********************************************************
 
 import "./commands";
-
 import "@avaya/neo/neo/dist/css/neo/neo.min.css";
+import "cypress-real-events/support";
+
+Cypress.Commands.add("mount", mount);

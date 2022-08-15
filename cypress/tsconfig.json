@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "lib": [
-      "es5",
-      "dom"
+      "ESNext",
+      "DOM"
     ],
     "types": [
       "cypress",
+      "cypress-real-events",
       "node"
     ]
   },

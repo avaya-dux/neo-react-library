@@ -11,6 +11,9 @@
       "DOM.Iterable",
       "ESNext"
     ],
+    "types": [
+      "cypress-real-events"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,

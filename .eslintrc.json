@@ -4,6 +4,7 @@
     "es2021": true
   },
   "extends": [
+    "plugin:cypress/recommended",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
@@ -19,7 +20,11 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["jsx-a11y", "react", "@typescript-eslint"],
+  "plugins": [
+    "jsx-a11y",
+    "react",
+    "@typescript-eslint"
+  ],
   "settings": {
     "react": {
       "version": "detect"
