@@ -4,6 +4,8 @@ export * from "./Button";
 export * from "./Chip";
 export * from "./Form";
 export * from "./Icon";
+export * from "./IconButton";
+export * from "./List";
 export * from "./NeoInputWrapper";
 export * from "./Radio";
 export * from "./Sheet";
