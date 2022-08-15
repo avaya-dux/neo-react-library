@@ -18,7 +18,6 @@ export interface ButtonProps
   animation?: "none" | "spinner" | "pulse";
   badge?: string;
   icon?: IconNamesType;
-  iconPosition?: "left" | "right";
   size?: "default" | "compact" | "wide";
   status?: "default" | "success" | "alert" | "warning" | "info" | "event";
   variant?: "primary" | "secondary" | "tertiary";
@@ -32,7 +31,6 @@ export const Button = forwardRef(
       children,
       className,
       icon,
-      iconPosition = "left",
       size = "default",
       status = "default",
       variant = "primary",
@@ -74,7 +72,6 @@ export const Button = forwardRef(
       <button
         className={buttonClasses}
         data-badge={computeBadge(badge)}
-        dir={iconPosition === "left" ? "ltr" : "rtl"}
         ref={ref}
         {...rest}
       >

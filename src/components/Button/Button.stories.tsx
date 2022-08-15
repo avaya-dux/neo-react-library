@@ -58,7 +58,7 @@ export const LeftIconExample = () => (
 );
 
 export const RightIconExample = () => (
-  <Button icon="settings" iconPosition="right">
+  <Button icon="settings" dir="rtl">
     Right Example
   </Button>
 );
