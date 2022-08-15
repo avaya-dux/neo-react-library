@@ -28,6 +28,7 @@ export default defineConfig({
       output: {
         globals: {
           react: "react",
+          "react-dom": "ReactDOM",
 
           // other "globals" from old lib:
           // "loglevel": "log",
