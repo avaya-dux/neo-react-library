@@ -4,6 +4,7 @@ export * from "./Chip";
 export * from "./Form";
 export * from "./Icon";
 export * from "./NeoInputWrapper";
+export * from "./Radio";
 export * from "./Spinner";
 export * from "./Switch";
 export * from "./TextInput";
