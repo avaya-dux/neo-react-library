@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 storybook-static
+
+cypress/screenshots/
+cypress/videos/

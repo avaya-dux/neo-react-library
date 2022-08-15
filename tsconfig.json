@@ -6,7 +6,11 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -17,7 +21,10 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "cypress.d.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
