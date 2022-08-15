@@ -1,10 +1,14 @@
 {
   "name": "@avaya/neo-react",
+  "version": "0.5.6-alpha.7",
   "description": "This is the React version of the shared library called 'NEO' buit by Avaya",
+  "license": "SEE LICENSE IN LICENSE.md",
   "repository": "github:avaya-dux/neo-react-library",
   "homepage": "https://design.avayacloud.com/components/web/setup-web#InstallReactviaNodePackageManager",
-  "version": "0.5.6-alpha.7",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "source": "src/index.ts",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -19,10 +23,6 @@
     "LICENSE.md",
     "LICENSE-3rd-party.html"
   ],
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "engines": {
     "node": ">=v16.0.0"
   },
