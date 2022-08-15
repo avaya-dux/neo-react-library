@@ -1,0 +1,38 @@
+.neo-sheet__header .neo-sheet__header--left {
+  font-size: 19px;
+  line-height: 28px;
+}
+
+.sheet-horizontal-slide-in-shim {
+  animation-name: slideInRightShim;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.sheet-horizontal-slide-out-shim {
+  animation-name: slideOutRightShim;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+@keyframes slideInRightShim {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRightShim {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

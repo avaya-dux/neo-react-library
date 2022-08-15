@@ -1,11 +1,10 @@
 import { forwardRef, useMemo } from "react";
 
-import { Spinner } from "components";
+import { Spinner } from "components/Spinner";
 import {
   computeBadge,
   getAnimationClass,
   getBadgeClass,
-  getIconClass,
   getSizeClass,
   getVariantClasses,
   IconNamesType,
@@ -13,38 +12,51 @@ import {
   showSpinner,
 } from "utils";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IconButtonProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "aria-label"> {
+  "aria-label": string;
   animation?: "none" | "spinner" | "pulse";
   badge?: string;
-  icon?: IconNamesType;
+  icon: IconNamesType;
+  shape?: "circle" | "square";
   size?: "default" | "compact" | "wide";
   status?: "default" | "success" | "alert" | "warning" | "info" | "event";
   variant?: "primary" | "secondary" | "tertiary";
 }
 
-export const Button = forwardRef(
+export const IconButton = forwardRef(
   (
     {
+      "aria-label": ariaLabel,
       animation = "none",
       badge,
-      children,
       className,
       icon,
+      shape = "square",
       size = "default",
       status = "default",
       variant = "primary",
       ...rest
-    }: ButtonProps,
+    }: IconButtonProps,
     ref: React.Ref<HTMLButtonElement>
   ) => {
+    if (!ariaLabel) {
+      console.error("`aria-label` is REQUIRED by accessibility standards.");
+    }
+
     const displaySpinner = useMemo(() => showSpinner(animation), [animation]);
 
     const buttonClasses = useMemo(() => {
+      const sizeOrShapeClass =
+        size === "wide"
+          ? `${rootBtnClass}-${size}`
+          : `${rootBtnClass}-${shape}`;
+
       const result = [
         rootBtnClass,
+        sizeOrShapeClass,
         getSizeClass(size),
-        ...getVariantClasses("none", variant, status),
+        ...getVariantClasses(shape, variant, status),
       ];
 
       const animationClass = getAnimationClass(animation);
@@ -57,28 +69,28 @@ export const Button = forwardRef(
         result.push(badgeClass);
       }
 
-      if (icon) {
-        result.push(getIconClass(icon));
-      }
-
       if (className) {
         result.push(className);
       }
 
       return result.join(" ");
-    }, [animation, badge, size, status, variant, icon, className]);
+    }, [animation, badge, shape, size, status, variant]);
 
     return (
       <button
+        aria-label={ariaLabel}
         className={buttonClasses}
         data-badge={computeBadge(badge)}
         ref={ref}
         {...rest}
       >
-        {displaySpinner && <Spinner />}
-        {children}
+        {displaySpinner ? (
+          <Spinner style={{ color: "inherit" }} />
+        ) : (
+          <span className={`neo-icon-${icon}`} style={{ fontSize: 20 }} />
+        )}
       </button>
     );
   }
 );
-Button.displayName = "Button";
+IconButton.displayName = "IconButton";
