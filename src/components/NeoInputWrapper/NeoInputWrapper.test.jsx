@@ -55,7 +55,7 @@ describe("NeoInputWrapper", () => {
   describe("getNeoInputWrapperProps", () => {
     it("returns expected props", () => {
       expect(getNeoInputWrapperProps()).toMatchInlineSnapshot(`
-        Object {
+        {
           "className": "neo-form-control",
         }
       `);
@@ -63,7 +63,7 @@ describe("NeoInputWrapper", () => {
       expect(
         getNeoInputWrapperProps({ error: true, required: true, disabled: true })
       ).toMatchInlineSnapshot(`
-        Object {
+        {
           "className": "neo-form-control neo-form-control--disabled neo-form-control--error neo-form-control--required",
         }
       `);
@@ -75,7 +75,7 @@ describe("NeoInputWrapper", () => {
           disabled: false,
         })
       ).toMatchInlineSnapshot(`
-        Object {
+        {
           "className": "neo-form-control neo-form-control--error",
         }
       `);
@@ -85,7 +85,7 @@ describe("NeoInputWrapper", () => {
       expect(
         getNeoInputWrapperProps({ wrapperClassName: "example-class-name" })
       ).toMatchInlineSnapshot(`
-        Object {
+        {
           "className": "neo-form-control example-class-name",
         }
       `);
@@ -95,13 +95,13 @@ describe("NeoInputWrapper", () => {
   describe("getInputGroupProps", () => {
     it("returns expected props", () => {
       expect(getInputGroupProps()).toMatchInlineSnapshot(`
-        Object {
+        {
           "className": "neo-input-group",
         }
       `);
 
       expect(getInputGroupProps({ inline: true })).toMatchInlineSnapshot(`
-        Object {
+        {
           "className": "neo-input-group neo-input-group--inline",
         }
       `);
@@ -110,10 +110,10 @@ describe("NeoInputWrapper", () => {
     it("allows extending of `className` via prop: `groupingClassName`", () => {
       expect(getInputGroupProps({ groupingClassName: "example-class-name" }))
         .toMatchInlineSnapshot(`
-        Object {
-          "className": "neo-input-group example-class-name",
-        }
-      `);
+          {
+            "className": "neo-input-group example-class-name",
+          }
+        `);
     });
   });
 });
