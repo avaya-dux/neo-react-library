@@ -1,6 +1,6 @@
 {
   "recommendations": [
-    "EditorConfig.EditorConfig",
+    "editorconfig.editorconfig",
     "alfnielsen.vsc-organize-imports",
     "deque-systems.vscode-axe-linter",
     "eamodio.gitlens",
@@ -12,6 +12,7 @@
     "silvenon.mdx",
     "visualstudioexptteam.vscodeintellicode",
     "vscode-icons-team.vscode-icons",
-    "wayou.vscode-todo-highlight"
+    "wayou.vscode-todo-highlight",
+    "ZixuanChen.vitest-explorer"
   ]
 }
