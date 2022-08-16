@@ -1,6 +1,7 @@
 import { Avatar } from "components/Avatar";
 
-import { Tooltip } from ".";
+import { Tooltip, TooltipPosition } from ".";
+import { translatePositionToCSSName } from "./helpers";
 
 import "./cypress-styles.css";
 
@@ -28,8 +29,10 @@ describe("Tooltip component", () => {
     const tooltipContainer = "div.neo-tooltip";
     const tooltipElement = "div.neo-tooltip div.neo-tooltip__content";
     const avatarElement = "figure.neo-avatar";
+    const tooltipPositionClass = (position: Omit<TooltipPosition, "auto">) =>
+      `neo-tooltip--${translatePositionToCSSName(position)}`;
 
-    it("should place the tooltip directly above the wrapped element if there is enough space", () => {
+    it("should assign the `top` position to a tooltip that has enough space above and to each side of itself", () => {
       cy.mount(
         <section className="heigh-ten-rem center-element">
           <Tooltip label={labelText}>
@@ -41,10 +44,13 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("not.be.visible");
       cy.get(avatarElement).realHover();
       cy.get(tooltipElement).should("be.visible");
-      cy.get(tooltipContainer).should("have.class", "neo-tooltip--up");
+      cy.get(tooltipContainer).should(
+        "have.class",
+        tooltipPositionClass("top")
+      );
     });
 
-    it("should place the tooltip directly below the wrapped element if there is enough space below but not above", () => {
+    it("should assign the `bottom` position to a tooltip that has enough space below and to each side but not above of itself", () => {
       cy.mount(
         <section className="center-element">
           <Tooltip label={labelText}>
@@ -56,7 +62,10 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("not.be.visible");
       cy.get(avatarElement).realHover();
       cy.get(tooltipElement).should("be.visible");
-      cy.get(tooltipContainer).should("have.class", "neo-tooltip--down");
+      cy.get(tooltipContainer).should(
+        "have.class",
+        tooltipPositionClass("bottom")
+      );
     });
   });
 });
