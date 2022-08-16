@@ -1,9 +1,6 @@
 import { render } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 
-import "@testing-library/jest-dom/extend-expect";
-
-expect.extend(toHaveNoViolations);
 import { Icon } from ".";
 
 describe("ExampleComponent", () => {
