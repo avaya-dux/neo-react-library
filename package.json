@@ -45,11 +45,12 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
+    "test:badges": "yarn test:coverage && jest-coverage-badges --output ./badges",
     "test:cypress": "cypress run --component -b chrome",
     "test:cypress-open": "cypress open --component -b chrome",
     "github": "yarn && yarn lint && yarn build && yarn test && yarn test:cypress",
     "netlify": "yarn && yarn build && yarn build-storybook",
-    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build-storybook && yarn test && yarn test:cypress && yarn pack"
+    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build-storybook && yarn test:cypress && yarn test:badges && yarn pack"
   },
   "dependencies": {
     "react-focus-lock": "^2.9.1"
@@ -92,6 +93,7 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-storybook": "^0.6.4",
     "jest-axe": "^6.0.0",
+    "jest-coverage-badges": "^1.1.2",
     "jsdom": "^20.0.0",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
