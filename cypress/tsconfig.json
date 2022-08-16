@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "types": [
+      "cypress",
+      "cypress-real-events",
+      "node"
+    ]
+  },
+  "include": [
+    "**/*.ts"
+  ]
+}

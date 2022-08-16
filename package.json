@@ -34,13 +34,15 @@
     "not ie <= 11"
   ],
   "scripts": {
-    "clean": "rm -rf dist storybook-static",
+    "clean": "rm -rf dist storybook-static cypress/screenshots cypress/videos",
     "lint": "eslint src",
     "dev": "vite",
     "format": "yarn prettier --write ./src --loglevel warn",
     "build": "tsc && vite build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "test:cypress": "cypress run --component -b chrome",
+    "test:cypress-open": "cypress open --component -b chrome",
     "netlify": "yarn && yarn build && yarn build-storybook",
     "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build-storybook"
   },
@@ -69,8 +71,11 @@
     "@typescript-eslint/parser": "^5.33.0",
     "@vitejs/plugin-react": "^2.0.1",
     "babel-loader": "^8.2.5",
+    "cypress": "^10.4.0",
+    "cypress-real-events": "^1.7.1",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-storybook": "^0.6.4",

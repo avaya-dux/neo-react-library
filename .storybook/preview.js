@@ -1,3 +1,5 @@
+import "@avaya/neo/neo/dist/css/neo/neo.min.css";
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
