@@ -1,7 +1,8 @@
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
-import { Spinner, getSizeClass } from "./Spinner";
+import { getSizeClass, Spinner } from "./Spinner";
 
 describe("Spinner", () => {
   it("fully renders without exploding", () => {
@@ -57,7 +58,7 @@ describe("Spinner", () => {
     });
 
     it("returns `undefined` and throws a warning if the passed size is not recognized", () => {
-      const spy = jest.spyOn(console, "warn").mockImplementation(() => {});
+      const spy = vi.spyOn(console, "warn").mockImplementation(() => null);
       expect(getSizeClass("aa")).toBe(undefined);
       expect(spy.mock.calls.length).toBe(1);
     });
