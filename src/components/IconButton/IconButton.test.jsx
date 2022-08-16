@@ -1,10 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
+import { vi } from "vitest";
+
 import { IconButton } from "./IconButton";
-
-import "@testing-library/jest-dom/extend-expect";
-
-expect.extend(toHaveNoViolations);
 
 describe("Button", () => {
   it("fully renders without exploding", () => {
@@ -37,7 +35,7 @@ describe("Button", () => {
   });
 
   it("throws a `console.error` if `aria-label` is not passed", () => {
-    const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const spy = vi.spyOn(console, "error").mockImplementation(() => null);
     render(<IconButton icon="save" shape="square" />);
 
     expect(spy.mock.calls.length).toBe(1);

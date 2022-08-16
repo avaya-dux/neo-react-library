@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 
 import { Button } from "./Button";
@@ -59,20 +59,10 @@ describe("Button", () => {
     expect(rootElement).toHaveAttribute("data-badge", badgeText.slice(0, 12));
   });
 
-  it("sets `dir='ltr'` when passed an icon without a position", () => {
-    const { getByTestId } = render(
-      <Button data-testid="neo-button" icon="settings" />
-    );
-    const rootElement = getByTestId("neo-button");
-    expect(rootElement).toHaveAttribute("dir", "ltr");
-  });
-
-  it("sets `dir='rtl'` when passed an icon with a position", () => {
-    const { getByTestId } = render(
-      <Button data-testid="neo-button" icon="settings" iconPosition="right" />
-    );
-    const rootElement = getByTestId("neo-button");
-    expect(rootElement).toHaveAttribute("dir", "rtl");
+  it("sets `dir='rtl'` when passed", () => {
+    render(<Button dir="rtl" />);
+    const btn = screen.getByRole("button");
+    expect(btn).toHaveAttribute("dir", "rtl");
   });
 
   describe("storybook tests", () => {
