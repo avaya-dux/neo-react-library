@@ -2,16 +2,18 @@ import { composeStories } from "@storybook/testing-react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { createChip } from "./ChipContainer";
 import * as ChipContainerStories from "./ChipContainer.stories";
-
-jest.spyOn(console, "warn").mockImplementation(() => {});
 
 const { BasicChips, IconChips, ClosableChips, MixedChips } =
   composeStories(ChipContainerStories);
 
 describe("Container", () => {
+  vi.spyOn(console, "warn").mockImplementation(() => null);
+  const user = userEvent.setup();
+
   describe("of BasicChips:", () => {
     let renderResult;
     beforeEach(() => {
@@ -68,14 +70,14 @@ describe("Container", () => {
 
     it("click on disabled button should not remove it", async () => {
       const chipOne = screen.getByText(/.*one/i);
-      userEvent.click(chipOne);
+      await user.click(chipOne);
       const buttons = await screen.findAllByRole("button");
       expect(buttons.length).toBe(2);
     });
 
     it("click on enabled button should remove it", async () => {
       const chipTwo = screen.getByText(/.*two/i);
-      userEvent.click(chipTwo);
+      await user.click(chipTwo);
       const buttons = await screen.findAllByRole("button");
       expect(buttons.length).toBe(1);
       // Two is gone. One is left.
@@ -86,10 +88,10 @@ describe("Container", () => {
       const buttonsBeforeDeletion = await screen.findAllByRole("button");
       expect(buttonsBeforeDeletion.length).toBe(2);
       expect(document.body).toHaveFocus();
-      userEvent.tab();
+      await user.tab();
       const chipOne = screen.getByText(/.*one/i);
       expect(chipOne).toHaveFocus();
-      userEvent.keyboard("{del}");
+      await user.keyboard("{del}");
       const buttons = await screen.findAllByRole("button");
       expect(buttons.length).toBe(2);
     });
@@ -98,13 +100,13 @@ describe("Container", () => {
       const buttonsBeforeDeletion = await screen.findAllByRole("button");
       expect(buttonsBeforeDeletion.length).toBe(2);
       expect(document.body).toHaveFocus();
-      userEvent.tab();
+      await user.tab();
       const chipOne = screen.getByText(/.*one/i);
       expect(chipOne).toHaveFocus();
-      userEvent.tab();
+      await user.tab();
       const chipTwo = screen.getByText(/.*two/i);
       expect(chipTwo).toHaveFocus();
-      userEvent.keyboard("{del}");
+      await user.keyboard("{Delete}");
       const buttons = await screen.findAllByRole("button");
       expect(buttons.length).toBe(1);
     });
@@ -113,13 +115,13 @@ describe("Container", () => {
       const buttonsBeforeDeletion = await screen.findAllByRole("button");
       expect(buttonsBeforeDeletion.length).toBe(2);
       expect(document.body).toHaveFocus();
-      userEvent.tab();
+      await user.tab();
       const chipOne = screen.getByText(/.*one/i);
       expect(chipOne).toHaveFocus();
-      userEvent.tab();
+      await user.tab();
       const chipTwo = screen.getByText(/.*two/i);
       expect(chipTwo).toHaveFocus();
-      userEvent.keyboard("{space}");
+      await user.keyboard("{space}");
       const buttons = await screen.findAllByRole("button");
       expect(buttons.length).toBe(2);
     });

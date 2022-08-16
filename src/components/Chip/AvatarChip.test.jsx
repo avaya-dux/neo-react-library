@@ -1,15 +1,16 @@
 import { composeStories } from "@storybook/testing-react";
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import * as ChipsStories from "./AvatarChip.stories";
-
-jest.spyOn(console, "warn").mockImplementation(() => {});
 
 const { Default, Success, Info, AlertWithTooltip, Warning, TooltipTopLeft } =
   composeStories(ChipsStories);
 
 describe("Avatar Chip: ", () => {
+  vi.spyOn(console, "warn").mockImplementation(() => null);
+
   describe("Default", () => {
     let renderResult;
     beforeEach(() => {
