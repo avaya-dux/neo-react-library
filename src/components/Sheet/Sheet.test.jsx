@@ -2,6 +2,7 @@ import { composeStories } from "@storybook/testing-react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { Button } from "components/Button";
 
@@ -11,6 +12,8 @@ import * as SheetStories from "./Sheet.stories";
 const { Default, Templated } = composeStories(SheetStories);
 
 describe("Sheet", () => {
+  const user = userEvent.setup();
+
   it("fully renders without exploding", () => {
     render(<Sheet aria-label="example sheet">content</Sheet>);
 
@@ -58,7 +61,7 @@ describe("Sheet", () => {
   });
 
   it("throws error if buttons are passed without a title", () => {
-    const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const spy = vi.spyOn(console, "error").mockImplementation(() => null);
     expect(() =>
       render(
         <Sheet
@@ -71,7 +74,7 @@ describe("Sheet", () => {
   });
 
   it("throws error if there is no `aria-label` or `title` passed", () => {
-    const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const spy = vi.spyOn(console, "error").mockImplementation(() => null);
     expect(() => render(<Sheet />)).toThrow();
     expect(spy).toHaveBeenCalled();
   });
@@ -83,9 +86,13 @@ describe("Sheet", () => {
   });
 
   describe("`open` functionality", () => {
-    it("when `open={true}`, a Sheet's contents _are_ visible and tab-able", () => {
-      const btnSpy = jest.fn();
-      const buttons = [<Button onClick={btnSpy}>example</Button>];
+    it("when `open={true}`, a Sheet's contents _are_ visible and tab-able", async () => {
+      const btnSpy = vi.fn();
+      const buttons = [
+        <Button onClick={btnSpy} key="example-btn">
+          example
+        </Button>,
+      ];
       render(<Sheet open={true} title="sheet title" actions={buttons} />);
 
       const sheet = screen.getByRole("dialog");
@@ -94,9 +101,9 @@ describe("Sheet", () => {
       const button = screen.getByRole("button");
 
       expect(button).not.toHaveFocus();
-      userEvent.tab();
+      await user.tab();
       expect(button).toHaveFocus();
-      userEvent.click(button);
+      await user.click(button);
       expect(btnSpy).toHaveBeenCalledTimes(1);
     });
 
