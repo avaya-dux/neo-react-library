@@ -8,8 +8,24 @@
   align-items: center;
 }
 
-.right-align-element {
+.center-right-align-element {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.center-left-align-element {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.right-align-element {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.left-align-element {
+  display: flex;
+  justify-content: flex-start;
 }
