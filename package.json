@@ -36,7 +36,7 @@
   "scripts": {
     "dev": "vite",
     "storybook": "start-storybook -p 6006",
-    "clean": "rm -rf coverage dist storybook-static cypress/screenshots cypress/videos jsdocs package *.tgz",
+    "clean": "rm -rf coverage badges dist storybook-static cypress/screenshots cypress/videos jsdocs package *.tgz",
     "format": "yarn prettier --write ./src --loglevel warn",
     "lint": "eslint src",
     "build": "tsc && vite build",
