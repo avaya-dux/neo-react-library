@@ -18,7 +18,7 @@ If you made a mistake, you can simply `unpublish` the package via
 
 
 Once that is complete, the next step is to add the release to our GitHub
-- navigate to our [GitHub releases page](https://github.com/avaya-dux/neo-library-react/releases)
+- navigate to our [GitHub releases page](https://github.com/avaya-dux/neo-react-library/releases)
 - click: "Draft a new release" (top right corner)
 - choose tag (or create a new tag on publish), using format `vX.X.X`
 - target `main` branch

@@ -11,7 +11,7 @@ This is the "living document" that describes the teams agreed upon bets practice
 - if you've added tests, show the output of the tests (image)
 - if you've added functionality, show it (eg, [with a GIF](https://gifox.io/)/recording)
 - prepend title with ticket number, eg: `NEO-420 // do the thing`
-- use JSDoc comments often; all exported components **must** have JSDoc comments ([see here for an example](https://github.com/joe-s-avaya/neo-library-react/blob/main/src/components/Switch/Switch.tsx))
+- use JSDoc comments often; all exported components **must** have JSDoc comments ([see here for an example](https://github.com/avaya-dux/neo-react-library/blob/main/src/components/Switch/Switch.tsx))
 - all PRs that adjust UX _must_ describe exactly how/why their work is accessible and include descriptions of the resources on how they know it is (gifs, articles, wcag docs, ect)
 - "squash and merge" your branch into `main` ![squash and merge github example](./images/squash-and-merge.png)
 
