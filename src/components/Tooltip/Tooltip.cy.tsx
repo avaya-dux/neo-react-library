@@ -4,29 +4,20 @@ import { Tooltip } from ".";
 
 describe("Tooltip component", () => {
   it("renders without exploding", () => {
-    const datatestid = "Tooltip-root";
-    const rootElement = `[data-testid='${datatestid}']`;
     const labelText = "cypress example label";
+    const tooltipContainer = "div.neo-tooltip";
+    const tooltipElement = "div.neo-tooltip div.neo-tooltip__content";
+    const avatarElement = "figure.neo-avatar";
 
     cy.mount(
-      <Tooltip label={labelText} data-testid={datatestid}>
+      <Tooltip label={labelText}>
         <Avatar />
       </Tooltip>
     );
 
-    cy.get(rootElement).should("contain.text", labelText);
-  });
-
-  // TODO: add tests for the six possible positions
-  it("test", () => {
-    cy.mount(
-      <Tooltip label="test" data-testid="test">
-        <Avatar />
-      </Tooltip>
-    );
-
-    cy.get("div.neo-tooltip__content").should("not.be.visible");
-    cy.get("figure.neo-avatar").realHover();
-    cy.get("div.neo-tooltip__content").should("be.visible");
+    cy.get(tooltipContainer).should("contain.text", labelText);
+    cy.get(tooltipElement).should("not.be.visible");
+    cy.get(avatarElement).realHover();
+    cy.get(tooltipElement).should("be.visible");
   });
 });
