@@ -9,6 +9,7 @@ import * as AccordionStories from "./Accordion.stories";
 const { Default } = composeStories(AccordionStories);
 
 describe("Accordion Component", () => {
+  const user = userEvent.setup();
   const headerText = "Accordion Header";
   const bodyText = "This is a body content";
 
@@ -26,11 +27,11 @@ describe("Accordion Component", () => {
     expect(results).toHaveNoViolations();
   });
 
-  it("button click functionality works as expected and assigns appropriate aria-expanded value", () => {
+  it("button click functionality works as expected and assigns appropriate aria-expanded value", async () => {
     render(<Accordion header={headerText}>{bodyText}</Accordion>);
     const AccordionElement = screen.getByRole("button");
     expect(AccordionElement).toHaveAttribute("aria-expanded", "false");
-    userEvent.click(AccordionElement);
+    await user.click(AccordionElement);
     const AccordionAfterClick = screen.getByRole("button");
     expect(AccordionAfterClick).toHaveAttribute("aria-expanded", "true");
   });
