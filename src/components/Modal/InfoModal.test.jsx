@@ -1,8 +1,8 @@
 import { composeStories } from "@storybook/testing-react";
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
-import { InfoModal } from ".";
 
+import { InfoModal } from ".";
 import * as InfoModalStories from "./InfoModal.stories";
 
 describe("InfoModal: ", () => {
@@ -28,7 +28,6 @@ describe("InfoModal: ", () => {
               class="neo-btn neo-btn--default neo-btn-primary neo-btn-primary--default"
               data-badge=""
               data-testid="neo-button-show"
-              dir="ltr"
               id="btn-show"
             >
               Show
@@ -65,7 +64,6 @@ describe("InfoModal: ", () => {
               class="neo-btn neo-btn--default neo-btn-primary neo-btn-primary--default"
               data-badge=""
               data-testid="neo-button-show"
-              dir="ltr"
               id="btn-show"
             >
               Show
@@ -102,7 +100,6 @@ describe("InfoModal: ", () => {
               class="neo-btn neo-btn--default neo-btn-primary neo-btn-primary--default"
               data-badge=""
               data-testid="neo-button-show"
-              dir="ltr"
               id="btn-show"
             >
               Show
@@ -122,7 +119,7 @@ describe("InfoModal: ", () => {
       const datatestid = "InfoModal-root";
 
       const { getByTestId } = render(
-        <InfoModal id={datatestid} onClose={() => {}} open={true}>
+        <InfoModal id={datatestid} onClose={() => null} open={true}>
           This is some content
         </InfoModal>
       );
@@ -133,7 +130,7 @@ describe("InfoModal: ", () => {
     it("Does not Render when open is false", () => {
       const datatestid = "InfoModal-root";
       const { queryAllByTestId } = render(
-        <InfoModal id={datatestid} onClose={() => {}} open={false}>
+        <InfoModal id={datatestid} onClose={() => null} open={false}>
           This is some content
         </InfoModal>
       );
