@@ -2,6 +2,7 @@ import { composeStories } from "@storybook/testing-react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { Switch } from "./";
 import * as SwitchStories from "./Switch.stories";
@@ -9,6 +10,7 @@ import * as SwitchStories from "./Switch.stories";
 const { Default, FormControl, Template } = composeStories(SwitchStories);
 
 describe("Switch Component", () => {
+  const user = userEvent.setup();
   const labelText = "example label";
 
   it("fully renders without exploding", () => {
@@ -28,27 +30,27 @@ describe("Switch Component", () => {
   });
 
   describe("applies `disabled` prop functionality appropriately", () => {
-    it("does not allow toggle when disabled", () => {
+    it("does not allow toggle when disabled", async () => {
       render(<Switch disabled>{labelText}</Switch>);
 
       const input = screen.getByRole("switch");
       expect(input).toBeDisabled();
       expect(input).not.toBeChecked();
 
-      userEvent.click(input);
+      await user.click(input);
       expect(input).toBeDisabled();
       expect(input).not.toBeChecked();
     });
 
-    it("toggles Switch when not `disabled`", () => {
-      const changeSpy = jest.fn();
+    it("toggles Switch when not `disabled`", async () => {
+      const changeSpy = vi.fn();
       render(<Switch onChange={changeSpy}>{labelText}</Switch>);
 
       const input = screen.getByRole("switch");
       expect(input).not.toBeDisabled();
       expect(input).not.toBeChecked();
 
-      userEvent.click(input);
+      await user.click(input);
       expect(input).toBeChecked();
       expect(changeSpy).toHaveBeenCalledTimes(1);
     });

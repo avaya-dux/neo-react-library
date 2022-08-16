@@ -9,8 +9,10 @@ import * as Stories from "./AccordionGroup.stories";
 const { Default } = composeStories(Stories);
 
 describe("Group Accordion Component", () => {
+  const user = userEvent.setup();
   const groupHeaderText = "Accordion group heading";
   const bodyText = "Some body data";
+
   it("render without erros", () => {
     render(
       <AccordionGroup header={groupHeaderText}>
@@ -33,7 +35,7 @@ describe("Group Accordion Component", () => {
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
-  it("Check button click functionality and assigns appropriate aria-expanded value", () => {
+  it("Check button click functionality and assigns appropriate aria-expanded value", async () => {
     render(
       <AccordionGroup header={groupHeaderText}>
         <Accordion header="heading 1">{bodyText}</Accordion>
@@ -43,10 +45,10 @@ describe("Group Accordion Component", () => {
     );
     const AccordionElements = screen.getAllByRole("button");
     expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
-    userEvent.click(AccordionElements[0]);
+    await user.click(AccordionElements[0]);
     expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "false");
   });
-  it("Check group accordion render properly by having a default open, when `allowOnlyOne` prop is passed", () => {
+  it("Check group accordion render properly by having a default open, when `allowOnlyOne` prop is passed", async () => {
     render(
       <AccordionGroup header={groupHeaderText} allowOnlyOne>
         <Accordion header="heading 1">{bodyText}</Accordion>
@@ -58,7 +60,7 @@ describe("Group Accordion Component", () => {
     // by default it opens first accordion
     expect(AccordionElements[0]).toHaveTextContent("heading 1");
     expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
-    userEvent.click(AccordionElements[0]);
+    await user.click(AccordionElements[0]);
     // remains open/true untill clicked on other accordion
     expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
   });

@@ -8,18 +8,10 @@ import {
   getAvatarStatusProps,
 } from "./Avatar";
 
-const errorSpy = jest
-  .spyOn(global.console, "error")
-  .mockImplementationOnce(() => null);
-
-beforeEach(() => {
-  errorSpy.mockReset();
-});
-
 describe("getAvatarFigureProps", () => {
   it("returns expected props", () => {
     expect(getAvatarFigureProps({ label: "Jeff" })).toMatchInlineSnapshot(`
-      Object {
+      {
         "aria-label": "Jeff",
         "className": "neo-avatar neo-avatar--generic",
       }
@@ -27,24 +19,24 @@ describe("getAvatarFigureProps", () => {
 
     expect(getAvatarFigureProps({ label: "Jim", size: "sm", variant: "bot" }))
       .toMatchInlineSnapshot(`
-      Object {
-        "aria-label": "Jim",
-        "className": "neo-avatar neo-avatar--small neo-avatar--small--bot",
-      }
-    `);
+        {
+          "aria-label": "Jim",
+          "className": "neo-avatar neo-avatar--small neo-avatar--small--bot",
+        }
+      `);
 
     expect(getAvatarFigureProps({ label: "Jenna", size: "md", variant: "bot" }))
       .toMatchInlineSnapshot(`
-      Object {
-        "aria-label": "Jenna",
-        "className": "neo-avatar neo-avatar--bot",
-      }
-    `);
+        {
+          "aria-label": "Jenna",
+          "className": "neo-avatar neo-avatar--bot",
+        }
+      `);
 
     expect(
       getAvatarFigureProps({ label: "Jezebel", size: "lg", variant: "bot" })
     ).toMatchInlineSnapshot(`
-      Object {
+      {
         "aria-label": "Jezebel",
         "className": "neo-avatar neo-avatar--large neo-avatar--large--bot",
       }
@@ -57,7 +49,7 @@ describe("getAvatarFigureProps", () => {
         variant: "generic",
       })
     ).toMatchInlineSnapshot(`
-      Object {
+      {
         "aria-label": "Jerry",
         "className": "neo-avatar neo-avatar--small neo-avatar--small--generic",
       }
@@ -70,7 +62,7 @@ describe("getAvatarFigureProps", () => {
         variant: "generic",
       })
     ).toMatchInlineSnapshot(`
-      Object {
+      {
         "aria-label": "Jordan",
         "className": "neo-avatar neo-avatar--generic",
       }
@@ -83,7 +75,7 @@ describe("getAvatarFigureProps", () => {
         variant: "generic",
       })
     ).toMatchInlineSnapshot(`
-      Object {
+      {
         "aria-label": "Jemima",
         "className": "neo-avatar neo-avatar--large neo-avatar--large--generic",
       }
@@ -91,20 +83,20 @@ describe("getAvatarFigureProps", () => {
 
     expect(getAvatarFigureProps({ label: "Jonah", initials: "JJ" }))
       .toMatchInlineSnapshot(`
-      Object {
-        "aria-label": "Jonah",
-        "className": "neo-avatar",
-        "data-initials": "JJ",
-      }
-    `);
+        {
+          "aria-label": "Jonah",
+          "className": "neo-avatar",
+          "data-initials": "JJ",
+        }
+      `);
 
     expect(getAvatarFigureProps({ label: "Joey", border: "default" }))
       .toMatchInlineSnapshot(`
-      Object {
-        "aria-label": "Joey",
-        "className": "neo-avatar neo-avatar--generic neo-avatar--default",
-      }
-    `);
+        {
+          "aria-label": "Joey",
+          "className": "neo-avatar neo-avatar--generic neo-avatar--default",
+        }
+      `);
 
     // and finally a bit of everything
     expect(
@@ -116,7 +108,7 @@ describe("getAvatarFigureProps", () => {
         border: "success",
       })
     ).toMatchInlineSnapshot(`
-      Object {
+      {
         "aria-label": "John",
         "className": "neo-avatar neo-avatar--large neo-avatar--large--bot neo-avatar--success",
         "data-initials": "JJ",
@@ -126,7 +118,7 @@ describe("getAvatarFigureProps", () => {
 
   it("does not set aria-label if no `label` passed", () => {
     expect(getAvatarFigureProps()).toMatchInlineSnapshot(`
-      Object {
+      {
         "className": "neo-avatar neo-avatar--generic",
       }
     `);
@@ -135,10 +127,10 @@ describe("getAvatarFigureProps", () => {
   it("does not set aria-label if there is an image", () => {
     expect(getAvatarFigureProps({ label: "Jonah", image: "jjonah.jpg" }))
       .toMatchInlineSnapshot(`
-      Object {
-        "className": "neo-avatar",
-      }
-    `);
+        {
+          "className": "neo-avatar",
+        }
+      `);
   });
 });
 
@@ -147,7 +139,7 @@ describe("getAvatarImageProps", () => {
     expect(
       getAvatarImageProps({ label: "Free Guy", image: "/images/freeguy.png" })
     ).toMatchInlineSnapshot(`
-      Object {
+      {
         "alt": "Free Guy",
         "className": "neo-img",
         "src": "/images/freeguy.png",
@@ -155,38 +147,39 @@ describe("getAvatarImageProps", () => {
     `);
   });
 });
+
 describe("getAvatarStatusProps", () => {
   it("returns expected props", () => {
     expect(getAvatarStatusProps()).toMatchInlineSnapshot(`
-      Object {
+      {
         "className": "neo-avatar-status",
       }
     `);
 
     expect(getAvatarStatusProps({ status: "available" }))
       .toMatchInlineSnapshot(`
-      Object {
-        "className": "neo-avatar-status neo-avatar-status--available",
-      }
-    `);
+        {
+          "className": "neo-avatar-status neo-avatar-status--available",
+        }
+      `);
     expect(getAvatarStatusProps({ status: "busy" })).toMatchInlineSnapshot(`
-      Object {
+      {
         "className": "neo-avatar-status neo-avatar-status--busy",
       }
     `);
     expect(getAvatarStatusProps({ status: "away" })).toMatchInlineSnapshot(`
-      Object {
+      {
         "className": "neo-avatar-status neo-avatar-status--away",
       }
     `);
     expect(getAvatarStatusProps({ status: "do-not-disturb" }))
       .toMatchInlineSnapshot(`
-      Object {
-        "className": "neo-avatar-status neo-avatar-status--do-not-disturb",
-      }
-    `);
+        {
+          "className": "neo-avatar-status neo-avatar-status--do-not-disturb",
+        }
+      `);
     expect(getAvatarStatusProps({ status: "offline" })).toMatchInlineSnapshot(`
-      Object {
+      {
         "className": "neo-avatar-status neo-avatar-status--offline",
       }
     `);
@@ -232,6 +225,7 @@ describe("Avatar", () => {
       <div>
         <figure
           class="neo-avatar neo-avatar--large neo-avatar--default"
+          status="available"
         >
           <img
             alt="Joey Joe Joe Jr."
@@ -264,6 +258,7 @@ describe("Avatar", () => {
           aria-label="J. Jonah Jameson"
           class="neo-avatar neo-avatar--small neo-avatar--small--generic neo-avatar--alert"
           data-initials="JJ"
+          status="available"
         >
           <div
             class="neo-avatar-status neo-avatar-status--available"
@@ -272,6 +267,7 @@ describe("Avatar", () => {
       </div>
     `);
   });
+
   it("Small Avatar accessibility ok", async () => {
     const { container } = render(<Avatar size="sm" variant="bot" />);
     const results = await axe(container);

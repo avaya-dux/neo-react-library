@@ -1,6 +1,7 @@
 import { composeStories } from "@storybook/testing-react";
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { InternalTextInputElement, TextInput } from "./TextInput";
 import * as TextInputStories from "./TextInput.stories";
@@ -31,7 +32,7 @@ describe("TextInput", () => {
   });
 
   it("throws an error without `label` AND `placeholder`", () => {
-    const errorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => null);
     expect(() => {
       render(<TextInput />);
     }).toThrow();
@@ -40,15 +41,11 @@ describe("TextInput", () => {
   });
 
   it("does not throw an error with `label` OR `placeholder`", () => {
-    const errorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
-
     expect(() => render(<TextInput label="truthy" />)).not.toThrow();
     expect(() => render(<TextInput placeholder="truthy" />)).not.toThrow();
     expect(() =>
       render(<TextInput label="double" placeholder="truthy" />)
     ).not.toThrow();
-
-    expect(errorSpy).not.toHaveBeenCalled();
   });
 
   describe("InternalTextInputElement", () => {
@@ -247,9 +244,9 @@ describe("TextInput", () => {
 
     describe("BadAccessibility", () => {
       it("explodes", async () => {
-        const errorSpy = jest
+        const errorSpy = vi
           .spyOn(console, "error")
-          .mockImplementation(() => {});
+          .mockImplementation(() => null);
 
         expect(() => {
           render(<BadAccessibility />);

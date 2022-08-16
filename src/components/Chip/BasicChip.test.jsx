@@ -1,16 +1,17 @@
 import { composeStories } from "@storybook/testing-react";
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { getBasicChipClassNames } from "./BasicChip";
 import * as ChipsStories from "./BasicChip.stories";
-
-jest.spyOn(console, "warn").mockImplementation(() => {});
 
 const { Default, Success, Info, AlertWithTooltip, Warning, TooltipTopLeft } =
   composeStories(ChipsStories);
 
 describe("Basic Chip: ", () => {
+  vi.spyOn(console, "warn").mockImplementation(() => null);
+
   describe("Default", () => {
     let renderResult;
     beforeEach(() => {

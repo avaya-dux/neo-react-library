@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+
 import { NeoThemeProvider, useNeoTheme } from "./ThemeProvider";
 
 describe("NeoThemeProvider", () => {
@@ -73,10 +74,10 @@ describe("NeoThemeProvider", () => {
     expect(view.container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="neo-global-colors neo-dark"
+          class="neo-global-colors"
         >
           <button>
-            Set Light
+            Set Dark
           </button>
         </div>
       </div>

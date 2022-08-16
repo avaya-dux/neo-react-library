@@ -1,6 +1,7 @@
 import { composeStories } from "@storybook/testing-react";
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import {
   ClosableChip,
@@ -8,8 +9,6 @@ import {
   getClosableChipClassNames,
 } from "./ClosableChip";
 import * as ClosableChipStories from "./ClosableChip.stories";
-
-jest.spyOn(console, "warn").mockImplementation(() => {});
 
 const {
   ClosableDefault,
@@ -21,6 +20,8 @@ const {
 } = composeStories(ClosableChipStories);
 
 describe("Closable Chip: ", () => {
+  vi.spyOn(console, "warn").mockImplementation(() => null);
+
   describe("Default", () => {
     let renderResult;
     beforeEach(() => {

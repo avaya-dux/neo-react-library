@@ -1,6 +1,7 @@
 import { composeStories } from "@storybook/testing-react";
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import * as ListStories from "./List.stories";
 
@@ -10,7 +11,7 @@ describe("List: ", () => {
     let renderResult;
 
     beforeEach(() => {
-      jest.spyOn(console, "warn").mockImplementation(() => {});
+      vi.spyOn(console, "warn").mockImplementation(() => null);
       renderResult = render(<PortalListItemExamples />);
     });
 
@@ -29,7 +30,7 @@ describe("List: ", () => {
     let renderResult;
 
     beforeEach(() => {
-      jest.spyOn(console, "warn").mockImplementation(() => {});
+      vi.spyOn(console, "warn").mockImplementation(() => null);
       renderResult = render(<PortalListSectionsExamples />);
     });
 
