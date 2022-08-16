@@ -139,7 +139,7 @@ describe("Tooltip component", () => {
     });
 
     it("should assign the `left` position to a tooltip that does not have enough space above or below itself, but does have space to the left of itself", () => {
-      cy.viewport(500, 90);
+      cy.viewport(500, 70);
       cy.mount(
         <section className="right-align-element">
           <Tooltip label={labelText}>
@@ -158,7 +158,7 @@ describe("Tooltip component", () => {
     });
 
     it("should assign the `right` position to a tooltip that does not have enough space above, below, or left of itself, but does have space to the right of itself", () => {
-      cy.viewport(500, 90);
+      cy.viewport(500, 70);
       cy.mount(
         <section>
           <Tooltip label={labelText}>
