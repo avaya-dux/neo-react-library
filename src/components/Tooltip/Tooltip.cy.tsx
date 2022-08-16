@@ -6,12 +6,12 @@ import { translatePositionToCSSName } from "./helpers";
 import "./cypress-styles.css";
 
 describe("Tooltip component", () => {
-  it("renders without exploding", () => {
-    const labelText = "cypress example label";
-    const tooltipContainer = "div.neo-tooltip";
-    const tooltipElement = "div.neo-tooltip div.neo-tooltip__content";
-    const avatarElement = "figure.neo-avatar";
+  const labelText = "cypress example label";
+  const tooltipContainer = "div.neo-tooltip";
+  const tooltipElement = "div.neo-tooltip div.neo-tooltip__content";
+  const avatarElement = "figure.neo-avatar";
 
+  it("renders without exploding", () => {
     cy.mount(
       <Tooltip label={labelText}>
         <Avatar />
@@ -25,10 +25,6 @@ describe("Tooltip component", () => {
   });
 
   describe("'auto' positions are shown appropriately", () => {
-    const labelText = "cypress example label";
-    const tooltipContainer = "div.neo-tooltip";
-    const tooltipElement = "div.neo-tooltip div.neo-tooltip__content";
-    const avatarElement = "figure.neo-avatar";
     const tooltipPositionClass = (position: Omit<TooltipPosition, "auto">) =>
       `neo-tooltip--${translatePositionToCSSName(position)}`;
 
@@ -65,6 +61,44 @@ describe("Tooltip component", () => {
       cy.get(tooltipContainer).should(
         "have.class",
         tooltipPositionClass("bottom")
+      );
+    });
+
+    it("should assign the `right` position to a tooltip that does not have enough space above, below, or left of itself, but does have space to the right of itself", () => {
+      cy.viewport(500, 90);
+      cy.mount(
+        <section>
+          <Tooltip label={labelText}>
+            <Avatar />
+          </Tooltip>
+        </section>
+      );
+
+      cy.get(tooltipElement).should("not.be.visible");
+      cy.get(avatarElement).realHover();
+      cy.get(tooltipElement).should("be.visible");
+      cy.get(tooltipContainer).should(
+        "have.class",
+        tooltipPositionClass("right")
+      );
+    });
+
+    it("should assign the `left` position to a tooltip that does not have enough space above or below itself, but does have space to the left of itself", () => {
+      cy.viewport(500, 90);
+      cy.mount(
+        <section className="right-align-element">
+          <Tooltip label={labelText}>
+            <Avatar />
+          </Tooltip>
+        </section>
+      );
+
+      cy.get(tooltipElement).should("not.be.visible");
+      cy.get(avatarElement).realHover();
+      cy.get(tooltipElement).should("be.visible");
+      cy.get(tooltipContainer).should(
+        "have.class",
+        tooltipPositionClass("left")
       );
     });
   });

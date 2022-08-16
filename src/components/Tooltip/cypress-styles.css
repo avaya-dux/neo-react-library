@@ -7,3 +7,9 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.right-align-element {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
