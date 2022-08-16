@@ -41,11 +41,15 @@
     "lint": "eslint src",
     "build": "tsc && vite build",
     "build-storybook": "build-storybook",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
     "test:cypress": "cypress run --component -b chrome",
     "test:cypress-open": "cypress open --component -b chrome",
     "github": "yarn && yarn lint && yarn build && yarn test && yarn test:cypress",
     "netlify": "yarn && yarn build && yarn build-storybook",
-    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build-storybook && yarn test:cypress && yarn pack"
+    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build-storybook && yarn test && yarn test:cypress && yarn pack"
   },
   "dependencies": {
     "react-focus-lock": "^2.9.1"
@@ -66,11 +70,13 @@
     "@storybook/builder-vite": "^0.2.2",
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
+    "@testing-library/react": "^13.3.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "@vitejs/plugin-react": "^2.0.1",
+    "@vitest/ui": "^0.22.0",
     "babel-loader": "^8.2.5",
     "cypress": "^10.4.0",
     "cypress-real-events": "^1.7.1",
@@ -80,11 +86,13 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-storybook": "^0.6.4",
+    "jsdom": "^20.0.0",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^4.7.4",
     "vite": "^3.0.7",
-    "vite-plugin-dts": "^1.4.1"
+    "vite-plugin-dts": "^1.4.1",
+    "vitest": "^0.22.0"
   }
 }
