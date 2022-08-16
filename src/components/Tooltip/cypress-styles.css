@@ -1,0 +1,9 @@
+.heigh-ten-rem {
+  height: 10rem;
+}
+
+.center-element {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

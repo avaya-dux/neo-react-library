@@ -1,4 +1,3 @@
-// TODO: add cypress tests back in
 import clsx from "clsx";
 import {
   Children,
