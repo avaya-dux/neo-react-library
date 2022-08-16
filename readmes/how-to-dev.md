@@ -4,7 +4,7 @@
 
 > For unit testing we use [Vitest](https://vitest.dev/), for integration testing we use [Cypress](https://www.cypress.io/how-it-works), for linting we use [ESLint](https://eslint.org/) and for code consistency we use [Prettier](https://prettier.io/).
 
-> You can see an overview of [the libraries structure here](https://app.codesee.io/maps/public/188812a0-d098-11ec-bea5-0157c94ef4f8). Generated via [CodeSee](https://www.codesee.io/).
+> You can see an overview of [the libraries structure here](https://app.codesee.io/maps/public/fe362a60-1da7-11ed-8a0e-8356adbc562c). Generated via [CodeSee](https://www.codesee.io/).
 
 ## first steps
 
