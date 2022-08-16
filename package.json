@@ -34,17 +34,18 @@
     "not ie <= 11"
   ],
   "scripts": {
-    "clean": "rm -rf dist storybook-static cypress/screenshots cypress/videos",
-    "lint": "eslint src",
     "dev": "vite",
-    "format": "yarn prettier --write ./src --loglevel warn",
-    "build": "tsc && vite build",
     "storybook": "start-storybook -p 6006",
+    "clean": "rm -rf coverage dist storybook-static cypress/screenshots cypress/videos jsdocs package *.tgz",
+    "format": "yarn prettier --write ./src --loglevel warn",
+    "lint": "eslint src",
+    "build": "tsc && vite build",
     "build-storybook": "build-storybook",
     "test:cypress": "cypress run --component -b chrome",
     "test:cypress-open": "cypress open --component -b chrome",
+    "github": "yarn && yarn lint && yarn build && yarn test && yarn test:cypress",
     "netlify": "yarn && yarn build && yarn build-storybook",
-    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build-storybook && yarn test:cypress"
+    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build-storybook && yarn test:cypress && yarn pack"
   },
   "dependencies": {
     "react-focus-lock": "^2.9.1"

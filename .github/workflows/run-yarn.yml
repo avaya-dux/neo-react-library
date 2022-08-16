@@ -2,11 +2,11 @@ name: CI (lint+build+tests)
 on: [push]
 jobs:
   build:
-    name: run `yarn all`
+    name: run `yarn github`
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
-      - run: yarn all
+      - run: yarn github
