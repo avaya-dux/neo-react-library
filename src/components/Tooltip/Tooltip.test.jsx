@@ -1,6 +1,7 @@
 import { composeStories } from "@storybook/testing-react";
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { Tooltip } from ".";
 import {
@@ -16,9 +17,9 @@ const { Default, Templated, MultipleChildren, AutoPosition } =
 
 describe("Tooltip", () => {
   it("fully renders without exploding", () => {
-    jest.spyOn(console, "warn").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => null);
     const { getByRole } = render(
-      <Tooltip children="text" label="default tooltip text" />
+      <Tooltip label="default tooltip text">text</Tooltip>
     );
 
     const rootElement = getByRole("tooltip");
@@ -275,25 +276,25 @@ describe("Tooltip", () => {
       });
 
       it("if an improper string is passed, it shows a console error", () => {
-        const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+        const spy = vi.spyOn(console, "error").mockImplementation(() => null);
         translatePositionToCSSName("bad string");
         expect(spy.mock.calls.length).toBe(1);
       });
 
       it("if an improper string is passed, it returns 'up'", () => {
-        jest.spyOn(console, "error").mockImplementation(() => {});
+        vi.spyOn(console, "error").mockImplementation(() => null);
         expect(translatePositionToCSSName("bad string")).toBe("up");
       });
     });
 
     describe("getMultilineClassName", () => {
       it("if an improper value is passed, it shows a console error", () => {
-        const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+        const spy = vi.spyOn(console, "error").mockImplementation(() => null);
         getMultilineClassName("bad value");
         expect(spy.mock.calls.length).toBe(1);
       });
       it("if an improper value is passed, it returns `MultilineClassName`", () => {
-        const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+        vi.spyOn(console, "error").mockImplementation(() => null);
         expect(getMultilineClassName("bad value")).toBe(MultilineClassName);
       });
       it("returns `MultilineClassName` if passed `undefined` or `true`", () => {
@@ -333,7 +334,7 @@ describe("Tooltip", () => {
       });
 
       it("defaults to `up` if no 'ideal' position can be found", () => {
-        const spy = jest.spyOn(console, "warn").mockImplementation(() => {});
+        const spy = vi.spyOn(console, "warn").mockImplementation(() => null);
         const actualResult = getIdealTooltipPosition(
           {
             width: 0,
@@ -349,7 +350,7 @@ describe("Tooltip", () => {
       });
 
       it("returns `up` if the tooltip can be displayed above it's `rootElement` without touching the top, left, or right of it's designated container", () => {
-        const spy = jest.spyOn(console, "warn").mockImplementation(() => {});
+        const spy = vi.spyOn(console, "warn").mockImplementation(() => null);
 
         rootElementMock.offsetTop = 100;
         rootElementMock.offsetLeft = 100;
