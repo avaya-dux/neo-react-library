@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { RadioGroup } from ".";
 
@@ -48,8 +49,7 @@ describe("RadioGroup", () => {
   let renderResult;
 
   beforeEach(() => {
-    // ignore tooltip position warning
-    jest.spyOn(console, "warn").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => null);
 
     renderResult = render(<RadioGroup {...DefaultProps} />);
   });
@@ -84,10 +84,7 @@ describe("RadioGroup", () => {
     const { getByTestId } = renderResult;
     DefaultRadioArray.forEach((radioObject) => {
       const radio = getByTestId(`Radio-root-${radioObject.label}`);
-      expect(radio).toHaveAttribute(
-        "id",
-        `radio-id-${DefaultProps.groupName}-${radioObject.label}`
-      );
+      expect(radio).toHaveAttribute("id", `radio-id-${radioObject.label}`);
     });
   });
 
@@ -96,13 +93,10 @@ describe("RadioGroup", () => {
     DefaultRadioArray.forEach((radioObject) => {
       const radio = getByTestId(`Radio-root-${radioObject.label}`);
       const radioLabel = getByTestId(`Radio-label-root-${radioObject.label}`);
-      expect(radio).toHaveAttribute(
-        "id",
-        `radio-id-${DefaultProps.groupName}-${radioObject.label}`
-      );
+      expect(radio).toHaveAttribute("id", `radio-id-${radioObject.label}`);
       expect(radioLabel).toHaveAttribute(
         "for",
-        `radio-id-${DefaultProps.groupName}-${radioObject.label}`
+        `radio-id-${radioObject.label}`
       );
     });
   });
@@ -121,7 +115,7 @@ describe("RadioGroup", () => {
   });
 
   it("renders with a Tooltip in the correct position", () => {
-    jest.spyOn(console, "warn").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => null);
     const { getByLabelText } = renderResult;
     DefaultRadioArray.forEach((radio) => {
       if (radio.tootip) {

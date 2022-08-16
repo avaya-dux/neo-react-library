@@ -17,7 +17,7 @@ export const Radio = ({
   value,
   ...rest
 }: RadioProps) => {
-  const idForLabel = useMemo(() => `radio-id-${name}-${value}`, [name, value]);
+  const idForLabel = useMemo(() => `radio-id-${value}`, [value]);
   const radioTestId = useMemo(() => `Radio-root-${value}`, [value]);
   const labelTestId = useMemo(() => `Radio-label-root-${value}`, [value]);
 
