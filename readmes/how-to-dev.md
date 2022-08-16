@@ -1,8 +1,8 @@
 # how to dev
 
-> Scaffolded via [create-react-library](https://github.com/transitive-bullshit/create-react-library) (with TypeScript support) and then modified to simplify the build process with [rollupjs](https://www.rollupjs.org/).
+> Scaffolded via [Vite](https://vitejs.dev/).
 
-> For unit testing we use [jest](https://jestjs.io/), for integration testing we use [Cypress](https://www.cypress.io/how-it-works), for linting we use [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/).
+> For unit testing we use [Vitest](https://vitest.dev/), for integration testing we use [Cypress](https://www.cypress.io/how-it-works), for linting we use [ESLint](https://eslint.org/) and for code consistency we use [Prettier](https://prettier.io/).
 
 > You can see an overview of [the libraries structure here](https://app.codesee.io/maps/public/188812a0-d098-11ec-bea5-0157c94ef4f8). Generated via [CodeSee](https://www.codesee.io/).
 
