@@ -1,0 +1,13 @@
+.neo-leftnav__main .neo-btn-tertiary--default[disabled] {
+  color: var(--leftnav-main-default-disabled-color);
+  font-size: 14px;
+  font-family: noto-sans, sans-serif;
+  width: max-content;
+}
+.neo-leftnav__main .neo-btn-tertiary--default::before {
+  font-size: 21px;
+}
+
+.neo-leftnav__main a {
+  text-decoration: none;
+}

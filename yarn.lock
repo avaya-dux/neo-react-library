@@ -8697,6 +8697,11 @@ log-update@^4.0.0:
     slice-ansi "^4.0.0"
     wrap-ansi "^6.2.0"
 
+loglevel@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.8.0.tgz#e7ec73a57e1e7b419cb6c6ac06bf050b67356114"
+  integrity sha512-G6A/nJLRgWOuuwdNuA6koovfEV1YpqqAG4pRUlFaz3jj2QNZ8M4vBqnVA+HBTmU/AMNUtlOsMmSpF6NyOjztbA==
+
 longest@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
@@ -10413,6 +10418,11 @@ react-ace@^9.5.0:
     lodash.isequal "^4.5.0"
     prop-types "^15.7.2"
 
+react-click-away-listener@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-click-away-listener/-/react-click-away-listener-2.2.1.tgz#c04b72783baf1a70b1f5bee3969019b3517cc565"
+  integrity sha512-l6KoQXrVgPVTGXTQllqMjzpmHDLBkm7LTOr3NIAhWeNc1JWyeecP/jh/3r77Jn9LxDxuYC0pJFuFg+fu06HdlA==
+
 react-clientside-effect@^1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.6.tgz#29f9b14e944a376b03fb650eed2a754dd128ea3a"
@@ -10529,6 +10539,13 @@ react-refresh@^0.14.0:
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
+
+react-roving-tabindex@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-roving-tabindex/-/react-roving-tabindex-3.2.0.tgz#fb21d365fe5fe9b345cd4228f6b17b1207fd7cd2"
+  integrity sha512-WY5d46Y/QuS2zgXs4MgYJlmi3uIyq7M9UD4l3SWim8ClnyV1L3r84brxElLxEBXdKuWFUbll9mOBpxfcDZsCVQ==
+  dependencies:
+    warning "^4.0.3"
 
 react-sizeme@^3.0.1:
   version "3.0.2"
@@ -12604,6 +12621,13 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==
   dependencies:
     makeerror "1.0.12"
+
+warning@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
+  dependencies:
+    loose-envify "^1.0.0"
 
 watchpack-chokidar2@^2.0.1:
   version "2.0.1"
