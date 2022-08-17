@@ -139,11 +139,11 @@ describe("Tree", () => {
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "true");
 
-      await user.keyboard(UserEventKeys.SPACE);
+      await user.keyboard(UserEventKeys.ENTER);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "false");
 
-      await user.keyboard(UserEventKeys.ENTER);
+      await user.keyboard(UserEventKeys.SPACE);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "true");
     });

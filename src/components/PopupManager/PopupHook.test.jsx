@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { vi } from "vitest";
 
 import { Notification } from "components/Notification";
@@ -25,6 +25,7 @@ describe("PopupHook", () => {
   afterEach(() => {
     document.getElementsByTagName("html")[0].innerHTML = "";
   });
+
   it("createContainer creates container", () => {
     vi.useFakeTimers();
     const callback = vi.fn();
@@ -49,6 +50,7 @@ describe("PopupHook", () => {
     expect(result.current.mounted).toBeTruthy();
     expect(document.getElementById(containerId)).toBeInTheDocument();
   });
+
   it("notify ok", async () => {
     const { result } = renderHook(() => usePopup());
     expect(result.current.notify).toBeTruthy();
@@ -65,6 +67,7 @@ describe("PopupHook", () => {
     expect(position).toEqual("top");
     expect(id).toBe(1);
   });
+
   it("toastInit ok", () => {
     const mock = vi.fn();
     vi.spyOn(popupHookLogger, "error").mockImplementation(mock);
@@ -73,6 +76,7 @@ describe("PopupHook", () => {
     expect(id).toEqual(-1);
     expect(position).toEqual("top");
   });
+
   it("notifyInit ok", () => {
     const mock = vi.fn();
     vi.spyOn(popupHookLogger, "error").mockImplementation(mock);
@@ -81,22 +85,26 @@ describe("PopupHook", () => {
     expect(id).toEqual(-1);
     expect(position).toEqual("top");
   });
+
   it("removeInit ok", () => {
     const mock = vi.fn();
     vi.spyOn(popupHookLogger, "error").mockImplementation(mock);
     removeInit();
     expect(mock).toBeCalled();
   });
+
   it("removeAllInit ok", () => {
     const mock = vi.fn();
     vi.spyOn(popupHookLogger, "error").mockImplementation(mock);
     removeAllInit();
     expect(mock).toBeCalled();
   });
+
   it("removePopupManagerContainer works when container does not exists.", () => {
     expect(document.getElementById(containerId)).toBeNull();
     removePopupManagerContainer();
   });
+
   it("repeatCheck", () => {
     vi.useFakeTimers();
     const getter = vi.fn().mockReturnValueOnce(false).mockReturnValueOnce(true);

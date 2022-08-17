@@ -25,6 +25,5 @@ export const UserEventKeys = Object.freeze({
   DELETE: "{Delete}",
   BACKSPACE: "{Backspace}",
   SELECTALL: "{selectall}",
-  SPACE: "{Space}",
-  WHITESPACE: " ",
+  SPACE: " ",
 });

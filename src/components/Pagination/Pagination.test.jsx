@@ -148,7 +148,6 @@ describe("Pagination", () => {
                 <button
                   class="neo-btn neo-btn--default neo-btn-secondary neo-btn-secondary--default"
                   data-badge=""
-                  dir="ltr"
                 >
                   1
                 </button>
@@ -173,7 +172,7 @@ describe("Pagination", () => {
               aria-describedby="pagination-items-per-page-selection-items per page"
             >
               <label>
-                Show:
+                Show: 
               </label>
               <select
                 aria-label="items per page"
