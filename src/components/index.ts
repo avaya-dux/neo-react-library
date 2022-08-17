@@ -14,7 +14,6 @@ export * from "./Image";
 export * from "./LeftNavigation";
 export * from "./List";
 export * from "./Modal";
-export * from "./Navbar";
 export * from "./NeoInputWrapper";
 export * from "./NoContent";
 export * from "./Radio";
