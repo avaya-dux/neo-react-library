@@ -23,7 +23,7 @@ import { SwitchProps } from "./SwitchTypes";
  *   onChange={(event, checked) => setChecked(checked)}
  * />Label on left</Switch>
  *
- * @see https://neo-library-react-storybook.netlify.app/?path=/story/components-switch--default
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-switch--default
  * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement
  */
 export const Switch = ({

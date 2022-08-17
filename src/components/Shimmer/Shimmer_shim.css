@@ -1,0 +1,13 @@
+.neo-shimmer.neo-shimmer__rectangle.sm {
+  height: 16px;
+}
+
+.neo-shimmer.neo-shimmer__rectangle.lg {
+  height: 48px;
+}
+
+.neo-shimmer.neo-shimmer--3-count {
+  -webkit-animation-iteration-count: 3;
+  -moz-animation-iteration-count: 3;
+  animation-iteration-count: 3;
+}
