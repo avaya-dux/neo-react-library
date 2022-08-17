@@ -1,0 +1,22 @@
+.neo-table th button {
+  color: black;
+  display: flex;
+  font-weight: 600;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: -12px;
+}
+
+.neo-table th button span {
+  height: auto;
+}
+
+.neo-table th button span:first-of-type {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.neo-table th button.neo-dropdown__link-header::after {
+  padding: 0 12px 0 0;
+}
