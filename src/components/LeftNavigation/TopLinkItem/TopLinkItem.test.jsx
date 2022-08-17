@@ -1,5 +1,6 @@
+import { userEvent } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -10,6 +11,7 @@ import * as TopLinkItemStories from "./TopLinkItem.stories";
 const { Default } = composeStories(TopLinkItemStories);
 
 describe("TopLinkItem", () => {
+  const user = userEvent.setup();
   const TopLinkItemLabel = "label for top link";
 
   it("fully renders without exploding", () => {
@@ -55,7 +57,7 @@ describe("TopLinkItem", () => {
     expect(linkElement).toHaveClass("neo-icon-address-book");
   });
 
-  it("should simulate onclick function when not disabled", () => {
+  it("should simulate onclick function when not disabled", async () => {
     const mockedFunction = vi.fn();
     const { getByText } = render(
       <LeftNavigation
@@ -67,7 +69,7 @@ describe("TopLinkItem", () => {
       </LeftNavigation>
     );
     const linkElement = getByText(TopLinkItemLabel);
-    fireEvent.click(linkElement);
+    await user.click(linkElement);
     expect(mockedFunction).toHaveBeenCalled();
   });
 
@@ -81,13 +83,13 @@ describe("TopLinkItem", () => {
     expect(buttonElement).toBeInTheDocument();
   });
 
-  it("should not simulate onclick function for disable link", () => {
+  it("should not simulate onclick function for disable link", async () => {
     const mockedFunction = vi.fn();
     const { getByText } = render(
       <TopLinkItem onClick={mockedFunction} label={TopLinkItemLabel} disabled />
     );
     const linkElement = getByText(TopLinkItemLabel);
-    fireEvent.click(linkElement);
+    await user.click.click(linkElement);
     expect(mockedFunction).not.toHaveBeenCalled();
   });
 
