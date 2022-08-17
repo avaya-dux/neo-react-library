@@ -19,6 +19,7 @@ export * from "./Navbar";
 export * from "./NeoInputWrapper";
 export * from "./NoContent";
 export * from "./Radio";
+export * from "./SelectNative";
 export * from "./Sheet";
 export * from "./Spinner";
 export * from "./Switch";
