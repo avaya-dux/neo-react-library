@@ -12,19 +12,18 @@ export const Keys = Object.freeze({
   UP: "ArrowUp",
 });
 
-// https://testing-library.com/docs/ecosystem-user-event/#specialchars
+// https://github.com/testing-library/user-event/blob/main/src/keyboard/keyMap.ts
 export const UserEventKeys = Object.freeze({
-  LEFT: "{arrowleft}",
-  RIGHT: "{arrowright}",
-  UP: "{arrowup}",
-  DOWN: "{arrowdown}",
-  HOME: "{home}",
-  END: "{end}",
-  ENTER: "{enter}",
-  ESC: "{esc}",
-  DELETE: "{del}",
-  BACKSPACE: "{backspace}",
+  LEFT: "{ArrowLeft}",
+  RIGHT: "{ArrowRight}",
+  UP: "{ArrowUp}",
+  DOWN: "{ArrowDown}",
+  HOME: "{Home}",
+  END: "{End}",
+  ENTER: "{Enter}",
+  ESC: "{Escape}",
+  DELETE: "{Delete}",
+  BACKSPACE: "{Backspace}",
   SELECTALL: "{selectall}",
-  SPACE: "{space}",
-  WHITESPACE: " ",
+  SPACE: " ",
 });

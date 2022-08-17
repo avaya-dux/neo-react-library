@@ -1,0 +1,154 @@
+.neo-form-control--disabled .neo-multiselect .neo-multiselect__header:after,
+.neo-form-control--disabled
+  .neo-multiselect
+  .neo-multiselect-combo__header:after {
+  background-color: var(--input-disabled-bg);
+}
+
+.neo-multiselect__content:empty {
+  border: none;
+  box-shadow: none;
+}
+
+.neo-multiselect__content .neo-check + .neo-check__label:not(last-child) {
+  margin-right: 0;
+}
+
+.neo-multiselect__content .neo-check ~ .neo-check__label {
+  padding: 8px 16px !important;
+}
+
+.neo-input-group .neo-check + .neo-check__label {
+  pointer-events: auto !important;
+}
+
+.neo-check + .neo-check__label {
+  color: #000;
+  color: var(--checkbox-font-color);
+  cursor: pointer;
+  display: inline-block;
+  line-height: 22px !important;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 14px !important;
+}
+
+.neo-check:not(:disabled) + .neo-check__label:hover,
+.neo-check:not(:disabled) + .neo-check__label:focus {
+  background-color: #f1f1f1; /* $token-color-base-100 */
+}
+
+.neo-check:checked:not(:disabled) + .neo-check__label:hover,
+.neo-check:checked:not(:disabled) + .neo-check__label:focus {
+  background-color: #dddddd; /* $token-color-base-150 */
+}
+
+.neo-check__label::before {
+  background: #fff;
+  border: 1px solid #1473e6;
+  content: "";
+  display: inline-block;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: text-top;
+  min-width: 16px;
+  border-radius: 4px;
+  line-height: 1.5;
+}
+
+.neo-check:checked + .neo-check__label:before {
+  background: #1473e6;
+  font-family: updated-neo-icons !important;
+  color: #fff;
+  padding-left: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neo-check:checked + .neo-check__label:before {
+  content: "";
+  font-size: 11px;
+}
+
+.neo-check:disabled + .neo-check__label {
+  color: #939393;
+  cursor: not-allowed;
+}
+
+.neo-check:disabled + .neo-check__label:before {
+  border: 1px solid #abccf5;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* no left padding while loading */
+.neo-multiselect.neo-select__spinner span input.neo-input {
+  padding-left: 0;
+}
+
+/* no left padding while loading */
+.neo-multiselect.neo-select__spinner button.neo-multiselect__header,
+.neo-multiselect.neo-select__spinner span.neo-multiselect-combo__header {
+  padding-left: 32px;
+  background-color: #f1f1f1;
+}
+
+div.neo-multiselect button.neo-multiselect__header,
+div.neo-multiselect span.neo-multiselect-combo__header {
+  width: 100%;
+}
+
+/* internal select option highlight styles */
+.neo-multiselect__content
+  .neo-input-group
+  div.neo-check__label[aria-selected="true"],
+.neo-multiselect__content ul li[aria-selected="true"] {
+  background-color: #e8f1fc;
+}
+
+/* remove innapropriate padding */
+.neo-multiselect .neo-multiselect__content .neo-input-group {
+  padding-bottom: 0;
+}
+
+/* can't use `label` due to axe error, need to update styling to use `div` instead */
+.neo-multiselect__content .neo-check + div + .neo-input-hint {
+  white-space: nowrap;
+  margin: 0;
+  padding-left: 40px;
+  padding-right: 8px;
+}
+
+/* BUG: need to figure out a better way to disable hover for the multi-select when an option is disabled */
+div.neo-multiselect div.neo-input-group:hover {
+  background-color: transparent;
+}
+
+/* override bad styling for the multi-select (non-searchable) */
+.neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
+  justify-content: start;
+}
+.neo-input-group
+  .neo-multiselect
+  span.neo-multiselect-combo__header
+  button.neo-multiselect__header {
+  border: none;
+  margin: 0;
+}
+
+/* fix bug where the option hint text was incorrectly marked as error text */
+.neo-form-control--error
+  .neo-multiselect__content
+  .neo-input-group
+  .neo-input-hint {
+  color: #5e5e5e; /* --input-hint-color */
+}
+.neo-form-control--error
+  .neo-multiselect__content
+  .neo-input-group
+  .neo-input-hint:before {
+  content: "";
+}

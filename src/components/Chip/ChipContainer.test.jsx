@@ -4,6 +4,8 @@ import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
+import { UserEventKeys } from "utils";
+
 import { createChip } from "./ChipContainer";
 import * as ChipContainerStories from "./ChipContainer.stories";
 
@@ -91,7 +93,7 @@ describe("Container", () => {
       await user.tab();
       const chipOne = screen.getByText(/.*one/i);
       expect(chipOne).toHaveFocus();
-      await user.keyboard("{del}");
+      await user.keyboard(UserEventKeys.DELETE);
       const buttons = await screen.findAllByRole("button");
       expect(buttons.length).toBe(2);
     });
@@ -106,7 +108,7 @@ describe("Container", () => {
       await user.tab();
       const chipTwo = screen.getByText(/.*two/i);
       expect(chipTwo).toHaveFocus();
-      await user.keyboard("{Delete}");
+      await user.keyboard(UserEventKeys.DELETE);
       const buttons = await screen.findAllByRole("button");
       expect(buttons.length).toBe(1);
     });
@@ -121,7 +123,7 @@ describe("Container", () => {
       await user.tab();
       const chipTwo = screen.getByText(/.*two/i);
       expect(chipTwo).toHaveFocus();
-      await user.keyboard("{space}");
+      await user.keyboard(UserEventKeys.SPACE);
       const buttons = await screen.findAllByRole("button");
       expect(buttons.length).toBe(2);
     });
