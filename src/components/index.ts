@@ -21,6 +21,7 @@ export * from "./NoContent";
 export * from "./Radio";
 export * from "./SelectNative";
 export * from "./Sheet";
+export * from "./Shimmer";
 export * from "./Spinner";
 export * from "./Switch";
 export * from "./TextInput";
