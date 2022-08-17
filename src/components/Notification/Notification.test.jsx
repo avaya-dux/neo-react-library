@@ -411,7 +411,7 @@ describe("Notification", () => {
       });
     });
 
-    describe("return ReactElement", () => {
+    it("returns a ReactElement", () => {
       const result = createAction(<div>test</div>, "success");
       expect(result).toMatchInlineSnapshot(`
         <div>
