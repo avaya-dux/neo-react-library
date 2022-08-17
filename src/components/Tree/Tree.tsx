@@ -3,13 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 
 import clsx from "clsx";
-import {
-  DetailedHTMLProps,
-  FC,
-  HTMLAttributes,
-  ReactNode,
-  useMemo,
-} from "react";
+import { DetailedHTMLProps, HTMLAttributes, ReactNode, useMemo } from "react";
 import { RovingTabIndexProvider } from "react-roving-tabindex";
 
 import { handleAccessbilityError } from "utils";
@@ -82,7 +76,7 @@ export interface TreeProps
  * @see https://design.avayacloud.com/components/web/treeview-web
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-tree
  */
-export const Tree: FC<TreeProps> = ({
+export const Tree = ({
   "aria-describedby": describedby,
   "aria-label": arialabel,
   children,
@@ -91,7 +85,7 @@ export const Tree: FC<TreeProps> = ({
   label,
 
   ...rest
-}) => {
+}: TreeProps) => {
   if (!label && !arialabel && !describedby) {
     handleAccessbilityError(
       "Tree requires a label, an aria-label, or an aria-describedby prop"

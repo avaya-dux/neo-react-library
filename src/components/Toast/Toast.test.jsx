@@ -1,9 +1,12 @@
 import { composeStories } from "@storybook/testing-react";
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
-import * as ToastStories from "./Toast.stories";
-import { popupManagerLogger, popupHookLogger } from "components/PopupManager";
+
+import { popupHookLogger, popupManagerLogger } from "components/PopupManager";
+
 import { toastLogger } from "./Toast";
+import * as ToastStories from "./Toast.stories";
+
 popupManagerLogger.disableAll();
 popupHookLogger.disableAll();
 toastLogger.disableAll();

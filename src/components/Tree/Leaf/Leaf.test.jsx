@@ -5,6 +5,8 @@ import { axe } from "jest-axe";
 import { Leaf, Tree } from "..";
 
 describe("TreeItem", () => {
+  const user = userEvent.setup();
+
   it("fully renders without exploding", () => {
     render(<Leaf>example</Leaf>);
 
@@ -22,7 +24,7 @@ describe("TreeItem", () => {
     expect(results).toHaveNoViolations();
   });
 
-  it("adds 'selected' class when treeitem is clicked", () => {
+  it("adds 'selected' class when treeitem is clicked", async () => {
     render(
       <Tree aria-label="tree label">
         <Leaf>example</Leaf>
@@ -30,7 +32,7 @@ describe("TreeItem", () => {
     );
 
     const rootElement = screen.getByRole("treeitem");
-    userEvent.click(rootElement);
+    await user.click(rootElement);
     expect(rootElement).toHaveClass("neo-treeview__item--selected");
   });
 });

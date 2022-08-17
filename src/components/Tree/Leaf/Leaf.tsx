@@ -5,7 +5,6 @@
 import clsx from "clsx";
 import {
   DetailedHTMLProps,
-  FC,
   LiHTMLAttributes,
   ReactNode,
   useContext,
@@ -29,14 +28,14 @@ export interface LeafProps
  * @see https://design.avayacloud.com/components/web/treeview-web
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-tree
  */
-export const Leaf: FC<LeafProps> = ({
+export const Leaf = ({
   actions,
   children,
   className,
   disabled = false,
 
   ...rest
-}) => {
+}: LeafProps) => {
   const { dir } = useContext(TreeContext);
 
   const ref = useRef(null);

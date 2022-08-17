@@ -1,13 +1,15 @@
 import log from "loglevel";
-import { FC, useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
+
 import { ToastOptions, usePopup } from "components/PopupManager";
+
 const logger = log.getLogger("toast-logger");
 logger.disableAll();
 export { logger as toastLogger };
 export interface ToastProps extends Omit<ToastOptions, "message"> {
   children: string;
 }
-export const Toast: FC<ToastProps> = (props) => {
+export const Toast = (props: ToastProps) => {
   const { children, ...rest } = props;
   const options: ToastOptions = useMemo(() => {
     return {
@@ -31,5 +33,6 @@ export const Toast: FC<ToastProps> = (props) => {
       }
     };
   }, [mounted, options]);
+
   return null;
 };

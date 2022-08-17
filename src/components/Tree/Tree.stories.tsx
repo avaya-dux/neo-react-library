@@ -1,13 +1,17 @@
 import { Meta } from "@storybook/react/types-6-0";
-import { DetailedHTMLProps, FC, LabelHTMLAttributes, useState } from "react";
+import {
+  DetailedHTMLProps,
+  LabelHTMLAttributes,
+  ReactNode,
+  useState,
+} from "react";
 
 import { Accordion } from "components/Accordion";
 import { Button } from "components/Button";
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
 import { IconButton } from "components/IconButton";
-import { List } from "components/List";
-import { ListSection } from "components/ListItem";
+import { List, ListSection } from "components/List";
 import { Sheet } from "components/Sheet";
 
 import { Branch, Leaf, Tree, TreeProps } from ".";
@@ -21,7 +25,7 @@ const Divider = () => (
   <div style={{ margin: "2rem 0", borderBottom: "1px solid black" }} />
 );
 
-const ListItem: FC = ({ children }) => (
+const ListItem = ({ children }: { children: ReactNode }) => (
   <ListSection style={{ height: "auto" }}>{children}</ListSection>
 );
 
@@ -445,15 +449,19 @@ export const EmbededActions = () => {
   );
 };
 
-const Label: FC<
-  DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
-> = ({ children, ...rest }) => (
+const Label = ({
+  children,
+  ...rest
+}: DetailedHTMLProps<
+  LabelHTMLAttributes<HTMLLabelElement>,
+  HTMLLabelElement
+>) => (
   <label style={{ fontWeight: "bolder", paddingBottom: "5px" }} {...rest}>
     {children}
   </label>
 );
 
-const Section: FC = ({ children }) => (
+const Section = ({ children }: { children: ReactNode }) => (
   <div
     style={{
       paddingBottom: "15px",

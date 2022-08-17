@@ -1,14 +1,13 @@
 import {
+  HTMLAttributes,
+  ReactElement,
   ReactFragment,
   ReactNode,
   ReactPortal,
-  ReactChild,
-  ReactElement,
-  HTMLAttributes,
 } from "react";
 
 export type HeaderProps = {
-  children: ReactChild | ReactFragment | ReactPortal;
+  children: ReactNode | ReactFragment | ReactPortal;
 };
 export type ActionProps = {
   children?: ReactNode;

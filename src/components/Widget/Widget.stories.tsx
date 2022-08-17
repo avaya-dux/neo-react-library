@@ -129,7 +129,7 @@ const InteractiveWidgetTemplate: Story<WidgetProps> = ({
   loading,
   empty,
   disabled,
-}) => {
+}: WidgetProps) => {
   return (
     <div>
       <p>

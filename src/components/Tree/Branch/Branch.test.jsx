@@ -3,11 +3,14 @@ import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 
 import { Button } from "components/Button";
+import { UserEventKeys } from "utils";
 
 import { Branch } from ".";
 import { Leaf, Tree } from "..";
 
 describe("Tree", () => {
+  const user = userEvent.setup();
+
   it("fully renders without exploding", () => {
     render(
       <Tree aria-label="tree-root">
@@ -37,7 +40,7 @@ describe("Tree", () => {
     expect(results).toHaveNoViolations();
   });
 
-  it("a `disabled` Branch does not expand when clicked, and has `tabIndex='-1'`", () => {
+  it("a `disabled` Branch does not expand when clicked, and has `tabIndex='-1'`", async () => {
     render(
       <Tree aria-label="tree-root">
         <Branch title="example" disabled>
@@ -59,12 +62,12 @@ describe("Tree", () => {
     expect(groupOfLeaves).toHaveAttribute("aria-expanded", "false");
 
     const branch = screen.getByRole("button");
-    userEvent.click(branch);
+    await user.click(branch);
 
     // still not expanded
     expect(groupOfLeaves).toHaveAttribute("aria-expanded", "false");
 
-    userEvent.keyboard("{enter}");
+    await user.keyboard(UserEventKeys.ENTER);
 
     // still not expanded
     expect(groupOfLeaves).toHaveAttribute("aria-expanded", "false");
@@ -91,7 +94,7 @@ describe("Tree", () => {
       container = c;
     });
 
-    it("expands and collapses when sub-menu is clicked", () => {
+    it("expands and collapses when sub-menu is clicked", async () => {
       const subtreeEdges = screen.getByRole("group");
       const subtreeTitle = screen.getByText(subTreeText);
 
@@ -100,15 +103,16 @@ describe("Tree", () => {
 
       expect(subtreeTitle).toBeInTheDocument();
 
-      userEvent.click(subtreeTitle);
+      await user.click(subtreeTitle);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "true");
 
-      userEvent.click(subtreeTitle);
+      await user.click(subtreeTitle);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "false");
     });
-    it("does _not_ expand/collapse when `actions` are clicked", () => {
+
+    it("does _not_ expand/collapse when `actions` are clicked", async () => {
       const subtreeEdges = screen.getByRole("group");
       const button = screen.getByText(buttonText);
 
@@ -117,12 +121,12 @@ describe("Tree", () => {
 
       expect(button).toBeInTheDocument();
 
-      userEvent.click(button);
+      await user.click(button);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "false");
     });
 
-    it("on keyboard space/enter, sets active=>true and toggles expanded", () => {
+    it("on keyboard space/enter, sets active=>true and toggles expanded", async () => {
       const subtreeEdges = screen.getByRole("group");
       const subtreeTitle = screen.getByText(subTreeText);
 
@@ -131,20 +135,20 @@ describe("Tree", () => {
 
       expect(subtreeTitle).toBeInTheDocument();
 
-      userEvent.click(subtreeTitle);
+      await user.click(subtreeTitle);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "true");
 
-      userEvent.keyboard("{space}");
+      await user.keyboard(UserEventKeys.SPACE);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "false");
 
-      userEvent.keyboard("{enter}");
+      await user.keyboard(UserEventKeys.ENTER);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "true");
     });
 
-    it("on keyboard left, sets active=>true and expanded=>false", () => {
+    it("on keyboard left, sets active=>true and expanded=>false", async () => {
       const subTreeDiv = container.querySelector(
         "li.neo-treeview__sub-tree-item div"
       );
@@ -153,21 +157,22 @@ describe("Tree", () => {
 
       expect(subTreeDiv).not.toHaveClass("neo-treeview__item--selected"); // NOT active
 
-      userEvent.click(subtreeTitle);
+      await user.click(subtreeTitle);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "true");
 
-      userEvent.keyboard("{ArrowLeft}");
+      await user.keyboard(UserEventKeys.LEFT);
 
       expect(subTreeDiv).toHaveClass("neo-treeview__item--selected"); // _is_ active
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "false");
 
-      userEvent.keyboard("{ArrowLeft}");
+      await user.keyboard(UserEventKeys.LEFT);
 
       expect(subTreeDiv).toHaveClass("neo-treeview__item--selected"); // _is_ active (still)
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "false");
     });
-    it("on keyboard right, sets active=>true and expanded=>true", () => {
+
+    it("on keyboard right, sets active=>true and expanded=>true", async () => {
       const subTreeDiv = container.querySelector(
         "li.neo-treeview__sub-tree-item div"
       );
@@ -176,21 +181,22 @@ describe("Tree", () => {
 
       expect(subTreeDiv).not.toHaveClass("neo-treeview__item--selected"); // NOT active
 
-      userEvent.click(subtreeTitle);
+      await user.click(subtreeTitle);
 
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "true");
 
-      userEvent.keyboard("{ArrowRight}");
+      await user.keyboard(UserEventKeys.RIGHT);
 
       expect(subTreeDiv).toHaveClass("neo-treeview__item--selected"); // _is_ active
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "true");
 
-      userEvent.keyboard("{ArrowRight}");
+      await user.keyboard(UserEventKeys.RIGHT);
 
       expect(subTreeDiv).toHaveClass("neo-treeview__item--selected"); // _is_ active (still)
       expect(subtreeEdges).toHaveAttribute("aria-expanded", "true");
     });
-    it("on keyboard up, sets active appropriately", () => {
+
+    it("on keyboard up, sets active appropriately", async () => {
       const subTreeDiv = container.querySelector(
         "li.neo-treeview__sub-tree-item div"
       );
@@ -198,19 +204,20 @@ describe("Tree", () => {
 
       expect(subTreeDiv).not.toHaveClass("neo-treeview__item--selected"); // NOT active
 
-      userEvent.click(subtreeTitle);
+      await user.click(subtreeTitle);
 
       expect(subTreeDiv).toHaveClass("neo-treeview__item--selected"); // _is_ active
 
-      userEvent.keyboard("{ArrowDown}");
+      await user.keyboard(UserEventKeys.DOWN);
 
       expect(subTreeDiv).not.toHaveClass("neo-treeview__item--selected"); // NOT active, cursor is on the next item
 
-      userEvent.keyboard("{ArrowUp}");
+      await user.keyboard(UserEventKeys.UP);
 
       expect(subTreeDiv).toHaveClass("neo-treeview__item--selected"); // _is_ active (again)
     });
-    it("on keyboard down, sets active=>false", () => {
+
+    it("on keyboard down, sets active=>false", async () => {
       const subTreeDiv = container.querySelector(
         "li.neo-treeview__sub-tree-item div"
       );
@@ -218,15 +225,15 @@ describe("Tree", () => {
 
       expect(subTreeDiv).not.toHaveClass("neo-treeview__item--selected"); // NOT active
 
-      userEvent.click(subtreeTitle);
+      await user.click(subtreeTitle);
 
       expect(subTreeDiv).toHaveClass("neo-treeview__item--selected"); // _is_ active
 
-      userEvent.keyboard("{ArrowDown}");
+      await user.keyboard(UserEventKeys.DOWN);
 
       expect(subTreeDiv).not.toHaveClass("neo-treeview__item--selected"); // _is_ NOT active
 
-      userEvent.keyboard("{ArrowDown}");
+      await user.keyboard(UserEventKeys.DOWN);
 
       expect(subTreeDiv).not.toHaveClass("neo-treeview__item--selected"); // _is_ NOT active (still);
     });

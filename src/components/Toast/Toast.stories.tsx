@@ -1,13 +1,15 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
+import { useEffect } from "react";
+
+import { Button } from "components/Button";
 import {
+  removePopupManagerContainer,
   ToastOptions,
   usePopup,
-  removePopupManagerContainer,
 } from "components/PopupManager";
 import { IconNames } from "utils";
-import { Toast, toastLogger as logger, ToastProps } from "./Toast";
-import { Button } from "components/Button";
-import { useEffect } from "react";
+
+import { toastLogger as logger, Toast, ToastProps } from "./Toast";
 
 const ToastTemplate: Story<ToastProps> = (props) => {
   useEffect(() => {

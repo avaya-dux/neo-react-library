@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useContext } from "react";
+
 import { WidgetContext } from "./WidgetContext";
 import { ContentProps } from "./WidgetTypes";
 
