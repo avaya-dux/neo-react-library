@@ -3,6 +3,7 @@ import { TwoMenus } from "./Menu.stories";
 describe("Menu component", () => {
   const leftNavBtn = "Menu One";
   const rightNavBtn = "Menu Two";
+
   it("Only one menu is open when closeOnBlur is true", () => {
     cy.mount(
       <TwoMenus
@@ -20,6 +21,7 @@ describe("Menu component", () => {
     numberOfMenus(1);
     rightMenuHasTwoMenuItems();
   });
+
   it("Two menu could be open when closeOnBlur is false", () => {
     cy.mount(
       <TwoMenus
