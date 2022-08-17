@@ -86,6 +86,7 @@
     "@vitest/coverage-c8": "^0.22.0",
     "@vitest/ui": "^0.22.0",
     "babel-loader": "^8.2.5",
+    "better-docs": "^2.7.2",
     "cypress": "^10.6.0",
     "cypress-real-events": "^1.7.1",
     "eslint": "^8.22.0",
