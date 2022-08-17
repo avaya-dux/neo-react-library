@@ -80,7 +80,7 @@ describe("TextInput", () => {
       const WrappedInLabel = () => (
         <div>
           <label htmlFor={internalId}>descriptive text</label>
-          <InternalTextInputElement internalId={internalId} />
+          <InternalTextInputElement id={internalId} />
         </div>
       );
       const { container } = render(<WrappedInLabel />);

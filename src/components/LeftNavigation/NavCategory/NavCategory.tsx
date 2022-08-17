@@ -52,7 +52,7 @@ export function getNavBarClassNames(
  * @see https://design.avayacloud.com/components/web/list-web
  */
 export const NavCategory = ({
-  id,
+  id = useId(),
   children = [],
   label,
   icon,
@@ -62,7 +62,6 @@ export const NavCategory = ({
   // active = false, // BUG: definied by never used
   ...rest
 }: NavCategoryProps) => {
-  const internalId = useMemo(() => id || useId(), []);
   const listClass = "neo-leftnav__nav";
   const [isExpanded, setIsExpanded] = useState(expanded);
   const [navItemClass, setNavItemClass] = useState(LEFTNAV_CATEGORY_STYLE);
@@ -146,7 +145,7 @@ export const NavCategory = ({
   }, [isExpanded, disabled, ctx.currentUrl]);
 
   return (
-    <li id={internalId} className={navItemClass}>
+    <li id={id} className={navItemClass}>
       <button
         className={clsx(
           "neo-leftnav__category expandable",

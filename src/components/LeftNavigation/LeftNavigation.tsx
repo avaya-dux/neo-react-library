@@ -1,4 +1,4 @@
-import { useCallback, useId, useMemo, useState } from "react";
+import { useCallback, useId, useState } from "react";
 import { RovingTabIndexProvider } from "react-roving-tabindex";
 
 import { LeftNavProps, NavigationContextType } from "./LeftNavigationTypes";
@@ -38,7 +38,7 @@ export const LeftNavigation = ({
 
   const [curUrl, setCurUrl] = useState(currentUrl);
 
-  const navId = useMemo(() => useId(), []);
+  const navId = useId();
 
   const handleSelectedLink = useCallback(
     (id: string, url: string) => {

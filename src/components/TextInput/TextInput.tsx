@@ -4,7 +4,6 @@ import {
   ReactNode,
   RefObject,
   useId,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -57,15 +56,13 @@ export const TextInput = ({
   startAddon,
   startIcon,
   type = "text",
+  id = useId(),
   value,
   ...rest
 }: TextInputProps) => {
   if (!label && !placeholder) {
     handleAccessbilityError("You must provide a `label` or `placeholder`.");
   }
-
-  // use given id or generate a unique one for accessibility
-  const internalId = useMemo(() => rest.id || useId(), []);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -95,13 +92,13 @@ export const TextInput = ({
       required={required}
       inline={inline}
     >
-      {label && <label htmlFor={internalId}>{label}</label>}
+      {label && <label htmlFor={id}>{label}</label>}
 
       {readOnly ? (
         <InternalTextInputElement
           disabled={disabled}
           inputRef={inputRef}
-          internalId={internalId}
+          id={id}
           placeholder={placeholder}
           readOnly={readOnly}
           value={value}
@@ -130,7 +127,7 @@ export const TextInput = ({
               <InternalTextInputElement
                 disabled={disabled}
                 inputRef={inputRef}
-                internalId={internalId}
+                id={id}
                 placeholder={placeholder}
                 readOnly={readOnly}
                 value={value}
@@ -174,7 +171,7 @@ export const TextInput = ({
       )}
 
       {!!helperText && (
-        <div className="neo-input-hint" id={`${internalId}-description`}>
+        <div className="neo-input-hint" id={`${id}-description`}>
           {helperText}
         </div>
       )}
@@ -185,7 +182,7 @@ export const TextInput = ({
 export const InternalTextInputElement = ({
   readOnly,
   disabled,
-  internalId,
+  id,
   placeholder,
   inputRef,
   value,
@@ -195,14 +192,14 @@ export const InternalTextInputElement = ({
   TextInputProps,
   "readOnly" | "disabled" | "placeholder" | "value" | "type"
 > & {
-  internalId: string;
+  id: string;
   inputRef: RefObject<HTMLInputElement>;
 }) => (
   <input
-    aria-describedby={`${internalId}-description`}
+    aria-describedby={`${id}-description`}
     className={clsx("neo-input", readOnly && "neo-input-readonly")}
     disabled={disabled}
-    id={internalId}
+    id={id}
     placeholder={placeholder}
     readOnly={readOnly}
     ref={inputRef}

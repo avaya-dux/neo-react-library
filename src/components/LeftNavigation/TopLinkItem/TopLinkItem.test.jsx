@@ -1,6 +1,6 @@
-import { userEvent } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -89,7 +89,7 @@ describe("TopLinkItem", () => {
       <TopLinkItem onClick={mockedFunction} label={TopLinkItemLabel} disabled />
     );
     const linkElement = getByText(TopLinkItemLabel);
-    await user.click.click(linkElement);
+    await user.click(linkElement);
     expect(mockedFunction).not.toHaveBeenCalled();
   });
 
