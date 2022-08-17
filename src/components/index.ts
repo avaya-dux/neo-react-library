@@ -24,6 +24,7 @@ export * from "./Sheet";
 export * from "./Shimmer";
 export * from "./Spinner";
 export * from "./Switch";
+export * from "./Tab";
 export * from "./TextInput";
 export * from "./ThemeProvider";
 export * from "./Tooltip";
