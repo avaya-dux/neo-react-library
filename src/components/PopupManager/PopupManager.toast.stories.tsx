@@ -1,12 +1,16 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
-import { Toast } from "components/Toast";
 import { useEffect, useRef } from "react";
+
+import { Toast } from "components/Toast";
 import { IconNames } from "utils";
+
 import { PopupManager, ToastOptions } from ".";
 import { removePopupManagerContainer } from "./";
 import { popupManagerLogger as logger } from "./PopupManager";
 
-const PopupManagerToastTemplate: Story<ToastOptions> = (props) => {
+const PopupManagerToastTemplate: Story<ToastOptions> = (
+  props: ToastOptions
+) => {
   const managerRef = useRef<PopupManager | null>(null);
 
   useEffect(() => {

@@ -1,11 +1,13 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
-import { PopupId, PopupManager, PopupPosition } from "components/PopupManager";
 import { useEffect, useRef, useState } from "react";
+
 import {
   EventNotificationProps,
-  Notification,
   notificationLogger as logger,
+  Notification,
 } from "components/Notification";
+import { PopupId, PopupManager, PopupPosition } from "components/PopupManager";
+
 logger.disableAll();
 type WithoutType = Omit<EventNotificationProps, "type">;
 const EventTemplate: Story<WithoutType> = ({ ...rest }: WithoutType) => {

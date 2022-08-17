@@ -1,13 +1,15 @@
 import log from "loglevel";
 import { createRef, useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+
 import { PopupManager } from "./PopupManager";
 import {
+  NotificationOptions,
   PopupId,
   PopupPosition,
   ToastOptions,
-  NotificationOptions,
 } from "./PopupTypes";
+
 const logger = log.getLogger("popup-hook-logger");
 logger.disableAll();
 export { logger as popupHookLogger };
@@ -115,9 +117,13 @@ export const usePopup = (traceId?: string) => {
     () => removeAllInit
   );
   const callback = useCallback(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     settoast(() => managerRef.current!.toast);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setnotify(() => managerRef.current!.notify);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setremove(() => managerRef.current!.remove);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setremoveAll(() => managerRef.current!.removeAll);
     setMounted(true);
   }, [settoast, setnotify, setremove, setremoveAll, setMounted]);

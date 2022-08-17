@@ -1,9 +1,12 @@
 import clsx from "clsx";
 import log from "loglevel";
 import { useMemo } from "react";
+
 import { IconNamesType } from "utils/icons";
 import { useTimeout } from "utils/useTimeout";
+
 import { PopupId, PopupPosition, ToastOptions } from "./PopupTypes";
+
 const logger = log.getLogger("internal-toast-logger");
 logger.disableAll();
 type required = Required<Pick<ToastOptions, "id" | "position">>;

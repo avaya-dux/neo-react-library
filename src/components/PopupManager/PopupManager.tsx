@@ -1,7 +1,9 @@
+import log from "loglevel";
 // eslint-disable-next-line no-use-before-define
 import { Component } from "react";
-import log from "loglevel";
+
 import { InternalToast, InternalToastOptions } from "./InternalToast";
+
 import type {
   NotificationOptions,
   PopupId,
@@ -16,10 +18,13 @@ const logger = log.getLogger("popup-manager-logger");
 logger.disableAll();
 export { logger as popupManagerLogger };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Dict<T = any> = Record<string, T>;
 const objectKeys = <T extends Dict>(obj: T) =>
   Object.keys(obj) as unknown as (keyof T)[];
 
+// HACK: TODO: fix this to use Dict (or whatever makes sense)
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
 export class PopupManager extends Component<Props, State> {

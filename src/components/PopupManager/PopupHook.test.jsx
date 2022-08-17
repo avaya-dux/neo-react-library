@@ -99,10 +99,7 @@ describe("PopupHook", () => {
   });
   it("repeatCheck", () => {
     vi.useFakeTimers();
-    const getter = jest
-      .fn()
-      .mockReturnValueOnce(false)
-      .mockReturnValueOnce(true);
+    const getter = vi.fn().mockReturnValueOnce(false).mockReturnValueOnce(true);
     const callback = vi.fn();
     repeatCheck(getter, callback);
     vi.runAllTimers();
