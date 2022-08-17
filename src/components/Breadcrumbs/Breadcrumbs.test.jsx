@@ -230,7 +230,6 @@ describe("Breadcrumbs: ", () => {
                 class="neo-btn neo-btn--default neo-btn-primary neo-btn-primary--default"
                 data-badge=""
                 data-testid="neo-button1"
-                dir="ltr"
                 id="test-axe1"
               >
                 Save
@@ -239,7 +238,6 @@ describe("Breadcrumbs: ", () => {
                 class="neo-btn neo-btn--default neo-btn-primary neo-btn-primary--default"
                 data-badge=""
                 data-testid="neo-button2"
-                dir="ltr"
                 id="test-axe2"
               >
                 Edit
