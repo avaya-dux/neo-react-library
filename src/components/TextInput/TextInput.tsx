@@ -144,9 +144,9 @@ export const TextInput = ({
               {!!clearable && (
                 <button
                   aria-label="clear input"
-                  tabIndex={-1}
                   className="neo-input-edit__icon neo-icon-end"
                   disabled={disabled}
+                  type="button"
                   onClick={() => {
                     dispatchInputOnChangeEvent(
                       inputRef.current as HTMLInputElement,
@@ -157,10 +157,11 @@ export const TextInput = ({
               )}
               {type === "password" && (
                 <button
+                  aria-label={ariaLabel}
+                  aria-pressed={ariaPressed}
                   className={`neo-icon-${eyeIcon}`}
                   onClick={toggleIcon}
-                  aria-pressed={ariaPressed}
-                  aria-label={ariaLabel}
+                  type="button"
                 />
               )}
             </div>
