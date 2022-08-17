@@ -17,6 +17,7 @@ export * from "./Modal";
 export * from "./NeoInputWrapper";
 export * from "./NoContent";
 export * from "./Radio";
+export * from "./Select";
 export * from "./SelectNative";
 export * from "./Sheet";
 export * from "./Shimmer";
