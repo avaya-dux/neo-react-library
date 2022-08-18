@@ -57,6 +57,7 @@ import "./Table_shim.css";
  *
  * @see https://design.avayacloud.com/components/web/tables-web
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Table = <T extends Record<string, any>>({
   id,
   data,

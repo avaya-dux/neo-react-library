@@ -6,14 +6,16 @@ import { Checkbox } from "components/Checkbox";
 import { IconButton } from "components/IconButton";
 import { Sheet } from "components/Sheet";
 
-import { FilterContext, translations as defaultTranslations } from "../helpers";
+import { translations as defaultTranslations, FilterContext } from "../helpers";
 import { ITableFilterTranslations } from "../types";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TableFilterProps<T extends Record<string, any>> = {
   translations: ITableFilterTranslations;
   instance: TableInstance<T>;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const TableFilter = <T extends Record<string, any>>({
   translations,
   instance,

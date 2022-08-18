@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TableInstance, TableOptions } from "react-table";
 
 import {

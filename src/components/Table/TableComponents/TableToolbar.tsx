@@ -19,6 +19,7 @@ import { TableFilter } from "./TableFilter";
  *  translations={translations}
  * />
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const TableToolbar = <T extends Record<string, any>>({
   customActionsNode,
   handleCreate,
@@ -43,7 +44,7 @@ export const TableToolbar = <T extends Record<string, any>>({
 
   const [search, setSearch] = useState<string>(globalFilter || "");
   const setSearches = useCallback(
-    (searchString) => {
+    (searchString: string) => {
       setSearch(searchString);
       setGlobalFilter(searchString);
     },

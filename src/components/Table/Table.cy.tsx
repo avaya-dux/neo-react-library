@@ -1,5 +1,3 @@
-import { mount } from "@cypress/react";
-
 import { Table, TableProps } from ".";
 import { FilledFields, IDataTableMockData } from "./helpers";
 
@@ -17,7 +15,7 @@ describe("Table component", () => {
   };
 
   it("if `selectableRows: 'multiple'`, always shows header checkbox, but only shows body checkboxes on hover or when checked", () => {
-    mount(<Table {...tableprops} />);
+    cy.mount(<Table {...tableprops} />);
 
     // visible th checkbox label
     cy.get(headerCheckboxLabel).should("be.visible");
