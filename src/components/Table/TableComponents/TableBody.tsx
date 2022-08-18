@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Row } from "react-table";
 
 import { Checkbox } from "components/Checkbox";
@@ -62,12 +63,18 @@ export const TableBody = <T extends Record<string, any>>({
       ) : (
         page.map((row) => {
           prepareRow(row);
+          const preparedRowProps = row.getRowProps();
+          const rowKey = preparedRowProps.key || `table-row-${row.id}`;
           const checkboxLabel = row.original.label || row.id;
 
           return (
             <tr
-              className={row.isSelected ? "active" : ""}
-              {...row.getRowProps()}
+              {...preparedRowProps}
+              className={clsx(
+                row.isSelected && "active",
+                preparedRowProps.className
+              )}
+              key={rowKey}
             >
               {shouldShowCheckbox && (
                 <td style={{ padding: "0 0 0 5px" }}>
