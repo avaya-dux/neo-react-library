@@ -265,9 +265,8 @@ describe("Table", () => {
       const searchInput = getByLabelText(
         FilledFields.translations.toolbar.searchInputPlaceholder
       );
-      await user.change(searchInput, {
-        target: { value: FilledFields.data[0].label },
-      });
+      await user.click(searchInput);
+      await user.keyboard(FilledFields.data[0].label);
 
       const filteredtrs = queryAllByRole("row");
       expect(filteredtrs.length).toBeGreaterThan(0);
