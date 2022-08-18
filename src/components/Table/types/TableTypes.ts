@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactNode } from "react";
 import { TableInstance, TableOptions } from "react-table";
 
 import {
@@ -12,7 +13,7 @@ import {
 interface ToolbarSharedProps<T extends Record<string, any>> {
   readonly?: boolean;
   selectableRows?: "none" | "single" | "multiple";
-  customActionsNode?: React.ReactNode;
+  customActionsNode?: ReactNode;
   handleCreate?: () => Promise<void> | void;
   handleDelete?: (selectedRowIds: string[]) => Promise<void> | void;
   handleEdit?: (selectedRow: T) => Promise<void> | void;

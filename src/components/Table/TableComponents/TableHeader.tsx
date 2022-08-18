@@ -24,7 +24,7 @@ import { TableHeaderProps } from "../types";
  * />
  */
 export const TableHeader = <T extends Record<string, any>>({
-  handleRowToggled = (_1: string[], _2?: T) => {},
+  handleRowToggled = () => null,
   instance,
   selectableRows,
   translations,
@@ -202,6 +202,7 @@ export const TableHeader = <T extends Record<string, any>>({
                 display: isVisible ? undefined : "none",
               }}
               {...getHeaderProps()}
+              key={column.id}
               scope="col"
               aria-sort={ariasort}
             >

@@ -14,8 +14,9 @@ import { TableBodyProps } from "../types";
  *  selectableRows={selectableRows}
  * />
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const TableBody = <T extends Record<string, any>>({
-  handleRowToggled = (_1: string[], _2?: T) => {},
+  handleRowToggled = () => null,
   instance,
   selectableRows,
   translations,
@@ -79,8 +80,10 @@ export const TableBody = <T extends Record<string, any>>({
                 </td>
               )}
 
-              {row.cells.map((cell) => (
-                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+              {row.cells.map((cell, i) => (
+                <td {...cell.getCellProps()} key={`td-${i}`}>
+                  {cell.render("Cell")}
+                </td>
               ))}
             </tr>
           );
