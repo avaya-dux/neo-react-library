@@ -1,8 +1,10 @@
 import { composeStories } from "@storybook/testing-react";
-import { fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
+
+import { UserEventKeys } from "utils";
 
 import { Table } from ".";
 import {
@@ -24,6 +26,7 @@ const {
 } = composeStories(TableStories);
 
 describe("Table", () => {
+  const user = userEvent.setup();
   vi.spyOn(console, "warn").mockImplementation(() => null); // ignore tooltip warnings
 
   it("fully renders without exploding", () => {
@@ -80,7 +83,7 @@ describe("Table", () => {
       expect(checkbox2).not.toHaveAttribute("checked");
     });
 
-    it("properly selects 'all' and 'none' of the checkboxes", () => {
+    it("properly selects 'all' and 'none' of the checkboxes", async () => {
       const { getByLabelText, container } = render(
         <Table
           {...FilledFields}
@@ -104,14 +107,14 @@ describe("Table", () => {
       expect(headerCheckbox).toHaveClass("neo-check--indeterminate");
       expect(checkbox2.checked).toBeFalsy();
 
-      fireEvent.click(headerCheckboxLabel);
+      await user.click(headerCheckboxLabel);
 
       // header checkbox is in `true` state
       expect(headerCheckbox.checked).toBeTruthy();
       expect(headerCheckbox).not.toHaveClass("neo-check--indeterminate");
       expect(checkbox2.checked).toBeTruthy();
 
-      fireEvent.click(headerCheckboxLabel);
+      await user.click(headerCheckboxLabel);
 
       // header checkbox is in `false` state
       expect(headerCheckbox.checked).toBeFalsy();
@@ -119,7 +122,7 @@ describe("Table", () => {
       expect(checkbox2.checked).toBeFalsy();
     });
 
-    it("properly selects and deselects a body row", () => {
+    it("properly selects and deselects a body row", async () => {
       const { queryAllByRole } = render(
         <Table {...FilledFields} selectableRows="multiple" />
       );
@@ -135,13 +138,13 @@ describe("Table", () => {
       expect(firstRowCheckbox.checked).toBeFalsy();
 
       const firstRowCheckboxLabel = firstBodyRow.querySelector("label");
-      fireEvent.click(firstRowCheckboxLabel);
+      await user.click(firstRowCheckboxLabel);
 
       expect(firstRowCheckbox.checked).toBeTruthy();
       expect(firstBodyRow.classList.length).toBe(1);
       expect(firstBodyRow).toHaveClass("active");
 
-      fireEvent.click(firstRowCheckboxLabel);
+      await user.click(firstRowCheckboxLabel);
 
       expect(firstRowCheckbox.checked).toBeFalsy();
       expect(firstBodyRow.classList.length).toBe(0);
@@ -150,7 +153,7 @@ describe("Table", () => {
   });
 
   describe("toolbar functionality", () => {
-    it("properly calls it's `refresh` method", () => {
+    it("properly calls it's `refresh` method", async () => {
       const mock = vi.fn();
       const { getByLabelText } = render(
         <Table {...FilledFields} handleRefresh={mock} />
@@ -160,11 +163,11 @@ describe("Table", () => {
         FilledFields.translations.toolbar.refresh
       );
 
-      fireEvent.click(refreshButton);
+      await user.click(refreshButton);
       expect(mock).toHaveBeenCalled();
     });
 
-    it("it's `create` method can be called at any time", () => {
+    it("it's `create` method can be called at any time", async () => {
       const mock = vi.fn();
       const { getByText, queryAllByRole } = render(
         <Table {...FilledFields} handleCreate={mock} selectableRows="single" />
@@ -172,18 +175,18 @@ describe("Table", () => {
 
       const createButton = getByText(FilledFields.translations.toolbar.create);
 
-      fireEvent.click(createButton);
+      await user.click(createButton);
       expect(mock).toHaveBeenCalledTimes(1);
 
       const firstRowCheckboxLabel =
         queryAllByRole("row")[1].querySelector("label");
-      fireEvent.click(firstRowCheckboxLabel);
+      await user.click(firstRowCheckboxLabel);
 
-      fireEvent.click(createButton);
+      await user.click(createButton);
       expect(mock).toHaveBeenCalledTimes(2);
     });
 
-    it("properly calls it's `edit` method", () => {
+    it("properly calls it's `edit` method", async () => {
       const mock = vi.fn();
       const { getByText, queryAllByRole } = render(
         <Table
@@ -202,22 +205,22 @@ describe("Table", () => {
         queryAllByRole("row")[1].querySelector("label");
       const secondRowCheckboxLabel =
         queryAllByRole("row")[2].querySelector("label");
-      fireEvent.click(firstRowCheckboxLabel);
-      fireEvent.click(secondRowCheckboxLabel);
+      await user.click(firstRowCheckboxLabel);
+      await user.click(secondRowCheckboxLabel);
 
       // expect button _still_ not to be rendered
       expect(() => getByText(FilledFields.translations.toolbar.edit)).toThrow();
 
       // deselect first row
-      fireEvent.click(firstRowCheckboxLabel);
+      await user.click(firstRowCheckboxLabel);
 
       // `edit` button should NOW be rendered and enabled, and thus callable
       const editButton = getByText(FilledFields.translations.toolbar.edit);
-      fireEvent.click(editButton);
+      await user.click(editButton);
       expect(mock).toHaveBeenCalled();
     });
 
-    it("properly calls it's `delete` method", () => {
+    it("properly calls it's `delete` method", async () => {
       const mock = vi.fn();
       const { getByText, queryAllByRole } = render(
         <Table
@@ -235,23 +238,23 @@ describe("Table", () => {
 
       const firstRowCheckboxLabel =
         queryAllByRole("row")[1].querySelector("label");
-      fireEvent.click(firstRowCheckboxLabel);
+      await user.click(firstRowCheckboxLabel);
 
       // callable when one row is selected
       const deleteButton = getByText(FilledFields.translations.toolbar.delete);
-      fireEvent.click(deleteButton);
+      await user.click(deleteButton);
       expect(mock).toHaveBeenCalledTimes(1);
 
       const secondRowCheckboxLabel =
         queryAllByRole("row")[2].querySelector("label");
-      fireEvent.click(secondRowCheckboxLabel);
+      await user.click(secondRowCheckboxLabel);
 
       // callable when multiple rows are selected
-      fireEvent.click(deleteButton);
+      await user.click(deleteButton);
       expect(mock).toHaveBeenCalledTimes(2);
     });
 
-    it("properly utilizes it's `search` method", () => {
+    it("properly utilizes it's `search` method", async () => {
       const { getByLabelText, queryAllByRole } = render(
         <Table {...FilledFields} itemsPerPageOptions={[50]} />
       );
@@ -262,7 +265,7 @@ describe("Table", () => {
       const searchInput = getByLabelText(
         FilledFields.translations.toolbar.searchInputPlaceholder
       );
-      fireEvent.change(searchInput, {
+      await user.change(searchInput, {
         target: { value: FilledFields.data[0].label },
       });
 
@@ -279,7 +282,7 @@ describe("Table", () => {
       renderResult = render(<AdvancedFilteringAndSorting />);
     });
 
-    it("allows column sorting of row", () => {
+    it("allows column sorting of row", async () => {
       const { container, getByRole, queryAllByRole } = renderResult;
 
       const firstColumnSortButton = container.querySelector(
@@ -296,7 +299,7 @@ describe("Table", () => {
       expect(getFirstCellTextContent()).toBe(FilledFields.data[0].name);
 
       expect(() => getByRole("menu")).toThrow();
-      fireEvent.click(firstColumnSortButton);
+      await user.click(firstColumnSortButton);
       expect(() => getByRole("menu")).not.toThrow();
 
       const menuItems = queryAllByRole("menuitem");
@@ -307,33 +310,33 @@ describe("Table", () => {
       expect(menuItems[3]).not.toHaveClass("neo-dropdown--disabled");
 
       // "clear" does nothing as it is disabled
-      fireEvent.click(queryAllByRole("menuitem")[0]);
+      await user.click(queryAllByRole("menuitem")[0]);
       expect(getFirstCellTextContent()).toBe(firstCellOriginalContent);
 
       // ascending sort works with mouse click
-      fireEvent.click(firstColumnSortButton);
-      fireEvent.click(queryAllByRole("menuitem")[1]);
+      await user.click(firstColumnSortButton);
+      await user.click(queryAllByRole("menuitem")[1]);
       const ascendingFirstCellContent = getFirstCellTextContent();
       expect(ascendingFirstCellContent).not.toBe(firstCellOriginalContent);
 
       // // descending sort works with keyboard click
-      fireEvent.click(firstColumnSortButton);
-      userEvent.keyboard("{ArrowDown}");
-      userEvent.keyboard("{ArrowDown}");
-      userEvent.keyboard("{space}");
+      await user.click(firstColumnSortButton);
+      await user.keyboard(UserEventKeys.DOWN);
+      await user.keyboard(UserEventKeys.DOWN);
+      await user.keyboard(UserEventKeys.SPACE);
       const descendingFirstCellContent = getFirstCellTextContent();
       expect(descendingFirstCellContent).not.toBe(firstCellOriginalContent);
       expect(descendingFirstCellContent).not.toBe(ascendingFirstCellContent);
 
       // "clear" is enabled as there is a sort applied, clicking it clears the sort
-      fireEvent.click(firstColumnSortButton);
+      await user.click(firstColumnSortButton);
       const clearSortButton = queryAllByRole("menuitem")[0];
       expect(clearSortButton).not.toHaveClass("neo-dropdown--disabled");
-      fireEvent.click(clearSortButton);
+      await user.click(clearSortButton);
       expect(getFirstCellTextContent()).toBe(firstCellOriginalContent);
     });
 
-    it("allows column filtering via header dropdown", () => {
+    it("allows column filtering via header dropdown", async () => {
       const { container, getByRole, queryAllByRole, getByLabelText } =
         renderResult;
 
@@ -352,11 +355,11 @@ describe("Table", () => {
         "sheet-horizontal-slide-out-shim"
       );
 
-      fireEvent.click(firstColumnSortButton);
+      await user.click(firstColumnSortButton);
 
       const menuItems = queryAllByRole("menuitem");
       expect(menuItems).toHaveLength(4);
-      fireEvent.click(queryAllByRole("menuitem")[3]);
+      await user.click(queryAllByRole("menuitem")[3]);
 
       expect(getByRole("dialog")).toHaveClass("sheet-horizontal-slide-in-shim");
       expect(getByRole("dialog")).not.toHaveClass(
@@ -366,12 +369,12 @@ describe("Table", () => {
       const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
       expect(nameCheckbox).toBeChecked();
 
-      fireEvent.click(nameCheckbox);
+      await user.click(nameCheckbox);
       expect(nameCheckbox).not.toBeChecked();
       expect(firstColumnSortButton).not.toBeVisible();
     });
 
-    it("allows column filtering via toolbar Filter Icon Button", () => {
+    it("allows column filtering via toolbar Filter Icon Button", async () => {
       const { container, getByRole, getByLabelText } = renderResult;
 
       const firstColumnSortButton = container.querySelector(
@@ -393,7 +396,7 @@ describe("Table", () => {
         "sheet-horizontal-slide-out-shim"
       );
 
-      fireEvent.click(columnFilterButton);
+      await user.click(columnFilterButton);
 
       expect(getByRole("dialog")).toHaveClass("sheet-horizontal-slide-in-shim");
       expect(getByRole("dialog")).not.toHaveClass(
@@ -403,7 +406,7 @@ describe("Table", () => {
       const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
       expect(nameCheckbox).toBeChecked();
 
-      fireEvent.click(nameCheckbox);
+      await user.click(nameCheckbox);
       expect(nameCheckbox).not.toBeChecked();
       expect(firstColumnSortButton).not.toBeVisible();
     });
