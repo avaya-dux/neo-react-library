@@ -261,6 +261,7 @@ describe("Menu", () => {
   });
 
   describe("Storybook tests", () => {
+    // BUG: tester explod
     describe.skip("SimpleMenu", () => {
       let renderResult;
       beforeEach(() => {
