@@ -1,6 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Meta, Story } from "@storybook/react/types-6-0";
 import { useEffect, useMemo, useState } from "react";
-import { Column } from "react-table";
+import { Column, ColumnInstance } from "react-table";
 
 import {
   Button,
@@ -57,7 +58,7 @@ export const AdvancedFilteringAndSorting = () => {
       },
     },
     {
-      Cell: ({ value }) => {
+      Cell: ({ value }: { value: IDataTableMockData["hasOnCallBeeper"] }) => {
         let icon: IconNamesType = "undo";
         let label = "unknown";
 
@@ -78,14 +79,16 @@ export const AdvancedFilteringAndSorting = () => {
       width: 75,
     },
     {
-      Cell: ({ value }) => <>{value?.toLocaleDateString()}</>,
+      Cell: ({ value }: { value: IDataTableMockData["date"] }) => (
+        <>{value?.toLocaleDateString()}</>
+      ),
       Header: "Date",
       accessor: "date",
       disableFilters: true,
       sortType: "datetime",
     },
     {
-      Cell: ({ value }) => {
+      Cell: ({ value }: { value: IDataTableMockData["status"] }) => {
         let icon: IconNamesType = "add-circle";
 
         switch (value) {
@@ -114,7 +117,11 @@ export const AdvancedFilteringAndSorting = () => {
           />
         );
       },
-      Filter: ({ column: { setFilter, preFilteredRows, id } }) => {
+      Filter: ({
+        column: { setFilter, preFilteredRows, id },
+      }: {
+        column: ColumnInstance<IDataTableMockData>;
+      }) => {
         const options = useMemo(() => {
           const optionSet = new Set();
           preFilteredRows.forEach((row) => {
@@ -148,7 +155,7 @@ export const AdvancedFilteringAndSorting = () => {
       filter: "exactTextCase",
     },
     {
-      Cell: ({ value }) =>
+      Cell: ({ value }: { value: IDataTableMockData["longText"] }) =>
         value ? (
           <Tooltip label={value}>
             <div
@@ -334,7 +341,7 @@ export const EmptyDataSet = () => (
     caption="Storybook Empty Date Set Table Example"
     columns={FilledFields.columns}
     data={[]}
-    handleRefresh={() => null}
+    handleRefresh={() => undefined}
   />
 );
 
