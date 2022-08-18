@@ -8,7 +8,7 @@ export interface NavbarButtonProps
   "aria-label": string;
   active?: boolean;
   badge?: string;
-  icon: IconNamesType;
+  icon?: IconNamesType;
   handleClick?: () => Promise<void> | void;
 }
 
@@ -18,7 +18,7 @@ export const NavbarButton: FunctionComponent<NavbarButtonProps> = forwardRef(
       "aria-label": ariaLabel,
       active = false,
       badge,
-      icon,
+      icon = "menu",
       ...rest
     }: NavbarButtonProps,
     ref: React.Ref<HTMLButtonElement>
