@@ -2,13 +2,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import log from "loglevel";
-import {
-  Dispatch,
-  ReactElement,
-  RefObject,
-  SetStateAction,
-  useId,
-} from "react";
+import { Dispatch, ReactElement, RefObject, SetStateAction } from "react";
+
+import { genId } from "utils";
 
 import { InternalTab } from "./InternalTab";
 import { InternalTabProps } from "./InternalTabTypes";
@@ -84,7 +80,6 @@ export const buildTabPropsNoPanel = (
 const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
   const props = tab.props;
   const { id, children, ...rest } = props;
-  const internalId = useId(); // HACK: TODO: use types and assign this like we do the rest
   const disabled = !!props!.disabled;
   logger.debug(`${id} disabled = ${disabled}`);
   const icon = "icon" in props ? props!.icon : undefined;
@@ -96,7 +91,7 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
     disabled,
     closable,
     onClose,
-    id: id || internalId,
+    id: id || genId(),
     name: children,
     ...(icon ? { icon } : {}),
   };
@@ -108,8 +103,6 @@ const buildSingleTabPropsHasAssociatedPanel = (
 ): InternalTabProps => {
   const props = tab.props;
   const { id, children, ...rest } = props;
-  const internalId = useId(); // HACK: TODO: use types and assign this like we do the rest
-  const contentId = useId(); // HACK: TODO: use types and assign this like we do the rest
   const disabled = !!props!.disabled;
   logger.debug(`${id} disabled = ${disabled}`);
   const icon = "icon" in props ? props!.icon : undefined;
@@ -118,7 +111,7 @@ const buildSingleTabPropsHasAssociatedPanel = (
 
   const content = {
     ...panel.props,
-    id: panel.props?.id || contentId,
+    id: panel.props?.id || genId(),
   };
 
   return {
@@ -126,7 +119,7 @@ const buildSingleTabPropsHasAssociatedPanel = (
     disabled,
     closable,
     onClose,
-    id: id || internalId,
+    id: id || genId(),
     name: children,
     content,
     ...(icon ? { icon } : {}),

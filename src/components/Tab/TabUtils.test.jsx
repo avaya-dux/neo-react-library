@@ -20,7 +20,7 @@ import {
 } from "./TabUtils";
 
 describe("TabUtils", () => {
-  describe(isValidTabElement, () => {
+  describe("isValidTabElement", () => {
     it("when element is fragment, return false", () => {
       const element = <></>;
       expect(isValidTabElement(element)).toBeFalsy();
@@ -38,7 +38,8 @@ describe("TabUtils", () => {
       expect(isValidTabElement(element)).toBeTruthy();
     });
   });
-  describe(isValidPanelElement, () => {
+
+  describe("isValidPanelElement", () => {
     it("when element is fragment, return false", () => {
       const element = <></>;
       expect(isValidPanelElement(element)).toBeFalsy();
@@ -56,7 +57,8 @@ describe("TabUtils", () => {
       expect(isValidPanelElement(element)).toBeTruthy();
     });
   });
-  describe(getContentClasses, () => {
+
+  describe("getContentClasses", () => {
     it("when className is undefined and active is true, should return neo-tabs__container--active", () => {
       expect(getContentClasses(true)).toBe("neo-tabs__container--active");
     });
@@ -76,7 +78,8 @@ describe("TabUtils", () => {
       );
     });
   });
-  describe(getTabItemClasses, () => {
+
+  describe("getTabItemClasses", () => {
     describe("when active = true and disabled = true", () => {
       it(" and vertical = false, return neo-tabs__item--active-disabled and neo-tabs__item", () => {
         const result = getTabItemClasses({
@@ -160,7 +163,8 @@ describe("TabUtils", () => {
       });
     });
   });
-  describe(buildTabProps, () => {
+
+  describe("buildTabProps", () => {
     it("returns a value for 'id' if this property was not initially defined", () => {
       const tabs = (
         <Tabs>
@@ -204,11 +208,11 @@ describe("TabUtils", () => {
         </Tabs>
       );
       expect(buildTabProps(tabs.props.children)).toMatchInlineSnapshot(`
-        Array [
-          Object {
+        [
+          {
             "closable": false,
-            "content": Object {
-              "children": Array [
+            "content": {
+              "children": [
                 <h2>
                   content1
                 </h2>,
@@ -224,9 +228,9 @@ describe("TabUtils", () => {
             "name": "tab1",
             "onClose": [Function],
           },
-          Object {
+          {
             "closable": false,
-            "content": Object {
+            "content": {
               "children": "content 2",
               "className": "customClass",
               "dir": "ltr",
@@ -237,9 +241,9 @@ describe("TabUtils", () => {
             "name": "tab2",
             "onClose": undefined,
           },
-          Object {
+          {
             "closable": true,
-            "content": Object {
+            "content": {
               "children": "content 3",
               "id": "panel3",
             },
@@ -252,7 +256,8 @@ describe("TabUtils", () => {
       `);
     });
   });
-  describe(buildTabPropsNoPanel, () => {
+
+  describe("buildTabPropsNoPanel", () => {
     it("returns a value for 'id' if this property was not initially defined", () => {
       const tabs = (
         <Tabs>
@@ -282,8 +287,8 @@ describe("TabUtils", () => {
         </Tabs>
       );
       expect(buildTabPropsNoPanel(tabs.props.children)).toMatchInlineSnapshot(`
-        Array [
-          Object {
+        [
+          {
             "closable": false,
             "dir": "ltr",
             "disabled": false,
@@ -291,14 +296,14 @@ describe("TabUtils", () => {
             "name": "tab1",
             "onClose": [Function],
           },
-          Object {
+          {
             "closable": false,
             "disabled": true,
             "id": "tab2",
             "name": "tab2",
             "onClose": undefined,
           },
-          Object {
+          {
             "closable": true,
             "disabled": false,
             "id": "tab3",
@@ -309,22 +314,23 @@ describe("TabUtils", () => {
       `);
     });
   });
-});
-describe(debugTabs, () => {
-  it("should call debug when log level is debug", () => {
-    const logger = {
-      getLevel: () => log.levels.DEBUG,
-      debug: vi.fn(),
-    };
-    debugTabs(logger, [{ id: "tab1", disabled: true }]);
-    expect(logger.debug).toBeCalledTimes(1);
-  });
-  it("should not call debug when log level is info", () => {
-    const logger = {
-      getLevel: () => log.levels.INFO,
-      debug: vi.fn(),
-    };
-    debugTabs(logger, [{ id: "tab1", disabled: true }]);
-    expect(logger.debug).toBeCalledTimes(0);
+
+  describe("debugTabs", () => {
+    it("should call debug when log level is debug", () => {
+      const logger = {
+        getLevel: () => log.levels.DEBUG,
+        debug: vi.fn(),
+      };
+      debugTabs(logger, [{ id: "tab1", disabled: true }]);
+      expect(logger.debug).toBeCalledTimes(1);
+    });
+    it("should not call debug when log level is info", () => {
+      const logger = {
+        getLevel: () => log.levels.INFO,
+        debug: vi.fn(),
+      };
+      debugTabs(logger, [{ id: "tab1", disabled: true }]);
+      expect(logger.debug).toBeCalledTimes(0);
+    });
   });
 });
