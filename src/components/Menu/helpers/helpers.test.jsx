@@ -11,7 +11,7 @@ const menuHelpersLogger = log.getLogger("menu-helpers");
 menuHelpersLogger.disableAll();
 
 describe("Menu helper methods", () => {
-  describe(addIdToChildren, () => {
+  describe("addIdToChildren", () => {
     it("should do nothing when child is not menu item or sub menu", () => {
       const children = [<MenuSeparator key="separator" />];
       expect(addIdToChildren(children, SubMenu.name)).toEqual(children);
@@ -48,7 +48,7 @@ describe("Menu helper methods", () => {
     });
   });
 
-  describe(buildMenuIndexes, () => {
+  describe("buildMenuIndexes", () => {
     it("should return empty array with empty children", () => {
       const children = [];
       expect(buildMenuIndexes(children, SubMenu.name)).toEqual([]);
@@ -62,8 +62,8 @@ describe("Menu helper methods", () => {
     it("should return correct result with one MenuItem", () => {
       const children = [<MenuItem key="menuitem">View</MenuItem>];
       expect(buildMenuIndexes(children, SubMenu.name)).toMatchInlineSnapshot(`
-        Array [
-          Object {
+        [
+          {
             "id": undefined,
             "index": 0,
           },
@@ -84,8 +84,8 @@ describe("Menu helper methods", () => {
         </SubMenu>,
       ];
       expect(buildMenuIndexes(children, SubMenu.name)).toMatchInlineSnapshot(`
-        Array [
-          Object {
+        [
+          {
             "id": "button",
             "index": 0,
             "length": 3,
@@ -110,13 +110,13 @@ describe("Menu helper methods", () => {
         </MenuItem>,
       ];
       expect(buildMenuIndexes(children, SubMenu.name)).toMatchInlineSnapshot(`
-        Array [
-          Object {
+        [
+          {
             "id": "button",
             "index": 0,
             "length": 3,
           },
-          Object {
+          {
             "id": "help",
             "index": 1,
           },
@@ -125,7 +125,7 @@ describe("Menu helper methods", () => {
     });
   });
 
-  describe(layoutChildren, () => {
+  describe("layoutChildren", () => {
     let handleMenuKeyDown;
     let handleMenuMouseMove;
     let handleMenuBlur;

@@ -10,7 +10,7 @@ import {
 log.disableAll();
 
 describe("MENU Mouse event handlers", () => {
-  describe(handleMenuButtonClickEvent, () => {
+  describe("handleMenuButtonClickEvent", () => {
     let setOpen;
     beforeEach(() => {
       setOpen = vi.fn();
@@ -31,13 +31,14 @@ describe("MENU Mouse event handlers", () => {
     });
   });
 
-  describe(handleMouseMoveEvent, () => {
+  describe("handleMouseMoveEvent", () => {
     let setCursor, setCursorAction, setEnterCounter;
     beforeEach(() => {
       setCursor = vi.fn();
       setCursorAction = vi.fn();
       setEnterCounter = vi.fn();
     });
+
     it("should do nothing when mouse is over element without id", () => {
       const target = { getAttribute: () => null };
       const e = { target };
@@ -58,6 +59,7 @@ describe("MENU Mouse event handlers", () => {
       expect(setCursorAction).not.toBeCalled();
       expect(setEnterCounter).not.toBeCalled();
     });
+
     it("should do nothing when mouse is over neither menu item nor sub menu", () => {
       const target = { getAttribute: () => "not a menu" };
       const e = { target };
@@ -78,6 +80,7 @@ describe("MENU Mouse event handlers", () => {
       expect(setCursorAction).not.toBeCalled();
       expect(setEnterCounter).not.toBeCalled();
     });
+
     it("should update cursor and increment eneterCounter when mouse is over the same menu item", () => {
       const target = { getAttribute: () => "menuitem1" };
       const e = { target };
@@ -98,6 +101,7 @@ describe("MENU Mouse event handlers", () => {
       expect(setCursorAction).not.toBeCalled();
       expect(setEnterCounter).toBeCalledWith(11);
     });
+
     it("should update cursor and set eneterCounter to 1 when mouse is over menu item the first time.", () => {
       const target = { getAttribute: () => "menuitem1" };
       const e = { target };
@@ -118,6 +122,7 @@ describe("MENU Mouse event handlers", () => {
       expect(setCursorAction).not.toBeCalled();
       expect(setEnterCounter).toBeCalledWith(1);
     });
+
     it("should update cursor and set eneterCounter to 1 when mouse is over sub menu the first time.", () => {
       const target = {
         getAttribute: vi.fn().mockImplementation(() => "menuitem1"),
@@ -141,6 +146,7 @@ describe("MENU Mouse event handlers", () => {
       expect(setCursorAction).toBeCalledWith("ENTER_SUB_MENU");
       expect(setEnterCounter).toBeCalledWith(1);
     });
+
     it("should update cursor and increment eneterCounter when mouse is over the same sub menu", () => {
       const target = { getAttribute: () => "menuitem1" };
       const e = { target };

@@ -67,6 +67,7 @@ export const handleKeyDownEvent = (
   if (menuIndexes.length === 0) {
     return;
   }
+
   switch (e.key) {
     case Keys.DOWN:
       setCursorAction("");
@@ -85,6 +86,7 @@ export const handleKeyDownEvent = (
         setCursor(cursor - 1);
       }
       break;
+
     case Keys.ENTER:
     case Keys.SPACE:
       // pressed enter on submenu:
@@ -104,6 +106,7 @@ export const handleKeyDownEvent = (
         e.preventDefault();
       }
       break;
+
     case Keys.RIGHT:
       logger.debug(`right arrow pressed on ${label}`);
       // pressed right arrow on submenu:
@@ -117,12 +120,14 @@ export const handleKeyDownEvent = (
         logger.debug(`enterCounter = ${enterCounter}`);
       }
       break;
+
     case Keys.LEFT:
       logger.debug(`left arrow press on ${label}`);
       setCursor(0);
       setCursorAction("");
       setOpen(false);
       break;
+
     case Keys.TAB:
     case Keys.ESC:
       logger.debug(`handling ${e.key} in submenu`);
@@ -131,6 +136,7 @@ export const handleKeyDownEvent = (
       handled = false;
       break;
   }
+
   if (handled) {
     e.stopPropagation();
   }

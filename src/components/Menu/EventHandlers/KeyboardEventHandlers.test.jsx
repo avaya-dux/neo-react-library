@@ -12,7 +12,7 @@ import {
 log.disableAll();
 
 describe("MENU Keyboard event handlers", () => {
-  describe(handleKeyDownEvent, () => {
+  describe("handleKeyDownEvent", () => {
     let setCursorAction;
     let setCursor;
     let setEnterCounter;
@@ -24,6 +24,7 @@ describe("MENU Keyboard event handlers", () => {
       setEnterCounter = vi.fn();
       setOpen = vi.fn();
     });
+
     it("should do nothing when menuIndexes is empty", () => {
       const e = { key: Keys.DOWN };
       const menuIndexes = [];
@@ -44,6 +45,7 @@ describe("MENU Keyboard event handlers", () => {
       expect(setEnterCounter).not.toBeCalled();
       expect(setOpen).not.toBeCalled();
     });
+
     describe(Keys.DOWN, () => {
       it("should increment cursor if it is not the biggest index currently.", () => {
         const e = {
@@ -458,7 +460,8 @@ describe("MENU Keyboard event handlers", () => {
       });
     });
   });
-  describe(handleBlurEvent, () => {
+
+  describe("handleBlurEvent", () => {
     let setOpen;
     beforeEach(() => {
       setOpen = vi.fn();
@@ -484,7 +487,7 @@ describe("MENU Keyboard event handlers", () => {
     });
   });
 
-  describe(handleButtonKeyDownEvent, () => {
+  describe("handleButtonKeyDownEvent", () => {
     let setCursor, setOpen;
     beforeEach(() => {
       setCursor = vi.fn();
