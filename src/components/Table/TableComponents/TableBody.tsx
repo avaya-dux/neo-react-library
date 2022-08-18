@@ -64,17 +64,17 @@ export const TableBody = <T extends Record<string, any>>({
         page.map((row) => {
           prepareRow(row);
           const preparedRowProps = row.getRowProps();
-          const rowKey = preparedRowProps.key || `table-row-${row.id}`;
           const checkboxLabel = row.original.label || row.id;
 
           return (
             <tr
-              {...preparedRowProps}
+              role={preparedRowProps.role}
+              style={preparedRowProps.style}
+              key={preparedRowProps.key || `table-row-${row.id}`}
               className={clsx(
                 row.isSelected && "active",
                 preparedRowProps.className
               )}
-              key={rowKey}
             >
               {shouldShowCheckbox && (
                 <td style={{ padding: "0 0 0 5px" }}>

@@ -350,7 +350,7 @@ export const BareBones = () => (
 );
 
 // BUG: initial values work, but they are unchangable
-export const SelectableRows = () => {
+export const PreSelectedRows = () => {
   const defaultSelectedRowIds = [
     FilledFields.data[1].id.toString(),
     FilledFields.data[3].id.toString(),

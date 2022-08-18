@@ -21,7 +21,7 @@ const {
   Default,
   EditableData,
   EmptyDataSet,
-  SelectableRows,
+  PreSelectedRows,
   Templated,
 } = composeStories(TableStories);
 
@@ -583,11 +583,11 @@ describe("Table", () => {
       });
     });
 
-    describe("SelectableRows", () => {
+    describe("PreSelectedRows", () => {
       let renderResult;
 
       beforeEach(() => {
-        renderResult = render(<SelectableRows />);
+        renderResult = render(<PreSelectedRows />);
       });
 
       it("should render ok", () => {
