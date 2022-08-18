@@ -23,6 +23,7 @@ import { TableHeaderProps } from "../types";
  *  translations={translations}
  * />
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const TableHeader = <T extends Record<string, any>>({
   handleRowToggled = () => null,
   instance,
