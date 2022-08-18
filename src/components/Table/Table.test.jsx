@@ -321,8 +321,7 @@ describe("Table", () => {
       // // descending sort works with keyboard click
       await user.click(firstColumnSortButton);
       await user.keyboard(UserEventKeys.DOWN);
-      await user.keyboard(UserEventKeys.DOWN);
-      await user.keyboard(UserEventKeys.SPACE);
+      await user.keyboard(UserEventKeys.ENTER);
       const descendingFirstCellContent = getFirstCellTextContent();
       expect(descendingFirstCellContent).not.toBe(firstCellOriginalContent);
       expect(descendingFirstCellContent).not.toBe(ascendingFirstCellContent);
