@@ -10,7 +10,8 @@ import {
 const sum = (widths) => {
   return widths.reduce((sum, current) => sum + current);
 };
-describe(canMovePreviousTabToRight, () => {
+
+describe("canMovePreviousTabToRight", () => {
   it("when leftOffset === 0 and containerWidth > viewPortWidth, should return false", () => {
     const leftOffset = 0;
     const containerWidth = 200;
@@ -52,7 +53,8 @@ describe(canMovePreviousTabToRight, () => {
     ).toBeFalsy();
   });
 });
-describe(canMoveNextTabToLeft, () => {
+
+describe("canMoveNextTabToLeft", () => {
   it("viewPortWidth === containerWidth, should return false", () => {
     const leftOffset = 100;
     const viewPortWidth = 100;
@@ -94,7 +96,8 @@ describe(canMoveNextTabToLeft, () => {
     ).toBeFalsy();
   });
 });
-describe(getPreviousTabToMoveRight, () => {
+
+describe("getPreviousTabToMoveRight", () => {
   it("when leftOffset = 0, should return index [-1, 0]", () => {
     const leftOffset = 0;
     const tab0 = 100;
@@ -143,7 +146,7 @@ describe(getPreviousTabToMoveRight, () => {
   });
 });
 
-describe(getNextTabToMoveLeft, () => {
+describe("getNextTabToMoveLeft", () => {
   it("when leftOffset + viewPortWidth === sum of all tab widths, should return [last index, 0]", () => {
     const leftOffset = 100;
     const viewPortWidth = 100;
@@ -165,7 +168,7 @@ describe(getNextTabToMoveLeft, () => {
   });
 });
 
-describe(calculateLeftMoveAmount, () => {
+describe("calculateLeftMoveAmount", () => {
   it("when index === last index and overshoot === 0, should return 0", () => {
     const tabWidths = [50, 60, 70, 80];
     const overshoot = 0;
@@ -209,7 +212,7 @@ describe(calculateLeftMoveAmount, () => {
   });
 });
 
-describe(calculateRightMoveAmount, () => {
+describe("calculateRightMoveAmount", () => {
   it("when index === -1, should return 0", () => {
     const index = -1;
     expect(calculateRightMoveAmount(index, 123, [])).toBe(0);

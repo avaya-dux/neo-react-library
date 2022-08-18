@@ -7,7 +7,7 @@ import {
 } from "./KeyboardHelper";
 
 describe("Tab -> EventHandlers -> Helper", () => {
-  describe(activatePreviousTab, () => {
+  describe("activatePreviousTab", () => {
     it("when no previous tab found, return false", () => {
       const tabs = [{}];
       const activeTabIndex = 0;
@@ -57,7 +57,7 @@ describe("Tab -> EventHandlers -> Helper", () => {
     });
   });
 
-  describe(getNextTabIndex, () => {
+  describe("getNextTabIndex", () => {
     it("when activeTabIndex === 0, tab at index 1 is disabled, should return 2", () => {
       const tabs = [{}, { disabled: true }, {}];
       const activeTabIndex = 0;
@@ -69,7 +69,8 @@ describe("Tab -> EventHandlers -> Helper", () => {
       expect(getNextTabIndex(tabs, activeTabIndex)).toBe(activeTabIndex);
     });
   });
-  describe(getPreviousTabIndex, () => {
+
+  describe("getPreviousTabIndex", () => {
     it("when activeTabIndex === 2, tab at index 1 is disabled, should return 0", () => {
       const tabs = [{}, { disabled: true }, {}];
       const activeTabIndex = 2;

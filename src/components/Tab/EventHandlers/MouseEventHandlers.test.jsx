@@ -17,7 +17,7 @@ import {
 
 vi.mock("./Helper");
 describe("Tab Mouse event handlers", () => {
-  describe(handleMouseClickEvent, () => {
+  describe("handleMouseClickEvent", () => {
     let setActiveTabIndex;
     let setActivePanelIndex;
     let tabs;
@@ -54,7 +54,8 @@ describe("Tab Mouse event handlers", () => {
       expect(activateAnotherTabAndPanel).not.toBeCalled();
     });
   });
-  describe(handleCloseElementMouseClickEvent, () => {
+
+  describe("handleCloseElementMouseClickEvent", () => {
     let setActiveTabIndex;
     let setActivePanelIndex;
     let tabs;
@@ -134,7 +135,8 @@ describe("Tab Mouse event handlers", () => {
       expect(activateAnotherTabAndPanel).toBeCalled();
     });
   });
-  describe(handleLeftCarouselMouseClickEvent, () => {
+
+  describe("handleLeftCarouselMouseClickEvent", () => {
     let setLeftCarouselButtonEnabled;
     let setRightCarouselButtonEnabled;
     let scrollRef;
@@ -185,7 +187,8 @@ describe("Tab Mouse event handlers", () => {
       expect(enableRightButton).toBeCalled();
     });
   });
-  describe(handleRightCarouselMouseClickEvent, () => {
+
+  describe("handleRightCarouselMouseClickEvent", () => {
     let setLeftCarouselButtonEnabled;
     let setRightCarouselButtonEnabled;
     let scrollRef;

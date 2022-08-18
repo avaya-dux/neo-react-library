@@ -21,7 +21,7 @@ vi.mock("./ScrollHelper");
 vi.mock("./KeyboardHelper");
 
 describe("Tab -> EventHandlers -> Helper", () => {
-  describe(activateAnotherTabAndPanel, () => {
+  describe("activateAnotherTabAndPanel", () => {
     afterEach(() => {
       vi.resetAllMocks();
     });
@@ -78,7 +78,8 @@ describe("Tab -> EventHandlers -> Helper", () => {
       expect(setActivePanelIndex).not.toBeCalled();
     });
   });
-  describe(movePreviousTabToRightAmount, () => {
+
+  describe("movePreviousTabToRightAmount", () => {
     afterEach(() => {
       vi.resetAllMocks();
     });
@@ -112,7 +113,8 @@ describe("Tab -> EventHandlers -> Helper", () => {
       );
     });
   });
-  describe(moveNextTabToLeftAmount, () => {
+
+  describe("moveNextTabToLeftAmount", () => {
     afterEach(() => {
       vi.resetAllMocks();
     });
@@ -158,9 +160,10 @@ describe("Tab -> EventHandlers -> Helper", () => {
       ).toBe(0);
     });
   });
-});
-describe(noop, () => {
-  it("should not blow up", () => {
-    noop();
+
+  describe("noop", () => {
+    it("should not blow up", () => {
+      noop();
+    });
   });
 });

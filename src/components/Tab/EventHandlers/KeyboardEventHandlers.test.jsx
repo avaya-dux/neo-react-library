@@ -13,8 +13,9 @@ import { activatePreviousTab, getNextTabIndex } from "./KeyboardHelper";
 
 vi.mock("./KeyboardHelper");
 vi.mock("./Helper");
+
 describe("Tab Keyboard event handlers", () => {
-  describe(handleFocusEvent, () => {
+  describe("handleFocusEvent", () => {
     let ref;
     beforeEach(() => {
       ref = {
@@ -42,7 +43,8 @@ describe("Tab Keyboard event handlers", () => {
       expect(e.preventDefault).toBeCalled();
     });
   });
-  describe(handleBlurEvent, () => {
+
+  describe("handleBlurEvent", () => {
     let ref;
     beforeEach(() => {
       ref = { current: { blur: vi.fn() } };
@@ -54,7 +56,8 @@ describe("Tab Keyboard event handlers", () => {
       expect(ref.current.blur).toHaveBeenCalled();
     });
   });
-  describe(handleKeyDownEvent, () => {
+
+  describe("handleKeyDownEvent", () => {
     let setActiveTabIndex, setActivePanelIndex, ref;
 
     beforeEach(() => {
@@ -136,7 +139,9 @@ describe("Tab Keyboard event handlers", () => {
           stopPropagation: vi.fn(),
           preventDefault: vi.fn(),
         };
+        vi.resetAllMocks();
       });
+
       it("should activate previous tab with vertical tab layout.", () => {
         const tabs = getTabProps();
         handleKeyDownEvent(
@@ -150,6 +155,7 @@ describe("Tab Keyboard event handlers", () => {
         );
         expect(activatePreviousTab).toBeCalled();
       });
+
       it("should do nothing with horizontal tab layout.", () => {
         const tabs = getTabProps();
         handleKeyDownEvent(
@@ -237,7 +243,9 @@ describe("Tab Keyboard event handlers", () => {
           key: Keys.LEFT,
           stopPropagation: vi.fn(),
         };
+        vi.resetAllMocks();
       });
+
       it("should do nothing with vertical tabs", () => {
         const tabs = getTabProps();
         handleKeyDownEvent(
@@ -252,6 +260,7 @@ describe("Tab Keyboard event handlers", () => {
         expect(e.stopPropagation).toHaveBeenCalled();
         expect(activatePreviousTab).not.toBeCalled();
       });
+
       it("should move to tab1 from tab2 with horizontal tabs", () => {
         const tabs = getTabProps();
         handleKeyDownEvent(
@@ -268,7 +277,8 @@ describe("Tab Keyboard event handlers", () => {
       });
     });
   });
-  describe(handleCloseElementKeyDownEvent, () => {
+
+  describe("handleCloseElementKeyDownEvent", () => {
     let setActiveTabIndex, setActivePanelIndex, ref;
 
     beforeEach(() => {
@@ -396,6 +406,7 @@ describe("Tab Keyboard event handlers", () => {
     });
   });
 });
+
 function getTabProps() {
   return [
     {
@@ -418,6 +429,7 @@ function getTabProps() {
     },
   ];
 }
+
 function testCloseElementKeyDown(e, setActiveTabIndex, setActivePanelIndex) {
   expect(
     handleCloseElementKeyDownEvent(
@@ -432,6 +444,7 @@ function testCloseElementKeyDown(e, setActiveTabIndex, setActivePanelIndex) {
   expect(e.preventDefault).toBeCalled();
   expect(e.stopPropagation).toBeCalled();
 }
+
 function testEnterOrSpaceKeyDown(
   e,
   setActiveTabIndex,
