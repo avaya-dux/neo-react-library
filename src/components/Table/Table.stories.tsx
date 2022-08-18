@@ -349,6 +349,7 @@ export const BareBones = () => (
   <Table columns={FilledFields.columns} data={[...FilledFields.data]} />
 );
 
+// BUG: initial values work, but they are unchangable
 export const SelectableRows = () => {
   const defaultSelectedRowIds = [
     FilledFields.data[1].id.toString(),
