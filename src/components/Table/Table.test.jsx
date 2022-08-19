@@ -281,6 +281,26 @@ describe("Table", () => {
       renderResult = render(<AdvancedFilteringAndSorting />);
     });
 
+    it("does not render sorting icon unless column is sorted", async () => {
+      const { container, queryAllByRole } = renderResult;
+
+      const sortableColumnHeader = container.querySelector(
+        "tr th button.neo-multiselect"
+      );
+
+      expect(sortableColumnHeader.querySelectorAll("span")).toHaveLength(1);
+
+      await user.click(sortableColumnHeader);
+      await user.click(queryAllByRole("menuitem")[1]);
+
+      expect(sortableColumnHeader.querySelectorAll("span")).toHaveLength(2);
+
+      await user.click(sortableColumnHeader);
+      await user.click(queryAllByRole("menuitem")[0]);
+
+      expect(sortableColumnHeader.querySelectorAll("span")).toHaveLength(1);
+    });
+
     it("allows column sorting of row", async () => {
       const { container, getByRole, queryAllByRole } = renderResult;
 

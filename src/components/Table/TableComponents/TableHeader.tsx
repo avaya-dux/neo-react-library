@@ -107,11 +107,7 @@ export const TableHeader = <T extends Record<string, any>>({
             });
 
             const sortIcon: IconNamesType =
-              isSorted === false
-                ? "sort"
-                : ariasort === "descending"
-                ? "arrow-up"
-                : "arrow-down";
+              ariasort === "descending" ? "arrow-up" : "arrow-down";
 
             const handleAscSort = () => toggleSortBy(column.id, false, false);
             const handleDescSort = () => toggleSortBy(column.id, true, false);
@@ -155,11 +151,12 @@ export const TableHeader = <T extends Record<string, any>>({
                       >
                         {render("Header")}
                       </span>
-
-                      <Icon
-                        icon={sortIcon}
-                        aria-label={sortIcon.replace(/-/g, " ")}
-                      />
+                      {isSorted && (
+                        <Icon
+                          icon={sortIcon}
+                          aria-label={sortIcon.replace(/-/g, " ")}
+                        />
+                      )}
                     </MenuButton>
                   </Tooltip>
                 }
