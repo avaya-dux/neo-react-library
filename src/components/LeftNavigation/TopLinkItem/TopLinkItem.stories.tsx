@@ -14,23 +14,21 @@ export const Default = () => (
   <LeftNavigation
     aria-label="Main Navigation"
     onNavigate={handleClick}
-    currentUrl=""
+    currentUrl="#active"
   >
-    <TopLinkItem label="Normal Link" href="#" />
-    <TopLinkItem active label="Active Link" href="#" />
-    <TopLinkItem label="Normal Link with Icon" icon="address-book" href="#" />
+    <TopLinkItem label="Active by default" href="#active" />
+    <TopLinkItem label="Normal Link" href="#normal" />
     <TopLinkItem
-      active
-      label="Active Link with Icon"
+      label="Normal Link with Icon"
       icon="address-book"
-      href="#"
+      href="#icon"
     />
-    <TopLinkItem label="Disabled Link" disabled href="#" />
+    <TopLinkItem label="Disabled Link" disabled href="#disabled" />
     <TopLinkItem
       label="Disabled Link with Icon"
       icon="address-book"
       disabled
-      href="#"
+      href="#disabledicon"
     />
   </LeftNavigation>
 );

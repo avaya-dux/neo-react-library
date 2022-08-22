@@ -31,7 +31,11 @@ describe("TopLinkItem", () => {
   });
 
   it("assigns the appropriate class name when the `active` prop is passed", () => {
-    render(<TopLinkItem label={TopLinkItemLabel} active />);
+    render(
+      <LeftNavigation currentUrl="#test">
+        <TopLinkItem href="#test" label={TopLinkItemLabel} />
+      </LeftNavigation>
+    );
     const linkElement = screen.getByRole("listitem");
     expect(linkElement).toHaveClass("neo-leftnav__main--active");
   });
