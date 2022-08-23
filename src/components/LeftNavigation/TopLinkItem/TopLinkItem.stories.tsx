@@ -8,7 +8,7 @@ export default {
   component: TopLinkItem,
 } as Meta<TopLinkItemProps>;
 const handleClick = (id: string, url: string) => {
-  alert(`clicked on the item with id: ${id}, url: ${url}`);
+  window.open(url);
 };
 export const Default = () => (
   <LeftNavigation
@@ -17,11 +17,11 @@ export const Default = () => (
     currentUrl="#active"
   >
     <TopLinkItem label="Active by default" href="#active" />
-    <TopLinkItem label="Normal Link" href="#normal" />
+    <TopLinkItem label="Link to Google" href="http://google.com" />
     <TopLinkItem
-      label="Normal Link with Icon"
+      label="Link with Icon to Bing"
       icon="address-book"
-      href="#icon"
+      href="http://bing.com"
     />
     <TopLinkItem label="Disabled Link" disabled href="#disabled" />
     <TopLinkItem
