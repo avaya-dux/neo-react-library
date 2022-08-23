@@ -8,29 +8,27 @@ export default {
   component: TopLinkItem,
 } as Meta<TopLinkItemProps>;
 const handleClick = (id: string, url: string) => {
-  alert(`clicked on the item with id: ${id}, url: ${url}`);
+  window.open(url);
 };
 export const Default = () => (
   <LeftNavigation
     aria-label="Main Navigation"
     onNavigate={handleClick}
-    currentUrl=""
+    currentUrl="#active"
   >
-    <TopLinkItem label="Normal Link" href="#" />
-    <TopLinkItem active label="Active Link" href="#" />
-    <TopLinkItem label="Normal Link with Icon" icon="address-book" href="#" />
+    <TopLinkItem label="Active by default" href="#active" />
+    <TopLinkItem label="Link to Google" href="http://google.com" />
     <TopLinkItem
-      active
-      label="Active Link with Icon"
+      label="Link with Icon to Bing"
       icon="address-book"
-      href="#"
+      href="http://bing.com"
     />
-    <TopLinkItem label="Disabled Link" disabled href="#" />
+    <TopLinkItem label="Disabled Link" disabled href="#disabled" />
     <TopLinkItem
       label="Disabled Link with Icon"
       icon="address-book"
       disabled
-      href="#"
+      href="#disabledicon"
     />
   </LeftNavigation>
 );

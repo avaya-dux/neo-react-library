@@ -1,5 +1,11 @@
 import clsx from "clsx";
-import { MouseEventHandler, useContext, useId } from "react";
+import {
+  MouseEventHandler,
+  useContext,
+  useEffect,
+  useId,
+  useState,
+} from "react";
 
 import { Button } from "components/Button";
 import { IconNamesType } from "utils";
@@ -9,7 +15,6 @@ import { NavigationContext } from "../NavigationContext";
 import "./TopLinkItem_shim.css";
 
 export interface TopLinkItemProps {
-  active?: boolean;
   label: string;
   href: string;
   icon?: IconNamesType;
@@ -18,7 +23,6 @@ export interface TopLinkItemProps {
 }
 
 export const TopLinkItem = ({
-  active,
   label,
   href,
   icon,
@@ -26,6 +30,11 @@ export const TopLinkItem = ({
   disabled,
 }: TopLinkItemProps) => {
   const ctx = useContext(NavigationContext);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    setIsActive(href === ctx.currentUrl);
+  }, [ctx.currentUrl, isActive, href]);
 
   const onClick: MouseEventHandler = (e) => {
     e.preventDefault();
@@ -36,7 +45,7 @@ export const TopLinkItem = ({
     <li
       className={clsx(
         "neo-leftnav__main",
-        active && "neo-leftnav__main--active"
+        isActive && "neo-leftnav__main--active"
       )}
     >
       {disabled ? (
