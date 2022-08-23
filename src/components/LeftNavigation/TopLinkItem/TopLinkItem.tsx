@@ -34,7 +34,7 @@ export const TopLinkItem = ({
 
   useEffect(() => {
     setIsActive(href === ctx.currentUrl);
-  }, [ctx.currentUrl]);
+  }, [ctx.currentUrl, isActive, href]);
 
   const onClick: MouseEventHandler = (e) => {
     e.preventDefault();
