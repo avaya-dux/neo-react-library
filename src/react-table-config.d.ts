@@ -66,6 +66,7 @@ declare module "react-table" {
       // note that having Record here allows you to add anything to the options, this matches the spirit of the
       // underlying js library, but might be cleaner if it's replaced by a more specific type that matches your
       // feature set, this is a safe default.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Record<string, any> {}
 
   export interface Hooks<
