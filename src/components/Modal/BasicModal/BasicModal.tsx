@@ -83,4 +83,4 @@ export const BasicModal = forwardRef(
   }
 );
 
-BasicModal.displayName = "Basic Modal";
+BasicModal.displayName = "BasicModal";
