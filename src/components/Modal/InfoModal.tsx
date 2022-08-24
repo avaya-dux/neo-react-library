@@ -1,8 +1,12 @@
+import clsx from "clsx";
 import { ReactNode, useId } from "react";
 import ReactDOM from "react-dom";
 
+import "./BasicModal/BasicModal_shim.css";
+
 export interface InfoModalProps {
   children?: ReactNode;
+  className?: string;
   id?: string;
   onClose: React.ReactEventHandler<HTMLButtonElement>;
   open: boolean;
@@ -25,6 +29,7 @@ export interface InfoModalProps {
  */
 export const InfoModal = ({
   children,
+  className,
   id = useId(),
   onClose,
   open = false,
@@ -39,7 +44,11 @@ export const InfoModal = ({
   }
 
   return ReactDOM.createPortal(
-    <div id={id} data-testid={id} className="neo-modal--active">
+    <div
+      id={id}
+      data-testid={id}
+      className={clsx("neo-modal-container neo-modal--active", className)}
+    >
       <div className="neo-modal__background"></div>
       <div
         className="neo-modal__content"
