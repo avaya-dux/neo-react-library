@@ -1,4 +1,4 @@
-.neo-modal-container {
+.neo-modal--active {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -8,8 +8,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.neo-modal--active {
-  justify-content: center;
 }

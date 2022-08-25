@@ -51,7 +51,7 @@ export const InfoModal = forwardRef(
       <div
         id={id}
         data-testid={id}
-        className={clsx("neo-modal-container neo-modal--active", className)}
+        className={clsx("neo-modal--active", className)}
         ref={ref}
       >
         <div className="neo-modal__background"></div>
