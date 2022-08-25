@@ -3,17 +3,19 @@ import ReactDOM from "react-dom";
 import FocusLock from "react-focus-lock";
 import clsx from "clsx";
 
-import { Button, ButtonProps } from "components/Button";
+import { Button } from "components/Button";
 
 import "./BasicModal_shim.css";
 
-export interface BasicModalProps extends ButtonProps {
+export interface BasicModalProps {
   actions?: JSX.Element[];
   children?: ReactNode;
   closeButtonLabel?: string;
   onClose: () => void;
   open: boolean;
   title: string;
+  className?: string;
+  id?: string;
 }
 
 export const BasicModal = forwardRef(
@@ -28,7 +30,7 @@ export const BasicModal = forwardRef(
       id = useId(),
       ...rest
     }: BasicModalProps,
-    ref: React.Ref<HTMLButtonElement>
+    ref: React.Ref<HTMLDivElement>
   ) => {
     const buttons = "actions" in rest ? rest.actions : null;
 
@@ -50,7 +52,7 @@ export const BasicModal = forwardRef(
 
     const modal = (
       <FocusLock>
-        <div id={id} className={clsx("neo-modal--active", className)}>
+        <div ref={ref} id={id} className={clsx("neo-modal--active", className)}>
           <div className="neo-modal__background"></div>
           <div
             className="neo-modal__content"
@@ -69,7 +71,6 @@ export const BasicModal = forwardRef(
                 variant="secondary"
                 data-dismiss="modal"
                 onClick={onClose}
-                ref={ref}
               >
                 {closeButtonLabel}
               </Button>

@@ -9,11 +9,3 @@
   justify-content: center;
   align-items: center;
 }
-
-.neo-modal__content {
-  animation: none;
-  position: absolute;
-  top: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
