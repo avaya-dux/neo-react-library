@@ -1,6 +1,7 @@
 import { composeStories } from "@storybook/testing-react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import {
@@ -8,9 +9,10 @@ import {
   handleRightCarouselMouseClickEvent,
 } from "./EventHandlers";
 import { enableLeftButton, enableRightButton } from "./EventHandlers/Helper";
-
 import * as CarouselTabStories from "./Tabs.carousel.stories";
-const { ManyTabsCarousel } = composeStories(CarouselTabStories);
+
+const { ManyTabsCarousel, TwoTabsCarousel } =
+  composeStories(CarouselTabStories);
 
 vi.mock("./EventHandlers");
 vi.mock("./EventHandlers/Helper");
@@ -18,10 +20,11 @@ vi.mock("./EventHandlers/Helper");
 describe("Tabs", () => {
   describe("Storybook tests", () => {
     describe(ManyTabsCarousel.storyName, () => {
+      let renderResult;
       beforeEach(() => {
         enableLeftButton.mockReturnValue(true);
         enableRightButton.mockReturnValue(true);
-        render(<ManyTabsCarousel />);
+        renderResult = render(<ManyTabsCarousel />);
         vi.resetAllMocks();
       });
 
@@ -43,6 +46,35 @@ describe("Tabs", () => {
         const rightButton = buttons[1];
         await userEvent.click(rightButton);
         expect(handleRightCarouselMouseClickEvent).toBeCalled();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).toBeDefined();
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe(TwoTabsCarousel.storyName, () => {
+      let renderResult;
+      beforeEach(() => {
+        renderResult = render(<TwoTabsCarousel />);
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).toBeDefined();
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
       });
     });
   });
