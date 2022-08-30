@@ -51,6 +51,7 @@ export type TableProps<T extends Record<string, any>> = {
   itemsPerPageOptions?: number[];
   defaultSelectedRowIds?: string[];
   rowHeight?: "compact" | "medium" | "large";
+  showRowSeparator?: boolean;
   summary?: string;
   containerClassName?: string;
   translations?: ITableTranslations;

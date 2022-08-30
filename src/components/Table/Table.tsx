@@ -78,6 +78,7 @@ export const Table = <T extends Record<string, any>>({
   readonly = false,
   selectableRows = "none",
   rowHeight = "large",
+  showRowSeparator = false,
   translations,
 
   ...rest
@@ -187,7 +188,8 @@ export const Table = <T extends Record<string, any>>({
           className={clsx(
             "neo-table",
             rowHeight === "compact" && "neo-table--compact",
-            rowHeight === "medium" && "neo-table--medium"
+            rowHeight === "medium" && "neo-table--medium",
+            showRowSeparator && "neo-table-separator"
           )}
           aria-labelledby={tableCaptionId}
           aria-describedby={tableSummaryId}
