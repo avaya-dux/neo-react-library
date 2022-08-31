@@ -19,7 +19,8 @@ const {
 } = composeStories(WidgetStories);
 
 describe("Widget", () => {
-  describe(normalize, () => {
+  // TODO: add tests back in when I can figure out why they're blowing up the build
+  describe("normalize", () => {
     it("Should do nothing with all required children", () => {
       const children = [
         <Header key="header" />,

@@ -108,6 +108,7 @@ export const EmptyWidget = () => {
     </Widget>
   );
 };
+
 export const DisabledWidget = () => {
   return (
     <Widget disabled>
@@ -164,6 +165,7 @@ InteractiveWidget.args = {
   loading: false,
   disabled: false,
 };
+
 export const LoadingEmptyWidget = () => {
   const [loading, setloading] = useState(true);
   const [empty, setempty] = useState(false);
