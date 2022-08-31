@@ -1,6 +1,6 @@
 {
   "name": "@avaya/neo-react",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "This is the React version of the shared library called 'NEO' buit by Avaya",
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": "github:avaya-dux/neo-react-library",
@@ -34,7 +34,7 @@
     "not ie <= 11"
   ],
   "scripts": {
-    "dev": "vite build --watch",
+    "dev": "vite build --mode dev --watch",
     "storybook": "start-storybook -p 6006",
     "clean": "rm -rf coverage badges dist storybook-static cypress/screenshots cypress/videos jsdocs package *.tgz",
     "format": "yarn prettier --write ./src --loglevel warn",
