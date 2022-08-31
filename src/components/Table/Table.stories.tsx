@@ -350,7 +350,11 @@ export const BareBones = () => (
 );
 
 export const WithRowSeparator = () => (
-  <Table showRowSeparator columns={FilledFields.columns} data={[...FilledFields.data]} />
+  <Table
+    showRowSeparator
+    columns={FilledFields.columns}
+    data={[...FilledFields.data]}
+  />
 );
 
 // BUG: initial values work, but they are unchangable
