@@ -20,3 +20,7 @@
 .neo-table th button.neo-dropdown__link-header::after {
   padding: 0 12px 0 0;
 }
+
+.neo-table-separator td {
+  border-bottom: 1px solid #f1f1f1;
+}
