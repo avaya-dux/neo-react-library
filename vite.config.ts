@@ -6,7 +6,12 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
-  plugins: [react(), dts()],
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+    }),
+  ],
   resolve: {
     alias: {
       components: "/src/components",
