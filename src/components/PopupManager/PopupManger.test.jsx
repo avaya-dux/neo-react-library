@@ -26,7 +26,7 @@ describe("PopupManager", () => {
   const user = userEvent.setup();
 
   describe("Storybook", () => {
-    describe(ToastMessageOnly, () => {
+    describe("ToastMessageOnly", () => {
       let renderResult;
       beforeEach(() => {
         renderResult = render(<ToastMessageOnly />);
@@ -44,7 +44,7 @@ describe("PopupManager", () => {
       });
     });
 
-    describe(ToastsPositioning, () => {
+    describe("ToastsPositioning", () => {
       let renderResult;
       beforeEach(() => {
         renderResult = render(<ToastsPositioning />);
@@ -62,7 +62,7 @@ describe("PopupManager", () => {
       });
     });
 
-    describe(ToastWithIcon, () => {
+    describe("ToastWithIcon", () => {
       let renderResult;
       beforeEach(() => {
         renderResult = render(<ToastWithIcon />);
@@ -80,7 +80,10 @@ describe("PopupManager", () => {
       });
     });
 
-    describe(DefaultToast, () => {
+    describe("DefaultToast", () => {
+      // NOTE: ignore react17 warnings (from storybook build). Should remove this line once storybook is updated to react18.
+      vi.spyOn(console, "error").mockImplementation(() => null);
+
       let renderResult;
       beforeEach(() => {
         renderResult = render(<DefaultToast />);

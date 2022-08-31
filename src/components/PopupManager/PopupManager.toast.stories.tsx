@@ -46,6 +46,7 @@ ToastMessageOnly.args = {
   position: "bottom-right",
   duration: 5000,
 };
+
 export const ToastWithIcon = PopupManagerToastTemplate.bind({});
 ToastWithIcon.args = {
   message: "This is a toast: 5 seconds long, with an icon.",
@@ -64,6 +65,7 @@ export const DefaultToast = () => {
     <Toast>Default Toast: positioned at top and center for 5 seconds</Toast>
   );
 };
+
 export const ToastsPositioning = () => {
   const managerRef = useRef<PopupManager | null>(null);
   useEffect(() => {

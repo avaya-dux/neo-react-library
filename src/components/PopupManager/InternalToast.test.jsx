@@ -22,6 +22,7 @@ describe("InternalToast", () => {
         />
       );
     });
+
     it("should render ok", () => {
       const { container } = renderResult;
       expect(container).toBeDefined();
@@ -44,6 +45,7 @@ describe("InternalToast", () => {
       expect(remove).toBeCalled();
     });
   });
+
   describe("duration less than 1 second", () => {
     let renderResult;
     let remove;
@@ -61,6 +63,7 @@ describe("InternalToast", () => {
         />
       );
     });
+
     it("should render ok", () => {
       const { container } = renderResult;
       expect(container).toBeDefined();

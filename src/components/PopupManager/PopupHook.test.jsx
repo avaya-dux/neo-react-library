@@ -21,12 +21,16 @@ import { popupManagerLogger } from "./PopupManager";
 
 popupManagerLogger.disableAll();
 popupHookLogger.disableAll();
+
 describe("PopupHook", () => {
   afterEach(() => {
     document.getElementsByTagName("html")[0].innerHTML = "";
   });
 
   it("createContainer creates container", () => {
+    // NOTE: ignore react17 warnings (from storybook build). Should remove this line once storybook is updated to react18.
+    vi.spyOn(console, "error").mockImplementation(() => null);
+
     vi.useFakeTimers();
     const callback = vi.fn();
     createContainer(callback);
@@ -45,6 +49,9 @@ describe("PopupHook", () => {
   });
 
   it("usePopup creates container", async () => {
+    // NOTE: ignore react17 warnings (from storybook build). Should remove this line once storybook is updated to react18.
+    vi.spyOn(console, "error").mockImplementation(() => null);
+
     expect(document.getElementById(containerId)).toBeNull();
     const { result } = renderHook(() => usePopup());
     expect(result.current.mounted).toBeTruthy();
@@ -52,6 +59,9 @@ describe("PopupHook", () => {
   });
 
   it("notify ok", async () => {
+    // NOTE: ignore react17 warnings (from storybook build). Should remove this line once storybook is updated to react18.
+    vi.spyOn(console, "error").mockImplementation(() => null);
+
     const { result } = renderHook(() => usePopup());
     expect(result.current.notify).toBeTruthy();
     const notification = (
