@@ -310,7 +310,7 @@ describe("Notification", () => {
     });
   });
 
-  describe(createAction, () => {
+  describe("createAction", () => {
     describe("return ClosableAction", () => {
       it("when action is undefined", () => {
         const result = createAction(undefined, "success");
