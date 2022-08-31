@@ -69,8 +69,6 @@ const navbarAvatar = (
   />
 );
 
-const navMenuToggleBtn = <NavbarButton aria-label="Toggle Menu" icon="menu" />;
-
 const Template: Story<NavbarProps> = (props: NavbarProps) => {
   return <Navbar {...props} />;
 };
@@ -80,6 +78,67 @@ BasicNavbar.args = {
   logo,
 };
 
+export const AltNavbarWithNavigationToggle = () => {
+  const [displayLeftNav, setDisplayLeftNav] = useState(false);
+
+  return (
+    <section>
+      <Navbar
+        logo={
+          <Logo src="http://design-portal-next-gen.herokuapp.com/images/logo-fpo.png" />
+        }
+        navButtons={[
+          <NavbarButton
+            key="1"
+            aria-label="Toggle Menu"
+            onClick={() => setDisplayLeftNav(!displayLeftNav)}
+          />,
+        ]}
+      />
+
+      {displayLeftNav && (
+        <div
+          className={
+            displayLeftNav
+              ? "neo-slide neo-slide--in-left neo-leftnav--collapsible"
+              : "neo-leftnav--collapsible neo-slide neo-slide--out-left"
+          }
+          style={{ width: "15%" }}
+        >
+          <div className="neo-leftnav--wrapper">
+            <nav className="neo-leftnav">
+              <ul className="neo-leftnav__nav">
+                <NavCategory icon="audio-on" label="Collapsed">
+                  <LinkItem href="#fake"> First Item </LinkItem>
+                  <LinkItem href="#fake"> Second Item </LinkItem>
+                  <LinkItem href="#fake"> Third Item </LinkItem>
+                  <LinkItem href="#fake"> Fourth Item </LinkItem>
+                </NavCategory>
+                <NavCategory active expanded icon="call" label="Active">
+                  <LinkItem href="#fake"> Item 1 </LinkItem>
+                  <LinkItem href="#fake" active={true}>
+                    Active Item 2
+                  </LinkItem>
+                  <LinkItem href="#fake"> Item 3</LinkItem>
+                </NavCategory>
+                <NavCategory
+                  disabled
+                  icon="available"
+                  label="Disabled Category"
+                >
+                  <LinkItem href="#fake"> First Item </LinkItem>
+                  <LinkItem href="#fake"> Second Item </LinkItem>
+                </NavCategory>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
+const navMenuToggleBtn = <NavbarButton aria-label="Toggle Menu" icon="menu" />;
 export const NavbarWithNavigationToggle = Template.bind({});
 NavbarWithNavigationToggle.args = {
   logo: linkLogo,

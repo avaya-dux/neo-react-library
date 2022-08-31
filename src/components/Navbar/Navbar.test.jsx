@@ -94,6 +94,7 @@ describe("Navbar", () => {
     });
 
     describe("Navbar With Navigation Toggle", () => {
+      // BUG: is throwing: "Warning: Received `true` for a non-boolean attribute `active`."
       it("correctly executes button onClick handler when passed as props", () => {
         const { getByRole, getAllByRole } = render(
           <NavbarWithNavigationToggle />
@@ -127,6 +128,7 @@ describe("Navbar", () => {
         expect(results).toHaveNoViolations();
       });
     });
+
     describe("Navbar With Tabs", () => {
       it("passes basic axe compliance", async () => {
         const { container } = render(<NavbarWithTabs />);
@@ -134,6 +136,7 @@ describe("Navbar", () => {
         expect(results).toHaveNoViolations();
       });
     });
+
     describe("Navbar With Agent Card", () => {
       it("passes basic axe compliance", async () => {
         const { container } = render(<NavbarWithAgentCard />);
