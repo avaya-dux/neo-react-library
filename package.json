@@ -9,16 +9,13 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "type": "module",
   "source": "src/index.ts",
   "types": "./dist/index.d.ts",
-  "main": "./dist/avaya-neo-react.umd.cjs",
-  "module": "./dist/avaya-neo-react.js",
   "exports": {
     "./avaya-neo-react.css": "./dist/avaya-neo-react.css",
     ".": {
-      "import": "./dist/avaya-neo-react.js",
-      "require": "./dist/avaya-neo-react.umd.cjs"
+      "import": "./dist/avaya-neo-react.mjs",
+      "require": "./dist/avaya-neo-react.umd.js"
     }
   },
   "files": [
