@@ -28,6 +28,8 @@ vi.mock("./EventHandlers");
 vi.mock("./EventHandlers/Helper");
 
 describe("Tabs", () => {
+  const user = userEvent.setup();
+
   describe("Storybook tests", () => {
     describe(ManyTabsCarousel.storyName, () => {
       let renderResult;
@@ -44,7 +46,7 @@ describe("Tabs", () => {
         expect(buttons.length).toBe(3);
 
         const leftButton = buttons[0];
-        await userEvent.click(leftButton);
+        await user.click(leftButton);
         expect(handleLeftCarouselMouseClickEvent).toBeCalled();
       });
 
@@ -54,7 +56,7 @@ describe("Tabs", () => {
         expect(buttons.length).toBe(3);
 
         const rightButton = buttons[1];
-        await userEvent.click(rightButton);
+        await user.click(rightButton);
         expect(handleRightCarouselMouseClickEvent).toBeCalled();
       });
 
@@ -110,7 +112,7 @@ describe("Tabs", () => {
         const tabs = getAllByRole("tab");
         expect(tabs.length).toBe(3);
         const tab3 = tabs[2];
-        await userEvent.click(tab3);
+        await user.click(tab3);
         const newTab3 = getAllByRole("tab")[2];
         expect(newTab3).toHaveAttribute("tabindex", "0");
         expect(newTab3).toHaveAttribute("aria-selected", "true");
@@ -134,51 +136,51 @@ describe("Tabs", () => {
         expect(results).toHaveNoViolations();
       });
 
-      it.skip("Close Tab2 using space should work", () => {
+      it.skip("Close Tab2 using space should work", async () => {
         const { getAllByRole } = renderResult;
         const tabs = getAllByRole("tab");
         const originalTabLength = tabs.length;
         expect(tabs.length).toBe(originalTabLength);
-        userEvent.tab();
+        await user.tab();
         const closeButton = getAllByRole("button")[0];
         expect(closeButton).toHaveFocus();
-        userEvent.keyboard("{space}");
+        await user.keyboard("{space}");
         expect(getAllByRole("tab").length).toBe(originalTabLength - 1);
       });
 
-      it.skip("Close Tab2 using enter should work", () => {
+      it.skip("Close Tab2 using enter should work", async () => {
         const { getAllByRole } = renderResult;
         const tabs = getAllByRole("tab");
         const originalTabLength = tabs.length;
         expect(tabs.length).toBe(originalTabLength);
-        userEvent.tab();
+        await user.tab();
         const closeButton = getAllByRole("button")[0];
         expect(closeButton).toHaveFocus();
-        userEvent.keyboard("{enter}");
+        await user.keyboard("{enter}");
         expect(getAllByRole("tab").length).toBe(originalTabLength - 1);
       });
 
-      it.skip("Tab on Tab2 Close button should not close tab2", () => {
+      it("Tab on Tab2 Close button should not close tab2", async () => {
         const { getAllByRole } = renderResult;
         const tabs = getAllByRole("tab");
         const originalTabLength = tabs.length;
         expect(tabs.length).toBe(originalTabLength);
-        userEvent.tab();
+        await user.tab();
         const closeButton = getAllByRole("button")[0];
         expect(closeButton).toHaveFocus();
-        userEvent.tab();
+        await user.tab();
         expect(getAllByRole("tab").length).toBe(originalTabLength);
       });
 
-      it.skip("Close Tab2 using mouse click should work", () => {
+      it("Close Tab2 using mouse click should work", async () => {
         const { getAllByRole } = renderResult;
         const tabs = getAllByRole("tab");
         const originalTabLength = tabs.length;
         expect(tabs.length).toBe(originalTabLength);
-        userEvent.tab();
+        await user.tab();
         const closeButton = getAllByRole("button")[0];
         expect(closeButton).toHaveFocus();
-        userEvent.click(closeButton);
+        await user.click(closeButton);
         expect(getAllByRole("tab").length).toBe(originalTabLength - 1);
       });
     });
