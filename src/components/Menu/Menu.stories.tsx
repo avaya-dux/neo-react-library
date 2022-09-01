@@ -1,7 +1,7 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 import log from "loglevel";
 
-import { Button } from "components";
+import { Button } from "components/Button";
 
 import {
   Menu,
