@@ -20,15 +20,47 @@ To run a project which consumes this project while it is running in development 
 Yarn provides a convenient way to do this:
 
 ```bash
-# register this project
+# register neo-react in the global space
+cd ~/dev/neo-react-library
 yarn link
 
-# now go to your consuming project directory
-cd ~/other-project
+# go to your consuming project directory
+cd ~/dev/other-project
 
-# create the symlink to your local development package (note, you MUST use `yarn`, NOT `npm`)
+# create the symlink
 yarn link @avaya/neo-react
 ```
+
+After you have completed your work, you should "unlink" to ensure that your environment is clean.
+
+```bash
+# remove the link from your project
+cd ~/dev/other-project
+yarn unlink @avaya/neo-react
+
+# re-pull data from NPM
+yarn install --force
+
+# unlink neo-react from the global space
+cd ~/dev/neo-react-library
+yarn unlink
+```
+
+### Vite note
+
+If you are using Vite in your project, you must add neo-react to your [optimized deps](https://vitejs.dev/config/dep-optimization-options.html#optimizedeps-exclude):
+```javascript
+export default defineConfig({
+  plugins: [react()],
+  ...
+  optimizeDeps: {
+    exclude: ["@avaya/neo-react"],
+  },
+});
+```
+
+This is due to how Vite optomizes dependancies. It simply doesn't view code in `node_modules` unless explicitely told to. You can read more about the [how and why here](https://vitejs.dev/guide/dep-pre-bundling.html#monorepos-and-linked-dependencies).
+
 ## to build a production version of the library
 
 ```
