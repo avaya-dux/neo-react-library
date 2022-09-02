@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import { Column, ColumnInstance } from "react-table";
 
 import {
-  Button,
   Icon,
   IconChip,
   List,
@@ -12,6 +11,7 @@ import {
   SelectNative,
   Tooltip,
 } from "components";
+import { Button } from "components/Button";
 import { IconNamesType } from "utils";
 
 import { Table, TableProps } from "./";

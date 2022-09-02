@@ -1,9 +1,18 @@
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
+import { UserEventKeys } from "utils";
+
 import { internalTabLogger } from "./InternalTab";
-import { Tab, TabLink, TabList, TabPanel, TabPanels } from "./TabComponents";
+import {
+  ClosableTab,
+  Tab,
+  TabLink,
+  TabList,
+  TabPanel,
+  TabPanels,
+} from "./TabComponents";
 import { Tabs } from "./Tabs";
 
 vi.spyOn(console, "log").mockImplementation(() => null);
@@ -11,17 +20,24 @@ vi.spyOn(console, "log").mockImplementation(() => null);
 internalTabLogger.disableAll();
 
 describe("Tabs", () => {
+  const user = userEvent.setup();
+
+  const tab1Title = "Tab 1";
+  const tab2Title = "Tab 2";
+  const tab3Title = "Tab 3";
+  const tab1Content = "Tab 1 Content";
+  const tab2Content = "Tab 2 Content";
+  const tab3Content = "Tab 3 Content";
+
   describe("`TabLink` component tests", () => {
-    const tab1Content = "Tab 1 Content";
-    const tab2Content = "Tab 2 Content";
     const tabLinkTabExample = (
       <Tabs defaultIndex={0}>
         <TabList>
-          <Tab id="tab1">Tab 1</Tab>
+          <Tab id="tab1">{tab1Title}</Tab>
 
           <TabLink href="https://kagi.com/faq">Kagi Search Engine</TabLink>
 
-          <Tab id="tab3">Tab 3</Tab>
+          <Tab id="tab3">{tab2Title}</Tab>
         </TabList>
 
         <TabPanels>
@@ -61,7 +77,7 @@ describe("Tabs", () => {
       );
 
       const link = screen.getByRole("link");
-      userEvent.click(link);
+      user.click(link);
 
       expect(screen.getAllByRole("tab")[0]).toHaveAttribute(
         "aria-selected",
@@ -71,6 +87,122 @@ describe("Tabs", () => {
         "aria-selected",
         "false"
       );
+    });
+  });
+
+  describe("Closable Tab", () => {
+    const closableTabSpy = vi.fn();
+
+    beforeEach(() => {
+      vi.resetAllMocks();
+      render(
+        <Tabs defaultIndex={0}>
+          <TabList>
+            <Tab id="tab1">{tab1Title}</Tab>
+
+            <ClosableTab id="tab2" onClose={closableTabSpy}>
+              {tab2Title}
+            </ClosableTab>
+
+            <Tab id="tab3">{tab3Title}</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>{tab1Content}</TabPanel>
+
+            <TabPanel>{tab2Content}</TabPanel>
+
+            <TabPanel>{tab3Content}</TabPanel>
+          </TabPanels>
+        </Tabs>
+      );
+    });
+
+    afterEach(() => {
+      cleanup();
+    });
+
+    it("should call the `onClose` method when 'close' btn is focused and user hits 'space'", async () => {
+      expect(closableTabSpy).not.toHaveBeenCalled();
+
+      screen.getByRole("button").focus();
+      await user.keyboard(UserEventKeys.SPACE);
+      expect(closableTabSpy).toHaveBeenCalled();
+    });
+
+    it("should call the `onClose` method when 'close' btn is focused and user hits 'enter'", async () => {
+      expect(closableTabSpy).not.toHaveBeenCalled();
+
+      screen.getByRole("button").focus();
+      await user.keyboard(UserEventKeys.ENTER);
+      expect(closableTabSpy).toHaveBeenCalled();
+    });
+
+    it("should call the `onClose` method when 'close' btn is clicked via mouse", async () => {
+      expect(closableTabSpy).not.toHaveBeenCalled();
+
+      await user.click(screen.getByRole("button"));
+      expect(closableTabSpy).toHaveBeenCalled();
+    });
+
+    it("should _not_ call the `onClose` method when 'close' btn is focused and user hits 'tab'", async () => {
+      expect(closableTabSpy).not.toHaveBeenCalled();
+
+      screen.getByRole("button").focus();
+      await user.tab();
+      expect(closableTabSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("index and aria-selected attributes", () => {
+    it("are appropriately set on mouse click", async () => {
+      render(
+        <Tabs defaultIndex={0}>
+          <TabList>
+            <Tab id="tab1">{tab1Title}</Tab>
+
+            <Tab id="tab2">{tab2Title}</Tab>
+
+            <Tab id="tab3">{tab3Title}</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>{tab1Content}</TabPanel>
+
+            <TabPanel>{tab2Content}</TabPanel>
+
+            <TabPanel>{tab3Content}</TabPanel>
+          </TabPanels>
+        </Tabs>
+      );
+
+      const tabs = screen.getAllByRole("tab");
+      expect(tabs).toHaveLength(3);
+
+      expect(tabs[0]).toHaveAttribute("tabindex", "0");
+      expect(tabs[0]).toHaveAttribute("aria-selected", "true");
+      expect(tabs[1]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[1]).toHaveAttribute("aria-selected", "false");
+      expect(tabs[2]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[2]).toHaveAttribute("aria-selected", "false");
+
+      await user.click(tabs[1]);
+
+      expect(tabs[0]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[0]).toHaveAttribute("aria-selected", "false");
+      expect(tabs[1]).toHaveAttribute("tabindex", "0");
+      expect(tabs[1]).toHaveAttribute("aria-selected", "true");
+      expect(tabs[2]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[2]).toHaveAttribute("aria-selected", "false");
+
+      await user.click(tabs[2]);
+
+      expect(tabs[0]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[0]).toHaveAttribute("aria-selected", "false");
+      expect(tabs[1]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[1]).toHaveAttribute("aria-selected", "false");
+      expect(tabs[2]).toHaveAttribute("tabindex", "0");
+      expect(tabs[2]).toHaveAttribute("aria-selected", "true");
     });
   });
 });

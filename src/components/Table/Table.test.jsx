@@ -301,7 +301,7 @@ describe("Table", () => {
       expect(sortableColumnHeader.querySelectorAll("span")).toHaveLength(1);
     });
 
-    it.skip("allows column sorting of row", async () => {
+    it("allows column sorting of row", async () => {
       const { container, getByRole, queryAllByRole } = renderResult;
 
       const firstColumnSortButton = container.querySelector(
@@ -352,7 +352,7 @@ describe("Table", () => {
       expect(clearSortButton).not.toHaveClass("neo-dropdown--disabled");
       await user.click(clearSortButton);
       expect(getFirstCellTextContent()).toBe(firstCellOriginalContent);
-    });
+    }, 10000);
 
     it("allows column filtering via header dropdown", async () => {
       const { container, getByRole, queryAllByRole, getByLabelText } =
@@ -507,8 +507,7 @@ describe("Table", () => {
       });
     });
 
-    // BUG: use of `Button` in `customActionsNode` is causing the render method to fail
-    describe.skip("CustomActions", () => {
+    describe("CustomActions", () => {
       let renderResult;
 
       beforeEach(() => {
