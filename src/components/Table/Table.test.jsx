@@ -352,7 +352,7 @@ describe("Table", () => {
       expect(clearSortButton).not.toHaveClass("neo-dropdown--disabled");
       await user.click(clearSortButton);
       expect(getFirstCellTextContent()).toBe(firstCellOriginalContent);
-    });
+    }, 10000);
 
     it("allows column filtering via header dropdown", async () => {
       const { container, getByRole, queryAllByRole, getByLabelText } =
