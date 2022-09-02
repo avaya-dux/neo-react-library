@@ -153,4 +153,56 @@ describe("Tabs", () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
     });
   });
+
+  describe("index and aria-selected attributes", () => {
+    it("are appropriately set on mouse click", async () => {
+      render(
+        <Tabs defaultIndex={0}>
+          <TabList>
+            <Tab id="tab1">{tab1Title}</Tab>
+
+            <Tab id="tab2">{tab2Title}</Tab>
+
+            <Tab id="tab3">{tab3Title}</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>{tab1Content}</TabPanel>
+
+            <TabPanel>{tab2Content}</TabPanel>
+
+            <TabPanel>{tab3Content}</TabPanel>
+          </TabPanels>
+        </Tabs>
+      );
+
+      const tabs = screen.getAllByRole("tab");
+      expect(tabs).toHaveLength(3);
+
+      expect(tabs[0]).toHaveAttribute("tabindex", "0");
+      expect(tabs[0]).toHaveAttribute("aria-selected", "true");
+      expect(tabs[1]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[1]).toHaveAttribute("aria-selected", "false");
+      expect(tabs[2]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[2]).toHaveAttribute("aria-selected", "false");
+
+      await user.click(tabs[1]);
+
+      expect(tabs[0]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[0]).toHaveAttribute("aria-selected", "false");
+      expect(tabs[1]).toHaveAttribute("tabindex", "0");
+      expect(tabs[1]).toHaveAttribute("aria-selected", "true");
+      expect(tabs[2]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[2]).toHaveAttribute("aria-selected", "false");
+
+      await user.click(tabs[2]);
+
+      expect(tabs[0]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[0]).toHaveAttribute("aria-selected", "false");
+      expect(tabs[1]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[1]).toHaveAttribute("aria-selected", "false");
+      expect(tabs[2]).toHaveAttribute("tabindex", "0");
+      expect(tabs[2]).toHaveAttribute("aria-selected", "true");
+    });
+  });
 });

@@ -106,17 +106,6 @@ describe("Tabs", () => {
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
-
-      it.skip("click on tab3 should make tab3 active", async () => {
-        const { getAllByRole } = renderResult;
-        const tabs = getAllByRole("tab");
-        expect(tabs.length).toBe(3);
-        const tab3 = tabs[2];
-        await user.click(tab3);
-        const newTab3 = getAllByRole("tab")[2];
-        expect(newTab3).toHaveAttribute("tabindex", "0");
-        expect(newTab3).toHaveAttribute("aria-selected", "true");
-      });
     });
 
     describe(UncontrolledActiveTabStory.storyName, () => {
