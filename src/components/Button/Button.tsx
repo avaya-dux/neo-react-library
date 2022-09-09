@@ -23,6 +23,19 @@ export interface ButtonProps
   variant?: "primary" | "secondary" | "tertiary";
 }
 
+/**
+ * The `Button` component is used to trigger an action or event, such as submitting a form,
+ * opening a dialog, canceling an action, or performing a delete operation.
+ *
+ * @example
+ * <Button>Example</Button>
+ * <Button variant="secondary">Cancel</Button>
+ * <Button animation="spinner" disabled>Loading</Button>
+ * <Button size="wide">Submit</Button>
+ *
+ * @see https://design.avayacloud.com/components/web/buttons-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-button
+ */
 export const Button = forwardRef(
   (
     {
