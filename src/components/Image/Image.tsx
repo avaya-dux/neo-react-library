@@ -14,7 +14,8 @@ import { handleAccessbilityError } from "utils";
  * fallback that is used when the image is loading or fails to load.
  *
  * @example
- * <Image alt="test image" width={200} height={300} src={localImage} fallback="https://via.placeholder.com/200x300" />
+ * <Image alt="test image" src={localImage} />
+ * <Image alt="test image" width={200} height={300} src={remoteImage} fallback="https://via.placeholder.com/200x300" />
  *
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-image--default-image
  */
