@@ -8,11 +8,9 @@ export interface RadioProps
 export const Radio: React.FC<RadioProps> = ({
   children,
   id = useId(),
-  checked,
-  value,
   ...rest
 }: RadioProps) => {
-  const idForLabel = useMemo(() => `Radio-label-${value}`, [value]);
+  const idForLabel = useMemo(() => `Radio-label-${rest.value}`, [rest.value]);
 
   return (
     <>
@@ -21,10 +19,8 @@ export const Radio: React.FC<RadioProps> = ({
         className="neo-radio"
         type="radio"
         id={id}
-        checked={checked}
-        value={value}
         aria-labelledby={idForLabel}
-        aria-label={value?.toString()}
+        aria-label={rest.value?.toString()}
       />
       <label id={idForLabel} htmlFor={id}>
         {children}
