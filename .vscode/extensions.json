@@ -9,10 +9,10 @@
     "henriiik.vscode-sort",
     "ms-vscode.vscode-typescript-next",
     "shardulm94.trailing-spaces",
-    "silvenon.mdx",
     "visualstudioexptteam.vscodeintellicode",
     "vscode-icons-team.vscode-icons",
     "wayou.vscode-todo-highlight",
-    "ZixuanChen.vitest-explorer"
+    "zixuanchen.vitest-explorer",
+    "unifiedjs.vscode-mdx"
   ]
 }

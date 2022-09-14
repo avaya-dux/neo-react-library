@@ -5,6 +5,10 @@ import { getIconClass, IconNamesType } from "utils/icons";
 // import { SizeType } from "utils/size"; TODO https://jira.forge.avaya.com/browse/NEO-645
 type SizeType = "sm" | "lg";
 export interface IconProps extends React.BaseHTMLAttributes<HTMLElement> {
+  "aria-label": string;
+  className?: string;
+  icon: IconNamesType;
+  size?: SizeType;
   status?:
     | "available"
     | "away"
@@ -17,16 +21,20 @@ export interface IconProps extends React.BaseHTMLAttributes<HTMLElement> {
     | "connected"
     | "inbound"
     | "outbound";
-  icon: IconNamesType;
-  size?: SizeType;
-  className?: string;
 }
 
+/**
+ * The `Icon` component is used to display an icon.
+ *
+ * @example
+ * <Icon icon="available-filled" aria-label="Check Icon" />
+ * <Icon icon="check" aria-label="Check Icon" size="lg" />
+ */
 export const Icon: React.FC<IconProps> = ({
-  status,
+  className,
   icon,
   size,
-  className,
+  status,
   ...rest
 }: IconProps) => {
   if (!rest["aria-label"]) {
