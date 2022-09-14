@@ -25,6 +25,8 @@ const DefaultProps = {
   value: "1",
 }
 
+vi.spyOn(console, "log").mockImplementation(() => null)
+
 describe.only("Checkbox", () => {
   it("renders as unchecked appropriately", () => {
     const { getByLabelText } = render(<Checkbox {...DefaultProps} />)
@@ -89,7 +91,6 @@ describe.only("Checkbox", () => {
   })
 
   describe("storybook tests", () => {
-    vi.spyOn(console, "log").mockImplementation(() => null)
 
     describe(Default.name, () => {
       const user = userEvent.setup()
@@ -349,6 +350,11 @@ describe.only("Checkbox", () => {
         expect(checkboxElement.getAttribute("aria-checked")).toEqual("true")
 
         await user.keyboard(UserEventKeys.SPACE)
+        expect(checkboxElement.checked).toBeFalsy()
+        expect(checkboxElement.getAttribute("aria-checked")).toEqual("false")
+
+        // arrow up should do nothing
+        await user.keyboard(UserEventKeys.UP)
         expect(checkboxElement.checked).toBeFalsy()
         expect(checkboxElement.getAttribute("aria-checked")).toEqual("false")
 
