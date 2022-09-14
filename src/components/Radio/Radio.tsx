@@ -1,52 +1,38 @@
-import { useMemo } from "react";
-
-import { Tooltip } from "components/Tooltip";
+import { useMemo, useId } from "react";
 
 export interface RadioProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "id" | "type"> {
   selected?: string; // TODO: and use `checked` (having `RadioGroup` set it)
-  tooltip?: string; // TODO: remove and add tooltip in story and test
-  label: string;
+  id?: string;
 }
 
-export const Radio = ({
+export const Radio: React.FC<RadioProps> = ({
+  children,
   selected,
-  tooltip,
-  label,
+  id = useId(),
   checked,
   value,
   ...rest
 }: RadioProps) => {
-  const idForLabel = useMemo(() => `radio-id-${value}`, [value]);
-  const radioTestId = useMemo(() => `Radio-root-${value}`, [value]);
-  const labelTestId = useMemo(() => `Radio-label-root-${value}`, [value]);
-
-  const Label = () => {
-    return (
-      <label htmlFor={idForLabel} data-testid={labelTestId}>
-        {label}
-      </label>
-    );
-  };
+  const idForLabel = useMemo(() => `Radio-label-${value}`, [value]);
 
   return (
     <>
       <input
         {...rest}
-        data-testid={radioTestId}
         className="neo-radio"
         type="radio"
-        id={idForLabel}
+        id={id}
         checked={checked || selected === value}
         value={value}
+        aria-labelledby={idForLabel}
+        aria-label={value?.toString()}
       />
-      {tooltip ? (
-        <Tooltip label={tooltip}>
-          <Label />
-        </Tooltip>
-      ) : (
-        <Label />
-      )}
+      <label id={idForLabel} htmlFor={id}>
+        {children}
+      </label>
     </>
   );
 };
+
+Radio.displayName = "Radio";
