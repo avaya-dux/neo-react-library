@@ -71,9 +71,7 @@ export const RadioGroup = ({
         // NOTE: The below seems kind of hacky, but I was unable to find a better way to make sure
         // that the correct props are passed to child Radios even when wrapped in a Tooltip
 
-        console.log((child.type as FC).name);
-
-        if ((child.type as FC).name === "Tooltip") {
+        if ((child.type as FC).displayName === "Tooltip") {
           radio = child.props.children as ReactElement;
 
           const childprops = {
