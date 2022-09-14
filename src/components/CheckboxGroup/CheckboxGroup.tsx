@@ -40,23 +40,23 @@ export interface CheckboxGroupProps {
 export const CheckboxGroup = ({
   checkboxes,
   groupName,
-  defaultChecked,
+  defaultChecked = [],
   inline,
   helperText,
   error,
   required,
   onChange,
 }: CheckboxGroupProps) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [selectedValues, setSelectedValues] = useState<string[]>([...defaultChecked]);
 
-  useEffect(() => {
-    if (defaultChecked) {
-      setSelectedValues((selectedValues) => [
-        ...selectedValues,
-        ...defaultChecked,
-      ]);
-    }
-  }, [defaultChecked]);
+  // useEffect(() => {
+  //   if (defaultChecked) {
+  //     setSelectedValues((selectedValues) => [
+  //       ...selectedValues,
+  //       ...defaultChecked,
+  //     ]);
+  //   }
+  // }, [defaultChecked]);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (selectedValues.includes(e.target.value)) {
