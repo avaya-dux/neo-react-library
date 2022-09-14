@@ -2,13 +2,11 @@ import { useMemo, useId } from "react";
 
 export interface RadioProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "id" | "type"> {
-  selected?: string; // TODO: and use `checked` (having `RadioGroup` set it)
   id?: string;
 }
 
 export const Radio: React.FC<RadioProps> = ({
   children,
-  selected,
   id = useId(),
   checked,
   value,
@@ -23,7 +21,7 @@ export const Radio: React.FC<RadioProps> = ({
         className="neo-radio"
         type="radio"
         id={id}
-        checked={checked || selected === value}
+        checked={checked}
         value={value}
         aria-labelledby={idForLabel}
         aria-label={value?.toString()}

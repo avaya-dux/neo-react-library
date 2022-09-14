@@ -64,7 +64,6 @@ export const RadioGroup = ({
 
         const propsToPass = {
           name: groupName,
-          selected: selectedValue,
           "aria-describedby": helperText ? helperText : "",
           onChange: onChangeHandler,
         };
@@ -78,6 +77,7 @@ export const RadioGroup = ({
           const childprops = {
             ...radio.props,
             ...propsToPass,
+            checked: radio.props.value === selectedValue,
           };
 
           const radioWithProps = cloneElement(radio, childprops);
@@ -87,6 +87,7 @@ export const RadioGroup = ({
           const childprops = {
             ...child.props,
             ...propsToPass,
+            checked: child.props.value === selectedValue,
           };
 
           return cloneElement(child, childprops);
