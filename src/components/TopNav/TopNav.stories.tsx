@@ -12,6 +12,7 @@ import {
   MenuItem,
   SubMenu,
   Tab,
+  TabLink,
   TabList,
   Tabs,
   TextInput,
@@ -25,9 +26,9 @@ export default {
   component: TopNav,
 } as Meta<TopNavProps>;
 
-const logo = <Image src={fpo} isDecorativeOrBranding />;
+const Logo = <Image src={fpo} isDecorativeOrBranding />;
 
-const linkLogo = (
+const LinkLogo = (
   <ImageLink
     href="https://design.avayacloud.com"
     src={fpo}
@@ -35,7 +36,7 @@ const linkLogo = (
   />
 );
 
-const search = (
+const Search = (
   <TextInput
     clearable={true}
     disabled={false}
@@ -45,7 +46,7 @@ const search = (
   />
 );
 
-const avatar = (
+const TopNavAvatar = (
   <TopNav.Avatar
     avatar={<Avatar initials="MD" />}
     dropdown={
@@ -74,81 +75,17 @@ const Template: Story<TopNavProps> = (props: TopNavProps) => {
 
 export const BasicImplementation = Template.bind({});
 BasicImplementation.args = {
-  logo,
+  logo: Logo,
 };
 
-export const AltTopNavigatoinWithNavigationToggle = () => {
-  const [displayLeftNav, setDisplayLeftNav] = useState(false);
-
-  return (
-    <section>
-      <TopNav
-        logo={
-          <Image
-            src="http://design-portal-next-gen.herokuapp.com/images/logo-fpo.png"
-            isDecorativeOrBranding
-          />
-        }
-        buttons={[
-          <TopNav.Button
-            key="1"
-            aria-label="Toggle Menu"
-            onClick={() => setDisplayLeftNav(!displayLeftNav)}
-          />,
-        ]}
-      />
-
-      {displayLeftNav && (
-        <div
-          className={
-            displayLeftNav
-              ? "neo-slide neo-slide--in-left neo-leftnav--collapsible"
-              : "neo-leftnav--collapsible neo-slide neo-slide--out-left"
-          }
-          style={{ width: "15%" }}
-        >
-          <div className="neo-leftnav--wrapper">
-            <nav className="neo-leftnav">
-              <ul className="neo-leftnav__nav">
-                <LeftNav.NavCategory icon="audio-on" label="Collapsed">
-                  <LeftNav.LinkItem href="#fake"> First Item </LeftNav.LinkItem>
-                  <LeftNav.LinkItem href="#fake">Second Item</LeftNav.LinkItem>
-                  <LeftNav.LinkItem href="#fake"> Third Item </LeftNav.LinkItem>
-                  <LeftNav.LinkItem href="#fake">Fourth Item</LeftNav.LinkItem>
-                </LeftNav.NavCategory>
-                <LeftNav.NavCategory active expanded icon="call" label="Active">
-                  <LeftNav.LinkItem href="#fake"> Item 1 </LeftNav.LinkItem>
-                  <LeftNav.LinkItem href="#fake" active={true}>
-                    Active Item 2
-                  </LeftNav.LinkItem>
-                  <LeftNav.LinkItem href="#fake"> Item 3</LeftNav.LinkItem>
-                </LeftNav.NavCategory>
-                <LeftNav.NavCategory
-                  disabled
-                  icon="available"
-                  label="Disabled Category"
-                >
-                  <LeftNav.LinkItem href="#fake"> First Item </LeftNav.LinkItem>
-                  <LeftNav.LinkItem href="#fake">Second Item</LeftNav.LinkItem>
-                </LeftNav.NavCategory>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      )}
-    </section>
-  );
-};
-
-const menuToggleBtn = <TopNav.Button aria-label="Toggle Menu" icon="menu" />;
-export const TopNavWithNavigationToggle = Template.bind({});
-TopNavWithNavigationToggle.args = {
-  logo: linkLogo,
+export const NavigationToggle = Template.bind({});
+NavigationToggle.args = {
+  logo: LinkLogo,
   skipLabel: "Skip it!",
   skipHref: "http://google.com",
-  menuToggleBtn: menuToggleBtn,
+  menuToggleBtn: <TopNav.Button aria-label="Toggle Menu" icon="menu" />,
 };
-TopNavWithNavigationToggle.decorators = [
+NavigationToggle.decorators = [
   (Story, context) => {
     const [displayLeftNav, setDisplayLeftNav] = useState(false);
 
@@ -216,18 +153,18 @@ TopNavWithNavigationToggle.decorators = [
   },
 ];
 
-export const TopNavWithTitle = Template.bind({});
-TopNavWithTitle.args = {
-  logo,
+export const TitleExample = Template.bind({});
+TitleExample.args = {
+  logo: Logo,
   title: "Product Name",
 };
 
-export const TopNavWithSearch = Template.bind({});
-TopNavWithSearch.args = {
-  logo,
-  search,
+export const SearchExample = Template.bind({});
+SearchExample.args = {
+  logo: Logo,
+  search: Search,
 };
-TopNavWithSearch.decorators = [
+SearchExample.decorators = [
   (Story, context) => {
     const [searchString, setSearchString] = useState("");
 
@@ -251,38 +188,33 @@ TopNavWithSearch.decorators = [
   },
 ];
 
-export const TopNavWithButtons = Template.bind({});
-TopNavWithButtons.args = {
-  logo,
+export const ButtonsExample = Template.bind({});
+ButtonsExample.args = {
+  logo: Logo,
   buttons: [
     <TopNav.Button icon="info" aria-label="Info" key="info" />,
     <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
   ],
 };
 
-export const TopNavWithAvatar = Template.bind({});
-TopNavWithAvatar.args = {
-  logo,
-  userOptions: avatar,
+export const AvatarExample = Template.bind({});
+AvatarExample.args = {
+  logo: Logo,
+  userOptions: TopNavAvatar,
   buttons: [
     <TopNav.Button icon="info" aria-label="Info" key="info" />,
     <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
   ],
 };
 
-export const TopNavWithAvatarAndDropdown = Template.bind({});
-TopNavWithAvatarAndDropdown.args = {
-  logo,
-  userOptions: avatar,
-};
-
-export const TopNavWithTabs = () => {
+export const TabsExample = () => {
   const [activeTabPanelIndex, setActiveTabPanelIndex] = useState(0);
   const contentToToggle = ["Tab 1 content", "Tab 2 content", "Tab 3 content"];
+
   return (
     <>
       <TopNav
-        logo={logo}
+        logo={Logo}
         tabs={
           <Tabs onTabPanelChange={setActiveTabPanelIndex}>
             <TabList>
@@ -291,10 +223,14 @@ export const TopNavWithTabs = () => {
               </Tab>
               <Tab id="tab2">Tab2</Tab>
               <Tab id="tab3">Tab3</Tab>
+              <TabLink id="tab4" href="http://kagi.com">
+                Tab4
+              </TabLink>
             </TabList>
           </Tabs>
         }
       />
+
       <h4 style={{ marginTop: "30px" }}>
         {contentToToggle[activeTabPanelIndex]}
       </h4>
@@ -305,7 +241,7 @@ export const TopNavWithTabs = () => {
 export const StickyTopNav: Story<TopNavProps> = () => {
   return (
     <>
-      <TopNav logo={logo} sticky />
+      <TopNav logo={Logo} sticky />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
         egestas orci sit amet mi dapibus condimentum. Etiam placerat facilisis
@@ -427,10 +363,10 @@ export const StickyTopNav: Story<TopNavProps> = () => {
   );
 };
 
-export const TopNavWithAgentCard = () => {
+export const AgentCardExample = () => {
   return (
     <TopNav
-      logo={logo}
+      logo={Logo}
       userOptions={
         <AgentCard
           agentName="Bob Boberson"

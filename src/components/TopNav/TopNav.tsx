@@ -6,10 +6,18 @@ import { genId } from "utils";
 import { TopNavAvatar, TopNavButton } from "./RightContent";
 import { TopNavProps } from "./TopNavTypes";
 
+import "./TopNav_shim.css";
+
 // TODO: NEO-731 - add Search Component to Design System
 
 /**
  * TopNav is used to orient users, and to access different areas within an interface.
+ *
+ * @example
+ * <TopNav
+    logo={<Image isDecorativeOrBranding src="link/to/image.png"/>}
+    title="Product Name"
+  />
  *
  * @see https://design.avayacloud.com/components/web/navbar-web
  * @see https://neo-react-library-storybook.netlify.app/
@@ -67,8 +75,6 @@ export const TopNav = ({
           </div>
         )}
 
-        {tabs}
-
         {search && (
           <div style={{ marginLeft: "16px", alignSelf: "center" }}>
             {search}
@@ -77,6 +83,8 @@ export const TopNav = ({
       </div>
 
       <div className="neo-nav" style={{ alignItems: "center" }}>
+        {tabs}
+
         {buttons?.map((button, key) =>
           cloneElement(button, {
             key,
@@ -86,6 +94,7 @@ export const TopNav = ({
               navButtonOnClickCallback(key, button.props.handleClick),
           })
         )}
+
         {userOptions}
       </div>
     </nav>
