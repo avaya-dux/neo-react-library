@@ -21,7 +21,7 @@ import { TopNav, TopNavProps } from ".";
 import fpo from "./logo-fpo.png";
 
 export default {
-  title: "Components/Navbar",
+  title: "Components/Top Navigation",
   component: TopNav,
 } as Meta<TopNavProps>;
 
