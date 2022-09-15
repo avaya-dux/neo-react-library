@@ -168,3 +168,4 @@ export const NavCategory = ({
     </li>
   );
 };
+NavCategory.displayName = "NavCategory";

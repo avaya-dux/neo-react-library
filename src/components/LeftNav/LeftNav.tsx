@@ -18,16 +18,16 @@ import { TopLinkItem } from "./TopLinkItem";
  *
  * @example
  * <LeftNav>
-    <NavCategory>
-      <LinkItem> First Item </LinkItem>
-      <LinkItem> Second Item </LinkItem>
-      <LinkItem> Third Item </LinkItem>
-    </NavCategory>
-    <TopLinkItem icon="call"/>
-    <NavCategory>
-      <LinkItem active> First Item </LinkItem>
-      <LinkItem> Second Item </LinkItem>
-    </NavCategory>
+    <LeftNav.NavCategory>
+      <LeftNav.LinkItem> First Item </LeftNav.LinkItem>
+      <LeftNav.LinkItem> Second Item </LeftNav.LinkItem>
+      <LeftNav.LinkItem> Third Item </LeftNav.LinkItem>
+    </LeftNav.NavCategory>
+    <LeftNav.TopLinkItem icon="call"/>
+    <LeftNav.NavCategory>
+      <LeftNav.LinkItem active> First Item </LeftNav.LinkItem>
+      <LeftNav.LinkItem> Second Item </LeftNav.LinkItem>
+    </LeftNav.NavCategory>
   </LeftNav>
 
  * @see https://design.avayacloud.com/components/web/left-nav-web

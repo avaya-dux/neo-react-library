@@ -54,7 +54,7 @@ describe("Image", () => {
       .spyOn(console, "error")
       .mockImplementation(() => null);
 
-    expect(() => render(<Image src={cat} isDecorativeOrBranding />)).toThrow();
+    render(<Image src={cat} isDecorativeOrBranding />);
     expect(consoleErrorSpy).not.toHaveBeenCalled();
   });
 

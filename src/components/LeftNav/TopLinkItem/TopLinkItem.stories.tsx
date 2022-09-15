@@ -7,7 +7,7 @@ export default {
   component: LeftNav.TopLinkItem,
 } as Meta<TopLinkItemProps>;
 
-const handleClick = (id: string, url: string) => {
+const handleClick = (_id: string, url: string) => {
   window.open(url);
 };
 

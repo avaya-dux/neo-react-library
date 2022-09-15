@@ -114,3 +114,4 @@ export const LinkItem = ({
     </li>
   );
 };
+LinkItem.displayName = "LinkItem";

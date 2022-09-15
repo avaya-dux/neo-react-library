@@ -1,12 +1,8 @@
-import { composeStories } from "@storybook/testing-react";
 import { fireEvent, render } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import { LinkItem } from "./LinkItem";
-import * as LinkItemStories from "./LinkItem.stories";
-
-const { LinkItems } = composeStories(LinkItemStories);
 
 describe("LinkItem", () => {
   const linkItemText = "example link item";
@@ -81,26 +77,5 @@ describe("LinkItem", () => {
     const linkElement = getByText(linkItemText);
     fireEvent.click(linkElement);
     expect(mockedFunction).toHaveBeenCalled();
-  });
-
-  describe("storybook tests", () => {
-    describe("LinkItems", () => {
-      let renderResult;
-
-      beforeEach(() => {
-        renderResult = render(<LinkItems />);
-      });
-
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
-
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
   });
 });

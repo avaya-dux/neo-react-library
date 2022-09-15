@@ -2,8 +2,9 @@ import { composeStories } from "@storybook/testing-react";
 import { fireEvent, render } from "@testing-library/react";
 import { axe } from "jest-axe";
 
+import { Image } from "components/Image";
+
 import { Navbar } from ".";
-import { Logo } from "./LeftContent/Logo";
 import * as NavbarStories from "./Navbar.stories";
 
 const {
@@ -21,7 +22,10 @@ describe("Navbar", () => {
     let renderResult;
     beforeEach(() => {
       const logo = (
-        <Logo src="http://design-portal-next-gen.herokuapp.com/images/logo-fpo.png" />
+        <Image
+          src="http://design-portal-next-gen.herokuapp.com/images/logo-fpo.png"
+          isDecorativeOrBranding
+        />
       );
 
       renderResult = render(<Navbar logo={logo} />);

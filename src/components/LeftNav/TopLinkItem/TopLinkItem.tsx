@@ -15,11 +15,11 @@ import { TopLinkItemProps } from "../LeftNavTypes";
 import "./TopLinkItem_shim.css";
 
 export const TopLinkItem = ({
-  label,
+  disabled,
   href,
   icon,
   id = useId(),
-  disabled,
+  label,
 }: TopLinkItemProps) => {
   const ctx = useContext(LeftNavContext);
   const [isActive, setIsActive] = useState(false);
@@ -56,3 +56,4 @@ export const TopLinkItem = ({
     </li>
   );
 };
+TopLinkItem.displayName = "TopLinkItem";

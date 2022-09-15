@@ -5,9 +5,9 @@ import { IconNamesType } from "utils";
 export interface TopLinkItemProps {
   label: string;
   href: string;
+  disabled?: boolean;
   icon?: IconNamesType;
   id?: string;
-  disabled?: boolean;
 }
 
 export interface LinkItemProps
