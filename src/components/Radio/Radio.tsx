@@ -1,7 +1,10 @@
 import { useMemo, useId } from "react";
 
 export interface RadioProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "id" | "type"> {
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "id" | "type" | "checked"
+  > {
   id?: string;
 }
 

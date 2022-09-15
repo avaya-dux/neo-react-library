@@ -79,6 +79,11 @@
   left: 3px;
 }
 
+.neo-tooltip .neo-radio[disabled] + label {
+  cursor: not-allowed;
+  color: #757474;
+}
+
 [dir="rtl"] .neo-radio:checked + label + .neo-tooltip label:after {
   left: auto;
   right: 3px;

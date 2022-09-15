@@ -1,13 +1,13 @@
 import {
   Children,
   cloneElement,
-  FC,
   ReactElement,
   useCallback,
   useEffect,
   useMemo,
   useState,
   useId,
+  FC,
 } from "react";
 
 import { NeoInputWrapper } from "components/NeoInputWrapper";
@@ -19,7 +19,8 @@ export interface RadioGroupProps {
   groupName: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   id?: string;
-  checked?: string;
+  disabled?: boolean;
+  selected?: string;
   label?: boolean;
   inline?: boolean;
   helperText?: string;
@@ -32,20 +33,21 @@ export const RadioGroup = ({
   groupName,
   onChange,
   id = useId(),
-  checked,
+  disabled,
+  selected,
   label,
   inline,
   helperText,
   error,
   required,
 }: RadioGroupProps) => {
-  const [selectedValue, setSelectedValue] = useState(checked);
+  const [selectedValue, setSelectedValue] = useState(selected);
 
   const helperTextId = `${id}-helper-text`;
 
   useEffect(() => {
-    setSelectedValue(checked);
-  }, [checked]);
+    setSelectedValue(selected);
+  }, [selected]);
 
   const onChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +68,7 @@ export const RadioGroup = ({
           name: groupName,
           "aria-describedby": helperText ? helperText : "",
           onChange: onChangeHandler,
+          disabled,
         };
 
         // NOTE: The below seems kind of hacky, but I was unable to find a better way to make sure
