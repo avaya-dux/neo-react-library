@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 
 import log from "loglevel";
 
@@ -61,23 +61,23 @@ export const CheckboxGroup = ({
     },
     [onChange],
   )
-  
+
   const computeCheckboxesJsx = () => {
     return (
       <>
         {checkboxes
-          ? checkboxes.map(({label = "", ...rest}, index) => {
-              return (
-                <Checkbox
-                  aria-describedby={helperText}
-                  key={index}
-                  label={label || ""}
-                  name={groupName}
-                  onChange={onChangeHandler}
-                  {...rest}
-                />
-              );
-            })
+          ? checkboxes.map(({ label = "", ...rest }, index) => {
+            return (
+              <Checkbox
+                aria-describedby={helperText}
+                key={index}
+                label={label || ""}
+                name={groupName}
+                onChange={onChangeHandler}
+                {...rest}
+              />
+            );
+          })
           : null}
       </>
     );
