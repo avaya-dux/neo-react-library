@@ -1,6 +1,8 @@
 import { useCallback, useId, useState } from "react";
 import { RovingTabIndexProvider } from "react-roving-tabindex";
 
+import { handleAccessbilityError } from "utils";
+
 import { LeftNavProps, NavigationContextType } from "./LeftNavigationTypes";
 import { NavigationContext } from "./NavigationContext";
 
@@ -9,18 +11,17 @@ import { NavigationContext } from "./NavigationContext";
  *
  * @example
  * <LeftNavigation>
-*   <NavCategory>
-*     <LinkItem> First Item </LinkItem>
-*     <LinkItem> Second Item </LinkItem>
-*     <LinkItem> Third Item </LinkItem>
-*   </NavCategory>
-*   <TopLinkItem icon="call"/>
-*   <NavCategory>
-*     <LinkItem active> First Item </LinkItem>
-*     <LinkItem> Second Item </LinkItem>
-*   </NavCategory>
-* </LeftNavigation>
-
+    <NavCategory>
+      <LinkItem> First Item </LinkItem>
+      <LinkItem> Second Item </LinkItem>
+      <LinkItem> Third Item </LinkItem>
+    </NavCategory>
+    <TopLinkItem icon="call"/>
+    <NavCategory>
+      <LinkItem active> First Item </LinkItem>
+      <LinkItem> Second Item </LinkItem>
+    </NavCategory>
+  </LeftNavigation>
 
  * @see https://design.avayacloud.com/components/web/left-nav-web
  */
@@ -31,7 +32,7 @@ export const LeftNavigation = ({
   ...rest
 }: LeftNavProps) => {
   if (!rest["aria-label"]) {
-    console.error(
+    handleAccessbilityError(
       "A descriptive ariaLabel prop value is required for screen readers to identify the navigation component"
     );
   }

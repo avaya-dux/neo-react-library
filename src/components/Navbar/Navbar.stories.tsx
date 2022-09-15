@@ -30,7 +30,7 @@ const logo = <Logo src={fpo} />;
 
 const linkLogo = (
   <LinkLogo
-    link="https://design.avayacloud.com"
+    href="https://design.avayacloud.com"
     src={fpo}
     alt="Link to Avaya"
   />

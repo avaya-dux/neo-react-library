@@ -5,7 +5,7 @@ export interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export interface LinkLogoProps extends LogoProps {
-  link: string;
+  href: string;
   alt: string;
 }
 
@@ -13,12 +13,18 @@ export const Logo: FunctionComponent<LogoProps> = ({ src, alt = "" }) => (
   <img src={src} alt={alt} />
 );
 
+/**
+ * A `Logo` is an image that is also a link
+ *
+ * @example
+ * <Logo href="www.homepage.com" src="link/to/image.png" alt="Image description" />
+ */
 export const LinkLogo: FunctionComponent<LinkLogoProps> = ({
   src,
-  link,
+  href,
   alt,
 }) => (
-  <a href={link}>
+  <a href={href}>
     <img src={src} alt={alt} />
   </a>
 );

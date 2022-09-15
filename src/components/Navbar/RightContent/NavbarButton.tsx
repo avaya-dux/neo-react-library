@@ -1,10 +1,10 @@
 import clsx from "clsx";
-import { forwardRef, FunctionComponent } from "react";
+import { ButtonHTMLAttributes, forwardRef, FunctionComponent } from "react";
 
 import { computeBadge, IconNamesType } from "utils";
 
 export interface NavbarButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "aria-label"> {
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   "aria-label": string;
   active?: boolean;
   badge?: string;

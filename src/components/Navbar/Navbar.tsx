@@ -73,7 +73,7 @@ return <Navbar {...exampleNavbarProps} />;
  * @see https://design.avayacloud.com/components/web/navbar-web
  */
 
-export const Navbar: FunctionComponent<NavbarProps> = ({
+export const Navbar = ({
   logo,
   search,
   title,
@@ -84,7 +84,7 @@ export const Navbar: FunctionComponent<NavbarProps> = ({
   sticky,
   skipLabel = "Skip to main content",
   skipHref = "#",
-}) => {
+}: NavbarProps) => {
   // TO-DO: NEO-786 - Replace inline styles on line 80 with updated CSS rules to avoid use of <form> element in Navbar
   // TO-DO: NEO-785 - Replace inline styles on line 76 with updated CSS rules for correct styling of 'title' prop
   // TO-DO: NEO-794 - Confirm use-case for Avatar in Navbar without Dropdown and resulting need for inline styles on line 132
