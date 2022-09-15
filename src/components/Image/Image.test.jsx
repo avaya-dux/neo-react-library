@@ -49,6 +49,15 @@ describe("Image", () => {
     expect(consoleErrorSpy).toHaveBeenCalled();
   });
 
+  it("does not log a console warning if the user does not pass `alt` text _and_ marks it as decorative", () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => null);
+
+    expect(() => render(<Image src={cat} isDecorativeOrBranding />)).toThrow();
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
+  });
+
   it("calls passed `onError` method if passed and an error was thrown", async () => {
     const onErrorSpy = vi.fn();
 

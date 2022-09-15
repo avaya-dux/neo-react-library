@@ -8,16 +8,17 @@ import {
 } from "react";
 
 import { AgentCardProps } from "components/AgentCard";
+import { ImageProps } from "components/Image";
+import { ImageLinkProps } from "components/ImageLink";
 import { TabProps } from "components/Tab";
 import { TextInputProps } from "components/TextInput";
 import { genId } from "utils";
 
-import { LinkLogoProps, LogoProps } from "./LeftContent";
 import { NavbarAvatarProps, NavbarButtonProps } from "./RightContent";
 
+// TODO: NEO-731 - add Search Component to Design System
 export interface NavbarProps {
-  logo: ReactElement<LogoProps | LinkLogoProps>;
-  // TO:DO: NEO-731 - add Search Component to Design System
+  logo: ReactElement<ImageProps | ImageLinkProps>;
   search?: ReactElement<
     Pick<
       TextInputProps,
@@ -47,7 +48,7 @@ export interface NavbarProps {
  * @example
 const exampleNavbarProps: NavbarProps = {
   logo: {
-    <Logo src="http://design-portal-next-gen.herokuapp.com/images/logo-fpo.png" />
+    <Image src="link/to/image.png" isDecorativeOrBranding />
   },
   search: {
     <TextInput

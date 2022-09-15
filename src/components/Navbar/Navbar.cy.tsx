@@ -1,10 +1,10 @@
+import { Image } from "components/Image";
 import { TextInput } from "components/TextInput";
 
-import { Logo } from "./LeftContent";
 import fpo from "./logo-fpo.png";
 import { NavbarWithSearch } from "./Navbar.stories";
 
-const logo = <Logo src={fpo} />;
+const logo = <Image src={fpo} isDecorativeOrBranding />;
 
 const search = (
   <TextInput

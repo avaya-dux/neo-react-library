@@ -4,6 +4,8 @@ import { cloneElement, FormEvent, useState } from "react";
 import {
   AgentCard,
   Avatar,
+  Image,
+  ImageLink,
   LeftNav,
   Menu,
   MenuButton,
@@ -16,7 +18,6 @@ import {
 } from "components";
 
 import { Navbar, NavbarProps } from ".";
-import { LinkLogo, Logo } from "./LeftContent";
 import fpo from "./logo-fpo.png";
 import { NavbarAvatar, NavbarButton } from "./RightContent";
 
@@ -25,10 +26,10 @@ export default {
   component: Navbar,
 } as Meta<NavbarProps>;
 
-const logo = <Logo src={fpo} />;
+const logo = <Image src={fpo} isDecorativeOrBranding />;
 
 const linkLogo = (
-  <LinkLogo
+  <ImageLink
     href="https://design.avayacloud.com"
     src={fpo}
     alt="Link to Avaya"
@@ -84,7 +85,10 @@ export const AltNavbarWithNavigationToggle = () => {
     <section>
       <Navbar
         logo={
-          <Logo src="http://design-portal-next-gen.herokuapp.com/images/logo-fpo.png" />
+          <Image
+            src="http://design-portal-next-gen.herokuapp.com/images/logo-fpo.png"
+            isDecorativeOrBranding
+          />
         }
         navButtons={[
           <NavbarButton
