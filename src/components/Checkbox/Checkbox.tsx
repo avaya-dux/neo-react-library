@@ -50,6 +50,7 @@ export const Checkbox = forwardRef(
   ({
     checked,
     defaultChecked,
+    readOnly,
     className,
     id = useId(),
     label,
@@ -88,6 +89,7 @@ export const Checkbox = forwardRef(
           aria-checked={state}
           className={clsx(
             "neo-check",
+            readOnly && "neo-check-readonly",
             state === "mixed" && "neo-check--indeterminate",
             className
           )}
