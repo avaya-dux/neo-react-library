@@ -18,11 +18,11 @@ export const Default = () => (
     currentUrl="#active"
   >
     <LeftNav.TopLinkItem label="Active by default" href="#active" />
-    <LeftNav.TopLinkItem label="Link to Google" href="http://google.com" />
+    <LeftNav.TopLinkItem label="Link 2" href="#test2" />
     <LeftNav.TopLinkItem
-      label="Link with Icon to Bing"
+      label="Link with Icon Example"
       icon="address-book"
-      href="http://bing.com"
+      href="#address-book"
     />
     <LeftNav.TopLinkItem label="Disabled Link" disabled href="#disabled" />
     <LeftNav.TopLinkItem
