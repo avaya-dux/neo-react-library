@@ -17,14 +17,13 @@ import {
   TextInput,
 } from "components";
 
-import { Navbar, NavbarProps } from ".";
+import { TopNav, TopNavProps } from ".";
 import fpo from "./logo-fpo.png";
-import { NavbarAvatar, NavbarButton } from "./RightContent";
 
 export default {
   title: "Components/Navbar",
-  component: Navbar,
-} as Meta<NavbarProps>;
+  component: TopNav,
+} as Meta<TopNavProps>;
 
 const logo = <Image src={fpo} isDecorativeOrBranding />;
 
@@ -46,8 +45,8 @@ const search = (
   />
 );
 
-const navbarAvatar = (
-  <NavbarAvatar
+const avatar = (
+  <TopNav.Avatar
     avatar={<Avatar initials="MD" />}
     dropdown={
       <Menu
@@ -69,29 +68,29 @@ const navbarAvatar = (
   />
 );
 
-const Template: Story<NavbarProps> = (props: NavbarProps) => {
-  return <Navbar {...props} />;
+const Template: Story<TopNavProps> = (props: TopNavProps) => {
+  return <TopNav {...props} />;
 };
 
-export const BasicNavbar = Template.bind({});
-BasicNavbar.args = {
+export const BasicImplementation = Template.bind({});
+BasicImplementation.args = {
   logo,
 };
 
-export const AltNavbarWithNavigationToggle = () => {
+export const AltTopNavigatoinWithNavigationToggle = () => {
   const [displayLeftNav, setDisplayLeftNav] = useState(false);
 
   return (
     <section>
-      <Navbar
+      <TopNav
         logo={
           <Image
             src="http://design-portal-next-gen.herokuapp.com/images/logo-fpo.png"
             isDecorativeOrBranding
           />
         }
-        navButtons={[
-          <NavbarButton
+        buttons={[
+          <TopNav.Button
             key="1"
             aria-label="Toggle Menu"
             onClick={() => setDisplayLeftNav(!displayLeftNav)}
@@ -141,28 +140,28 @@ export const AltNavbarWithNavigationToggle = () => {
   );
 };
 
-const navMenuToggleBtn = <NavbarButton aria-label="Toggle Menu" icon="menu" />;
-export const NavbarWithNavigationToggle = Template.bind({});
-NavbarWithNavigationToggle.args = {
+const menuToggleBtn = <TopNav.Button aria-label="Toggle Menu" icon="menu" />;
+export const TopNavWithNavigationToggle = Template.bind({});
+TopNavWithNavigationToggle.args = {
   logo: linkLogo,
   skipLabel: "Skip it!",
   skipHref: "http://google.com",
-  navMenuToggleBtn,
+  menuToggleBtn: menuToggleBtn,
 };
-NavbarWithNavigationToggle.decorators = [
+TopNavWithNavigationToggle.decorators = [
   (Story, context) => {
     const [displayLeftNav, setDisplayLeftNav] = useState(false);
 
     const args = { ...context.args };
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const navMenuToggleWithHandler = cloneElement(args.navMenuToggleBtn!, {
+    const navMenuToggleWithHandler = cloneElement(args.menuToggleBtn!, {
       onClick: () => setDisplayLeftNav(!displayLeftNav),
     });
 
     return (
       <>
-        <Story args={{ ...args, navMenuToggleBtn: navMenuToggleWithHandler }} />
+        <Story args={{ ...args, menuToggleBtn: navMenuToggleWithHandler }} />
         {displayLeftNav && (
           <div
             className={
@@ -217,18 +216,18 @@ NavbarWithNavigationToggle.decorators = [
   },
 ];
 
-export const NavbarWithTitle = Template.bind({});
-NavbarWithTitle.args = {
+export const TopNavWithTitle = Template.bind({});
+TopNavWithTitle.args = {
   logo,
   title: "Product Name",
 };
 
-export const NavbarWithSearch = Template.bind({});
-NavbarWithSearch.args = {
+export const TopNavWithSearch = Template.bind({});
+TopNavWithSearch.args = {
   logo,
   search,
 };
-NavbarWithSearch.decorators = [
+TopNavWithSearch.decorators = [
   (Story, context) => {
     const [searchString, setSearchString] = useState("");
 
@@ -252,39 +251,39 @@ NavbarWithSearch.decorators = [
   },
 ];
 
-export const NavbarWithNavButtons = Template.bind({});
-NavbarWithNavButtons.args = {
+export const TopNavWithButtons = Template.bind({});
+TopNavWithButtons.args = {
   logo,
-  navButtons: [
-    <NavbarButton icon="info" aria-label="Info" key="info" />,
-    <NavbarButton icon="settings" aria-label="Settings" key="settings" />,
+  buttons: [
+    <TopNav.Button icon="info" aria-label="Info" key="info" />,
+    <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
   ],
 };
 
-export const NavbarWithAvatar = Template.bind({});
-NavbarWithAvatar.args = {
+export const TopNavWithAvatar = Template.bind({});
+TopNavWithAvatar.args = {
   logo,
-  userOptions: navbarAvatar,
-  navButtons: [
-    <NavbarButton icon="info" aria-label="Info" key="info" />,
-    <NavbarButton icon="settings" aria-label="Settings" key="settings" />,
+  userOptions: avatar,
+  buttons: [
+    <TopNav.Button icon="info" aria-label="Info" key="info" />,
+    <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
   ],
 };
 
-export const NavbarWithAvatarAndDropdown = Template.bind({});
-NavbarWithAvatarAndDropdown.args = {
+export const TopNavWithAvatarAndDropdown = Template.bind({});
+TopNavWithAvatarAndDropdown.args = {
   logo,
-  userOptions: navbarAvatar,
+  userOptions: avatar,
 };
 
-export const NavbarWithTabs = () => {
+export const TopNavWithTabs = () => {
   const [activeTabPanelIndex, setActiveTabPanelIndex] = useState(0);
   const contentToToggle = ["Tab 1 content", "Tab 2 content", "Tab 3 content"];
   return (
     <>
-      <Navbar
+      <TopNav
         logo={logo}
-        navbarTabs={
+        tabs={
           <Tabs onTabPanelChange={setActiveTabPanelIndex}>
             <TabList>
               <Tab id="tab1" onClick={() => alert("Clicked")}>
@@ -303,10 +302,10 @@ export const NavbarWithTabs = () => {
   );
 };
 
-export const StickyNavbar: Story<NavbarProps> = () => {
+export const StickyTopNav: Story<TopNavProps> = () => {
   return (
     <>
-      <Navbar logo={logo} sticky />
+      <TopNav logo={logo} sticky />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
         egestas orci sit amet mi dapibus condimentum. Etiam placerat facilisis
@@ -428,9 +427,9 @@ export const StickyNavbar: Story<NavbarProps> = () => {
   );
 };
 
-export const NavbarWithAgentCard = () => {
+export const TopNavWithAgentCard = () => {
   return (
-    <Navbar
+    <TopNav
       logo={logo}
       userOptions={
         <AgentCard

@@ -1,18 +1,11 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes, forwardRef, FunctionComponent } from "react";
+import { forwardRef } from "react";
 
-import { computeBadge, IconNamesType } from "utils";
+import { computeBadge } from "utils";
 
-export interface NavbarButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
-  "aria-label": string;
-  active?: boolean;
-  badge?: string;
-  icon?: IconNamesType;
-  handleClick?: () => Promise<void> | void;
-}
+import { TopNavButtonProps } from "../TopNavTypes";
 
-export const NavbarButton: FunctionComponent<NavbarButtonProps> = forwardRef(
+export const TopNavButton = forwardRef(
   (
     {
       "aria-label": ariaLabel,
@@ -20,7 +13,7 @@ export const NavbarButton: FunctionComponent<NavbarButtonProps> = forwardRef(
       badge,
       icon = "menu",
       ...rest
-    }: NavbarButtonProps,
+    }: TopNavButtonProps,
     ref: React.Ref<HTMLButtonElement>
   ) => {
     return (
@@ -43,4 +36,4 @@ export const NavbarButton: FunctionComponent<NavbarButtonProps> = forwardRef(
     );
   }
 );
-NavbarButton.displayName = "NavbarButton";
+TopNavButton.displayName = "TopNavButton";

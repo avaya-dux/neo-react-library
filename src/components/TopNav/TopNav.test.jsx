@@ -1,23 +1,23 @@
 import { composeStories } from "@storybook/testing-react";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 
 import { Image } from "components/Image";
 
-import { Navbar } from ".";
-import * as NavbarStories from "./Navbar.stories";
+import { TopNav } from ".";
+import * as TopNavStories from "./TopNav.stories";
 
 const {
-  NavbarWithNavigationToggle,
-  NavbarWithTitle,
-  NavbarWithNavButtons,
-  NavbarWithAvatarAndDropdown,
-  StickyNavbar,
-  NavbarWithTabs,
-  NavbarWithAgentCard,
-} = composeStories(NavbarStories);
+  TopNavWithNavigationToggle,
+  TopNavWithTitle,
+  TopNavWithButtons,
+  TopNavWithAvatarAndDropdown,
+  StickyTopNav,
+  TopNavWithTabs,
+  TopNavWithAgentCard,
+} = composeStories(TopNavStories);
 
-describe("Navbar", () => {
+describe("TopNav", () => {
   describe("basic unit tests", () => {
     let renderResult;
     beforeEach(() => {
@@ -28,7 +28,7 @@ describe("Navbar", () => {
         />
       );
 
-      renderResult = render(<Navbar logo={logo} />);
+      renderResult = render(<TopNav logo={logo} />);
     });
 
     it("renders without exploding", () => {
@@ -51,22 +51,23 @@ describe("Navbar", () => {
   });
 
   describe("storybook tests", () => {
-    describe("Sticky Navbar", () => {
+    describe("Sticky TopNav", () => {
       it("has the correct class name with sticky prop passed", () => {
-        const { getByRole } = render(<StickyNavbar />);
-        const navBarParent = getByRole("navigation");
-        expect(navBarParent).toHaveClass("neo-navbar--sticky");
+        render(<StickyTopNav />);
+        expect(screen.getByRole("navigation")).toHaveClass(
+          "neo-navbar--sticky"
+        );
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<StickyNavbar />);
+        const { container } = render(<StickyTopNav />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With NavButtons", () => {
+    describe("TopNav With buttons", () => {
       it("toggles active states correctly", () => {
-        const { getAllByRole } = render(<NavbarWithNavButtons />);
+        const { getAllByRole } = render(<TopNavWithButtons />);
         const buttonElements = getAllByRole("button");
         fireEvent.click(buttonElements[0]);
         expect(buttonElements[0].closest("div")).toHaveClass(
@@ -77,31 +78,32 @@ describe("Navbar", () => {
           "neo-badge__navbutton--active"
         );
       });
+
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithNavButtons />);
+        const { container } = render(<TopNavWithButtons />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With Title", () => {
+    describe("TopNav With Title", () => {
       it("renders text passed as title prop", () => {
-        const { getByText } = render(<NavbarWithTitle />);
+        const { getByText } = render(<TopNavWithTitle />);
         const titleElement = getByText("Product Name");
         expect(titleElement).toBeTruthy();
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithTitle />);
+        const { container } = render(<TopNavWithTitle />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With Navigation Toggle", () => {
+    describe("TopNav With Navigation Toggle", () => {
       // BUG: is throwing: "Warning: Received `true` for a non-boolean attribute `active`."
       it("correctly executes button onClick handler when passed as props", () => {
         const { getByRole, getAllByRole } = render(
-          <NavbarWithNavigationToggle />
+          <TopNavWithNavigationToggle />
         );
         const navElementsBeforeToggle = getAllByRole("navigation");
         expect(navElementsBeforeToggle).toHaveLength(1);
@@ -111,15 +113,15 @@ describe("Navbar", () => {
         expect(navElementsAfterToggle).toHaveLength(2);
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithNavigationToggle />);
+        const { container } = render(<TopNavWithNavigationToggle />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With Avatar and Dropdown", () => {
+    describe("TopNav With Avatar and Dropdown", () => {
       it("adds appropriate class to toggle Dropdown when clicked", () => {
-        const { getByRole } = render(<NavbarWithAvatarAndDropdown />);
+        const { getByRole } = render(<TopNavWithAvatarAndDropdown />);
         const avatar = getByRole("figure");
         const avatarDropdown = getByRole("figure").closest("div");
         expect(avatarDropdown).not.toHaveClass("neo-dropdown--active");
@@ -127,23 +129,23 @@ describe("Navbar", () => {
         expect(avatarDropdown).toHaveClass("neo-dropdown--active");
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithAvatarAndDropdown />);
+        const { container } = render(<TopNavWithAvatarAndDropdown />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With Tabs", () => {
+    describe("TopNav With Tabs", () => {
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithTabs />);
+        const { container } = render(<TopNavWithTabs />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With Agent Card", () => {
+    describe("TopNav With Agent Card", () => {
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithAgentCard />);
+        const { container } = render(<TopNavWithAgentCard />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });

@@ -2,14 +2,14 @@ import { fireEvent, render } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
-import { NavbarButton } from "./NavbarButton";
+import { TopNavButton } from "./";
 
-describe("NavbarButton", () => {
+describe("TopNavButton", () => {
   let renderResult;
   const mockCallBack = vi.fn();
   beforeEach(() => {
     renderResult = render(
-      <NavbarButton
+      <TopNavButton
         icon={"settings"}
         aria-label={"Settings"}
         onClick={mockCallBack}
