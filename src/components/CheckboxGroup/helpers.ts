@@ -4,7 +4,7 @@ export const DefaultCheckboxArray: CheckboxProps[] = [
   {
     label: "Check 1",
     value: "Check 1",
-    checked: true,
+    defaultChecked: true,
   },
   {
     label: "Check 2",
@@ -28,12 +28,12 @@ export const DefaultCheckboxArray: CheckboxProps[] = [
     label: "Check 6",
     value: "Check 6",
     disabled: true,
-    checked: "mixed",
+    defaultChecked: "mixed",
   },
   {
     label: "Check 7",
     value: "Check 7",
-    disabled: true,
-    checked: "mixed",
+    disabled: false,
+    defaultChecked: "mixed",
   },
 ];
