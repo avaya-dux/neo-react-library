@@ -14,8 +14,8 @@ import { useFocusEffect, useRovingTabIndex } from "react-roving-tabindex";
 import { Button } from "components/Button";
 import { Keys } from "utils";
 
-import { LinkItemProps } from "../LeftNavigationTypes";
-import { NavigationContext } from "../NavigationContext";
+import { LeftNavContext } from "../LeftNavContext";
+import { LinkItemProps } from "../LeftNavTypes";
 
 export const LinkItem = ({
   active = false,
@@ -30,7 +30,7 @@ export const LinkItem = ({
 
   ...rest
 }: LinkItemProps) => {
-  const ctx = useContext(NavigationContext);
+  const ctx = useContext(LeftNavContext);
   const [itemStyle, setItemStyle] = useState({ padding: "8px 28px 8px 20px" });
 
   const ref = useRef(null);

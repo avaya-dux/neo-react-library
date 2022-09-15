@@ -8,19 +8,11 @@ import {
 } from "react";
 
 import { Button } from "components/Button";
-import { IconNamesType } from "utils";
 
-import { NavigationContext } from "../NavigationContext";
+import { LeftNavContext } from "../LeftNavContext";
+import { TopLinkItemProps } from "../LeftNavTypes";
 
 import "./TopLinkItem_shim.css";
-
-export interface TopLinkItemProps {
-  label: string;
-  href: string;
-  icon?: IconNamesType;
-  id?: string;
-  disabled?: boolean;
-}
 
 export const TopLinkItem = ({
   label,
@@ -29,7 +21,7 @@ export const TopLinkItem = ({
   id = useId(),
   disabled,
 }: TopLinkItemProps) => {
-  const ctx = useContext(NavigationContext);
+  const ctx = useContext(LeftNavContext);
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {

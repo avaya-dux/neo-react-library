@@ -18,8 +18,8 @@ import { useFocusEffect, useRovingTabIndex } from "react-roving-tabindex";
 
 import { getIconClass, Keys } from "utils";
 
-import { NavCategoryProps } from "../LeftNavigationTypes";
-import { NavigationContext } from "../NavigationContext";
+import { LeftNavContext } from "../LeftNavContext";
+import { NavCategoryProps } from "../LeftNavTypes";
 
 const LEFTNAV_CATEGORY_STYLE = "neo-leftnav__main";
 
@@ -75,7 +75,7 @@ export const NavCategory = ({
   );
   useFocusEffect(isActive, ref);
 
-  const ctx = useContext(NavigationContext);
+  const ctx = useContext(LeftNavContext);
 
   useEffect(() => {
     const active = childIsActive;

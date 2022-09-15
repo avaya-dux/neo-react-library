@@ -1,6 +1,14 @@
 import { HTMLAttributes, ReactElement } from "react";
-import { TopLinkItemProps } from "./TopLinkItem";
+
 import { IconNamesType } from "utils";
+
+export interface TopLinkItemProps {
+  label: string;
+  href: string;
+  icon?: IconNamesType;
+  id?: string;
+  disabled?: boolean;
+}
 
 export interface LinkItemProps
   extends HTMLAttributes<HTMLLIElement | HTMLAnchorElement> {
@@ -28,7 +36,13 @@ export interface LeftNavProps extends React.BaseHTMLAttributes<HTMLElement> {
     | ReactElement<NavCategoryProps | TopLinkItemProps>[];
 }
 
-export interface NavigationContextType {
+export interface LeftNavSubComponents {
+  LinkItem: React.FC<LinkItemProps>;
+  NavCategory: React.FC<NavCategoryProps>;
+  TopLinkItem: React.FC<TopLinkItemProps>;
+}
+
+export interface LeftNavContextType {
   currentUrl: string;
   onSelectedLink?: (id: string, url: string) => void;
 }

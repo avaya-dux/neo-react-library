@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import {
   cloneElement,
-  FunctionComponent,
   ReactElement,
   useCallback,
   useEffect,
@@ -51,13 +50,13 @@ const exampleNavbarProps: NavbarProps = {
     <Logo src="http://design-portal-next-gen.herokuapp.com/images/logo-fpo.png" />
   },
   search: {
-  <TextInput
-    clearable={true}
-    disabled={false}
-    placeholder="Search"
-    startIcon="search"
-    aria-label="search"
-  />
+    <TextInput
+      clearable={true}
+      disabled={false}
+      placeholder="Search"
+      startIcon="search"
+      aria-label="search"
+    />
   },
   title: "Product Name",
   skipLabel: "Skip to main content",

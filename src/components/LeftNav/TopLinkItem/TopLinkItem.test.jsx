@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
-import { LeftNavigation } from "../LeftNavigation";
+import { LeftNav } from "../LeftNav";
 import { TopLinkItem } from "./TopLinkItem";
 import * as TopLinkItemStories from "./TopLinkItem.stories";
 
@@ -32,9 +32,9 @@ describe("TopLinkItem", () => {
 
   it("assigns the appropriate class name when the `active` prop is passed", () => {
     render(
-      <LeftNavigation currentUrl="#test">
+      <LeftNav currentUrl="#test">
         <TopLinkItem href="#test" label={TopLinkItemLabel} />
-      </LeftNavigation>
+      </LeftNav>
     );
     const linkElement = screen.getByRole("listitem");
     expect(linkElement).toHaveClass("neo-leftnav__main--active");
@@ -64,13 +64,13 @@ describe("TopLinkItem", () => {
   it("should simulate onclick function when not disabled", async () => {
     const mockedFunction = vi.fn();
     const { getByText } = render(
-      <LeftNavigation
+      <LeftNav
         aria-label="Main Navigation"
         onNavigate={mockedFunction}
         currentUrl=""
       >
         <TopLinkItem label={TopLinkItemLabel} />
-      </LeftNavigation>
+      </LeftNav>
     );
     const linkElement = getByText(TopLinkItemLabel);
     await user.click(linkElement);

@@ -1,16 +1,23 @@
-import { useCallback, useId, useState } from "react";
+import { FC, useCallback, useId, useState } from "react";
 import { RovingTabIndexProvider } from "react-roving-tabindex";
 
 import { handleAccessbilityError } from "utils";
 
-import { LeftNavProps, NavigationContextType } from "./LeftNavigationTypes";
-import { NavigationContext } from "./NavigationContext";
+import { LeftNavContext } from "./LeftNavContext";
+import {
+  LeftNavContextType,
+  LeftNavProps,
+  LeftNavSubComponents,
+} from "./LeftNavTypes";
+import { LinkItem } from "./LinkItem";
+import { NavCategory } from "./NavCategory";
+import { TopLinkItem } from "./TopLinkItem";
 
 /**
  * This is the main Left Navigation outer container that contains all other subComponents
  *
  * @example
- * <LeftNavigation>
+ * <LeftNav>
     <NavCategory>
       <LinkItem> First Item </LinkItem>
       <LinkItem> Second Item </LinkItem>
@@ -21,11 +28,11 @@ import { NavigationContext } from "./NavigationContext";
       <LinkItem active> First Item </LinkItem>
       <LinkItem> Second Item </LinkItem>
     </NavCategory>
-  </LeftNavigation>
+  </LeftNav>
 
  * @see https://design.avayacloud.com/components/web/left-nav-web
  */
-export const LeftNavigation = ({
+export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
   children,
   currentUrl = "",
   onNavigate,
@@ -52,7 +59,7 @@ export const LeftNavigation = ({
     [onNavigate]
   );
 
-  const navContext: NavigationContextType = {
+  const navContext: LeftNavContextType = {
     currentUrl: curUrl,
     onSelectedLink: handleSelectedLink,
   };
@@ -61,13 +68,18 @@ export const LeftNavigation = ({
     <RovingTabIndexProvider
       options={{ direction: "vertical", focusOnClick: true }}
     >
-      <NavigationContext.Provider value={navContext}>
+      <LeftNavContext.Provider value={navContext}>
         <div id={navId} className="neo-leftnav--wrapper">
           <nav className="neo-leftnav">
             <ul className="neo-leftnav__nav">{children}</ul>
           </nav>
         </div>
-      </NavigationContext.Provider>
+      </LeftNavContext.Provider>
     </RovingTabIndexProvider>
   );
 };
+
+LeftNav.displayName = "LeftNav";
+LeftNav.LinkItem = LinkItem;
+LeftNav.NavCategory = NavCategory;
+LeftNav.TopLinkItem = TopLinkItem;

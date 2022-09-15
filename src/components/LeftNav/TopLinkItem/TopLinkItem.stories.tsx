@@ -1,34 +1,35 @@
 import { Meta } from "@storybook/react/types-7-0";
 
-import { LeftNavigation } from "../LeftNavigation";
-import { TopLinkItem, TopLinkItemProps } from "./TopLinkItem";
+import { LeftNav, TopLinkItemProps } from "../";
 
 export default {
   title: "Components/Left Navigation/Top Link Item",
-  component: TopLinkItem,
+  component: LeftNav.TopLinkItem,
 } as Meta<TopLinkItemProps>;
+
 const handleClick = (id: string, url: string) => {
   window.open(url);
 };
+
 export const Default = () => (
-  <LeftNavigation
+  <LeftNav
     aria-label="Main Navigation"
     onNavigate={handleClick}
     currentUrl="#active"
   >
-    <TopLinkItem label="Active by default" href="#active" />
-    <TopLinkItem label="Link to Google" href="http://google.com" />
-    <TopLinkItem
+    <LeftNav.TopLinkItem label="Active by default" href="#active" />
+    <LeftNav.TopLinkItem label="Link to Google" href="http://google.com" />
+    <LeftNav.TopLinkItem
       label="Link with Icon to Bing"
       icon="address-book"
       href="http://bing.com"
     />
-    <TopLinkItem label="Disabled Link" disabled href="#disabled" />
-    <TopLinkItem
+    <LeftNav.TopLinkItem label="Disabled Link" disabled href="#disabled" />
+    <LeftNav.TopLinkItem
       label="Disabled Link with Icon"
       icon="address-book"
       disabled
       href="#disabledicon"
     />
-  </LeftNavigation>
+  </LeftNav>
 );

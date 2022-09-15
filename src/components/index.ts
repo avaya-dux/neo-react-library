@@ -11,7 +11,7 @@ export * from "./Form";
 export * from "./Icon";
 export * from "./IconButton";
 export * from "./Image";
-export * from "./LeftNavigation";
+export * from "./LeftNav";
 export * from "./List";
 export * from "./Menu";
 export * from "./Modal";

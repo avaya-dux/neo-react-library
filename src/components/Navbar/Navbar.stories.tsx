@@ -4,11 +4,10 @@ import { cloneElement, FormEvent, useState } from "react";
 import {
   AgentCard,
   Avatar,
-  LinkItem,
+  LeftNav,
   Menu,
   MenuButton,
   MenuItem,
-  NavCategory,
   SubMenu,
   Tab,
   TabList,
@@ -108,27 +107,27 @@ export const AltNavbarWithNavigationToggle = () => {
           <div className="neo-leftnav--wrapper">
             <nav className="neo-leftnav">
               <ul className="neo-leftnav__nav">
-                <NavCategory icon="audio-on" label="Collapsed">
-                  <LinkItem href="#fake"> First Item </LinkItem>
-                  <LinkItem href="#fake"> Second Item </LinkItem>
-                  <LinkItem href="#fake"> Third Item </LinkItem>
-                  <LinkItem href="#fake"> Fourth Item </LinkItem>
-                </NavCategory>
-                <NavCategory active expanded icon="call" label="Active">
-                  <LinkItem href="#fake"> Item 1 </LinkItem>
-                  <LinkItem href="#fake" active={true}>
+                <LeftNav.NavCategory icon="audio-on" label="Collapsed">
+                  <LeftNav.LinkItem href="#fake"> First Item </LeftNav.LinkItem>
+                  <LeftNav.LinkItem href="#fake">Second Item</LeftNav.LinkItem>
+                  <LeftNav.LinkItem href="#fake"> Third Item </LeftNav.LinkItem>
+                  <LeftNav.LinkItem href="#fake">Fourth Item</LeftNav.LinkItem>
+                </LeftNav.NavCategory>
+                <LeftNav.NavCategory active expanded icon="call" label="Active">
+                  <LeftNav.LinkItem href="#fake"> Item 1 </LeftNav.LinkItem>
+                  <LeftNav.LinkItem href="#fake" active={true}>
                     Active Item 2
-                  </LinkItem>
-                  <LinkItem href="#fake"> Item 3</LinkItem>
-                </NavCategory>
-                <NavCategory
+                  </LeftNav.LinkItem>
+                  <LeftNav.LinkItem href="#fake"> Item 3</LeftNav.LinkItem>
+                </LeftNav.NavCategory>
+                <LeftNav.NavCategory
                   disabled
                   icon="available"
                   label="Disabled Category"
                 >
-                  <LinkItem href="#fake"> First Item </LinkItem>
-                  <LinkItem href="#fake"> Second Item </LinkItem>
-                </NavCategory>
+                  <LeftNav.LinkItem href="#fake"> First Item </LeftNav.LinkItem>
+                  <LeftNav.LinkItem href="#fake">Second Item</LeftNav.LinkItem>
+                </LeftNav.NavCategory>
               </ul>
             </nav>
           </div>
@@ -172,27 +171,38 @@ NavbarWithNavigationToggle.decorators = [
             <div className="neo-leftnav--wrapper">
               <nav className="neo-leftnav">
                 <ul className="neo-leftnav__nav">
-                  <NavCategory icon="audio-on" label="Collapsed">
-                    <LinkItem href="#fake"> First Item </LinkItem>
-                    <LinkItem href="#fake"> Second Item </LinkItem>
-                    <LinkItem href="#fake"> Third Item </LinkItem>
-                    <LinkItem href="#fake"> Fourth Item </LinkItem>
-                  </NavCategory>
-                  <NavCategory active expanded icon="call" label="Active">
-                    <LinkItem href="#fake"> Item 1 </LinkItem>
-                    <LinkItem href="#fake" active={true}>
+                  <LeftNav.NavCategory icon="audio-on" label="Collapsed">
+                    <LeftNav.LinkItem href="#fake">First Item</LeftNav.LinkItem>
+                    <LeftNav.LinkItem href="#fake">
+                      Second Item
+                    </LeftNav.LinkItem>
+                    <LeftNav.LinkItem href="#fake">Third Item</LeftNav.LinkItem>
+                    <LeftNav.LinkItem href="#fake">
+                      Fourth Item
+                    </LeftNav.LinkItem>
+                  </LeftNav.NavCategory>
+                  <LeftNav.NavCategory
+                    active
+                    expanded
+                    icon="call"
+                    label="Active"
+                  >
+                    <LeftNav.LinkItem href="#fake"> Item 1 </LeftNav.LinkItem>
+                    <LeftNav.LinkItem href="#fake" active={true}>
                       Active Item 2
-                    </LinkItem>
-                    <LinkItem href="#fake"> Item 3</LinkItem>
-                  </NavCategory>
-                  <NavCategory
+                    </LeftNav.LinkItem>
+                    <LeftNav.LinkItem href="#fake"> Item 3</LeftNav.LinkItem>
+                  </LeftNav.NavCategory>
+                  <LeftNav.NavCategory
                     disabled
                     icon="available"
                     label="Disabled Category"
                   >
-                    <LinkItem href="#fake"> First Item </LinkItem>
-                    <LinkItem href="#fake"> Second Item </LinkItem>
-                  </NavCategory>
+                    <LeftNav.LinkItem href="#fake">First Item</LeftNav.LinkItem>
+                    <LeftNav.LinkItem href="#fake">
+                      Second Item
+                    </LeftNav.LinkItem>
+                  </LeftNav.NavCategory>
                 </ul>
               </nav>
             </div>
