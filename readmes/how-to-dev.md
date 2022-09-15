@@ -96,6 +96,7 @@ yarn test:watch
 ```
 
 Run, in watch mode, tests that match a certain name pattern, e.g. below command runs only Checkbox related tests
+Note: if vitest does not pick up changes in source files, press 'f' or 'a' to force it to run immediately.
 
 ```
 npx vitest Checkbox
