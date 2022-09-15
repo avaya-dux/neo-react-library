@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react"
-import { render, screen } from "@testing-library/react"
+import { cleanup, render, screen } from "@testing-library/react"
 import { axe } from "jest-axe"
 import { vi } from "vitest"
 import userEvent from "@testing-library/user-event"
@@ -27,7 +27,12 @@ const DefaultProps = {
 
 vi.spyOn(console, "log").mockImplementation(() => null)
 
-describe.only("Checkbox", () => {
+describe("Checkbox", () => {
+
+  afterEach(() => {
+    cleanup();
+  });
+
   it("renders as unchecked appropriately", () => {
     const { getByLabelText } = render(<Checkbox {...DefaultProps} />)
 
@@ -56,6 +61,10 @@ describe.only("Checkbox", () => {
   })
 
   describe("className is assigned appropriately", () => {
+    afterEach(() => {
+      cleanup();
+    });
+
     it("returns the correct class name when passed `true`", () => {
       render(<Checkbox {...DefaultProps} checked />)
       const checkboxElement = screen.getByLabelText(DefaultProps.label)
@@ -100,6 +109,10 @@ describe.only("Checkbox", () => {
         renderResult = render(<Default />)
       })
 
+      afterEach(() => {
+        cleanup();
+      });
+
       it("should render ok", () => {
         const { container } = renderResult
         expect(container).not.toBe(null)
@@ -129,6 +142,10 @@ describe.only("Checkbox", () => {
       beforeEach(() => {
         renderResult = render(<DefaultChecked />)
       })
+
+      afterEach(() => {
+        cleanup();
+      });
 
       it("should render ok", () => {
         const { container } = renderResult
@@ -162,6 +179,10 @@ describe.only("Checkbox", () => {
         renderResult = render(<CheckedAndControlled />)
       })
 
+      afterEach(() => {
+        cleanup();
+      });
+
       it("should render ok", () => {
         const { container } = renderResult
         expect(container).not.toBe(null)
@@ -193,6 +214,10 @@ describe.only("Checkbox", () => {
       beforeEach(() => {
         renderResult = render(<CheckedAndUncontrolled />)
       })
+
+      afterEach(() => {
+        cleanup();
+      });
 
       it("should render ok", () => {
         const { container } = renderResult
@@ -226,6 +251,10 @@ describe.only("Checkbox", () => {
         renderResult = render(<UncheckedAndControlled />)
       })
 
+      afterEach(() => {
+        cleanup();
+      });
+
       it("should render ok", () => {
         const { container } = renderResult
         expect(container).not.toBe(null)
@@ -257,6 +286,10 @@ describe.only("Checkbox", () => {
         renderResult = render(<UncheckedAndUncontrolled />)
       })
 
+      afterEach(() => {
+        cleanup();
+      });
+
       it("should render ok", () => {
         const { container } = renderResult
         expect(container).not.toBe(null)
@@ -287,6 +320,10 @@ describe.only("Checkbox", () => {
       beforeEach(() => {
         renderResult = render(<MixedAndControlled />)
       })
+
+      afterEach(() => {
+        cleanup();
+      });
 
       it("should render ok", () => {
         const { container } = renderResult
@@ -326,6 +363,10 @@ describe.only("Checkbox", () => {
         renderResult = render(<MixedAndUncontrolled />)
       })
 
+      afterEach(() => {
+        cleanup();
+      });
+      
       it("should render ok", () => {
         const { container } = renderResult
         expect(container).not.toBe(null)

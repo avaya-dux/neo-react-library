@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, Children, ReactElement } from "react";
 
 import log from "loglevel";
 
@@ -9,7 +9,7 @@ const logger = log.getLogger("checkboxgroup-logger");
 logger.disableAll();
 
 export interface CheckboxGroupProps {
-  checkboxes: CheckboxProps[];
+  children: ReactElement<CheckboxProps>[];
   groupName: string;
   defaultChecked?: string[];
   inline?: boolean;
@@ -37,13 +37,12 @@ export interface CheckboxGroupProps {
     },
     ]
     groupName="Default Checkbox Group"
-    defaultChecked=["Check 1", "Check 4", "Check 6"]
     onChange=() => null,
     />
  *
  */
 export const CheckboxGroup = ({
-  checkboxes,
+  children,
   groupName,
   inline,
   helperText,
@@ -65,8 +64,9 @@ export const CheckboxGroup = ({
   const computeCheckboxesJsx = () => {
     return (
       <>
-        {checkboxes
-          ? checkboxes.map(({ label = "", ...rest }, index) => {
+        {children
+          ? Children.map(children, (child, index) => {
+            const {label, ...rest} = child.props as CheckboxProps
             return (
               <Checkbox
                 aria-describedby={helperText}
