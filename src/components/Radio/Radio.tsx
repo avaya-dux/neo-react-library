@@ -10,7 +10,9 @@ export const Radio: React.FC<RadioProps> = ({
   id = useId(),
   ...rest
 }: RadioProps) => {
-  const idForLabel = useMemo(() => `Radio-label-${rest.value}`, [rest.value]);
+  const { value } = rest;
+
+  const idForLabel = useMemo(() => `Radio-label-${value}`, [value]);
 
   return (
     <>
@@ -20,7 +22,7 @@ export const Radio: React.FC<RadioProps> = ({
         type="radio"
         id={id}
         aria-labelledby={idForLabel}
-        aria-label={rest.value?.toString()}
+        aria-label={value?.toString()}
       />
       <label id={idForLabel} htmlFor={id}>
         {children}
