@@ -19,11 +19,9 @@ export interface TopNavAvatarProps {
 
 export interface TopNavButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
-  "aria-label": string;
   active?: boolean;
   badge?: string;
   icon?: IconNamesType;
-  handleClick?: () => Promise<void> | void;
 }
 
 export interface TopNavSkipNavProps
