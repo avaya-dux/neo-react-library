@@ -3,7 +3,12 @@ import { cloneElement, useCallback, useEffect, useState } from "react";
 
 import { genId } from "utils";
 
-import { TopNavAvatar, TopNavButton, TopNavSkipNav } from "./helpers";
+import {
+  TopNavAvatar,
+  TopNavButton,
+  TopNavSearch,
+  TopNavSkipNav,
+} from "./helpers";
 import { TopNavProps } from "./TopNavTypes";
 
 import "./TopNav_shim.css";
@@ -73,12 +78,6 @@ export const TopNav = ({
             {title}
           </div>
         )}
-
-        {search && (
-          <div style={{ marginLeft: "16px", alignSelf: "center" }}>
-            {search}
-          </div>
-        )}
       </div>
 
       <div className="neo-nav" style={{ alignItems: "center" }}>
@@ -95,6 +94,8 @@ export const TopNav = ({
         )}
 
         {userOptions}
+
+        {search}
       </div>
     </nav>
   );
@@ -103,3 +104,4 @@ TopNav.displayName = "TopNav";
 TopNav.Avatar = TopNavAvatar;
 TopNav.Button = TopNavButton;
 TopNav.SkipNav = TopNavSkipNav;
+TopNav.Search = TopNavSearch;

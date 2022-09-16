@@ -43,22 +43,12 @@ export interface TopNavProps {
   tabs?: ReactElement<TabProps>;
   title?: string;
   userOptions?: ReactElement<AgentCardProps | TopNavAvatarProps>;
-  search?: ReactElement<
-    Pick<
-      TextInputProps,
-      | "clearable"
-      | "disabled"
-      | "placeholder"
-      | "value"
-      | "startIcon"
-      | "aria-label"
-      | "onChange"
-    >
-  >;
+  search?: ReactElement<TextInputProps>;
 }
 
 export interface TopNavSubComponents {
   Avatar: React.FC<TopNavAvatarProps>;
   Button: React.FC<TopNavButtonProps>;
+  Search: React.FC<TextInputProps>;
   SkipNav: React.FC<TopNavSkipNavProps>;
 }

@@ -15,7 +15,6 @@ import {
   TabLink,
   TabList,
   Tabs,
-  TextInput,
 } from "components";
 
 import { TopNav, TopNavProps } from ".";
@@ -36,15 +35,7 @@ const LinkLogo = (
   />
 );
 
-const Search = (
-  <TextInput
-    clearable={true}
-    disabled={false}
-    placeholder="Search"
-    startIcon="search"
-    aria-label="search"
-  />
-);
+const TopNavSearch = <TopNav.Search />;
 
 const TopNavAvatar = (
   <TopNav.Avatar
@@ -167,7 +158,7 @@ TitleExample.args = {
 export const SearchExample = Template.bind({});
 SearchExample.args = {
   logo: Logo,
-  search: Search,
+  search: TopNavSearch,
   skipNav: TopNavSkipNav,
 };
 SearchExample.decorators = [
