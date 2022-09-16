@@ -26,7 +26,7 @@ import "./TopNav_shim.css";
   />
  *
  * @see https://design.avayacloud.com/components/web/navbar-web
- * @see https://neo-react-library-storybook.netlify.app/
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-top-navigation
  */
 export const TopNav = ({
   buttons,
