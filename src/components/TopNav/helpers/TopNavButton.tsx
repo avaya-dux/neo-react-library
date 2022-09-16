@@ -28,7 +28,9 @@ export const TopNavIconButton = forwardRef(
       <div
         className={clsx(
           "neo-badge__navbutton",
-          active && "neo-badge__navbutton--active"
+          active && !disabled && "neo-badge__navbutton--active",
+          disabled && !active && "neo-badge__navbutton--disabled",
+          active && disabled && "neo-badge__navbutton--active-disabled"
         )}
       >
         <button

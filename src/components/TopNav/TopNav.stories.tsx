@@ -173,12 +173,21 @@ export const ButtonsExample = () => {
       </TopNav.LinkButton>
 
       <TopNav.LinkButton href="/whats-new" active disabled>
-        Disabled Active Link
+        Active Disabled Link
       </TopNav.LinkButton>
 
-      <TopNav.IconButton icon="settings" aria-label="Settings" />
+      <TopNav.IconButton icon="settings" aria-label="Settings" badge="12" />
 
-      <TopNav.IconButton icon="info" aria-label="Info" badge="12" active />
+      <TopNav.IconButton icon="settings" aria-label="Settings" active />
+
+      <TopNav.IconButton icon="settings" aria-label="Settings" disabled />
+
+      <TopNav.IconButton
+        icon="settings"
+        aria-label="Settings"
+        active
+        disabled
+      />
     </TopNav>
   );
 };
