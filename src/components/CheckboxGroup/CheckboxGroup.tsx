@@ -11,7 +11,6 @@ logger.disableAll();
 export interface CheckboxGroupProps {
   children: ReactElement<CheckboxProps>[];
   groupName: string;
-  defaultChecked?: string[];
   inline?: boolean;
   helperText?: string;
   error?: boolean;

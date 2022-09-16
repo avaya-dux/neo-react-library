@@ -95,7 +95,7 @@ export const Checkbox = forwardRef(
           ref={ref}
           type="checkbox"
           id={id}
-          checked={state === "mixed" || state}
+          checked={state === "mixed" || state || false}
           aria-checked={state || "false"}
           className={clsx(
             "neo-check",

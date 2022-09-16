@@ -82,6 +82,7 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
 export const DefaultCheckboxGroup = DefaultTemplate.bind({});
 DefaultCheckboxGroup.args = {
   groupName: "default checkbox group",
+  required: true,
 };
 
 export const InlineDefaultCheckboxGroup = DefaultTemplate.bind({});

@@ -170,6 +170,13 @@ describe("CheckboxGroup", () => {
         expect(submit).toBeTruthy();
         await user.click(submit);
         expect(checkedOutput.value).toEqual("false, true, true, true, true");
+
+        const unchecked = screen.getByLabelText("Check 1 unchecked");
+        expect(unchecked).toBeTruthy();
+        unchecked.focus();
+        await user.keyboard(UserEventKeys.SPACE);
+        await user.click(submit);
+        expect(checkedOutput.value).toEqual("true, true, true, true, true");
       });
     });
 
