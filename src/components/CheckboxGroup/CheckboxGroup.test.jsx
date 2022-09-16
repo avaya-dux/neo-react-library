@@ -5,9 +5,9 @@ import { vi } from "vitest"
 
 import { CheckboxGroup } from "."
 import * as CheckboxGroupStories from "./CheckboxGroup.stories"
-import { DefaultCheckboxArray } from "./helpers"
+import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./helpers"
 
-const { DefaultCheckboxGroup, InlineCheckboxGroup } = composeStories(
+const { DefaultCheckboxGroup, InlineDefaultCheckboxGroup } = composeStories(
   CheckboxGroupStories
 )
 
@@ -26,15 +26,13 @@ const DefaultProps = {
 describe("CheckboxGroup", () => {
   describe("base tests", () => {
     let renderResult
-
+    const defaultCheckboxes = checkboxes(true, "mixed")
     beforeEach(() => {
       // ignore tooltip position warning
       vi.spyOn(console, "warn").mockImplementation(() => null)
 
       renderResult = render(
-        <CheckboxGroup {...DefaultProps}>
-          {DefaultCheckboxArray.map((checkbox) => checkbox)}
-        </CheckboxGroup>
+        <CheckboxGroup {...DefaultProps}>{defaultCheckboxes}</CheckboxGroup>
       )
     })
 
@@ -50,44 +48,31 @@ describe("CheckboxGroup", () => {
 
     it("checkbox renders ok", () => {
       const { getByLabelText } = renderResult
-      const rootElement = getByLabelText(DefaultCheckboxArray[0].props.label)
+      const rootElement = getByLabelText(defaultCheckboxes[0].props.label)
       expect(rootElement).toBeTruthy()
     })
 
     it("checkbox renders with correct class name", () => {
       const { getByLabelText } = renderResult
-      const rootElement = getByLabelText(DefaultCheckboxArray[5].props.label)
+      const rootElement = getByLabelText(defaultCheckboxes[4].props.label)
       expect(rootElement).toHaveAttribute(
         "class",
         "neo-check neo-check--indeterminate"
       )
     })
 
-    it("has a value that matches the label", () => {
+    it("has correct value", () => {
       const { getByLabelText } = renderResult
-      DefaultCheckboxArray.forEach((checkboxObject) => {
+      defaultCheckboxes.forEach((checkboxObject) => {
         const check = getByLabelText(checkboxObject.props.label)
-        expect(check).toHaveAttribute("value", checkboxObject.props.label)
+        expect(check).toHaveAttribute("value", checkboxObject.value)
       })
     })
 
     it("has a correct id when passed", () => {
       const { getByLabelText } = renderResult
-      const check = getByLabelText(DefaultCheckboxArray[2].props.label)
-      expect(check).toHaveAttribute("id", DefaultCheckboxArray[2].props.id)
-    })
-
-    it("renders as disabled", () => {
-      const { getByLabelText } = renderResult
-      DefaultCheckboxArray.forEach((checkboxObject) => {
-        if (checkboxObject.props.disabled) {
-          const check = getByLabelText(checkboxObject.props.label)
-          expect(check).toHaveAttribute("disabled")
-        } else {
-          const check = getByLabelText(checkboxObject.props.label)
-          expect(check).not.toHaveAttribute("disabled")
-        }
-      })
+      const check = getByLabelText(defaultCheckboxes[3].props.label)
+      expect(check).toHaveAttribute("id", defaultCheckboxes[3].props.id)
     })
 
     it("passes basic axe compliance", async () => {
@@ -95,6 +80,34 @@ describe("CheckboxGroup", () => {
     })
   })
 
+  describe("disabled checkbox group", () => {
+    let renderResult
+    beforeEach(() => {
+      // ignore tooltip position warning
+      vi.spyOn(console, "warn").mockImplementation(() => null)
+
+      renderResult = render(
+        <CheckboxGroup {...DefaultProps}>{disabledCheckboxes}</CheckboxGroup>
+      )
+    })
+
+    afterEach(() => {
+      cleanup()
+    })
+
+    it("renders as disabled", () => {
+      const { getByLabelText } = renderResult
+      disabledCheckboxes.forEach((checkboxObject) => {
+        expect(checkboxObject.props.disabled).toBeTruthy()
+        const check = getByLabelText(checkboxObject.props.label)
+        expect(check).toHaveAttribute("disabled")
+      })
+    })
+
+    it("passes basic axe compliance", async () => {
+      await axeTest(renderResult)
+    })
+  })
   describe("storybook tests", () => {
     describe("DefaultCheckboxGroup", () => {
       let renderResult
@@ -119,11 +132,11 @@ describe("CheckboxGroup", () => {
       })
     })
 
-    describe("InlineCheckboxGroup", () => {
+    describe("InlineDefaultCheckboxGroup", () => {
       let renderResult
 
       beforeEach(() => {
-        renderResult = render(<InlineCheckboxGroup />)
+        renderResult = render(<InlineDefaultCheckboxGroup />)
       })
 
       afterEach(() => {
