@@ -60,10 +60,6 @@ const TopNavAvatar = (
   />
 );
 
-const TopNavSkipNav = (
-  <TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>
-);
-
 const Template: Story<TopNavProps> = (props: TopNavProps) => {
   return <TopNav {...props} />;
 };
@@ -71,13 +67,11 @@ const Template: Story<TopNavProps> = (props: TopNavProps) => {
 export const BasicImplementation = Template.bind({});
 BasicImplementation.args = {
   logo: Logo,
-  skipNav: TopNavSkipNav,
 };
 
 export const NavigationToggle = Template.bind({});
 NavigationToggle.args = {
   logo: LinkLogo,
-  skipNav: TopNavSkipNav,
   menuToggleBtn: <TopNav.Button aria-label="Toggle Menu" icon="menu" />,
 };
 NavigationToggle.decorators = [
@@ -152,14 +146,15 @@ export const TitleExample = Template.bind({});
 TitleExample.args = {
   logo: Logo,
   title: "Product Name",
-  skipNav: TopNavSkipNav,
 };
 
 export const SearchExample = Template.bind({});
 SearchExample.args = {
   logo: Logo,
   search: TopNavSearch,
-  skipNav: TopNavSkipNav,
+  skipNav: (
+    <TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>
+  ),
 };
 SearchExample.decorators = [
   (Story, context) => {
@@ -179,7 +174,9 @@ SearchExample.decorators = [
     return (
       <>
         <Story args={{ ...args, search: searchWithHandler }} />
-        <p>You are searching for: {searchString}</p>
+        <section id="main-content">
+          You are searching for: {searchString}
+        </section>
       </>
     );
   },
@@ -188,7 +185,6 @@ SearchExample.decorators = [
 export const ButtonsExample = Template.bind({});
 ButtonsExample.args = {
   logo: Logo,
-  skipNav: TopNavSkipNav,
   buttons: [
     <TopNav.Button icon="info" aria-label="Info" key="info" />,
     <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
@@ -199,7 +195,6 @@ export const AvatarExample = Template.bind({});
 AvatarExample.args = {
   logo: Logo,
   userOptions: TopNavAvatar,
-  skipNav: TopNavSkipNav,
   buttons: [
     <TopNav.Button icon="info" aria-label="Info" key="info" />,
     <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
@@ -214,7 +209,6 @@ export const TabsExample = () => {
     <>
       <TopNav
         logo={Logo}
-        skipNav={TopNavSkipNav}
         tabs={
           <Tabs onTabPanelChange={setActiveTabPanelIndex}>
             <TabList>
@@ -241,7 +235,7 @@ export const TabsExample = () => {
 export const StickyTopNav: Story<TopNavProps> = () => {
   return (
     <>
-      <TopNav logo={Logo} skipNav={TopNavSkipNav} sticky />
+      <TopNav logo={Logo} sticky />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
         egestas orci sit amet mi dapibus condimentum. Etiam placerat facilisis
@@ -367,7 +361,6 @@ export const AgentCardExample = () => {
   return (
     <TopNav
       logo={Logo}
-      skipNav={TopNavSkipNav}
       userOptions={
         <AgentCard
           agentName="Bob Boberson"
