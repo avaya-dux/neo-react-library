@@ -69,6 +69,10 @@ const TopNavAvatar = (
   />
 );
 
+const TopNavSkipNav = (
+  <TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>
+);
+
 const Template: Story<TopNavProps> = (props: TopNavProps) => {
   return <TopNav {...props} />;
 };
@@ -81,8 +85,7 @@ BasicImplementation.args = {
 export const NavigationToggle = Template.bind({});
 NavigationToggle.args = {
   logo: LinkLogo,
-  skipLabel: "Skip it!",
-  skipHref: "http://google.com",
+  skipNav: TopNavSkipNav,
   menuToggleBtn: <TopNav.Button aria-label="Toggle Menu" icon="menu" />,
 };
 NavigationToggle.decorators = [
@@ -215,6 +218,7 @@ export const TabsExample = () => {
     <>
       <TopNav
         logo={Logo}
+        skipNav={TopNavSkipNav}
         tabs={
           <Tabs onTabPanelChange={setActiveTabPanelIndex}>
             <TabList>
@@ -241,7 +245,7 @@ export const TabsExample = () => {
 export const StickyTopNav: Story<TopNavProps> = () => {
   return (
     <>
-      <TopNav logo={Logo} sticky />
+      <TopNav logo={Logo} skipNav={TopNavSkipNav} sticky />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
         egestas orci sit amet mi dapibus condimentum. Etiam placerat facilisis
@@ -367,6 +371,7 @@ export const AgentCardExample = () => {
   return (
     <TopNav
       logo={Logo}
+      skipNav={TopNavSkipNav}
       userOptions={
         <AgentCard
           agentName="Bob Boberson"

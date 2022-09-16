@@ -3,7 +3,7 @@ import { cloneElement, useCallback, useEffect, useState } from "react";
 
 import { genId } from "utils";
 
-import { TopNavAvatar, TopNavButton } from "./helpers";
+import { TopNavAvatar, TopNavButton, TopNavSkipNav } from "./helpers";
 import { TopNavProps } from "./TopNavTypes";
 
 import "./TopNav_shim.css";
@@ -23,16 +23,15 @@ import "./TopNav_shim.css";
  * @see https://neo-react-library-storybook.netlify.app/
  */
 export const TopNav = ({
-  logo,
-  search,
-  title,
   buttons,
+  logo,
   menuToggleBtn,
-  tabs,
-  userOptions,
+  search,
+  skipNav: skipNavButton,
   sticky,
-  skipLabel = "Skip to main content",
-  skipHref = "#",
+  tabs,
+  title,
+  userOptions,
 }: TopNavProps) => {
   // TO-DO: NEO-786 - Replace inline styles on line 80 with updated CSS rules to avoid use of <form> element in Navbar
   // TO-DO: NEO-785 - Replace inline styles on line 76 with updated CSS rules for correct styling of 'title' prop
@@ -58,9 +57,8 @@ export const TopNav = ({
   return (
     <nav className={clsx("neo-navbar", sticky && "neo-navbar--sticky")}>
       <div className="neo-nav--left">
-        <a className="neo-skipnav" href={skipHref}>
-          {skipLabel}
-        </a>
+        {skipNavButton}
+
         {menuToggleBtn}
 
         {logo}
@@ -103,3 +101,4 @@ export const TopNav = ({
 TopNav.displayName = "TopNav";
 TopNav.Avatar = TopNavAvatar;
 TopNav.Button = TopNavButton;
+TopNav.SkipNav = TopNavSkipNav;
