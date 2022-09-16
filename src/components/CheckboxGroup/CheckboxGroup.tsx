@@ -9,13 +9,13 @@ const logger = log.getLogger("checkboxgroup-logger");
 logger.disableAll();
 
 export interface CheckboxGroupProps {
-  children: ReactElement<CheckboxProps>[];
+  children: ReactElement<CheckboxProps> | ReactElement<CheckboxProps>[];
   groupName: string;
   inline?: boolean;
   helperText?: string;
   error?: boolean;
   required?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -55,25 +55,19 @@ export const CheckboxGroup = ({
   );
 
   const computeCheckboxesJsx = () => {
-    return (
-      <>
-        {children
-          ? Children.map(children, (child, index) => {
-              const { label, ...rest } = child.props as CheckboxProps;
-              return (
-                <Checkbox
-                  aria-describedby={helperText}
-                  key={index}
-                  label={label || ""}
-                  name={groupName}
-                  onChange={onChangeHandler}
-                  {...rest}
-                />
-              );
-            })
-          : null}
-      </>
-    );
+    return Children.map(children, (child, index) => {
+      const { label, ...rest } = child.props as CheckboxProps;
+      return (
+        <Checkbox
+          aria-describedby={helperText}
+          key={index}
+          label={label || ""}
+          name={groupName}
+          onChange={onChangeHandler}
+          {...rest}
+        />
+      );
+    });
   };
 
   return (

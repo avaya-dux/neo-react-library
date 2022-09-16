@@ -1,6 +1,6 @@
 import { Story } from "@storybook/react";
 import { Button, TextArea } from "components";
-import { CheckboxProps } from "components/Checkbox/Checkbox";
+import { Checkbox, CheckboxProps } from "components/Checkbox/Checkbox";
 import { FormEvent, useCallback, useState } from "react";
 import { CheckboxGroup, CheckboxGroupProps } from "./CheckboxGroup";
 import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./helpers";
@@ -8,6 +8,14 @@ import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./helpers";
 export default {
   title: "Components/Checkbox Group",
   component: CheckboxGroup,
+};
+
+export const Default = () => {
+  return (
+    <CheckboxGroup groupName="Single checkbox">
+      <Checkbox label="example label" value="1" />
+    </CheckboxGroup>
+  );
 };
 
 const DefaultTemplate: Story<CheckboxGroupProps> = (
@@ -53,7 +61,7 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
     <>
       <form className="neo-form" onSubmit={onSubmit}>
         <CheckboxGroup {...args} onChange={onChange}>
-          {checkboxes(checked4, checked5)}
+          {checkboxes(args.groupName, checked4, checked5)}
         </CheckboxGroup>
         <Button type="submit">Submit</Button>
       </form>
@@ -91,36 +99,40 @@ InlineDefaultCheckboxGroup.args = {
   inline: true,
 };
 
-const Template: Story<CheckboxGroupProps> = ({
-  children,
+const DisabledTemplate: Story<CheckboxGroupProps> = ({
   ...args
-}: CheckboxGroupProps) => <CheckboxGroup {...args}>{children}</CheckboxGroup>;
-export const DisabledCheckboxGroup = Template.bind({});
+}: CheckboxGroupProps) => {
+  const children = disabledCheckboxes(args.groupName);
+  return <CheckboxGroup {...args}>{children}</CheckboxGroup>;
+};
+export const DisabledCheckboxGroup = DisabledTemplate.bind({});
 DisabledCheckboxGroup.args = {
   groupName: "disabled checkbox group",
-  children: disabledCheckboxes,
   onChange: () => null,
 };
 
-export const InlineDisabledCheckboxGroup = Template.bind({});
+export const InlineDisabledCheckboxGroup = DisabledTemplate.bind({});
 InlineDisabledCheckboxGroup.args = {
   groupName: "inline disabled checkbox group",
-  children: disabledCheckboxes,
   inline: true,
   onChange: () => null,
 };
 
-export const ReadonlyCheckboxGroup = Template.bind({});
+const ReadonlyTemplate: Story<CheckboxGroupProps> = ({
+  ...args
+}: CheckboxGroupProps) => {
+  const children = readonlyCheckboxes(args.groupName);
+  return <CheckboxGroup {...args}>{children}</CheckboxGroup>;
+};
+export const ReadonlyCheckboxGroup = ReadonlyTemplate.bind({});
 ReadonlyCheckboxGroup.args = {
   groupName: "readonly checkbox group",
-  children: readonlyCheckboxes,
   onChange: () => null,
 };
 
-export const InlineReadonlyCheckboxGroup = Template.bind({});
+export const InlineReadonlyCheckboxGroup = ReadonlyTemplate.bind({});
 InlineReadonlyCheckboxGroup.args = {
   groupName: "inline readonly checkbox group",
-  children: readonlyCheckboxes,
   inline: true,
   onChange: () => null,
 };

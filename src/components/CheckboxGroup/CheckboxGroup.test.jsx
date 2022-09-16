@@ -10,8 +10,15 @@ import { CheckboxGroup } from ".";
 import * as CheckboxGroupStories from "./CheckboxGroup.stories";
 import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./helpers";
 
-const { DefaultCheckboxGroup, InlineDefaultCheckboxGroup } =
-  composeStories(CheckboxGroupStories);
+const {
+  Default,
+  DefaultCheckboxGroup,
+  InlineDefaultCheckboxGroup,
+  DisabledCheckboxGroup,
+  InlineDisabledCheckboxGroup,
+  ReadonlyCheckboxGroup,
+  InlineReadonlyCheckboxGroup,
+} = composeStories(CheckboxGroupStories);
 
 async function axeTest(renderResult) {
   const { container } = renderResult;
@@ -28,7 +35,7 @@ const DefaultProps = {
 describe("CheckboxGroup", () => {
   describe("base tests", () => {
     let renderResult;
-    const defaultCheckboxes = checkboxes(true, "mixed");
+    const defaultCheckboxes = checkboxes(DefaultProps.groupName, true, "mixed");
     beforeEach(() => {
       // ignore tooltip position warning
       vi.spyOn(console, "warn").mockImplementation(() => null);
@@ -84,12 +91,13 @@ describe("CheckboxGroup", () => {
 
   describe("disabled checkbox group", () => {
     let renderResult;
+    const checkboxes = disabledCheckboxes("Disabled group");
     beforeEach(() => {
       // ignore tooltip position warning
       vi.spyOn(console, "warn").mockImplementation(() => null);
 
       renderResult = render(
-        <CheckboxGroup {...DefaultProps}>{disabledCheckboxes}</CheckboxGroup>
+        <CheckboxGroup {...DefaultProps}>{checkboxes}</CheckboxGroup>
       );
     });
 
@@ -99,7 +107,7 @@ describe("CheckboxGroup", () => {
 
     it("renders as disabled", () => {
       const { getByLabelText } = renderResult;
-      disabledCheckboxes.forEach((checkboxObject) => {
+      checkboxes.forEach((checkboxObject) => {
         expect(checkboxObject.props.disabled).toBeTruthy();
         const check = getByLabelText(checkboxObject.props.label);
         expect(check).toHaveAttribute("disabled");
@@ -118,7 +126,9 @@ describe("CheckboxGroup", () => {
       vi.spyOn(console, "warn").mockImplementation(() => null);
 
       renderResult = render(
-        <CheckboxGroup {...DefaultProps}>{readonlyCheckboxes}</CheckboxGroup>
+        <CheckboxGroup {...DefaultProps}>
+          {readonlyCheckboxes("readonly group")}
+        </CheckboxGroup>
       );
     });
 
@@ -138,6 +148,28 @@ describe("CheckboxGroup", () => {
   });
 
   describe("storybook tests", () => {
+    describe("Default", () => {
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<Default />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
     describe("DefaultCheckboxGroup", () => {
       const user = userEvent.setup();
 
@@ -185,6 +217,98 @@ describe("CheckboxGroup", () => {
 
       beforeEach(() => {
         renderResult = render(<InlineDefaultCheckboxGroup />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("DisabledCheckboxGroup", () => {
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<DisabledCheckboxGroup />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("InlineDisabledCheckboxGroup", () => {
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<InlineDisabledCheckboxGroup />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("ReadonlyCheckboxGroup", () => {
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<ReadonlyCheckboxGroup />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("InlineReadonlyCheckboxGroup", () => {
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<InlineReadonlyCheckboxGroup />);
       });
 
       afterEach(() => {

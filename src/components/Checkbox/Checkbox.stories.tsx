@@ -9,11 +9,13 @@ export default {
 } as Meta<CheckboxProps>;
 
 export const Default = () => {
-  return <Checkbox label="example label" value="1" />;
+  return <Checkbox label="example label" name="example" value="1" />;
 };
 
 export const DefaultChecked = () => {
-  return <Checkbox label="example label" value="1" defaultChecked />;
+  return (
+    <Checkbox label="example label" name="example" value="1" defaultChecked />
+  );
 };
 
 const ControlledTemplate: Story<CheckboxProps> = ({
