@@ -80,6 +80,7 @@ const Template: Story<TopNavProps> = (props: TopNavProps) => {
 export const BasicImplementation = Template.bind({});
 BasicImplementation.args = {
   logo: Logo,
+  skipNav: TopNavSkipNav,
 };
 
 export const NavigationToggle = Template.bind({});
@@ -160,12 +161,14 @@ export const TitleExample = Template.bind({});
 TitleExample.args = {
   logo: Logo,
   title: "Product Name",
+  skipNav: TopNavSkipNav,
 };
 
 export const SearchExample = Template.bind({});
 SearchExample.args = {
   logo: Logo,
   search: Search,
+  skipNav: TopNavSkipNav,
 };
 SearchExample.decorators = [
   (Story, context) => {
@@ -194,6 +197,7 @@ SearchExample.decorators = [
 export const ButtonsExample = Template.bind({});
 ButtonsExample.args = {
   logo: Logo,
+  skipNav: TopNavSkipNav,
   buttons: [
     <TopNav.Button icon="info" aria-label="Info" key="info" />,
     <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
@@ -204,6 +208,7 @@ export const AvatarExample = Template.bind({});
 AvatarExample.args = {
   logo: Logo,
   userOptions: TopNavAvatar,
+  skipNav: TopNavSkipNav,
   buttons: [
     <TopNav.Button icon="info" aria-label="Info" key="info" />,
     <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,

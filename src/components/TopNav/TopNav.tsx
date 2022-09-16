@@ -16,6 +16,7 @@ import "./TopNav_shim.css";
  * @example
  * <TopNav
     logo={<Image isDecorativeOrBranding src="link/to/image.png"/>}
+    skipNav={<TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>}
     title="Product Name"
   />
  *

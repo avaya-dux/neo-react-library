@@ -1,5 +1,6 @@
 import { composeStories } from "@storybook/testing-react";
 import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 
 import { Image } from "components/Image";
@@ -18,6 +19,8 @@ const {
 } = composeStories(TopNavStories);
 
 describe("TopNav", () => {
+  const user = userEvent.setup();
+
   describe("basic unit tests", () => {
     let renderResult;
     beforeEach(() => {
@@ -27,8 +30,13 @@ describe("TopNav", () => {
           isDecorativeOrBranding
         />
       );
+      const skipNav = (
+        <TopNav.SkipNav href="#main-content">
+          Skip to main content
+        </TopNav.SkipNav>
+      );
 
-      renderResult = render(<TopNav logo={logo} />);
+      renderResult = render(<TopNav logo={logo} skipNav={skipNav} />);
     });
 
     it("renders without exploding", () => {
@@ -48,6 +56,18 @@ describe("TopNav", () => {
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
+
+    it("'Skip Nav' is the first element to be hit when 'tab' is pressed", async () => {
+      const skipNav = screen.getByRole("link");
+      expect(skipNav).toBeDefined();
+      expect(skipNav).not.toHaveFocus();
+
+      await user.tab();
+      expect(skipNav).toHaveFocus();
+    });
+
+    // TODO: `.isVisible` is not working as expected, should add this test when possible
+    // it("should not show the 'Skip Nav' unless tabbed to", async () => {});
   });
 
   describe("storybook tests", () => {
