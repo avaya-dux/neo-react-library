@@ -12,6 +12,7 @@ const {
   AgentCardExample,
   AvatarExample,
   NavigationToggle,
+  SearchExample,
   StickyTopNav,
   TabsExample,
   TitleExample,
@@ -142,6 +143,14 @@ describe("TopNav", () => {
     describe("TopNav With Agent Card", () => {
       it("passes basic axe compliance", async () => {
         const { container } = render(<AgentCardExample />);
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("SearchExample", () => {
+      it("passes basic axe compliance", async () => {
+        const { container } = render(<SearchExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });

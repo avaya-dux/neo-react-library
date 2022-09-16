@@ -23,6 +23,21 @@ describe("TopNavIconButton", () => {
     expect(grid).toHaveClass("neo-badge__icon");
   });
 
+  it("explodes if an accessibility error is found", () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => null);
+    expect(() => render(<TopNavIconButton aria-label="" />)).toThrow();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it("passes basic axe compliance", async () => {
+    const { container } = render(
+      <TopNavIconButton aria-label={ariaLabel} icon={icon} />
+    );
+
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
   describe("click events", () => {
     it("fires click event when clicked", async () => {
       const onClickSpy = vi.fn();
@@ -55,20 +70,17 @@ describe("TopNavIconButton", () => {
       expect(onClickSpy).not.toHaveBeenCalled();
     });
   });
-
-  it("passes basic axe compliance", async () => {
-    const { container } = render(
-      <TopNavIconButton aria-label={ariaLabel} icon={icon} />
-    );
-
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-  });
 });
 
 describe("TopNavLinkButton", () => {
   const href = "/example";
   const children = "Example";
+
+  it("explodes if an accessibility error is found", () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => null);
+    expect(() => render(<TopNavLinkButton href={href} />)).toThrow();
+    expect(spy).toHaveBeenCalled();
+  });
 
   it("renders a link when not disabled", () => {
     render(<TopNavLinkButton href={href}>{children}</TopNavLinkButton>);
