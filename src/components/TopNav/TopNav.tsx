@@ -28,7 +28,7 @@ export const TopNav = ({
   logo,
   menuToggleBtn,
   search,
-  skipNav: skipNavButton,
+  skipNav,
   sticky,
   tabs,
   title,
@@ -58,7 +58,7 @@ export const TopNav = ({
   return (
     <nav className={clsx("neo-navbar", sticky && "neo-navbar--sticky")}>
       <div className="neo-nav--left">
-        {skipNavButton}
+        {skipNav}
 
         {menuToggleBtn}
 
