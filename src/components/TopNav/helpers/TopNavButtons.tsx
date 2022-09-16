@@ -37,7 +37,7 @@ export const TopNavIconButton = forwardRef(
           className={clsx(
             "neo-badge__navbutton--content neo-btn",
             !!icon && `neo-icon-${icon}`,
-            !!className && className
+            className
           )}
           disabled={disabled}
           ref={ref}
