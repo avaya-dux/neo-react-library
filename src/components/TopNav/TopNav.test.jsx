@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 
@@ -9,13 +9,12 @@ import { TopNav } from ".";
 import * as TopNavStories from "./TopNav.stories";
 
 const {
-  NavigationToggle,
-  TitleExample,
-  ButtonsExample,
+  AgentCardExample,
   AvatarExample,
+  NavigationToggle,
   StickyTopNav,
   TabsExample,
-  AgentCardExample,
+  TitleExample,
 } = composeStories(TopNavStories);
 
 describe("TopNav", () => {
@@ -85,27 +84,6 @@ describe("TopNav", () => {
       });
     });
 
-    describe("TopNav With buttons", () => {
-      it("toggles active states correctly", () => {
-        const { getAllByRole } = render(<ButtonsExample />);
-        const buttonElements = getAllByRole("button");
-        fireEvent.click(buttonElements[0]);
-        expect(buttonElements[0].closest("div")).toHaveClass(
-          "neo-badge__navbutton--active"
-        );
-        fireEvent.click(buttonElements[1]);
-        expect(buttonElements[0].closest("div")).not.toHaveClass(
-          "neo-badge__navbutton--active"
-        );
-      });
-
-      it("passes basic axe compliance", async () => {
-        const { container } = render(<ButtonsExample />);
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
-
     describe("TopNav With Title", () => {
       it("renders text passed as title prop", () => {
         const { getByText } = render(<TitleExample />);
@@ -120,16 +98,16 @@ describe("TopNav", () => {
     });
 
     describe("TopNav With Navigation Toggle", () => {
-      // BUG: is throwing: "Warning: Received `true` for a non-boolean attribute `active`."
-      it("correctly executes button onClick handler when passed as props", () => {
+      it("correctly executes button onClick handler when passed as props", async () => {
         const { getByRole, getAllByRole } = render(<NavigationToggle />);
         const navElementsBeforeToggle = getAllByRole("navigation");
         expect(navElementsBeforeToggle).toHaveLength(1);
         const leftNavToggleButton = getByRole("button");
-        fireEvent.click(leftNavToggleButton);
+        await user.click(leftNavToggleButton);
         const navElementsAfterToggle = getAllByRole("navigation");
         expect(navElementsAfterToggle).toHaveLength(2);
       });
+
       it("passes basic axe compliance", async () => {
         const { container } = render(<NavigationToggle />);
         const results = await axe(container);
@@ -138,12 +116,12 @@ describe("TopNav", () => {
     });
 
     describe("TopNav With Avatar and Dropdown", () => {
-      it("adds appropriate class to toggle Dropdown when clicked", () => {
+      it("adds appropriate class to toggle Dropdown when clicked", async () => {
         const { getByRole } = render(<AvatarExample />);
         const avatar = getByRole("figure");
         const avatarDropdown = getByRole("figure").closest("div");
         expect(avatarDropdown).not.toHaveClass("neo-dropdown--active");
-        fireEvent.click(avatar);
+        await user.click(avatar);
         expect(avatarDropdown).toHaveClass("neo-dropdown--active");
       });
       it("passes basic axe compliance", async () => {

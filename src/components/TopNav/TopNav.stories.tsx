@@ -74,44 +74,27 @@ NavigationToggle.decorators = [
             }
             style={{ width: "15%" }}
           >
-            <div className="neo-leftnav--wrapper">
-              <nav className="neo-leftnav">
-                <ul className="neo-leftnav__nav">
-                  <LeftNav.NavCategory icon="audio-on" label="Collapsed">
-                    <LeftNav.LinkItem href="#fake">First Item</LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake">
-                      Second Item
-                    </LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake">Third Item</LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake">
-                      Fourth Item
-                    </LeftNav.LinkItem>
-                  </LeftNav.NavCategory>
-                  <LeftNav.NavCategory
-                    active
-                    expanded
-                    icon="call"
-                    label="Active"
-                  >
-                    <LeftNav.LinkItem href="#fake"> Item 1 </LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake" active={true}>
-                      Active Item 2
-                    </LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake"> Item 3</LeftNav.LinkItem>
-                  </LeftNav.NavCategory>
-                  <LeftNav.NavCategory
-                    disabled
-                    icon="available"
-                    label="Disabled Category"
-                  >
-                    <LeftNav.LinkItem href="#fake">First Item</LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake">
-                      Second Item
-                    </LeftNav.LinkItem>
-                  </LeftNav.NavCategory>
-                </ul>
-              </nav>
-            </div>
+            <LeftNav aria-label="Collapsible Navigation Menu">
+              <LeftNav.NavCategory icon="audio-on" label="Collapsed">
+                <LeftNav.LinkItem href="#first">First Item</LeftNav.LinkItem>
+                <LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
+              </LeftNav.NavCategory>
+              <LeftNav.NavCategory expanded icon="call" label="Active">
+                <LeftNav.LinkItem href="#item1">Item 1</LeftNav.LinkItem>
+                <LeftNav.LinkItem href="#item2" active>
+                  Active Item 2
+                </LeftNav.LinkItem>
+                <LeftNav.LinkItem href="#item3">Item 3</LeftNav.LinkItem>
+              </LeftNav.NavCategory>
+              <LeftNav.NavCategory disabled icon="available" label="Disabled">
+                <LeftNav.LinkItem href="#disabled1">
+                  First Item
+                </LeftNav.LinkItem>
+                <LeftNav.LinkItem href="#disabled2">
+                  Second Item
+                </LeftNav.LinkItem>
+              </LeftNav.NavCategory>
+            </LeftNav>
           </div>
         )}
       </>

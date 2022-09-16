@@ -21,12 +21,9 @@ import "./TopNav_shim.css";
     title="Product Name"
   />
  *
- * <TopNav
-    logo={<Image isDecorativeOrBranding src="link/to/image.png"/>}
-    skipNav={<TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>}
-  >
-    <TopNav.Button href="/components">Components</TopNav.Button>
-    <TopNav.Button icon="settings" aria-label="Settings" key="settings" />
+ * <TopNav logo={<Image isDecorativeOrBranding src="link/to/image.png"/>}>
+    <TopNav.LinkButton active href="/components">Link</TopNav.LinkButton>
+    <TopNav.IconButton icon="settings" aria-label="Settings" />
   </TopNav>
  *
  * @see https://design.avayacloud.com/components/web/navbar-web
