@@ -23,21 +23,16 @@ export interface CheckboxGroupProps {
  *
  * @example
  * <CheckboxGroup
- *  checkboxes=[
-      label: "Check 1",
-      value: "Check 1",
-      checked: true,
-      onChange: () => null,
-    },
-    {
-      label: "Check 2",
-      value: "Check 2",
-      onChange: () => null,
-    },
-    ]
-    groupName="Default Checkbox Group"
-    onChange=() => null,
-    />
+ *   groupName="Default Checkbox Group"
+ *   onChange=() => null,
+ * >
+ * <Checkbox label="Gift" value="gift" />
+ * <Checkbox
+ *   label="Prime"
+ *   value="prime"
+ *   defaultChecked
+ * />
+ * </CheckboxGroup>
  *
  */
 export const CheckboxGroup = ({
