@@ -103,5 +103,5 @@ export const TopNav = ({
 TopNav.displayName = "TopNav";
 TopNav.Avatar = TopNavAvatar;
 TopNav.Button = TopNavButton;
-TopNav.SkipNav = TopNavSkipNav;
 TopNav.Search = TopNavSearch;
+TopNav.SkipNav = TopNavSkipNav;
