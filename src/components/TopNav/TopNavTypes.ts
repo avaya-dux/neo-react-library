@@ -38,12 +38,12 @@ export interface TopNavProps {
   logo: ReactElement<ImageProps | ImageLinkProps>;
   buttons?: ReactElement<TopNavButtonProps>[];
   menuToggleBtn?: ReactElement<Partial<TopNavButtonProps>>;
+  search?: ReactElement<TextInputProps>;
   skipNav?: ReactElement<TopNavSkipNavProps>;
   sticky?: boolean;
   tabs?: ReactElement<TabProps>;
   title?: string;
   userOptions?: ReactElement<AgentCardProps | TopNavAvatarProps>;
-  search?: ReactElement<TextInputProps>;
 }
 
 export interface TopNavSubComponents {
