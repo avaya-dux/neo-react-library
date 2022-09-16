@@ -5,7 +5,6 @@ import {
   ReactNode,
 } from "react";
 
-import { AgentCardProps } from "components/AgentCard";
 import { AvatarProps } from "components/Avatar";
 import { ImageProps } from "components/Image";
 import { ImageLinkProps } from "components/ImageLink";
@@ -36,14 +35,13 @@ export interface TopNavSkipNavProps
 
 export interface TopNavProps {
   logo: ReactElement<ImageProps | ImageLinkProps>;
-  buttons?: ReactElement<TopNavButtonProps>[];
+  children?: ReactNode;
   menuToggleBtn?: ReactElement<Partial<TopNavButtonProps>>;
   search?: ReactElement<TextInputProps>;
   skipNav?: ReactElement<TopNavSkipNavProps>;
   sticky?: boolean;
   tabs?: ReactElement<TabProps>;
   title?: string;
-  userOptions?: ReactElement<AgentCardProps | TopNavAvatarProps>;
 }
 
 export interface TopNavSubComponents {

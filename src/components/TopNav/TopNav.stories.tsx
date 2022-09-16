@@ -37,29 +37,6 @@ const LinkLogo = (
 
 const TopNavSearch = <TopNav.Search />;
 
-const TopNavAvatar = (
-  <TopNav.Avatar
-    avatar={<Avatar initials="MD" />}
-    dropdown={
-      <Menu
-        itemAlignment="right"
-        menuRootElement={
-          <MenuButton onClick={() => console.log("Functional Menu opened")}>
-            Functional Menu
-          </MenuButton>
-        }
-      >
-        <MenuItem key={"1"}>Item1</MenuItem>
-        <SubMenu key={"2"} menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
-          <MenuItem key={"2-1"}>Sub Item1</MenuItem>
-          <MenuItem key={"2-2"}>Sub Item2</MenuItem>
-        </SubMenu>
-        <MenuItem key={"3"}>Item3</MenuItem>
-      </Menu>
-    }
-  />
-);
-
 const Template: Story<TopNavProps> = (props: TopNavProps) => {
   return <TopNav {...props} />;
 };
@@ -185,20 +162,44 @@ SearchExample.decorators = [
 export const ButtonsExample = Template.bind({});
 ButtonsExample.args = {
   logo: Logo,
-  buttons: [
-    <TopNav.Button icon="info" aria-label="Info" key="info" />,
-    <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
-  ],
+  children: (
+    <>
+      <TopNav.Button icon="info" aria-label="Info" />
+      <TopNav.Button icon="settings" aria-label="Settings" />
+    </>
+  ),
 };
 
 export const AvatarExample = Template.bind({});
 AvatarExample.args = {
   logo: Logo,
-  userOptions: TopNavAvatar,
-  buttons: [
-    <TopNav.Button icon="info" aria-label="Info" key="info" />,
-    <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
-  ],
+  children: (
+    <>
+      <TopNav.Button icon="info" aria-label="Info" />
+      <TopNav.Button icon="settings" aria-label="Settings" />
+
+      <TopNav.Avatar
+        avatar={<Avatar initials="MD" />}
+        dropdown={
+          <Menu
+            itemAlignment="right"
+            menuRootElement={
+              <MenuButton onClick={() => console.log("Functional Menu opened")}>
+                Functional Menu
+              </MenuButton>
+            }
+          >
+            <MenuItem key={"1"}>Item1</MenuItem>
+            <SubMenu key={"2"} menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
+              <MenuItem key={"2-1"}>Sub Item1</MenuItem>
+              <MenuItem key={"2-2"}>Sub Item2</MenuItem>
+            </SubMenu>
+            <MenuItem key={"3"}>Item3</MenuItem>
+          </Menu>
+        }
+      />
+    </>
+  ),
 };
 
 export const TabsExample = () => {
@@ -359,15 +360,12 @@ export const StickyTopNav: Story<TopNavProps> = () => {
 
 export const AgentCardExample = () => {
   return (
-    <TopNav
-      logo={Logo}
-      userOptions={
-        <AgentCard
-          agentName="Bob Boberson"
-          agentStatus="connected"
-          avatar={<Avatar />}
-        />
-      }
-    />
+    <TopNav logo={Logo}>
+      <AgentCard
+        agentName="Bob Boberson"
+        agentStatus="connected"
+        avatar={<Avatar />}
+      />
+    </TopNav>
   );
 };

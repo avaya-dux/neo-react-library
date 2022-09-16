@@ -1,7 +1,4 @@
 import clsx from "clsx";
-import { cloneElement, useCallback, useEffect, useState } from "react";
-
-import { genId } from "utils";
 
 import {
   TopNavAvatar,
@@ -13,8 +10,6 @@ import { TopNavProps } from "./TopNavTypes";
 
 import "./TopNav_shim.css";
 
-// TODO: NEO-731 - add Search Component to Design System
-
 /**
  * TopNav is used to orient users, and to access different areas within an interface.
  *
@@ -25,11 +20,19 @@ import "./TopNav_shim.css";
     title="Product Name"
   />
  *
+ * <TopNav
+    logo={<Image isDecorativeOrBranding src="link/to/image.png"/>}
+    skipNav={<TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>}
+  >
+    <TopNav.Button href="/components">Components</TopNav.Button>
+    <TopNav.Button icon="settings" aria-label="Settings" key="settings" />
+  </TopNav>
+ *
  * @see https://design.avayacloud.com/components/web/navbar-web
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-top-navigation
  */
 export const TopNav = ({
-  buttons,
+  children,
   logo,
   menuToggleBtn,
   search,
@@ -37,29 +40,7 @@ export const TopNav = ({
   sticky,
   tabs,
   title,
-  userOptions,
 }: TopNavProps) => {
-  // TO-DO: NEO-786 - Replace inline styles on line 80 with updated CSS rules to avoid use of <form> element in Navbar
-  // TO-DO: NEO-785 - Replace inline styles on line 76 with updated CSS rules for correct styling of 'title' prop
-  // TO-DO: NEO-794 - Confirm use-case for Avatar in Navbar without Dropdown and resulting need for inline styles on line 132
-  const [ids, setIds] = useState<string[]>([]);
-  const [activeId, setActiveId] = useState("");
-
-  useEffect(() => {
-    setIds([]);
-    buttons?.forEach(() => {
-      setIds((ids) => (ids = [...ids, genId()]));
-    });
-  }, [buttons]);
-
-  const navButtonOnClickCallback = useCallback(
-    (id: number, clickHandler?: () => void | Promise<void>) => {
-      if (clickHandler) clickHandler();
-      setActiveId(ids[id]);
-    },
-    [ids]
-  );
-
   return (
     <nav className={clsx("neo-navbar", sticky && "neo-navbar--sticky")}>
       <div className="neo-nav--left">
@@ -69,31 +50,13 @@ export const TopNav = ({
 
         {logo}
 
-        {title && (
-          <div
-            style={{ fontSize: "19px", lineHeight: "28px", marginLeft: "16px" }}
-            role="heading"
-            aria-level={1}
-          >
-            {title}
-          </div>
-        )}
+        {title && <h1 className="nav-title">{title}</h1>}
       </div>
 
-      <div className="neo-nav" style={{ alignItems: "center" }}>
+      <div className="neo-nav">
         {tabs}
 
-        {buttons?.map((button, key) =>
-          cloneElement(button, {
-            key,
-            active: ids[key] === activeId,
-            id: ids[key],
-            onClick: () =>
-              navButtonOnClickCallback(key, button.props.handleClick),
-          })
-        )}
-
-        {userOptions}
+        {children}
 
         {search}
       </div>
