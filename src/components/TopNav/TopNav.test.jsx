@@ -8,13 +8,13 @@ import { TopNav } from ".";
 import * as TopNavStories from "./TopNav.stories";
 
 const {
-  TopNavWithNavigationToggle,
-  TopNavWithTitle,
-  TopNavWithButtons,
-  TopNavWithAvatarAndDropdown,
+  NavigationToggle,
+  TitleExample,
+  ButtonsExample,
+  AvatarExample,
   StickyTopNav,
-  TopNavWithTabs,
-  TopNavWithAgentCard,
+  TabsExample,
+  AgentCardExample,
 } = composeStories(TopNavStories);
 
 describe("TopNav", () => {
@@ -67,7 +67,7 @@ describe("TopNav", () => {
 
     describe("TopNav With buttons", () => {
       it("toggles active states correctly", () => {
-        const { getAllByRole } = render(<TopNavWithButtons />);
+        const { getAllByRole } = render(<ButtonsExample />);
         const buttonElements = getAllByRole("button");
         fireEvent.click(buttonElements[0]);
         expect(buttonElements[0].closest("div")).toHaveClass(
@@ -80,7 +80,7 @@ describe("TopNav", () => {
       });
 
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithButtons />);
+        const { container } = render(<ButtonsExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
@@ -88,12 +88,12 @@ describe("TopNav", () => {
 
     describe("TopNav With Title", () => {
       it("renders text passed as title prop", () => {
-        const { getByText } = render(<TopNavWithTitle />);
+        const { getByText } = render(<TitleExample />);
         const titleElement = getByText("Product Name");
         expect(titleElement).toBeTruthy();
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithTitle />);
+        const { container } = render(<TitleExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
@@ -102,9 +102,7 @@ describe("TopNav", () => {
     describe("TopNav With Navigation Toggle", () => {
       // BUG: is throwing: "Warning: Received `true` for a non-boolean attribute `active`."
       it("correctly executes button onClick handler when passed as props", () => {
-        const { getByRole, getAllByRole } = render(
-          <TopNavWithNavigationToggle />
-        );
+        const { getByRole, getAllByRole } = render(<NavigationToggle />);
         const navElementsBeforeToggle = getAllByRole("navigation");
         expect(navElementsBeforeToggle).toHaveLength(1);
         const leftNavToggleButton = getByRole("button");
@@ -113,7 +111,7 @@ describe("TopNav", () => {
         expect(navElementsAfterToggle).toHaveLength(2);
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithNavigationToggle />);
+        const { container } = render(<NavigationToggle />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
@@ -121,7 +119,7 @@ describe("TopNav", () => {
 
     describe("TopNav With Avatar and Dropdown", () => {
       it("adds appropriate class to toggle Dropdown when clicked", () => {
-        const { getByRole } = render(<TopNavWithAvatarAndDropdown />);
+        const { getByRole } = render(<AvatarExample />);
         const avatar = getByRole("figure");
         const avatarDropdown = getByRole("figure").closest("div");
         expect(avatarDropdown).not.toHaveClass("neo-dropdown--active");
@@ -129,7 +127,7 @@ describe("TopNav", () => {
         expect(avatarDropdown).toHaveClass("neo-dropdown--active");
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithAvatarAndDropdown />);
+        const { container } = render(<AvatarExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
@@ -137,7 +135,7 @@ describe("TopNav", () => {
 
     describe("TopNav With Tabs", () => {
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithTabs />);
+        const { container } = render(<TabsExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
@@ -145,7 +143,7 @@ describe("TopNav", () => {
 
     describe("TopNav With Agent Card", () => {
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithAgentCard />);
+        const { container } = render(<AgentCardExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
