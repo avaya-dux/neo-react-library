@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
-import { TopNavIconButton } from ".";
+import { TopNavIconButton, TopNavLinkButton } from ".";
 
 describe("TopNavIconButton", () => {
   const user = userEvent.setup();
@@ -59,6 +59,67 @@ describe("TopNavIconButton", () => {
   it("passes basic axe compliance", async () => {
     const { container } = render(
       <TopNavIconButton aria-label={ariaLabel} icon={icon} />
+    );
+
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+});
+
+describe("TopNavLinkButton", () => {
+  const href = "/example";
+  const children = "Example";
+
+  it("renders a link when not disabled", () => {
+    render(<TopNavLinkButton href={href}>{children}</TopNavLinkButton>);
+
+    expect(screen.getByRole("link")).toBeInTheDocument();
+  });
+
+  it("renders a button when disabled", () => {
+    render(
+      <TopNavLinkButton disabled href={href}>
+        {children}
+      </TopNavLinkButton>
+    );
+
+    expect(screen.getByRole("button")).toBeInTheDocument();
+  });
+
+  it("has active class when active", () => {
+    render(
+      <TopNavLinkButton active href={href}>
+        {children}
+      </TopNavLinkButton>
+    );
+
+    expect(screen.getByRole("link")).toHaveClass("link-btn-active");
+  });
+
+  it("has active class when both active and disabled", () => {
+    render(
+      <TopNavLinkButton active disabled href={href}>
+        {children}
+      </TopNavLinkButton>
+    );
+
+    expect(screen.getByRole("button")).toHaveClass("link-btn-active");
+  });
+
+  it("passes basic axe compliance", async () => {
+    const { container } = render(
+      <TopNavLinkButton href={href}>{children}</TopNavLinkButton>
+    );
+
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
+  it("passes basic axe compliance when disabled", async () => {
+    const { container } = render(
+      <TopNavLinkButton href={href} disabled>
+        {children}
+      </TopNavLinkButton>
     );
 
     const results = await axe(container);
