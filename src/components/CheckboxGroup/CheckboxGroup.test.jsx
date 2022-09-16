@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react"
-import { cleanup, render } from "@testing-library/react"
+import { cleanup, render, screen } from "@testing-library/react"
 import { axe } from "jest-axe"
 import { vi } from "vitest"
 
@@ -108,6 +108,33 @@ describe("CheckboxGroup", () => {
       await axeTest(renderResult)
     })
   })
+
+  describe("readonly checkbox group", () => {
+    let renderResult
+    beforeEach(() => {
+      // ignore tooltip position warning
+      vi.spyOn(console, "warn").mockImplementation(() => null)
+
+      renderResult = render(
+        <CheckboxGroup {...DefaultProps}>{readonlyCheckboxes}</CheckboxGroup>
+      )
+    })
+
+    afterEach(() => {
+      cleanup()
+    })
+
+    it("renders as readonly", () => {
+      const checkboxes = screen.getAllByLabelText(/readonly/)
+      expect(checkboxes).toBeTruthy()
+      expect(checkboxes.length).toEqual(5)
+    })
+
+    it("passes basic axe compliance", async () => {
+      await axeTest(renderResult)
+    })
+  })
+
   describe("storybook tests", () => {
     describe("DefaultCheckboxGroup", () => {
       let renderResult
