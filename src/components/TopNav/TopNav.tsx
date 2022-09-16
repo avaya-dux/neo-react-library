@@ -3,7 +3,7 @@ import { cloneElement, useCallback, useEffect, useState } from "react";
 
 import { genId } from "utils";
 
-import { TopNavAvatar, TopNavButton } from "./RightContent";
+import { TopNavAvatar, TopNavButton } from "./helpers";
 import { TopNavProps } from "./TopNavTypes";
 
 import "./TopNav_shim.css";
