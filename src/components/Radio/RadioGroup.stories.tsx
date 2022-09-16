@@ -25,7 +25,7 @@ export const RadioGroupExample = () => {
     >
       <RadioGroup
         groupName="Default Radio Group"
-        selected="Radio 1"
+        selected={selectedValue}
         onChange={onRadioChange}
       >
         <Radio value="Radio 1">Radio 1</Radio>
@@ -104,7 +104,7 @@ export const InlineRadioGroupExample = () => {
     <>
       <RadioGroup
         groupName="Default Radio Group"
-        selected="Radio 1"
+        selected={selectedValue}
         onChange={onRadioChange}
         inline
       >

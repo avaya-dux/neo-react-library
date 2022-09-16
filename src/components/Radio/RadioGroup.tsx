@@ -3,11 +3,8 @@ import {
   cloneElement,
   ReactElement,
   useCallback,
-  useEffect,
   useMemo,
-  useState,
   useId,
-  FC,
 } from "react";
 
 import { NeoInputWrapper, Tooltip } from "components";
@@ -41,22 +38,15 @@ export const RadioGroup = ({
   error,
   required,
 }: RadioGroupProps) => {
-  const [selectedValue, setSelectedValue] = useState(selected);
-
   const helperTextId = `${id}-helper-text`;
-
-  useEffect(() => {
-    setSelectedValue(selected);
-  }, [selected]);
 
   const onChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSelectedValue(e.target.value);
       if (onChange) {
         onChange(e);
       }
     },
-    [onChange, setSelectedValue]
+    [onChange]
   );
 
   const radios = useMemo(
@@ -80,7 +70,7 @@ export const RadioGroup = ({
           const childprops = {
             ...radio.props,
             ...propsToPass,
-            checked: radio.props.value === selectedValue,
+            checked: radio.props.value === selected,
           };
 
           const radioWithProps = cloneElement(radio, childprops);
@@ -90,13 +80,13 @@ export const RadioGroup = ({
           const childprops = {
             ...child.props,
             ...propsToPass,
-            checked: child.props.value === selectedValue,
+            checked: child.props.value === selected,
           };
 
           return cloneElement(child, childprops);
         }
       }),
-    [children, selectedValue, groupName, helperText, onChangeHandler]
+    [children, selected, groupName, helperText, onChangeHandler]
   );
 
   return (
