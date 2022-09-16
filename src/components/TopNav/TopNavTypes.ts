@@ -36,9 +36,9 @@ export interface TopNavSkipNavProps
 
 export interface TopNavProps {
   logo: ReactElement<ImageProps | ImageLinkProps>;
-  skipNav: ReactElement<TopNavSkipNavProps>;
   buttons?: ReactElement<TopNavButtonProps>[];
   menuToggleBtn?: ReactElement<Partial<TopNavButtonProps>>;
+  skipNav?: ReactElement<TopNavSkipNavProps>;
   sticky?: boolean;
   tabs?: ReactElement<TabProps>;
   title?: string;
