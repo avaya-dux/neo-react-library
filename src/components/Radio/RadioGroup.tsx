@@ -10,7 +10,7 @@ import {
   FC,
 } from "react";
 
-import { NeoInputWrapper } from "components/NeoInputWrapper";
+import { NeoInputWrapper, Tooltip } from "components";
 
 import "./RadioGroup_shim.css";
 
@@ -74,7 +74,7 @@ export const RadioGroup = ({
         // NOTE: The below seems kind of hacky, but I was unable to find a better way to make sure
         // that the correct props are passed to child Radios even when wrapped in a Tooltip
 
-        if ((child.type as FC).displayName === "Tooltip") {
+        if (child.type === Tooltip) {
           radio = child.props.children as ReactElement;
 
           const childprops = {
