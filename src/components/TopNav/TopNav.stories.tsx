@@ -159,15 +159,21 @@ SearchExample.decorators = [
   },
 ];
 
-export const ButtonsExample = Template.bind({});
-ButtonsExample.args = {
-  logo: Logo,
-  children: (
-    <>
-      <TopNav.Button icon="info" aria-label="Info" />
+export const ButtonsExample = () => {
+  return (
+    <TopNav logo={Logo}>
+      <a className="link-btn link-btn-active" href="/whats-new">
+        Active Anchor
+      </a>
+
+      <a className="link-btn" href="/whats-new">
+        Plain Anchor
+      </a>
+
+      <TopNav.Button icon="info" aria-label="Info" badge="12" active />
       <TopNav.Button icon="settings" aria-label="Settings" />
-    </>
-  ),
+    </TopNav>
+  );
 };
 
 export const AvatarExample = Template.bind({});
