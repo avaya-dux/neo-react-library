@@ -49,7 +49,7 @@ BasicImplementation.args = {
 export const NavigationToggle = Template.bind({});
 NavigationToggle.args = {
   logo: LinkLogo,
-  menuToggleBtn: <TopNav.Button aria-label="Toggle Menu" icon="menu" />,
+  menuToggleBtn: <TopNav.IconButton aria-label="Toggle Menu" icon="menu" />,
 };
 NavigationToggle.decorators = [
   (Story, context) => {
@@ -162,16 +162,23 @@ SearchExample.decorators = [
 export const ButtonsExample = () => {
   return (
     <TopNav logo={Logo}>
-      <a className="link-btn link-btn-active" href="/whats-new">
-        Active Anchor
-      </a>
+      <TopNav.LinkButton href="/whats-new">Link</TopNav.LinkButton>
 
-      <a className="link-btn" href="/whats-new">
-        Plain Anchor
-      </a>
+      <TopNav.LinkButton href="/whats-new" active>
+        Active Link
+      </TopNav.LinkButton>
 
-      <TopNav.Button icon="info" aria-label="Info" badge="12" active />
-      <TopNav.Button icon="settings" aria-label="Settings" />
+      <TopNav.LinkButton href="/whats-new" disabled>
+        Disabled Link
+      </TopNav.LinkButton>
+
+      <TopNav.LinkButton href="/whats-new" active disabled>
+        Disabled Active Link
+      </TopNav.LinkButton>
+
+      <TopNav.IconButton icon="settings" aria-label="Settings" />
+
+      <TopNav.IconButton icon="info" aria-label="Info" badge="12" active />
     </TopNav>
   );
 };
@@ -181,8 +188,8 @@ AvatarExample.args = {
   logo: Logo,
   children: (
     <>
-      <TopNav.Button icon="info" aria-label="Info" />
-      <TopNav.Button icon="settings" aria-label="Settings" />
+      <TopNav.IconButton icon="info" aria-label="Info" active />
+      <TopNav.IconButton icon="settings" aria-label="Settings" />
 
       <TopNav.Avatar
         avatar={<Avatar initials="MD" />}

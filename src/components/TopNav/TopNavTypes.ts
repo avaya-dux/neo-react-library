@@ -17,11 +17,20 @@ export interface TopNavAvatarProps {
   dropdown?: ReactElement<MenuProps>;
 }
 
-export interface TopNavButtonProps
+export interface TopNavIconButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
+  "aria-label": string;
   active?: boolean;
   badge?: string;
+  disabled?: boolean;
   icon?: IconNamesType;
+}
+
+export interface TopNavLinkButtonProps
+  extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  href: string;
+  active?: boolean;
+  disabled?: boolean;
 }
 
 export interface TopNavSkipNavProps
@@ -33,7 +42,7 @@ export interface TopNavSkipNavProps
 export interface TopNavProps {
   logo: ReactElement<ImageProps | ImageLinkProps>;
   children?: ReactNode;
-  menuToggleBtn?: ReactElement<Partial<TopNavButtonProps>>;
+  menuToggleBtn?: ReactElement<Partial<TopNavIconButtonProps>>;
   search?: ReactElement<TextInputProps>;
   skipNav?: ReactElement<TopNavSkipNavProps>;
   sticky?: boolean;
@@ -42,7 +51,8 @@ export interface TopNavProps {
 
 export interface TopNavSubComponents {
   Avatar: React.FC<TopNavAvatarProps>;
-  Button: React.FC<TopNavButtonProps>;
+  IconButton: React.FC<TopNavIconButtonProps>;
+  LinkButton: React.FC<TopNavLinkButtonProps>;
   Search: React.FC<TextInputProps>;
   SkipNav: React.FC<TopNavSkipNavProps>;
 }

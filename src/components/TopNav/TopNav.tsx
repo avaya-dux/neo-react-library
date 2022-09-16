@@ -2,7 +2,8 @@ import clsx from "clsx";
 
 import {
   TopNavAvatar,
-  TopNavButton,
+  TopNavIconButton,
+  TopNavLinkButton,
   TopNavSearch,
   TopNavSkipNav,
 } from "./helpers";
@@ -62,6 +63,7 @@ export const TopNav = ({
 };
 TopNav.displayName = "TopNav";
 TopNav.Avatar = TopNavAvatar;
-TopNav.Button = TopNavButton;
+TopNav.IconButton = TopNavIconButton;
+TopNav.LinkButton = TopNavLinkButton;
 TopNav.Search = TopNavSearch;
 TopNav.SkipNav = TopNavSkipNav;

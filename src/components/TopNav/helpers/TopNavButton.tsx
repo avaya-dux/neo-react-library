@@ -1,25 +1,26 @@
 import clsx from "clsx";
-import { forwardRef } from "react";
+import { ButtonHTMLAttributes, forwardRef, Ref } from "react";
 
+import { Button } from "components/Button";
 import { computeBadge, handleAccessbilityError } from "utils";
 
-import { TopNavButtonProps } from "../TopNavTypes";
+import { TopNavIconButtonProps, TopNavLinkButtonProps } from "../TopNavTypes";
 
-export const TopNavButton = forwardRef(
+export const TopNavIconButton = forwardRef(
   (
     {
       active = false,
       badge,
-      children,
+      disabled = false,
       className,
       icon,
       ...rest
-    }: TopNavButtonProps,
-    ref: React.Ref<HTMLButtonElement>
+    }: TopNavIconButtonProps,
+    ref: Ref<HTMLButtonElement>
   ) => {
-    if (!rest["aria-label"] && !children) {
+    if (!rest["aria-label"]) {
       handleAccessbilityError(
-        "A Button must have descriptive text. Either as children or an aria-label."
+        "A Icon Button must have descriptive text as an aria-label."
       );
     }
 
@@ -36,11 +37,10 @@ export const TopNavButton = forwardRef(
             !!icon && `neo-icon-${icon}`,
             !!className && className
           )}
+          disabled={disabled}
           ref={ref}
           {...rest}
-        >
-          {children}
-        </button>
+        ></button>
 
         {badge && (
           <span className="neo-badge__icon" data-badge={computeBadge(badge)} />
@@ -49,4 +49,46 @@ export const TopNavButton = forwardRef(
     );
   }
 );
-TopNavButton.displayName = "TopNavButton";
+TopNavIconButton.displayName = "TopNavIconButton";
+
+export const TopNavLinkButton = forwardRef(
+  (
+    {
+      active = false,
+      className,
+      disabled = false,
+      href,
+      children,
+      ...rest
+    }: TopNavLinkButtonProps,
+    ref: Ref<HTMLAnchorElement>
+  ) => {
+    if (!rest["aria-label"] && !children) {
+      handleAccessbilityError(
+        "Descriptive text must be provided as either `children` as text, or as an aria-label."
+      );
+    }
+
+    return href && !disabled ? (
+      <a
+        className={clsx("link-btn", active && "link-btn-active", className)}
+        href={href}
+        ref={ref}
+        {...rest}
+      >
+        {children}
+      </a>
+    ) : (
+      <Button
+        className={clsx("link-btn", active && "link-btn-active", className)}
+        disabled={disabled}
+        variant="tertiary"
+        ref={ref as Ref<HTMLButtonElement>}
+        {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
+      >
+        {children}
+      </Button>
+    );
+  }
+);
+TopNavLinkButton.displayName = "TopNavLinkButton";

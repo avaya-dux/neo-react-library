@@ -8,7 +8,8 @@
   margin-left: 16px;
 }
 
-.neo-navbar a.link-btn {
+.neo-navbar a.link-btn,
+.neo-navbar button.link-btn {
   display: flex;
   align-items: center;
   color: var(--tab-default-color);
@@ -16,9 +17,10 @@
   text-decoration: none;
   padding-left: 32px;
   padding-right: 32px;
-  border-bottom: 2px solid #0000;
+  border-bottom: 2px solid transparent;
 }
-.neo-navbar a.link-btn.link-btn-active {
+.neo-navbar a.link-btn.link-btn-active,
+.neo-navbar button.link-btn.link-btn-active {
   border-bottom: 2px solid var(--tab-action-color);
   color: var(--tab-action-color);
   font-weight: 600;
