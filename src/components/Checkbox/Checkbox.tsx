@@ -20,20 +20,20 @@ interface BaseCheckboxProps
 
 type EnforcedAccessibleLabel =
   | {
-    label: string | JSX.Element;
-    "aria-label"?: string;
-    "aria-labelledby"?: string;
-  }
+      label: string | JSX.Element;
+      "aria-label"?: string;
+      "aria-labelledby"?: string;
+    }
   | {
-    label?: string | JSX.Element;
-    "aria-label": string;
-    "aria-labelledby"?: string;
-  }
+      label?: string | JSX.Element;
+      "aria-label": string;
+      "aria-labelledby"?: string;
+    }
   | {
-    label?: string | JSX.Element;
-    "aria-label"?: string;
-    "aria-labelledby": string;
-  };
+      label?: string | JSX.Element;
+      "aria-label"?: string;
+      "aria-labelledby": string;
+    };
 
 export type CheckboxProps = BaseCheckboxProps & EnforcedAccessibleLabel;
 
@@ -47,46 +47,56 @@ export type CheckboxProps = BaseCheckboxProps & EnforcedAccessibleLabel;
  */
 
 export const Checkbox = forwardRef(
-  ({
-    checked,
-    defaultChecked,
-    readOnly,
-    className,
-    id = useId(),
-    label,
-    onChange = () => null,
-    ...rest
-  }: CheckboxProps,
-    ref: React.Ref<HTMLInputElement>) => {
+  (
+    {
+      checked,
+      defaultChecked,
+      readOnly,
+      className,
+      id = useId(),
+      label,
+      onChange = () => null,
+      ...rest
+    }: CheckboxProps,
+    ref: React.Ref<HTMLInputElement>
+  ) => {
     if (!label && !rest["aria-label"] && !rest["aria-labelledby"]) {
       handleAccessbilityError(
         "Checkbox must have an have an accessible label. Please add a `label`, `aria-label`, or `aria-labelledby` prop."
       );
     }
-    const [state, setstate] = useControlled({ controlled: checked, default: defaultChecked, name: "Checkbox" })
+    const [state, setstate] = useControlled({
+      controlled: checked,
+      default: defaultChecked,
+      name: "Checkbox",
+    });
     const onChangeHandler = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
-        logger.debug("clicked", state, ref && "current" in ref && ref.current && ref.current.checked)
+        logger.debug(
+          "clicked",
+          state,
+          ref && "current" in ref && ref.current && ref.current.checked
+        );
         if (state === "mixed") {
-          setstate(true)
+          setstate(true);
         } else {
-          setstate(!state)
+          setstate(!state);
         }
         onChange(e);
       },
       [state, setstate, onChange]
-    )
+    );
 
     logger.debug({ checked, defaultChecked, state });
 
-      return (
+    return (
       <>
         <input
           ref={ref}
           type="checkbox"
           id={id}
           checked={state === "mixed" || state}
-          aria-checked={state}
+          aria-checked={state || "false"}
           className={clsx(
             "neo-check",
             readOnly && "neo-check-readonly",
@@ -103,6 +113,7 @@ export const Checkbox = forwardRef(
       */}
         <label htmlFor={id}>{label}</label>
       </>
-    )
-  });
-Checkbox.displayName = "Checkbox"
+    );
+  }
+);
+Checkbox.displayName = "Checkbox";

@@ -1,185 +1,199 @@
-import { composeStories } from "@storybook/testing-react"
-import { cleanup, render, screen } from "@testing-library/react"
-import { axe } from "jest-axe"
-import { vi } from "vitest"
+import { composeStories } from "@storybook/testing-react";
+import userEvent from "@testing-library/user-event";
+import { cleanup, render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
+import { vi } from "vitest";
 
-import { CheckboxGroup } from "."
-import * as CheckboxGroupStories from "./CheckboxGroup.stories"
-import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./helpers"
+import { UserEventKeys } from "utils";
 
-const { DefaultCheckboxGroup, InlineDefaultCheckboxGroup } = composeStories(
-  CheckboxGroupStories
-)
+import { CheckboxGroup } from ".";
+import * as CheckboxGroupStories from "./CheckboxGroup.stories";
+import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./helpers";
+
+const { DefaultCheckboxGroup, InlineDefaultCheckboxGroup } =
+  composeStories(CheckboxGroupStories);
 
 async function axeTest(renderResult) {
-  const { container } = renderResult
-  const results = await axe(container)
-  expect(results).toHaveNoViolations()
+  const { container } = renderResult;
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
 }
 
 const DefaultProps = {
   groupName: "Checkbox Group",
   checked: "Check 1",
   onChange: () => null,
-}
+};
 
 describe("CheckboxGroup", () => {
   describe("base tests", () => {
-    let renderResult
-    const defaultCheckboxes = checkboxes(true, "mixed")
+    let renderResult;
+    const defaultCheckboxes = checkboxes(true, "mixed");
     beforeEach(() => {
       // ignore tooltip position warning
-      vi.spyOn(console, "warn").mockImplementation(() => null)
+      vi.spyOn(console, "warn").mockImplementation(() => null);
 
       renderResult = render(
         <CheckboxGroup {...DefaultProps}>{defaultCheckboxes}</CheckboxGroup>
-      )
-    })
+      );
+    });
 
     afterEach(() => {
-      cleanup()
-    })
+      cleanup();
+    });
 
     it("checkbox group renders ok", () => {
-      const { getByTestId } = renderResult
-      const rootElement = getByTestId("CheckboxGroup-root")
-      expect(rootElement).toBeTruthy()
-    })
+      const { getByTestId } = renderResult;
+      const rootElement = getByTestId("CheckboxGroup-root");
+      expect(rootElement).toBeTruthy();
+    });
 
     it("checkbox renders ok", () => {
-      const { getByLabelText } = renderResult
-      const rootElement = getByLabelText(defaultCheckboxes[0].props.label)
-      expect(rootElement).toBeTruthy()
-    })
+      const { getByLabelText } = renderResult;
+      const rootElement = getByLabelText(defaultCheckboxes[0].props.label);
+      expect(rootElement).toBeTruthy();
+    });
 
     it("checkbox renders with correct class name", () => {
-      const { getByLabelText } = renderResult
-      const rootElement = getByLabelText(defaultCheckboxes[4].props.label)
+      const { getByLabelText } = renderResult;
+      const rootElement = getByLabelText(defaultCheckboxes[4].props.label);
       expect(rootElement).toHaveAttribute(
         "class",
         "neo-check neo-check--indeterminate"
-      )
-    })
+      );
+    });
 
     it("has correct value", () => {
-      const { getByLabelText } = renderResult
+      const { getByLabelText } = renderResult;
       defaultCheckboxes.forEach((checkboxObject) => {
-        const check = getByLabelText(checkboxObject.props.label)
-        expect(check).toHaveAttribute("value", checkboxObject.value)
-      })
-    })
+        const check = getByLabelText(checkboxObject.props.label);
+        expect(check).toHaveAttribute("value", checkboxObject.value);
+      });
+    });
 
     it("has a correct id when passed", () => {
-      const { getByLabelText } = renderResult
-      const check = getByLabelText(defaultCheckboxes[3].props.label)
-      expect(check).toHaveAttribute("id", defaultCheckboxes[3].props.id)
-    })
+      const { getByLabelText } = renderResult;
+      const check = getByLabelText(defaultCheckboxes[3].props.label);
+      expect(check).toHaveAttribute("id", defaultCheckboxes[3].props.id);
+    });
 
     it("passes basic axe compliance", async () => {
-      await axeTest(renderResult)
-    })
-  })
+      await axeTest(renderResult);
+    });
+  });
 
   describe("disabled checkbox group", () => {
-    let renderResult
+    let renderResult;
     beforeEach(() => {
       // ignore tooltip position warning
-      vi.spyOn(console, "warn").mockImplementation(() => null)
+      vi.spyOn(console, "warn").mockImplementation(() => null);
 
       renderResult = render(
         <CheckboxGroup {...DefaultProps}>{disabledCheckboxes}</CheckboxGroup>
-      )
-    })
+      );
+    });
 
     afterEach(() => {
-      cleanup()
-    })
+      cleanup();
+    });
 
     it("renders as disabled", () => {
-      const { getByLabelText } = renderResult
+      const { getByLabelText } = renderResult;
       disabledCheckboxes.forEach((checkboxObject) => {
-        expect(checkboxObject.props.disabled).toBeTruthy()
-        const check = getByLabelText(checkboxObject.props.label)
-        expect(check).toHaveAttribute("disabled")
-      })
-    })
+        expect(checkboxObject.props.disabled).toBeTruthy();
+        const check = getByLabelText(checkboxObject.props.label);
+        expect(check).toHaveAttribute("disabled");
+      });
+    });
 
     it("passes basic axe compliance", async () => {
-      await axeTest(renderResult)
-    })
-  })
+      await axeTest(renderResult);
+    });
+  });
 
   describe("readonly checkbox group", () => {
-    let renderResult
+    let renderResult;
     beforeEach(() => {
       // ignore tooltip position warning
-      vi.spyOn(console, "warn").mockImplementation(() => null)
+      vi.spyOn(console, "warn").mockImplementation(() => null);
 
       renderResult = render(
         <CheckboxGroup {...DefaultProps}>{readonlyCheckboxes}</CheckboxGroup>
-      )
-    })
+      );
+    });
 
     afterEach(() => {
-      cleanup()
-    })
+      cleanup();
+    });
 
     it("renders as readonly", () => {
-      const checkboxes = screen.getAllByLabelText(/readonly/)
-      expect(checkboxes).toBeTruthy()
-      expect(checkboxes.length).toEqual(5)
-    })
+      const checkboxes = screen.getAllByLabelText(/readonly/);
+      expect(checkboxes).toBeTruthy();
+      expect(checkboxes.length).toEqual(5);
+    });
 
     it("passes basic axe compliance", async () => {
-      await axeTest(renderResult)
-    })
-  })
+      await axeTest(renderResult);
+    });
+  });
 
   describe("storybook tests", () => {
     describe("DefaultCheckboxGroup", () => {
-      let renderResult
+      const user = userEvent.setup();
+
+      let renderResult;
 
       beforeEach(() => {
-        renderResult = render(<DefaultCheckboxGroup />)
-      })
+        renderResult = render(<DefaultCheckboxGroup />);
+      });
 
       afterEach(() => {
-        cleanup()
-      })
+        cleanup();
+      });
 
       it("should render ok", () => {
-        const { container } = renderResult
-        expect(container).not.toBe(null)
-      })
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
 
       it("passes basic axe compliance", async () => {
-        const { container } = renderResult
-        const results = await axe(container)
-        expect(results).toHaveNoViolations()
-      })
-    })
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it("form data are correct", async () => {
+        const checkedOutput = screen.getByLabelText("checked values:");
+        expect(checkedOutput.value).toEqual("");
+
+        const submit = screen.getByRole("button");
+        expect(submit).toBeTruthy();
+        await user.click(submit);
+        expect(checkedOutput.value).toEqual("false, true, true, true, true");
+      });
+    });
 
     describe("InlineDefaultCheckboxGroup", () => {
-      let renderResult
+      let renderResult;
 
       beforeEach(() => {
-        renderResult = render(<InlineDefaultCheckboxGroup />)
-      })
+        renderResult = render(<InlineDefaultCheckboxGroup />);
+      });
 
       afterEach(() => {
-        cleanup()
-      })
+        cleanup();
+      });
 
       it("should render ok", () => {
-        const { container } = renderResult
-        expect(container).not.toBe(null)
-      })
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
 
       it("passes basic axe compliance", async () => {
-        const { container } = renderResult
-        const results = await axe(container)
-        expect(results).toHaveNoViolations()
-      })
-    })
-  })
-})
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+  });
+});

@@ -50,34 +50,33 @@ export const CheckboxGroup = ({
   required,
   onChange,
 }: CheckboxGroupProps) => {
-
   const onChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      logger.debug(e.target.value)
+      logger.debug(e.target.value);
       if (onChange) {
         onChange(e);
       }
     },
-    [onChange],
-  )
+    [onChange]
+  );
 
   const computeCheckboxesJsx = () => {
     return (
       <>
         {children
           ? Children.map(children, (child, index) => {
-            const {label, ...rest} = child.props as CheckboxProps
-            return (
-              <Checkbox
-                aria-describedby={helperText}
-                key={index}
-                label={label || ""}
-                name={groupName}
-                onChange={onChangeHandler}
-                {...rest}
-              />
-            );
-          })
+              const { label, ...rest } = child.props as CheckboxProps;
+              return (
+                <Checkbox
+                  aria-describedby={helperText}
+                  key={index}
+                  label={label || ""}
+                  name={groupName}
+                  onChange={onChangeHandler}
+                  {...rest}
+                />
+              );
+            })
           : null}
       </>
     );
