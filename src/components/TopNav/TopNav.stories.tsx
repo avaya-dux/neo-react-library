@@ -189,12 +189,12 @@ AvatarExample.args = {
               </MenuButton>
             }
           >
-            <MenuItem key={"1"}>Item1</MenuItem>
-            <SubMenu key={"2"} menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
-              <MenuItem key={"2-1"}>Sub Item1</MenuItem>
-              <MenuItem key={"2-2"}>Sub Item2</MenuItem>
+            <MenuItem>Item1</MenuItem>
+            <SubMenu menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
+              <MenuItem>Sub Item1</MenuItem>
+              <MenuItem>Sub Item2</MenuItem>
             </SubMenu>
-            <MenuItem key={"3"}>Item3</MenuItem>
+            <MenuItem>Item3</MenuItem>
           </Menu>
         }
       />
@@ -208,27 +208,22 @@ export const TabsExample = () => {
 
   return (
     <>
-      <TopNav
-        logo={Logo}
-        tabs={
-          <Tabs onTabPanelChange={setActiveTabPanelIndex}>
-            <TabList>
-              <Tab id="tab1" onClick={() => alert("Clicked")}>
-                Tab1
-              </Tab>
-              <Tab id="tab2">Tab2</Tab>
-              <Tab id="tab3">Tab3</Tab>
-              <TabLink id="tab4" href="http://kagi.com">
-                Tab4
-              </TabLink>
-            </TabList>
-          </Tabs>
-        }
-      />
+      <TopNav logo={Logo}>
+        <Tabs onTabPanelChange={setActiveTabPanelIndex}>
+          <TabList>
+            <Tab id="tab1">Tab1</Tab>
+            <Tab id="tab2">Tab2</Tab>
+            <Tab id="tab3">Tab3</Tab>
+            <TabLink id="tab4" href="http://kagi.com">
+              Tab4
+            </TabLink>
+          </TabList>
+        </Tabs>
+      </TopNav>
 
-      <h4 style={{ marginTop: "30px" }}>
+      <p style={{ marginTop: "30px" }}>
         {contentToToggle[activeTabPanelIndex]}
-      </h4>
+      </p>
     </>
   );
 };

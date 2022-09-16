@@ -38,7 +38,6 @@ export const TopNav = ({
   search,
   skipNav,
   sticky,
-  tabs,
   title,
 }: TopNavProps) => {
   return (
@@ -54,8 +53,6 @@ export const TopNav = ({
       </div>
 
       <div className="neo-nav">
-        {tabs}
-
         {children}
 
         {search}

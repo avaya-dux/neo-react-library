@@ -9,7 +9,6 @@ import { AvatarProps } from "components/Avatar";
 import { ImageProps } from "components/Image";
 import { ImageLinkProps } from "components/ImageLink";
 import { MenuProps } from "components/Menu";
-import { TabProps } from "components/Tab";
 import { TextInputProps } from "components/TextInput";
 import { IconNamesType } from "utils";
 
@@ -40,7 +39,6 @@ export interface TopNavProps {
   search?: ReactElement<TextInputProps>;
   skipNav?: ReactElement<TopNavSkipNavProps>;
   sticky?: boolean;
-  tabs?: ReactElement<TabProps>;
   title?: string;
 }
 
