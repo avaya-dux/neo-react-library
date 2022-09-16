@@ -25,12 +25,9 @@ const ControlledTemplate: Story<CheckboxProps> = ({
   const ref = useRef(null);
   const [checked, setchecked] = useState<"mixed" | boolean>(checkedProp);
   const onChange = useCallback(() => {
-    console.log(checked);
     if (checked === "mixed") {
-      console.log("set to true");
       setchecked(true);
     } else {
-      console.log("toggle", checked);
       setchecked((prev) => !prev);
     }
   }, [checked, setchecked]);
