@@ -3,7 +3,8 @@ import { axe } from "jest-axe";
 import { composeStories } from "@storybook/testing-react";
 import * as RadioGroupStories from "./RadioGroup.stories";
 
-import { RadioGroup, Radio } from ".";
+import { RadioGroup } from "./RadioGroup";
+import { Radio } from "./Radio";
 
 import userEvent from "@testing-library/user-event";
 
