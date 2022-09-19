@@ -8,6 +8,23 @@ export default {
   component: Checkbox,
 } as Meta<CheckboxProps>;
 
+export const VoiceOverTest = () => (
+  <form>
+    <fieldset>
+      <legend>Plain checkbox</legend>
+      <p>VoiceOver will announce [state], [label], checkbox when there is a state change.</p>
+      <input type="checkbox" id="topping1" />
+      <label htmlFor="topping1">Announcing</label>
+    </fieldset>
+    <fieldset>
+      <legend>Neo checkbox</legend>
+      <p>VoiceOver only repeats [label] in state change.</p>
+      <input type="checkbox" id="topping2" className="neo-check" />
+      <label htmlFor="topping2">Not Announcing</label>
+    </fieldset>
+  </form>
+  )
+
 export const Default = () => {
   return <Checkbox label="example label" name="example" value="1" />;
 };
