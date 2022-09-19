@@ -10,11 +10,14 @@
 - name prop definitions well
 
 :heavy_check_mark:
+
 ```
 interface AwesomeComponentProps { /* ... */ }
 export const AwesomeComponent = ({ /* ... */ }: AwesomeComponentProps) => { /* ... */ }
 ```
+
 :x:
+
 ```
 interface Props { /* ... */ }
 export const AwesomeComponent = ({ /* ... */ }: Props) => { /* ... */ }
@@ -23,6 +26,7 @@ export const AwesomeComponent = ({ /* ... */ }: Props) => { /* ... */ }
 - deconstruct the props
 
 :heavy_check_mark:
+
 ```
 interface AwesomeComponentProps {
   goodname: string;
@@ -34,7 +38,9 @@ export const AwesomeComponent = ({
   ...rest
 }: AwesomeComponentProps) => { /* ... */ }
 ```
+
 :x:
+
 ```
 interface AwesomeComponentProps {
   goodname: string;
@@ -45,3 +51,25 @@ export const AwesomeComponent = (props: AwesomeComponentProps) => { /* ... */ }
 
 - **do** export your named component (`export const MyComponent = () => {}`), _never_ `export default`
 - FOLLOW THE [ACCESSIBILITY GUIDELINES](./accessibility-guidelines.md)
+
+## naming conventions
+
+> When creating a component that _must_ be used with specific sub-components, use `Parent` w/ `Parent.Child` syntax
+
+:heavy_check_mark:
+
+```javascript
+<TopNav>
+  <TopNav.LinkButton>I am a Link</TopNav.LinkButton>
+  <TopNav.IconButton>I am a Button</TopNav.IconButton>
+</TopNav>
+```
+
+:x:
+
+```javascript
+<TopNav>
+  <LinkButton>I am a Link</LinkButton>
+  <IconButton>I am a Button</IconButton>
+</TopNav>
+```
