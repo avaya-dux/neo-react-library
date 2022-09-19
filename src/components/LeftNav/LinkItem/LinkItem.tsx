@@ -17,6 +17,15 @@ import { Keys } from "utils";
 import { LeftNavContext } from "../LeftNavContext";
 import { LinkItemProps } from "../LeftNavTypes";
 
+/**
+ * Is meant to be used as a link that is nested under a `NavCategory`.
+ *
+ * @example
+ * <LeftNav.NavCategory icon="audio-on" label="Collapsed">
+ *  <LeftNav.LinkItem href="#first">First Item</LeftNav.LinkItem>
+ *  <LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
+ * </LeftNav.NavCategory>
+ */
 export const LinkItem = ({
   active = false,
   children,

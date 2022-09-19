@@ -14,6 +14,19 @@ import { TopLinkItemProps } from "../LeftNavTypes";
 
 import "./TopLinkItem_shim.css";
 
+/**
+ * Is meant to be used as a top level link. Eg, one that is not nested.
+ *
+ * @example
+ * <LeftNav
+    aria-label="Main Navigation"
+    onNavigate={handleClick}
+    currentUrl="#active"
+  >
+    <LeftNav.TopLinkItem label="Active by default" href="#active" />
+    <LeftNav.TopLinkItem label="Link 2" href="#test2" />
+  </LeftNav>
+ */
 export const TopLinkItem = ({
   disabled,
   href,

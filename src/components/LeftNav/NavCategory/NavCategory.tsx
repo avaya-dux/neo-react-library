@@ -42,13 +42,11 @@ function getItemClassNames(
  * Is meant to wrap an array of `LinkItem`.
  *
  * @example
- * <NavCategory>
- *   <LinkItem> First Item </LinkItem>
- *   <LinkItem> Second Item </LinkItem>
- *   <LinkItem> Third Item </LinkItem>
- * </NavCategory>
-
-
+ * <LeftNav.NavCategory icon="audio-on" label="Collapsed">
+    <LeftNav.LinkItem href="#first">First Item</LeftNav.LinkItem>
+    <LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
+  </LeftNav.NavCategory>
+ *
  * @see https://design.avayacloud.com/components/web/list-web
  */
 export const NavCategory = ({

@@ -23,7 +23,7 @@ import { TopLinkItem } from "./TopLinkItem";
       <LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
     </LeftNav.NavCategory>
     <LeftNav.NavCategory expanded icon="call" label="Active">
-      <LeftNav.LinkItem href="#item1"> Item 1 </LeftNav.LinkItem>
+      <LeftNav.LinkItem href="#item1">Item 1</LeftNav.LinkItem>
       <LeftNav.LinkItem href="#item2" active>
         Active Item 2
       </LeftNav.LinkItem>
