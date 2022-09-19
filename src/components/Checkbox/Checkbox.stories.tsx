@@ -23,14 +23,14 @@ const ControlledTemplate: Story<CheckboxProps> = ({
   ...rest
 }: CheckboxProps) => {
   const ref = useRef(null);
-  const [checked, setchecked] = useState<"mixed" | boolean>(checkedProp);
+  const [checked, setChecked] = useState<"mixed" | boolean>(checkedProp);
   const onChange = useCallback(() => {
     if (checked === "mixed") {
-      setchecked(true);
+      setChecked(true);
     } else {
-      setchecked((prev) => !prev);
+      setChecked((prev) => !prev);
     }
-  }, [checked, setchecked]);
+  }, [checked, setChecked]);
   const allProps = { ...rest, onChange, checked };
   return <Checkbox ref={ref} {...allProps} />;
 };

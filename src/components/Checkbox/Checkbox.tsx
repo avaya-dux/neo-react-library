@@ -65,7 +65,7 @@ export const Checkbox = forwardRef(
         "Checkbox must have an have an accessible label. Please add a `label`, `aria-label`, or `aria-labelledby` prop."
       );
     }
-    const [state, setstate] = useControlled({
+    const [state, setState] = useControlled({
       controlled: checked,
       default: defaultChecked,
       name: "Checkbox",
@@ -78,13 +78,13 @@ export const Checkbox = forwardRef(
           ref && "current" in ref && ref.current && ref.current.checked
         );
         if (state === "mixed") {
-          setstate(true);
+          setState(true);
         } else {
-          setstate(!state);
+          setState(!state);
         }
         onChange(e);
       },
-      [state, setstate, onChange]
+      [state, setState, onChange]
     );
 
     logger.debug({ checked, defaultChecked, state });
