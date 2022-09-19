@@ -10,18 +10,22 @@ import {
 import { handleAccessbilityError } from "utils";
 
 /**
- * The Image component displays and image while also providing a
+ * The Image component displays an image while also providing a
  * fallback that is used when the image is loading or fails to load.
+ * All non-decorative images must have alt text.
  *
  * @example
+ * <Image src={brandingImage} isDecorativeOrBranding />
  * <Image alt="test image" src={localImage} />
  * <Image alt="test image" width={200} height={300} src={remoteImage} fallback="https://via.placeholder.com/200x300" />
  *
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-image--default-image
  */
 export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
-  fallback?: ReactElement | string;
   src: string;
+
+  fallback?: ReactElement | string;
+  isDecorativeOrBranding?: boolean;
   thumbnail?: boolean;
 }
 
@@ -29,6 +33,7 @@ export const Image = ({
   alt = "",
   className,
   fallback,
+  isDecorativeOrBranding = false,
   onError,
   onLoad,
   src,
@@ -36,7 +41,7 @@ export const Image = ({
   thumbnail = false,
   ...rest
 }: ImageProps) => {
-  if (!alt) {
+  if (!alt && !isDecorativeOrBranding) {
     handleAccessbilityError(
       `Alternative text should be added to the image if it conveys meaning and is not displayed elsewhere on the page.
         Decorative and branding images do not need alt text.`
