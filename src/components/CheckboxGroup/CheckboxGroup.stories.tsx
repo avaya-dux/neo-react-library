@@ -21,27 +21,27 @@ export const Default = () => {
 const DefaultTemplate: Story<CheckboxGroupProps> = (
   args: CheckboxGroupProps
 ) => {
-  const [checked4, setchecked4] = useState<CheckboxProps["checked"]>(true);
-  const [checked5, setchecked5] = useState<CheckboxProps["checked"]>("mixed");
+  const [checked4, setChecked4] = useState<CheckboxProps["checked"]>(true);
+  const [checked5, setChecked5] = useState<CheckboxProps["checked"]>("mixed");
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const checkboxId = e.target.id;
       console.log(checkboxId);
       if (checkboxId === "check4") {
-        setchecked4(!checked4);
+        setChecked4(!checked4);
       } else if (checkboxId === "check5") {
         if (checked5 === "mixed") {
-          setchecked5(true);
+          setChecked5(true);
         } else {
-          setchecked5(!checked5);
+          setChecked5(!checked5);
         }
       }
     },
-    [checked4, checked5, setchecked4, setchecked5]
+    [checked4, checked5, setChecked4, setChecked5]
   );
-  const [checkedValues, setcheckedValues] = useState("");
-  const [ariaCheckedValues, setariaCheckedValues] = useState("");
-  const [nameValues, setnameValues] = useState("");
+  const [checkedValues, setCheckedValues] = useState("");
+  const [ariaCheckedValues, setAriaCheckedValues] = useState("");
+  const [nameValues, setNameValues] = useState("");
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const cv = [];
@@ -53,9 +53,9 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
       av.push(elm.ariaChecked);
       nv.push(elm.name === args.groupName);
     }
-    setcheckedValues(cv.join(", "));
-    setariaCheckedValues(av.join(", "));
-    setnameValues(nv.join(", "))
+    setCheckedValues(cv.join(", "));
+    setAriaCheckedValues(av.join(", "));
+    setNameValues(nv.join(", "))
   };
   return (
     <>
