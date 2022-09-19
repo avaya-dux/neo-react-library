@@ -39,6 +39,20 @@ export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
   value?: number | string;
 }
 
+/**
+ * Text fields give users a way to enter and edit information.
+ * They’re used in forms, modal dialogs, tables, and other
+ * surfaces where text input is required.
+ *
+ * @example
+ * <TextInput label="Just a Label" />
+ * <TextInput label="Password" type="password" />
+ * <TextInput label="Email" type="email" />
+ * <TextInput label="Search" startIcon="search" clearable={true} />
+ *
+ * @see https://design.avayacloud.com/components/web/input-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-text-input
+ */
 export const TextInput = ({
   ariaLabelPasswordHide = "Hide Password",
   ariaLabelPasswordShow = "Show Password",
@@ -97,8 +111,9 @@ export const TextInput = ({
       {readOnly ? (
         <InternalTextInputElement
           disabled={disabled}
-          inputRef={inputRef}
+          hasHelperText={!!helperText}
           id={id}
+          inputRef={inputRef}
           placeholder={placeholder}
           readOnly={readOnly}
           value={value}
@@ -126,12 +141,13 @@ export const TextInput = ({
 
               <InternalTextInputElement
                 disabled={disabled}
-                inputRef={inputRef}
+                hasHelperText={!!helperText}
                 id={id}
+                inputRef={inputRef}
                 placeholder={placeholder}
                 readOnly={readOnly}
-                value={value}
                 type={inputType}
+                value={value}
                 {...rest}
               />
 
@@ -180,13 +196,14 @@ export const TextInput = ({
 };
 
 export const InternalTextInputElement = ({
-  readOnly,
   disabled,
+  hasHelperText,
   id,
-  placeholder,
   inputRef,
-  value,
+  placeholder,
+  readOnly,
   type,
+  value,
   ...rest
 }: Pick<
   TextInputProps,
@@ -194,9 +211,10 @@ export const InternalTextInputElement = ({
 > & {
   id: string;
   inputRef: RefObject<HTMLInputElement>;
+  hasHelperText: boolean;
 }) => (
   <input
-    aria-describedby={`${id}-description`}
+    aria-describedby={hasHelperText ? `${id}-description` : undefined}
     className={clsx("neo-input", readOnly && "neo-input-readonly")}
     disabled={disabled}
     id={id}

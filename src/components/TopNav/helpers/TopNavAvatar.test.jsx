@@ -3,13 +3,13 @@ import { axe } from "jest-axe";
 
 import { Avatar, Menu, MenuItem } from "components";
 
-import { NavbarAvatar } from "./NavbarAvatar";
+import { TopNavAvatar } from "./";
 
-describe("NavbarAvatar", () => {
+describe("TopNavAvatar", () => {
   describe("Avatar without Dropdown tests", () => {
     let renderResult;
     beforeEach(() => {
-      renderResult = render(<NavbarAvatar avatar={<Avatar initials="MD" />} />);
+      renderResult = render(<TopNavAvatar avatar={<Avatar initials="MD" />} />);
     });
 
     it("renders without exploding", () => {
@@ -40,7 +40,7 @@ describe("NavbarAvatar", () => {
     );
     beforeEach(() => {
       renderResult = render(
-        <NavbarAvatar
+        <TopNavAvatar
           avatar={<Avatar initials="MD" />}
           dropdown={dropdownItems}
         />

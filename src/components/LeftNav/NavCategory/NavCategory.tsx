@@ -23,7 +23,7 @@ import { NavCategoryProps } from "../LeftNavTypes";
 
 const LEFTNAV_CATEGORY_STYLE = "neo-leftnav__main";
 
-export function getNavBarClassNames(
+function getItemClassNames(
   expanded: boolean,
   active: boolean,
   disabled: boolean
@@ -79,7 +79,7 @@ export const NavCategory = ({
 
   useEffect(() => {
     const active = childIsActive;
-    const itemStyle = getNavBarClassNames(isExpanded, active, disabled);
+    const itemStyle = getItemClassNames(isExpanded, active, disabled);
     setNavItemClass(itemStyle);
   }, [isExpanded, isActive, disabled, childIsActive]);
 

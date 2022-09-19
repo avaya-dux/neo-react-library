@@ -17,16 +17,21 @@ import { TopLinkItem } from "./TopLinkItem";
  * This is the main Left Navigation outer container that contains all other subComponents
  *
  * @example
- * <LeftNav>
-    <LeftNav.NavCategory>
-      <LeftNav.LinkItem> First Item </LeftNav.LinkItem>
-      <LeftNav.LinkItem> Second Item </LeftNav.LinkItem>
-      <LeftNav.LinkItem> Third Item </LeftNav.LinkItem>
+ * <LeftNav aria-label="Collapsible Navigation Menu">
+    <LeftNav.NavCategory icon="audio-on" label="Collapsed">
+      <LeftNav.LinkItem href="#first">First Item</LeftNav.LinkItem>
+      <LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
     </LeftNav.NavCategory>
-    <LeftNav.TopLinkItem icon="call"/>
-    <LeftNav.NavCategory>
-      <LeftNav.LinkItem active> First Item </LeftNav.LinkItem>
-      <LeftNav.LinkItem> Second Item </LeftNav.LinkItem>
+    <LeftNav.NavCategory expanded icon="call" label="Active">
+      <LeftNav.LinkItem href="#item1"> Item 1 </LeftNav.LinkItem>
+      <LeftNav.LinkItem href="#item2" active>
+        Active Item 2
+      </LeftNav.LinkItem>
+      <LeftNav.LinkItem href="#item3"> Item 3</LeftNav.LinkItem>
+    </LeftNav.NavCategory>
+    <LeftNav.NavCategory disabled icon="available" label="Disabled">
+      <LeftNav.LinkItem href="#disabled1">First Item</LeftNav.LinkItem>
+      <LeftNav.LinkItem href="#disabled2">Second Item</LeftNav.LinkItem>
     </LeftNav.NavCategory>
   </LeftNav>
 

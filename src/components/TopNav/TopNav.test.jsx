@@ -1,23 +1,26 @@
 import { composeStories } from "@storybook/testing-react";
-import { fireEvent, render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 
 import { Image } from "components/Image";
 
-import { Navbar } from ".";
-import * as NavbarStories from "./Navbar.stories";
+import { TopNav } from ".";
+import * as TopNavStories from "./TopNav.stories";
 
 const {
-  NavbarWithNavigationToggle,
-  NavbarWithTitle,
-  NavbarWithNavButtons,
-  NavbarWithAvatarAndDropdown,
-  StickyNavbar,
-  NavbarWithTabs,
-  NavbarWithAgentCard,
-} = composeStories(NavbarStories);
+  AgentCardExample,
+  AvatarExample,
+  NavigationToggle,
+  SearchExample,
+  StickyTopNav,
+  TabsExample,
+  TitleExample,
+} = composeStories(TopNavStories);
 
-describe("Navbar", () => {
+describe("TopNav", () => {
+  const user = userEvent.setup();
+
   describe("basic unit tests", () => {
     let renderResult;
     beforeEach(() => {
@@ -27,8 +30,13 @@ describe("Navbar", () => {
           isDecorativeOrBranding
         />
       );
+      const skipNav = (
+        <TopNav.SkipNav href="#main-content">
+          Skip to main content
+        </TopNav.SkipNav>
+      );
 
-      renderResult = render(<Navbar logo={logo} />);
+      renderResult = render(<TopNav logo={logo} skipNav={skipNav} />);
     });
 
     it("renders without exploding", () => {
@@ -48,102 +56,101 @@ describe("Navbar", () => {
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
+
+    it("'Skip Nav' is the first element to be hit when 'tab' is pressed", async () => {
+      const skipNav = screen.getByRole("link");
+      expect(skipNav).toBeDefined();
+      expect(skipNav).not.toHaveFocus();
+
+      await user.tab();
+      expect(skipNav).toHaveFocus();
+    });
+
+    // TODO: `.isVisible` is not working as expected, should add this test when possible
+    // it("should not show the 'Skip Nav' unless tabbed to", async () => {});
   });
 
   describe("storybook tests", () => {
-    describe("Sticky Navbar", () => {
+    describe("Sticky TopNav", () => {
       it("has the correct class name with sticky prop passed", () => {
-        const { getByRole } = render(<StickyNavbar />);
-        const navBarParent = getByRole("navigation");
-        expect(navBarParent).toHaveClass("neo-navbar--sticky");
+        render(<StickyTopNav />);
+        expect(screen.getByRole("navigation")).toHaveClass(
+          "neo-navbar--sticky"
+        );
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<StickyNavbar />);
+        const { container } = render(<StickyTopNav />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With NavButtons", () => {
-      it("toggles active states correctly", () => {
-        const { getAllByRole } = render(<NavbarWithNavButtons />);
-        const buttonElements = getAllByRole("button");
-        fireEvent.click(buttonElements[0]);
-        expect(buttonElements[0].closest("div")).toHaveClass(
-          "neo-badge__navbutton--active"
-        );
-        fireEvent.click(buttonElements[1]);
-        expect(buttonElements[0].closest("div")).not.toHaveClass(
-          "neo-badge__navbutton--active"
-        );
-      });
-      it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithNavButtons />);
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
-
-    describe("Navbar With Title", () => {
+    describe("TopNav With Title", () => {
       it("renders text passed as title prop", () => {
-        const { getByText } = render(<NavbarWithTitle />);
+        const { getByText } = render(<TitleExample />);
         const titleElement = getByText("Product Name");
         expect(titleElement).toBeTruthy();
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithTitle />);
+        const { container } = render(<TitleExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With Navigation Toggle", () => {
-      // BUG: is throwing: "Warning: Received `true` for a non-boolean attribute `active`."
-      it("correctly executes button onClick handler when passed as props", () => {
-        const { getByRole, getAllByRole } = render(
-          <NavbarWithNavigationToggle />
-        );
+    describe("TopNav With Navigation Toggle", () => {
+      it("correctly executes button onClick handler when passed as props", async () => {
+        const { getByRole, getAllByRole } = render(<NavigationToggle />);
         const navElementsBeforeToggle = getAllByRole("navigation");
         expect(navElementsBeforeToggle).toHaveLength(1);
         const leftNavToggleButton = getByRole("button");
-        fireEvent.click(leftNavToggleButton);
+        await user.click(leftNavToggleButton);
         const navElementsAfterToggle = getAllByRole("navigation");
         expect(navElementsAfterToggle).toHaveLength(2);
       });
+
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithNavigationToggle />);
+        const { container } = render(<NavigationToggle />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With Avatar and Dropdown", () => {
-      it("adds appropriate class to toggle Dropdown when clicked", () => {
-        const { getByRole } = render(<NavbarWithAvatarAndDropdown />);
+    describe("TopNav With Avatar and Dropdown", () => {
+      it("adds appropriate class to toggle Dropdown when clicked", async () => {
+        const { getByRole } = render(<AvatarExample />);
         const avatar = getByRole("figure");
         const avatarDropdown = getByRole("figure").closest("div");
         expect(avatarDropdown).not.toHaveClass("neo-dropdown--active");
-        fireEvent.click(avatar);
+        await user.click(avatar);
         expect(avatarDropdown).toHaveClass("neo-dropdown--active");
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithAvatarAndDropdown />);
+        const { container } = render(<AvatarExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With Tabs", () => {
+    describe("TopNav With Tabs", () => {
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithTabs />);
+        const { container } = render(<TabsExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
-    describe("Navbar With Agent Card", () => {
+    describe("TopNav With Agent Card", () => {
       it("passes basic axe compliance", async () => {
-        const { container } = render(<NavbarWithAgentCard />);
+        const { container } = render(<AgentCardExample />);
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("SearchExample", () => {
+      it("passes basic axe compliance", async () => {
+        const { container } = render(<SearchExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
