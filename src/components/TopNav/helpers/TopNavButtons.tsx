@@ -6,6 +6,17 @@ import { computeBadge, handleAccessbilityError } from "utils";
 
 import { TopNavIconButtonProps, TopNavLinkButtonProps } from "../TopNavTypes";
 
+/**
+ * Is meant to be used as a button that is nested under a `TopNav`.
+ *
+ * @example
+ * <TopNav>
+ *   <TopNav.IconButton icon="settings" aria-label="Settings" badge="12" />
+ *   <TopNav.IconButton icon="settings" aria-label="Settings" active />
+ * </TopNav>
+ *
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-top-navigation--buttons-example
+ */
 export const TopNavIconButton = forwardRef(
   (
     {
@@ -53,6 +64,17 @@ export const TopNavIconButton = forwardRef(
 );
 TopNavIconButton.displayName = "TopNavIconButton";
 
+/**
+ * Is meant to be used as a button that is nested under a `TopNav`.
+ *
+ * @example
+ * <TopNav>
+ *  <TopNav.LinkButton href="#first">First Item</TopNav.LinkButton>
+ *  <TopNav.LinkButton href="#second" active>Second Item</TopNav.LinkButton>
+ * </TopNav>
+ *
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-top-navigation--buttons-example
+ */
 export const TopNavLinkButton = forwardRef(
   (
     {
