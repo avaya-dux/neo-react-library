@@ -41,7 +41,7 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
   );
   const [checkedValues, setcheckedValues] = useState("");
   const [ariaCheckedValues, setariaCheckedValues] = useState("");
-  const [nameCount, setnameCount] = useState(0);
+  const [nameValues, setnameValues] = useState("");
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const cv = [];
@@ -51,11 +51,11 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
       const elm = e.currentTarget.elements.item(i) as HTMLInputElement;
       cv.push(elm.checked);
       av.push(elm.ariaChecked);
-      nv.push(elm.name === args.groupName ? 1 : 0);
+      nv.push(elm.name === args.groupName);
     }
     setcheckedValues(cv.join(", "));
     setariaCheckedValues(av.join(", "));
-    setnameCount(nv.reduce((sum, current) => (sum += current)));
+    setnameValues(nv.join(", "))
   };
   return (
     <>
@@ -79,8 +79,8 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
       />
       <TextArea
         id="nameOutput"
-        label={`"${args.groupName}" occurence:`}
-        value={nameCount}
+        label="name is set correctly:"
+        value={nameValues}
         readOnly
       />
     </>
