@@ -70,6 +70,7 @@ export const RadioGroup = ({
           const childprops = {
             ...radio.props,
             ...propsToPass,
+            disabled: disabled ? disabled : radio.props.disabled,
             checked: radio.props.value === selected,
           };
 
@@ -80,6 +81,7 @@ export const RadioGroup = ({
           const childprops = {
             ...child.props,
             ...propsToPass,
+            disabled: disabled ? disabled : child.props.disabled,
             checked: child.props.value === selected,
           };
 
