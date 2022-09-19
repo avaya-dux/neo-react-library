@@ -15,7 +15,6 @@ import {
   TabLink,
   TabList,
   Tabs,
-  TextInput,
 } from "components";
 
 import { TopNav, TopNavProps } from ".";
@@ -36,38 +35,7 @@ const LinkLogo = (
   />
 );
 
-const Search = (
-  <TextInput
-    clearable={true}
-    disabled={false}
-    placeholder="Search"
-    startIcon="search"
-    aria-label="search"
-  />
-);
-
-const TopNavAvatar = (
-  <TopNav.Avatar
-    avatar={<Avatar initials="MD" />}
-    dropdown={
-      <Menu
-        itemAlignment="right"
-        menuRootElement={
-          <MenuButton onClick={() => console.log("Functional Menu opened")}>
-            Functional Menu
-          </MenuButton>
-        }
-      >
-        <MenuItem key={"1"}>Item1</MenuItem>
-        <SubMenu key={"2"} menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
-          <MenuItem key={"2-1"}>Sub Item1</MenuItem>
-          <MenuItem key={"2-2"}>Sub Item2</MenuItem>
-        </SubMenu>
-        <MenuItem key={"3"}>Item3</MenuItem>
-      </Menu>
-    }
-  />
-);
+const TopNavSearch = <TopNav.Search />;
 
 const Template: Story<TopNavProps> = (props: TopNavProps) => {
   return <TopNav {...props} />;
@@ -81,9 +49,7 @@ BasicImplementation.args = {
 export const NavigationToggle = Template.bind({});
 NavigationToggle.args = {
   logo: LinkLogo,
-  skipLabel: "Skip it!",
-  skipHref: "http://google.com",
-  menuToggleBtn: <TopNav.Button aria-label="Toggle Menu" icon="menu" />,
+  menuToggleBtn: <TopNav.IconButton aria-label="Toggle Menu" icon="menu" />,
 };
 NavigationToggle.decorators = [
   (Story, context) => {
@@ -108,44 +74,27 @@ NavigationToggle.decorators = [
             }
             style={{ width: "15%" }}
           >
-            <div className="neo-leftnav--wrapper">
-              <nav className="neo-leftnav">
-                <ul className="neo-leftnav__nav">
-                  <LeftNav.NavCategory icon="audio-on" label="Collapsed">
-                    <LeftNav.LinkItem href="#fake">First Item</LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake">
-                      Second Item
-                    </LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake">Third Item</LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake">
-                      Fourth Item
-                    </LeftNav.LinkItem>
-                  </LeftNav.NavCategory>
-                  <LeftNav.NavCategory
-                    active
-                    expanded
-                    icon="call"
-                    label="Active"
-                  >
-                    <LeftNav.LinkItem href="#fake"> Item 1 </LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake" active={true}>
-                      Active Item 2
-                    </LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake"> Item 3</LeftNav.LinkItem>
-                  </LeftNav.NavCategory>
-                  <LeftNav.NavCategory
-                    disabled
-                    icon="available"
-                    label="Disabled Category"
-                  >
-                    <LeftNav.LinkItem href="#fake">First Item</LeftNav.LinkItem>
-                    <LeftNav.LinkItem href="#fake">
-                      Second Item
-                    </LeftNav.LinkItem>
-                  </LeftNav.NavCategory>
-                </ul>
-              </nav>
-            </div>
+            <LeftNav aria-label="Collapsible Navigation Menu">
+              <LeftNav.NavCategory icon="audio-on" label="Collapsed">
+                <LeftNav.LinkItem href="#first">First Item</LeftNav.LinkItem>
+                <LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
+              </LeftNav.NavCategory>
+              <LeftNav.NavCategory expanded icon="call" label="Active">
+                <LeftNav.LinkItem href="#item1">Item 1</LeftNav.LinkItem>
+                <LeftNav.LinkItem href="#item2" active>
+                  Active Item 2
+                </LeftNav.LinkItem>
+                <LeftNav.LinkItem href="#item3">Item 3</LeftNav.LinkItem>
+              </LeftNav.NavCategory>
+              <LeftNav.NavCategory disabled icon="available" label="Disabled">
+                <LeftNav.LinkItem href="#disabled1">
+                  First Item
+                </LeftNav.LinkItem>
+                <LeftNav.LinkItem href="#disabled2">
+                  Second Item
+                </LeftNav.LinkItem>
+              </LeftNav.NavCategory>
+            </LeftNav>
           </div>
         )}
       </>
@@ -162,7 +111,10 @@ TitleExample.args = {
 export const SearchExample = Template.bind({});
 SearchExample.args = {
   logo: Logo,
-  search: Search,
+  search: TopNavSearch,
+  skipNav: (
+    <TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>
+  ),
 };
 SearchExample.decorators = [
   (Story, context) => {
@@ -182,29 +134,77 @@ SearchExample.decorators = [
     return (
       <>
         <Story args={{ ...args, search: searchWithHandler }} />
-        <p>You are searching for: {searchString}</p>
+        <section id="main-content">
+          You are searching for: {searchString}
+        </section>
       </>
     );
   },
 ];
 
-export const ButtonsExample = Template.bind({});
-ButtonsExample.args = {
-  logo: Logo,
-  buttons: [
-    <TopNav.Button icon="info" aria-label="Info" key="info" />,
-    <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
-  ],
+export const ButtonsExample = () => {
+  return (
+    <TopNav logo={Logo}>
+      <TopNav.LinkButton href="/whats-new">Link</TopNav.LinkButton>
+
+      <TopNav.LinkButton href="/whats-new" active>
+        Active Link
+      </TopNav.LinkButton>
+
+      <TopNav.LinkButton href="/whats-new" disabled>
+        Disabled Link
+      </TopNav.LinkButton>
+
+      <TopNav.LinkButton href="/whats-new" active disabled>
+        Active Disabled Link
+      </TopNav.LinkButton>
+
+      <TopNav.IconButton icon="settings" aria-label="Settings" badge="12" />
+
+      <TopNav.IconButton icon="settings" aria-label="Settings" active />
+
+      <TopNav.IconButton icon="settings" aria-label="Settings" disabled />
+
+      <TopNav.IconButton
+        icon="settings"
+        aria-label="Settings"
+        active
+        disabled
+      />
+    </TopNav>
+  );
 };
 
 export const AvatarExample = Template.bind({});
 AvatarExample.args = {
   logo: Logo,
-  userOptions: TopNavAvatar,
-  buttons: [
-    <TopNav.Button icon="info" aria-label="Info" key="info" />,
-    <TopNav.Button icon="settings" aria-label="Settings" key="settings" />,
-  ],
+  children: (
+    <>
+      <TopNav.IconButton icon="info" aria-label="Info" active />
+      <TopNav.IconButton icon="settings" aria-label="Settings" />
+
+      <TopNav.Avatar
+        avatar={<Avatar initials="MD" />}
+        dropdown={
+          <Menu
+            itemAlignment="right"
+            menuRootElement={
+              <MenuButton onClick={() => console.log("Functional Menu opened")}>
+                Functional Menu
+              </MenuButton>
+            }
+          >
+            <MenuItem>Item1</MenuItem>
+            <SubMenu menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
+              <MenuItem>Sub Item1</MenuItem>
+              <MenuItem>Sub Item2</MenuItem>
+            </SubMenu>
+            <MenuItem>Item3</MenuItem>
+          </Menu>
+        }
+      />
+    </>
+  ),
 };
 
 export const TabsExample = () => {
@@ -213,27 +213,22 @@ export const TabsExample = () => {
 
   return (
     <>
-      <TopNav
-        logo={Logo}
-        tabs={
-          <Tabs onTabPanelChange={setActiveTabPanelIndex}>
-            <TabList>
-              <Tab id="tab1" onClick={() => alert("Clicked")}>
-                Tab1
-              </Tab>
-              <Tab id="tab2">Tab2</Tab>
-              <Tab id="tab3">Tab3</Tab>
-              <TabLink id="tab4" href="http://kagi.com">
-                Tab4
-              </TabLink>
-            </TabList>
-          </Tabs>
-        }
-      />
+      <TopNav logo={Logo}>
+        <Tabs onTabPanelChange={setActiveTabPanelIndex}>
+          <TabList>
+            <Tab id="tab1">Tab1</Tab>
+            <Tab id="tab2">Tab2</Tab>
+            <Tab id="tab3">Tab3</Tab>
+            <TabLink id="tab4" href="http://kagi.com">
+              Tab4
+            </TabLink>
+          </TabList>
+        </Tabs>
+      </TopNav>
 
-      <h4 style={{ marginTop: "30px" }}>
+      <p style={{ marginTop: "30px" }}>
         {contentToToggle[activeTabPanelIndex]}
-      </h4>
+      </p>
     </>
   );
 };
@@ -365,15 +360,12 @@ export const StickyTopNav: Story<TopNavProps> = () => {
 
 export const AgentCardExample = () => {
   return (
-    <TopNav
-      logo={Logo}
-      userOptions={
-        <AgentCard
-          agentName="Bob Boberson"
-          agentStatus="connected"
-          avatar={<Avatar />}
-        />
-      }
-    />
+    <TopNav logo={Logo}>
+      <AgentCard
+        agentName="Bob Boberson"
+        agentStatus="connected"
+        avatar={<Avatar />}
+      />
+    </TopNav>
   );
 };

@@ -54,6 +54,7 @@ export default defineConfig(({ mode }) => {
       environment: "jsdom",
       setupFiles: "./src/test/setup.ts",
       coverage: {
+        exclude: ["src/**/*.stories.*", "src/**/*.test.*"],
         reporter: ["text", "json", "json-summary", "html", "lcov"],
       },
     },
