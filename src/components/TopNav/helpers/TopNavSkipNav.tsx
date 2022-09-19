@@ -7,7 +7,9 @@ import { TopNavSkipNavProps } from "../TopNavTypes";
  * The content inside a link should indicate where the link goes, even out of context.
  *
  * @example
- * <TopNavSkipNav href="#main-content">Skip To Main Content</TopNavSkipNav>
+ * <TopNav logo={Logo} skipNav={<TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>}>
+ *   <TopNav.LinkButton href="/whats-new">Link</TopNav.LinkButton>
+ * </TopNav>
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#accessibility
  */
