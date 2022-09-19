@@ -47,7 +47,7 @@ export const TopNav = ({
 
         {logo}
 
-        {title && <h1 className="nav-title">{title}</h1>}
+        {title && <h1 className="neo-nav-title">{title}</h1>}
       </div>
 
       <div className="neo-nav">

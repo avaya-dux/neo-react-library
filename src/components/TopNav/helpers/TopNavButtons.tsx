@@ -73,7 +73,11 @@ export const TopNavLinkButton = forwardRef(
 
     return href && !disabled ? (
       <a
-        className={clsx("link-btn", active && "link-btn-active", className)}
+        className={clsx(
+          "neo-nav-link-btn",
+          active && "neo-nav-link-btn-active",
+          className
+        )}
         href={href}
         ref={ref}
         {...rest}
@@ -82,7 +86,11 @@ export const TopNavLinkButton = forwardRef(
       </a>
     ) : (
       <Button
-        className={clsx("link-btn", active && "link-btn-active", className)}
+        className={clsx(
+          "neo-nav-link-btn",
+          active && "neo-nav-link-btn-active",
+          className
+        )}
         disabled={disabled}
         variant="tertiary"
         ref={ref as Ref<HTMLButtonElement>}

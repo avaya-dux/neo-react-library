@@ -105,7 +105,7 @@ describe("TopNavLinkButton", () => {
       </TopNavLinkButton>
     );
 
-    expect(screen.getByRole("link")).toHaveClass("link-btn-active");
+    expect(screen.getByRole("link")).toHaveClass("neo-nav-link-btn-active");
   });
 
   it("has active class when both active and disabled", () => {
@@ -115,7 +115,7 @@ describe("TopNavLinkButton", () => {
       </TopNavLinkButton>
     );
 
-    expect(screen.getByRole("button")).toHaveClass("link-btn-active");
+    expect(screen.getByRole("button")).toHaveClass("neo-nav-link-btn-active");
   });
 
   it("passes basic axe compliance", async () => {

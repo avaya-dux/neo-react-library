@@ -2,13 +2,13 @@
   height: 57px;
 }
 
-.neo-navbar h1.nav-title {
+.neo-navbar h1.neo-nav-title {
   font-size: 19px;
   line-height: 28px;
   margin-left: 16px;
 }
 
-.neo-navbar a.link-btn {
+.neo-navbar a.neo-nav-link-btn {
   display: flex;
   align-items: center;
   color: var(--tab-default-color);
@@ -18,7 +18,7 @@
   padding-right: 32px;
   border-bottom: 2px solid transparent;
 }
-.neo-navbar button.link-btn:disabled {
+.neo-navbar button.neo-nav-link-btn:disabled {
   font-size: 16px;
   padding-left: 32px;
   padding-right: 32px;
@@ -29,17 +29,17 @@
 }
 
 /* HACK: disabled tertiary button has some issues that need fixing, hacking this to make it work for now */
-.neo-navbar button.link-btn:disabled:hover {
+.neo-navbar button.neo-nav-link-btn:disabled:hover {
   color: var(--button-text-color);
   cursor: not-allowed;
 }
 
-.neo-navbar a.link-btn.link-btn-active {
+.neo-navbar a.neo-nav-link-btn.neo-nav-link-btn-active {
   border-bottom: 2px solid var(--tab-action-color);
   color: var(--tab-action-color);
   font-weight: 600;
 }
-.neo-navbar button.link-btn.link-btn-active:disabled {
+.neo-navbar button.neo-nav-link-btn.neo-nav-link-btn-active:disabled {
   border-bottom: 2px solid var(--navbar-active-disabled-color);
   font-weight: 400;
 }
