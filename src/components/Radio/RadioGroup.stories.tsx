@@ -1,46 +1,124 @@
-import { Story } from "@storybook/react";
-
-import { RadioGroup, RadioGroupProps } from "./RadioGroup";
+import { RadioGroup } from "./RadioGroup";
+import { Radio } from "./Radio";
+import { Tooltip, Button, Form } from "components";
+import React, { useEffect, useState } from "react";
 
 export default {
   title: "Components/Radio Group",
   component: RadioGroup,
 };
 
-const DefaultRadioArray = [
-  {
-    label: "Radio 1",
-    value: "Radio 1",
-  },
-  {
-    label: "Radio 2",
-    value: "Radio 2",
-  },
-  {
-    label: "Radio 3",
-    value: "Radio 3",
-  },
-  {
-    label: "Radio 4",
-    value: "Radio 4",
-    disabled: true,
-  },
-  {
-    label: "Radio 5",
-    value: "Radio 5",
-    disabled: true,
-    tooltip: "Tooltip for Radio",
-    position: "down",
-  },
-];
+export const RadioGroupExample = () => {
+  const [selectedValue, setSelectedValue] = useState("Radio 1");
 
-const Template: Story<RadioGroupProps> = (args: RadioGroupProps) => (
-  <RadioGroup {...args} />
-);
+  function onRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setSelectedValue(event.target.value);
+  }
 
-export const Default = Template.bind({});
-Default.args = {
-  radios: DefaultRadioArray,
-  groupName: "Default Radio Group",
-  checked: "Radio 1",
+  return (
+    <Form
+      id="radio-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        alert(`you successfully submitted: ${selectedValue}`);
+      }}
+    >
+      <RadioGroup
+        groupName="Default Radio Group"
+        selected={selectedValue}
+        onChange={onRadioChange}
+      >
+        <Radio value="Radio 1">Radio 1</Radio>
+        <Radio value="Radio 2" disabled>
+          Radio 2
+        </Radio>
+        <Radio value="Radio 3">Radio 3</Radio>
+        <Tooltip label="Radio 4" position="right">
+          <Radio value="Radio 4">Radio 4</Radio>
+        </Tooltip>
+      </RadioGroup>
+      <br />
+      <p>Selected button is {selectedValue}</p>
+      <br />
+      <Button type="submit">Submit</Button>
+    </Form>
+  );
+};
+
+export const MockAPIRadioGroupExample = () => {
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [selectedValue, setSelectedValue] = useState<string>();
+
+  function onRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setSelectedValue(event.target.value);
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsDisabled(false);
+      setSelectedValue("Radio 3");
+    }, 3000);
+  }, []);
+
+  return (
+    <Form
+      id="radio-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        alert(`you successfully submitted: ${selectedValue}`);
+      }}
+    >
+      <RadioGroup
+        groupName="Default Radio Group"
+        selected={selectedValue}
+        onChange={onRadioChange}
+        disabled={isDisabled}
+      >
+        <Radio value="Radio 1">Radio 1</Radio>
+        <Radio value="Radio 2">Radio 2</Radio>
+        <Radio value="Radio 3">Radio 3</Radio>
+        <Tooltip label="Radio 4" position="right">
+          <Radio value="Radio 4">Radio 4</Radio>
+        </Tooltip>
+      </RadioGroup>
+      <br />
+      <p>
+        {selectedValue
+          ? `selected button is ${selectedValue}`
+          : "Loading selected value, please wait..."}
+      </p>
+      <br />
+      <Button type="submit">Submit</Button>
+    </Form>
+  );
+};
+
+export const InlineRadioGroupExample = () => {
+  const [selectedValue, setSelectedValue] = useState("Radio 1");
+
+  function onRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setSelectedValue(event.target.value);
+  }
+
+  return (
+    <>
+      <RadioGroup
+        groupName="Default Radio Group"
+        selected={selectedValue}
+        onChange={onRadioChange}
+        inline
+      >
+        <Radio value="Radio 1">Radio 1</Radio>
+        <Radio value="Radio 2" disabled>
+          Radio 2
+        </Radio>
+        <Radio value="Radio 3">Radio 3</Radio>
+        <Tooltip label="Radio 4">
+          <Radio value="Radio 4">Radio 4</Radio>
+        </Tooltip>
+      </RadioGroup>
+      <br />
+      <p>Selected button is {selectedValue}</p>
+    </>
+  );
 };
