@@ -1,96 +1,66 @@
 import clsx from "clsx";
-import { cloneElement, useCallback, useEffect, useState } from "react";
 
-import { genId } from "utils";
-
-import { TopNavAvatar, TopNavButton } from "./RightContent";
+import {
+  TopNavAvatar,
+  TopNavIconButton,
+  TopNavLinkButton,
+  TopNavSearch,
+  TopNavSkipNav,
+} from "./helpers";
 import { TopNavProps } from "./TopNavTypes";
 
-// TODO: NEO-731 - add Search Component to Design System
+import "./TopNav_shim.css";
 
 /**
  * TopNav is used to orient users, and to access different areas within an interface.
  *
+ * @example
+ * <TopNav
+    logo={<Image isDecorativeOrBranding src="link/to/image.png"/>}
+    skipNav={<TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>}
+    title="Product Name"
+  />
+ *
+ * <TopNav logo={<Image isDecorativeOrBranding src="link/to/image.png"/>}>
+    <TopNav.LinkButton active href="/components">Link</TopNav.LinkButton>
+    <TopNav.IconButton icon="settings" aria-label="Settings" />
+  </TopNav>
+ *
  * @see https://design.avayacloud.com/components/web/navbar-web
- * @see https://neo-react-library-storybook.netlify.app/
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-top-navigation
  */
 export const TopNav = ({
+  children,
   logo,
-  search,
-  title,
-  buttons,
   menuToggleBtn,
-  tabs,
-  userOptions,
+  search,
+  skipNav,
   sticky,
-  skipLabel = "Skip to main content",
-  skipHref = "#",
+  title,
 }: TopNavProps) => {
-  // TO-DO: NEO-786 - Replace inline styles on line 80 with updated CSS rules to avoid use of <form> element in Navbar
-  // TO-DO: NEO-785 - Replace inline styles on line 76 with updated CSS rules for correct styling of 'title' prop
-  // TO-DO: NEO-794 - Confirm use-case for Avatar in Navbar without Dropdown and resulting need for inline styles on line 132
-  const [ids, setIds] = useState<string[]>([]);
-  const [activeId, setActiveId] = useState("");
-
-  useEffect(() => {
-    setIds([]);
-    buttons?.forEach(() => {
-      setIds((ids) => (ids = [...ids, genId()]));
-    });
-  }, [buttons]);
-
-  const navButtonOnClickCallback = useCallback(
-    (id: number, clickHandler?: () => void | Promise<void>) => {
-      if (clickHandler) clickHandler();
-      setActiveId(ids[id]);
-    },
-    [ids]
-  );
-
   return (
     <nav className={clsx("neo-navbar", sticky && "neo-navbar--sticky")}>
       <div className="neo-nav--left">
-        <a className="neo-skipnav" href={skipHref}>
-          {skipLabel}
-        </a>
+        {skipNav}
+
         {menuToggleBtn}
 
         {logo}
 
-        {title && (
-          <div
-            style={{ fontSize: "19px", lineHeight: "28px", marginLeft: "16px" }}
-            role="heading"
-            aria-level={1}
-          >
-            {title}
-          </div>
-        )}
-
-        {tabs}
-
-        {search && (
-          <div style={{ marginLeft: "16px", alignSelf: "center" }}>
-            {search}
-          </div>
-        )}
+        {title && <h1 className="neo-nav-title">{title}</h1>}
       </div>
 
-      <div className="neo-nav" style={{ alignItems: "center" }}>
-        {buttons?.map((button, key) =>
-          cloneElement(button, {
-            key,
-            active: ids[key] === activeId,
-            id: ids[key],
-            onClick: () =>
-              navButtonOnClickCallback(key, button.props.handleClick),
-          })
-        )}
-        {userOptions}
+      <div className="neo-nav">
+        {children}
+
+        {search}
       </div>
     </nav>
   );
 };
 TopNav.displayName = "TopNav";
 TopNav.Avatar = TopNavAvatar;
-TopNav.Button = TopNavButton;
+TopNav.IconButton = TopNavIconButton;
+TopNav.LinkButton = TopNavLinkButton;
+TopNav.Search = TopNavSearch;
+TopNav.SkipNav = TopNavSkipNav;

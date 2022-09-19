@@ -1,5 +1,6 @@
 import { composeStories } from "@storybook/testing-react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 
 import { Image } from "components/Image";
@@ -8,16 +9,18 @@ import { TopNav } from ".";
 import * as TopNavStories from "./TopNav.stories";
 
 const {
-  TopNavWithNavigationToggle,
-  TopNavWithTitle,
-  TopNavWithButtons,
-  TopNavWithAvatarAndDropdown,
+  AgentCardExample,
+  AvatarExample,
+  NavigationToggle,
+  SearchExample,
   StickyTopNav,
-  TopNavWithTabs,
-  TopNavWithAgentCard,
+  TabsExample,
+  TitleExample,
 } = composeStories(TopNavStories);
 
 describe("TopNav", () => {
+  const user = userEvent.setup();
+
   describe("basic unit tests", () => {
     let renderResult;
     beforeEach(() => {
@@ -27,8 +30,13 @@ describe("TopNav", () => {
           isDecorativeOrBranding
         />
       );
+      const skipNav = (
+        <TopNav.SkipNav href="#main-content">
+          Skip to main content
+        </TopNav.SkipNav>
+      );
 
-      renderResult = render(<TopNav logo={logo} />);
+      renderResult = render(<TopNav logo={logo} skipNav={skipNav} />);
     });
 
     it("renders without exploding", () => {
@@ -48,6 +56,18 @@ describe("TopNav", () => {
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
+
+    it("'Skip Nav' is the first element to be hit when 'tab' is pressed", async () => {
+      const skipNav = screen.getByRole("link");
+      expect(skipNav).toBeDefined();
+      expect(skipNav).not.toHaveFocus();
+
+      await user.tab();
+      expect(skipNav).toHaveFocus();
+    });
+
+    // TODO: `.isVisible` is not working as expected, should add this test when possible
+    // it("should not show the 'Skip Nav' unless tabbed to", async () => {});
   });
 
   describe("storybook tests", () => {
@@ -65,71 +85,48 @@ describe("TopNav", () => {
       });
     });
 
-    describe("TopNav With buttons", () => {
-      it("toggles active states correctly", () => {
-        const { getAllByRole } = render(<TopNavWithButtons />);
-        const buttonElements = getAllByRole("button");
-        fireEvent.click(buttonElements[0]);
-        expect(buttonElements[0].closest("div")).toHaveClass(
-          "neo-badge__navbutton--active"
-        );
-        fireEvent.click(buttonElements[1]);
-        expect(buttonElements[0].closest("div")).not.toHaveClass(
-          "neo-badge__navbutton--active"
-        );
-      });
-
-      it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithButtons />);
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
-
     describe("TopNav With Title", () => {
       it("renders text passed as title prop", () => {
-        const { getByText } = render(<TopNavWithTitle />);
+        const { getByText } = render(<TitleExample />);
         const titleElement = getByText("Product Name");
         expect(titleElement).toBeTruthy();
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithTitle />);
+        const { container } = render(<TitleExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
     describe("TopNav With Navigation Toggle", () => {
-      // BUG: is throwing: "Warning: Received `true` for a non-boolean attribute `active`."
-      it("correctly executes button onClick handler when passed as props", () => {
-        const { getByRole, getAllByRole } = render(
-          <TopNavWithNavigationToggle />
-        );
+      it("correctly executes button onClick handler when passed as props", async () => {
+        const { getByRole, getAllByRole } = render(<NavigationToggle />);
         const navElementsBeforeToggle = getAllByRole("navigation");
         expect(navElementsBeforeToggle).toHaveLength(1);
         const leftNavToggleButton = getByRole("button");
-        fireEvent.click(leftNavToggleButton);
+        await user.click(leftNavToggleButton);
         const navElementsAfterToggle = getAllByRole("navigation");
         expect(navElementsAfterToggle).toHaveLength(2);
       });
+
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithNavigationToggle />);
+        const { container } = render(<NavigationToggle />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
     });
 
     describe("TopNav With Avatar and Dropdown", () => {
-      it("adds appropriate class to toggle Dropdown when clicked", () => {
-        const { getByRole } = render(<TopNavWithAvatarAndDropdown />);
+      it("adds appropriate class to toggle Dropdown when clicked", async () => {
+        const { getByRole } = render(<AvatarExample />);
         const avatar = getByRole("figure");
         const avatarDropdown = getByRole("figure").closest("div");
         expect(avatarDropdown).not.toHaveClass("neo-dropdown--active");
-        fireEvent.click(avatar);
+        await user.click(avatar);
         expect(avatarDropdown).toHaveClass("neo-dropdown--active");
       });
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithAvatarAndDropdown />);
+        const { container } = render(<AvatarExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
@@ -137,7 +134,7 @@ describe("TopNav", () => {
 
     describe("TopNav With Tabs", () => {
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithTabs />);
+        const { container } = render(<TabsExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
@@ -145,7 +142,15 @@ describe("TopNav", () => {
 
     describe("TopNav With Agent Card", () => {
       it("passes basic axe compliance", async () => {
-        const { container } = render(<TopNavWithAgentCard />);
+        const { container } = render(<AgentCardExample />);
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("SearchExample", () => {
+      it("passes basic axe compliance", async () => {
+        const { container } = render(<SearchExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
