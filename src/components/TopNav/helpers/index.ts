@@ -1,4 +1,4 @@
 export * from "./TopNavAvatar";
-export * from "./TopNavButton";
+export * from "./TopNavButtons";
 export * from "./TopNavSearch";
 export * from "./TopNavSkipNav";
