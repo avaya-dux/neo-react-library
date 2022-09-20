@@ -1,13 +1,19 @@
+import log from "loglevel";
 import clsx from "clsx";
-import { useId } from "react";
+import React, { forwardRef, useCallback, useId } from "react";
 
 import { handleAccessbilityError } from "utils";
+import useControlled from "utils/useControlled";
+
+const logger = log.getLogger("checkbox-logger");
+logger.disableAll();
 
 interface BaseCheckboxProps
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "checked" | "type" | "value"
+    "defaultChecked" | "checked" | "type" | "value"
   > {
+  defaultChecked?: boolean | "mixed"; // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-checked
   checked?: boolean | "mixed"; // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-checked
   value: string | number;
 }
@@ -40,45 +46,75 @@ export type CheckboxProps = BaseCheckboxProps & EnforcedAccessibleLabel;
  * @see https://design.avayacloud.com/components/web/checkbox-web
  */
 
-export const Checkbox = ({
-  checked,
-  className,
-  id = useId(),
-  label,
-
-  ...rest
-}: CheckboxProps) => {
-  if (!label && !rest["aria-label"] && !rest["aria-labelledby"]) {
-    handleAccessbilityError(
-      "Checkbox must have an have an accessible label. Please add a `label`, `aria-label`, or `aria-labelledby` prop."
+export const Checkbox = forwardRef(
+  (
+    {
+      checked,
+      defaultChecked,
+      readOnly,
+      className,
+      id = useId(),
+      label,
+      onChange = () => null,
+      "aria-label": ariaLabel,
+      ...rest
+    }: CheckboxProps,
+    ref: React.Ref<HTMLInputElement>
+  ) => {
+    if (!label && !ariaLabel && !rest["aria-labelledby"]) {
+      handleAccessbilityError(
+        "Checkbox must have an have an accessible label. Please add a `label`, `aria-label`, or `aria-labelledby` prop."
+      );
+    }
+    const [state, setState] = useControlled({
+      controlled: checked,
+      default: defaultChecked,
+      name: "Checkbox",
+    });
+    const onChangeHandler = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        logger.debug(
+          "clicked",
+          state,
+          ref && "current" in ref && ref.current && ref.current.checked
+        );
+        if (state === "mixed") {
+          setState(true);
+        } else {
+          setState(!state);
+        }
+        onChange(e);
+      },
+      [state, setState, onChange]
     );
-  }
 
-  if (checked !== undefined && !rest.onChange) {
-    handleAccessbilityError(
-      "You provided a `checked` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultChecked`. Otherwise, set either `onChange` or `readOnly`."
-    );
-  }
+    logger.debug({ checked, defaultChecked, state });
+    return (
+      <>
+        <input
+          ref={ref}
+          type="checkbox"
+          id={id}
+          checked={state === "mixed" || state || false}
+          aria-checked={state || "false"}
+          aria-label={ariaLabel || `${label}`} // specify this and voiceover will announce state change
+          className={clsx(
+            "neo-check",
+            readOnly && "neo-check-readonly",
+            state === "mixed" && "neo-check--indeterminate",
+            className
+          )}
+          onChange={onChangeHandler}
+          {...rest}
+        />
 
-  return (
-    <>
-      <input
-        type="checkbox"
-        id={id}
-        checked={checked === "mixed" || checked}
-        className={clsx(
-          "neo-check",
-          checked === "mixed" && "neo-check--indeterminate",
-          className
-        )}
-        {...rest}
-      />
-
-      {/*
+        {/*
         BUG: the Neo styles are all on the `label` element, so if there isn't a `label`,
         there's no checkbox. Which is bad.
       */}
-      <label htmlFor={id}>{label}</label>
-    </>
-  );
-};
+        <label htmlFor={id}>{label}</label>
+      </>
+    );
+  }
+);
+Checkbox.displayName = "Checkbox";

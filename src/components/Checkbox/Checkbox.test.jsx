@@ -1,21 +1,34 @@
 import { composeStories } from "@storybook/testing-react";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { UserEventKeys } from "utils";
 
 import { Checkbox } from "./";
 import * as CheckboxStories from "./Checkbox.stories";
 
-const { Default, Templated } = composeStories(CheckboxStories);
+const {
+  Default,
+  CheckedAndControlled,
+  CheckedAndUncontrolled,
+  UncheckedAndControlled,
+  UncheckedAndUncontrolled,
+  MixedAndControlled,
+  MixedAndUncontrolled,
+  VoiceOverTest,
+} = composeStories(CheckboxStories);
 
 const DefaultProps = {
   id: "checkbox-id",
   label: "example label",
-  onChange: vi.fn(),
   value: "1",
 };
 
+
 describe("Checkbox", () => {
+  vi.spyOn(console, "log").mockImplementation(() => null);
+
   it("renders as unchecked appropriately", () => {
     const { getByLabelText } = render(<Checkbox {...DefaultProps} />);
 
@@ -34,10 +47,19 @@ describe("Checkbox", () => {
   it("throws if an accessibility issue is discovered", () => {
     const spy = vi.spyOn(console, "error").mockImplementation(() => null);
     expect(() => render(<Checkbox value="test one" />)).toThrow();
-    expect(() =>
-      render(<Checkbox value="test one" label="bad accessbility" checked />)
-    ).toThrow();
     expect(spy).toHaveBeenCalled();
+  });
+
+  it("aria-label is set to label when not specified", () => {
+    render(<Checkbox {...DefaultProps} />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("aria-label", DefaultProps.label);
+  });
+
+  it("aria-label is set to specified value", () => {
+    render(<Checkbox aria-label="the label" {...DefaultProps} />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("aria-label", "the label");
   });
 
   it("passes basic axe compliance", async () => {
@@ -47,6 +69,7 @@ describe("Checkbox", () => {
   });
 
   describe("className is assigned appropriately", () => {
+
     it("returns the correct class name when passed `true`", () => {
       render(<Checkbox {...DefaultProps} checked />);
       const checkboxElement = screen.getByLabelText(DefaultProps.label);
@@ -82,13 +105,18 @@ describe("Checkbox", () => {
   });
 
   describe("storybook tests", () => {
-    describe("Default", () => {
+    describe(Default.name, () => {
+      const user = userEvent.setup();
       let renderResult;
 
       beforeEach(() => {
         renderResult = render(<Default />);
       });
 
+      afterEach(() => {
+        cleanup();
+      });
+
       it("should render ok", () => {
         const { container } = renderResult;
         expect(container).not.toBe(null);
@@ -99,13 +127,30 @@ describe("Checkbox", () => {
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
+
+      it("should be accessible by space key", async () => {
+        const checkboxes = screen.getAllByRole("checkbox");
+        expect(checkboxes.length).toBe(2)
+        const checkboxElement = checkboxes[0]
+        expect(checkboxElement.checked).toBeFalsy();
+        await user.tab();
+        expect(checkboxElement).toHaveFocus();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeTruthy();
+      });
     });
 
-    describe("Templated", () => {
+    describe(CheckedAndControlled.name, () => {
+      const user = userEvent.setup();
+
       let renderResult;
 
       beforeEach(() => {
-        renderResult = render(<Templated />);
+        renderResult = render(<CheckedAndControlled />);
+      });
+
+      afterEach(() => {
+        cleanup();
       });
 
       it("should render ok", () => {
@@ -118,6 +163,238 @@ describe("Checkbox", () => {
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
+
+      it("should be accessible by space key", async () => {
+        const checkboxElement = screen.getByRole("checkbox");
+        expect(checkboxElement.checked).toBeTruthy();
+        await user.tab();
+        expect(checkboxElement).toHaveFocus();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeFalsy();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeTruthy();
+      });
     });
+
+    describe(CheckedAndUncontrolled.name, () => {
+      const user = userEvent.setup();
+
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<CheckedAndUncontrolled />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it("should be accessible by space key", async () => {
+        const checkboxElement = screen.getByRole("checkbox");
+        expect(checkboxElement.checked).toBeTruthy();
+        await user.tab();
+        expect(checkboxElement).toHaveFocus();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeFalsy();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeTruthy();
+      });
+    });
+
+    describe(UncheckedAndControlled.name, () => {
+      const user = userEvent.setup();
+
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<UncheckedAndControlled />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it("should be accessible by space key", async () => {
+        const checkboxElement = screen.getByRole("checkbox");
+        expect(checkboxElement.checked).toBeFalsy();
+        await user.tab();
+        expect(checkboxElement).toHaveFocus();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeTruthy();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeFalsy();
+      });
+    });
+    describe(UncheckedAndUncontrolled.name, () => {
+      const user = userEvent.setup();
+
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<UncheckedAndUncontrolled />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it("should be accessible by space key", async () => {
+        const checkboxElement = screen.getByRole("checkbox");
+        expect(checkboxElement.checked).toBeFalsy();
+        await user.tab();
+        expect(checkboxElement).toHaveFocus();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeTruthy();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeFalsy();
+      });
+    });
+    describe(MixedAndControlled.name, () => {
+      const user = userEvent.setup();
+
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<MixedAndControlled />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it("should be accessible by space key", async () => {
+        const checkboxElement = screen.getByRole("checkbox");
+        expect(checkboxElement.checked).toEqual(true);
+        expect(checkboxElement.getAttribute("aria-checked")).toEqual("mixed");
+
+        await user.tab();
+        expect(checkboxElement).toHaveFocus();
+
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeTruthy();
+        expect(checkboxElement.getAttribute("aria-checked")).toEqual("true");
+
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeFalsy();
+        expect(checkboxElement.getAttribute("aria-checked")).toEqual("false");
+      });
+    });
+    describe(MixedAndUncontrolled.name, () => {
+      const user = userEvent.setup();
+
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<MixedAndUncontrolled />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it("should be accessible by space key", async () => {
+        const checkboxElement = screen.getByRole("checkbox");
+        expect(checkboxElement.checked).toEqual(true);
+        expect(checkboxElement.getAttribute("aria-checked")).toEqual("mixed");
+
+        await user.tab();
+        expect(checkboxElement).toHaveFocus();
+
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeTruthy();
+        expect(checkboxElement.getAttribute("aria-checked")).toEqual("true");
+
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeFalsy();
+        expect(checkboxElement.getAttribute("aria-checked")).toEqual("false");
+
+        // arrow up should do nothing
+        await user.keyboard(UserEventKeys.UP);
+        expect(checkboxElement.checked).toBeFalsy();
+        expect(checkboxElement.getAttribute("aria-checked")).toEqual("false");
+      });
+    });
+
+
+    describe(VoiceOverTest.name, () => {
+
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<VoiceOverTest />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+    });
+
   });
 });

@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import { useCallback, Children, ReactElement } from "react";
+
+import log from "loglevel";
 
 import { Checkbox, CheckboxProps } from "components/Checkbox";
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 
+const logger = log.getLogger("checkboxgroup-logger");
+logger.disableAll();
+
 export interface CheckboxGroupProps {
-  checkboxes: CheckboxProps[];
+  children: ReactElement<CheckboxProps> | ReactElement<CheckboxProps>[];
   groupName: string;
-  defaultChecked?: string[];
   inline?: boolean;
   helperText?: string;
   error?: boolean;
   required?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -19,85 +23,51 @@ export interface CheckboxGroupProps {
  *
  * @example
  * <CheckboxGroup
- *  checkboxes=[
-      label: "Check 1",
-      value: "Check 1",
-      checked: true,
-      onChange: () => null,
-    },
-    {
-      label: "Check 2",
-      value: "Check 2",
-      onChange: () => null,
-    },
-    ]
-    groupName="Default Checkbox Group"
-    defaultChecked=["Check 1", "Check 4", "Check 6"]
-    onChange=() => null,
-    />
+ *   groupName="Default Checkbox Group"
+ *   onChange=() => null,
+ * >
+ * <Checkbox label="Gift" value="gift" />
+ * <Checkbox
+ *   label="Prime"
+ *   value="prime"
+ *   defaultChecked
+ * />
+ * </CheckboxGroup>
  *
  */
 export const CheckboxGroup = ({
-  checkboxes,
+  children,
   groupName,
-  defaultChecked,
   inline,
   helperText,
   error,
   required,
   onChange,
 }: CheckboxGroupProps) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (defaultChecked) {
-      setSelectedValues((selectedValues) => [
-        ...selectedValues,
-        ...defaultChecked,
-      ]);
-    }
-  }, [defaultChecked]);
-
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (selectedValues.includes(e.target.value)) {
-      setSelectedValues(
-        selectedValues.filter(
-          (selectedValue) => selectedValue !== e.target.value
-        )
-      );
-    } else {
-      setSelectedValues((selectedValues) => [
-        ...selectedValues,
-        e.target.value,
-      ]);
-    }
-    if (onChange) {
-      onChange(e);
-    }
-  };
+  const onChangeHandler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      logger.debug(e.target.value);
+      if (onChange) {
+        onChange(e);
+      }
+    },
+    [onChange]
+  );
 
   const computeCheckboxesJsx = () => {
-    return (
-      <>
-        {checkboxes
-          ? checkboxes.map((checkbox, index) => {
-              return (
-                <Checkbox
-                  aria-describedby={helperText}
-                  checked={checkbox.checked}
-                  disabled={checkbox.disabled}
-                  id={checkbox.id}
-                  key={index}
-                  label={checkbox.label || ""}
-                  name={groupName}
-                  onChange={onChangeHandler}
-                  value={checkbox.value}
-                />
-              );
-            })
-          : null}
-      </>
-    );
+    return Children.map(children, (child, index) => {
+      const { label, ...rest } = child.props as CheckboxProps;
+      return (
+        <Checkbox
+          aria-describedby={helperText}
+          key={index}
+          label={label || ""}
+          name={groupName}
+          onChange={onChangeHandler}
+          {...rest}
+        />
+      );
+    });
   };
 
   return (
