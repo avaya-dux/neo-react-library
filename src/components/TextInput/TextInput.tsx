@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import {
-  HTMLAttributes,
+  InputHTMLAttributes,
   ReactNode,
   RefObject,
   useId,
@@ -18,7 +18,7 @@ import {
 
 import "./TextInput_shim.css";
 
-export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   ariaLabelPasswordHide?: string;
   ariaLabelPasswordShow?: string;
   children?: ReactNode;
@@ -35,7 +35,6 @@ export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
   required?: boolean;
   startAddon?: ReactNode;
   startIcon?: IconNamesType;
-  type?: "text" | "password" | "number" | "email" | "tel";
   value?: number | string;
 }
 
