@@ -16,36 +16,39 @@ export const AppLayout = ({
   mobileAreas,
   header,
 }: AppLayoutProps) => {
-  const areasDesktop = `
-    topheader topheader
-    leftpanel main
-    leftpanel footer
+  const defaultDesktopAreas = `
+    topheader topheader topheader
+    leftpanel main  rightpanel
+    footer footer footer
     `;
 
-  const areasMobile = `
+  const defaultMobileAreas = `
     topheader
     main
+    footer
     `;
 
   return (
     <Composition
-      areas={mobileAreas || areasMobile}
-      areasMd={desktopAreas || areasDesktop}
+      areas={mobileAreas || defaultMobileAreas}
+      areasMd={desktopAreas || defaultDesktopAreas}
       templateRows={"60px 1fr 30px"}
       templateCols={"1fr auto"}
-      templateColsMd={"250px 1fr"}
-      h="700px"
+      templateColsMd={"250px 1fr auto"}
       gap={1}
     >
       {(Areas) => (
         <>
+          11:56
           <Areas.Topheader>{header}</Areas.Topheader>
-          <Areas.Leftpanel pl="2" area={"leftpanel"}>
-            {leftPanel}
-          </Areas.Leftpanel>
-          <Areas.Main pl="2" w="80%" area={"main"}>
-            {mainContent}
-          </Areas.Main>
+          <Areas.Leftpanel area={"leftpanel"}>{leftPanel}</Areas.Leftpanel>
+          <Areas.Main area={"main"}>{mainContent}</Areas.Main>
+          <Areas.Rightpanel area={"rightpanel"}>
+            Right Panel goes here
+          </Areas.Rightpanel>
+          <Areas.Footer area={"footer"}>
+            Footer goes here
+          </Areas.Footer>
         </>
       )}
     </Composition>
