@@ -10,13 +10,13 @@ import * as CheckboxStories from "./Checkbox.stories";
 
 const {
   Default,
-  DefaultChecked,
   CheckedAndControlled,
   CheckedAndUncontrolled,
   UncheckedAndControlled,
   UncheckedAndUncontrolled,
   MixedAndControlled,
   MixedAndUncontrolled,
+  VoiceOverTest,
 } = composeStories(CheckboxStories);
 
 const DefaultProps = {
@@ -28,10 +28,6 @@ const DefaultProps = {
 vi.spyOn(console, "log").mockImplementation(() => null);
 
 describe("Checkbox", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("renders as unchecked appropriately", () => {
     const { getByLabelText } = render(<Checkbox {...DefaultProps} />);
 
@@ -51,6 +47,18 @@ describe("Checkbox", () => {
     const spy = vi.spyOn(console, "error").mockImplementation(() => null);
     expect(() => render(<Checkbox value="test one" />)).toThrow();
     expect(spy).toHaveBeenCalled();
+  });
+
+  it("aria-label is set to label when not specified", () => {
+    render(<Checkbox {...DefaultProps} />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("aria-label", DefaultProps.label);
+  });
+
+  it("aria-label is set to specified value", () => {
+    render(<Checkbox aria-label="the label" {...DefaultProps} />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("aria-label", "the label");
   });
 
   it("passes basic axe compliance", async () => {
@@ -123,46 +131,12 @@ describe("Checkbox", () => {
       });
 
       it("should be accessible by space key", async () => {
-        const checkboxElement = screen.getByRole("checkbox");
+        const checkboxes = screen.getAllByRole("checkbox");
+        expect(checkboxes.length).toBe(2)
+        const checkboxElement = checkboxes[0]
         expect(checkboxElement.checked).toBeFalsy();
         await user.tab();
         expect(checkboxElement).toHaveFocus();
-        await user.keyboard(UserEventKeys.SPACE);
-        expect(checkboxElement.checked).toBeTruthy();
-      });
-    });
-
-    describe(DefaultChecked.name, () => {
-      const user = userEvent.setup();
-
-      let renderResult;
-
-      beforeEach(() => {
-        renderResult = render(<DefaultChecked />);
-      });
-
-      afterEach(() => {
-        cleanup();
-      });
-
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
-
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-
-      it("should be accessible by space key", async () => {
-        const checkboxElement = screen.getByRole("checkbox");
-        expect(checkboxElement.checked).toBeTruthy();
-        await user.tab();
-        expect(checkboxElement).toHaveFocus();
-        await user.keyboard(UserEventKeys.SPACE);
-        expect(checkboxElement.checked).toBeFalsy();
         await user.keyboard(UserEventKeys.SPACE);
         expect(checkboxElement.checked).toBeTruthy();
       });
@@ -397,5 +371,33 @@ describe("Checkbox", () => {
         expect(checkboxElement.getAttribute("aria-checked")).toEqual("false");
       });
     });
+
+
+    describe(VoiceOverTest.name, () => {
+      const user = userEvent.setup();
+
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<VoiceOverTest />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+    });
+
   });
 });

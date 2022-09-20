@@ -8,30 +8,12 @@ export default {
   component: Checkbox,
 } as Meta<CheckboxProps>;
 
-export const VoiceOverTest = () => (
-  <form>
-    <fieldset>
-      <legend>Plain checkbox</legend>
-      <p>VoiceOver will announce [state], [label], checkbox when there is a state change.</p>
-      <input type="checkbox" id="topping1" />
-      <label htmlFor="topping1">Announcing</label>
-    </fieldset>
-    <fieldset>
-      <legend>Neo checkbox</legend>
-      <p>VoiceOver only repeats [label] in state change.</p>
-      <input type="checkbox" id="topping2" className="neo-check" />
-      <label htmlFor="topping2">Not Announcing</label>
-    </fieldset>
-  </form>
-  )
-
 export const Default = () => {
-  return <Checkbox label="example label" name="example" value="1" />;
-};
-
-export const DefaultChecked = () => {
   return (
-    <Checkbox label="example label" name="example" value="1" defaultChecked />
+    <>
+      <Checkbox label="example label" name="example" value="1" />;
+      <Checkbox label="example label" name="example" value="1" defaultChecked />
+    </>
   );
 };
 
@@ -118,3 +100,36 @@ MixedAndUncontrolled.args = {
   value: "1",
   disabled: false,
 };
+
+export const VoiceOverTest = () => (
+  <form>
+    <fieldset>
+      <legend>Plain checkbox</legend>
+      <p>
+        VoiceOver announcew [state], [label], [checkbox], after a state change.
+      </p>
+      <input type="checkbox" id="topping1" />
+      <label htmlFor="topping1">Announcing</label>
+    </fieldset>
+    <fieldset>
+      <legend>Neo checkbox</legend>
+      <p>
+        CSS neo-check breaks VoiceOver announcement. Only [label] is
+        announcement.
+      </p>
+      <input type="checkbox" id="topping2" className="neo-check" />
+      <label htmlFor="topping2">Broken</label>
+    </fieldset>
+    <fieldset>
+      <legend>Neo checkbox fixed</legend>
+      <p>Assign [aria-label] fixes VoiceOver announcement</p>
+      <input
+        type="checkbox"
+        id="topping3"
+        className="neo-check"
+        aria-label="Fixed"
+      />
+      <label htmlFor="topping3">Fixed</label>
+    </fieldset>
+  </form>
+);

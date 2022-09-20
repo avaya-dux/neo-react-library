@@ -55,7 +55,7 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
     }
     setCheckedValues(cv.join(", "));
     setAriaCheckedValues(av.join(", "));
-    setNameValues(nv.join(", "))
+    setNameValues(nv.join(", "));
   };
   return (
     <>

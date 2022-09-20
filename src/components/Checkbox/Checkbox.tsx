@@ -56,11 +56,12 @@ export const Checkbox = forwardRef(
       id = useId(),
       label,
       onChange = () => null,
+      "aria-label": ariaLabel,
       ...rest
     }: CheckboxProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
-    if (!label && !rest["aria-label"] && !rest["aria-labelledby"]) {
+    if (!label && !ariaLabel && !rest["aria-labelledby"]) {
       handleAccessbilityError(
         "Checkbox must have an have an accessible label. Please add a `label`, `aria-label`, or `aria-labelledby` prop."
       );
@@ -88,7 +89,6 @@ export const Checkbox = forwardRef(
     );
 
     logger.debug({ checked, defaultChecked, state });
-
     return (
       <>
         <input
@@ -97,6 +97,7 @@ export const Checkbox = forwardRef(
           id={id}
           checked={state === "mixed" || state || false}
           aria-checked={state || "false"}
+          aria-label={ariaLabel || `${label}`} // specify this and voiceover will announce state change
           className={clsx(
             "neo-check",
             readOnly && "neo-check-readonly",
