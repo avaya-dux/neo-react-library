@@ -106,10 +106,10 @@ export const VoiceOverTest = () => (
     <fieldset>
       <legend>Plain checkbox</legend>
       <p>
-        VoiceOver announcew [state], [label], [checkbox], after a state change.
+        VoiceOver announces [state], [label], [checkbox], after a state change.
       </p>
       <input type="checkbox" id="topping1" />
-      <label htmlFor="topping1">Announcing</label>
+      <label htmlFor="topping1">Working</label>
     </fieldset>
     <fieldset>
       <legend>Neo checkbox</legend>
@@ -122,7 +122,7 @@ export const VoiceOverTest = () => (
     </fieldset>
     <fieldset>
       <legend>Neo checkbox fixed</legend>
-      <p>Assign [aria-label] fixes VoiceOver announcement</p>
+      <p>Assigning [aria-label] attribute fixes the announcement</p>
       <input
         type="checkbox"
         id="topping3"
