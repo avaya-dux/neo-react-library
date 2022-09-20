@@ -8,7 +8,7 @@ import { UserEventKeys } from "utils";
 
 import { CheckboxGroup } from ".";
 import * as CheckboxGroupStories from "./CheckboxGroup.stories";
-import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./helpers";
+import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./testHelpers";
 
 const {
   Default,
