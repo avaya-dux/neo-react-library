@@ -25,9 +25,10 @@ const DefaultProps = {
   value: "1",
 };
 
-vi.spyOn(console, "log").mockImplementation(() => null);
 
 describe("Checkbox", () => {
+  vi.spyOn(console, "log").mockImplementation(() => null);
+
   it("renders as unchecked appropriately", () => {
     const { getByLabelText } = render(<Checkbox {...DefaultProps} />);
 
@@ -68,9 +69,6 @@ describe("Checkbox", () => {
   });
 
   describe("className is assigned appropriately", () => {
-    afterEach(() => {
-      cleanup();
-    });
 
     it("returns the correct class name when passed `true`", () => {
       render(<Checkbox {...DefaultProps} checked />);
@@ -374,7 +372,6 @@ describe("Checkbox", () => {
 
 
     describe(VoiceOverTest.name, () => {
-      const user = userEvent.setup();
 
       let renderResult;
 

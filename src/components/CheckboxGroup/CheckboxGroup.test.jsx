@@ -171,6 +171,8 @@ describe("CheckboxGroup", () => {
       });
     });
     describe("DefaultCheckboxGroup", () => {
+      vi.spyOn(console, "log").mockImplementation(() => null);
+      
       const user = userEvent.setup();
 
       let renderResult;
