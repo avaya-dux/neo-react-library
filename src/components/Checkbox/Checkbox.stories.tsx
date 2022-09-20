@@ -11,7 +11,7 @@ export default {
 export const Default = () => {
   return (
     <>
-      <Checkbox label="example label" name="example" value="1" />;
+      <Checkbox label="example label" name="example" value="1" />
       <Checkbox label="example label" name="example" value="1" defaultChecked />
     </>
   );
