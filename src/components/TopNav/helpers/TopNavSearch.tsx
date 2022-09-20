@@ -29,6 +29,7 @@ export const TopNavSearch = ({
     disabled={disabled}
     placeholder={placeholder}
     startIcon={startIcon}
+    type="search"
     {...rest}
   />
 );
