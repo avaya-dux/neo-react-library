@@ -55,9 +55,11 @@
     "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn jsdocs && yarn build:storybook && yarn test:cypress && yarn test:badges && yarn pack"
   },
   "dependencies": {
+    "atomic-layout": "^0.16.2",
     "loglevel": "^1.8.0",
     "react-click-away-listener": "^2.2.1",
-    "react-focus-lock": "^2.9.1"
+    "react-focus-lock": "^2.9.1",
+    "styled-components": "^5.3.5"
   },
   "peerDependencies": {
     "downshift": "^6.1.9",
