@@ -25,6 +25,17 @@ export interface IconButtonProps
   variant?: "primary" | "secondary" | "tertiary";
 }
 
+//https://neo-react-library-storybook.netlify.app/?path=/story/components-iconbutton
+
+/**
+ * IconButton is a button that contains an icon and has no text
+ *
+ * @example
+ * <IconButton aria-label="add item" icon="add" />
+ * <IconButton aria-label="add item" icon="add" shape="circle" />
+ *
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-iconbutton
+ */
 export const IconButton = forwardRef(
   (
     {
