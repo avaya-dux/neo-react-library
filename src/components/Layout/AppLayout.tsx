@@ -1,6 +1,5 @@
-import { ReactNode, useEffect } from "react";
 import Layout, { Composition } from "atomic-layout";
-
+import { ReactNode, useEffect } from "react";
 
 export interface AppLayoutProps {
   desktopAreas?: string;
@@ -19,29 +18,28 @@ export const AppLayout = ({
   mobileAreas,
   rightPanel,
 }: AppLayoutProps) => {
-
-    useEffect(() => {
-      Layout.configure({
-        defaultBreakpointName: "desktop",
-        breakpoints: {
-          mobile: {
-            maxWidth: 767,
-          },
-          tablet: {
-            minWidth: 768,
-            maxWidth: 1023,
-          },
-          desktop: {
-            minWidth: 1024,
-            maxWidth: 1439,
-          },
-          bigscreen: {
-            minWidth: 1024,
-            maxWidth: 1439,
-          },
+  useEffect(() => {
+    Layout.configure({
+      defaultBreakpointName: "desktop",
+      breakpoints: {
+        mobile: {
+          maxWidth: 767,
         },
-      });
-    }, []);
+        tablet: {
+          minWidth: 768,
+          maxWidth: 1023,
+        },
+        desktop: {
+          minWidth: 1024,
+          maxWidth: 1439,
+        },
+        bigscreen: {
+          minWidth: 1024,
+          maxWidth: 1439,
+        },
+      },
+    });
+  }, []);
 
   const defaultDesktopAreas = `
     topheader topheader
@@ -49,7 +47,7 @@ export const AppLayout = ({
     footer footer
     `;
 
-    const defaultBigscreenAreas = `
+  const defaultBigscreenAreas = `
     topheader topheader topheader
     leftpanel main rightpanel
     footer footer footer
