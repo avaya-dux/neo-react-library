@@ -7,6 +7,7 @@ import {
   getBadgeClass,
   getSizeClass,
   getVariantClasses,
+  handleAccessbilityError,
   IconNamesType,
   rootBtnClass,
   showSpinner,
@@ -41,7 +42,9 @@ export const IconButton = forwardRef(
     ref: React.Ref<HTMLButtonElement>
   ) => {
     if (!ariaLabel) {
-      console.error("`aria-label` is REQUIRED by accessibility standards.");
+      handleAccessbilityError(
+        "`aria-label` is REQUIRED by accessibility standards."
+      );
     }
 
     const displaySpinner = useMemo(() => showSpinner(animation), [animation]);
