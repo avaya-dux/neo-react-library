@@ -8,7 +8,11 @@ import { UserEventKeys } from "utils";
 
 import { CheckboxGroup } from ".";
 import * as CheckboxGroupStories from "./CheckboxGroup.stories";
-import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./testHelpers";
+import {
+  checkboxes,
+  disabledCheckboxes,
+  readonlyCheckboxes,
+} from "./testHelpers";
 
 const {
   Default,
@@ -172,7 +176,7 @@ describe("CheckboxGroup", () => {
     });
     describe("DefaultCheckboxGroup", () => {
       vi.spyOn(console, "log").mockImplementation(() => null);
-      
+
       const user = userEvent.setup();
 
       let renderResult;
