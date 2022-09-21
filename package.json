@@ -1,6 +1,6 @@
 {
   "name": "@avaya/neo-react",
-  "version": "0.6.0",
+  "version": "0.7.1",
   "description": "This is the React version of the shared library called 'NEO' buit by Avaya",
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": "github:avaya-dux/neo-react-library",
@@ -40,7 +40,7 @@
     "format": "yarn prettier --write ./src --loglevel warn",
     "lint": "eslint src",
     "build": "tsc && vite build",
-    "build-storybook": "build-storybook",
+    "build:storybook": "build-storybook",
     "jsdocs": "jsdoc -c .jsdoc.json",
     "jsdocs:verbose": "jsdoc -c .jsdoc.json --verbose",
     "test": "vitest run",
@@ -51,8 +51,8 @@
     "test:cypress": "cypress run --component -b chrome",
     "test:cypress-open": "cypress open --component -b chrome",
     "github": "yarn && yarn lint && yarn build && yarn test && yarn test:cypress",
-    "netlify": "yarn && yarn build && yarn build-storybook",
-    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn jsdocs && yarn build-storybook && yarn test:cypress && yarn test:badges && yarn pack"
+    "netlify": "yarn && yarn build && yarn build:storybook",
+    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn jsdocs && yarn build:storybook && yarn test:cypress && yarn test:badges && yarn pack"
   },
   "dependencies": {
     "atomic-layout": "^0.16.2",

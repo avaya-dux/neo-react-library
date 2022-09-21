@@ -1,134 +1,126 @@
-import { render } from "@testing-library/react";
+import { render, cleanup, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
-import { vi } from "vitest";
+import { composeStories } from "@storybook/testing-react";
+import * as RadioGroupStories from "./RadioGroup.stories";
 
-import { RadioGroup } from ".";
+import { RadioGroup } from "./RadioGroup";
+import { Radio } from "./Radio";
+
+import userEvent from "@testing-library/user-event";
 
 import "@testing-library/jest-dom";
 
-async function axeTest(renderResult) {
-  const { container } = renderResult;
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-}
-
-const DefaultRadioArray = [
-  {
-    label: "Radio 1",
-    value: "Radio 1",
-  },
-  {
-    label: "Radio 2",
-    value: "Radio 2",
-  },
-  {
-    label: "Radio 3",
-    value: "Radio 3",
-  },
-  {
-    label: "Radio 4",
-    value: "Radio 4",
-    disabled: true,
-  },
-  {
-    label: "Radio 5",
-    value: "Radio 5",
-    disabled: true,
-    tooltip: "Tooltip for Radio",
-    position: "down",
-  },
-];
-
-const DefaultProps = {
-  radios: DefaultRadioArray,
-  groupName: "Radio Group",
-  checked: "Radio 1",
-};
+const { RadioGroupExample, InlineRadioGroupExample } =
+  composeStories(RadioGroupStories);
 
 describe("RadioGroup", () => {
-  let renderResult;
-
   beforeEach(() => {
-    vi.spyOn(console, "warn").mockImplementation(() => null);
+    render(
+      <RadioGroup groupName={"radioGroup"}>
+        <Radio value="Radio 1">Radio 1</Radio>
+      </RadioGroup>
+    );
+  });
 
-    renderResult = render(<RadioGroup {...DefaultProps} />);
+  afterEach(() => {
+    cleanup();
   });
 
   it("radio group renders ok", () => {
-    const { getByTestId } = renderResult;
-    const rootElement = getByTestId("RadioGroup-root");
+    const rootElement = screen.getByRole("radiogroup");
     expect(rootElement).toBeTruthy();
   });
 
-  it("radio renders ok", () => {
-    const { getByTestId } = renderResult;
-    const rootElement = getByTestId("Radio-root-Radio 1");
-    expect(rootElement).toBeTruthy();
+  it("radio renders ok & with correct class name", () => {
+    const radioElement = screen.getByLabelText("Radio 1");
+    expect(radioElement).toBeTruthy().toHaveAttribute("class", "neo-radio");
   });
 
-  it("radio renders with correct class name", () => {
-    const { getByTestId } = renderResult;
-    const rootElement = getByTestId("Radio-root-Radio 1");
-    expect(rootElement).toHaveAttribute("class", "neo-radio");
+  it("has an id value that matches the 'for' attribute on label", () => {
+    const radio = screen.getByLabelText(`Radio 1`);
+    const radioId = radio.getAttribute("id");
+    const radioLabel = screen.getByText("Radio 1");
+    expect(radioLabel).toHaveAttribute("for", radioId);
   });
 
-  it("has a value that matches the label", () => {
-    const { getByTestId } = renderResult;
-    DefaultRadioArray.forEach((radioObject) => {
-      const radio = getByTestId(`Radio-root-${radioObject.label}`);
-      expect(radio).toHaveAttribute("value", radioObject.label);
+  it("passes basic axe compliance", async () => {
+    const results = await axe(screen.getByTestId("RadioGroup-root"));
+    expect(results).toHaveNoViolations();
+  });
+});
+
+describe("Storybook tests", () => {
+  const user = userEvent.setup();
+
+  describe("RadioGroupExample", () => {
+    beforeEach(() => {
+      render(<RadioGroupExample />);
     });
-  });
 
-  it("has an id that matches the label", () => {
-    const { getByTestId } = renderResult;
-    DefaultRadioArray.forEach((radioObject) => {
-      const radio = getByTestId(`Radio-root-${radioObject.label}`);
-      expect(radio).toHaveAttribute("id", `radio-id-${radioObject.label}`);
+    afterEach(() => {
+      cleanup();
     });
-  });
 
-  it("has an id value that matches the for attribute on label", () => {
-    const { getByTestId } = renderResult;
-    DefaultRadioArray.forEach((radioObject) => {
-      const radio = getByTestId(`Radio-root-${radioObject.label}`);
-      const radioLabel = getByTestId(`Radio-label-root-${radioObject.label}`);
-      expect(radio).toHaveAttribute("id", `radio-id-${radioObject.label}`);
-      expect(radioLabel).toHaveAttribute(
-        "for",
-        `radio-id-${radioObject.label}`
+    it("should render ok", () => {
+      expect(screen.container).not.toBe(null);
+    });
+
+    it("passes basic axe compliance", async () => {
+      const results = await axe(screen.getByTestId("RadioGroup-root"));
+      expect(results).toHaveNoViolations();
+    });
+
+    it("renders as disabled", () => {
+      const disabledRadioButton = screen.getByLabelText(`Radio 2`);
+      expect(disabledRadioButton).toHaveAttribute("disabled");
+    });
+
+    it("renders with a Tooltip in the correct position", () => {
+      const radioGroup = screen.getByRole("radiogroup");
+
+      expect(radioGroup.lastChild).toHaveAttribute(
+        "class",
+        "neo-tooltip neo-tooltip--right neo-tooltip--onhover"
+      );
+    });
+
+    it("passes and responds to onChange handler correctly", async () => {
+      const selectedButtonPrompt = screen.getByText(
+        "Selected button is Radio 1"
+      );
+
+      const unselectedRadio = screen.getByLabelText("Radio 3");
+
+      await user.click(unselectedRadio);
+
+      expect(selectedButtonPrompt).toHaveTextContent(
+        "Selected button is Radio 3"
       );
     });
   });
 
-  it("renders as disabled", () => {
-    const { getByTestId } = renderResult;
-    DefaultRadioArray.forEach((radio) => {
-      if (radio.disabled) {
-        const radioButton = getByTestId(`Radio-root-${radio.label}`);
-        expect(radioButton).toHaveAttribute("disabled");
-      } else {
-        const radioButton = getByTestId(`Radio-root-${radio.label}`);
-        expect(radioButton).not.toHaveAttribute("disabled");
-      }
+  describe("InlineRadioGroupExample", () => {
+    beforeEach(() => {
+      render(<InlineRadioGroupExample />);
     });
-  });
 
-  it("renders with a Tooltip in the correct position", () => {
-    vi.spyOn(console, "warn").mockImplementation(() => null);
-    const { getByLabelText } = renderResult;
-    DefaultRadioArray.forEach((radio) => {
-      if (radio.tootip) {
-        const radioTooltip = getByLabelText(radio.tooltip);
-        expect(radioTooltip).toHaveAttribute(
-          "class",
-          `neo-tooltip--${radio.position}`
-        );
-      }
+    afterEach(() => {
+      cleanup();
     });
-  });
 
-  it("passes basic axe compliance", async () => {
-    await axeTest(renderResult);
+    it("should render ok", () => {
+      expect(screen.container).not.toBe(null);
+    });
+
+    it("passes basic axe compliance", async () => {
+      const results = await axe(screen.getByTestId("RadioGroup-root"));
+      expect(results).toHaveNoViolations();
+    });
+
+    it("renders with the correct class name for inline styles", () => {
+      const radioGroup = screen.getByRole("radiogroup");
+
+      expect(radioGroup).toHaveAttribute("class", "neo-input-group--inline");
+    });
   });
 });

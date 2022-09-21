@@ -83,16 +83,23 @@ yarn storybook
 
 ## testing commands
 
-Run jest tests
+Run tests
 
 ```
 yarn test
 ```
 
-Run jest tests and watch for new tests
+Run tests in watch mode
 
 ```
 yarn test:watch
+```
+
+Run, in watch mode, tests that match a certain name pattern, e.g. below command runs only Checkbox related tests
+Note: if vitest does not pick up changes in source files, press 'f' or 'a' to force it to run immediately.
+
+```
+yarn test:watch Checkbox
 ```
 
 Run cypress tests
