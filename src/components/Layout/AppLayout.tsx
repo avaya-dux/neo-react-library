@@ -3,6 +3,7 @@ import { ReactNode, useEffect } from "react";
 
 export interface AppLayoutProps {
   desktopAreas?: string;
+  footer?: ReactNode;
   header?: ReactNode;
   height?: string;
   leftPanel?: ReactNode;
@@ -13,6 +14,7 @@ export interface AppLayoutProps {
 
 export const AppLayout = ({
   desktopAreas,
+  footer,
   header,
   height = "100vh",
   leftPanel,
@@ -55,7 +57,7 @@ export const AppLayout = ({
           {leftPanel && <Areas.Leftpanel area={"leftpanel"}>{leftPanel}</Areas.Leftpanel>}
           <Areas.Main area={"main"}>{mainContent}</Areas.Main>
           {rightPanel && <Areas.Rightpanel area={"rightpanel"}>{rightPanel}</Areas.Rightpanel>}
-          <Areas.Footer area={"footer"}>Footer goes here</Areas.Footer>
+          {footer && <Areas.Footer area={"footer"}>{footer}</Areas.Footer>}
         </>
       )}
     </Composition>
