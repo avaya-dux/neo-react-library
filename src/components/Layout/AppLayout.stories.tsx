@@ -36,27 +36,71 @@ const leftNav: ReactNode = (
   </LeftNav>
 );
 
-const emptyWidget: ReactNode = (
+const headerWidget: ReactNode = (
   <Widget empty>
     <Icon icon="settings" aria-label="settings" />
-    <p>Header of widget window</p>
+    <p>Header Widget</p>
+  </Widget>
+);
+
+const leftPanelWidget: ReactNode = (
+  <Widget empty>
+    <Icon icon="settings" aria-label="settings" />
+    <p>Left Pane Widget</p>
+  </Widget>
+);
+
+const rightPanelWidget: ReactNode = (
+  <Widget empty>
+    <Icon icon="settings" aria-label="settings" />
+    <p>Right Pane Widget</p>
+  </Widget>
+);
+
+const mainContentWidget: ReactNode = (
+  <Widget empty>
+    <Icon icon="settings" aria-label="settings" />
+    <p>Main Content Widget</p>
+  </Widget>
+);
+
+const footerWidget: ReactNode = (
+  <Widget empty>
+    <Icon icon="settings" aria-label="settings" />
+    <p>Footer Widget</p>
   </Widget>
 );
 
 export const Default = () => (
   <AppLayout
-    // header={TopNavBar}
-    leftPanel={leftNav}
-    mainContent={emptyWidget}
-    // rightPanel={emptyWidget}
-    // footer={emptyWidget}
+    header={headerWidget}
+    leftPanel={leftPanelWidget}
+    mainContent={mainContentWidget}
+    rightPanel={rightPanelWidget}
+    footer={footerWidget}
   />
 );
 
 export const HeaderAndContent = () => (
-  <AppLayout
-    header={emptyWidget}
-    mainContent={emptyWidget}
-  />
+  <AppLayout header={headerWidget} mainContent={mainContentWidget} />
 );
 
+export const LeftPanelAndContent = () => (
+  <AppLayout leftPanel={leftPanelWidget} mainContent={mainContentWidget} />
+);
+
+export const FooterAndContent = () => (
+  <AppLayout footer={footerWidget} mainContent={mainContentWidget} />
+);
+
+export const RightPanelAndContent = () => (
+  <AppLayout rightPanel={rightPanelWidget} mainContent={mainContentWidget} />
+);
+
+export const LeftNavHeaderAndContent = () => (
+  <AppLayout
+    header={headerWidget}
+    leftPanel={leftNav}
+    mainContent={mainContentWidget}
+  />
+);
