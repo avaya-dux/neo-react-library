@@ -51,10 +51,10 @@ export const AppLayout = ({
     >
       {(Areas) => (
         <>
-          <Areas.Topheader>{header}</Areas.Topheader>
-          <Areas.Leftpanel area={"leftpanel"}>{leftPanel}</Areas.Leftpanel>
+          {header && <Areas.Topheader>{header}</Areas.Topheader>}
+          {leftPanel && <Areas.Leftpanel area={"leftpanel"}>{leftPanel}</Areas.Leftpanel>}
           <Areas.Main area={"main"}>{mainContent}</Areas.Main>
-          <Areas.Rightpanel area={"rightpanel"}>{rightPanel}</Areas.Rightpanel>
+          {rightPanel && <Areas.Rightpanel area={"rightpanel"}>{rightPanel}</Areas.Rightpanel>}
           <Areas.Footer area={"footer"}>Footer goes here</Areas.Footer>
         </>
       )}
