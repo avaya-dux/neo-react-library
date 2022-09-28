@@ -18,29 +18,6 @@ export const AppLayout = ({
   mobileAreas,
   rightPanel,
 }: AppLayoutProps) => {
-  useEffect(() => {
-    Layout.configure({
-      defaultBreakpointName: "desktop",
-      breakpoints: {
-        mobile: {
-          maxWidth: 767,
-        },
-        tablet: {
-          minWidth: 768,
-          maxWidth: 1023,
-        },
-        desktop: {
-          minWidth: 1024,
-          maxWidth: 1439,
-        },
-        bigscreen: {
-          minWidth: 1024,
-          maxWidth: 1439,
-        },
-      },
-    });
-  }, []);
-
   const defaultDesktopAreas = `
     topheader topheader
     leftpanel main
@@ -64,9 +41,9 @@ export const AppLayout = ({
       areas={mobileAreas || defaultMobileAreas}
       areasMd={desktopAreas || defaultDesktopAreas}
       areasLg={desktopAreas || defaultBigscreenAreas}
-      templateRows={"60px 1fr 30px"}
+      templateRows={"auto 1fr auto"}
       templateCols={"1fr auto"}
-      templateColsMd={"250px 1fr auto"}
+      templateColsMd={"auto 1fr auto"}
       gap={1}
     >
       {(Areas) => (
