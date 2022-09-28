@@ -4,6 +4,7 @@ import { ReactNode, useEffect } from "react";
 export interface AppLayoutProps {
   desktopAreas?: string;
   header?: ReactNode;
+  height?: string;
   leftPanel?: ReactNode;
   mainContent: ReactNode;
   mobileAreas?: string;
@@ -13,6 +14,7 @@ export interface AppLayoutProps {
 export const AppLayout = ({
   desktopAreas,
   header,
+  height = "100vh",
   leftPanel,
   mainContent,
   mobileAreas,
@@ -41,6 +43,7 @@ export const AppLayout = ({
       areas={mobileAreas || defaultMobileAreas}
       areasMd={desktopAreas || defaultDesktopAreas}
       areasLg={desktopAreas || defaultBigscreenAreas}
+      height={height}
       templateRows={"auto 1fr auto"}
       templateCols={"1fr auto"}
       templateColsMd={"auto 1fr auto"}
