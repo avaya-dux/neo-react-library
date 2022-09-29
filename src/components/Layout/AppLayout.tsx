@@ -1,5 +1,5 @@
-import Layout, { Composition } from "atomic-layout";
-import { ReactNode, useEffect } from "react";
+import { Composition } from "atomic-layout";
+import { ReactNode } from "react";
 
 export interface AppLayoutProps {
   desktopAreas?: string;

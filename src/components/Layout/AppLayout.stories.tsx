@@ -11,12 +11,6 @@ export default {
   component: AppLayout,
 } as Meta<AppLayoutProps>;
 
-const inverseDesktopAreas = `
-  footer footer
-  leftpanel main
-  topheader topheader
-`;
-
 const leftNav: ReactNode = (
   <LeftNav
     aria-label="Integration Testing App Menu"
