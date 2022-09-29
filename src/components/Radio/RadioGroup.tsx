@@ -25,6 +25,27 @@ export interface RadioGroupProps {
   required?: boolean;
 }
 
+/**
+ * A RadioGroup is a group of radio buttons that allows the user to select one option from a set.
+ *
+ * @example
+ * <RadioGroup
+    groupName="Example Radio Group"
+    onChange={(e) => console.log(e.target.value)}
+  >
+    <Radio value="Radio 1">Radio 1</Radio>
+    <Radio value="Radio 2" disabled>
+      Radio 2
+    </Radio>
+    <Radio value="Radio 3">Radio 3</Radio>
+    <Tooltip label="Radio 4" position="right">
+      <Radio value="Radio 4">Radio 4</Radio>
+    </Tooltip>
+  </RadioGroup>
+ *
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-radio-group
+ * @see https://design.avayacloud.com/components/web/radio-web
+ */
 export const RadioGroup = ({
   children,
   groupName,
