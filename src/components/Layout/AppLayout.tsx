@@ -61,9 +61,9 @@ export const AppLayout = ({
       areasMd={desktopAreas || defaultDesktopAreas}
       areasLg={desktopAreas || defaultBigscreenAreas}
       height={height}
-      templateRows={"auto 1fr auto"}
-      templateCols={"1fr auto"}
-      templateColsMd={"auto 1fr auto"}
+      templateRows="auto 1fr auto"
+      templateCols="1fr auto"
+      templateColsMd="auto 1fr auto"
       gap={1}
     >
       {(Areas) => (
