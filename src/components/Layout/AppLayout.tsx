@@ -1,46 +1,42 @@
-import Layout, { Composition } from "atomic-layout";
-import { ReactNode, useEffect } from "react";
+import { Composition } from "atomic-layout";
+import { ReactNode } from "react";
 
 export interface AppLayoutProps {
   desktopAreas?: string;
+  footer?: ReactNode;
   header?: ReactNode;
+  height?: string;
   leftPanel?: ReactNode;
   mainContent: ReactNode;
   mobileAreas?: string;
   rightPanel?: ReactNode;
 }
 
+/**
+ * This component is used to create a Layout that a typical web application uses
+ *
+ * @example
+ * <AppLayout
+ *   header={TopNavBar}
+ *   leftPanel={leftNav}
+ *   mainContent={mainPanel}
+ *   rightPanel={emptyWidget}
+ *   footer={emptyWidget}
+ *  />
+ *
+ * Only the mainContent prop is required.
+ */
+
 export const AppLayout = ({
   desktopAreas,
+  footer,
   header,
+  height = "100vh",
   leftPanel,
   mainContent,
   mobileAreas,
   rightPanel,
 }: AppLayoutProps) => {
-  useEffect(() => {
-    Layout.configure({
-      defaultBreakpointName: "desktop",
-      breakpoints: {
-        mobile: {
-          maxWidth: 767,
-        },
-        tablet: {
-          minWidth: 768,
-          maxWidth: 1023,
-        },
-        desktop: {
-          minWidth: 1024,
-          maxWidth: 1439,
-        },
-        bigscreen: {
-          minWidth: 1024,
-          maxWidth: 1439,
-        },
-      },
-    });
-  }, []);
-
   const defaultDesktopAreas = `
     topheader topheader
     leftpanel main
@@ -64,18 +60,19 @@ export const AppLayout = ({
       areas={mobileAreas || defaultMobileAreas}
       areasMd={desktopAreas || defaultDesktopAreas}
       areasLg={desktopAreas || defaultBigscreenAreas}
-      templateRows={"60px 1fr 30px"}
-      templateCols={"1fr auto"}
-      templateColsMd={"250px 1fr auto"}
+      height={height}
+      templateRows="auto 1fr auto"
+      templateCols="1fr auto"
+      templateColsMd="auto 1fr auto"
       gap={1}
     >
       {(Areas) => (
         <>
-          <Areas.Topheader>{header}</Areas.Topheader>
-          <Areas.Leftpanel area={"leftpanel"}>{leftPanel}</Areas.Leftpanel>
+          {header && <Areas.Topheader>{header}</Areas.Topheader>}
+          {leftPanel && <Areas.Leftpanel area={"leftpanel"}>{leftPanel}</Areas.Leftpanel>}
           <Areas.Main area={"main"}>{mainContent}</Areas.Main>
-          <Areas.Rightpanel area={"rightpanel"}>{rightPanel}</Areas.Rightpanel>
-          <Areas.Footer area={"footer"}>Footer goes here</Areas.Footer>
+          {rightPanel && <Areas.Rightpanel area={"rightpanel"}>{rightPanel}</Areas.Rightpanel>}
+          {footer && <Areas.Footer area={"footer"}>{footer}</Areas.Footer>}
         </>
       )}
     </Composition>

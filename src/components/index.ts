@@ -12,6 +12,7 @@ export * from "./Icon";
 export * from "./IconButton";
 export * from "./Image";
 export * from "./ImageLink";
+export * from "./Layout";
 export * from "./LeftNav";
 export * from "./List";
 export * from "./Menu";
