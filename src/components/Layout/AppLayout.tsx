@@ -12,6 +12,21 @@ export interface AppLayoutProps {
   rightPanel?: ReactNode;
 }
 
+/**
+ * This component is used to create a Layout that a typical web application uses
+ *
+ * @example
+ * <AppLayout
+ *   header={TopNavBar}
+ *   leftPanel={leftNav}
+ *   mainContent={mainPanel}
+ *   rightPanel={emptyWidget}
+ *   footer={emptyWidget}
+ *  />
+ *
+ * Only the mainContent prop is required.
+ */
+
 export const AppLayout = ({
   desktopAreas,
   footer,
