@@ -1,4 +1,4 @@
-import { useMemo, useId } from "react";
+import { useId, useMemo } from "react";
 
 export interface RadioProps
   extends Omit<

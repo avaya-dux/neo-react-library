@@ -1,6 +1,5 @@
-import { useCallback, Children, ReactElement } from "react";
-
 import log from "loglevel";
+import { Children, ReactElement, useCallback } from "react";
 
 import { Checkbox, CheckboxProps } from "components/Checkbox";
 import { NeoInputWrapper } from "components/NeoInputWrapper";
