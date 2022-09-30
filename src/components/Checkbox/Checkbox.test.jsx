@@ -25,7 +25,6 @@ const DefaultProps = {
   value: "1",
 };
 
-
 describe("Checkbox", () => {
   vi.spyOn(console, "log").mockImplementation(() => null);
 
@@ -69,7 +68,6 @@ describe("Checkbox", () => {
   });
 
   describe("className is assigned appropriately", () => {
-
     it("returns the correct class name when passed `true`", () => {
       render(<Checkbox {...DefaultProps} checked />);
       const checkboxElement = screen.getByLabelText(DefaultProps.label);
@@ -130,8 +128,8 @@ describe("Checkbox", () => {
 
       it("should be accessible by space key", async () => {
         const checkboxes = screen.getAllByRole("checkbox");
-        expect(checkboxes.length).toBe(2)
-        const checkboxElement = checkboxes[0]
+        expect(checkboxes.length).toBe(2);
+        const checkboxElement = checkboxes[0];
         expect(checkboxElement.checked).toBeFalsy();
         await user.tab();
         expect(checkboxElement).toHaveFocus();
@@ -370,9 +368,7 @@ describe("Checkbox", () => {
       });
     });
 
-
     describe(VoiceOverTest.name, () => {
-
       let renderResult;
 
       beforeEach(() => {
@@ -393,8 +389,6 @@ describe("Checkbox", () => {
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
-
     });
-
   });
 });

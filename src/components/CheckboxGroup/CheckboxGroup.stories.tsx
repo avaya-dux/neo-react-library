@@ -3,7 +3,11 @@ import { Button, TextArea } from "components";
 import { Checkbox, CheckboxProps } from "components/Checkbox/Checkbox";
 import { FormEvent, useCallback, useState } from "react";
 import { CheckboxGroup, CheckboxGroupProps } from "./CheckboxGroup";
-import { checkboxes, disabledCheckboxes, readonlyCheckboxes } from "./testHelpers";
+import {
+  checkboxes,
+  disabledCheckboxes,
+  readonlyCheckboxes,
+} from "./testHelpers";
 
 export default {
   title: "Components/Checkbox Group",

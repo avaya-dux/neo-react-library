@@ -1,6 +1,5 @@
-import { useCallback, Children, ReactElement } from "react";
-
 import log from "loglevel";
+import { Children, ReactElement, useCallback } from "react";
 
 import { Checkbox, CheckboxProps } from "components/Checkbox";
 import { NeoInputWrapper } from "components/NeoInputWrapper";
@@ -23,17 +22,16 @@ export interface CheckboxGroupProps {
  *
  * @example
  * <CheckboxGroup
- *   groupName="Default Checkbox Group"
- *   onChange=() => null,
- * >
- * <Checkbox label="Gift" value="gift" />
- * <Checkbox
- *   label="Prime"
- *   value="prime"
- *   defaultChecked
- * />
- * </CheckboxGroup>
- *
+    groupName="Default Checkbox Group"
+    onChange=() => null,
+  >
+    <Checkbox label="Gift" value="gift" />
+    <Checkbox
+      label="Prime"
+      value="prime"
+      defaultChecked
+    />
+  </CheckboxGroup>
  */
 export const CheckboxGroup = ({
   children,

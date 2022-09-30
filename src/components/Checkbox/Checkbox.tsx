@@ -1,5 +1,5 @@
-import log from "loglevel";
 import clsx from "clsx";
+import log from "loglevel";
 import React, { forwardRef, useCallback, useId } from "react";
 
 import { handleAccessbilityError } from "utils";
@@ -45,7 +45,6 @@ export type CheckboxProps = BaseCheckboxProps & EnforcedAccessibleLabel;
  *
  * @see https://design.avayacloud.com/components/web/checkbox-web
  */
-
 export const Checkbox = forwardRef(
   (
     {
