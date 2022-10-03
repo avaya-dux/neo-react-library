@@ -5,7 +5,8 @@ import { vi } from "vitest";
 
 import * as AppLayoutStories from "./AppLayout.stories";
 
-// the following defineProperty call is needed to woraround an issue with the test library.
+// the following defineProperty call is needed to workaround an issue with the test library.
+// See article: https://stackoverflow.com/questions/39830580/jest-test-fails-typeerror-window-matchmedia-is-not-a-function
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
