@@ -18,11 +18,19 @@
   padding-right: 32px;
   border-bottom: 2px solid transparent;
 }
+.neo-navbar a.neo-nav-link-btn:hover {
+  color: var(--tab-item-hover-color);
+  background-color: var(--tab-background-hover-color);
+  transition: background-color 0.4s;
+}
 .neo-navbar button.neo-nav-link-btn:disabled {
   font-size: 16px;
   padding-left: 32px;
   padding-right: 32px;
   border-bottom: 2px solid transparent;
+  background-color: unset;
+  background-image: none;
+  transition: none;
 
   /* HACK: disabled tertiary button has some issues that need fixing, hacking this to make it work for now */
   color: var(--navbar-active-disabled-color);
@@ -30,7 +38,9 @@
 
 /* HACK: disabled tertiary button has some issues that need fixing, hacking this to make it work for now */
 .neo-navbar button.neo-nav-link-btn:disabled:hover {
-  color: var(--button-text-color);
+  background-color: unset;
+  background-image: none;
+  transition: none;
   cursor: not-allowed;
 }
 
@@ -40,6 +50,9 @@
   font-weight: 600;
 }
 .neo-navbar button.neo-nav-link-btn.neo-nav-link-btn-active:disabled {
+  background-color: unset;
+  background-image: none;
+  transition: none;
   border-bottom: 2px solid var(--navbar-active-disabled-color);
   font-weight: 400;
 }
