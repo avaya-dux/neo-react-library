@@ -1,3 +1,7 @@
+.neo-navbar .neo-nav {
+  margin-left: auto;
+}
+
 .neo-navbar .neo-nav .neo-tabs {
   height: 57px;
 }
