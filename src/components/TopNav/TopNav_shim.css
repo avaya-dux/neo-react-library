@@ -43,3 +43,39 @@
   border-bottom: 2px solid var(--navbar-active-disabled-color);
   font-weight: 400;
 }
+
+/* center search input */
+nav.neo-navbar .neo-nav .neo-form-control.neo-input-icon {
+  display: flex;
+  align-items: center;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+/* grid-ify top nav when screen is <799px */
+@media (max-width: 799px) {
+  .neo-navbar {
+    display: grid;
+    grid-template-areas:
+      "a c"
+      "b b";
+  }
+
+  .neo-navbar .neo-nav--left {
+    grid-area: a;
+  }
+  .neo-navbar .neo-nav {
+    grid-area: b;
+    justify-content: space-between;
+    height: 58px;
+    margin: 0;
+    padding: 0;
+  }
+  .neo-navbar .neo-nav--right {
+    grid-area: c;
+  }
+
+  .neo-navbar button.neo-nav-link-btn {
+    margin-top: 2px;
+  }
+}

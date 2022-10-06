@@ -26,6 +26,11 @@ import "./TopNav_shim.css";
     <TopNav.IconButton icon="settings" aria-label="Settings" />
   </TopNav>
  *
+ * <TopNav
+    logo={<Image isDecorativeOrBranding src="link/to/image.png"/>}
+    search={<TopNav.Search onChange={handleChange} />}
+    title="Product Name"
+  />
  * @see https://design.avayacloud.com/components/web/navbar-web
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-top-navigation
  */
@@ -50,11 +55,9 @@ export const TopNav = ({
         {title && <h1 className="neo-nav-title">{title}</h1>}
       </div>
 
-      <div className="neo-nav">
-        {children}
+      <div className="neo-nav">{children}</div>
 
-        {search}
-      </div>
+      <div className="neo-nav--right">{search}</div>
     </nav>
   );
 };
