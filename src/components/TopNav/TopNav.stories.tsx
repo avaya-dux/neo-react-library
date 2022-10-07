@@ -25,7 +25,11 @@ export default {
   component: TopNav,
 } as Meta<TopNavProps>;
 
-const Logo = <Image src={fpo} isDecorativeOrBranding />;
+const Logo = (
+  <a href="/" title="Logo Link">
+    <Image src={fpo} isDecorativeOrBranding />
+  </a>
+);
 
 const LinkLogo = (
   <ImageLink
@@ -34,8 +38,6 @@ const LinkLogo = (
     alt="Link to Avaya"
   />
 );
-
-const TopNavSearch = <TopNav.Search />;
 
 const Template: Story<TopNavProps> = (props: TopNavProps) => {
   return <TopNav {...props} />;
@@ -111,7 +113,7 @@ TitleExample.args = {
 export const SearchExample = Template.bind({});
 SearchExample.args = {
   logo: Logo,
-  search: TopNavSearch,
+  search: <TopNav.Search />,
   skipNav: (
     <TopNav.SkipNav href="#main-content">Skip To Main Content</TopNav.SkipNav>
   ),
@@ -369,3 +371,21 @@ export const AgentCardExample = () => {
     </TopNav>
   );
 };
+
+export const DesignPortalExample = () => (
+  <TopNav logo={Logo} search={<TopNav.Search />}>
+    <TopNav.LinkButton href="/whats-new">Link</TopNav.LinkButton>
+
+    <TopNav.LinkButton href="/active" active>
+      Active
+    </TopNav.LinkButton>
+
+    <TopNav.LinkButton href="/active" disabled active>
+      Disabled Active
+    </TopNav.LinkButton>
+
+    <TopNav.LinkButton href="/active" disabled>
+      Disabled
+    </TopNav.LinkButton>
+  </TopNav>
+);

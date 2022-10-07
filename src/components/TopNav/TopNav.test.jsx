@@ -48,7 +48,7 @@ describe("TopNav", () => {
       const { container } = renderResult;
       const navElement = container.firstChild;
       expect(navElement.firstChild).toHaveClass("neo-nav--left");
-      expect(navElement.lastChild).toHaveClass("neo-nav");
+      expect(navElement.lastChild).toHaveClass("neo-nav--right");
     });
 
     it("passes basic axe compliance", async () => {

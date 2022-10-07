@@ -73,8 +73,8 @@ export const TextInput = ({
   value,
   ...rest
 }: TextInputProps) => {
-  if (!label && !placeholder) {
-    handleAccessbilityError("You must provide a `label` or `placeholder`.");
+  if (!label && !rest["aria-label"]) {
+    handleAccessbilityError("You must provide a `label` or `aria-label`.");
   }
 
   const inputRef = useRef<HTMLInputElement>(null);

@@ -18,3 +18,8 @@
 .neo-input-editable__wrapper input::-ms-clear {
   display: none;
 }
+
+.neo-input-editable__wrapper .neo-input-edit__icon:not(:disabled):focus,
+.neo-input-editable__wrapper .neo-input-editable__close:not(:disabled):focus {
+  margin: unset;
+}
