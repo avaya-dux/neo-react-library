@@ -25,7 +25,11 @@ export default {
   component: TopNav,
 } as Meta<TopNavProps>;
 
-const Logo = <Image src={fpo} isDecorativeOrBranding />;
+const Logo = (
+  <a href="/" title="Logo Link">
+    <Image src={fpo} isDecorativeOrBranding />
+  </a>
+);
 
 const LinkLogo = (
   <ImageLink
