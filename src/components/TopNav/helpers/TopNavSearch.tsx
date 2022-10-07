@@ -27,6 +27,7 @@ export const TopNavSearch = ({
     clearable={clearable}
     disabled={disabled}
     startIcon={startIcon}
+    type="search"
     {...rest}
   />
 );
