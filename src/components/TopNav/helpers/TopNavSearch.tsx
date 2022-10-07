@@ -18,7 +18,6 @@ export const TopNavSearch = ({
   "aria-label": ariaLabel = "Search",
   clearable = true,
   disabled = false,
-  placeholder = "Search",
   startIcon = "search",
 
   ...rest
@@ -27,7 +26,6 @@ export const TopNavSearch = ({
     aria-label={ariaLabel}
     clearable={clearable}
     disabled={disabled}
-    placeholder={placeholder}
     startIcon={startIcon}
     {...rest}
   />
