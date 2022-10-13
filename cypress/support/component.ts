@@ -19,4 +19,8 @@ import "./commands";
 import "@avaya/neo/neo/dist/css/neo/neo.min.css";
 import "cypress-real-events/support";
 
+// HACK: from `cypress-io` issue: https://github.com/cypress-io/cypress/issues/21434
+global.process = global.process || {};
+global.process.env = global.process.env || {};
+
 Cypress.Commands.add("mount", mount);
