@@ -42,7 +42,7 @@ describe("TextInput", () => {
 
   it("does not throw an error with `label` OR `placeholder`", () => {
     expect(() => render(<TextInput label="truthy" />)).not.toThrow();
-    expect(() => render(<TextInput placeholder="truthy" />)).not.toThrow();
+    expect(() => render(<TextInput aria-label="truthy" />)).not.toThrow();
     expect(() =>
       render(<TextInput label="double" placeholder="truthy" />)
     ).not.toThrow();
