@@ -82,7 +82,7 @@
     "@storybook/testing-library": "^0.0.13",
     "@storybook/testing-react": "^1.3.0",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest-axe": "^3.5.4",
     "@types/react": "^18.0.17",
@@ -107,7 +107,7 @@
     "jest-axe": "^6.0.0",
     "jest-coverage-badges": "^1.1.2",
     "jsdoc": "^3.6.11",
-    "jsdom": "^20.0.0",
+    "jsdom": "^20.0.1",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -117,6 +117,6 @@
     "typescript": "^4.7.4",
     "vite": "^3.0.8",
     "vite-plugin-dts": "^1.4.1",
-    "vitest": "^0.22.0"
+    "vitest": "^0.22.1"
   }
 }
