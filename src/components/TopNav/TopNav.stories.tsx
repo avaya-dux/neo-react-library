@@ -19,7 +19,6 @@ import {
 
 import { TopNav, TopNavProps } from ".";
 import fpo from "./logo-fpo.png";
-import { TopNavSkipNav } from "./helpers";
 
 export default {
   title: "Components/Top Navigation",
