@@ -19,6 +19,7 @@ import {
 
 import { TopNav, TopNavProps } from ".";
 import fpo from "./logo-fpo.png";
+import { TopNavSkipNav } from "./helpers";
 
 export default {
   title: "Components/Top Navigation",
@@ -387,5 +388,38 @@ export const DesignPortalExample = () => (
     <TopNav.LinkButton href="/active" disabled>
       Disabled
     </TopNav.LinkButton>
+  </TopNav>
+);
+
+export const IconButtonDropdownExample = () => (
+  <TopNav logo={Logo} search={<TopNav.Search />}>
+    <Menu
+      itemAlignment="right"
+      menuRootElement={
+        <TopNav.IconButton
+          className="neo-dropdown__link-header"
+          icon="agents"
+          aria-label="agents"
+        />
+      }
+    >
+      <MenuItem>Item1</MenuItem>
+      <SubMenu menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
+        <MenuItem>Sub Item1</MenuItem>
+        <MenuItem>Sub Item2</MenuItem>
+      </SubMenu>
+      <MenuItem>Item3</MenuItem>
+    </Menu>
+    <TopNav.IconButton
+      className="neo-dropdown__link-header"
+      icon="settings"
+      aria-label="Settings"
+    />
+    <TopNav.IconButton
+      className="neo-dropdown__link-header"
+      icon="notifications-on"
+      aria-label="notifications"
+      badge="2"
+    />
   </TopNav>
 );
