@@ -72,11 +72,6 @@ describe("TopNav", () => {
   });
 
   describe("storybook tests", () => {
-    beforeEach(() => {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      window.getComputedStyle = () => {};
-    });
-
     describe("Sticky TopNav", () => {
       it("has the correct class name with sticky prop passed", () => {
         render(<StickyTopNav />);
@@ -164,6 +159,8 @@ describe("TopNav", () => {
 
     describe("Icon Button Dropdown Example", () => {
       it("passes basic axe compliance", async () => {
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        window.getComputedStyle = () => {};
         const { container } = render(<IconButtonDropdownExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
