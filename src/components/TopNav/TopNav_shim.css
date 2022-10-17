@@ -6,6 +6,10 @@
   height: 57px;
 }
 
+.neo-navbar .neo-nav--right {
+  padding-right: 1px;
+}
+
 .neo-navbar .neo-nav--right [type="search"]::-webkit-search-cancel-button,
 .neo-navbar .neo-nav--right [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
