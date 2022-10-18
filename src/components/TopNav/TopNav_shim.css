@@ -79,6 +79,14 @@ nav.neo-navbar .neo-nav .neo-form-control.neo-input-icon {
   padding-right: 32px;
 }
 
+.neo-nav .neo-dropdown:not(:last-child) {
+  padding-right: 0px;
+}
+
+[dir="rtl"] .neo-nav .neo-dropdown:not(:last-child) {
+  padding-left: 0px;
+}
+
 /* grid-ify top nav when screen is <799px */
 @media (max-width: 799px) {
   .neo-navbar {

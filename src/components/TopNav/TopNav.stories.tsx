@@ -409,13 +409,8 @@ export const IconButtonDropdownExample = () => (
       </SubMenu>
       <MenuItem>Item3</MenuItem>
     </Menu>
+    <TopNav.IconButton icon="settings" aria-label="Settings" />
     <TopNav.IconButton
-      className="neo-dropdown__link-header"
-      icon="settings"
-      aria-label="Settings"
-    />
-    <TopNav.IconButton
-      className="neo-dropdown__link-header"
       icon="notifications-on"
       aria-label="notifications"
       badge="2"
