@@ -389,3 +389,31 @@ export const DesignPortalExample = () => (
     </TopNav.LinkButton>
   </TopNav>
 );
+
+export const IconButtonDropdownExample = () => (
+  <TopNav logo={Logo} search={<TopNav.Search />}>
+    <Menu
+      itemAlignment="right"
+      menuRootElement={
+        <TopNav.IconButton
+          className="neo-dropdown__link-header"
+          icon="agents"
+          aria-label="agents"
+        />
+      }
+    >
+      <MenuItem>Item1</MenuItem>
+      <SubMenu menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
+        <MenuItem>Sub Item1</MenuItem>
+        <MenuItem>Sub Item2</MenuItem>
+      </SubMenu>
+      <MenuItem>Item3</MenuItem>
+    </Menu>
+    <TopNav.IconButton icon="settings" aria-label="Settings" />
+    <TopNav.IconButton
+      icon="notifications-on"
+      aria-label="notifications"
+      badge="2"
+    />
+  </TopNav>
+);

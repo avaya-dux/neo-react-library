@@ -16,6 +16,7 @@ const {
   StickyTopNav,
   TabsExample,
   TitleExample,
+  IconButtonDropdownExample,
 } = composeStories(TopNavStories);
 
 describe("TopNav", () => {
@@ -151,6 +152,16 @@ describe("TopNav", () => {
     describe("SearchExample", () => {
       it("passes basic axe compliance", async () => {
         const { container } = render(<SearchExample />);
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("Icon Button Dropdown Example", () => {
+      it("passes basic axe compliance", async () => {
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        window.getComputedStyle = () => {};
+        const { container } = render(<IconButtonDropdownExample />);
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
