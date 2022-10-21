@@ -455,7 +455,7 @@ function getTabLinkProps() {
     {
       content: "content 2",
       disabled: false,
-      href: "somelinek",
+      href: "http://somelink.com",
       id: "tab2",
       name: "tab2",
     },
