@@ -136,7 +136,7 @@ export const createTab = (
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
   setActivePanelIndex: Dispatch<SetStateAction<number>>,
   focus: boolean,
-  setFocus: ispatch<SetStateAction<boolean>>
+  setFocus: Dispatch<SetStateAction<boolean>>
 ) => {
   const tabId = tabProps.id;
   const active = index === activeTabIndex;
