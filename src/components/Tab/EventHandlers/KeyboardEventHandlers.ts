@@ -11,7 +11,11 @@ import { isAriaDisabled, Keys } from "utils";
 
 import { InternalTabProps } from "../InternalTabTypes";
 import { activateAnotherTabAndPanel } from "./Helper";
-import { activatePreviousTab, getNextTabIndex } from "./KeyboardHelper";
+import {
+  activatePreviousTab,
+  getNextTabIndex,
+  isTabLink,
+} from "./KeyboardHelper";
 
 const logger = log.getLogger("tab-keyboard-event-handler");
 logger.disableAll();
@@ -160,9 +164,11 @@ export const handleKeyDownEvent = (
       break;
     case Keys.ENTER:
     case Keys.SPACE:
-      e.preventDefault();
-      setActivePanelIndex(activeTabIndex);
-      focus(ref, tabs[activeTabIndex].id);
+      if (!isTabLink(tabs, activeTabIndex)) {
+        e.preventDefault();
+        setActivePanelIndex(activeTabIndex);
+        focus(ref, tabs[activeTabIndex].id);
+      }
       break;
   }
   e.stopPropagation();

@@ -4,6 +4,7 @@ import {
   activatePreviousTab,
   getNextTabIndex,
   getPreviousTabIndex,
+  isTabLink
 } from "./KeyboardHelper";
 
 describe("Tab -> EventHandlers -> Helper", () => {
@@ -80,6 +81,19 @@ describe("Tab -> EventHandlers -> Helper", () => {
       const tabs = [{}, { disabled: true }, {}];
       const activeTabIndex = 0;
       expect(getPreviousTabIndex(tabs, activeTabIndex)).toBe(activeTabIndex);
+    });
+  });
+
+  describe("isTabLink", () => {
+    it("when href is defined, return true", () => {
+      const tabs = [{}, { href: "http://faq.com" }, {}];
+      const activeTabIndex = 1;
+      expect(isTabLink(tabs, activeTabIndex)).toBe(true);
+    });
+    it("when href is not defined, return false", () => {
+      const tabs = [{}, {}, {}];
+      const activeTabIndex = 1;
+      expect(isTabLink(tabs, activeTabIndex)).toBe(false);
     });
   });
 });

@@ -9,7 +9,7 @@ import {
   handleFocusEvent,
   handleKeyDownEvent,
 } from "./KeyboardEventHandlers";
-import { activatePreviousTab, getNextTabIndex } from "./KeyboardHelper";
+import { activatePreviousTab, getNextTabIndex, isTabLink } from "./KeyboardHelper";
 
 vi.mock("./KeyboardHelper");
 vi.mock("./Helper");
@@ -182,10 +182,15 @@ describe("Tab Keyboard event handlers", () => {
           stopPropagation: vi.fn(),
           preventDefault: vi.fn(),
         };
+        vi.resetAllMocks();
       });
-      it("should do nothing if tab is vertical", () => {
+      it("should show panel after pressing enter on Tab", () => {
         testEnterOrSpaceKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
       });
+      it("should open link after pressing enter on TabLink", () => {
+        isTabLink.mockReturnValue(true)
+        testLinkOpenOnEnterOrSpaceKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
+      })
     });
     describe(Keys.SPACE, () => {
       let e;
@@ -195,10 +200,15 @@ describe("Tab Keyboard event handlers", () => {
           stopPropagation: vi.fn(),
           preventDefault: vi.fn(),
         };
+        vi.resetAllMocks();
       });
       it("should call setActivePanelIndex and focus", () => {
         testEnterOrSpaceKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
       });
+      it("should open link after pressing enter on TabLink", () => {
+        isTabLink.mockReturnValue(true)
+        testLinkOpenOnEnterOrSpaceKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
+      })
     });
     describe(Keys.RIGHT, () => {
       let e;
@@ -434,6 +444,30 @@ function getTabProps() {
   ];
 }
 
+function getTabLinkProps() {
+  return [
+    {
+      content: <h2>content1</h2>,
+      disabled: false,
+      id: "tab1",
+      name: "tab1",
+    },
+    {
+      content: "content 2",
+      disabled: false,
+      href: "http://somelink.com",
+      id: "tab2",
+      name: "tab2",
+    },
+    {
+      content: "content 3",
+      disabled: false,
+      id: "tab3",
+      name: "tab3",
+    },
+  ];
+}
+
 function testCloseElementKeyDown(e, setActiveTabIndex, setActivePanelIndex) {
   expect(
     handleCloseElementKeyDownEvent(
@@ -468,4 +502,25 @@ function testEnterOrSpaceKeyDown(
   expect(setActivePanelIndex).toBeCalledWith(1);
   expect(e.stopPropagation).toHaveBeenCalled();
   expect(e.preventDefault).toHaveBeenCalled();
+}
+
+function testLinkOpenOnEnterOrSpaceKeyDown(
+  e,
+  setActiveTabIndex,
+  setActivePanelIndex,
+  ref
+) {
+  const tabs = getTabLinkProps();
+  handleKeyDownEvent(
+    e,
+    false,
+    tabs,
+    1,
+    setActiveTabIndex,
+    setActivePanelIndex,
+    ref
+  );
+  expect(e.preventDefault).not.toBeCalled();
+  expect(setActivePanelIndex).not.toBeCalled();
+  expect(e.stopPropagation).toHaveBeenCalled();
 }
