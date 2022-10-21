@@ -121,7 +121,7 @@ export const InternalTab = ({
       logger.debug(`focus tab ${id}`);
       ref.current && ref.current.focus();
     }
-  }, [focus, active]);
+  }, [focus, active, disabled]);
 
   return (
     <>
