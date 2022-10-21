@@ -54,3 +54,11 @@ export function activatePreviousTab(
     return false;
   }
 }
+
+export const isTabLink = (
+  tabs: InternalTabProps[],
+  activeTabIndex: number
+): boolean => {
+  const tab = tabs[activeTabIndex];
+  return !!tab.href;
+};
