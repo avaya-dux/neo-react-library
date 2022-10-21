@@ -33,6 +33,7 @@ const hrefNoopString = "#noop";
 export const InternalTab = ({
   tabIndex,
   active,
+  focus,
   dir,
   disabled,
   closable,
@@ -48,6 +49,7 @@ export const InternalTab = ({
   activeTabIndex,
   setActiveTabIndex,
   setActivePanelIndex,
+  setFocus,
 }: InternalTabProps & InteractiveTabProps) => {
   logger.debug(`debug internalTab ${id}`);
   const ref = useRef<HTMLAnchorElement>(null);
@@ -105,21 +107,21 @@ export const InternalTab = ({
   const handleAnchorFocusEvent: FocusEventHandler = (
     e: FocusEvent<HTMLAnchorElement>
   ) => {
-    return handleFocusEvent(e, ref);
+    return handleFocusEvent(e, ref, setFocus);
   };
 
   const handleAnchorBlurEvent: FocusEventHandler = (
     e: FocusEvent<HTMLAnchorElement>
   ) => {
-    return handleBlurEvent(e, ref);
+    return handleBlurEvent(e, ref, setFocus);
   };
 
   useEffect(() => {
-    if (active && !disabled) {
+    if (focus && active && !disabled) {
       logger.debug(`focus tab ${id}`);
       ref.current && ref.current.focus();
     }
-  }, [activeTabIndex]);
+  }, [focus, active, disabled]);
 
   return (
     <>

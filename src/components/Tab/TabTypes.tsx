@@ -40,6 +40,7 @@ interface Oritentation {
 interface CommonTabsProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultIndex?: number;
   index?: number;
+  initialFocus?: boolean;
   children:
     | ReactElement<TabListProps>
     | [ReactElement<TabListProps>, ReactElement<TabPanelsProps>];

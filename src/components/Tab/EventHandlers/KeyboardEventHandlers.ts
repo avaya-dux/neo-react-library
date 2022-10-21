@@ -28,7 +28,8 @@ export const focus = (
 
 export const handleFocusEvent = (
   e: FocusEvent<HTMLAnchorElement>,
-  ref: RefObject<HTMLAnchorElement>
+  ref: RefObject<HTMLAnchorElement>,
+  setFocus: Dispatch<SetStateAction<boolean>>
 ) => {
   const target = e.target as HTMLElement;
   const id = target.getAttribute("id");
@@ -44,6 +45,7 @@ export const handleFocusEvent = (
   if (!disabled) {
     logger.debug(`focusing ${id}`);
     focus(ref, nonNullId);
+    setFocus(true);
   } else {
     blur(ref, nonNullId);
   }
@@ -53,7 +55,8 @@ export const handleFocusEvent = (
 
 export const handleBlurEvent = (
   e: FocusEvent<HTMLAnchorElement>,
-  ref: RefObject<HTMLAnchorElement>
+  ref: RefObject<HTMLAnchorElement>,
+  setFocus: Dispatch<SetStateAction<boolean>>
 ) => {
   const target = e.target as HTMLElement;
   const id = target.getAttribute("id");
@@ -63,6 +66,7 @@ export const handleBlurEvent = (
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   blur(ref, id!);
+  setFocus(false);
 };
 
 export const blur = (

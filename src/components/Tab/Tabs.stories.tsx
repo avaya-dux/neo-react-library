@@ -121,7 +121,7 @@ export const UncontrolledActiveTabStory = () => {
 
   return (
     <div>
-      <Tabs defaultIndex={1} onTabChange={onTabChange}>
+      <Tabs defaultIndex={1} onTabChange={onTabChange} initialFocus={true}>
         <TabList>
           <Tab id="tab1">Tab1</Tab>
 
