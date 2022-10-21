@@ -134,7 +134,9 @@ export const createTab = (
   isVertical: boolean,
   activeTabIndex: number,
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
-  setActivePanelIndex: Dispatch<SetStateAction<number>>
+  setActivePanelIndex: Dispatch<SetStateAction<number>>,
+  focus: boolean,
+  setFocus: ispatch<SetStateAction<boolean>>
 ) => {
   const tabId = tabProps.id;
   const active = index === activeTabIndex;
@@ -171,6 +173,8 @@ export const createTab = (
         tabIndex={index}
         tabs={tabs}
         vertical={isVertical}
+        focus={focus}
+        setFocus={setFocus}
       />
     </li>
   );

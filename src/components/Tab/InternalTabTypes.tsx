@@ -19,8 +19,10 @@ export interface InteractiveTabProps {
   tabIndex: number;
   vertical: boolean;
   active: boolean;
+  focus: boolean;
   tabs: InternalTabProps[];
   activeTabIndex: number;
   setActiveTabIndex: Dispatch<SetStateAction<number>>;
   setActivePanelIndex: Dispatch<SetStateAction<number>>;
+  setFocus: Dispatch<SetStateAction<boolean>>;
 }

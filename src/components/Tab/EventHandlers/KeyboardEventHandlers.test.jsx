@@ -37,10 +37,12 @@ describe("Tab Keyboard event handlers", () => {
         stopPropagation: vi.fn(),
         preventDefault: vi.fn(),
       };
-      handleFocusEvent(e, ref);
+      const setFocus = vi.fn();
+      handleFocusEvent(e, ref, setFocus);
       expect(ref.current.blur).toHaveBeenCalled();
       expect(e.stopPropagation).toBeCalled();
       expect(e.preventDefault).toBeCalled();
+      expect(setFocus).not.toBeCalled();
     });
   });
 
@@ -52,8 +54,10 @@ describe("Tab Keyboard event handlers", () => {
     it("blur is called", () => {
       const target = { getAttribute: () => "tab1" };
       const e = { target, relatedTarget: null };
-      handleBlurEvent(e, ref);
+      const setFocus = vi.fn();
+      handleBlurEvent(e, ref, setFocus);
       expect(ref.current.blur).toHaveBeenCalled();
+      expect(setFocus).toBeCalledWith(false);
     });
   });
 

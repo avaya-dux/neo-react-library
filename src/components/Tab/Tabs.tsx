@@ -36,6 +36,7 @@ logger.disableAll();
 export const Tabs = ({
   defaultIndex = 0,
   index,
+  initialFocus = false,
   children,
   onTabChange,
   onTabPanelChange,
@@ -72,10 +73,13 @@ export const Tabs = ({
     name: "activeTabIndex",
   });
 
+  const [focus, setFocus] = useState(initialFocus)
+
   // HACK: TODO: add proper type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setActiveTabIndex = (newActiveTabIndex: any) => {
     setUncontrolledActiveTabIndex(newActiveTabIndex);
+    setFocus(true)
     onTabChange?.(newActiveTabIndex);
   };
 
@@ -128,7 +132,9 @@ export const Tabs = ({
           isVertical,
           activeTabIndex,
           setActiveTabIndex,
-          setActivePanelIndex
+          setActivePanelIndex,
+          focus,
+          setFocus
         );
       })}
     </ul>
