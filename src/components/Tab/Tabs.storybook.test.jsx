@@ -110,7 +110,7 @@ describe("Tabs", () => {
       it("tab2 should NOT have focus", () => {
         const tab2 = screen.getByText(/Tab2/);
         expect(tab2).not.toHaveFocus();
-      })
+      });
     });
 
     describe(UncontrolledActiveTabStory.storyName, () => {
@@ -133,7 +133,7 @@ describe("Tabs", () => {
       it("tab2 should have focus", () => {
         const tab2 = screen.getByText(/Tab2/);
         expect(tab2).toHaveFocus();
-      })
+      });
     });
 
     describe(IconTabs.storyName, () => {

@@ -4,7 +4,7 @@ import {
   activatePreviousTab,
   getNextTabIndex,
   getPreviousTabIndex,
-  isTabLink
+  isTabLink,
 } from "./KeyboardHelper";
 
 describe("Tab -> EventHandlers -> Helper", () => {

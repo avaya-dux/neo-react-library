@@ -9,7 +9,11 @@ import {
   handleFocusEvent,
   handleKeyDownEvent,
 } from "./KeyboardEventHandlers";
-import { activatePreviousTab, getNextTabIndex, isTabLink } from "./KeyboardHelper";
+import {
+  activatePreviousTab,
+  getNextTabIndex,
+  isTabLink,
+} from "./KeyboardHelper";
 
 vi.mock("./KeyboardHelper");
 vi.mock("./Helper");
@@ -188,9 +192,14 @@ describe("Tab Keyboard event handlers", () => {
         testEnterOrSpaceKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
       });
       it("should open link after pressing enter on TabLink", () => {
-        isTabLink.mockReturnValue(true)
-        testLinkOpenOnEnterOrSpaceKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
-      })
+        isTabLink.mockReturnValue(true);
+        testLinkOpenOnEnterOrSpaceKeyDown(
+          e,
+          setActiveTabIndex,
+          setActivePanelIndex,
+          ref
+        );
+      });
     });
     describe(Keys.SPACE, () => {
       let e;
@@ -206,9 +215,14 @@ describe("Tab Keyboard event handlers", () => {
         testEnterOrSpaceKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
       });
       it("should open link after pressing enter on TabLink", () => {
-        isTabLink.mockReturnValue(true)
-        testLinkOpenOnEnterOrSpaceKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
-      })
+        isTabLink.mockReturnValue(true);
+        testLinkOpenOnEnterOrSpaceKeyDown(
+          e,
+          setActiveTabIndex,
+          setActivePanelIndex,
+          ref
+        );
+      });
     });
     describe(Keys.RIGHT, () => {
       let e;
