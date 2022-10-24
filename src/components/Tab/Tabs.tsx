@@ -73,13 +73,13 @@ export const Tabs = ({
     name: "activeTabIndex",
   });
 
-  const [focus, setFocus] = useState(initialFocus)
+  const [focus, setFocus] = useState(initialFocus);
 
   // HACK: TODO: add proper type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setActiveTabIndex = (newActiveTabIndex: any) => {
     setUncontrolledActiveTabIndex(newActiveTabIndex);
-    setFocus(true)
+    setFocus(true);
     onTabChange?.(newActiveTabIndex);
   };
 
