@@ -191,8 +191,12 @@ export const Table = <T extends Record<string, any>>({
             rowHeight === "medium" && "neo-table--medium",
             showRowSeparator && "neo-table-separator"
           )}
-          aria-labelledby={tableCaptionId}
-          aria-describedby={tableSummaryId}
+          aria-labelledby={
+            caption && tableCaptionId ? tableCaptionId : undefined
+          }
+          aria-describedby={
+            summary && tableSummaryId ? tableSummaryId : undefined
+          }
         >
           <TableHeader
             handleRowToggled={handleRowToggled}
