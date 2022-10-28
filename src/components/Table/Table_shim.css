@@ -6,6 +6,17 @@
   padding-right: 0px;
   margin-left: -12px;
 }
+@media (prefers-color-scheme: light) {
+  :root .neo-dynamic .neo-table th button {
+    color: black;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root .neo-dynamic .neo-table th button,
+  :root .neo-dark .neo-table th button {
+    color: white;
+  }
+}
 
 .neo-table th button span {
   height: auto;
