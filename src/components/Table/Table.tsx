@@ -173,16 +173,18 @@ export const Table = <T extends Record<string, any>>({
           </>
         )}
 
-        <TableToolbar
-          customActionsNode={customActionsNode}
-          handleCreate={handleCreate}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-          handleRefresh={handleRefresh}
-          instance={instance}
-          readonly={readonly}
-          translations={toolbarTranslations}
-        />
+        {readonly === false && (
+          <TableToolbar
+            customActionsNode={customActionsNode}
+            handleCreate={handleCreate}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            handleRefresh={handleRefresh}
+            instance={instance}
+            readonly={readonly}
+            translations={toolbarTranslations}
+          />
+        )}
 
         <table
           {...getTableProps()}
