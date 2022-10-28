@@ -76,8 +76,9 @@ export const Table = <T extends Record<string, any>>({
   handleRefresh,
   handleRowToggled,
   readonly = false,
-  selectableRows = "none",
   rowHeight = "large",
+  selectableRows = "none",
+  showPagination = true,
   showRowSeparator = false,
   translations,
 
@@ -213,7 +214,7 @@ export const Table = <T extends Record<string, any>>({
           />
         </table>
 
-        {rows.length > 0 && (
+        {rows.length > 0 && showPagination && (
           <Pagination
             currentPageIndex={pageIndex + 1}
             itemCount={rowCount}
