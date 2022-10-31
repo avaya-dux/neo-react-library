@@ -25,7 +25,7 @@
     "LICENSE-3rd-party.html"
   ],
   "engines": {
-    "node": ">=v16.0.0"
+    "node": ">=v16.18.0"
   },
   "browserslist": [
     "> 0.5%",
@@ -77,7 +77,7 @@
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-interactions": "^6.5.13",
     "@storybook/addon-links": "^6.5.13",
-    "@storybook/builder-vite": "^0.2.4",
+    "@storybook/builder-vite": "^0.2.5",
     "@storybook/react": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/testing-react": "^1.3.0",
@@ -85,17 +85,17 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest-axe": "^3.5.5",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
     "@types/react-table": "^7.7.12",
-    "@typescript-eslint/eslint-plugin": "^5.40.1",
-    "@typescript-eslint/parser": "^5.40.1",
-    "@vitejs/plugin-react": "^2.1.0",
-    "@vitest/coverage-c8": "^0.24.3",
-    "@vitest/ui": "^0.24.3",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
+    "@vitejs/plugin-react": "^2.2.0",
+    "@vitest/coverage-c8": "^0.24.4",
+    "@vitest/ui": "^0.24.4",
     "babel-loader": "^8.2.5",
     "better-docs": "^2.7.2",
-    "cypress": "^10.10.0",
+    "cypress": "^10.11.0",
     "cypress-real-events": "^1.7.2",
     "downshift": "6.1.12",
     "eslint": "^8.26.0",
@@ -107,7 +107,7 @@
     "jest-axe": "^6.0.0",
     "jest-coverage-badges": "^1.1.2",
     "jsdoc": "^3.6.11",
-    "jsdom": "^20.0.1",
+    "jsdom": "^20.0.2",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -115,8 +115,8 @@
     "react-stopwatch": "^2.0.4",
     "react-table": "^7.8.0",
     "typescript": "^4.8.4",
-    "vite": "^3.1.8",
+    "vite": "^3.2.2",
     "vite-plugin-dts": "^1.6.6",
-    "vitest": "^0.24.3"
+    "vitest": "^0.24.4"
   }
 }
