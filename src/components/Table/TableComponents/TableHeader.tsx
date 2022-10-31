@@ -39,7 +39,8 @@ export const TableHeader = <T extends Record<string, any>>({
     toggleSortBy,
   } = instance;
 
-  const { toggleFilterSheetVisible } = useContext(FilterContext);
+  const { allowColumnFilter, toggleFilterSheetVisible } =
+    useContext(FilterContext);
 
   const selectedRows = Object.keys(selectedRowIds);
   const allRowsAreSelected = selectedRows.length === page.length;
@@ -184,12 +185,18 @@ export const TableHeader = <T extends Record<string, any>>({
                   Z - A
                 </MenuItem>
 
-                <MenuItem
-                  onClick={toggleFilterSheetVisible}
-                  onKeyDown={(e) => onSpaceOrEnter(e, toggleFilterSheetVisible)}
-                >
-                  {translations.filterColumn || "Filter Column"}
-                </MenuItem>
+                {allowColumnFilter ? (
+                  <MenuItem
+                    onClick={toggleFilterSheetVisible}
+                    onKeyDown={(e) =>
+                      onSpaceOrEnter(e, toggleFilterSheetVisible)
+                    }
+                  >
+                    {translations.filterColumn || "Filter Column"}
+                  </MenuItem>
+                ) : (
+                  <></>
+                )}
               </Menu>
             );
           }

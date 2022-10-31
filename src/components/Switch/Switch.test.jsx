@@ -29,6 +29,14 @@ describe("Switch Component", () => {
     expect(results).toHaveNoViolations();
   });
 
+  it("throws if an accessibility error if no children or `aria-label` is passed", () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => null);
+    expect(spy).toHaveBeenCalledTimes(0);
+
+    expect(() => render(<Switch />)).toThrow();
+    expect(spy).toHaveBeenCalled();
+  });
+
   describe("applies `disabled` prop functionality appropriately", () => {
     it("does not allow toggle when disabled", async () => {
       render(<Switch disabled>{labelText}</Switch>);

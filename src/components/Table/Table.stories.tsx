@@ -424,4 +424,5 @@ Templated.args = {
   columns: FilledFields.columns,
   data: [...FilledFields.data],
   selectableRows: "none",
+  showPagination: true,
 };

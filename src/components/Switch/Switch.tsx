@@ -35,6 +35,10 @@ export const Switch = ({
   dir,
   ...rest
 }: SwitchProps) => {
+  if (!children && !rest["aria-label"]) {
+    throw new Error("Switch must be passed children or an aria-label");
+  }
+
   const { disabled, required } = rest;
 
   return (
