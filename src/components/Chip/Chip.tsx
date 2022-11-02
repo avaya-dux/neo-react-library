@@ -1,14 +1,15 @@
 import clsx from "clsx";
+import { useState } from "react";
 
 import { Avatar } from "components/Avatar";
 import { ButtonProps } from "components/Button";
 import { IconButton } from "components/IconButton";
-import { useState } from "react";
 import { IconNamesType } from "utils";
 
 export interface ChipProps {
   avatarInitials?: string;
   children: string;
+  className?: string;
   closable?: boolean;
   closeButtonAriaLabel?: string;
   disabled?: boolean;
@@ -32,6 +33,7 @@ export interface ChipProps {
 export const Chip = ({
   avatarInitials,
   children,
+  className,
   closable = false,
   closeButtonAriaLabel = "Close",
   disabled = false,
@@ -48,7 +50,8 @@ export const Chip = ({
         `neo-chip neo-chip--${variant}`,
         disabled && `neo-chip--${variant}--disabled`,
         icon && `neo-icon-${icon}`,
-        closable && `neo-chip--close neo-chip--close--${variant}`
+        closable && `neo-chip--close neo-chip--close--${variant}`,
+        className
       )}
     >
       {avatarInitials && <Avatar initials={avatarInitials} />}
