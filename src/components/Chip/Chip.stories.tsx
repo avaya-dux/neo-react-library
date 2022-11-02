@@ -21,14 +21,64 @@ export const Closable = () => (
   </ChipsContainer>
 );
 
-export const ChipsContainerExample = () => (
-  <ChipsContainer>
-    <Chip variant="default">Default</Chip>
-    <Chip variant="alert">Alert</Chip>
-    <Chip variant="info">Info</Chip>
-    <Chip variant="success">Success</Chip>
-    <Chip variant="warning">Warning</Chip>
-  </ChipsContainer>
+export const ChipsContainerExamples = () => (
+  <div>
+    <section>
+      <h2>Variants</h2>
+
+      <ChipsContainer>
+        <Chip variant="default">Default</Chip>
+        <Chip variant="alert">Alert</Chip>
+        <Chip variant="info">Info</Chip>
+        <Chip variant="success">Success</Chip>
+        <Chip variant="warning">Warning</Chip>
+      </ChipsContainer>
+    </section>
+
+    <section>
+      <h2>Disabled Variants</h2>
+
+      <ChipsContainer>
+        <Chip disabled variant="default">
+          Default
+        </Chip>
+        <Chip disabled variant="alert">
+          Alert
+        </Chip>
+        <Chip disabled variant="info">
+          Info
+        </Chip>
+        <Chip disabled variant="success">
+          Success
+        </Chip>
+        <Chip disabled variant="warning">
+          Warning
+        </Chip>
+      </ChipsContainer>
+    </section>
+
+    <section>
+      <h2>Disabled Variants</h2>
+
+      <ChipsContainer>
+        <Chip avatarInitials="D1" variant="default">
+          Default
+        </Chip>
+        <Chip avatarInitials="A1" variant="alert">
+          Alert
+        </Chip>
+        <Chip avatarInitials="I1" variant="info">
+          Info
+        </Chip>
+        <Chip avatarInitials="S1" variant="success">
+          Success
+        </Chip>
+        <Chip avatarInitials="W1" variant="warning">
+          Warning
+        </Chip>
+      </ChipsContainer>
+    </section>
+  </div>
 );
 
 const Template: Story<ChipProps> = (props: ChipProps) => <Chip {...props} />;
