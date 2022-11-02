@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useContext, useMemo } from "react";
 
-import { Chip } from "components/Chip-old";
+import { Chip } from "components/Chip";
 
 import { SelectContext } from "../utils/SelectContext";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
@@ -32,7 +32,7 @@ export const MultiSelect = () => {
             <Chip
               closable
               key={`${item.children}-${index}`}
-              onClick={() => toggleItem(item)}
+              onClose={() => toggleItem(item)}
             >
               {item.children}
             </Chip>

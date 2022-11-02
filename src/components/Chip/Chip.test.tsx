@@ -25,7 +25,7 @@ describe("Chip", () => {
   it("removes closable chip from DOM if 'closed'", async () => {
     const spy = vi.fn();
     render(
-      <Chip closable closeOnClick={spy}>
+      <Chip closable onClose={spy}>
         {chipText}
       </Chip>
     );

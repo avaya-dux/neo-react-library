@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
 import { useContext, useEffect, useMemo } from "react";
 
-import { Chip } from "components/Chip-old";
+import { Chip } from "components/Chip";
 import { Keys } from "utils";
 
 import { SelectContext } from "../utils/SelectContext";
@@ -50,7 +50,7 @@ export const MultiSelectSearchable = () => {
             <Chip
               closable
               key={`${item.children}-${index}`}
-              onClick={() => toggleItem(item)}
+              onClose={() => toggleItem(item)}
             >
               {item.children}
             </Chip>

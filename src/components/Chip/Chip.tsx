@@ -11,9 +11,9 @@ export interface ChipProps {
   children: string;
   closable?: boolean;
   closeButtonAriaLabel?: string;
-  closeOnClick?: ButtonProps["onClick"];
   disabled?: boolean;
   icon?: IconNamesType;
+  onClose?: ButtonProps["onClick"];
   variant?: "alert" | "default" | "info" | "success" | "warning";
 }
 

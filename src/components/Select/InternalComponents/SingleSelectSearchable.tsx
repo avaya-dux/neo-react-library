@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
 import { useContext, useEffect } from "react";
 
-import { Chip } from "components/Chip-old";
+import { Chip } from "components/Chip";
 import { Keys } from "utils";
 
 import { SelectContext } from "../utils/SelectContext";
@@ -62,7 +62,7 @@ export const SingleSelectSearchable = () => {
       >
         {selectedItems[0] && (
           <Chip
-            onClick={(e) => {
+            onClose={(e) => {
               e.stopPropagation();
               reset();
             }}
