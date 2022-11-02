@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
 import { useContext, useEffect } from "react";
 
-import { Chip } from "components/Chip";
+import { Chip } from "components/Chip-old";
 import { Keys } from "utils";
 
 import { SelectContext } from "../utils/SelectContext";

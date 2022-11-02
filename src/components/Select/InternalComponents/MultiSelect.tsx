@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useContext, useMemo } from "react";
 
-import { Chip } from "components/Chip";
+import { Chip } from "components/Chip-old";
 
 import { SelectContext } from "../utils/SelectContext";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
