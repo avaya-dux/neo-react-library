@@ -1,8 +1,7 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 
 import { Avatar } from "components/Avatar";
-import { ButtonProps } from "components/Button";
 import { IconNamesType } from "utils";
 
 export interface ChipProps {
@@ -13,7 +12,7 @@ export interface ChipProps {
   closeButtonAriaLabel?: string;
   disabled?: boolean;
   icon?: IconNamesType;
-  onClose?: ButtonProps["onClick"];
+  onClose?: MouseEventHandler<HTMLButtonElement>;
   variant?: "alert" | "default" | "info" | "success" | "warning";
 }
 
@@ -37,9 +36,9 @@ export const Chip = ({
   closeButtonAriaLabel = "Close",
   disabled = false,
   icon,
+  onClose,
   variant = "default",
 }: ChipProps) => {
-  // TODO: gotta figure out "expandable"
   const [closed, setClosed] = useState(false);
 
   return closed ? (
@@ -60,7 +59,10 @@ export const Chip = ({
         <button
           className="neo-close neo-close--clear"
           aria-label={closeButtonAriaLabel}
-          onClick={() => setClosed(true)}
+          onClick={(e) => {
+            setClosed(true);
+            onClose && onClose(e);
+          }}
         />
       )}
     </div>
