@@ -158,7 +158,7 @@ describe("Select", () => {
 
       // newly created chip has been added
       expect(screen.getAllByRole("button")).toHaveLength(1);
-      expect(screen.getByRole("button")).toHaveTextContent(newOptionText);
+      expect(screen.getByText(newOptionText)).toBeInTheDocument();
 
       await user.keyboard(UserEventKeys.BACKSPACE);
       expect(screen.queryAllByRole("button")).toHaveLength(0); // chip removed
@@ -183,7 +183,7 @@ describe("Select", () => {
 
       // first option chip has been created
       expect(screen.getAllByRole("button")).toHaveLength(1);
-      expect(screen.getByRole("button")).toHaveTextContent(firstOptionText);
+      expect(screen.getByText(firstOptionText)).toBeInTheDocument();
 
       // add second option
       await user.keyboard(secondOptionText);
@@ -192,7 +192,7 @@ describe("Select", () => {
 
       // first option chip has been removed in place of second option chip
       expect(screen.getAllByRole("button")).toHaveLength(1);
-      expect(screen.getByRole("button")).toHaveTextContent(secondOptionText);
+      expect(screen.getByText(secondOptionText)).toBeInTheDocument();
     });
 
     it("`MultiSelectSearchable` allows a user to create and remove custom options if `creatable` prop is set", async () => {
@@ -222,7 +222,7 @@ describe("Select", () => {
 
       // newly created chip has been added
       expect(screen.getAllByRole("button")).toHaveLength(1);
-      expect(screen.getByRole("button")).toHaveTextContent(newOptionText);
+      expect(screen.getByText(newOptionText)).toBeInTheDocument();
 
       await user.keyboard(UserEventKeys.BACKSPACE);
       expect(screen.queryAllByRole("button")).toHaveLength(0); // chip removed
@@ -247,7 +247,7 @@ describe("Select", () => {
 
       // first option chip has been created
       expect(screen.getAllByRole("button")).toHaveLength(1);
-      expect(screen.getByRole("button")).toHaveTextContent(firstOptionText);
+      expect(screen.getByText(firstOptionText)).toBeInTheDocument();
 
       // add second option
       await user.keyboard(secondOptionText);
@@ -256,9 +256,7 @@ describe("Select", () => {
 
       // both chips have been created
       expect(screen.getAllByRole("button")).toHaveLength(2);
-      expect(screen.getAllByRole("button")[1]).toHaveTextContent(
-        secondOptionText
-      );
+      expect(screen.getByText(secondOptionText)).toBeInTheDocument();
     });
   });
 });

@@ -62,11 +62,12 @@ export const SingleSelectSearchable = () => {
       >
         {selectedItems[0] && (
           <Chip
+            closable
+            closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}
             onClose={(e) => {
               e.stopPropagation();
               reset();
             }}
-            closable
           >
             {selectedItems[0].children}
           </Chip>

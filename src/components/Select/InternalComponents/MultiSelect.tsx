@@ -30,8 +30,9 @@ export const MultiSelect = () => {
       selectedItems.length
         ? selectedItems.map((item, index) => (
             <Chip
-              closable
               key={`${item.children}-${index}`}
+              closable
+              closeButtonAriaLabel={`Remove ${item.children}`}
               onClose={() => toggleItem(item)}
             >
               {item.children}
