@@ -4,7 +4,7 @@ import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import { Chip } from "./";
-import { Closable, Default } from "./Chip.stories";
+import { Closable, Default, Templated } from "./Chip.stories";
 
 describe("Chip", () => {
   const user = userEvent.setup();
@@ -79,6 +79,29 @@ describe("Chip", () => {
 
       beforeEach(() => {
         renderResult = render(<Closable />);
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("Templated", () => {
+      let renderResult: RenderResult<
+        typeof import("@testing-library/dom/types/queries"),
+        HTMLElement,
+        HTMLElement
+      >;
+
+      beforeEach(() => {
+        renderResult = render(<Templated>test</Templated>);
       });
 
       it("should render ok", () => {
