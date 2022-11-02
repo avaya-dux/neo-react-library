@@ -11,13 +11,17 @@ export const Default = () => <Chip>Default Example</Chip>;
 
 export const Closable = () => (
   <ChipsContainer>
-    <Chip closable>Closable</Chip>
+    <Chip closable variant="info">
+      Closable
+    </Chip>
     <Chip>Not Closable</Chip>
-    <Chip closable>Also Closable</Chip>
+    <Chip closable variant="info">
+      Also Closable
+    </Chip>
   </ChipsContainer>
 );
 
-export const Variants = () => (
+export const ChipsContainerExample = () => (
   <ChipsContainer>
     <Chip variant="default">Default</Chip>
     <Chip variant="alert">Alert</Chip>
@@ -28,8 +32,8 @@ export const Variants = () => (
 );
 
 const Template: Story<ChipProps> = (props: ChipProps) => <Chip {...props} />;
-export const TemplatedExample = Template.bind({});
-TemplatedExample.args = {
+export const Templated = Template.bind({});
+Templated.args = {
   avatarInitials: "",
   children: "Templated Example",
   closable: false,

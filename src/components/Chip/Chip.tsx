@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import { Avatar } from "components/Avatar";
 import { ButtonProps } from "components/Button";
-import { IconButton } from "components/IconButton";
 import { IconNamesType } from "utils";
 
 export interface ChipProps {
@@ -40,6 +39,7 @@ export const Chip = ({
   icon,
   variant = "default",
 }: ChipProps) => {
+  // TODO: gotta figure out "expandable"
   const [closed, setClosed] = useState(false);
 
   return closed ? (
@@ -57,10 +57,10 @@ export const Chip = ({
       {avatarInitials && <Avatar initials={avatarInitials} />}
       {children}
       {closable && (
-        <IconButton
-          icon="close"
-          onClick={() => setClosed(true)}
+        <button
+          className="neo-close neo-close--clear"
           aria-label={closeButtonAriaLabel}
+          onClick={() => setClosed(true)}
         />
       )}
     </div>
