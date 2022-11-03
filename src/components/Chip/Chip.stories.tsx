@@ -14,7 +14,7 @@ export const Closable = () => (
     <Chip closable variant="info">
       Closable
     </Chip>
-    <Chip>Not Closable</Chip>
+
     <Chip closable variant="info">
       Also Closable
     </Chip>
@@ -42,15 +42,19 @@ export const ChipsContainerExamples = () => (
         <Chip disabled variant="default">
           Default
         </Chip>
+
         <Chip disabled variant="alert">
           Alert
         </Chip>
+
         <Chip disabled variant="info">
           Info
         </Chip>
+
         <Chip disabled variant="success">
           Success
         </Chip>
+
         <Chip disabled variant="warning">
           Warning
         </Chip>

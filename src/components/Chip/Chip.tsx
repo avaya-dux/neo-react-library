@@ -41,6 +41,10 @@ export const Chip = ({
 }: ChipProps) => {
   const [closed, setClosed] = useState(false);
 
+  if (avatarInitials && icon) {
+    throw new Error("Chip cannot have both an Avatar and an Icon, it must have one or the other.");
+  }
+
   return closed ? (
     <></>
   ) : (
