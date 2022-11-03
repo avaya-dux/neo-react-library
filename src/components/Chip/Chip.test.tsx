@@ -23,6 +23,16 @@ describe("Chip", () => {
     expect(results).toHaveNoViolations();
   });
 
+  it("throws error if no label is passed", () => {
+    expect(() =>
+      render(
+        <Chip avatarInitials="BAD" icon="error">
+          {chipText}
+        </Chip>
+      )
+    ).toThrow();
+  });
+
   it("utilizes the `Avatar` component and `avatarInitials` are passed", () => {
     const { container } = render(<Chip avatarInitials="D1">{chipText}</Chip>);
     expect(container.querySelector("figure")).toBeInTheDocument();
