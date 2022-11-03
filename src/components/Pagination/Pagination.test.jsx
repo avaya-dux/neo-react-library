@@ -146,7 +146,7 @@ describe("Pagination", () => {
             >
               <li>
                 <button
-                  class="neo-btn neo-btn--default neo-btn-secondary neo-btn-secondary--default"
+                  class="neo-btn neo-btn--default neo-btn-secondary neo-btn-secondary--default neo-btn-square neo-btn-square-secondary neo-btn-square-secondary--info"
                   data-badge=""
                 >
                   1
