@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { Children, cloneElement, ReactElement } from "react";
 
 import { ChipProps } from "./Chip";
 
@@ -19,5 +19,12 @@ export interface ChipsContainerProps {
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-chips
  */
 export const ChipsContainer = ({ children }: ChipsContainerProps) => (
-  <div className="neo-chips">{children}</div>
+  <div className="neo-chips">
+    {Children.map(children, (child, index) =>
+      cloneElement(child, {
+        key: index,
+        className: "neo-chips__item",
+      })
+    )}
+  </div>
 );
