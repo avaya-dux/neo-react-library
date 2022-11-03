@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 import { Button } from "components/Button";
 
 import { PaginationNavigationProps } from "../PaginationTypes";
@@ -22,13 +24,21 @@ export const NavListItemButton = ({
 }: {
   pageToNavigateTo: number;
   isCurrentPage?: boolean;
-} & Pick<PaginationNavigationProps, "onPageChange">) => (
-  <li>
-    <Button
-      onClick={(e) => onPageChange(e, pageToNavigateTo)}
-      variant={isCurrentPage ? "secondary" : "tertiary"}
-    >
-      {pageToNavigateTo}
-    </Button>
-  </li>
-);
+} & Pick<PaginationNavigationProps, "onPageChange">) => {
+  const variant = isCurrentPage ? "secondary" : "tertiary";
+
+  return (
+    <li>
+      <Button
+        className={clsx(
+          "neo-btn-square",
+          `neo-btn-square-${variant} neo-btn-square-${variant}--info`
+        )}
+        onClick={(e) => onPageChange(e, pageToNavigateTo)}
+        variant={variant}
+      >
+        {pageToNavigateTo}
+      </Button>
+    </li>
+  );
+};
