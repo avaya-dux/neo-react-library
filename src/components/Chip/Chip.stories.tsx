@@ -92,6 +92,7 @@ Templated.args = {
   children: "Templated Example",
   closable: false,
   closeButtonAriaLabel: "Close",
+  dir: "ltr",
   disabled: false,
   icon: undefined,
   variant: "default",
