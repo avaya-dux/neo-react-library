@@ -38,11 +38,14 @@ export const Chip = ({
   icon,
   onClose,
   variant = "default",
+  ...rest
 }: ChipProps) => {
   const [closed, setClosed] = useState(false);
 
   if (avatarInitials && icon) {
-    throw new Error("Chip cannot have both an Avatar and an Icon, it must have one or the other.");
+    throw new Error(
+      "Chip cannot have both an Avatar and an Icon, it must have one or the other."
+    );
   }
 
   return closed ? (
@@ -56,6 +59,7 @@ export const Chip = ({
         closable && `neo-chip--close neo-chip--close--${variant}`,
         className
       )}
+      {...rest}
     >
       {avatarInitials && <Avatar initials={avatarInitials} size="sm" />}
       {children}
