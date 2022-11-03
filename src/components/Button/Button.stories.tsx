@@ -1,7 +1,7 @@
 import { ComponentStory } from "@storybook/react";
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Avatar, BasicChip } from "components";
+import { Avatar, Chip } from "components";
 
 import { Button, ButtonProps } from "./Button";
 
@@ -66,7 +66,7 @@ export const RightIconExample = () => (
 export const WithMultipleChildren = () => {
   return (
     <Button>
-      <Avatar /> <BasicChip chiptype="basic" text="text" />
+      <Avatar /> <Chip>text</Chip>
     </Button>
   );
 };

@@ -1,33 +1,78 @@
-import { useId } from "react";
+import clsx from "clsx";
+import { HTMLAttributes, MouseEventHandler, useState } from "react";
 
-import { BasicChip } from "./BasicChip";
-import { Variants } from "./ChipTypes";
-import { ClosableChip } from "./ClosableChip";
+import { Avatar } from "components/Avatar";
+import { IconNamesType } from "utils";
 
-type ChipProps = {
+export interface ChipProps
+  extends Exclude<HTMLAttributes<HTMLDivElement>, "onClick"> {
+  avatarInitials?: string;
   children: string;
   closable?: boolean;
-  id?: string;
-  onClick?: React.MouseEventHandler;
-  variant?: Variants;
-};
+  closeButtonAriaLabel?: string;
+  disabled?: boolean;
+  icon?: IconNamesType;
+  onClose?: MouseEventHandler<HTMLButtonElement>;
+  variant?: "alert" | "default" | "info" | "success" | "warning";
+}
 
+/**
+ * Used to display a single chip
+ *
+ * @example
+ * <Chip>default</Chip>
+ * <Chip disabled>default</Chip>
+ * <Chip avatarInitials="TJ">default</Chip>
+ * <Chip variant="info" icon="info" closable>default</Chip>
+ *
+ * @see https://design.avayacloud.com/components/web/chip-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-chips
+ */
 export const Chip = ({
+  avatarInitials,
   children,
+  className,
   closable = false,
-  id = useId(),
-  onClick,
+  closeButtonAriaLabel = "Close",
+  disabled = false,
+  icon,
+  onClose,
   variant = "default",
+  ...rest
 }: ChipProps) => {
-  return closable ? (
-    <ClosableChip
-      chiptype="closable"
-      id={id}
-      onClick={onClick}
-      text={children}
-      variant={variant}
-    />
+  const [closed, setClosed] = useState(false);
+
+  if (avatarInitials && icon) {
+    throw new Error(
+      "Chip cannot have both an Avatar and an Icon, it must have one or the other."
+    );
+  }
+
+  return closed ? (
+    <></>
   ) : (
-    <BasicChip chiptype="basic" variant={variant} id={id} text={children} />
+    <div
+      className={clsx(
+        `neo-chip neo-chip--${variant}`,
+        disabled && `neo-chip--${variant}--disabled`,
+        icon && `neo-icon-${icon}`,
+        closable && `neo-chip--close neo-chip--close--${variant}`,
+        className
+      )}
+      {...rest}
+    >
+      {avatarInitials && <Avatar initials={avatarInitials} size="sm" />}
+      {children}
+      {closable && (
+        <button
+          className="neo-close neo-close--clear"
+          aria-label={closeButtonAriaLabel}
+          onClick={(e) => {
+            setClosed(true);
+            onClose && onClose(e);
+          }}
+        />
+      )}
+    </div>
   );
 };

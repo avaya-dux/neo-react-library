@@ -3,14 +3,7 @@ import { Meta, Story } from "@storybook/react/types-6-0";
 import { useEffect, useMemo, useState } from "react";
 import { Column, ColumnInstance } from "react-table";
 
-import {
-  Icon,
-  IconChip,
-  List,
-  ListItem,
-  SelectNative,
-  Tooltip,
-} from "components";
+import { Chip, Icon, List, ListItem, SelectNative, Tooltip } from "components";
 import { Button } from "components/Button";
 import { IconNamesType } from "utils";
 
@@ -109,13 +102,7 @@ export const AdvancedFilteringAndSorting = () => {
             break;
         }
 
-        return (
-          <IconChip
-            icon={icon}
-            text={value?.toUpperCase() || ""}
-            chiptype="icon"
-          />
-        );
+        return <Chip icon={icon}>{value?.toUpperCase() || ""}</Chip>;
       },
       Filter: ({
         column: { setFilter, preFilteredRows, id },
