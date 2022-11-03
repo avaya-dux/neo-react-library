@@ -53,7 +53,7 @@ export const Chip = ({
         className
       )}
     >
-      {avatarInitials && <Avatar initials={avatarInitials} />}
+      {avatarInitials && <Avatar initials={avatarInitials} size="sm" />}
       {children}
       {closable && (
         <button

@@ -58,7 +58,7 @@ export const ChipsContainerExamples = () => (
     </section>
 
     <section>
-      <h2>Disabled Variants</h2>
+      <h2>Chips with Avatar</h2>
 
       <ChipsContainer>
         <Chip avatarInitials="D1" variant="default">
