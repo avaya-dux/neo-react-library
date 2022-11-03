@@ -1,13 +1,13 @@
 import clsx from "clsx";
-import { MouseEventHandler, useState } from "react";
+import { HTMLAttributes, MouseEventHandler, useState } from "react";
 
 import { Avatar } from "components/Avatar";
 import { IconNamesType } from "utils";
 
-export interface ChipProps {
+export interface ChipProps
+  extends Exclude<HTMLAttributes<HTMLDivElement>, "onClick"> {
   avatarInitials?: string;
   children: string;
-  className?: string;
   closable?: boolean;
   closeButtonAriaLabel?: string;
   disabled?: boolean;
