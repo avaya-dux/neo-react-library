@@ -93,7 +93,7 @@
     "@vitejs/plugin-react": "^2.2.0",
     "@vitest/coverage-c8": "^0.24.5",
     "@vitest/ui": "^0.24.5",
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^9.1.0",
     "better-docs": "^2.7.2",
     "cypress": "^10.11.0",
     "cypress-real-events": "^1.7.2",
