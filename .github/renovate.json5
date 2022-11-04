@@ -1,26 +1,12 @@
 // copy-pasted from: https://github.com/sveltejs/vite-plugin-svelte/blob/main/.github/renovate.json5
 {
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
     "config:base",
-    "schedule:weekly", // each monday
     "group:allNonMajor", // batch non-majors into one PR
     ":semanticCommits", // nicer commit messages
   ],
+  assignees: ["joe-s-avaya"],
   reviewers: ["avaya-dux/dux-devs", "joe-s-avaya"],
-  labels: ["dependencies"],
-  pin: false,
-  rangeStrategy: "bump",
-  node: false,
-  packageRules: [
-    {
-      matchDepTypes: ["peerDependencies"],
-      enabled: false,
-    },
-  ],
-  ignoreDeps: [
-    // ESM Only => https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c#how-can-i-move-my-commonjs-project-to-esm
-    // must stick to non-esm versions until we got rid of jest
-    "node-fetch",
-    "execa",
-  ],
+  schedule: ["on monday before 5am"],
 }
