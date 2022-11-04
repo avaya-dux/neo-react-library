@@ -35,9 +35,3 @@
 .neo-table-separator td {
   border-bottom: 1px solid #f1f1f1;
 }
-
-/* HACK: putting hack in place while waiting on update to css-lib */
-.neo-pagination__row .neo-pagination .neo-pagination__list li {
-  height: 42px;
-  width: 42px;
-}
