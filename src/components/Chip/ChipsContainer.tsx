@@ -11,10 +11,10 @@ export interface ChipsContainerProps extends HTMLAttributes<HTMLDivElement> {
  * Used to wrap a set of Chip components
  *
  * @example
- * <ChipContainer>
+ * <ChipsContainer>
  *  <Chip>default</Chip>
  *  <Chip variant="alert" icon="warning-filled">alert chip</Chip>
- * </ChipContainer>
+ * </ChipsContainer>
  *
  * @see https://design.avayacloud.com/components/web/chip-web
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-chips
