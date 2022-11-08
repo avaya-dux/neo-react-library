@@ -41,7 +41,8 @@ export type CheckboxProps = BaseCheckboxProps & EnforcedAccessibleLabel;
  * Checkboxes are used when several choices are available and multiple selections are allowed.
  *
  * @example
- * <Checkbox label="Checkbox 1" value="Checkbox 1" name="Checkbox Group Name"/>
+ * <Checkbox value="1" name="group-name">Checkbox 1</Checkbox>
+ * <Checkbox value="2" name="group-name" aria-label="Checkbox 2" />
  *
  * @see https://design.avayacloud.com/components/web/checkbox-web
  */
@@ -96,12 +97,7 @@ export const Checkbox = forwardRef(
           id={id}
           checked={state === "mixed" || state || false}
           aria-checked={state || "false"}
-          aria-label={
-            // specify this and voiceover will announce state change
-            ariaLabel || typeof children === "string"
-              ? (children as string)
-              : undefined
-          }
+          aria-label={ariaLabel || (children as string)}
           className={clsx(
             "neo-check",
             readOnly && "neo-check-readonly",
@@ -112,7 +108,7 @@ export const Checkbox = forwardRef(
           {...rest}
         />
 
-        {/* NOTE: the Neo styles are all on the `label` element, so if there isn't a `label`, there's no checkbox. Which is bad. */}
+        {/* NOTE: the Neo styles are all on the `label` element, so if there isn't a `label` tag, there's no checkbox. Which is bad. */}
         <label htmlFor={id}>{children}</label>
       </>
     );

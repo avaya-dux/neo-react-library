@@ -1,6 +1,6 @@
 import { composeStories } from "@storybook/testing-react";
-import userEvent from "@testing-library/user-event";
 import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -30,8 +30,9 @@ async function axeTest(renderResult) {
   expect(results).toHaveNoViolations();
 }
 
+const defaultCheckboxGroupLabel = "Checkbox Group";
 const DefaultProps = {
-  label: "Checkbox Group",
+  label: defaultCheckboxGroupLabel,
   groupName: "checkbox-group",
   checked: "Check 1",
   onChange: () => null,
@@ -42,9 +43,6 @@ describe("CheckboxGroup", () => {
     let renderResult;
     const defaultCheckboxes = checkboxes(DefaultProps.groupName, true, "mixed");
     beforeEach(() => {
-      // ignore tooltip position warning
-      vi.spyOn(console, "warn").mockImplementation(() => null);
-
       renderResult = render(
         <CheckboxGroup {...DefaultProps}>{defaultCheckboxes}</CheckboxGroup>
       );

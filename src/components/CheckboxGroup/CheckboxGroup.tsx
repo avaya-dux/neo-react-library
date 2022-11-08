@@ -3,6 +3,7 @@ import { Children, ReactElement, useCallback, useMemo } from "react";
 
 import { Checkbox, CheckboxProps } from "components/Checkbox";
 import { NeoInputWrapper } from "components/NeoInputWrapper";
+import { handleAccessbilityError } from "utils";
 
 const logger = log.getLogger("checkboxgroup-logger");
 logger.disableAll();
@@ -74,7 +75,7 @@ export const CheckboxGroup = ({
   onChange,
 }: CheckboxGroupProps) => {
   if (!groupName && !label) {
-    throw new Error(
+    handleAccessbilityError(
       "CheckboxGroup: You must provide either a `groupName` or a `label` prop."
     );
   }
