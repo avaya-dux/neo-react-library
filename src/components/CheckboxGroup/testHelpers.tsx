@@ -6,126 +6,127 @@ export const checkboxes = (
   checked4: CheckboxProps["checked"],
   checked5: CheckboxProps["checked"]
 ): ReactElement<CheckboxProps>[] => [
-  <Checkbox
-    key="check1"
-    name={groupName}
-    label="Check 1 unchecked"
-    value="unchecked"
-  />,
+  <Checkbox key="check1" name={groupName} value="unchecked">
+    Check 1 unchecked
+  </Checkbox>,
   <Checkbox
     key="check2"
     name={groupName}
-    label="Check 2 default checked"
     value="default checked"
     defaultChecked
-  />,
+  >
+    Check 2 default checked
+  </Checkbox>,
   <Checkbox
     key="check3"
     name={groupName}
-    label="Check 3 default mixed"
     value="default mixed"
     defaultChecked="mixed"
-  />,
+  >
+    Check 3 default mixed
+  </Checkbox>,
   <Checkbox
     key="check4"
     name={groupName}
-    label="Check 4 checked (controlled)"
     value="checked"
     id="check4"
     checked={checked4}
-  />,
+  >
+    Check 4 checked (controlled)
+  </Checkbox>,
   <Checkbox
     key="check5"
     name={groupName}
-    label="Check 5 mixed (controlled)"
     value="mixed"
     id="check5"
     checked={checked5}
-  />,
+  >
+    Check 5 mixed (controlled)
+  </Checkbox>,
 ];
 export const disabledCheckboxes = (
   groupName: string
 ): ReactElement<CheckboxProps>[] => [
-  <Checkbox
-    key="check1"
-    name={groupName}
-    label="disabled unchecked"
-    value="disabled unchecked"
-    disabled
-  />,
+  <Checkbox key="check1" name={groupName} value="disabled unchecked" disabled>
+    disabled unchecked
+  </Checkbox>,
   <Checkbox
     key="check2"
     name={groupName}
-    label="disabled default checked"
     value="disabled default checked"
     disabled
     defaultChecked
-  />,
+  >
+    disabled default checked
+  </Checkbox>,
   <Checkbox
     key="check3"
     name={groupName}
-    label="disabled default mixed"
     value="disabled default mixed"
     disabled
     defaultChecked="mixed"
-  />,
+  >
+    disabled default mixed
+  </Checkbox>,
   <Checkbox
     key="check4"
     name={groupName}
-    label="disabled checked (controlled)"
     value="disabled checked"
     disabled
     checked
-  />,
+  >
+    disabled checked (controlled)
+  </Checkbox>,
   <Checkbox
     key="check5"
     name={groupName}
-    label="disabled mixed (controlled)"
     value="disabled mixed"
     disabled
     checked="mixed"
-  />,
+  >
+    disabled mixed (controlled)
+  </Checkbox>,
 ];
 export const readonlyCheckboxes = (
   groupName: string
 ): ReactElement<CheckboxProps>[] => [
-  <Checkbox
-    key="check1"
-    name={groupName}
-    label="readonly unchecked"
-    value="readonly unchecked"
-    readOnly
-  />,
+  <Checkbox key="check1" name={groupName} value="readonly unchecked" readOnly>
+    readonly unchecked
+  </Checkbox>,
   <Checkbox
     key="check2"
     name={groupName}
-    label="readonly default checked"
     value="readonly default checked"
     readOnly
     defaultChecked
-  />,
+  >
+    readonly default checked
+  </Checkbox>,
   <Checkbox
     key="check3"
     name={groupName}
-    label="readonly default mixed"
     value="readonly default mixed"
     readOnly
     defaultChecked="mixed"
-  />,
+  >
+    readonly default mixed
+  </Checkbox>,
   <Checkbox
     key="check4"
     name={groupName}
-    label="readonly checked (controlled)"
     value="readonly checked"
     readOnly
     checked
-  />,
+  >
+    readonly checked (controlled)
+  </Checkbox>,
   <Checkbox
     key="check5"
     name={groupName}
-    label="readonly mixed (controlled)"
     value="readonly mixed"
     readOnly
     checked="mixed"
-  />,
+  >
+    readonly mixed (controlled)
+  </Checkbox>,
 ];

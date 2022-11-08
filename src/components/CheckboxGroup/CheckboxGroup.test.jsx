@@ -31,7 +31,8 @@ async function axeTest(renderResult) {
 }
 
 const DefaultProps = {
-  groupName: "Checkbox Group",
+  label: "Checkbox Group",
+  groupName: "checkbox-group",
   checked: "Check 1",
   onChange: () => null,
 };
@@ -54,20 +55,19 @@ describe("CheckboxGroup", () => {
     });
 
     it("checkbox group renders ok", () => {
-      const { getByTestId } = renderResult;
-      const rootElement = getByTestId("CheckboxGroup-root");
-      expect(rootElement).toBeTruthy();
+      const groupLabel = screen.getByText(defaultCheckboxGroupLabel);
+      expect(groupLabel).toBeInTheDocument();
     });
 
     it("checkbox renders ok", () => {
       const { getByLabelText } = renderResult;
-      const rootElement = getByLabelText(defaultCheckboxes[0].props.label);
+      const rootElement = getByLabelText(defaultCheckboxes[0].props.children);
       expect(rootElement).toBeTruthy();
     });
 
     it("checkbox renders with correct class name", () => {
       const { getByLabelText } = renderResult;
-      const rootElement = getByLabelText(defaultCheckboxes[4].props.label);
+      const rootElement = getByLabelText(defaultCheckboxes[4].props.children);
       expect(rootElement).toHaveAttribute(
         "class",
         "neo-check neo-check--indeterminate"
@@ -77,14 +77,14 @@ describe("CheckboxGroup", () => {
     it("has correct value", () => {
       const { getByLabelText } = renderResult;
       defaultCheckboxes.forEach((checkboxObject) => {
-        const check = getByLabelText(checkboxObject.props.label);
+        const check = getByLabelText(checkboxObject.props.children);
         expect(check).toHaveAttribute("value", checkboxObject.value);
       });
     });
 
     it("has a correct id when passed", () => {
       const { getByLabelText } = renderResult;
-      const check = getByLabelText(defaultCheckboxes[3].props.label);
+      const check = getByLabelText(defaultCheckboxes[3].props.children);
       expect(check).toHaveAttribute("id", defaultCheckboxes[3].props.id);
     });
 
@@ -113,7 +113,7 @@ describe("CheckboxGroup", () => {
       const { getByLabelText } = renderResult;
       checkboxes.forEach((checkboxObject) => {
         expect(checkboxObject.props.disabled).toBeTruthy();
-        const check = getByLabelText(checkboxObject.props.label);
+        const check = getByLabelText(checkboxObject.props.children);
         expect(check).toHaveAttribute("disabled");
       });
     });

@@ -17,7 +17,7 @@ export default {
 export const Default = () => {
   return (
     <CheckboxGroup groupName="Single checkbox">
-      <Checkbox label="example label" value="1" />
+      <Checkbox value="1">example label</Checkbox>
     </CheckboxGroup>
   );
 };
@@ -65,7 +65,7 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
     <>
       <form className="neo-form" onSubmit={onSubmit}>
         <CheckboxGroup {...args} onChange={onChange}>
-          {checkboxes(args.groupName, checked4, checked5)}
+          {checkboxes(args.groupName as string, checked4, checked5)}
         </CheckboxGroup>
         <Button type="submit">Submit</Button>
       </form>
@@ -106,7 +106,7 @@ InlineDefaultCheckboxGroup.args = {
 const DisabledTemplate: Story<CheckboxGroupProps> = ({
   ...args
 }: CheckboxGroupProps) => {
-  const children = disabledCheckboxes(args.groupName);
+  const children = disabledCheckboxes(args.groupName as string);
   return <CheckboxGroup {...args}>{children}</CheckboxGroup>;
 };
 export const DisabledCheckboxGroup = DisabledTemplate.bind({});
@@ -125,7 +125,7 @@ InlineDisabledCheckboxGroup.args = {
 const ReadonlyTemplate: Story<CheckboxGroupProps> = ({
   ...args
 }: CheckboxGroupProps) => {
-  const children = readonlyCheckboxes(args.groupName);
+  const children = readonlyCheckboxes(args.groupName as string);
   return <CheckboxGroup {...args}>{children}</CheckboxGroup>;
 };
 export const ReadonlyCheckboxGroup = ReadonlyTemplate.bind({});

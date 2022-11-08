@@ -31,11 +31,11 @@ export type CheckboxGroupProps = BaseCheckboxGroupProps &
 
 /**
  * Checkbox group is used to render a group of related Checkbox Components.
+ * It can be passed label text, or a `groupName` that matches the `htmlFor` of an existing `<label>` tag.
  *
  * @example
 <CheckboxGroup
   label="Default Checkbox Group"
-  groupName="default-checkbox-group"
   onChange={(e) => setChecked(e.target.value)},
 >
   <Checkbox label="Gift" value="gift" />
