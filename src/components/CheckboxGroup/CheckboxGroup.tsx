@@ -1,5 +1,5 @@
 import log from "loglevel";
-import { Children, ReactElement, useCallback } from "react";
+import { Children, ReactElement, useCallback, useMemo } from "react";
 
 import { Checkbox, CheckboxProps } from "components/Checkbox";
 import { NeoInputWrapper } from "components/NeoInputWrapper";
@@ -7,9 +7,8 @@ import { NeoInputWrapper } from "components/NeoInputWrapper";
 const logger = log.getLogger("checkboxgroup-logger");
 logger.disableAll();
 
-export interface CheckboxGroupProps {
+export interface BaseCheckboxGroupProps {
   children: ReactElement<CheckboxProps> | ReactElement<CheckboxProps>[];
-  groupName: string;
   inline?: boolean;
   helperText?: string;
   error?: boolean;
@@ -17,31 +16,75 @@ export interface CheckboxGroupProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+type EnforcedAccessibleLabel =
+  | {
+      label: string;
+      groupName?: string;
+    }
+  | {
+      label?: string;
+      groupName: string;
+    };
+
+export type CheckboxGroupProps = BaseCheckboxGroupProps &
+  EnforcedAccessibleLabel;
+
 /**
  * Checkbox group is used to render a group of related Checkbox Components.
  *
  * @example
- * <CheckboxGroup
-    groupName="Default Checkbox Group"
-    onChange=() => null,
-  >
-    <Checkbox label="Gift" value="gift" />
-    <Checkbox
-      label="Prime"
-      value="prime"
-      defaultChecked
-    />
-  </CheckboxGroup>
+<CheckboxGroup
+  label="Default Checkbox Group"
+  groupName="default-checkbox-group"
+  onChange={(e) => setChecked(e.target.value)},
+>
+  <Checkbox label="Gift" value="gift" />
+  <Checkbox
+    label="Prime"
+    value="prime"
+    defaultChecked
+  />
+</CheckboxGroup>
+ *
+ * @example
+<label htmlFor="checkbox-group">Checkbox Group</label>
+<CheckboxGroup
+  groupName="checkbox-group"
+  onChange={(e) => setChecked(e.target.value)},
+>
+  <Checkbox label="Gift" value="gift" />
+  <Checkbox
+    label="Prime"
+    value="prime"
+    defaultChecked
+  />
+</CheckboxGroup>
+ *
+ * @see https://design.avayacloud.com/components/web/checkbox-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-checkbox-group
  */
 export const CheckboxGroup = ({
   children,
   groupName,
+  label,
   inline,
   helperText,
   error,
   required,
   onChange,
 }: CheckboxGroupProps) => {
+  if (!groupName && !label) {
+    throw new Error(
+      "CheckboxGroup: You must provide either a `groupName` or a `label` prop."
+    );
+  }
+
+  const htmlForName = useMemo(
+    () =>
+      label && !groupName ? label.toLowerCase().replace(" ", "-") : groupName,
+    [groupName]
+  );
+
   const onChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       logger.debug(e.target.value);
@@ -52,34 +95,27 @@ export const CheckboxGroup = ({
     [onChange]
   );
 
-  const computeCheckboxesJsx = () => {
-    return Children.map(children, (child, index) => {
-      const { label, ...rest } = child.props as CheckboxProps;
-      return (
-        <Checkbox
-          aria-describedby={helperText}
-          key={index}
-          label={label || ""}
-          name={groupName}
-          onChange={onChangeHandler}
-          {...rest}
-        />
-      );
-    });
-  };
+  const computeCheckboxesJsx = () =>
+    Children.map(children, (child, index) => (
+      <Checkbox
+        aria-describedby={helperText}
+        key={index}
+        name={htmlForName}
+        onChange={onChangeHandler}
+        {...child.props}
+      />
+    ));
 
   return (
-    <NeoInputWrapper
-      data-testid="CheckboxGroup-root"
-      required={required}
-      error={error}
-    >
-      <label htmlFor={groupName}>{groupName}</label>
+    <NeoInputWrapper required={required} error={error}>
+      {label && <label htmlFor={htmlForName}>{label}</label>}
+
       {inline ? (
         <div className="neo-input-group--inline">{computeCheckboxesJsx()}</div>
       ) : (
         <>{computeCheckboxesJsx()}</>
       )}
+
       {helperText && <div className="neo-input-hint">{helperText}</div>}
     </NeoInputWrapper>
   );

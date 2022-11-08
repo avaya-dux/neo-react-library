@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import log from "loglevel";
-import React, { forwardRef, useCallback, useId } from "react";
+import React, { forwardRef, ReactNode, useCallback, useId } from "react";
 
 import { handleAccessbilityError } from "utils";
 import useControlled from "utils/useControlled";
@@ -20,17 +20,17 @@ interface BaseCheckboxProps
 
 type EnforcedAccessibleLabel =
   | {
-      label: string | JSX.Element;
+      children: ReactNode;
       "aria-label"?: string;
       "aria-labelledby"?: string;
     }
   | {
-      label?: string | JSX.Element;
+      children?: ReactNode;
       "aria-label": string;
       "aria-labelledby"?: string;
     }
   | {
-      label?: string | JSX.Element;
+      children?: ReactNode;
       "aria-label"?: string;
       "aria-labelledby": string;
     };
@@ -53,16 +53,16 @@ export const Checkbox = forwardRef(
       readOnly,
       className,
       id = useId(),
-      label,
+      children,
       onChange = () => null,
       "aria-label": ariaLabel,
       ...rest
     }: CheckboxProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
-    if (!label && !ariaLabel && !rest["aria-labelledby"]) {
+    if (!children && !ariaLabel && !rest["aria-labelledby"]) {
       handleAccessbilityError(
-        "Checkbox must have an have an accessible label. Please add a `label`, `aria-label`, or `aria-labelledby` prop."
+        "Checkbox must have an have an accessible label. Please add `children`, an `aria-label`, or an `aria-labelledby` prop."
       );
     }
     const [state, setState] = useControlled({
@@ -96,7 +96,12 @@ export const Checkbox = forwardRef(
           id={id}
           checked={state === "mixed" || state || false}
           aria-checked={state || "false"}
-          aria-label={ariaLabel || `${label}`} // specify this and voiceover will announce state change
+          aria-label={
+            // specify this and voiceover will announce state change
+            ariaLabel || typeof children === "string"
+              ? (children as string)
+              : undefined
+          }
           className={clsx(
             "neo-check",
             readOnly && "neo-check-readonly",
@@ -107,11 +112,8 @@ export const Checkbox = forwardRef(
           {...rest}
         />
 
-        {/*
-        BUG: the Neo styles are all on the `label` element, so if there isn't a `label`,
-        there's no checkbox. Which is bad.
-      */}
-        <label htmlFor={id}>{label}</label>
+        {/* NOTE: the Neo styles are all on the `label` element, so if there isn't a `label`, there's no checkbox. Which is bad. */}
+        <label htmlFor={id}>{children}</label>
       </>
     );
   }
