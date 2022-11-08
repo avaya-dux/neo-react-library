@@ -58,14 +58,16 @@ describe("CheckboxGroup", () => {
     });
 
     it("checkbox renders ok", () => {
-      const { getByLabelText } = renderResult;
-      const rootElement = getByLabelText(defaultCheckboxes[0].props.children);
+      const rootElement = screen.getByLabelText(
+        defaultCheckboxes[0].props.children
+      );
       expect(rootElement).toBeTruthy();
     });
 
     it("checkbox renders with correct class name", () => {
-      const { getByLabelText } = renderResult;
-      const rootElement = getByLabelText(defaultCheckboxes[4].props.children);
+      const rootElement = screen.getByLabelText(
+        defaultCheckboxes[4].props.children
+      );
       expect(rootElement).toHaveAttribute(
         "class",
         "neo-check neo-check--indeterminate"
@@ -73,21 +75,57 @@ describe("CheckboxGroup", () => {
     });
 
     it("has correct value", () => {
-      const { getByLabelText } = renderResult;
       defaultCheckboxes.forEach((checkboxObject) => {
-        const check = getByLabelText(checkboxObject.props.children);
+        const check = screen.getByLabelText(checkboxObject.props.children);
         expect(check).toHaveAttribute("value", checkboxObject.value);
       });
     });
 
     it("has a correct id when passed", () => {
-      const { getByLabelText } = renderResult;
-      const check = getByLabelText(defaultCheckboxes[3].props.children);
+      const check = screen.getByLabelText(defaultCheckboxes[3].props.children);
       expect(check).toHaveAttribute("id", defaultCheckboxes[3].props.id);
     });
 
     it("passes basic axe compliance", async () => {
       await axeTest(renderResult);
+    });
+  });
+
+  describe("extended cases", () => {
+    const defaultCheckboxes = checkboxes(DefaultProps.groupName, true, "mixed");
+
+    it("throws error if no label and no groupName are passed", () => {
+      vi.spyOn(console, "error").mockImplementation(() => null);
+
+      expect(() =>
+        render(<CheckboxGroup>{defaultCheckboxes}</CheckboxGroup>)
+      ).toThrow();
+    });
+
+    it("uses a modified `label` for `for` attribute if no `groupName` is passed", () => {
+      render(
+        <CheckboxGroup label={defaultCheckboxGroupLabel}>
+          {defaultCheckboxes}
+        </CheckboxGroup>
+      );
+
+      const modifiedLabel = defaultCheckboxGroupLabel
+        .toLowerCase()
+        .replace(" ", "-");
+
+      const label = screen.getByText(defaultCheckboxGroupLabel);
+      expect(label).toHaveAttribute("for", modifiedLabel);
+    });
+
+    it("shows `helperText` if passed", () => {
+      const helperText = "This is a helper text";
+      render(
+        <CheckboxGroup {...DefaultProps} helperText={helperText}>
+          {defaultCheckboxes}
+        </CheckboxGroup>
+      );
+
+      expect(screen.getByText(helperText)).toBeInTheDocument();
     });
   });
 

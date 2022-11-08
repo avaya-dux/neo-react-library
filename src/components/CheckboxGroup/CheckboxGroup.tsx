@@ -86,6 +86,11 @@ export const CheckboxGroup = ({
     [groupName]
   );
 
+  const helperTextId = useMemo(
+    () => (helperText ? `${htmlForName}-helper-text` : undefined),
+    [htmlForName, helperText]
+  );
+
   const onChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       logger.debug(e.target.value);
@@ -99,7 +104,7 @@ export const CheckboxGroup = ({
   const computeCheckboxesJsx = () =>
     Children.map(children, (child, index) => (
       <Checkbox
-        aria-describedby={helperText}
+        aria-describedby={helperTextId}
         key={index}
         name={htmlForName}
         onChange={onChangeHandler}
@@ -117,7 +122,11 @@ export const CheckboxGroup = ({
         <>{computeCheckboxesJsx()}</>
       )}
 
-      {helperText && <div className="neo-input-hint">{helperText}</div>}
+      {helperText && (
+        <div id={helperTextId} className="neo-input-hint">
+          {helperText}
+        </div>
+      )}
     </NeoInputWrapper>
   );
 };
