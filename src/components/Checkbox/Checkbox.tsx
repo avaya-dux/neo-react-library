@@ -97,7 +97,10 @@ export const Checkbox = forwardRef(
           id={id}
           checked={state === "mixed" || state || false}
           aria-checked={state || "false"}
-          aria-label={ariaLabel || (children as string)}
+          aria-label={
+            ariaLabel ||
+            (typeof children === "string" ? (children as string) : undefined)
+          }
           className={clsx(
             "neo-check",
             readOnly && "neo-check-readonly",
