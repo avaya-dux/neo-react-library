@@ -81,8 +81,7 @@ export const CheckboxGroup = ({
   }
 
   const htmlForName = useMemo(
-    () =>
-      label && !groupName ? label.toLowerCase().replace(" ", "-") : groupName,
+    () => groupName || label?.toLowerCase().replace(" ", "-"),
     [groupName]
   );
 
