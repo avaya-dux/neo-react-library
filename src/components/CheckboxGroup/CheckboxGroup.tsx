@@ -82,7 +82,7 @@ export const CheckboxGroup = ({
 
   const htmlForName = useMemo(
     () => groupName || label?.toLowerCase().replace(" ", "-"),
-    [groupName]
+    [groupName, label]
   );
 
   const helperTextId = useMemo(
