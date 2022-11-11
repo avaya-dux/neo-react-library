@@ -94,29 +94,6 @@ describe("CheckboxGroup", () => {
   describe("extended cases", () => {
     const defaultCheckboxes = checkboxes(DefaultProps.groupName, true, "mixed");
 
-    it("throws error if no label and no groupName are passed", () => {
-      vi.spyOn(console, "error").mockImplementation(() => null);
-
-      expect(() =>
-        render(<CheckboxGroup>{defaultCheckboxes}</CheckboxGroup>)
-      ).toThrow();
-    });
-
-    it("uses a modified `label` for `for` attribute if no `groupName` is passed", () => {
-      render(
-        <CheckboxGroup label={defaultCheckboxGroupLabel}>
-          {defaultCheckboxes}
-        </CheckboxGroup>
-      );
-
-      const modifiedLabel = defaultCheckboxGroupLabel
-        .toLowerCase()
-        .replace(" ", "-");
-
-      const label = screen.getByText(defaultCheckboxGroupLabel);
-      expect(label).toHaveAttribute("for", modifiedLabel);
-    });
-
     it("shows `helperText` if passed", () => {
       const helperText = "This is a helper text";
       render(
