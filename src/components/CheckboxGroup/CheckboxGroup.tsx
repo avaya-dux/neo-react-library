@@ -3,13 +3,14 @@ import { Children, ReactElement, useCallback, useMemo } from "react";
 
 import { Checkbox, CheckboxProps } from "components/Checkbox";
 import { NeoInputWrapper } from "components/NeoInputWrapper";
-import { handleAccessbilityError } from "utils";
 
 const logger = log.getLogger("checkboxgroup-logger");
 logger.disableAll();
 
-export interface BaseCheckboxGroupProps {
+export interface CheckboxGroupProps {
   children: ReactElement<CheckboxProps> | ReactElement<CheckboxProps>[];
+  groupName: string;
+  label?: string;
   inline?: boolean;
   helperText?: string;
   error?: boolean;
@@ -17,34 +18,18 @@ export interface BaseCheckboxGroupProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-type EnforcedAccessibleLabel =
-  | {
-      label: string;
-      groupName?: string;
-    }
-  | {
-      label?: string;
-      groupName: string;
-    };
-
-export type CheckboxGroupProps = BaseCheckboxGroupProps &
-  EnforcedAccessibleLabel;
-
 /**
  * Checkbox group is used to render a group of related Checkbox Components.
  * It can be passed label text, or a `groupName` that matches the `htmlFor` of an existing `<label>` tag.
  *
  * @example
 <CheckboxGroup
-  label="Default Checkbox Group"
+  label="Checkbox Group"
+  groupName="checkbox-group"
   onChange={(e) => setChecked(e.target.value)},
 >
-  <Checkbox label="Gift" value="gift" />
-  <Checkbox
-    label="Prime"
-    value="prime"
-    defaultChecked
-  />
+  <Checkbox value="gift">Gift</Checkbox>
+  <Checkbox value="prime" defaultChecked>Prime</Checkbox>
 </CheckboxGroup>
  *
  * @example
@@ -53,12 +38,8 @@ export type CheckboxGroupProps = BaseCheckboxGroupProps &
   groupName="checkbox-group"
   onChange={(e) => setChecked(e.target.value)},
 >
-  <Checkbox label="Gift" value="gift" />
-  <Checkbox
-    label="Prime"
-    value="prime"
-    defaultChecked
-  />
+  <Checkbox value="gift">Gift</Checkbox>
+  <Checkbox value="prime" defaultChecked>Prime</Checkbox>
 </CheckboxGroup>
  *
  * @see https://design.avayacloud.com/components/web/checkbox-web
@@ -74,20 +55,9 @@ export const CheckboxGroup = ({
   required,
   onChange,
 }: CheckboxGroupProps) => {
-  if (!groupName && !label) {
-    handleAccessbilityError(
-      "CheckboxGroup: You must provide either a `groupName` or a `label` prop."
-    );
-  }
-
-  const htmlForName = useMemo(
-    () => groupName || label?.toLowerCase().replace(" ", "-"),
-    [groupName, label]
-  );
-
   const helperTextId = useMemo(
-    () => (helperText ? `${htmlForName}-helper-text` : undefined),
-    [htmlForName, helperText]
+    () => (helperText ? `${groupName}-helper-text` : undefined),
+    [groupName, helperText]
   );
 
   const onChangeHandler = useCallback(
@@ -105,7 +75,7 @@ export const CheckboxGroup = ({
       <Checkbox
         aria-describedby={helperTextId}
         key={index}
-        name={htmlForName}
+        name={groupName}
         onChange={onChangeHandler}
         {...child.props}
       />
@@ -113,7 +83,7 @@ export const CheckboxGroup = ({
 
   return (
     <NeoInputWrapper required={required} error={error}>
-      {label && <label htmlFor={htmlForName}>{label}</label>}
+      {label && <label htmlFor={groupName}>{label}</label>}
 
       {inline ? (
         <div className="neo-input-group--inline">{computeCheckboxesJsx()}</div>
