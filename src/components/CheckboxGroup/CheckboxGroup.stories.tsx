@@ -93,13 +93,15 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
 
 export const DefaultCheckboxGroup = DefaultTemplate.bind({});
 DefaultCheckboxGroup.args = {
-  groupName: "default checkbox group",
+  groupName: "default-checkbox-group",
+  label: "Default Checkbox Group",
   required: true,
 };
 
 export const InlineDefaultCheckboxGroup = DefaultTemplate.bind({});
 InlineDefaultCheckboxGroup.args = {
-  groupName: "inline checkbox group",
+  groupName: "inline-checkbox-group",
+  label: "Inline Default Checkbox Group",
   inline: true,
 };
 
@@ -111,13 +113,15 @@ const DisabledTemplate: Story<CheckboxGroupProps> = ({
 };
 export const DisabledCheckboxGroup = DisabledTemplate.bind({});
 DisabledCheckboxGroup.args = {
-  groupName: "disabled checkbox group",
+  groupName: "disabled-checkbox-group",
+  label: "Disabled Checkbox Group",
   onChange: () => null,
 };
 
 export const InlineDisabledCheckboxGroup = DisabledTemplate.bind({});
 InlineDisabledCheckboxGroup.args = {
-  groupName: "inline disabled checkbox group",
+  groupName: "inline-disabled-checkbox-group",
+  label: "Inline Disabled Checkbox Group",
   inline: true,
   onChange: () => null,
 };
@@ -130,13 +134,15 @@ const ReadonlyTemplate: Story<CheckboxGroupProps> = ({
 };
 export const ReadonlyCheckboxGroup = ReadonlyTemplate.bind({});
 ReadonlyCheckboxGroup.args = {
-  groupName: "readonly checkbox group",
+  groupName: "readonly-checkbox-group",
+  label: "Readonly Checkbox Group",
   onChange: () => null,
 };
 
 export const InlineReadonlyCheckboxGroup = ReadonlyTemplate.bind({});
 InlineReadonlyCheckboxGroup.args = {
-  groupName: "inline readonly checkbox group",
+  groupName: "inline-readonly-checkbox-group",
+  label: "Inline Readonly Checkbox Group",
   inline: true,
   onChange: () => null,
 };
