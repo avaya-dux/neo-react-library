@@ -63,11 +63,9 @@ export const TableFilter = <T extends Record<string, any>>({
       >
         <section>
           {allColumns.map((column) => (
-            <Checkbox
-              key={column.id}
-              {...column.getToggleHiddenProps()}
-              label={column.Header}
-            />
+            <Checkbox key={column.id} {...column.getToggleHiddenProps()}>
+              {column.Header}
+            </Checkbox>
           ))}
         </section>
 

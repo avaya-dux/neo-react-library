@@ -1,5 +1,5 @@
 import log from "loglevel";
-import { Children, ReactElement, useCallback } from "react";
+import { Children, ReactElement, useCallback, useMemo } from "react";
 
 import { Checkbox, CheckboxProps } from "components/Checkbox";
 import { NeoInputWrapper } from "components/NeoInputWrapper";
@@ -10,6 +10,7 @@ logger.disableAll();
 export interface CheckboxGroupProps {
   children: ReactElement<CheckboxProps> | ReactElement<CheckboxProps>[];
   groupName: string;
+  label?: string;
   inline?: boolean;
   helperText?: string;
   error?: boolean;
@@ -19,29 +20,46 @@ export interface CheckboxGroupProps {
 
 /**
  * Checkbox group is used to render a group of related Checkbox Components.
+ * It can be passed label text, or a `groupName` that matches the `htmlFor` of an existing `<label>` tag.
  *
  * @example
- * <CheckboxGroup
-    groupName="Default Checkbox Group"
-    onChange=() => null,
-  >
-    <Checkbox label="Gift" value="gift" />
-    <Checkbox
-      label="Prime"
-      value="prime"
-      defaultChecked
-    />
-  </CheckboxGroup>
+<CheckboxGroup
+  label="Checkbox Group"
+  groupName="checkbox-group"
+  onChange={(e) => setChecked(e.target.value)},
+>
+  <Checkbox value="gift">Gift</Checkbox>
+  <Checkbox value="prime" defaultChecked>Prime</Checkbox>
+</CheckboxGroup>
+ *
+ * @example
+<label htmlFor="checkbox-group">Checkbox Group</label>
+<CheckboxGroup
+  groupName="checkbox-group"
+  onChange={(e) => setChecked(e.target.value)},
+>
+  <Checkbox value="gift">Gift</Checkbox>
+  <Checkbox value="prime" defaultChecked>Prime</Checkbox>
+</CheckboxGroup>
+ *
+ * @see https://design.avayacloud.com/components/web/checkbox-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-checkbox-group
  */
 export const CheckboxGroup = ({
   children,
   groupName,
+  label,
   inline,
   helperText,
   error,
   required,
   onChange,
 }: CheckboxGroupProps) => {
+  const helperTextId = useMemo(
+    () => (helperText ? `${groupName}-helper-text` : undefined),
+    [groupName, helperText]
+  );
+
   const onChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       logger.debug(e.target.value);
@@ -52,35 +70,32 @@ export const CheckboxGroup = ({
     [onChange]
   );
 
-  const computeCheckboxesJsx = () => {
-    return Children.map(children, (child, index) => {
-      const { label, ...rest } = child.props as CheckboxProps;
-      return (
-        <Checkbox
-          aria-describedby={helperText}
-          key={index}
-          label={label || ""}
-          name={groupName}
-          onChange={onChangeHandler}
-          {...rest}
-        />
-      );
-    });
-  };
+  const computeCheckboxesJsx = () =>
+    Children.map(children, (child, index) => (
+      <Checkbox
+        aria-describedby={helperTextId}
+        key={index}
+        name={groupName}
+        onChange={onChangeHandler}
+        {...child.props}
+      />
+    ));
 
   return (
-    <NeoInputWrapper
-      data-testid="CheckboxGroup-root"
-      required={required}
-      error={error}
-    >
-      <label htmlFor={groupName}>{groupName}</label>
+    <NeoInputWrapper required={required} error={error}>
+      {label && <label htmlFor={groupName}>{label}</label>}
+
       {inline ? (
         <div className="neo-input-group--inline">{computeCheckboxesJsx()}</div>
       ) : (
         <>{computeCheckboxesJsx()}</>
       )}
-      {helperText && <div className="neo-input-hint">{helperText}</div>}
+
+      {helperText && (
+        <div id={helperTextId} className="neo-input-hint">
+          {helperText}
+        </div>
+      )}
     </NeoInputWrapper>
   );
 };

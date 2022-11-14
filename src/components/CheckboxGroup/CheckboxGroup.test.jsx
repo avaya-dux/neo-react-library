@@ -1,6 +1,6 @@
 import { composeStories } from "@storybook/testing-react";
-import userEvent from "@testing-library/user-event";
 import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -30,8 +30,10 @@ async function axeTest(renderResult) {
   expect(results).toHaveNoViolations();
 }
 
+const defaultCheckboxGroupLabel = "Checkbox Group";
 const DefaultProps = {
-  groupName: "Checkbox Group",
+  label: defaultCheckboxGroupLabel,
+  groupName: "checkbox-group",
   checked: "Check 1",
   onChange: () => null,
 };
@@ -41,9 +43,6 @@ describe("CheckboxGroup", () => {
     let renderResult;
     const defaultCheckboxes = checkboxes(DefaultProps.groupName, true, "mixed");
     beforeEach(() => {
-      // ignore tooltip position warning
-      vi.spyOn(console, "warn").mockImplementation(() => null);
-
       renderResult = render(
         <CheckboxGroup {...DefaultProps}>{defaultCheckboxes}</CheckboxGroup>
       );
@@ -54,20 +53,21 @@ describe("CheckboxGroup", () => {
     });
 
     it("checkbox group renders ok", () => {
-      const { getByTestId } = renderResult;
-      const rootElement = getByTestId("CheckboxGroup-root");
-      expect(rootElement).toBeTruthy();
+      const groupLabel = screen.getByText(defaultCheckboxGroupLabel);
+      expect(groupLabel).toBeInTheDocument();
     });
 
     it("checkbox renders ok", () => {
-      const { getByLabelText } = renderResult;
-      const rootElement = getByLabelText(defaultCheckboxes[0].props.label);
+      const rootElement = screen.getByLabelText(
+        defaultCheckboxes[0].props.children
+      );
       expect(rootElement).toBeTruthy();
     });
 
     it("checkbox renders with correct class name", () => {
-      const { getByLabelText } = renderResult;
-      const rootElement = getByLabelText(defaultCheckboxes[4].props.label);
+      const rootElement = screen.getByLabelText(
+        defaultCheckboxes[4].props.children
+      );
       expect(rootElement).toHaveAttribute(
         "class",
         "neo-check neo-check--indeterminate"
@@ -75,21 +75,34 @@ describe("CheckboxGroup", () => {
     });
 
     it("has correct value", () => {
-      const { getByLabelText } = renderResult;
       defaultCheckboxes.forEach((checkboxObject) => {
-        const check = getByLabelText(checkboxObject.props.label);
+        const check = screen.getByLabelText(checkboxObject.props.children);
         expect(check).toHaveAttribute("value", checkboxObject.value);
       });
     });
 
     it("has a correct id when passed", () => {
-      const { getByLabelText } = renderResult;
-      const check = getByLabelText(defaultCheckboxes[3].props.label);
+      const check = screen.getByLabelText(defaultCheckboxes[3].props.children);
       expect(check).toHaveAttribute("id", defaultCheckboxes[3].props.id);
     });
 
     it("passes basic axe compliance", async () => {
       await axeTest(renderResult);
+    });
+  });
+
+  describe("extended cases", () => {
+    const defaultCheckboxes = checkboxes(DefaultProps.groupName, true, "mixed");
+
+    it("shows `helperText` if passed", () => {
+      const helperText = "This is a helper text";
+      render(
+        <CheckboxGroup {...DefaultProps} helperText={helperText}>
+          {defaultCheckboxes}
+        </CheckboxGroup>
+      );
+
+      expect(screen.getByText(helperText)).toBeInTheDocument();
     });
   });
 
@@ -113,7 +126,7 @@ describe("CheckboxGroup", () => {
       const { getByLabelText } = renderResult;
       checkboxes.forEach((checkboxObject) => {
         expect(checkboxObject.props.disabled).toBeTruthy();
-        const check = getByLabelText(checkboxObject.props.label);
+        const check = getByLabelText(checkboxObject.props.children);
         expect(check).toHaveAttribute("disabled");
       });
     });

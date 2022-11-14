@@ -21,7 +21,7 @@ const {
 
 const DefaultProps = {
   id: "checkbox-id",
-  label: "example label",
+  children: "example label",
   value: "1",
 };
 
@@ -31,14 +31,14 @@ describe("Checkbox", () => {
   it("renders as unchecked appropriately", () => {
     const { getByLabelText } = render(<Checkbox {...DefaultProps} />);
 
-    const checkboxElement = getByLabelText(DefaultProps.label);
+    const checkboxElement = getByLabelText(DefaultProps.children);
     expect(checkboxElement.cheched).toBeFalsy();
   });
 
   it("renders as checked appropriately", () => {
     const { getByLabelText } = render(<Checkbox {...DefaultProps} checked />);
 
-    const checkboxElement = getByLabelText(DefaultProps.label);
+    const checkboxElement = getByLabelText(DefaultProps.children);
     expect(checkboxElement).toBeTruthy();
     expect(checkboxElement.checked).toBeTruthy();
   });
@@ -52,13 +52,14 @@ describe("Checkbox", () => {
   it("aria-label is set to label when not specified", () => {
     render(<Checkbox {...DefaultProps} />);
     const checkbox = screen.getByRole("checkbox");
-    expect(checkbox).toHaveAttribute("aria-label", DefaultProps.label);
+    expect(checkbox).toHaveAttribute("aria-label", DefaultProps.children);
   });
 
   it("aria-label is set to specified value", () => {
-    render(<Checkbox aria-label="the label" {...DefaultProps} />);
+    const ariaLabel = "the label";
+    render(<Checkbox aria-label={ariaLabel} />);
     const checkbox = screen.getByRole("checkbox");
-    expect(checkbox).toHaveAttribute("aria-label", "the label");
+    expect(checkbox).toHaveAttribute("aria-label", ariaLabel);
   });
 
   it("passes basic axe compliance", async () => {
@@ -70,7 +71,7 @@ describe("Checkbox", () => {
   describe("className is assigned appropriately", () => {
     it("returns the correct class name when passed `true`", () => {
       render(<Checkbox {...DefaultProps} checked />);
-      const checkboxElement = screen.getByLabelText(DefaultProps.label);
+      const checkboxElement = screen.getByLabelText(DefaultProps.children);
 
       expect(checkboxElement).not.toHaveClass("neo-check--indeterminate");
       expect(checkboxElement).toHaveClass("neo-check");
@@ -78,7 +79,7 @@ describe("Checkbox", () => {
 
     it("returns the correct class name when passed `false`", () => {
       render(<Checkbox {...DefaultProps} />);
-      const checkboxElement = screen.getByLabelText(DefaultProps.label);
+      const checkboxElement = screen.getByLabelText(DefaultProps.children);
 
       expect(checkboxElement).not.toHaveClass("neo-check--indeterminate");
       expect(checkboxElement).toHaveClass("neo-check");
@@ -86,7 +87,7 @@ describe("Checkbox", () => {
 
     it("returns the correct class name when passed `mixed`", () => {
       render(<Checkbox {...DefaultProps} checked="mixed" />);
-      const checkboxElement = screen.getByLabelText(DefaultProps.label);
+      const checkboxElement = screen.getByLabelText(DefaultProps.children);
 
       expect(checkboxElement).toHaveClass("neo-check--indeterminate");
       expect(checkboxElement).toHaveClass("neo-check");
@@ -95,7 +96,7 @@ describe("Checkbox", () => {
     it("returns the correct class name when passed a `className`", () => {
       const exampleCssClass = "example-css-class";
       render(<Checkbox {...DefaultProps} className={exampleCssClass} />);
-      const checkboxElement = screen.getByLabelText(DefaultProps.label);
+      const checkboxElement = screen.getByLabelText(DefaultProps.children);
 
       expect(checkboxElement).toHaveClass(exampleCssClass);
       expect(checkboxElement).toHaveClass("neo-check");

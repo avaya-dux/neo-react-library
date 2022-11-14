@@ -11,8 +11,12 @@ export default {
 export const Default = () => {
   return (
     <>
-      <Checkbox label="example label" name="example" value="1" />
-      <Checkbox label="example label" name="example" value="1" defaultChecked />
+      <Checkbox name="example" value="1">
+        example label 1
+      </Checkbox>
+      <Checkbox name="example" value="2" defaultChecked>
+        example label 2
+      </Checkbox>
     </>
   );
 };
@@ -56,7 +60,7 @@ const UncontrolledTemplate: Story<CheckboxProps> = ({
 export const CheckedAndControlled = ControlledTemplate.bind({});
 CheckedAndControlled.args = {
   checked: true,
-  label: "example label",
+  children: "example label",
   value: "1",
   disabled: false,
 };
@@ -64,7 +68,7 @@ CheckedAndControlled.args = {
 export const CheckedAndUncontrolled = UncontrolledTemplate.bind({});
 CheckedAndUncontrolled.args = {
   defaultChecked: true,
-  label: "example label",
+  children: "example label",
   value: "1",
   disabled: false,
 };
@@ -72,7 +76,7 @@ CheckedAndUncontrolled.args = {
 export const UncheckedAndControlled = ControlledTemplate.bind({});
 UncheckedAndControlled.args = {
   checked: false,
-  label: "example label",
+  children: "example label",
   value: "1",
   disabled: false,
 };
@@ -80,7 +84,7 @@ UncheckedAndControlled.args = {
 export const UncheckedAndUncontrolled = UncontrolledTemplate.bind({});
 UncheckedAndUncontrolled.args = {
   defaultChecked: false,
-  label: "example label",
+  children: "example label",
   value: "1",
   disabled: false,
 };
@@ -88,7 +92,7 @@ UncheckedAndUncontrolled.args = {
 export const MixedAndControlled = ControlledTemplate.bind({});
 MixedAndControlled.args = {
   checked: "mixed",
-  label: "example label",
+  children: "example label",
   value: "1",
   disabled: false,
 };
@@ -96,7 +100,7 @@ MixedAndControlled.args = {
 export const MixedAndUncontrolled = UncontrolledTemplate.bind({});
 MixedAndUncontrolled.args = {
   defaultChecked: "mixed",
-  label: "example label",
+  children: "example label",
   value: "1",
   disabled: false,
 };
