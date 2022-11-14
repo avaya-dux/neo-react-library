@@ -16,7 +16,7 @@ export default {
 
 export const Default = () => {
   return (
-    <CheckboxGroup groupName="Single checkbox">
+    <CheckboxGroup groupName="single-checkbox" label="Single Checkbox">
       <Checkbox value="1">example label</Checkbox>
     </CheckboxGroup>
   );

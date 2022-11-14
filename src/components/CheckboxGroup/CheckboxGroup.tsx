@@ -3,20 +3,33 @@ import { Children, ReactElement, useCallback, useMemo } from "react";
 
 import { Checkbox, CheckboxProps } from "components/Checkbox";
 import { NeoInputWrapper } from "components/NeoInputWrapper";
+import { handleAccessbilityError } from "utils";
 
 const logger = log.getLogger("checkboxgroup-logger");
 logger.disableAll();
 
-export interface CheckboxGroupProps {
+export interface CheckboxGroupDefaultProps {
   children: ReactElement<CheckboxProps> | ReactElement<CheckboxProps>[];
   groupName: string;
-  label?: string;
   inline?: boolean;
   helperText?: string;
   error?: boolean;
   required?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+type EnforcedAccessibleLabel =
+  | {
+      ["aria-labelledby"]: string;
+      label?: string;
+    }
+  | {
+      ["aria-labelledby"]?: string;
+      label: string;
+    };
+
+export type CheckboxGroupProps = CheckboxGroupDefaultProps &
+  EnforcedAccessibleLabel;
 
 /**
  * Checkbox group is used to render a group of related Checkbox Components.
@@ -33,9 +46,10 @@ export interface CheckboxGroupProps {
 </CheckboxGroup>
  *
  * @example
-<label htmlFor="checkbox-group">Checkbox Group</label>
+<label id="checkbox-group-label">Checkbox Group</label>
 <CheckboxGroup
   groupName="checkbox-group"
+  aria-labelledby="checkbox-group-label"
   onChange={(e) => setChecked(e.target.value)},
 >
   <Checkbox value="gift">Gift</Checkbox>
@@ -48,6 +62,7 @@ export interface CheckboxGroupProps {
 export const CheckboxGroup = ({
   children,
   groupName,
+  ["aria-labelledby"]: ariaLabelledBy,
   label,
   inline,
   helperText,
@@ -55,6 +70,11 @@ export const CheckboxGroup = ({
   required,
   onChange,
 }: CheckboxGroupProps) => {
+  const labelId = useMemo(
+    () => ariaLabelledBy || `${groupName}-label`,
+    [groupName, ariaLabelledBy]
+  );
+
   const helperTextId = useMemo(
     () => (helperText ? `${groupName}-helper-text` : undefined),
     [groupName, helperText]
@@ -70,6 +90,12 @@ export const CheckboxGroup = ({
     [onChange]
   );
 
+  if (!label && !ariaLabelledBy) {
+    handleAccessbilityError(
+      "CheckboxGroup must have a `label` or `aria-labelledby`"
+    );
+  }
+
   const computeCheckboxesJsx = () =>
     Children.map(children, (child, index) => (
       <Checkbox
@@ -82,8 +108,13 @@ export const CheckboxGroup = ({
     ));
 
   return (
-    <NeoInputWrapper required={required} error={error}>
-      {label && <label htmlFor={groupName}>{label}</label>}
+    <NeoInputWrapper
+      required={required}
+      error={error}
+      role="group"
+      aria-labelledby={labelId}
+    >
+      {label && <label id={labelId}>{label}</label>}
 
       {inline ? (
         <div className="neo-input-group--inline">{computeCheckboxesJsx()}</div>
