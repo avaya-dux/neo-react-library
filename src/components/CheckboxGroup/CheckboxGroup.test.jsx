@@ -104,6 +104,50 @@ describe("CheckboxGroup", () => {
 
       expect(screen.getByText(helperText)).toBeInTheDocument();
     });
+
+    it("if passed a `label`, creates an `id` prop for it that is: `${groupName}-label`", () => {
+      const groupName = "checkbox-groupname";
+      const labelId = `${groupName}-label`;
+      render(
+        <CheckboxGroup label={defaultCheckboxGroupLabel} groupName={groupName}>
+          {defaultCheckboxes}
+        </CheckboxGroup>
+      );
+
+      expect(screen.getByText(defaultCheckboxGroupLabel)).toHaveAttribute(
+        "id",
+        labelId
+      );
+    });
+
+    it("if a `label` is not passed, an `aria-labelledby` is required and is used by the root element (`<div>`)", () => {
+      const labelId = "checkbox-group-label";
+      render(
+        <>
+          <div id={labelId}>{defaultCheckboxGroupLabel}</div>
+
+          <CheckboxGroup aria-labelledby={labelId} groupName="group-name">
+            {defaultCheckboxes}
+          </CheckboxGroup>
+        </>
+      );
+
+      expect(screen.getByLabelText(defaultCheckboxGroupLabel)).toHaveAttribute(
+        "role",
+        "group"
+      );
+    });
+
+    it("if neither a `label` or `aria-labelledby` is passed, an error is thrown", () => {
+      vi.spyOn(console, "error").mockImplementation(() => null);
+      expect(() =>
+        render(
+          <CheckboxGroup groupName="group-name">
+            {defaultCheckboxes}
+          </CheckboxGroup>
+        )
+      ).toThrowError();
+    });
   });
 
   describe("disabled checkbox group", () => {

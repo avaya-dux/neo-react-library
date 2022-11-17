@@ -114,7 +114,7 @@ export const CheckboxGroup = ({
       role="group"
       aria-labelledby={labelId}
     >
-      {label && <label id={labelId}>{label}</label>}
+      {label && <span id={labelId}>{label}</span>}
 
       {inline ? (
         <div className="neo-input-group--inline">{computeCheckboxesJsx()}</div>

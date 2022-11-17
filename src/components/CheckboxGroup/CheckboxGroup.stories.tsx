@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Story } from "@storybook/react";
 import { FormEvent, useCallback, useState } from "react";
 
@@ -19,8 +18,9 @@ export default {
 
 export const Default = () => {
   return (
-    <CheckboxGroup groupName="single-checkbox" label="Single Checkbox">
-      <Checkbox value="1">example label</Checkbox>
+    <CheckboxGroup groupName="single-checkbox" label="Checkbox Group">
+      <Checkbox value="1">example value</Checkbox>
+      <Checkbox value="2">another value</Checkbox>
     </CheckboxGroup>
   );
 };
@@ -28,12 +28,13 @@ export const Default = () => {
 export const UseOfSeperateLabel = () => {
   return (
     <>
-      <label id="checkbox-group-label">Checkbox Group</label>
+      <div id="checkbox-group-label">Seperate Label for Group</div>
       <CheckboxGroup
         groupName="single-checkbox"
         aria-labelledby="checkbox-group-label"
       >
-        <Checkbox value="1">example label</Checkbox>
+        <Checkbox value="1">example value</Checkbox>
+        <Checkbox value="2">another value</Checkbox>
       </CheckboxGroup>
     </>
   );
