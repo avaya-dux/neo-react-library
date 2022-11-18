@@ -2,11 +2,12 @@ import { composeStories } from "@storybook/testing-react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
+
 import { Accordion } from "../Accordion";
 import { AccordionGroup } from "./AccordionGroup";
 import * as Stories from "./AccordionGroup.stories";
 
-const { Default } = composeStories(Stories);
+const { Group } = composeStories(Stories);
 
 describe("Group Accordion Component", () => {
   const user = userEvent.setup();
@@ -98,7 +99,7 @@ describe("Group Accordion Component", () => {
     describe("Accordion group", () => {
       let renderResult;
       beforeEach(() => {
-        renderResult = render(<Default />);
+        renderResult = render(<Group />);
       });
       it("should render ok", () => {
         const { container } = renderResult;

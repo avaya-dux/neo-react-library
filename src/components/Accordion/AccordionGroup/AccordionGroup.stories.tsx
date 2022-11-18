@@ -4,11 +4,11 @@ import { AccordionGroup, AccordionGroupProps } from "./AccordionGroup";
 import { Sheet } from "components/Sheet";
 
 export default {
-  title: "Components/Accordion Group",
+  title: "Components/Accordion",
   component: AccordionGroup,
 } as Meta<AccordionGroupProps>;
 
-export const Default = () => {
+export const Group = () => {
   return (
     <Sheet title="Sheet title" style={{ width: 600 }}>
       <br />
