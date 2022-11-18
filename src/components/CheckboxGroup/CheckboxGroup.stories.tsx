@@ -18,7 +18,7 @@ export default {
 
 export const Default = () => {
   return (
-    <CheckboxGroup groupName="single-checkbox" label="Checkbox Group">
+    <CheckboxGroup groupName="checkbox-group" label="Checkbox Group">
       <Checkbox value="1">example value</Checkbox>
       <Checkbox value="2">another value</Checkbox>
     </CheckboxGroup>
@@ -30,7 +30,7 @@ export const UseOfSeperateLabel = () => {
     <>
       <div id="checkbox-group-label">Seperate Label for Group</div>
       <CheckboxGroup
-        groupName="single-checkbox"
+        groupName="checkbox-group"
         aria-labelledby="checkbox-group-label"
       >
         <Checkbox value="1">example value</Checkbox>
