@@ -1,7 +1,9 @@
 import { Story } from "@storybook/react";
+import { FormEvent, useCallback, useState } from "react";
+
 import { Button, TextArea } from "components";
 import { Checkbox, CheckboxProps } from "components/Checkbox/Checkbox";
-import { FormEvent, useCallback, useState } from "react";
+
 import { CheckboxGroup, CheckboxGroupProps } from "./CheckboxGroup";
 import {
   checkboxes,
@@ -16,9 +18,25 @@ export default {
 
 export const Default = () => {
   return (
-    <CheckboxGroup groupName="Single checkbox">
-      <Checkbox value="1">example label</Checkbox>
+    <CheckboxGroup groupName="checkbox-group" label="Checkbox Group">
+      <Checkbox value="1">example value</Checkbox>
+      <Checkbox value="2">another value</Checkbox>
     </CheckboxGroup>
+  );
+};
+
+export const UseOfSeperateLabel = () => {
+  return (
+    <>
+      <div id="checkbox-group-label">Seperate Label for Group</div>
+      <CheckboxGroup
+        groupName="checkbox-group"
+        aria-labelledby="checkbox-group-label"
+      >
+        <Checkbox value="1">example value</Checkbox>
+        <Checkbox value="2">another value</Checkbox>
+      </CheckboxGroup>
+    </>
   );
 };
 
@@ -93,13 +111,15 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
 
 export const DefaultCheckboxGroup = DefaultTemplate.bind({});
 DefaultCheckboxGroup.args = {
-  groupName: "default checkbox group",
+  groupName: "default-checkbox-group",
+  label: "Default Checkbox Group",
   required: true,
 };
 
 export const InlineDefaultCheckboxGroup = DefaultTemplate.bind({});
 InlineDefaultCheckboxGroup.args = {
-  groupName: "inline checkbox group",
+  groupName: "inline-checkbox-group",
+  label: "Inline Default Checkbox Group",
   inline: true,
 };
 
@@ -111,13 +131,15 @@ const DisabledTemplate: Story<CheckboxGroupProps> = ({
 };
 export const DisabledCheckboxGroup = DisabledTemplate.bind({});
 DisabledCheckboxGroup.args = {
-  groupName: "disabled checkbox group",
+  groupName: "disabled-checkbox-group",
+  label: "Disabled Checkbox Group",
   onChange: () => null,
 };
 
 export const InlineDisabledCheckboxGroup = DisabledTemplate.bind({});
 InlineDisabledCheckboxGroup.args = {
-  groupName: "inline disabled checkbox group",
+  groupName: "inline-disabled-checkbox-group",
+  label: "Inline Disabled Checkbox Group",
   inline: true,
   onChange: () => null,
 };
@@ -130,13 +152,15 @@ const ReadonlyTemplate: Story<CheckboxGroupProps> = ({
 };
 export const ReadonlyCheckboxGroup = ReadonlyTemplate.bind({});
 ReadonlyCheckboxGroup.args = {
-  groupName: "readonly checkbox group",
+  groupName: "readonly-checkbox-group",
+  label: "Readonly Checkbox Group",
   onChange: () => null,
 };
 
 export const InlineReadonlyCheckboxGroup = ReadonlyTemplate.bind({});
 InlineReadonlyCheckboxGroup.args = {
-  groupName: "inline readonly checkbox group",
+  groupName: "inline-readonly-checkbox-group",
+  label: "Inline Readonly Checkbox Group",
   inline: true,
   onChange: () => null,
 };
