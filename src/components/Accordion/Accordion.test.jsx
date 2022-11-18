@@ -6,7 +6,7 @@ import { axe } from "jest-axe";
 import { Accordion } from "./Accordion";
 import * as AccordionStories from "./Accordion.stories";
 
-const { Default } = composeStories(AccordionStories);
+const { Single } = composeStories(AccordionStories);
 
 describe("Accordion Component", () => {
   const user = userEvent.setup();
@@ -50,7 +50,7 @@ describe("Accordion Component", () => {
     describe("Accordion", () => {
       let renderResult;
       beforeEach(() => {
-        renderResult = render(<Default />);
+        renderResult = render(<Single />);
       });
 
       it("should render ok", () => {
