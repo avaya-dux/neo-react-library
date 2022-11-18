@@ -7,7 +7,7 @@ export default {
   component: Accordion,
 } as Meta;
 
-export const Default = () => (
+export const Single = () => (
   <Sheet title="Accordion Examples" style={{ width: 400 }}>
     <Accordion header="Accordion Header">Some text in body</Accordion>
 
