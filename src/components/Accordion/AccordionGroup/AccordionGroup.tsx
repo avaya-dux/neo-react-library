@@ -43,10 +43,19 @@ export const AccordionGroup = ({
   const controlledChildren = Children.map(children, (child, index) =>
     cloneElement(child, {
       key: index,
-      handleClick: allowOnlyOne
-        ? () => setOpenAccordionIndex(index)
-        : undefined,
-      isOpen: index === openAccordionIndex,
+      onClick:
+        allowOnlyOne || child.props.onClick
+          ? () => {
+              if (allowOnlyOne) {
+                setOpenAccordionIndex(index);
+              }
+
+              if (child.props.onClick) {
+                child.props.onClick();
+              }
+            }
+          : undefined,
+      isOpen: allowOnlyOne ? index === openAccordionIndex : child.props.isOpen,
     })
   );
 

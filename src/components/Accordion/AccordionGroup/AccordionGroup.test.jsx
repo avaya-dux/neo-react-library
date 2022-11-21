@@ -2,6 +2,7 @@ import { composeStories } from "@storybook/testing-react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { Accordion } from "../Accordion";
 import { AccordionGroup } from "./AccordionGroup";
@@ -39,7 +40,9 @@ describe("Group Accordion Component", () => {
   it("Check button click functionality and assigns appropriate aria-expanded value", async () => {
     render(
       <AccordionGroup header={groupHeaderText}>
-        <Accordion header="heading 1">{bodyText}</Accordion>
+        <Accordion header="heading 1" defaultExpanded>
+          {bodyText}
+        </Accordion>
         <Accordion header="heading 2">{bodyText}</Accordion>
         <Accordion header="heading 3">{bodyText}</Accordion>
       </AccordionGroup>
@@ -48,6 +51,26 @@ describe("Group Accordion Component", () => {
     expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
     await user.click(AccordionElements[0]);
     expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "false");
+  });
+  it("does not override an `Accordion`s `onClick` functionality", async () => {
+    const spy = vi.fn();
+    const spyHeader = "Spy Header";
+
+    render(
+      <AccordionGroup header={groupHeaderText}>
+        <Accordion header="heading 1">{bodyText}</Accordion>
+        <Accordion header={spyHeader} onClick={spy}>
+          {bodyText}
+        </Accordion>
+        <Accordion header="heading 3">{bodyText}</Accordion>
+      </AccordionGroup>
+    );
+
+    expect(spy).not.toHaveBeenCalled();
+
+    await user.click(screen.getByText(spyHeader));
+
+    expect(spy).toHaveBeenCalled();
   });
   it("Check group accordion render properly by having a default open, when `allowOnlyOne` prop is passed", async () => {
     render(

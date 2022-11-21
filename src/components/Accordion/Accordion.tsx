@@ -7,7 +7,7 @@ export interface AccordionProps {
   children?: ReactNode;
   defaultExpanded?: boolean;
   disabled?: boolean;
-  handleClick?: () => void;
+  onClick?: () => void;
   header: ReactNode;
   headerId?: string;
   isOpen?: boolean;
@@ -40,7 +40,7 @@ export const Accordion = ({
   children,
   defaultExpanded = false,
   disabled = false,
-  handleClick,
+  onClick,
   header,
   headerId = useId(),
   isOpen,
@@ -80,11 +80,17 @@ export const Accordion = ({
             aria-controls={bodyId}
             id={headerId}
             onClick={() => {
-              handleClick ? handleClick() : setIsActive(!isActive);
+              if (onClick) {
+                onClick();
+              }
+
+              if (isOpen === undefined) {
+                setIsActive(!isActive);
+              }
             }}
             disabled={disabled}
             // aria-disabled below condition is for screen reader when allowOnlyOne prop is true from parent component.
-            aria-disabled={!!(isActive && handleClick)}
+            aria-disabled={!!(isActive && onClick)}
           >
             {header}
           </button>
