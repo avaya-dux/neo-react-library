@@ -12,6 +12,28 @@ export interface AccordionProps {
   headerId?: string;
   isOpen?: boolean;
 }
+
+/**
+ * An Accordion is a vertically stacked menu.
+ * When opened, the list expands to reveal the associated content.
+ *
+ * @example
+<Accordion header="Single Accordion Example">
+  Inner content of Accordion example
+</Accordion>
+ *
+<Accordion
+  header="Single Accordion Example"
+  disabled={disabled}
+  isOpen={open}
+  handleClick={() => setOpen(!open)}
+>
+  Inner content of Accordion example
+</Accordion>
+ *
+ * @see https://design.avayacloud.com/components/web/accordion-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-accordion
+ */
 export const Accordion = ({
   "aria-label": ariaLabel = "Accordion Heading",
   "aria-level": ariaLevel = 2,
@@ -34,6 +56,7 @@ export const Accordion = ({
       setIsActive(false);
     }
   }, [isOpen]);
+
   return (
     <div className="neo-accordion">
       <div
