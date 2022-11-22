@@ -35,6 +35,7 @@ import { TooltipProps } from "./TooltipTypes";
  * <Tooltip label="example text"><span>text</span></Tooltip>
  *
  * @see https://design.avayacloud.com/components/web/tooltip-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-tooltip
  */
 export const Tooltip = ({
   arrow = true,
