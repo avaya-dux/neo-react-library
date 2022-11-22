@@ -2,6 +2,8 @@ import clsx from "clsx";
 import {
   Children,
   cloneElement,
+  useCallback,
+  useEffect,
   useId,
   useLayoutEffect,
   useMemo,
@@ -9,7 +11,7 @@ import {
   useState,
 } from "react";
 
-import { isString } from "utils";
+import { isString, Keys } from "utils";
 
 import {
   getIdealTooltipPosition,
@@ -81,12 +83,32 @@ export const Tooltip = ({
     }
   }, [isString, children]);
 
+  const [allowTooltip, setAllowTooltip] = useState(true);
+  const onKeyUp = useCallback((e: KeyboardEvent) => {
+    if (e.key === Keys.ESC) {
+      setAllowTooltip(false);
+
+      setTimeout(() => {
+        setAllowTooltip(true);
+      }, 2000);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
+
   return (
     <div
       {...rest}
       ref={tooltipContainerRef}
       className={clsx(
-        `neo-tooltip neo-tooltip--${tooltipPosition} neo-tooltip--onhover`,
+        `neo-tooltip neo-tooltip--${tooltipPosition}`,
+        allowTooltip && "neo-tooltip--onhover",
         className
       )}
     >
