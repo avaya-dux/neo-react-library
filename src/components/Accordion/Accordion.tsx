@@ -7,18 +7,40 @@ export interface AccordionProps {
   children?: ReactNode;
   defaultExpanded?: boolean;
   disabled?: boolean;
-  handleClick?: () => void;
+  onClick?: () => void;
   header: ReactNode;
   headerId?: string;
   isOpen?: boolean;
 }
+
+/**
+ * An Accordion is a vertically stacked menu.
+ * When opened, the list expands to reveal the associated content.
+ *
+ * @example
+<Accordion header="Single Accordion Example">
+  Inner content of Accordion example
+</Accordion>
+ *
+<Accordion
+  header="Single Accordion Example"
+  disabled={disabled}
+  isOpen={open}
+  handleClick={() => setOpen(!open)}
+>
+  Inner content of Accordion example
+</Accordion>
+ *
+ * @see https://design.avayacloud.com/components/web/accordion-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-accordion
+ */
 export const Accordion = ({
   "aria-label": ariaLabel = "Accordion Heading",
   "aria-level": ariaLevel = 2,
   children,
   defaultExpanded = false,
   disabled = false,
-  handleClick,
+  onClick,
   header,
   headerId = useId(),
   isOpen,
@@ -34,6 +56,7 @@ export const Accordion = ({
       setIsActive(false);
     }
   }, [isOpen]);
+
   return (
     <div className="neo-accordion">
       <div
@@ -57,11 +80,17 @@ export const Accordion = ({
             aria-controls={bodyId}
             id={headerId}
             onClick={() => {
-              handleClick ? handleClick() : setIsActive(!isActive);
+              if (onClick) {
+                onClick();
+              }
+
+              if (isOpen === undefined) {
+                setIsActive(!isActive);
+              }
             }}
             disabled={disabled}
             // aria-disabled below condition is for screen reader when allowOnlyOne prop is true from parent component.
-            aria-disabled={!!(isActive && handleClick)}
+            aria-disabled={!!(isActive && onClick)}
           >
             {header}
           </button>

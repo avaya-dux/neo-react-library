@@ -45,6 +45,7 @@ export type CheckboxProps = BaseCheckboxProps & EnforcedAccessibleLabel;
  * <Checkbox value="2" name="group-name" aria-label="Checkbox 2" />
  *
  * @see https://design.avayacloud.com/components/web/checkbox-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-checkbox
  */
 export const Checkbox = forwardRef(
   (
