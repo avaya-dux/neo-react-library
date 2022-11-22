@@ -10,16 +10,11 @@ export default {
   component: Tooltip,
 } as Meta<TooltipProps>;
 
-export const Default = () => {
-  const id = "tooltiplabelid";
-  return (
-    <Tooltip label="default tooltip text" id={id}>
-      <Button aria-describedby={id} variant="primary">
-        button text
-      </Button>
-    </Tooltip>
-  );
-};
+export const Default = () => (
+  <Tooltip label="default tooltip text">
+    <Button variant="primary">button text</Button>
+  </Tooltip>
+);
 
 const Template: Story<TooltipProps> = ({ children, ...rest }: TooltipProps) => (
   <Tooltip {...rest}>
