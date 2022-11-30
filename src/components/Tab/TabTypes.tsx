@@ -3,14 +3,14 @@ import { ReactElement, ReactNode } from "react";
 import { MenuProps } from "components/Menu";
 import { IconNamesType } from "utils";
 
-export interface TabProps extends React.HTMLAttributes<HTMLLIElement> {
+export interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;
   children: ReactNode;
   disabled?: boolean;
   icon?: IconNamesType;
 }
 
-export interface TabLinkProps extends React.HTMLAttributes<HTMLLIElement> {
+export interface TabLinkProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   disabled?: boolean;
   href: string;

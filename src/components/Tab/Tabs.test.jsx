@@ -52,15 +52,12 @@ describe("Tabs", () => {
       const { container } = render(tabLinkTabExample);
 
       const tabs = screen.getAllByRole("tab");
-      expect(tabs).toHaveLength(2);
-
-      const links = screen.getAllByRole("link");
-      expect(links).toHaveLength(1);
+      expect(tabs).toHaveLength(3);
 
       const anchorTags = container.querySelectorAll("a");
       expect(anchorTags).toHaveLength(3);
       expect(anchorTags[0]).toHaveAttribute("role", "tab");
-      expect(anchorTags[1]).toHaveAttribute("role", "link");
+      expect(anchorTags[1]).toHaveAttribute("role", "tab");
       expect(anchorTags[2]).toHaveAttribute("role", "tab");
     });
 
@@ -71,19 +68,19 @@ describe("Tabs", () => {
         "aria-selected",
         "true"
       );
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute(
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute(
         "aria-selected",
         "false"
       );
 
-      const link = screen.getByRole("link");
+      const link = screen.getAllByRole("tab")[1];
       user.click(link);
 
       expect(screen.getAllByRole("tab")[0]).toHaveAttribute(
         "aria-selected",
         "true"
       );
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute(
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute(
         "aria-selected",
         "false"
       );
@@ -125,7 +122,7 @@ describe("Tabs", () => {
     it("should call the `onClose` method when 'close' btn is focused and user hits 'space'", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
 
-      screen.getByRole("button").focus();
+      screen.getAllByRole("tab")[2].focus();
       await user.keyboard(UserEventKeys.SPACE);
       expect(closableTabSpy).toHaveBeenCalled();
     });
@@ -133,7 +130,7 @@ describe("Tabs", () => {
     it("should call the `onClose` method when 'close' btn is focused and user hits 'enter'", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
 
-      screen.getByRole("button").focus();
+      screen.getAllByRole("tab")[2].focus();
       await user.keyboard(UserEventKeys.ENTER);
       expect(closableTabSpy).toHaveBeenCalled();
     });
@@ -141,14 +138,14 @@ describe("Tabs", () => {
     it("should call the `onClose` method when 'close' btn is clicked via mouse", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
 
-      await user.click(screen.getByRole("button"));
+      await user.click(screen.getAllByRole("tab")[2]);
       expect(closableTabSpy).toHaveBeenCalled();
     });
 
     it("should _not_ call the `onClose` method when 'close' btn is focused and user hits 'tab'", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
 
-      screen.getByRole("button").focus();
+      screen.getAllByRole("tab")[2].focus();
       await user.tab();
       expect(closableTabSpy).not.toHaveBeenCalled();
     });

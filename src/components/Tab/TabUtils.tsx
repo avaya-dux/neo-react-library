@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import log from "loglevel";
 import { Dispatch, ReactElement, RefObject, SetStateAction } from "react";
-
+import clsx from "clsx";
 import { genId } from "utils";
 
 import { InternalTab } from "./InternalTab";
@@ -25,7 +25,7 @@ export function debugTabs(
   }
 }
 export function getAllTabIdsInString(tabProps: InternalTabProps[]): string {
-  return tabProps.map((tab) => tab.id).join(" ");
+  return tabProps.map((tab) => clsx(tab.id, tab.closableId)).join(" ");
 }
 
 export function isValidPanelElement(element: ReactElement) {
@@ -86,6 +86,10 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
   const closable = isClosableTab(tab);
   const onClose = "onClose" in props ? props!.onClose : undefined;
 
+  const content = {
+    id: genId(),
+  };
+
   return {
     ...rest,
     disabled,
@@ -93,6 +97,7 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
     onClose,
     id: id || genId(),
     name: children,
+    content,
     ...(icon ? { icon } : {}),
   };
 };
@@ -118,6 +123,7 @@ const buildSingleTabPropsHasAssociatedPanel = (
     ...rest,
     disabled,
     closable,
+    ...(closable ? { closableId: genId() } : {}),
     onClose,
     id: id || genId(),
     name: children,
@@ -127,7 +133,7 @@ const buildSingleTabPropsHasAssociatedPanel = (
 };
 
 export const createTab = (
-  ref: RefObject<HTMLLIElement>,
+  ref: RefObject<HTMLDivElement>,
   index: number,
   tabProps: InternalTabProps,
   tabs: InternalTabProps[],
@@ -149,19 +155,23 @@ export const createTab = (
   logger.debug(`${tabId} disabled is ${tabProps.disabled}`);
 
   return (
-    <li
-      {...rest}
+    <div
       ref={ref}
       key={index}
-      className={getTabItemClasses({
-        active,
-        disabled: tabProps.disabled,
-        vertical: isVertical,
-      })}
+      className={clsx(
+        getTabItemClasses({
+          active,
+          disabled: tabProps.disabled,
+          vertical: isVertical,
+        }),
+        className
+      )}
       dir={closable ? "ltr" : dir}
     >
       <InternalTab
-        {...tabProps}
+        {...rest}
+        id={id}
+        name={name}
         active={active}
         activeTabIndex={activeTabIndex}
         aria-disabled={disabled}
@@ -176,7 +186,7 @@ export const createTab = (
         focus={focus}
         setFocus={setFocus}
       />
-    </li>
+    </div>
   );
 };
 

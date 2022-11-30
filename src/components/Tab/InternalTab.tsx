@@ -38,6 +38,7 @@ export const InternalTab = ({
   disabled,
   closable,
   onClose = noop,
+  closableId,
   href = hrefNoopString,
   id,
   name,
@@ -129,6 +130,7 @@ export const InternalTab = ({
         aria-controls={content?.id}
         aria-disabled={disabled}
         aria-selected={isLink ? undefined : active}
+        role="tab"
         className={getClassNames(className, icon)}
         dir={closable ? "ltr" : dir}
         href={href}
@@ -139,7 +141,7 @@ export const InternalTab = ({
         onKeyDown={handleAnchorKeyDownEvent}
         ref={ref}
         rel="noreferrer"
-        role={isLink ? "link" : "tab"}
+        aria-busy={isLink}
         tabIndex={active && !disabled ? 0 : -1}
         target={isLink ? "_blank" : undefined}
       >
@@ -156,7 +158,8 @@ export const InternalTab = ({
 
       {closable && (
         <span
-          role="button"
+          role="tab"
+          id={closableId}
           className="neo-icon-end"
           tabIndex={active && !disabled ? 0 : -1}
           onKeyDown={handleCloseKeyDownEvent}

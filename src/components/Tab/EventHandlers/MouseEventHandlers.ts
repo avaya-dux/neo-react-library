@@ -71,7 +71,7 @@ export const handleCloseElementMouseClickEvent = (
 export const handleLeftCarouselMouseClickEvent = (
   e: MouseEvent,
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLLIElement>[],
+  tabRefs: RefObject<HTMLDivElement>[],
   setLeftCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
   setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>
 ) => {
@@ -98,7 +98,7 @@ export const handleLeftCarouselMouseClickEvent = (
 function scrollAndUpdateButtons(
   amount: number,
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLLIElement>[],
+  tabRefs: RefObject<HTMLDivElement>[],
   setLeftCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
   setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>
 ) {
@@ -120,7 +120,7 @@ function scrollAndUpdateButtons(
 export const handleRightCarouselMouseClickEvent = (
   e: MouseEvent,
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLLIElement>[],
+  tabRefs: RefObject<HTMLDivElement>[],
   setLeftCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
   setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>
 ) => {
