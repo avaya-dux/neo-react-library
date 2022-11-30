@@ -104,7 +104,7 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-storybook": "^0.6.7",
-    "jest-axe": "7.0.0",
+    "jest-axe": "6.0.1",
     "jest-coverage-badges": "^1.1.2",
     "jsdoc": "^4.0.0",
     "jsdom": "^20.0.2",

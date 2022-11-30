@@ -94,6 +94,7 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
     ...rest,
     disabled,
     closable,
+    ...(closable ? { closableId: genId() } : {}),
     onClose,
     id: id || genId(),
     name: children,

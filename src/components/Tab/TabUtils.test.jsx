@@ -208,6 +208,7 @@ describe("TabUtils", () => {
         </Tabs>
       );
       const propsBuilt = buildTabProps(tabs.props.children);
+      expect(propsBuilt.length).toBe(3);
       expect(propsBuilt[0]).toMatchInlineSnapshot(`
       {
         "closable": false,
@@ -245,21 +246,20 @@ describe("TabUtils", () => {
       }
       `);
 
-      expect(propsBuilt[2]).toMatchInlineSnapshot(
-        { closableId: expect.any(String) },
-        `{
-            "closable": true,
-            "closableId": Any<String>,
-            "content": {
-              "children": "content 3",
-              "id": "panel3",
-            },
-            "disabled": false,
-            "id": "tab3",
-            "name": "tab3",
-            "onClose": undefined,
-          }`
-      );
+      expect(propsBuilt[2]).toMatchInlineSnapshot({ closableId: expect.any(String) },`
+       {
+          "closable": true,
+          "closableId": Any<String>,
+          "content": {
+            "children": "content 3",
+            "id": "panel3",
+          },
+          "disabled": false,
+          "id": "tab3",
+          "name": "tab3",
+          "onClose": undefined,
+        }
+        `);
     });
   });
 
@@ -293,7 +293,7 @@ describe("TabUtils", () => {
         </Tabs>
       );
       const tabsBuilt = buildTabPropsNoPanel(tabs.props.children);
-      //
+      
       expect(tabsBuilt[0]).toMatchInlineSnapshot(
         { content: { id: expect.any(String) } },
         `
@@ -326,10 +326,11 @@ describe("TabUtils", () => {
       `
       );
       expect(tabsBuilt[2]).toMatchInlineSnapshot(
-        { content: { id: expect.any(String) } },
+        { content: { id: expect.any(String) }, closableId: expect.any(String) },
         `
         {
           "closable": true,
+          "closableId": Any<String>,
           "content": {
             "id": Any<String>,
           },
