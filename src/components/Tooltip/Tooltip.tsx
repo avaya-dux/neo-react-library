@@ -77,22 +77,25 @@ export const Tooltip = ({
     const shouldWrap = isString(children) || Children.count(children) > 1;
     if (shouldWrap) {
       return <div aria-describedby={id}>{children}</div>;
-    } else {
-      const child = Children.only(children) as React.ReactElement;
-      return cloneElement(child, { "aria-describedby": id });
     }
+
+    const child = Children.only(children) as React.ReactElement;
+    return cloneElement(child, { "aria-describedby": id });
   }, [isString, children]);
 
   const [allowTooltip, setAllowTooltip] = useState(true);
-  const onKeyUp = useCallback((e: KeyboardEvent) => {
-    if (e.key === Keys.ESC) {
-      setAllowTooltip(false);
-
-      setTimeout(() => {
-        setAllowTooltip(true);
-      }, 2000);
-    }
-  }, []);
+  const setAllowTooltipTrue = useCallback(
+    () => setAllowTooltip(true),
+    [setAllowTooltip]
+  );
+  const onKeyUp = useCallback(
+    (e: { key: string }) => {
+      if (e.key === Keys.ESC) {
+        setAllowTooltip(false);
+      }
+    },
+    [setAllowTooltip]
+  );
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp, false);
@@ -102,10 +105,25 @@ export const Tooltip = ({
     };
   }, []);
 
+  /**
+   * NOTE: on the subject of the 'eslint-disable-next-line' below:
+   * According to both MDN [1], W3 [2], and deque [3], we _must_ use JS to appropriately
+   * hide the tooltip when the user clicks the "ESC" key. But jsx-a11y does
+   * not like that we have event handlers on a static element [4]. I see no way
+   * around this, so I'm having eslint ignore the rule for this instance.
+   *
+   * [1] https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tooltip_role
+   * [2] https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
+   * [3] https://dequeuniversity.com/library/aria/tooltip
+   * [4] https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/4abc751d87a8491219a9a3d2dacd80ea8adcb79b/docs/rules/no-static-element-interactions.md
+   */
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       {...rest}
       ref={tooltipContainerRef}
+      onFocus={setAllowTooltipTrue}
+      onMouseOver={setAllowTooltipTrue}
       className={clsx(
         `neo-tooltip neo-tooltip--${tooltipPosition}`,
         allowTooltip && "neo-tooltip--onhover",
