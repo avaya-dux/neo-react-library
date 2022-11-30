@@ -141,7 +141,6 @@ export const InternalTab = ({
         onKeyDown={handleAnchorKeyDownEvent}
         ref={ref}
         rel="noreferrer"
-        aria-busy={isLink}
         tabIndex={active && !disabled ? 0 : -1}
         target={isLink ? "_blank" : undefined}
       >
