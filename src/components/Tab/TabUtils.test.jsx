@@ -246,7 +246,9 @@ describe("TabUtils", () => {
       }
       `);
 
-      expect(propsBuilt[2]).toMatchInlineSnapshot({ closableId: expect.any(String) },`
+      expect(propsBuilt[2]).toMatchInlineSnapshot(
+        { closableId: expect.any(String) },
+        `
        {
           "closable": true,
           "closableId": Any<String>,
@@ -259,7 +261,8 @@ describe("TabUtils", () => {
           "name": "tab3",
           "onClose": undefined,
         }
-        `);
+        `
+      );
     });
   });
 
@@ -293,7 +296,7 @@ describe("TabUtils", () => {
         </Tabs>
       );
       const tabsBuilt = buildTabPropsNoPanel(tabs.props.children);
-      
+
       expect(tabsBuilt[0]).toMatchInlineSnapshot(
         { content: { id: expect.any(String) } },
         `
