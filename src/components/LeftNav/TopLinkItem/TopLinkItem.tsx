@@ -33,13 +33,16 @@ export const TopLinkItem = ({
   icon,
   id = useId(),
   label,
+  className,
 }: TopLinkItemProps) => {
   const ctx = useContext(LeftNavContext);
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    setIsActive(href === ctx.currentUrl);
-  }, [ctx.currentUrl, isActive, href]);
+    !ctx.isActiveOverride
+      ? setIsActive(href === ctx.currentUrl)
+      : setIsActive(false);
+  }, [ctx.currentUrl, ctx.isActiveOverride, isActive, href]);
 
   const onClick: MouseEventHandler = (e) => {
     e.preventDefault();
@@ -50,7 +53,8 @@ export const TopLinkItem = ({
     <li
       className={clsx(
         "neo-leftnav__main",
-        isActive && "neo-leftnav__main--active"
+        isActive && "neo-leftnav__main--active",
+        className
       )}
     >
       {disabled ? (
