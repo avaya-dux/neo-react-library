@@ -68,7 +68,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
   const navContext: LeftNavContextType = {
     currentUrl: curUrl,
     onSelectedLink: handleSelectedLink,
-    isActiveOverride: isActiveOverride,
+    isActiveOverride,
   };
 
   return (
