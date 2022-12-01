@@ -41,6 +41,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
   children,
   currentUrl = "",
   onNavigate,
+  isActiveOverride,
   ...rest
 }: LeftNavProps) => {
   if (!rest["aria-label"]) {
@@ -67,6 +68,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
   const navContext: LeftNavContextType = {
     currentUrl: curUrl,
     onSelectedLink: handleSelectedLink,
+    isActiveOverride,
   };
 
   return (

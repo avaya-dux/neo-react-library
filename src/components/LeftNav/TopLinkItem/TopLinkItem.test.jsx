@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
@@ -15,6 +15,22 @@ describe("TopLinkItem", () => {
     );
     const topLinkElement = getByText(TopLinkItemLabel);
     expect(topLinkElement).toBeInTheDocument();
+  });
+
+  it("accepts override of internal setting of active state", () => {
+    const { rerender } = render(
+      <LeftNav currentUrl="#test" aria-label="test-label">
+        <LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
+      </LeftNav>
+    );
+    const linkElement = screen.getByRole("listitem");
+    expect(linkElement).toHaveClass("neo-leftnav__main--active");
+    rerender(
+      <LeftNav currentUrl="#test" aria-label="test-label" isActiveOverride>
+        <LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
+      </LeftNav>
+    );
+    expect(linkElement).not.toHaveClass("neo-leftnav__main--active");
   });
 
   it("passes basic axe compliance", async () => {
