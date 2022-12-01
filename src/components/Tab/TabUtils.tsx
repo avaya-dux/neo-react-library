@@ -86,10 +86,6 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
   const closable = isClosableTab(tab);
   const onClose = "onClose" in props ? props!.onClose : undefined;
 
-  const content = {
-    id: genId(),
-  };
-
   return {
     ...rest,
     disabled,
@@ -98,7 +94,6 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
     onClose,
     id: id || genId(),
     name: children,
-    content,
     ...(icon ? { icon } : {}),
   };
 };
