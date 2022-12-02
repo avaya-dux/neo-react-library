@@ -87,45 +87,20 @@ export const handleCloseElementKeyDownEvent = (
   activeTabIndex: number,
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
   setActivePanelIndex: Dispatch<SetStateAction<number>>,
-  ref: RefObject<HTMLAnchorElement>
+  onClose: (index: number) => void
 ) => {
   logger.debug(`handle close element key event ${e.key} on ${activeTabIndex}`);
   if (tabs.length === 0) {
-    return false;
+    return;
   }
-  switch (e.key) {
-    case Keys.ENTER:
-    case Keys.SPACE:
-      e.preventDefault();
-      activateAnotherTabAndPanel(
-        tabs,
-        activeTabIndex,
-        setActiveTabIndex,
-        setActivePanelIndex
-      );
-      e.stopPropagation();
-      return true;
-    case Keys.TAB:
-      e.preventDefault();
-      logger.debug("shift pressed is", e.shiftKey);
-      if (e.shiftKey) {
-        focus(ref, tabs[activeTabIndex].id);
-      } else {
-        const activated = activateNextTab(
-          tabs,
-          activeTabIndex,
-          setActiveTabIndex
-        );
-        if (!activated) {
-          logger.debug("no next tab to activate, return focus to this tab");
-          focus(ref, tabs[activeTabIndex].id);
-        }
-      }
-      e.stopPropagation();
-      return false;
-  }
-  logger.debug("not handled key", e.key);
-  return false;
+  e.preventDefault();
+  activateAnotherTabAndPanel(
+    tabs,
+    activeTabIndex,
+    setActiveTabIndex,
+    setActivePanelIndex
+  );
+  onClose(activeTabIndex);
 };
 
 export const handleKeyDownEvent = (
@@ -135,9 +110,10 @@ export const handleKeyDownEvent = (
   activeTabIndex: number,
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
   setActivePanelIndex: Dispatch<SetStateAction<number>>,
-  ref: RefObject<HTMLAnchorElement>
+  ref: RefObject<HTMLAnchorElement>,
+  onClose: (index: number) => void
 ) => {
-  logger.debug(`handle tab key event ${e.key} on ${activeTabIndex}`);
+  logger.debug(`handle tab component key event ${e.key} on ${activeTabIndex}`);
   if (tabs.length === 0) {
     return;
   }
@@ -169,6 +145,18 @@ export const handleKeyDownEvent = (
         setActivePanelIndex(activeTabIndex);
         focus(ref, tabs[activeTabIndex].id);
       }
+      break;
+    case Keys.BACKSPACE:
+    case Keys.X:
+    case Keys.x:
+      handleCloseElementKeyDownEvent(
+        e,
+        tabs,
+        activeTabIndex,
+        setActiveTabIndex,
+        setActivePanelIndex,
+        onClose
+      );
       break;
   }
   e.stopPropagation();

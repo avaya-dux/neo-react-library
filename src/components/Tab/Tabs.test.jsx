@@ -93,7 +93,7 @@ describe("Tabs", () => {
     beforeEach(() => {
       vi.resetAllMocks();
       render(
-        <Tabs defaultIndex={0}>
+        <Tabs defaultIndex={1}>
           <TabList>
             <Tab id="tab1">{tab1Title}</Tab>
 
@@ -119,35 +119,34 @@ describe("Tabs", () => {
       cleanup();
     });
 
-    it("should call the `onClose` method when 'close' btn is focused and user hits 'space'", async () => {
+    it("should call the `onClose` method when closable tab is focused and user hits 'backspace'", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
 
-      screen.getAllByRole("tab")[2].focus();
-      await user.keyboard(UserEventKeys.SPACE);
+      screen.getAllByRole("tab")[1].focus();
+      await user.keyboard(UserEventKeys.BACKSPACE);
       expect(closableTabSpy).toHaveBeenCalled();
     });
 
-    it("should call the `onClose` method when 'close' btn is focused and user hits 'enter'", async () => {
+    it("should call the `onClose` method when closable tab is focused and user hits 'X'", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
 
-      screen.getAllByRole("tab")[2].focus();
-      await user.keyboard(UserEventKeys.ENTER);
+      screen.getAllByRole("tab")[1].focus();
+      await user.keyboard(UserEventKeys.X);
       expect(closableTabSpy).toHaveBeenCalled();
     });
 
-    it("should call the `onClose` method when 'close' btn is clicked via mouse", async () => {
+    it("should call the `onClose` method when closable tab is focused and user hits 'x'", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
 
-      await user.click(screen.getAllByRole("tab")[2]);
+      screen.getAllByRole("tab")[1].focus();
+      await user.keyboard(UserEventKeys.x);
       expect(closableTabSpy).toHaveBeenCalled();
     });
 
-    it("should _not_ call the `onClose` method when 'close' btn is focused and user hits 'tab'", async () => {
+    it("should call the `onClose` method when close icon is clicked via mouse", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
-
-      screen.getAllByRole("tab")[2].focus();
-      await user.tab();
-      expect(closableTabSpy).not.toHaveBeenCalled();
+      await user.click(screen.getAllByRole("tab")[1].getElementsByTagName("span")[0]);
+      expect(closableTabSpy).toHaveBeenCalled();
     });
   });
 

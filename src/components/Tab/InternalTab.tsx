@@ -13,10 +13,10 @@ import {
 import { Icon } from "components/Icon";
 import { IconNamesType } from "utils";
 
+import "./InternalTab_shim.css";
+
 import {
   handleBlurEvent,
-  handleCloseElementKeyDownEvent,
-  handleCloseElementMouseClickEvent,
   handleFocusEvent,
   handleKeyDownEvent,
   handleMouseClickEvent,
@@ -58,22 +58,9 @@ export const InternalTab = ({
   const isLink = href !== hrefNoopString;
   const handleAnchorMouseClickEvent: MouseEventHandler = (e: MouseEvent) =>
     !isLink &&
-    handleMouseClickEvent(e, tabs, setActiveTabIndex, setActivePanelIndex);
+    handleMouseClickEvent(e, tabs, tabIndex,
+      activeTabIndex, setActiveTabIndex, setActivePanelIndex, onClose);
 
-  const handleCloseMouseClickEvent: MouseEventHandler = (e: MouseEvent) => {
-    logger.debug(
-      `Mouse click event on close element: tab index is ${tabIndex}`
-    );
-    handleCloseElementMouseClickEvent(
-      e,
-      tabs,
-      tabIndex,
-      activeTabIndex,
-      setActiveTabIndex,
-      setActivePanelIndex
-    );
-    onClose(tabIndex);
-  };
   const handleAnchorKeyDownEvent: KeyboardEventHandler = (
     e: KeyboardEvent<HTMLAnchorElement>
   ) => {
@@ -84,25 +71,9 @@ export const InternalTab = ({
       activeTabIndex,
       setActiveTabIndex,
       setActivePanelIndex,
-      ref
+      ref,
+      onClose
     );
-  };
-
-  const handleCloseKeyDownEvent: KeyboardEventHandler = (
-    e: KeyboardEvent<HTMLAnchorElement>
-  ) => {
-    logger.debug(`Close button keyboard event, tab index is ${tabIndex}`);
-    const tabClosed = handleCloseElementKeyDownEvent(
-      e,
-      tabs,
-      activeTabIndex,
-      setActiveTabIndex,
-      setActivePanelIndex,
-      ref
-    );
-    if (tabClosed) {
-      onClose(tabIndex);
-    }
   };
 
   const handleAnchorFocusEvent: FocusEventHandler = (
@@ -124,12 +95,16 @@ export const InternalTab = ({
     }
   }, [focus, active, disabled]);
 
+  // todo: get aria-label if any
+  const labelledBy = closable ? `You can press X to close tab ${name}` : name?.toString();
+
   return (
     <>
       <a
         aria-controls={content?.id}
         aria-disabled={disabled}
         aria-selected={isLink ? undefined : active}
+        aria-label={labelledBy}
         role="tab"
         className={getClassNames(className, icon)}
         dir={closable ? "ltr" : dir}
@@ -153,19 +128,14 @@ export const InternalTab = ({
             aria-label="External Link"
           />
         )}
-      </a>
 
-      {closable && (
-        <span
-          role="tab"
-          id={closableId}
-          className="neo-icon-end"
-          tabIndex={active && !disabled ? 0 : -1}
-          onKeyDown={handleCloseKeyDownEvent}
-          onClick={handleCloseMouseClickEvent}
-          aria-label="enter or space to close this tab; tab again to move focus to next tab; shift tab returns focus to this tab;"
-        ></span>
-      )}
+        {closable && (
+          <span
+            id={closableId}
+            className="neo-icon-end"
+          ></span>
+        )}
+      </a>
     </>
   );
 };
