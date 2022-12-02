@@ -307,12 +307,12 @@ describe("Tab Keyboard event handlers", () => {
   });
 
   describe("handleCloseElementKeyDownEvent", () => {
-    let setActiveTabIndex, setActivePanelIndex, ref;
+    let setActiveTabIndex, setActivePanelIndex, onClose;
 
     beforeEach(() => {
       setActiveTabIndex = vi.fn();
       setActivePanelIndex = vi.fn();
-      ref = { current: { focus: vi.fn(), blur: vi.fn() } };
+      onClose = vi.fn();
     });
 
     it("should do nothing if tabs is empty", () => {
@@ -322,115 +322,25 @@ describe("Tab Keyboard event handlers", () => {
         0,
         setActiveTabIndex,
         setActivePanelIndex,
-        ref
+        onClose
       );
       expect(setActiveTabIndex).not.toBeCalled();
       expect(setActivePanelIndex).not.toBeCalled();
+      expect(onClose).not.toBeCalled();
     });
 
-    describe(Keys.ENTER, () => {
-      let e;
-      beforeEach(() => {
-        e = {
-          key: Keys.ENTER,
-          stopPropagation: vi.fn(),
-          preventDefault: vi.fn(),
-        };
-      });
-      it("should call activateAnotherTabAndPanel", () => {
-        testCloseElementKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
-      });
-    });
-    describe("SPACE", () => {
-      let e;
-      beforeEach(() => {
-        e = {
-          key: Keys.SPACE,
-          stopPropagation: vi.fn(),
-          preventDefault: vi.fn(),
-        };
-      });
-      it("should call activateAnotherTabAndPanel", () => {
-        testCloseElementKeyDown(e, setActiveTabIndex, setActivePanelIndex, ref);
-      });
-    });
-    describe("TAB", () => {
-      it("Tab moves focus from close button to next available tab", () => {
-        getNextTabIndex.mockReturnValue(1);
-        const e = {
-          key: Keys.TAB,
-          shiftKey: false,
-          stopPropagation: vi.fn(),
-          preventDefault: vi.fn(),
-        };
-        handleCloseElementKeyDownEvent(
-          e,
-          [{ name: "tab1" }, { name: "tab2" }],
-          0,
-          setActiveTabIndex,
-          setActivePanelIndex,
-          ref
-        );
-        expect(setActiveTabIndex).toBeCalledWith(1);
-        expect(setActivePanelIndex).not.toBeCalled();
-        expect(ref.current.focus).not.toBeCalled();
-      });
-      it("Tab moves focus from close button to current tab if no next tab", () => {
-        getNextTabIndex.mockReturnValue(0);
-        const e = {
-          key: Keys.TAB,
-          shiftKey: false,
-          stopPropagation: vi.fn(),
-          preventDefault: vi.fn(),
-        };
-        handleCloseElementKeyDownEvent(
-          e,
-          [{ name: "tab1" }],
-          0,
-          setActiveTabIndex,
-          setActivePanelIndex,
-          ref
-        );
-        expect(setActiveTabIndex).not.toBeCalled();
-        expect(setActivePanelIndex).not.toBeCalled();
-        expect(ref.current.focus).toBeCalled();
-      });
-      it("Shfit+Tab moves focus from close button to current tab", () => {
-        getNextTabIndex.mockReturnValue(0);
-        const e = {
-          key: Keys.TAB,
-          shiftKey: true,
-          stopPropagation: vi.fn(),
-          preventDefault: vi.fn(),
-        };
-        handleCloseElementKeyDownEvent(
-          e,
-          [{ name: "tab1" }],
-          0,
-          setActiveTabIndex,
-          setActivePanelIndex,
-          ref
-        );
-        expect(setActiveTabIndex).not.toBeCalled();
-        expect(setActivePanelIndex).not.toBeCalled();
-        expect(ref.current.focus).toBeCalled();
-      });
-    });
-    describe("Other Key", () => {
-      it("should return false", () => {
-        expect(
-          handleCloseElementKeyDownEvent(
-            { key: Keys.DOWN },
-            getTabProps(),
-            0,
-            setActiveTabIndex,
-            setActivePanelIndex,
-            ref
-          )
-        ).toBeFalsy();
-        expect(setActiveTabIndex).not.toBeCalled();
-        expect(setActivePanelIndex).not.toBeCalled();
-      });
+    it("should call activateAnotherTabAndPanel", () => {
+      const e = {
+        key: Keys.BACKSPACE,
+        stopPropagation: vi.fn(),
+        preventDefault: vi.fn(),
+      };
+      testCloseElementKeyDown(
+        e,
+        setActiveTabIndex,
+        setActivePanelIndex,
+        onClose
+      );
     });
   });
 });
@@ -482,19 +392,24 @@ function getTabLinkProps() {
   ];
 }
 
-function testCloseElementKeyDown(e, setActiveTabIndex, setActivePanelIndex) {
-  expect(
-    handleCloseElementKeyDownEvent(
-      e,
-      [{ name: "tab1" }],
-      0,
-      setActiveTabIndex,
-      setActivePanelIndex
-    )
-  ).toBeTruthy();
+function testCloseElementKeyDown(
+  e,
+  setActiveTabIndex,
+  setActivePanelIndex,
+  onClose
+) {
+  handleCloseElementKeyDownEvent(
+    e,
+    [{ name: "tab1" }],
+    0,
+    setActiveTabIndex,
+    setActivePanelIndex,
+    onClose
+  );
   expect(activateAnotherTabAndPanel).toBeCalled();
   expect(e.preventDefault).toBeCalled();
-  expect(e.stopPropagation).toBeCalled();
+  expect(e.stopPropagation).not.toBeCalled();
+  expect(onClose).toBeCalled();
 }
 
 function testEnterOrSpaceKeyDown(

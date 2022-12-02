@@ -207,53 +207,62 @@ describe("TabUtils", () => {
           </TabPanels>
         </Tabs>
       );
-      expect(buildTabProps(tabs.props.children)).toMatchInlineSnapshot(`
-        [
-          {
-            "closable": false,
-            "content": {
-              "children": [
-                <h2>
-                  content1
-                </h2>,
-                <p>
-                  paragraph 1
-                </p>,
-              ],
-              "id": "panel1",
-            },
-            "dir": "ltr",
-            "disabled": false,
-            "id": "tab1",
-            "name": "tab1",
-            "onClose": [Function],
-          },
-          {
-            "closable": false,
-            "content": {
-              "children": "content 2",
-              "className": "customClass",
-              "dir": "ltr",
-              "id": "panel2",
-            },
-            "disabled": true,
-            "id": "tab2",
-            "name": "tab2",
-            "onClose": undefined,
-          },
-          {
-            "closable": true,
-            "content": {
-              "children": "content 3",
-              "id": "panel3",
-            },
-            "disabled": false,
-            "id": "tab3",
-            "name": "tab3",
-            "onClose": undefined,
-          },
-        ]
+      const propsBuilt = buildTabProps(tabs.props.children);
+      expect(propsBuilt.length).toBe(3);
+      expect(propsBuilt[0]).toMatchInlineSnapshot(`
+      {
+        "closable": false,
+        "content": {
+          "children": [
+            <h2>
+              content1
+            </h2>,
+            <p>
+              paragraph 1
+            </p>,
+          ],
+          "id": "panel1",
+        },
+        "dir": "ltr",
+        "disabled": false,
+        "id": "tab1",
+        "name": "tab1",
+        "onClose": [Function],
+      }
       `);
+      expect(propsBuilt[1]).toMatchInlineSnapshot(`
+      {
+        "closable": false,
+        "content": {
+          "children": "content 2",
+          "className": "customClass",
+          "dir": "ltr",
+          "id": "panel2",
+        },
+        "disabled": true,
+        "id": "tab2",
+        "name": "tab2",
+        "onClose": undefined,
+      }
+      `);
+
+      expect(propsBuilt[2]).toMatchInlineSnapshot(
+        { closableId: expect.any(String) },
+        `
+       {
+          "closable": true,
+          "closableId": Any<String>,
+          "content": {
+            "children": "content 3",
+            "id": "panel3",
+          },
+          "disabled": false,
+          "id": "tab3",
+          "name": "tab3",
+          "onClose": undefined,
+        }
+        `
+      );
     });
   });
 
@@ -286,32 +295,44 @@ describe("TabUtils", () => {
           </TabList>
         </Tabs>
       );
-      expect(buildTabPropsNoPanel(tabs.props.children)).toMatchInlineSnapshot(`
-        [
-          {
-            "closable": false,
-            "dir": "ltr",
-            "disabled": false,
-            "id": "tab1",
-            "name": "tab1",
-            "onClose": [Function],
-          },
-          {
-            "closable": false,
-            "disabled": true,
-            "id": "tab2",
-            "name": "tab2",
-            "onClose": undefined,
-          },
-          {
-            "closable": true,
-            "disabled": false,
-            "id": "tab3",
-            "name": "tab3",
-            "onClose": undefined,
-          },
-        ]
-      `);
+      const tabsBuilt = buildTabPropsNoPanel(tabs.props.children);
+
+      expect(tabsBuilt[0]).toMatchInlineSnapshot(
+        `
+        {
+          "closable": false,
+          "dir": "ltr",
+          "disabled": false,
+          "id": "tab1",
+          "name": "tab1",
+          "onClose": [Function],
+        }
+      `
+      );
+      expect(tabsBuilt[1]).toMatchInlineSnapshot(
+        `
+        {
+          "closable": false,
+          "disabled": true,
+          "id": "tab2",
+          "name": "tab2",
+          "onClose": undefined,
+        }
+      `
+      );
+      expect(tabsBuilt[2]).toMatchInlineSnapshot(
+        { closableId: expect.any(String) },
+        `
+        {
+          "closable": true,
+          "closableId": Any<String>,
+          "disabled": false,
+          "id": "tab3",
+          "name": "tab3",
+          "onClose": undefined,
+        }
+      `
+      );
     });
   });
 

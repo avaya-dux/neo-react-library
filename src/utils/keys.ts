@@ -10,6 +10,8 @@ export const Keys = Object.freeze({
   SPACE: " ",
   TAB: "Tab",
   UP: "ArrowUp",
+  X: "X",
+  x: "x",
 });
 
 // https://github.com/testing-library/user-event/blob/main/src/keyboard/keyMap.ts
@@ -26,4 +28,6 @@ export const UserEventKeys = Object.freeze({
   BACKSPACE: "{Backspace}",
   SELECTALL: "{selectall}",
   SPACE: " ",
+  X: "X",
+  x: "x",
 });

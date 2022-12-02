@@ -5,7 +5,6 @@ import { isAriaDisabled } from "utils";
 
 import { InternalTabProps } from "../InternalTabTypes";
 import {
-  activateAnotherTabAndPanel,
   enableLeftButton,
   enableRightButton,
   extractProperties,
@@ -13,6 +12,7 @@ import {
   movePreviousTabToRightAmount,
 } from "./Helper";
 
+import { handleCloseElementMouseClickEvent } from "./MouseHelper";
 const logger = log.getLogger("tab-mouse-event-handler");
 logger.disableAll();
 
@@ -20,58 +20,49 @@ export { logger as tabMouseEventHandlerLogger };
 export const handleMouseClickEvent = (
   e: MouseEvent,
   tabs: InternalTabProps[],
-  setActiveTabIndex: Dispatch<SetStateAction<number>>,
-  setActivePanelIndex: Dispatch<SetStateAction<number>>
-) => {
-  e.stopPropagation();
-  logger.debug("hanlding mouse click event on tab");
-  const target = e.target as HTMLElement;
-  const id = target.getAttribute("id");
-  const disabled = isAriaDisabled(target);
-  logger.debug(
-    `mouse event target id = ${id} and disabled = ${disabled} and ${
-      id && !disabled
-    }`
-  );
-  if (id && !disabled) {
-    logger.debug(`set ${id} to active`);
-    const index = tabs.findIndex((tab) => tab.id === id);
-    setActiveTabIndex(index);
-    setActivePanelIndex(index);
-  }
-  e.preventDefault();
-};
-
-export const handleCloseElementMouseClickEvent = (
-  e: MouseEvent,
-  tabs: InternalTabProps[],
   tabIndex: number,
   activeTabIndex: number,
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
-  setActivePanelIndex: Dispatch<SetStateAction<number>>
+  setActivePanelIndex: Dispatch<SetStateAction<number>>,
+  onClose: (index: number) => void
 ) => {
   e.stopPropagation();
-  logger.debug("hanlding mouse click event on tab close element");
-  if (tabIndex > activeTabIndex) {
-    logger.debug(`do nothing`);
-  } else if (tabIndex < activeTabIndex) {
-    const newActiveIndex = activeTabIndex - 1;
-    setActiveTabIndex(newActiveIndex);
-    setActivePanelIndex(newActiveIndex);
+  e.preventDefault();
+  logger.debug("hanlding mouse click event on tab");
+  const currentTarget = e.currentTarget as HTMLElement;
+  const currentId = currentTarget.getAttribute("id");
+  const currentDisabled = isAriaDisabled(currentTarget);
+
+  const target = e.target as HTMLElement;
+  const id = target.getAttribute("id");
+
+  logger.debug({ currentId, id, currentDisabled });
+
+  if (currentDisabled) {
+    return;
+  }
+
+  if (currentId === id) {
+    logger.debug(`set ${id} to active`);
+    setActiveTabIndex(tabIndex);
+    setActivePanelIndex(tabIndex);
   } else {
-    activateAnotherTabAndPanel(
+    handleCloseElementMouseClickEvent(
+      e,
       tabs,
+      tabIndex,
       activeTabIndex,
       setActiveTabIndex,
       setActivePanelIndex
     );
+    onClose(tabIndex);
   }
-  e.preventDefault();
 };
+
 export const handleLeftCarouselMouseClickEvent = (
   e: MouseEvent,
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLLIElement>[],
+  tabRefs: RefObject<HTMLDivElement>[],
   setLeftCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
   setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>
 ) => {
@@ -98,7 +89,7 @@ export const handleLeftCarouselMouseClickEvent = (
 function scrollAndUpdateButtons(
   amount: number,
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLLIElement>[],
+  tabRefs: RefObject<HTMLDivElement>[],
   setLeftCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
   setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>
 ) {
@@ -120,7 +111,7 @@ function scrollAndUpdateButtons(
 export const handleRightCarouselMouseClickEvent = (
   e: MouseEvent,
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLLIElement>[],
+  tabRefs: RefObject<HTMLDivElement>[],
   setLeftCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
   setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>
 ) => {

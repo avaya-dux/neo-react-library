@@ -11154,6 +11154,11 @@ react-merge-refs@^1.0.0:
   resolved "https://registry.npmjs.org/react-merge-refs/-/react-merge-refs-1.1.0.tgz"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
 
+react-node-to-string@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-node-to-string/-/react-node-to-string-0.1.0.tgz#dc53c215948b6e565a52cb24c88b9a2c68b56d2f"
+  integrity sha512-7JM/2fb8UZ4BaGr2hEhf76CYSkLc8ec/9i5GLg+MuuHoMMGJBwnmeIn2WdCe9lf+9IjZUJ0q41yI8oiQU7Hv0g==
+
 react-refresh@^0.11.0:
   version "0.11.0"
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.11.0.tgz"

@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import log from "loglevel";
 import { Dispatch, ReactElement, RefObject, SetStateAction } from "react";
-
+import clsx from "clsx";
 import { genId } from "utils";
 
 import { InternalTab } from "./InternalTab";
@@ -90,6 +90,7 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
     ...rest,
     disabled,
     closable,
+    ...(closable ? { closableId: genId() } : {}),
     onClose,
     id: id || genId(),
     name: children,
@@ -118,6 +119,7 @@ const buildSingleTabPropsHasAssociatedPanel = (
     ...rest,
     disabled,
     closable,
+    ...(closable ? { closableId: genId() } : {}),
     onClose,
     id: id || genId(),
     name: children,
@@ -127,7 +129,7 @@ const buildSingleTabPropsHasAssociatedPanel = (
 };
 
 export const createTab = (
-  ref: RefObject<HTMLLIElement>,
+  ref: RefObject<HTMLDivElement>,
   index: number,
   tabProps: InternalTabProps,
   tabs: InternalTabProps[],
@@ -149,19 +151,23 @@ export const createTab = (
   logger.debug(`${tabId} disabled is ${tabProps.disabled}`);
 
   return (
-    <li
-      {...rest}
+    <div
       ref={ref}
       key={index}
-      className={getTabItemClasses({
-        active,
-        disabled: tabProps.disabled,
-        vertical: isVertical,
-      })}
+      className={clsx(
+        getTabItemClasses({
+          active,
+          disabled: tabProps.disabled,
+          vertical: isVertical,
+        }),
+        className
+      )}
       dir={closable ? "ltr" : dir}
     >
       <InternalTab
-        {...tabProps}
+        {...rest}
+        id={id}
+        name={name}
         active={active}
         activeTabIndex={activeTabIndex}
         aria-disabled={disabled}
@@ -176,7 +182,7 @@ export const createTab = (
         focus={focus}
         setFocus={setFocus}
       />
-    </li>
+    </div>
   );
 };
 

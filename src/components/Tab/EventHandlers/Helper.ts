@@ -43,7 +43,7 @@ export function activateAnotherTabAndPanel(
 
 export function extractProperties(
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLLIElement>[]
+  tabRefs: RefObject<HTMLDivElement>[]
 ) {
   const {
     scrollLeft = 0,
@@ -64,7 +64,7 @@ export function extractProperties(
 }
 export function enableLeftButton(
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLLIElement>[]
+  tabRefs: RefObject<HTMLDivElement>[]
 ) {
   const { scrollLeft, scrollWidth, visibleWidth } = extractProperties(
     scrollRef,
@@ -78,7 +78,7 @@ export function enableLeftButton(
 
 export function enableRightButton(
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLLIElement>[]
+  tabRefs: RefObject<HTMLDivElement>[]
 ) {
   const { scrollLeft, scrollWidth, visibleWidth } = extractProperties(
     scrollRef,

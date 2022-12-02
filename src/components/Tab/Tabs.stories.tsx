@@ -15,7 +15,7 @@ import {
 import { Tabs } from "./Tabs";
 import { TabsProps } from "./TabTypes";
 
-tabMouseEventHandlerLogger.disableAll();
+tabMouseEventHandlerLogger.enableAll();
 
 export default {
   title: "Components/Tab",
@@ -81,7 +81,7 @@ export const ControlledActiveTabStory = () => {
         </Button>
       </div>
 
-      <Tabs index={activeTabIndex} onTabChange={onTabChange}>
+      <Tabs defaultIndex={activeTabIndex} onTabChange={onTabChange}>
         <TabList>
           <Tab id="tab1" disabled={disabledFlags[0]}>
             Tab1

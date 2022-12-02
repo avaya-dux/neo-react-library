@@ -90,7 +90,7 @@ export const Tabs = ({
   }, [activePanelIndex]);
 
   const verticalStyle: CSSProperties = isVertical ? { display: "flex" } : {};
-  const refs: RefObject<HTMLLIElement>[] = [];
+  const refs: RefObject<HTMLDivElement>[] = [];
   const scrollRef = useRef<HTMLDivElement>(null);
   const carouselLeftButtonClickEventHandler: MouseEventHandler = (
     e: MouseEvent
@@ -115,14 +115,17 @@ export const Tabs = ({
     );
   };
   const tabsNav = (
-    <ul
+    <div
       className={
         isVertical ? "neo-tabs__nav neo-tabs__nav--vertical" : "neo-tabs__nav"
       }
+      role="tablist"
+      aria-owns={getAllTabIdsInString(tabs)}
+      aria-orientation={orientation}
     >
       {tabs.map((tab, index) => {
         logger.debug(`calling createTab with tabItem ${tab.disabled}`);
-        const ref = createRef<HTMLLIElement>();
+        const ref = createRef<HTMLDivElement>();
         refs.push(ref);
         return createTab(
           ref,
@@ -137,7 +140,7 @@ export const Tabs = ({
           setFocus
         );
       })}
-    </ul>
+    </div>
   );
   const [leftCarouselButtonEnabled, setLeftCarouselButtonEnabled] =
     useState(false);
@@ -167,12 +170,7 @@ export const Tabs = ({
   }, [scrollRef]);
 
   const tabsCarousel = (
-    <div
-      className={hasCarousel ? "neo-tabs__carousel" : "neo-tabs"}
-      role="tablist"
-      aria-owns={getAllTabIdsInString(tabs)}
-      aria-orientation={orientation}
-    >
+    <div className={hasCarousel ? "neo-tabs__carousel" : "neo-tabs"}>
       {hasCarousel ? (
         <>
           <Button

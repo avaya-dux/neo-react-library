@@ -4,7 +4,7 @@ import { IconNamesType } from "utils";
 
 import { TabPanelProps } from "./TabTypes";
 
-export interface InternalTabProps extends React.HTMLAttributes<HTMLLIElement> {
+export interface InternalTabProps extends React.HTMLAttributes<HTMLDivElement> {
   id: string;
   name: ReactNode;
   disabled: boolean;
@@ -12,6 +12,7 @@ export interface InternalTabProps extends React.HTMLAttributes<HTMLLIElement> {
   href?: string;
   icon?: IconNamesType;
   closable?: boolean;
+  closableId?: string;
   onClose?: (index: number) => void;
 }
 
