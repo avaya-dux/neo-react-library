@@ -61,8 +61,15 @@ export const InternalTab = ({
   const isLink = href !== hrefNoopString;
   const handleAnchorMouseClickEvent: MouseEventHandler = (e: MouseEvent) =>
     !isLink &&
-    handleMouseClickEvent(e, tabs, tabIndex,
-      activeTabIndex, setActiveTabIndex, setActivePanelIndex, onClose);
+    handleMouseClickEvent(
+      e,
+      tabs,
+      tabIndex,
+      activeTabIndex,
+      setActiveTabIndex,
+      setActivePanelIndex,
+      onClose
+    );
 
   const handleAnchorKeyDownEvent: KeyboardEventHandler = (
     e: KeyboardEvent<HTMLAnchorElement>
@@ -98,7 +105,9 @@ export const InternalTab = ({
     }
   }, [focus, active, disabled]);
 
-  const defaultAriaLabel = closable ? `You can press backspace or X to close tab ${name}` : reactNodeToString(name);
+  const defaultAriaLabel = closable
+    ? `You can press backspace or X to close tab ${name}`
+    : reactNodeToString(name);
 
   return (
     <>
@@ -131,12 +140,7 @@ export const InternalTab = ({
           />
         )}
 
-        {closable && (
-          <span
-            id={closableId}
-            className="neo-icon-end"
-          ></span>
-        )}
+        {closable && <span id={closableId} className="neo-icon-end"></span>}
       </a>
     </>
   );

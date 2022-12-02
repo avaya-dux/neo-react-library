@@ -327,7 +327,6 @@ describe("Tab Keyboard event handlers", () => {
       expect(setActiveTabIndex).not.toBeCalled();
       expect(setActivePanelIndex).not.toBeCalled();
       expect(onClose).not.toBeCalled();
-
     });
 
     it("should call activateAnotherTabAndPanel", () => {
@@ -336,7 +335,12 @@ describe("Tab Keyboard event handlers", () => {
         stopPropagation: vi.fn(),
         preventDefault: vi.fn(),
       };
-      testCloseElementKeyDown(e, setActiveTabIndex, setActivePanelIndex, onClose);
+      testCloseElementKeyDown(
+        e,
+        setActiveTabIndex,
+        setActivePanelIndex,
+        onClose
+      );
     });
   });
 });
@@ -388,16 +392,20 @@ function getTabLinkProps() {
   ];
 }
 
-function testCloseElementKeyDown(e, setActiveTabIndex, setActivePanelIndex, onClose) {
-  
-    handleCloseElementKeyDownEvent(
-      e,
-      [{ name: "tab1" }],
-      0,
-      setActiveTabIndex,
-      setActivePanelIndex,
-      onClose
-    );
+function testCloseElementKeyDown(
+  e,
+  setActiveTabIndex,
+  setActivePanelIndex,
+  onClose
+) {
+  handleCloseElementKeyDownEvent(
+    e,
+    [{ name: "tab1" }],
+    0,
+    setActiveTabIndex,
+    setActivePanelIndex,
+    onClose
+  );
   expect(activateAnotherTabAndPanel).toBeCalled();
   expect(e.preventDefault).toBeCalled();
   expect(e.stopPropagation).not.toBeCalled();

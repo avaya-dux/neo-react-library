@@ -14,7 +14,7 @@ import {
   handleRightCarouselMouseClickEvent,
 } from "./MouseEventHandlers";
 
-import {handleCloseElementMouseClickEvent} from "./MouseHelper"
+import { handleCloseElementMouseClickEvent } from "./MouseHelper";
 
 vi.mock("./Helper");
 vi.mock("./MouseHelper");
@@ -29,8 +29,8 @@ describe("Tab Mouse event handlers", () => {
     let onClose;
     beforeEach(() => {
       tabs = getTabProps();
-      tabIndex=1;
-      activeTabIndex=1;
+      tabIndex = 1;
+      activeTabIndex = 1;
       setActiveTabIndex = vi.fn();
       setActivePanelIndex = vi.fn();
       onClose = vi.fn();
@@ -42,33 +42,54 @@ describe("Tab Mouse event handlers", () => {
         stopPropagation: vi.fn(),
         preventDefault: vi.fn(),
         target,
-        currentTarget
+        currentTarget,
       };
 
-      handleMouseClickEvent(e, tabs, tabIndex, activeTabIndex, setActiveTabIndex, setActivePanelIndex, onClose);
+      handleMouseClickEvent(
+        e,
+        tabs,
+        tabIndex,
+        activeTabIndex,
+        setActiveTabIndex,
+        setActivePanelIndex,
+        onClose
+      );
       expect(e.stopPropagation).toBeCalled();
       expect(e.preventDefault).toBeCalled();
       expect(activateAnotherTabAndPanel).not.toBeCalled();
       expect(onClose).not.toBeCalled();
     });
     it("should do nothing when tab is disabled", () => {
-      const currentTarget = { getAttribute: vi.fn().mockReturnValueOnce("tab1").mockReturnValueOnce("true") };
+      const currentTarget = {
+        getAttribute: vi
+          .fn()
+          .mockReturnValueOnce("tab1")
+          .mockReturnValueOnce("true"),
+      };
       const target = { getAttribute: () => "tab1" };
       const e = {
         stopPropagation: vi.fn(),
         preventDefault: vi.fn(),
         target,
-        currentTarget
+        currentTarget,
       };
 
-      handleMouseClickEvent(e, tabs, tabIndex, activeTabIndex, setActiveTabIndex, setActivePanelIndex, onClose);
+      handleMouseClickEvent(
+        e,
+        tabs,
+        tabIndex,
+        activeTabIndex,
+        setActiveTabIndex,
+        setActivePanelIndex,
+        onClose
+      );
       expect(e.stopPropagation).toBeCalled();
       expect(e.preventDefault).toBeCalled();
       expect(setActiveTabIndex).not.toBeCalled();
       expect(setActivePanelIndex).not.toBeCalled();
       expect(activateAnotherTabAndPanel).not.toBeCalled();
       expect(onClose).not.toBeCalled();
-    })
+    });
     it("should close tab when close icon is clicked", () => {
       const currentTarget = { getAttribute: () => "tab1" };
       const target = { getAttribute: () => "x" };
@@ -78,7 +99,15 @@ describe("Tab Mouse event handlers", () => {
         target,
         currentTarget,
       };
-      handleMouseClickEvent(e, tabs, tabIndex, activeTabIndex, setActiveTabIndex, setActivePanelIndex, onClose);
+      handleMouseClickEvent(
+        e,
+        tabs,
+        tabIndex,
+        activeTabIndex,
+        setActiveTabIndex,
+        setActivePanelIndex,
+        onClose
+      );
       expect(e.stopPropagation).toBeCalled();
       expect(e.preventDefault).toBeCalled();
       expect(setActiveTabIndex).not.toBeCalled();
@@ -87,7 +116,6 @@ describe("Tab Mouse event handlers", () => {
       expect(onClose).toBeCalled();
     });
   });
-
 
   describe("handleLeftCarouselMouseClickEvent", () => {
     let setLeftCarouselButtonEnabled;

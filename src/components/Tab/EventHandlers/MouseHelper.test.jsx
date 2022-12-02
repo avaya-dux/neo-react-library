@@ -1,28 +1,28 @@
-import { vi } from "vitest"
+import { vi } from "vitest";
 
-import { activateAnotherTabAndPanel } from "./Helper"
-import { handleCloseElementMouseClickEvent } from "./MouseHelper"
+import { activateAnotherTabAndPanel } from "./Helper";
+import { handleCloseElementMouseClickEvent } from "./MouseHelper";
 
-vi.mock("./Helper")
+vi.mock("./Helper");
 
 describe("handleCloseElementMouseClickEvent", () => {
-  let setActiveTabIndex
-  let setActivePanelIndex
-  let tabs
+  let setActiveTabIndex;
+  let setActivePanelIndex;
+  let tabs;
   beforeEach(() => {
-    tabs = getTabProps()
-    setActiveTabIndex = vi.fn()
-    setActivePanelIndex = vi.fn()
-  })
+    tabs = getTabProps();
+    setActiveTabIndex = vi.fn();
+    setActivePanelIndex = vi.fn();
+  });
   it("do nothing when tabIndex > activeTabIndex", () => {
-    const target = { getAttribute: () => "tab1" }
+    const target = { getAttribute: () => "tab1" };
     const e = {
       stopPropagation: vi.fn(),
       preventDefault: vi.fn(),
       target,
-    }
-    const activeTabIndex = 1
-    const tabIndex = activeTabIndex + 1
+    };
+    const activeTabIndex = 1;
+    const tabIndex = activeTabIndex + 1;
     handleCloseElementMouseClickEvent(
       e,
       tabs,
@@ -30,22 +30,22 @@ describe("handleCloseElementMouseClickEvent", () => {
       activeTabIndex,
       setActiveTabIndex,
       setActivePanelIndex
-    )
-    expect(e.stopPropagation).toBeCalled()
-    expect(setActiveTabIndex).not.toBeCalled()
-    expect(setActivePanelIndex).not.toBeCalled()
-    expect(e.preventDefault).toBeCalled()
-    expect(activateAnotherTabAndPanel).not.toBeCalled()
-  })
+    );
+    expect(e.stopPropagation).toBeCalled();
+    expect(setActiveTabIndex).not.toBeCalled();
+    expect(setActivePanelIndex).not.toBeCalled();
+    expect(e.preventDefault).toBeCalled();
+    expect(activateAnotherTabAndPanel).not.toBeCalled();
+  });
   it("should set activeTabIndex to activeTabIndex -1 when tabIndex < activeTabIndex", () => {
-    const target = { getAttribute: () => null }
+    const target = { getAttribute: () => null };
     const e = {
       stopPropagation: vi.fn(),
       preventDefault: vi.fn(),
       target,
-    }
-    const tabIndex = 0
-    const activeTabIndex = 1
+    };
+    const tabIndex = 0;
+    const activeTabIndex = 1;
 
     handleCloseElementMouseClickEvent(
       e,
@@ -54,22 +54,22 @@ describe("handleCloseElementMouseClickEvent", () => {
       activeTabIndex,
       setActiveTabIndex,
       setActivePanelIndex
-    )
-    expect(e.stopPropagation).toBeCalled()
-    expect(setActiveTabIndex).toBeCalledWith(0)
-    expect(setActivePanelIndex).toBeCalledWith(0)
-    expect(e.preventDefault).toBeCalled()
-    expect(activateAnotherTabAndPanel).not.toBeCalled()
-  })
+    );
+    expect(e.stopPropagation).toBeCalled();
+    expect(setActiveTabIndex).toBeCalledWith(0);
+    expect(setActivePanelIndex).toBeCalledWith(0);
+    expect(e.preventDefault).toBeCalled();
+    expect(activateAnotherTabAndPanel).not.toBeCalled();
+  });
   it("should call activateAnotherTabAndPanel when tabIndex === activeTabIndex", () => {
-    const target = { getAttribute: () => "tab1" }
+    const target = { getAttribute: () => "tab1" };
     const e = {
       stopPropagation: vi.fn(),
       preventDefault: vi.fn(),
       target,
-    }
-    const activeTabIndex = 1
-    const tabIndex = activeTabIndex
+    };
+    const activeTabIndex = 1;
+    const tabIndex = activeTabIndex;
     handleCloseElementMouseClickEvent(
       e,
       tabs,
@@ -77,14 +77,14 @@ describe("handleCloseElementMouseClickEvent", () => {
       activeTabIndex,
       setActiveTabIndex,
       setActivePanelIndex
-    )
-    expect(e.stopPropagation).toBeCalled()
-    expect(setActiveTabIndex).not.toBeCalled()
-    expect(setActivePanelIndex).not.toBeCalled()
-    expect(e.preventDefault).toBeCalled()
-    expect(activateAnotherTabAndPanel).toBeCalled()
-  })
-})
+    );
+    expect(e.stopPropagation).toBeCalled();
+    expect(setActiveTabIndex).not.toBeCalled();
+    expect(setActivePanelIndex).not.toBeCalled();
+    expect(e.preventDefault).toBeCalled();
+    expect(activateAnotherTabAndPanel).toBeCalled();
+  });
+});
 
 function getTabProps() {
   return [
@@ -106,5 +106,5 @@ function getTabProps() {
       id: "tab3",
       name: "tab3",
     },
-  ]
+  ];
 }

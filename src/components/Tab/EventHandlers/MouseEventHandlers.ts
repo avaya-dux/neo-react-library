@@ -12,7 +12,7 @@ import {
   movePreviousTabToRightAmount,
 } from "./Helper";
 
-import {handleCloseElementMouseClickEvent} from "./MouseHelper"
+import { handleCloseElementMouseClickEvent } from "./MouseHelper";
 const logger = log.getLogger("tab-mouse-event-handler");
 logger.disableAll();
 
@@ -25,7 +25,6 @@ export const handleMouseClickEvent = (
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
   setActivePanelIndex: Dispatch<SetStateAction<number>>,
   onClose: (index: number) => void
-
 ) => {
   e.stopPropagation();
   e.preventDefault();
@@ -48,8 +47,15 @@ export const handleMouseClickEvent = (
     setActiveTabIndex(tabIndex);
     setActivePanelIndex(tabIndex);
   } else {
-    handleCloseElementMouseClickEvent(e, tabs, tabIndex, activeTabIndex, setActiveTabIndex, setActivePanelIndex);
-    onClose(tabIndex)
+    handleCloseElementMouseClickEvent(
+      e,
+      tabs,
+      tabIndex,
+      activeTabIndex,
+      setActiveTabIndex,
+      setActivePanelIndex
+    );
+    onClose(tabIndex);
   }
 };
 

@@ -145,7 +145,9 @@ describe("Tabs", () => {
 
     it("should call the `onClose` method when close icon is clicked via mouse", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
-      await user.click(screen.getAllByRole("tab")[1].getElementsByTagName("span")[0]);
+      await user.click(
+        screen.getAllByRole("tab")[1].getElementsByTagName("span")[0]
+      );
       expect(closableTabSpy).toHaveBeenCalled();
     });
   });
