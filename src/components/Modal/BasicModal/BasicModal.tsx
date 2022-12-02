@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { Button } from "components/Button";
 
 import "./BasicModal_shim.css";
+import { Keys } from "utils";
 
 export interface BasicModalProps {
   actions?: JSX.Element[];
@@ -35,8 +36,8 @@ export const BasicModal = forwardRef(
     const buttons = "actions" in rest ? rest.actions : null;
 
     const onKeyDown = useCallback(
-      (e: { key: string }) => {
-        if (e.key === "Escape" && open) {
+      (e: KeyboardEvent) => {
+        if (e.key === Keys.ESC && open) {
           onClose();
         }
       },
