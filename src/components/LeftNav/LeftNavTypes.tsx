@@ -8,6 +8,7 @@ export interface TopLinkItemProps {
   disabled?: boolean;
   icon?: IconNamesType;
   id?: string;
+  className?: string;
 }
 
 export interface LinkItemProps
@@ -30,6 +31,7 @@ export interface NavCategoryProps
 export interface LeftNavProps extends React.BaseHTMLAttributes<HTMLElement> {
   "aria-label": string;
   currentUrl?: string;
+  isActiveOverride?: boolean;
   onNavigate?: (id: string, url: string) => void;
   children?:
     | ReactElement<NavCategoryProps | TopLinkItemProps>
@@ -45,4 +47,5 @@ export interface LeftNavSubComponents {
 export interface LeftNavContextType {
   currentUrl: string;
   onSelectedLink?: (id: string, url: string) => void;
+  isActiveOverride?: boolean;
 }
