@@ -25,7 +25,7 @@ export function debugTabs(
   }
 }
 export function getAllTabIdsInString(tabProps: InternalTabProps[]): string {
-  return tabProps.map((tab) => clsx(tab.id, tab.closableId)).join(" ");
+  return tabProps.map((tab) => tab.id).join(" ");
 }
 
 export function isValidPanelElement(element: ReactElement) {
