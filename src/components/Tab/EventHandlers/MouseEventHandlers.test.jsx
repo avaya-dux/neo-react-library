@@ -51,6 +51,24 @@ describe("Tab Mouse event handlers", () => {
       expect(activateAnotherTabAndPanel).not.toBeCalled();
       expect(onClose).not.toBeCalled();
     });
+    it("should do nothing when tab is disabled", () => {
+      const currentTarget = { getAttribute: vi.fn().mockReturnValueOnce("tab1").mockReturnValueOnce("true") };
+      const target = { getAttribute: () => "tab1" };
+      const e = {
+        stopPropagation: vi.fn(),
+        preventDefault: vi.fn(),
+        target,
+        currentTarget
+      };
+
+      handleMouseClickEvent(e, tabs, tabIndex, activeTabIndex, setActiveTabIndex, setActivePanelIndex, onClose);
+      expect(e.stopPropagation).toBeCalled();
+      expect(e.preventDefault).toBeCalled();
+      expect(setActiveTabIndex).not.toBeCalled();
+      expect(setActivePanelIndex).not.toBeCalled();
+      expect(activateAnotherTabAndPanel).not.toBeCalled();
+      expect(onClose).not.toBeCalled();
+    })
     it("should close tab when close icon is clicked", () => {
       const currentTarget = { getAttribute: () => "tab1" };
       const target = { getAttribute: () => "x" };

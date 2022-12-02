@@ -81,7 +81,7 @@ export const ControlledActiveTabStory = () => {
         </Button>
       </div>
 
-      <Tabs index={activeTabIndex} onTabChange={onTabChange}>
+      <Tabs defaultIndex={activeTabIndex} onTabChange={onTabChange}>
         <TabList>
           <Tab id="tab1" disabled={disabledFlags[0]}>
             Tab1

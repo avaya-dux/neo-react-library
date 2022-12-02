@@ -10,6 +10,8 @@ import {
   useRef,
 } from "react";
 
+import reactNodeToString from "react-node-to-string";
+
 import { Icon } from "components/Icon";
 import { IconNamesType } from "utils";
 
@@ -31,6 +33,7 @@ export { logger as internalTabLogger };
 const hrefNoopString = "#noop";
 
 export const InternalTab = ({
+  "aria-label": ariaLabel,
   tabIndex,
   active,
   focus,
@@ -95,8 +98,7 @@ export const InternalTab = ({
     }
   }, [focus, active, disabled]);
 
-  // todo: get aria-label if any
-  const labelledBy = closable ? `You can press X to close tab ${name}` : name?.toString();
+  const defaultAriaLabel = closable ? `You can press backspace or X to close tab ${name}` : reactNodeToString(name);
 
   return (
     <>
@@ -104,7 +106,7 @@ export const InternalTab = ({
         aria-controls={content?.id}
         aria-disabled={disabled}
         aria-selected={isLink ? undefined : active}
-        aria-label={labelledBy}
+        aria-label={ariaLabel || defaultAriaLabel}
         role="tab"
         className={getClassNames(className, icon)}
         dir={closable ? "ltr" : dir}
