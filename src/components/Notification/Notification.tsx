@@ -30,6 +30,27 @@ export { logger as notificationLogger };
   description="Successful action completed"
 />
  *
+<Notification
+  type="event"
+  icon="info"
+  header="Alternate Options"
+  description="You can override the default action with your own"
+  action={{
+    buttons: [
+      { children: "Edit", onClick: () => alert("Edit Clicked") },
+      { children: "Alert", onClick: () => alert("Alert Clicked") },
+    ],
+  }}
+/>
+ *
+<Notification
+  type="info"
+  icon="info"
+  header="Timer Notification"
+  description="You can pass a 'count' action to display a timer, but you must increment the timer yourself"
+  action={{ count: "12:34:56" }}
+/>
+ *
  * @see https://design.avayacloud.com/components/web/notifications-web
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-notification
  */
