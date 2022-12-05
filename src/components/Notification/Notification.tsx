@@ -14,6 +14,46 @@ import { NotificationProps } from "./NotificationTypes";
 const logger = log.getLogger("notification-logger");
 logger.disableAll();
 export { logger as notificationLogger };
+
+/**
+ * Notifications are used to communicate with users,
+ * providing real time feedback on high level and
+ * priority items requiring immediate attention.
+ *
+ * @example
+<Notification type="success" description="Successful action completed" />
+ *
+<Notification
+  icon="check"
+  type="success"
+  header="Success"
+  description="Successful action completed"
+/>
+ *
+<Notification
+  type="event"
+  icon="info"
+  header="Alternate Options"
+  description="You can override the default action with your own"
+  action={{
+    buttons: [
+      { children: "Edit", onClick: () => alert("Edit Clicked") },
+      { children: "Alert", onClick: () => alert("Alert Clicked") },
+    ],
+  }}
+/>
+ *
+<Notification
+  type="info"
+  icon="info"
+  header="Timer Notification"
+  description="You can pass a 'count' action to display a timer, but you must increment the timer yourself"
+  action={{ count: "12:34:56" }}
+/>
+ *
+ * @see https://design.avayacloud.com/components/web/notifications-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-notification
+ */
 export const Notification = ({
   type,
   action,
