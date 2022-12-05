@@ -14,6 +14,25 @@ import { NotificationProps } from "./NotificationTypes";
 const logger = log.getLogger("notification-logger");
 logger.disableAll();
 export { logger as notificationLogger };
+
+/**
+ * Notifications are used to communicate with users,
+ * providing real time feedback on high level and
+ * priority items requiring immediate attention.
+ *
+ * @example
+<Notification type="success" description="Successful action completed" />
+ *
+<Notification
+  icon="check"
+  type="success"
+  header="Success"
+  description="Successful action completed"
+/>
+ *
+ * @see https://design.avayacloud.com/components/web/notifications-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-notification
+ */
 export const Notification = ({
   type,
   action,
