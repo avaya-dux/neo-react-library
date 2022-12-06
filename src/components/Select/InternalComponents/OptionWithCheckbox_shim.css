@@ -1,0 +1,85 @@
+/* option with checkbox styled */
+.neo-option {
+  color: var(--checkbox-font-color);
+  cursor: pointer;
+  align-items: center;
+  padding: 3px 0;
+  line-height: 14px;
+  display: flex;
+  position: relative;
+  font-size: 14px !important;
+}
+
+.neo-option:before {
+  background: var(--checkbox-icon-color);
+  border: 1px solid var(--checkbox-border-color);
+  content: "";
+  height: 16px;
+  vertical-align: text-top;
+  min-width: 16px;
+  border-radius: 4px;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+[dir="rtl"] .neo-option:before {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+.neo-option:after {
+  content: "";
+  height: 9px;
+  width: 6px;
+  border: 2px solid #fff;
+  border-width: 0 2px 2px 0;
+  display: none;
+  position: absolute;
+  top: 1.75px;
+  left: 5px;
+  transform: rotate(45deg);
+}
+
+[dir="rtl"] .neo-option:after {
+  left: auto;
+  right: 5px;
+}
+
+.neo-option.neo-option--selected:before {
+  background: var(--checkbox-checked-background-color);
+  content: "";
+  color: var(--checkbox-icon-color);
+  justify-content: center;
+  align-items: center;
+  padding-left: 1px;
+  font-family: updated-neo-icons;
+  font-size: 11px;
+  display: flex;
+}
+
+.neo-option.neo-option--disabled {
+  color: var(--checkbox-disabled-font-color);
+  cursor: not-allowed;
+}
+
+.neo-option.neo-option--disabled:before {
+  border: 1px solid var(--checkbox-disabled-border-color);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.neo-option.neo-option--disabled.neo-option--selected:before {
+  background-color: var(--checkbox-disabled-background-color);
+  border: 1px solid var(--checkbox-disabled-border-color);
+  content: "";
+  justify-content: center;
+  align-items: center;
+  padding-right: 2px;
+  font-size: 11px;
+  display: flex;
+}
+
+[dir="rtl"] .neo-option.neo-option--disabled.neo-option--selected:before {
+  margin-left: 8px;
+  margin-right: 0;
+}
