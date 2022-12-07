@@ -22,8 +22,6 @@
   pointer-events: auto !important;
 }
 
-
-
 .neo-option:not(.neo-option--disabled):hover,
 .neo-option:not(.neo-option--disabled):focus {
   background-color: #f1f1f1; /* $token-color-base-100 */
