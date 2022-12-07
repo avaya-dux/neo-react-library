@@ -36,6 +36,10 @@
   background-color: #dddddd; /* $token-color-base-150 */
 }
 
+.neo-option:focus-visible {
+  outline: 0;
+}
+
 .neo-option.neo-option::before {
   background: #fff;
   border: 1px solid #1473e6;
