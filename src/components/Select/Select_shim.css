@@ -5,6 +5,10 @@
   background-color: var(--input-disabled-bg);
 }
 
+.neo-multiselect button.neo-multiselect__header.neo-multiselect__header--no-after:after{
+  display: none;
+}
+
 .neo-multiselect__content:empty {
   border: none;
   box-shadow: none;
