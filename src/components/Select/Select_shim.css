@@ -10,42 +10,31 @@
   box-shadow: none;
 }
 
-.neo-multiselect__content .neo-check + .neo-check__label:not(last-child) {
+.neo-multiselect__content .neo-option:not(last-child) {
   margin-right: 0;
 }
 
-.neo-multiselect__content .neo-check ~ .neo-check__label {
+.neo-multiselect__content .neo-option {
   padding: 8px 16px !important;
 }
 
-.neo-input-group .neo-check + .neo-check__label {
+.neo-input-group .neo-option {
   pointer-events: auto !important;
 }
 
-.neo-check + .neo-check__label {
-  color: #000;
-  color: var(--checkbox-font-color);
-  cursor: pointer;
-  display: inline-block;
-  line-height: 22px !important;
-  padding: 0;
-  position: relative;
-  display: flex;
-  align-items: center;
-  font-size: 14px !important;
-}
 
-.neo-check:not(:disabled) + .neo-check__label:hover,
-.neo-check:not(:disabled) + .neo-check__label:focus {
+
+.neo-option:not(.neo-option--disabled):hover,
+.neo-option:not(.neo-option--disabled):focus {
   background-color: #f1f1f1; /* $token-color-base-100 */
 }
 
-.neo-check:checked:not(:disabled) + .neo-check__label:hover,
-.neo-check:checked:not(:disabled) + .neo-check__label:focus {
+.neo-option.neo-option--selected:not(.neo-option--disabled):hover,
+.neo-option.neo-option--selected:not(.neo-option--disabled):focus {
   background-color: #dddddd; /* $token-color-base-150 */
 }
 
-.neo-check__label::before {
+.neo-option.neo-option::before {
   background: #fff;
   border: 1px solid #1473e6;
   content: "";
@@ -56,32 +45,6 @@
   min-width: 16px;
   border-radius: 4px;
   line-height: 1.5;
-}
-
-.neo-check:checked + .neo-check__label:before {
-  background: #1473e6;
-  font-family: updated-neo-icons !important;
-  color: #fff;
-  padding-left: 1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.neo-check:checked + .neo-check__label:before {
-  content: "";
-  font-size: 11px;
-}
-
-.neo-check:disabled + .neo-check__label {
-  color: #939393;
-  cursor: not-allowed;
-}
-
-.neo-check:disabled + .neo-check__label:before {
-  border: 1px solid #abccf5;
-  box-shadow: none;
-  cursor: not-allowed;
 }
 
 /* no left padding while loading */
@@ -104,7 +67,7 @@ div.neo-multiselect span.neo-multiselect-combo__header {
 /* internal select option highlight styles */
 .neo-multiselect__content
   .neo-input-group
-  div.neo-check__label[aria-selected="true"],
+  option.neo-option[aria-selected="true"],
 .neo-multiselect__content ul li[aria-selected="true"] {
   background-color: #e8f1fc;
 }
@@ -114,8 +77,7 @@ div.neo-multiselect span.neo-multiselect-combo__header {
   padding-bottom: 0;
 }
 
-/* can't use `label` due to axe error, need to update styling to use `div` instead */
-.neo-multiselect__content .neo-check + div + .neo-input-hint {
+.neo-multiselect__content .neo-option + .neo-input-hint {
   white-space: nowrap;
   margin: 0;
   padding-left: 40px;

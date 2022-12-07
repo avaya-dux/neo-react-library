@@ -1,21 +1,20 @@
 import clsx from "clsx";
-import { KeyboardEventHandler, KeyboardEvent } from "react";
+import { forwardRef, KeyboardEventHandler, KeyboardEvent, RefObject, Ref } from "react";
 import useControlled from "utils/useControlled";
 import "./OptionWithCheckbox_shim.css";
 import { Keys } from "utils";
 export interface OptionProps extends React.OptionHTMLAttributes<HTMLOptionElement> {
   defaultSelected?: boolean;
 }
-export const OptionWithCheckbox = ({
+export const OptionWithCheckbox = forwardRef(({
   disabled,
   selected,
   defaultSelected,
   defaultChecked,
-  onChange,
-  tabIndex = 0,
+  tabIndex = -1,
   children,
   ...rest
-}: OptionProps) => {
+}: OptionProps, ref: Ref<HTMLOptionElement>) => {
   const [state, setState] = useControlled({
     controlled: selected,
     default: defaultSelected || defaultChecked,
@@ -36,6 +35,7 @@ export const OptionWithCheckbox = ({
   };
   return (
     <option
+      ref={ref}
       tabIndex={tabIndex}
       className={clsx(
         "neo-option",
@@ -45,12 +45,11 @@ export const OptionWithCheckbox = ({
       onClick={() => setState(!state)}
       onKeyDown={handleKeyDown}
       aria-selected={state}
-      selected={state}
-      onChange={onChange}
       disabled={disabled}
       {...rest}
     >
       {children}
     </option>
   );
-};
+});
+OptionWithCheckbox.displayName = "OptionWithCheckbox";

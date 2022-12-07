@@ -37,8 +37,8 @@ export const InternalSelectOption = ({
     change for searchable selects, and the use of `useMemo` for that
     use-case is bad. Thus, the use `useMemo` for these `id`s is debatable.
   */
-  const [labelId, helperId] = useMemo(
-    () => [`label-id-${genId()}`, `helper-text-${genId()}`],
+  const helperId = useMemo(
+    () => `helper-text-${genId()}`,
     [children]
   );
 
@@ -56,7 +56,7 @@ export const InternalSelectOption = ({
         selected={selectedItemsValues.includes(optionSelf.value)}
         disabled={disabled}
         value={optionSelf.value} // BUG: `value` is updated on reset, but the change needs to be propagated up
-        {...itemProps} 
+        {...itemProps}
       >
         {children}
       </OptionWithCheckbox>

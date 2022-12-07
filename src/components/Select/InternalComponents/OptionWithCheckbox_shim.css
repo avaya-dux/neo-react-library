@@ -3,8 +3,8 @@
   color: var(--checkbox-font-color);
   cursor: pointer;
   align-items: center;
-  padding: 3px 0;
-  line-height: 14px;
+  padding: 0;
+  line-height: 22px !important;
   display: flex;
   position: relative;
   font-size: 14px !important;
@@ -45,7 +45,7 @@
   right: 5px;
 }
 
-.neo-option.neo-option--selected:before {
+.neo-option.neo-option.neo-option--selected:before {
   background: var(--checkbox-checked-background-color);
   content: "";
   color: var(--checkbox-icon-color);
