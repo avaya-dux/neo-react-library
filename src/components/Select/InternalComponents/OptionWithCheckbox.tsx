@@ -1,10 +1,5 @@
 import clsx from "clsx";
-import {
-  forwardRef,
-  KeyboardEventHandler,
-  KeyboardEvent,
-  Ref,
-} from "react";
+import { forwardRef, KeyboardEventHandler, KeyboardEvent, Ref } from "react";
 import useControlled from "utils/useControlled";
 import "./OptionWithCheckbox_shim.css";
 import { Keys } from "utils";
