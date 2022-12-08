@@ -4,3 +4,4 @@ export * from "./MultiSelect";
 export * from "./MultiSelectSearchable";
 export * from "./SingleSelect";
 export * from "./SingleSelectSearchable";
+export * from "./OptionWithCheckbox";
