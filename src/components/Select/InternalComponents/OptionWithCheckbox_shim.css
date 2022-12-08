@@ -62,7 +62,7 @@
   cursor: not-allowed;
 }
 
-.neo-option.neo-option--disabled:before {
+.neo-option.neo-option.neo-option--disabled:before {
   border: 1px solid var(--checkbox-disabled-border-color);
   box-shadow: none;
   cursor: not-allowed;
