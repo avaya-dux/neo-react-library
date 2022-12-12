@@ -16,7 +16,7 @@ export const Toast = (props: ToastProps) => {
       ...rest,
       message: children,
     };
-  }, [props]);
+  }, [children, rest]);
 
   const { mounted, toast, remove } = usePopup(options.message);
   const toastRef = useRef<ReturnType<typeof toast>>();
@@ -32,7 +32,7 @@ export const Toast = (props: ToastProps) => {
         remove(toastRef.current.id, toastRef.current.position);
       }
     };
-  }, [mounted, options]);
+  }, [mounted, options, remove, toast]);
 
   return null;
 };

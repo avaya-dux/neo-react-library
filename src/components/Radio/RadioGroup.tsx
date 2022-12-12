@@ -111,7 +111,7 @@ export const RadioGroup = ({
           return cloneElement(child, childprops);
         }
       }),
-    [children, selected, groupName, helperText, onChangeHandler]
+    [children, selected, groupName, helperText, onChangeHandler, disabled]
   );
 
   return (

@@ -37,7 +37,10 @@ export const InternalSelectOption = ({
     change for searchable selects, and the use of `useMemo` for that
     use-case is bad. Thus, the use `useMemo` for these `id`s is debatable.
   */
-  const helperId = useMemo(() => `helper-text-${genId()}`, [children]);
+  const helperId = useMemo(
+    () => `helper-text-${genId()}-${children}`,
+    [children]
+  );
 
   const optionSelf = filteredOptions[index] || {};
   const itemProps = getItemProps({

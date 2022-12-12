@@ -39,7 +39,7 @@ export default function useControlled<T>({
           ].join("\n")
         );
       }
-    }, [state, name, controlled]);
+    }, [state, name, controlled, isControlled]);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { current: defaultValue } = React.useRef(defaultProp);
@@ -54,6 +54,7 @@ export default function useControlled<T>({
           ].join("\n")
         );
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [JSON.stringify(defaultProp)]);
   }
 
@@ -61,6 +62,7 @@ export default function useControlled<T>({
     if (!isControlled) {
       setValue(newValue);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [value, setValueIfUncontrolled];

@@ -87,7 +87,7 @@ export const Tabs = ({
 
   useEffect(() => {
     onTabPanelChange?.(activePanelIndex);
-  }, [activePanelIndex]);
+  }, [activePanelIndex, onTabPanelChange]);
 
   const verticalStyle: CSSProperties = isVertical ? { display: "flex" } : {};
   const refs: RefObject<HTMLDivElement>[] = [];

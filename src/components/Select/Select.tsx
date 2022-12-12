@@ -102,6 +102,7 @@ export const Select = (props: SelectProps) => {
     if (optionsHaveChanged) {
       setFilteredOptions(options);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options]);
 
   const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);
