@@ -264,7 +264,8 @@ export const EditableData = () => {
 
   useEffect(() => {
     setLogItems(["data modified, new length: " + data.length, ...logItems]);
-  }, [data, logItems]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <section>

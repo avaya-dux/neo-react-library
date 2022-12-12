@@ -132,7 +132,8 @@ export const Select = (props: SelectProps) => {
         setSelectedItems(userSelectedOptions);
       }
     }
-  }, [defaultValue, isInitialRender, multiple, options, selectedItems, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   useEffect(() => {
     if (!isInitialRender && onChange) {
@@ -148,7 +149,8 @@ export const Select = (props: SelectProps) => {
         );
       }
     }
-  }, [isInitialRender, multiple, onChange, selectedItems]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedItems]);
   const selectedItemsValues = useMemo(
     () => selectedItems.map((item) => item.value),
     [selectedItems]
