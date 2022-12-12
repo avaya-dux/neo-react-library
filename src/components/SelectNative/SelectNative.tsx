@@ -33,13 +33,15 @@ export const SelectNative = ({
   disabled = false,
   errorList = [],
   helperText,
-  id = useId(),
+  id,
   label,
   loading,
   multiple = false,
   required,
   ...rest
 }: SelectNativeProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   if (!label && !rest["aria-label"]) {
     handleAccessbilityError("SelectNative requires a label prop");
   }

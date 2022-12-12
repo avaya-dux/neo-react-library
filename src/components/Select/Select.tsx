@@ -55,7 +55,6 @@ export const Select = (props: SelectProps) => {
     disabled = false,
     errorList = [],
     helperText = "",
-    id = useId(),
     label = "",
     loading = false,
     multiple = false,
@@ -66,6 +65,9 @@ export const Select = (props: SelectProps) => {
     searchable = false,
     value,
   } = props;
+
+  const generatedId = useId();
+  const id = props.id || generatedId;
 
   if (!(label || ariaLabel)) {
     handleAccessbilityError("Select requires a label prop or aria-label");

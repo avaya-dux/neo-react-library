@@ -69,10 +69,13 @@ export const TextInput = ({
   startAddon,
   startIcon,
   type = "text",
-  id = useId(),
+  id,
   value,
   ...rest
 }: TextInputProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
+  
   if (!label && !rest["aria-label"]) {
     handleAccessbilityError("You must provide a `label` or `aria-label`.");
   }

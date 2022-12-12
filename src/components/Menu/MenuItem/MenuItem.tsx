@@ -38,11 +38,13 @@ export const MenuItem = ({
   counter,
   disabled = false,
   hasFocus = false,
-  id = useId(),
+  id,
   isActive = false,
   tabIndex = 0,
   ...rest
 }: MenuItemProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   const ref = useRef(null);
 
   log.debug(

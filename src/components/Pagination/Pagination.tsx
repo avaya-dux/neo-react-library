@@ -33,7 +33,7 @@ import { PaginationProps } from "./PaginationTypes";
  * @see https://design.avayacloud.com/components/web/tables-web
  */
 export const Pagination = ({
-  id = `pagination-${useId()}`,
+  id,
 
   currentPageIndex,
   itemCount,
@@ -58,6 +58,8 @@ export const Pagination = ({
   leftNode,
   rightNode,
 }: PaginationProps) => {
+  const generatedId = `pagination-${useId()}`;
+  id = id || generatedId;
   const rootRef = useRef<HTMLDivElement>(null);
   const totalPages = Math.ceil(itemCount / itemsPerPage);
 

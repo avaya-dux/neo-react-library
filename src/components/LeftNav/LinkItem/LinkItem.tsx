@@ -32,13 +32,15 @@ export const LinkItem = ({
   className,
   disabled = false,
   href,
-  id = useId(),
+  id,
   onFocus,
   onMouseOver,
   parentHasIcon,
 
   ...rest
 }: LinkItemProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   const ctx = useContext(LeftNavContext);
   const [itemStyle, setItemStyle] = useState({ padding: "8px 28px 8px 20px" });
 

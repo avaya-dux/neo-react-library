@@ -1,3 +1,4 @@
+import { userEvent } from "@testing-library/user-event/dist/types/setup";
 import clsx from "clsx";
 import log from "loglevel";
 import React, { forwardRef, ReactNode, useCallback, useId } from "react";
@@ -54,7 +55,7 @@ export const Checkbox = forwardRef(
       defaultChecked,
       readOnly,
       className,
-      id = useId(),
+      id,
       children,
       onChange = () => null,
       "aria-label": ariaLabel,
@@ -62,6 +63,8 @@ export const Checkbox = forwardRef(
     }: CheckboxProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
+    const generatedId = useId();
+    id = id || generatedId;
     if (!children && !ariaLabel && !rest["aria-labelledby"]) {
       handleAccessbilityError(
         "Checkbox must have an have an accessible label. Please add `children`, an `aria-label`, or an `aria-labelledby` prop."

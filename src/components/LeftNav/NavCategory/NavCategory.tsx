@@ -50,7 +50,7 @@ function getItemClassNames(
  * @see https://design.avayacloud.com/components/web/list-web
  */
 export const NavCategory = ({
-  id = useId(),
+  id,
   children = [],
   label,
   icon,
@@ -60,6 +60,8 @@ export const NavCategory = ({
   // active = false, // BUG: definied by never used
   ...rest
 }: NavCategoryProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   const listClass = "neo-leftnav__nav";
   const [isExpanded, setIsExpanded] = useState(expanded);
   const [navItemClass, setNavItemClass] = useState(LEFTNAV_CATEGORY_STYLE);

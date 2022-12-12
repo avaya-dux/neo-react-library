@@ -103,7 +103,7 @@ export const InternalTab = ({
       logger.debug(`focus tab ${id}`);
       ref.current && ref.current.focus();
     }
-  }, [focus, active, disabled]);
+  }, [focus, active, disabled, id]);
 
   const defaultAriaLabel = closable
     ? `You can press backspace or X to close tab ${name}`

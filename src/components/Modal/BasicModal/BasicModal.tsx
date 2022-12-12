@@ -28,11 +28,13 @@ export const BasicModal = forwardRef(
       onClose,
       open,
       title,
-      id = useId(),
+      id,
       ...rest
     }: BasicModalProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
+    const generatedId = useId();
+    id = id || generatedId;
     const buttons = "actions" in rest ? rest.actions : null;
 
     const onKeyDown = useCallback(

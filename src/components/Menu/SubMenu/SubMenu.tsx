@@ -53,10 +53,12 @@ export const SubMenu: FC<SubMenuProps> = ({
   menuRootElement,
   children,
   counter,
-  id = useId(),
+  id,
 
   ...rest
 }) => {
+  const generatedId = useId();
+  id = id || generatedId;
   const { closeOnSelect, setRootMenuOpen } = useContext(MenuContext);
 
   const { children: btnChildren, isActive, hasFocus } = menuRootElement.props;

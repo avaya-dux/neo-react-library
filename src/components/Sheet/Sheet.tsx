@@ -49,13 +49,15 @@ export type SheetProps = BaseSheetProps & EnforcedAccessibleLabel;
 export const Sheet = ({
   children,
   className,
-  id = useId(),
+  id,
   open = true,
   slide = true,
   title,
 
   ...rest
 }: SheetProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   const initialRender = useIsInitialRender();
   const buttons = "actions" in rest ? rest.actions : null;
 
