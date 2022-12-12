@@ -43,7 +43,7 @@ export const BasicModal = forwardRef(
           onClose();
         }
       },
-      [open]
+      [open, onClose]
     );
 
     useEffect(() => {
@@ -51,7 +51,7 @@ export const BasicModal = forwardRef(
       return () => {
         document.removeEventListener("keyup", onKeyDown, false);
       };
-    }, [open]);
+    }, [open, onKeyDown]);
 
     const modal = (
       <FocusLock>

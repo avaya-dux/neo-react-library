@@ -94,7 +94,7 @@ export const NavCategory = ({
       hasActiveLinks = hasActiveLinks || child.props.href === ctx.currentUrl;
     });
     setChildIsActive(hasActiveLinks);
-  }, [ctx.currentUrl]);
+  }, [ctx.currentUrl, children]);
 
   const handleOnClick: MouseEventHandler = (event: MouseEvent) => {
     event.stopPropagation();
@@ -142,7 +142,7 @@ export const NavCategory = ({
         parentHasIcon,
       });
     });
-  }, [isExpanded, disabled, ctx.currentUrl]);
+  }, [isExpanded, disabled, ctx.currentUrl, children, icon]);
 
   return (
     <li id={id} className={navItemClass}>

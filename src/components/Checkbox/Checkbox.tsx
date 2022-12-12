@@ -88,7 +88,7 @@ export const Checkbox = forwardRef(
         }
         onChange(e);
       },
-      [state, setState, onChange]
+      [state, setState, onChange, ref]
     );
 
     logger.debug({ checked, defaultChecked, state });
