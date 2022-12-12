@@ -17,7 +17,7 @@ const ToastTemplate: Story<ToastProps> = (props) => {
       logger.debug("remove container");
       removePopupManagerContainer();
     };
-  }, [removePopupManagerContainer]);
+  }, []);
   return <Toast {...props} />;
 };
 
@@ -49,7 +49,7 @@ export const TwoToasts = () => {
     return () => {
       removePopupManagerContainer();
     };
-  }, [removePopupManagerContainer]);
+  }, []);
   return (
     <div>
       <Toast>Toast 1</Toast>
@@ -63,7 +63,7 @@ export const InteractiveToasts = () => {
     return () => {
       removePopupManagerContainer();
     };
-  }, [removePopupManagerContainer]);
+  }, []);
   const duration = 5000;
   return !mounted ? (
     <div>not ready</div>

@@ -132,7 +132,7 @@ export const Select = (props: SelectProps) => {
         setSelectedItems(userSelectedOptions);
       }
     }
-  }, [value]);
+  }, [defaultValue, isInitialRender, multiple, options, selectedItems, value]);
 
   useEffect(() => {
     if (!isInitialRender && onChange) {
@@ -148,7 +148,7 @@ export const Select = (props: SelectProps) => {
         );
       }
     }
-  }, [selectedItems]);
+  }, [isInitialRender, multiple, onChange, selectedItems]);
   const selectedItemsValues = useMemo(
     () => selectedItems.map((item) => item.value),
     [selectedItems]

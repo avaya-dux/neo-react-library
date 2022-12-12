@@ -264,7 +264,7 @@ export const EditableData = () => {
 
   useEffect(() => {
     setLogItems(["data modified, new length: " + data.length, ...logItems]);
-  }, [data]);
+  }, [data, logItems]);
 
   return (
     <section>
