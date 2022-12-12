@@ -57,7 +57,7 @@ export const MultiSelectSearchable = () => {
             </Chip>
           ))
         : null,
-    [selectedItems]
+    [selectedItems, toggleItem]
   );
 
   return (
