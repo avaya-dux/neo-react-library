@@ -66,7 +66,7 @@ export const LinkItem = ({
   const handleOnClick: MouseEventHandler = (e) => {
     handleClick();
     e.preventDefault();
-    ctx?.onSelectedLink && ctx.onSelectedLink(id, href);
+    ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
   };
 
   const handleKeyDown: KeyboardEventHandler = (
@@ -84,7 +84,7 @@ export const LinkItem = ({
     switch (event.key) {
       case Keys.SPACE:
       case Keys.ENTER:
-        ctx?.onSelectedLink && ctx.onSelectedLink(id, href);
+        ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
         break;
     }
   };

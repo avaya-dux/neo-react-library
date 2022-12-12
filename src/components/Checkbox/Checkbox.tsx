@@ -1,4 +1,3 @@
-import { userEvent } from "@testing-library/user-event/dist/types/setup";
 import clsx from "clsx";
 import log from "loglevel";
 import React, { forwardRef, ReactNode, useCallback, useId } from "react";

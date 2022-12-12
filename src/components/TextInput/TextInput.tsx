@@ -75,7 +75,7 @@ export const TextInput = ({
 }: TextInputProps) => {
   const generatedId = useId();
   id = id || generatedId;
-  
+
   if (!label && !rest["aria-label"]) {
     handleAccessbilityError("You must provide a `label` or `aria-label`.");
   }

@@ -48,7 +48,7 @@ export const TopLinkItem = ({
 
   const onClick: MouseEventHandler = (e) => {
     e.preventDefault();
-    ctx?.onSelectedLink && ctx.onSelectedLink(id, href);
+    ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
   };
 
   return (

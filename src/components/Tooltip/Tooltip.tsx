@@ -59,13 +59,13 @@ export const Tooltip = ({
     setTooltipPosition(
       position === "auto"
         ? getIdealTooltipPosition(
-          {
-            height: document.lastElementChild?.clientHeight || 0,
-            width: document.lastElementChild?.clientWidth || 0,
-          },
-          label,
-          tooltipContainerRef.current
-        )
+            {
+              height: document.lastElementChild?.clientHeight || 0,
+              width: document.lastElementChild?.clientWidth || 0,
+            },
+            label,
+            tooltipContainerRef.current
+          )
         : translatePositionToCSSName(position)
     );
   }, [label, position, tooltipContainerRef]);
