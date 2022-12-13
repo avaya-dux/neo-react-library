@@ -9,7 +9,6 @@ from the root of the directory
 - - note: to skip the "version" prompt, you can use: `yarn publish --new-version <version to publish>`
 
 
-
 You can check that the package was properly published by viewing it on NPMJS
 - [link to registry](https://registry.npmjs.org/@avaya%2fneo-react): api call, returns JSON, no cache
 - [link to npmjs page](https://www.npmjs.com/package/@avaya/neo-react): our page on NPMJS, is on a 60min cache
