@@ -155,7 +155,7 @@ export const Tabs = ({
 
   useEffect(() => {
     logger.debug(
-      `useLayoutEffect: update carousel buttons disabled state on activeTab change ${activeTabIndex}`
+      `useEffect: update carousel buttons disabled state on activeTab change ${activeTabIndex}`
     );
     updateCarouselButtonStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
