@@ -371,6 +371,15 @@ export const SmallSelects = () => {
       >
         {fruitOptions}
       </Select>
+
+      <Select
+        helperText="Please select one"
+        label="Select a favorite food"
+        onChange={(value) => setFavFood(value as string)}
+        isSmall
+      >
+        {fruitOptions}
+      </Select>
     </Sheet>
   );
 }
