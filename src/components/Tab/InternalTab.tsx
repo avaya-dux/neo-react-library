@@ -89,7 +89,8 @@ export const InternalTab = ({
   const handleAnchorFocusEvent: FocusEventHandler = (
     e: FocusEvent<HTMLAnchorElement>
   ) => {
-    return handleFocusEvent(e, ref, setFocus);
+    setActiveTabIndex(tabIndex);
+    handleFocusEvent(e, ref, setFocus);
   };
 
   const handleAnchorBlurEvent: FocusEventHandler = (
