@@ -5,7 +5,9 @@ from the root of the directory
 - `npm login`: to ensure that you are properly logged in to the NPM network
 - `yarn all`: this will clean out all build artifacts, rebuild everything, run all tests, and "pack" the tarball if everything was successful
 - `yarn publish`: publishes the generated tarball to our registry
+- - note: At "new version" prompt, type in current version.
 - - note: to skip the "version" prompt, you can use: `yarn publish --new-version <version to publish>`
+
 
 
 You can check that the package was properly published by viewing it on NPMJS
@@ -26,3 +28,4 @@ Once that is complete, the next step is to add the release to our GitHub
 - click: "Auto-generate release notes"
 - attach the binary generated from `yarn all` (tgz file)
 - click: "Publish release"
+- create a PR and bump package.json version
