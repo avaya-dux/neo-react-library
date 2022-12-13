@@ -1,4 +1,4 @@
-import { useId, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import {
   PaginationItemDisplay,
@@ -64,7 +64,7 @@ export const Pagination = ({
   const totalPages = Math.ceil(itemCount / itemsPerPage);
 
   const [rootWidth, setRootWidth] = useState(0);
-  useLayoutEffect(() => {
+  useEffect(() => {
     // TODO: could add a debounce/throttle here
     // example: https://github.com/maslianok/react-resize-detector/blob/ccdb602d683e891386302e5436bf599645a16ba6/src/utils.ts#L16
     const updateRootWidth = () => {

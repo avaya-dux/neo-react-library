@@ -84,6 +84,8 @@ export const handleLeftCarouselMouseClickEvent = (
       setLeftCarouselButtonEnabled,
       setRightCarouselButtonEnabled
     );
+  } else {
+    setLeftCarouselButtonEnabled(false);
   }
 };
 function scrollAndUpdateButtons(
@@ -133,5 +135,7 @@ export const handleRightCarouselMouseClickEvent = (
       setLeftCarouselButtonEnabled,
       setRightCarouselButtonEnabled
     );
+  } else {
+    setRightCarouselButtonEnabled(false);
   }
 };
