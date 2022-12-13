@@ -148,6 +148,7 @@ describe("Tab Mouse event handlers", () => {
       expect(scrollRef.current.scrollBy).not.toBeCalled();
       expect(e.stopPropagation).toBeCalled();
       expect(extractProperties).toBeCalled();
+      expect(setLeftCarouselButtonEnabled).toBeCalledWith(false);
     });
     it("scroll tabs to right when tabs can be scrolled right", () => {
       const moveAmount = 100;
@@ -201,6 +202,7 @@ describe("Tab Mouse event handlers", () => {
       expect(e.stopPropagation).toBeCalled();
       expect(extractProperties).toBeCalled();
       expect(moveNextTabToLeftAmount).toBeCalled();
+      expect(setRightCarouselButtonEnabled).toBeCalledWith(false);
     });
     it("scroll tabs left when tabs can be scrolled left", () => {
       const moveAmount = 100;

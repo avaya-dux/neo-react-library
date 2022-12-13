@@ -5,7 +5,6 @@ import {
   useCallback,
   useEffect,
   useId,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -55,7 +54,7 @@ export const Tooltip = ({
   const tooltipContainerRef = useRef(null);
 
   const [tooltipPosition, setTooltipPosition] = useState("");
-  useLayoutEffect(() => {
+  useEffect(() => {
     setTooltipPosition(
       position === "auto"
         ? getIdealTooltipPosition(
