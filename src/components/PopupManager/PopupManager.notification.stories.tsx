@@ -142,11 +142,12 @@ export const PopClosableEvent = () => {
   }, [open]);
 
   useEffect(() => {
+    const current = managerRef.current;
     return () => {
       logger.debug("PopClosableEvent cleaning up ...");
-      if (managerRef.current) {
+      if (current) {
         logger.debug("remove all...");
-        managerRef.current.removeAll();
+        current.removeAll();
       }
     };
   }, [managerRef]);

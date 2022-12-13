@@ -29,12 +29,14 @@ import { SwitchProps } from "./SwitchTypes";
 export const Switch = ({
   children,
   error,
-  id = useId(),
+  id,
   multiline,
   onChange,
   dir,
   ...rest
 }: SwitchProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   if (!children && !rest["aria-label"]) {
     throw new Error("Switch must be passed children or an aria-label");
   }

@@ -21,6 +21,7 @@ export default function useControlled<T>({
   const value = isControlled ? controlled! : valueState;
 
   if (process.env.NODE_ENV !== "production") {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     React.useEffect(() => {
       if (isControlled !== (controlled !== undefined)) {
         console.error(
@@ -38,10 +39,12 @@ export default function useControlled<T>({
           ].join("\n")
         );
       }
-    }, [state, name, controlled]);
+    }, [state, name, controlled, isControlled]);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { current: defaultValue } = React.useRef(defaultProp);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     React.useEffect(() => {
       if (!isControlled && defaultValue !== defaultProp) {
         console.error(
@@ -51,6 +54,7 @@ export default function useControlled<T>({
           ].join("\n")
         );
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [JSON.stringify(defaultProp)]);
   }
 
@@ -58,6 +62,7 @@ export default function useControlled<T>({
     if (!isControlled) {
       setValue(newValue);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [value, setValueIfUncontrolled];

@@ -50,7 +50,7 @@ export const RadioGroup = ({
   children,
   groupName,
   onChange,
-  id = useId(),
+  id,
   disabled,
   selected,
   label,
@@ -59,6 +59,8 @@ export const RadioGroup = ({
   error,
   required,
 }: RadioGroupProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   const helperTextId = `${id}-helper-text`;
 
   const onChangeHandler = useCallback(
@@ -109,7 +111,7 @@ export const RadioGroup = ({
           return cloneElement(child, childprops);
         }
       }),
-    [children, selected, groupName, helperText, onChangeHandler]
+    [children, selected, groupName, helperText, onChangeHandler, disabled]
   );
 
   return (

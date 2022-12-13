@@ -29,16 +29,11 @@ export interface InfoModalProps {
  */
 export const InfoModal = forwardRef(
   (
-    {
-      children,
-      className,
-      id = useId(),
-      onClose,
-      open = false,
-      title,
-    }: InfoModalProps,
+    { children, className, id, onClose, open = false, title }: InfoModalProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
+    const generatedId = useId();
+    id = id || generatedId;
     if (!onClose) {
       console.error("onClose prop is required.");
     }

@@ -26,7 +26,7 @@ export const TextArea = ({
   disabled,
   error,
   helperText,
-  id = useId(),
+  id,
   label,
   locked,
   maxLength,
@@ -38,6 +38,9 @@ export const TextArea = ({
   },
   ...rest
 }: TextAreaProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
+
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const [characterCount, setCharacterCount] = useState(

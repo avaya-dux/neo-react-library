@@ -54,6 +54,7 @@ export const TableToolbar = <T extends Record<string, any>>({
   useEffect(() => {
     // handle data update (e.g. new/more data pulled from server)
     setSearches(search);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, setSearches]);
 
   const editDisabled = readonly || selectedRowIdsStringArray.length !== 1;

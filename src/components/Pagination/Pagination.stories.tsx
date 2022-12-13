@@ -32,14 +32,14 @@ const BookOfPages = ({ sectionWidth }: { sectionWidth?: number }) => {
     }
 
     return paragraphs;
-  }, [numParagraphs]);
+  }, [itemsPerPage, numParagraphs, pageIndex]);
 
   const displayedParagraphs = useMemo(() => {
     const startIndex = (pageIndex - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
     return paragraphArray.slice(startIndex, endIndex);
-  }, [pageIndex, itemsPerPage]);
+  }, [pageIndex, itemsPerPage, paragraphArray]);
 
   const [logItems, setLogItems] = useState<JSX.Element[]>([]);
 

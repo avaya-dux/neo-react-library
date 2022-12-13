@@ -110,7 +110,7 @@ export const Menu = forwardRef(
       if (isOpen === false && didMount.current) {
         onMenuClose();
       }
-    }, [isOpen]);
+    }, [isOpen, onMenuClose, ref]);
 
     // `didMount` must be placed _after_ any usage of it in a hook
     const didMount = useRef(false);

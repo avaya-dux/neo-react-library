@@ -87,7 +87,7 @@ export const Tabs = ({
 
   useEffect(() => {
     onTabPanelChange?.(activePanelIndex);
-  }, [activePanelIndex]);
+  }, [activePanelIndex, onTabPanelChange]);
 
   const verticalStyle: CSSProperties = isVertical ? { display: "flex" } : {};
   const refs: RefObject<HTMLDivElement>[] = [];
@@ -147,6 +147,7 @@ export const Tabs = ({
   const [rightCarouselButtonEnabled, setRightCarouselButtonEnabled] =
     useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateCarouselButtonStatus = () => {
     setLeftCarouselButtonEnabled(enableLeftButton(scrollRef, refs));
     setRightCarouselButtonEnabled(enableRightButton(scrollRef, refs));
@@ -157,6 +158,7 @@ export const Tabs = ({
       `useLayoutEffect: update carousel buttons disabled state on activeTab change ${activeTabIndex}`
     );
     updateCarouselButtonStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTabIndex]);
 
   useLayoutEffect(() => {
@@ -167,6 +169,7 @@ export const Tabs = ({
     updateCarouselButtonStatus();
     return () =>
       window.removeEventListener("resize", updateCarouselButtonStatus);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollRef]);
 
   const tabsCarousel = (

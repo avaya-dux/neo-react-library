@@ -54,7 +54,7 @@ export const Checkbox = forwardRef(
       defaultChecked,
       readOnly,
       className,
-      id = useId(),
+      id,
       children,
       onChange = () => null,
       "aria-label": ariaLabel,
@@ -62,6 +62,8 @@ export const Checkbox = forwardRef(
     }: CheckboxProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
+    const generatedId = useId();
+    id = id || generatedId;
     if (!children && !ariaLabel && !rest["aria-labelledby"]) {
       handleAccessbilityError(
         "Checkbox must have an have an accessible label. Please add `children`, an `aria-label`, or an `aria-labelledby` prop."
@@ -86,7 +88,7 @@ export const Checkbox = forwardRef(
         }
         onChange(e);
       },
-      [state, setState, onChange]
+      [state, setState, onChange, ref]
     );
 
     logger.debug({ checked, defaultChecked, state });

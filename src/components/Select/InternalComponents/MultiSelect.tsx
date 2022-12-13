@@ -39,7 +39,7 @@ export const MultiSelect = () => {
             </Chip>
           ))
         : null,
-    [selectedItems]
+    [selectedItems, toggleItem]
   );
 
   return (

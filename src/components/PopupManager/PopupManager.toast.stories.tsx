@@ -14,17 +14,18 @@ const PopupManagerToastTemplate: Story<ToastOptions> = (
   const managerRef = useRef<PopupManager | null>(null);
 
   useEffect(() => {
-    if (managerRef.current) {
-      managerRef.current.toast(props);
+    const current = managerRef.current;
+    if (current) {
+      current.toast(props);
     }
     return () => {
       logger.debug(props.id, "cleaning up ...");
-      if (managerRef.current) {
+      if (current) {
         logger.debug("remove all...");
-        managerRef.current.removeAll();
+        current.removeAll();
       }
     };
-  }, [managerRef]);
+  }, [managerRef, props]);
   return <PopupManager ref={managerRef} />;
 };
 
@@ -69,11 +70,12 @@ export const DefaultToast = () => {
 export const ToastsPositioning = () => {
   const managerRef = useRef<PopupManager | null>(null);
   useEffect(() => {
+    const current = managerRef.current;
     return () => {
       logger.debug("ToastsPositioning cleaning up ...");
-      if (managerRef.current) {
+      if (current) {
         logger.debug("remove all...");
-        managerRef.current.removeAll();
+        current.removeAll();
       }
     };
   }, []);

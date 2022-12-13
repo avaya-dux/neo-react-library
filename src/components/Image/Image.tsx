@@ -52,7 +52,7 @@ export const Image = ({
   const [hasError, setHasError] = useState(false);
   const useFallback = useMemo(
     () => !!fallback && (isLoading || hasError),
-    [fallback, isLoading]
+    [fallback, isLoading, hasError]
   );
 
   useEffect(() => {

@@ -88,7 +88,7 @@ export const IconButton = forwardRef(
       }
 
       return result.join(" ");
-    }, [animation, badge, shape, size, status, variant]);
+    }, [animation, badge, shape, size, status, variant, className]);
 
     return (
       <button

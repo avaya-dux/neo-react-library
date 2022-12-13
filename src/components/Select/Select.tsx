@@ -55,7 +55,6 @@ export const Select = (props: SelectProps) => {
     disabled = false,
     errorList = [],
     helperText = "",
-    id = useId(),
     label = "",
     loading = false,
     multiple = false,
@@ -66,6 +65,9 @@ export const Select = (props: SelectProps) => {
     searchable = false,
     value,
   } = props;
+
+  const generatedId = useId();
+  const id = props.id || generatedId;
 
   if (!(label || ariaLabel)) {
     handleAccessbilityError("Select requires a label prop or aria-label");
@@ -100,6 +102,7 @@ export const Select = (props: SelectProps) => {
     if (optionsHaveChanged) {
       setFilteredOptions(options);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options]);
 
   const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);
@@ -129,6 +132,7 @@ export const Select = (props: SelectProps) => {
         setSelectedItems(userSelectedOptions);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   useEffect(() => {
@@ -145,6 +149,7 @@ export const Select = (props: SelectProps) => {
         );
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItems]);
   const selectedItemsValues = useMemo(
     () => selectedItems.map((item) => item.value),

@@ -31,10 +31,12 @@ export const TopLinkItem = ({
   disabled,
   href,
   icon,
-  id = useId(),
+  id,
   label,
   className,
 }: TopLinkItemProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   const ctx = useContext(LeftNavContext);
   const [isActive, setIsActive] = useState(false);
 
@@ -46,7 +48,7 @@ export const TopLinkItem = ({
 
   const onClick: MouseEventHandler = (e) => {
     e.preventDefault();
-    ctx?.onSelectedLink && ctx.onSelectedLink(id, href);
+    ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
   };
 
   return (

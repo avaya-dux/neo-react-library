@@ -32,13 +32,15 @@ export const LinkItem = ({
   className,
   disabled = false,
   href,
-  id = useId(),
+  id,
   onFocus,
   onMouseOver,
   parentHasIcon,
 
   ...rest
 }: LinkItemProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   const ctx = useContext(LeftNavContext);
   const [itemStyle, setItemStyle] = useState({ padding: "8px 28px 8px 20px" });
 
@@ -64,7 +66,7 @@ export const LinkItem = ({
   const handleOnClick: MouseEventHandler = (e) => {
     handleClick();
     e.preventDefault();
-    ctx?.onSelectedLink && ctx.onSelectedLink(id, href);
+    ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
   };
 
   const handleKeyDown: KeyboardEventHandler = (
@@ -82,7 +84,7 @@ export const LinkItem = ({
     switch (event.key) {
       case Keys.SPACE:
       case Keys.ENTER:
-        ctx?.onSelectedLink && ctx.onSelectedLink(id, href);
+        ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
         break;
     }
   };

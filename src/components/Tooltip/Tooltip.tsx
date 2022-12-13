@@ -43,13 +43,15 @@ export const Tooltip = ({
   arrow = true,
   children,
   className,
-  id = useId(),
+  id,
   label,
   multiline,
   position = "auto",
 
   ...rest
 }: TooltipProps) => {
+  const generatedId = useId();
+  id = id || generatedId;
   const tooltipContainerRef = useRef(null);
 
   const [tooltipPosition, setTooltipPosition] = useState("");
@@ -81,7 +83,7 @@ export const Tooltip = ({
 
     const child = Children.only(children) as React.ReactElement;
     return cloneElement(child, { "aria-describedby": id });
-  }, [isString, children]);
+  }, [children, id]);
 
   const [allowTooltip, setAllowTooltip] = useState(true);
   const setAllowTooltipTrue = useCallback(
@@ -103,7 +105,7 @@ export const Tooltip = ({
     return () => {
       document.removeEventListener("keyup", onKeyUp, false);
     };
-  }, []);
+  }, [onKeyUp]);
 
   /**
    * NOTE: on the subject of the 'eslint-disable-next-line' below:

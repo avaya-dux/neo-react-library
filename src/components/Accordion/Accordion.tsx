@@ -42,9 +42,11 @@ export const Accordion = ({
   disabled = false,
   onClick,
   header,
-  headerId = useId(),
+  headerId,
   isOpen,
 }: AccordionProps) => {
+  const generatedId = useId();
+  headerId = headerId || generatedId;
   const [isActive, setIsActive] = useState(defaultExpanded);
 
   const bodyId = `accordion-control-${headerId}`;
@@ -55,7 +57,7 @@ export const Accordion = ({
     } else {
       setIsActive(false);
     }
-  }, [isOpen]);
+  }, [isOpen, defaultExpanded]);
 
   return (
     <div className="neo-accordion">

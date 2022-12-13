@@ -39,7 +39,7 @@ export const PaginationNavigation = ({
       onPageChange,
       totalPages
     );
-  }, [currentPageIndex, totalPages, paginationRootWidth]);
+  }, [currentPageIndex, totalPages, paginationRootWidth, onPageChange]);
 
   const leftArrowDisabled = currentPageIndex <= 1;
   const rightArrowDisabled = currentPageIndex >= totalPages;
