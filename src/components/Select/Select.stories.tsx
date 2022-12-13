@@ -358,15 +358,11 @@ export const MoreThanOneMultipleSelect = () => {
 };
 
 export const SmallSelects = () => {
-  const [favFood, setFavFood] = useState("");
-  const [foods, setFoods] = useState<string[]>([]);
-
   return (
     <Sheet title="Small Selects" style={{ width: 400 }}>
       <Select
         helperText="Please select one"
         label="Select a favorite food"
-        onChange={(value) => setFavFood(value as string)}
         isSmall
       >
         {fruitOptions}
@@ -375,11 +371,10 @@ export const SmallSelects = () => {
       <Select
         helperText="Please select one"
         label="Select a favorite food"
-        onChange={(value) => setFavFood(value as string)}
         isSmall
       >
         {fruitOptions}
       </Select>
     </Sheet>
   );
-}
+};
