@@ -149,11 +149,12 @@ export const Tabs = ({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateCarouselButtonStatus = () => {
+    logger.debug("updating carousel buttons status");
     setLeftCarouselButtonEnabled(enableLeftButton(scrollRef, refs));
     setRightCarouselButtonEnabled(enableRightButton(scrollRef, refs));
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     logger.debug(
       `useLayoutEffect: update carousel buttons disabled state on activeTab change ${activeTabIndex}`
     );
@@ -161,17 +162,18 @@ export const Tabs = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTabIndex]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", updateCarouselButtonStatus);
     logger.debug(
       `updateCarouselButtonStatus: update carousel buttons disabled status on window resize`
     );
-    updateCarouselButtonStatus();
+    // updateCarouselButtonStatus();
     return () =>
       window.removeEventListener("resize", updateCarouselButtonStatus);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollRef]);
 
+  logger.debug({ leftCarouselButtonEnabled, rightCarouselButtonEnabled })
   const tabsCarousel = (
     <div className={hasCarousel ? "neo-tabs__carousel" : "neo-tabs"}>
       {hasCarousel ? (
