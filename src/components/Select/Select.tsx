@@ -64,6 +64,7 @@ export const Select = (props: SelectProps) => {
     required,
     searchable = false,
     value,
+    isSmall,
   } = props;
 
   const generatedId = useId();
@@ -183,6 +184,7 @@ export const Select = (props: SelectProps) => {
       helperText,
       loading,
       placeholder,
+      isSmall,
     },
     optionProps: {
       multiple,
