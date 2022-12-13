@@ -380,16 +380,22 @@ describe("Select", () => {
         expect(results).toHaveNoViolations();
       });
     });
+
     describe("Small Select", () => {
       let renderResult;
       beforeEach(() => {
         renderResult = render(<SmallSelects />);
       });
 
-
       it("renders without exploding", () => {
         const { container } = renderResult;
         expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
       });
     });
   });
