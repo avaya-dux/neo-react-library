@@ -6,7 +6,6 @@ import {
   MouseEventHandler,
   RefObject,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -173,7 +172,7 @@ export const Tabs = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollRef]);
 
-  logger.debug({ leftCarouselButtonEnabled, rightCarouselButtonEnabled })
+  logger.debug({ leftCarouselButtonEnabled, rightCarouselButtonEnabled });
   const tabsCarousel = (
     <div className={hasCarousel ? "neo-tabs__carousel" : "neo-tabs"}>
       {hasCarousel ? (
