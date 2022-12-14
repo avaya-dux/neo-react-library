@@ -18,6 +18,7 @@ export type SelectContextProps = {
     helperText?: string;
     loading: boolean;
     placeholder: string;
+    isSmall?: boolean;
   };
 
   optionProps: {

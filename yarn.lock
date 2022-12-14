@@ -20,10 +20,10 @@
   resolved "https://registry.npmjs.org/@atomic-layout/core/-/core-0.14.1.tgz"
   integrity sha512-o5nhk/1djuKzB20C2LSOuetTDytsbGg4c0UfxXkq1pqoaN3hKJcHPYF9nV+p6+P5CWqNBaaJddZ32OsFSppULQ==
 
-"@avaya/neo@^3.62.0":
-  version "3.62.0"
-  resolved "https://registry.npmjs.org/@avaya/neo/-/neo-3.62.0.tgz"
-  integrity sha512-cf4Pj81fMisUZF1IjREXZ3bsNsZWwuNCnVyFJvQqZg2Qh63IItB6uffZvQ/VwtVOyLwfcb8v9j4vlNORGcBXxg==
+"@avaya/neo@^3.65.0":
+  version "3.65.0"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.65.0.tgz#41b75b1a40544750a95d153a02b9734053681098"
+  integrity sha512-BHnwgE3pVkA8WIvDF/OE1pTxJrogj1E0DvBSYBjIp807pX0eJWvMOJjj8m3iAVI6CwQAbE3QLr63IAN5Uqj8fQ==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.18.6", "@babel/code-frame@^7.5.5", "@babel/code-frame@^7.8.3":
   version "7.18.6"

@@ -22,6 +22,7 @@ export const MultiSelect = () => {
       helperText,
       loading,
       placeholder,
+      isSmall
     },
   } = useContext(SelectContext);
 
@@ -47,6 +48,7 @@ export const MultiSelect = () => {
       aria-describedby={helperText && helperId}
       className={clsx(
         "neo-multiselect",
+        isSmall && "neo-multiselect--small",
         disabled && "neo-multiselect--disabled",
         loading && "neo-select__spinner",
         isOpen && "neo-multiselect--active"

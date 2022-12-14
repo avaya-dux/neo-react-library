@@ -356,3 +356,25 @@ export const MoreThanOneMultipleSelect = () => {
     </Sheet>
   );
 };
+
+export const SmallSelects = () => {
+  return (
+    <Sheet title="Small Selects" style={{ width: 400 }}>
+      <Select
+        helperText="Please select one"
+        label="Select a favorite food"
+        isSmall
+      >
+        {fruitOptions}
+      </Select>
+
+      <Select
+        helperText="Please select one"
+        label="Select a favorite food"
+        isSmall
+      >
+        {fruitOptions}
+      </Select>
+    </Sheet>
+  );
+};

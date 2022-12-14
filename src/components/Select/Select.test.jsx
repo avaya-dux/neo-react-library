@@ -18,6 +18,7 @@ const {
   Empty,
   SelectsWithWrongChildren,
   MoreThanOneMultipleSelect,
+  SmallSelects
 } = composeStories(SelectStories);
 
 const label = "Select Label";
@@ -371,6 +372,24 @@ describe("Select", () => {
         const allOptionTwosAfterClick = getAllByText("Option 3");
         expect(allOptionOnesAfterClick).toHaveLength(3);
         expect(allOptionTwosAfterClick).toHaveLength(3);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("Small Select", () => {
+      let renderResult;
+      beforeEach(() => {
+        renderResult = render(<SmallSelects />);
+      });
+
+      it("renders without exploding", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
       });
 
       it("passes basic axe compliance", async () => {
