@@ -34,6 +34,7 @@ export const InfoModal = forwardRef(
   ) => {
     const generatedId = useId();
     id = id || generatedId;
+    const titleId = id + '-title';
     if (!onClose) {
       console.error("onClose prop is required.");
     }
@@ -52,7 +53,7 @@ export const InfoModal = forwardRef(
         <div className="neo-modal__background"></div>
         <div
           className="neo-modal__content"
-          aria-label="This is an informational modal" // TODO: What should this value be? Ask Matt or Terri.
+          aria-labelledby={titleId}
           aria-modal="true"
           role="dialog"
         >
@@ -65,7 +66,7 @@ export const InfoModal = forwardRef(
           </div>
           {title && (
             <div className="neo-modal__header">
-              <h4>{title}</h4>
+              <h4 id={titleId}>{title}</h4>
             </div>
           )}
           <div className="neo-modal__body">
