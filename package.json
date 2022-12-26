@@ -92,8 +92,8 @@
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
     "@vitejs/plugin-react": "^3.0.0",
-    "@vitest/coverage-c8": "^0.25.0",
-    "@vitest/ui": "^0.25.0",
+    "@vitest/coverage-c8": "^0.26.0",
+    "@vitest/ui": "^0.26.0",
     "babel-loader": "^9.1.0",
     "better-docs": "^2.7.2",
     "cypress": "^12.0.0",
@@ -120,6 +120,6 @@
     "typescript": "^4.8.4",
     "vite": "^4.0.0",
     "vite-plugin-dts": "^1.6.6",
-    "vitest": "^0.25.0"
+    "vitest": "^0.26.0"
   }
 }
