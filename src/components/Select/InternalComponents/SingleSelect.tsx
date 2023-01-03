@@ -15,7 +15,7 @@ export const SingleSelect = () => {
       helperText,
       loading,
       placeholder,
-      isSmall
+      isSmall,
     },
   } = useContext(SelectContext);
 
