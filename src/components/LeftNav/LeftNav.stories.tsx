@@ -91,3 +91,27 @@ export const CategoryGroupsWithIcons = () => (
     </LeftNav.NavCategory>
   </LeftNav>
 );
+
+export const DoesNotConflictWithOtherNavs = () => (
+  <div>
+    <LeftNav aria-label="Main Navigation">
+      <LeftNav.TopLinkItem label="Active by default" href="#active" />
+      <LeftNav.TopLinkItem label="Link 2" href="#test2" />
+      <LeftNav.TopLinkItem label="Link 3" href="#test3" />
+    </LeftNav>
+
+    <nav>
+      <ul>
+        <li>
+          <a href="#test">Test</a>
+        </li>
+        <li>
+          <a href="#test2">Test2</a>
+        </li>
+        <li>
+          <a href="#test3">Test3</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+);
