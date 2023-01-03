@@ -42,11 +42,13 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
   currentUrl = "",
   onNavigate,
   isActiveOverride,
+  ["aria-label"]: ariaLabel = "Left Navigation",
   ...rest
 }: LeftNavProps) => {
-  if (!rest["aria-label"]) {
+  // NOTE: this is for non-TS users
+  if (!ariaLabel && !rest["aria-labelledby"]) {
     handleAccessbilityError(
-      "A descriptive ariaLabel prop value is required for screen readers to identify the navigation component"
+      "An `aria-label` or `aria-labelledby` value is required for screen readers to identify the navigation component"
     );
   }
 
@@ -77,7 +79,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
     >
       <LeftNavContext.Provider value={navContext}>
         <div id={navId} className="neo-leftnav--wrapper">
-          <nav className="neo-leftnav" {...rest}>
+          <nav className="neo-leftnav" aria-label={ariaLabel} {...rest}>
             <ul className="neo-leftnav__nav">{children}</ul>
           </nav>
         </div>
