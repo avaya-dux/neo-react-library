@@ -22,7 +22,7 @@ export const MultiSelect = () => {
       helperText,
       loading,
       placeholder,
-      isSmall
+      isSmall,
     },
   } = useContext(SelectContext);
 

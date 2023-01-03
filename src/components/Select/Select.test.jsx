@@ -18,7 +18,7 @@ const {
   Empty,
   SelectsWithWrongChildren,
   MoreThanOneMultipleSelect,
-  SmallSelects
+  SmallSelects,
 } = composeStories(SelectStories);
 
 const label = "Select Label";
