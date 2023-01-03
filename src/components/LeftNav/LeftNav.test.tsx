@@ -11,7 +11,7 @@ import {
 } from "./LeftNav.stories";
 
 describe("LeftNav", () => {
-  describe("base tests", () => {
+  describe("a11y tests", () => {
     const examplechildren = (
       <>
         <LeftNav.TopLinkItem label="Active by default" href="#active" />
@@ -29,8 +29,21 @@ describe("LeftNav", () => {
       </>
     );
 
-    it("render without exploding", () => {
+    it("renders properly when `aria-label` is passed", () => {
       render(<LeftNav aria-label="Main Navigation">{examplechildren}</LeftNav>);
+
+      expect(screen.getByRole("navigation")).toBeInTheDocument();
+    });
+
+    it("renders properly when `aria-labelledby` is passed", () => {
+      const id = "left-nav-title";
+      render(
+        <div>
+          <h1 id={id}>Left Navigation</h1>
+
+          <LeftNav aria-labelledby={id}>{examplechildren}</LeftNav>
+        </div>
+      );
 
       expect(screen.getByRole("navigation")).toBeInTheDocument();
     });
