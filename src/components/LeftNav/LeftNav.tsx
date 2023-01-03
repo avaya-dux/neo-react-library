@@ -77,7 +77,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
     >
       <LeftNavContext.Provider value={navContext}>
         <div id={navId} className="neo-leftnav--wrapper">
-          <nav className="neo-leftnav">
+          <nav className="neo-leftnav" {...rest}>
             <ul className="neo-leftnav__nav">{children}</ul>
           </nav>
         </div>
