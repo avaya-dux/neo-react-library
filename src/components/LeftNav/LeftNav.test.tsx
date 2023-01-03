@@ -1,6 +1,8 @@
-import { render, RenderResult, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
+
+import { RenderResultType } from "test/types";
 
 import { LeftNav } from "./";
 import {
@@ -59,11 +61,7 @@ describe("LeftNav", () => {
 
   describe("storybook tests", () => {
     describe("Default", () => {
-      let renderResult: RenderResult<
-        typeof import("@testing-library/dom/types/queries"),
-        HTMLElement,
-        HTMLElement
-      >;
+      let renderResult: RenderResultType;
 
       beforeEach(() => {
         renderResult = render(<Default />);
@@ -82,11 +80,7 @@ describe("LeftNav", () => {
     });
 
     describe("CategoryGroups", () => {
-      let renderResult: RenderResult<
-        typeof import("@testing-library/dom/types/queries"),
-        HTMLElement,
-        HTMLElement
-      >;
+      let renderResult: RenderResultType;
 
       beforeEach(() => {
         renderResult = render(<CategoryGroups />);
@@ -105,11 +99,7 @@ describe("LeftNav", () => {
     });
 
     describe("CategoryGroupsWithIcons", () => {
-      let renderResult: RenderResult<
-        typeof import("@testing-library/dom/types/queries"),
-        HTMLElement,
-        HTMLElement
-      >;
+      let renderResult: RenderResultType;
 
       beforeEach(() => {
         renderResult = render(<CategoryGroupsWithIcons />);
@@ -128,11 +118,7 @@ describe("LeftNav", () => {
     });
 
     describe("DoesNotConflictWithOtherNavs", () => {
-      let renderResult: RenderResult<
-        typeof import("@testing-library/dom/types/queries"),
-        HTMLElement,
-        HTMLElement
-      >;
+      let renderResult: RenderResultType;
 
       beforeEach(() => {
         renderResult = render(<DoesNotConflictWithOtherNavs />);
