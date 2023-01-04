@@ -1,7 +1,9 @@
-import { render, RenderResult, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
+
+import { RenderResultType } from "test/types";
 
 import { Chip } from "./";
 import { Closable, Default, Templated } from "./Chip.stories";
@@ -58,11 +60,7 @@ describe("Chip", () => {
 
   describe("storybook tests", () => {
     describe("Default", () => {
-      let renderResult: RenderResult<
-        typeof import("@testing-library/dom/types/queries"),
-        HTMLElement,
-        HTMLElement
-      >;
+      let renderResult: RenderResultType;
 
       beforeEach(() => {
         renderResult = render(<Default />);
@@ -81,11 +79,7 @@ describe("Chip", () => {
     });
 
     describe("Closable", () => {
-      let renderResult: RenderResult<
-        typeof import("@testing-library/dom/types/queries"),
-        HTMLElement,
-        HTMLElement
-      >;
+      let renderResult: RenderResultType;
 
       beforeEach(() => {
         renderResult = render(<Closable />);
@@ -104,11 +98,7 @@ describe("Chip", () => {
     });
 
     describe("Templated", () => {
-      let renderResult: RenderResult<
-        typeof import("@testing-library/dom/types/queries"),
-        HTMLElement,
-        HTMLElement
-      >;
+      let renderResult: RenderResultType;
 
       beforeEach(() => {
         renderResult = render(<Templated>test</Templated>);

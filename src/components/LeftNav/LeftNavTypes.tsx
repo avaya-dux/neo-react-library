@@ -19,6 +19,7 @@ export interface LinkItemProps
   href: string;
   parentHasIcon?: boolean;
 }
+
 export interface NavCategoryProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
@@ -28,15 +29,20 @@ export interface NavCategoryProps
   active?: boolean;
   children?: ReactElement<LinkItemProps> | ReactElement<LinkItemProps>[];
 }
-export interface LeftNavProps extends React.BaseHTMLAttributes<HTMLElement> {
-  "aria-label": string;
+
+type EnforcedAccessibleLabel =
+  | { "aria-label": string }
+  | { "aria-labelledby": string };
+
+export type LeftNavProps = {
   currentUrl?: string;
   isActiveOverride?: boolean;
   onNavigate?: (id: string, url: string) => void;
   children?:
     | ReactElement<NavCategoryProps | TopLinkItemProps>
     | ReactElement<NavCategoryProps | TopLinkItemProps>[];
-}
+} & React.BaseHTMLAttributes<HTMLElement> &
+  EnforcedAccessibleLabel;
 
 export interface LeftNavSubComponents {
   LinkItem: React.FC<LinkItemProps>;
