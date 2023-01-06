@@ -104,8 +104,8 @@ export const SingleSelectSearchable = () => {
         />
       </span>
 
-      <div className="neo-multiselect__content">
-        <ul aria-label={ariaLabel} {...getMenuProps()}>
+      <div className="neo-multiselect__content" aria-label={ariaLabel} {...getMenuProps()}>
+        <ul role="group">
           <OptionsWithEmptyMessageFallback />
         </ul>
       </div>

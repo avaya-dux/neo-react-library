@@ -1,7 +1,12 @@
+import log from "loglevel";
+
 import { useCombobox, useSelect } from "downshift";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { SelectOptionProps } from "./SelectTypes";
+
+const logger = log.getLogger("use-downshfit");
+logger.disableAll();
 
 const createOptionValue = "neo-select-create-option";
 

@@ -1,3 +1,5 @@
+import log from "loglevel";
+
 import { useContext, useMemo } from "react";
 
 import { genId } from "utils/accessibilityUtils";
@@ -10,6 +12,8 @@ export interface InternalSelectOptionProps extends SelectOptionProps {
   index: number;
 }
 
+const logger = log.getLogger("internal-select-option");
+logger.disableAll();
 /* 
 https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
  In addition, the interaction model conveyed by the listbox role to assistive 
@@ -48,6 +52,8 @@ export const InternalSelectOption = ({
     index,
     disabled,
   });
+
+  logger.debug(itemProps);
 
   return multiple ? (
     <div className="neo-input-group">
