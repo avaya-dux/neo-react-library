@@ -152,7 +152,7 @@ export const Select = (props: SelectProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItems]);
-  
+
   const selectedItemsValues = useMemo(
     () => selectedItems.map((item) => item.value),
     [selectedItems]
