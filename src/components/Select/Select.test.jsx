@@ -167,11 +167,7 @@ describe("Select", () => {
 
       it("does open content area on click after content is loaded", () => {
         const { getByRole, rerender } = render(
-          <Select
-            multiple
-            label={label}
-            loading={true}
-          ></Select>
+          <Select multiple label={label} loading={true}></Select>
         );
 
         const defaultSelectHeader = getByRole("button");
@@ -180,11 +176,7 @@ describe("Select", () => {
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
 
         rerender(
-          <Select
-            multiple
-            label={label}
-            loading={false}
-          >
+          <Select multiple label={label} loading={false}>
             <SelectOption>Option 1</SelectOption>
           </Select>
         );
