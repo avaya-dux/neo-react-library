@@ -14,7 +14,6 @@ export const SingleSelect = () => {
       helperId,
       helperText,
       loading,
-      placeholder,
       isSmall,
     },
   } = useContext(SelectContext);
@@ -30,13 +29,15 @@ export const SingleSelect = () => {
         isOpen && "neo-multiselect--active"
       )}
     >
-      <button
-        {...getToggleButtonProps()}
-        className="neo-multiselect__header"
-        type="button"
-      >
-        {selectedItems[0]?.children || placeholder}
-      </button>
+      <span className="neo-multiselect-combo__header">
+        <button
+          {...getToggleButtonProps()}
+          className="neo-multiselect__header"
+          type="button"
+        >
+          {selectedItems[0]?.children || ""}
+        </button>
+      </span>
 
       <div
         className="neo-multiselect__content"

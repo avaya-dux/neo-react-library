@@ -20,7 +20,6 @@ export const SingleSelectSearchable = () => {
       helperId,
       helperText,
       loading,
-      placeholder,
     },
   } = useContext(SelectContext);
   const {
@@ -77,7 +76,6 @@ export const SingleSelectSearchable = () => {
           {...restInputProps}
           className="neo-input"
           disabled={disabled}
-          placeholder={placeholder}
           onKeyDown={(e) => {
             if (
               e.key === Keys.ENTER &&

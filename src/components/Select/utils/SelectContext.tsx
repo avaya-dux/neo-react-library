@@ -17,7 +17,6 @@ export type SelectContextProps = {
     helperId?: string;
     helperText?: string;
     loading: boolean;
-    placeholder: string;
     isSmall?: boolean;
   };
 
@@ -37,7 +36,6 @@ export const SelectContext = createContext<SelectContextProps>({
     disabled: false,
     filteredOptions: [],
     loading: false,
-    placeholder: "",
   },
 
   optionProps: {

@@ -76,7 +76,6 @@ export const Searchable = () => {
         label="Select a few nice foods"
         multiple
         onChange={(value) => setFoods(value as string[])}
-        placeholder=""
         searchable
       >
         {fruitOptions}

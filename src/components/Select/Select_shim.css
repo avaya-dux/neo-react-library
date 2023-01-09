@@ -65,10 +65,15 @@
   padding-left: 32px;
   background-color: #f1f1f1;
 }
-
 div.neo-multiselect button.neo-multiselect__header,
 div.neo-multiselect span.neo-multiselect-combo__header {
   width: 100%;
+  min-height: 36px;
+}
+div.neo-multiselect.neo-multiselect--small button.neo-multiselect__header,
+div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
+  width: 100%;
+  min-height: 26px;
 }
 
 /* internal select option highlight styles */

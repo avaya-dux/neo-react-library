@@ -116,7 +116,6 @@ describe("Select", () => {
 
       it("toggles aria-expanded prop on click", () => {
         const toggleElement = screen.getByRole("button");
-        expect(toggleElement).toHaveTextContent(placeholder);
         expect(toggleElement).toHaveAttribute("aria-expanded", "false");
         fireEvent.click(toggleElement);
         expect(toggleElement).toHaveAttribute("aria-expanded", "true");
@@ -167,17 +166,15 @@ describe("Select", () => {
       });
 
       it("does open content area on click after content is loaded", () => {
-        const placeholder = "please select one";
-        const { getByText, rerender } = render(
+        const { getByRole, rerender } = render(
           <Select
             multiple
             label={label}
             loading={true}
-            placeholder={placeholder}
           ></Select>
         );
 
-        const defaultSelectHeader = getByText(placeholder);
+        const defaultSelectHeader = getByRole("button");
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
         fireEvent.click(defaultSelectHeader);
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
@@ -187,7 +184,6 @@ describe("Select", () => {
             multiple
             label={label}
             loading={false}
-            placeholder={placeholder}
           >
             <SelectOption>Option 1</SelectOption>
           </Select>
@@ -312,8 +308,8 @@ describe("Select", () => {
       });
 
       it("does not open content area on click when loading", () => {
-        const { getByText } = renderResult;
-        const defaultSelectHeader = getByText("Select One");
+        const { getByRole } = renderResult;
+        const defaultSelectHeader = getByRole("button");
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
         fireEvent.click(defaultSelectHeader);
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
