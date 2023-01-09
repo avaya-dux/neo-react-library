@@ -109,7 +109,7 @@
     "jest-axe": "7.0.0",
     "jest-coverage-badges": "^1.1.2",
     "jsdoc": "^4.0.0",
-    "jsdom": "^20.0.2",
+    "jsdom": "^21.0.0",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
