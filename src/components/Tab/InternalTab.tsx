@@ -10,7 +10,7 @@ import {
   useRef,
 } from "react";
 
-import reactNodeToString from "react-node-to-string";
+import { reactNodeToString } from "utils";
 
 import { Icon } from "components/Icon";
 import { IconNamesType } from "utils";

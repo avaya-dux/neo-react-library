@@ -59,7 +59,6 @@
     "loglevel": "^1.8.0",
     "react-click-away-listener": "^2.2.2",
     "react-focus-lock": "^2.9.1",
-    "react-node-to-string": "^0.1.0",
     "styled-components": "^5.3.6"
   },
   "peerDependencies": {
