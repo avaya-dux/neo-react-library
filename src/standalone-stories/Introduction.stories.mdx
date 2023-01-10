@@ -12,17 +12,28 @@ If you are looking for another Neo product, please see our [LinkTree](https://li
 
 If you want to jump right in, you can add the Neo React Library to your app via:
 
-<code>npm i @avaya/neo-react</code>
-
-or
-
-<code>yarn add @avaya/neo-react</code>
+<code>npm i @avaya/neo-react</code>|<code>yarn add @avaya/neo-react</code>|
+<code>pnpm add @avaya/neo-react</code>
 
 Add the CSS styles to your app root via:
 
 <code>import "@avaya/neo-react/avaya-neo-react.css";</code>
 
 And then wrapping your app in our [Theme Provider](/story/components-neo-theme-provider--default).
+
+**NOTE:** The Neo CSS Library is included with the Neo React Library. If you install the
+Neo React Library, you _do not_ need to install or import from the CSS
+Library.
+
+## Project Recommendations
+
+### [Vite w/ TS](https://vitejs.dev/guide/)
+
+This team has experience building projects (both apps and libraries) using [CRA (create-react-app)](https://create-react-app.dev/), [Vite](https://vitejs.dev/), [Webpack](https://webpack.js.org/), [Parcel](https://parceljs.org/), and [Rollup](https://www.rollupjs.org/guide/en/). Of those, we recommend using Vite to build out brand new projects. Vite has shown itself to be not only a faster build tool, but also to be a better DX (Developer eXperience) due to its excellent documentation and intelligent defaults. [See this article](https://blog.logrocket.com/vite-3-vs-create-react-app-comparison-migration-guide/) for some further details on those points.
+
+Example app creation with Vite using React+TS: `pnpm create vite my-react-ts-app --template react-ts`
+
+This team also has experience building projects with the package managers NPM, [Yarn (classic)](https://classic.yarnpkg.com/lang/en/docs/install/), and [PNPM](https://pnpm.io/installation). Of the three, we have had good experiences with both Yarn (classic) and PNPM and recommend either of those.
 
 ## More resources
 
