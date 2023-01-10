@@ -42,7 +42,7 @@ export const SingleSelectSearchable = () => {
     setInputValue,
   } = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
 
-  logger.debug(selectedItems[0])
+  logger.debug(selectedItems[0]);
 
   const { id, onKeyDown, ...restInputProps } = getInputProps();
 
@@ -68,7 +68,7 @@ export const SingleSelectSearchable = () => {
         {...getToggleButtonProps()}
         className="neo-multiselect-combo__header"
       >
-        { selectedItems[0] && (
+        {selectedItems[0] && (
           <Chip
             closable
             closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}

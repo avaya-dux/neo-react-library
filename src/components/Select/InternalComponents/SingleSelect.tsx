@@ -35,6 +35,7 @@ export const SingleSelect = () => {
           {...getToggleButtonProps()}
           className="neo-multiselect__header"
           type="button"
+          aria-label={ariaLabel}
         >
           {selectedItems[0]?.children || placeholder}
         </button>

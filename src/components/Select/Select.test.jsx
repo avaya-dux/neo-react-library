@@ -169,7 +169,12 @@ describe("Select", () => {
       it("does open content area on click after content is loaded", () => {
         const placeholder = "please select one";
         const { getByRole, rerender } = render(
-          <Select multiple label={label} loading={true} placeholder={placeholder}></Select>
+          <Select
+            multiple
+            label={label}
+            loading={true}
+            placeholder={placeholder}
+          ></Select>
         );
 
         const defaultSelectHeader = getByRole("button");
