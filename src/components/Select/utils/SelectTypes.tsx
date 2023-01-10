@@ -28,6 +28,7 @@ export type SelectProps = {
   multiple?: boolean;
   noOptionsMessage?: string;
   onChange?: (value: null | string | string[]) => void;
+  placeholder?: string;
   required?: boolean;
   searchable?: boolean;
   value?: string | string[];

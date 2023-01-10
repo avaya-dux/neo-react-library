@@ -14,6 +14,7 @@ export const SingleSelect = () => {
       helperId,
       helperText,
       loading,
+      placeholder,
       isSmall,
     },
   } = useContext(SelectContext);
@@ -35,7 +36,7 @@ export const SingleSelect = () => {
           className="neo-multiselect__header"
           type="button"
         >
-          {selectedItems[0]?.children || ""}
+          {selectedItems[0]?.children || placeholder}
         </button>
       </span>
 

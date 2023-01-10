@@ -21,6 +21,7 @@ export const MultiSelect = () => {
       helperId,
       helperText,
       loading,
+      placeholder,
       isSmall,
     },
   } = useContext(SelectContext);
@@ -61,7 +62,9 @@ export const MultiSelect = () => {
           className="neo-multiselect__header neo-multiselect__header--no-after"
           type="button"
           aria-label={ariaLabel}
-        />
+          >
+          {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
+        </button>
       </span>
 
       <div

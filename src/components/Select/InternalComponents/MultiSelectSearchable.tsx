@@ -20,6 +20,7 @@ export const MultiSelectSearchable = () => {
       helperId,
       helperText,
       loading,
+      placeholder,
     },
   } = useContext(SelectContext);
   const {
@@ -49,6 +50,7 @@ export const MultiSelectSearchable = () => {
             <Chip
               key={`${item.children}-${index}`}
               closable
+              disabled={disabled}
               onClose={() => toggleItem(item)}
               closeButtonAriaLabel={`Remove ${item.children}`}
             >
@@ -80,6 +82,7 @@ export const MultiSelectSearchable = () => {
           {...restInputProps}
           className="neo-input"
           disabled={disabled}
+          placeholder={placeholder}
           onKeyDown={(e) => {
             if (
               e.key === Keys.ENTER &&

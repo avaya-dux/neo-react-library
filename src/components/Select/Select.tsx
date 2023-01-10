@@ -60,6 +60,7 @@ export const Select = (props: SelectProps) => {
     multiple = false,
     noOptionsMessage = "No options available",
     onChange,
+    placeholder = "",
     required,
     searchable = false,
     value,
@@ -183,6 +184,7 @@ export const Select = (props: SelectProps) => {
       helperId,
       helperText,
       loading,
+      placeholder,
       isSmall,
     },
     optionProps: {
