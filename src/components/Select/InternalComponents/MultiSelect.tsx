@@ -61,6 +61,7 @@ export const MultiSelect = () => {
           {...getToggleButtonProps()}
           className="neo-multiselect__header neo-multiselect__header--no-after"
           type="button"
+          aria-label={ariaLabel}
         >
           {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
         </button>
