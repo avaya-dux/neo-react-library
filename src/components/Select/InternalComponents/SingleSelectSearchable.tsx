@@ -1,3 +1,5 @@
+import log from "loglevel";
+
 import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
 import { useContext, useEffect } from "react";
@@ -8,6 +10,9 @@ import { Keys } from "utils";
 import { SelectContext } from "../utils/SelectContext";
 import { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
+
+const logger = log.getLogger("single-select-searchabel");
+logger.disableAll();
 
 export const SingleSelectSearchable = () => {
   const {
@@ -23,6 +28,7 @@ export const SingleSelectSearchable = () => {
       placeholder,
     },
   } = useContext(SelectContext);
+
   const {
     closeMenu,
     getComboboxProps,
@@ -35,6 +41,8 @@ export const SingleSelectSearchable = () => {
     selectItem,
     setInputValue,
   } = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
+
+  logger.debug(selectedItems[0]);
 
   const { id, onKeyDown, ...restInputProps } = getInputProps();
 

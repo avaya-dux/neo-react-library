@@ -4,7 +4,7 @@ describe("Single Select Scrolling Tests", () => {
   it("Last fruit in the list becomes visible with arow downs", () => {
     cy.mount(<BasicSelects />);
 
-    cy.contains("Select One").click(); // click the first select one
+    cy.get("span button").first().click(); // click the first select one
 
     cy.get("[role='listbox']")
       .first()
@@ -24,7 +24,7 @@ describe("Single Select Searchable Scrolling Tests", () => {
   it("Last fruit in the list becomes visible with arrow ups", () => {
     cy.mount(<Searchable />);
 
-    cy.get("[placeholder='Select One']").click();
+    cy.get("span").first().click();
 
     cy.get("[role='listbox']")
       .first()

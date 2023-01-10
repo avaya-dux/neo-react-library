@@ -60,7 +60,7 @@ export const Select = (props: SelectProps) => {
     multiple = false,
     noOptionsMessage = "No options available",
     onChange,
-    placeholder = "Select One",
+    placeholder = "",
     required,
     searchable = false,
     value,
@@ -178,7 +178,7 @@ export const Select = (props: SelectProps) => {
   const contextValue = {
     downshiftProps,
     selectProps: {
-      ariaLabel,
+      ariaLabel: ariaLabel || label,
       disabled,
       filteredOptions,
       helperId,
