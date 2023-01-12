@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d59de19f-79ec-4c57-8282-cd07357a66cc/deploy-status)](https://app.netlify.com/sites/neo-react-library-storybook/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/825502d6-02db-45a6-88bc-6aed064eb748/deploy-status)](https://app.netlify.com/sites/neo-react-library-storybook/deploys)
 ![github workflow status](https://github.com/avaya-dux/neo-react-library/actions/workflows/run-yarn.yml/badge.svg)
 [![npm version](https://badge.fury.io/js/@avaya%2Fneo-react.svg)](https://badge.fury.io/js/@avaya%2Fneo-react)
 
