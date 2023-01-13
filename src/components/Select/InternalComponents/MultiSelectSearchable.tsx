@@ -103,7 +103,7 @@ export const MultiSelectSearchable = () => {
               onKeyDown(e);
             }}
             onChange={(e) => {
-              logger.debug({onChangeCalled: e.target.value});
+              logger.debug({ onChangeCalled: e.target.value });
               setInputValue(e.target.value);
             }}
           />
