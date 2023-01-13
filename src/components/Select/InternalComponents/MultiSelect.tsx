@@ -55,21 +55,26 @@ export const MultiSelect = () => {
       )}
     >
       <span className="neo-multiselect-combo__header">
-        {selectedItemsAsChips}
+        <span className="neo-padded-container">
+          {selectedItemsAsChips}
 
-        <button
-          {...getToggleButtonProps()}
-          className="neo-multiselect__header neo-multiselect__header--no-after"
-          type="button"
-          aria-label={ariaLabel}
-        >
-          {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
-        </button>
+          <button
+            {...getToggleButtonProps()}
+            className="neo-multiselect__header neo-multiselect__header--no-after neo-button--width-10px"
+            type="button"
+            aria-label={ariaLabel}
+          >
+            {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
+          </button>
+        </span>
       </span>
 
       <div
         aria-label={ariaLabel}
-        className="neo-multiselect__content"
+        className={clsx(
+          "neo-multiselect__content",
+          isOpen && "neo-set-keyboard-focus"
+        )}
         {...getMenuProps()}
       >
         <OptionsWithEmptyMessageFallback />

@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
 import { useContext, useEffect, useMemo } from "react";
+import AutosizeInput from "react-input-autosize";
 
 import { Chip } from "components/Chip";
 import { Keys } from "utils";
@@ -75,28 +76,30 @@ export const MultiSelectSearchable = () => {
         {...getToggleButtonProps()}
         className="neo-multiselect-combo__header"
       >
-        {selectedItemsAsChips}
+        <span className="neo-padded-container">
+          {selectedItemsAsChips}
+          <AutosizeInput
+            {...restInputProps}
+            value={inputValue}
+            style={{ border: 0, height: "26px", display: "inline-block" }}
+            inputClassName="neo-input neo-input__height-26px"
+            disabled={disabled}
+            placeholder={placeholder}
+            onKeyDown={(e) => {
+              if (
+                e.key === Keys.ENTER &&
+                filteredOptions.length === 1 &&
+                !filteredOptions[0].disabled
+              ) {
+                toggleItem(filteredOptions[0]);
+              } else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
+                toggleItem(selectedItems[selectedItems.length - 1]);
+              }
 
-        <input
-          {...restInputProps}
-          className="neo-input"
-          disabled={disabled}
-          placeholder={placeholder}
-          onKeyDown={(e) => {
-            if (
-              e.key === Keys.ENTER &&
-              filteredOptions.length === 1 &&
-              !filteredOptions[0].disabled
-            ) {
-              toggleItem(filteredOptions[0]);
-            } else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
-              toggleItem(selectedItems[selectedItems.length - 1]);
-            }
-
-            onKeyDown(e);
-          }}
-        />
-
+              onKeyDown(e);
+            }}
+          />
+        </span>
         <input
           className="neo-display-none"
           id={id}
@@ -108,7 +111,10 @@ export const MultiSelectSearchable = () => {
 
       <div
         aria-label={ariaLabel}
-        className="neo-multiselect__content"
+        className={clsx(
+          "neo-multiselect__content",
+          isOpen && "neo-set-keyboard-focus"
+        )}
         {...getMenuProps()}
       >
         <OptionsWithEmptyMessageFallback />

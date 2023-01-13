@@ -33,7 +33,7 @@ export const SingleSelect = () => {
       <span className="neo-multiselect-combo__header">
         <button
           {...getToggleButtonProps()}
-          className="neo-multiselect__header"
+          className="neo-multiselect__header neo-multiselect__header--no-after"
           type="button"
           aria-label={ariaLabel}
         >
