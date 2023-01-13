@@ -82,7 +82,7 @@ export const MultiSelectSearchable = () => {
             {...restInputProps}
             value={inputValue}
             style={{ border: 0, height: "26px", display: "inline-block" }}
-            inputClassName="neo-input neo-input__height-26px"
+            inputClassName="neo-input neo-input--height-26px"
             disabled={disabled}
             placeholder={placeholder}
             onKeyDown={(e) => {

@@ -84,7 +84,7 @@ export const SingleSelectSearchable = () => {
 
           <input
             {...restInputProps}
-            className="neo-input neo-input__height-26px"
+            className="neo-input neo-input--height-26px"
             disabled={disabled}
             placeholder={placeholder}
             onKeyDown={(e) => {
