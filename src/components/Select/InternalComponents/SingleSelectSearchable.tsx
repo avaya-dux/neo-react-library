@@ -11,7 +11,7 @@ import { SelectContext } from "../utils/SelectContext";
 import { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
-const logger = log.getLogger("single-select-searchabel");
+const logger = log.getLogger("single-select-searchable");
 logger.disableAll();
 
 export const SingleSelectSearchable = () => {
@@ -115,7 +115,10 @@ export const SingleSelectSearchable = () => {
       </span>
 
       <div
-        className="neo-multiselect__content"
+        className={clsx(
+          "neo-multiselect__content",
+          isOpen && "neo-set-keyboard-focus"
+        )}
         aria-label={ariaLabel}
         {...getMenuProps()}
       >

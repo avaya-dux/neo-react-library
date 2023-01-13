@@ -1,3 +1,5 @@
+import log from "loglevel";
+
 import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
 import { useContext, useEffect, useMemo } from "react";
@@ -10,6 +12,8 @@ import { SelectContext } from "../utils/SelectContext";
 import { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
+const logger = log.getLogger("multiple-select-searchable");
+logger.disableAll();
 export const MultiSelectSearchable = () => {
   const {
     downshiftProps,
@@ -95,8 +99,12 @@ export const MultiSelectSearchable = () => {
               } else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
                 toggleItem(selectedItems[selectedItems.length - 1]);
               }
-
+              logger.debug(e);
               onKeyDown(e);
+            }}
+            onChange={(e) => {
+              logger.debug({onChangeCalled: e.target.value});
+              setInputValue(e.target.value);
             }}
           />
         </span>

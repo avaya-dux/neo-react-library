@@ -42,7 +42,10 @@ export const SingleSelect = () => {
       </span>
 
       <div
-        className="neo-multiselect__content"
+        className={clsx(
+          "neo-multiselect__content",
+          isOpen && "neo-set-keyboard-focus"
+        )}
         aria-label={ariaLabel}
         {...getMenuProps()}
       >
