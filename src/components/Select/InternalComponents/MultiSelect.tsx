@@ -61,11 +61,10 @@ export const MultiSelect = () => {
             className="neo-multiselect__header neo-multiselect__header--no-after neo-button--width-10px"
             type="button"
             aria-label={ariaLabel}
-          >
-            {selectedItemsAsChips}
+          ></button>
+          {selectedItemsAsChips}
 
-            {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
-          </button>
+          {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
         </span>
       </span>
 

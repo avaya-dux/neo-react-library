@@ -83,7 +83,12 @@ export const MultiSelectSearchable = () => {
           <AutosizeInput
             {...restInputProps}
             value={inputValue}
-            style={{ border: 0, height: "26px", display: "inline-block", order: "2" }}
+            style={{
+              border: 0,
+              height: "26px",
+              display: "inline-block",
+              order: "2",
+            }}
             inputClassName="neo-input neo-input--height-26px"
             disabled={disabled}
             placeholder={placeholder}

@@ -130,6 +130,7 @@ div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
   padding: 0;
   display: flex;
   justify-content: flex-start;
+  order: 2;
 }
 
 .neo-multiselect-combo__header input.neo-input--height-26px {
