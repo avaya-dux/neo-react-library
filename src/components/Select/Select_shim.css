@@ -9,7 +9,11 @@
   button.neo-multiselect__header.neo-multiselect__header--no-after:after {
   display: none;
 }
-
+body .neo-multiselect__content.neo-set-keyboard-focus,
+body .neo-multiselect__content:focus-visible {
+  outline-offset: 1px;
+  outline: 1px auto #1473e6;
+}
 .neo-multiselect__content:empty {
   border: none;
   box-shadow: none;
@@ -65,11 +69,39 @@
   padding-left: 32px;
   background-color: #f1f1f1;
 }
-div.neo-multiselect button.neo-multiselect__header,
 div.neo-multiselect span.neo-multiselect-combo__header {
-  width: 100%;
   min-height: 36px;
 }
+
+div.neo-multiselect button.neo-multiselect__header {
+  min-height: 36px;
+  flex-grow: 1;
+}
+
+span.neo-multiselect-combo__header .neo-padded-container {
+  align-items: center;
+  background-color: var(--input-background-color);
+  color: var(--input-font-color);
+  border: 0px solid var(--input-border-color);
+  letter-spacing: 0;
+  border-radius: 2px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  min-height: 36px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  flex-grow: 1;
+  display: flex;
+}
+
+.neo-multiselect.neo-multiselect--disabled
+  .neo-multiselect-combo__header
+  .neo-padded-container {
+  background-color: var(--input-disabled-bg);
+  color: var(--input-disabled-color) !important;
+  cursor: not-allowed !important;
+}
+
 div.neo-multiselect.neo-multiselect--small button.neo-multiselect__header,
 div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
   width: 100%;
@@ -87,6 +119,22 @@ div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
 /* remove innapropriate padding */
 .neo-multiselect .neo-multiselect__content .neo-input-group {
   padding-bottom: 0;
+}
+
+.neo-multiselect
+  span.neo-multiselect-combo__header
+  button.neo-multiselect__header.neo-button--width-10px {
+  width: 10px;
+  min-height: 30px;
+  height: 30px; /* same as chip */
+  padding: 0;
+}
+
+.neo-multiselect-combo__header input.neo-input--height-26px {
+  min-height: 26px;
+  height: 26px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .neo-multiselect__content .neo-option + .neo-input-hint {
