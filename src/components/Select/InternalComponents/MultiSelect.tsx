@@ -56,14 +56,14 @@ export const MultiSelect = () => {
     >
       <span className="neo-multiselect-combo__header">
         <span className="neo-padded-container">
-          {selectedItemsAsChips}
-
           <button
             {...getToggleButtonProps()}
             className="neo-multiselect__header neo-multiselect__header--no-after neo-button--width-10px"
             type="button"
             aria-label={ariaLabel}
           >
+            {selectedItemsAsChips}
+
             {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
           </button>
         </span>

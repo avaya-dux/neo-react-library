@@ -69,19 +69,6 @@ export const SingleSelectSearchable = () => {
         className="neo-multiselect-combo__header"
       >
         <span className="neo-padded-container">
-          {selectedItems[0] && (
-            <Chip
-              closable
-              closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}
-              onClose={(e) => {
-                e.stopPropagation();
-                reset();
-              }}
-            >
-              {selectedItems[0].children}
-            </Chip>
-          )}
-
           <input
             {...restInputProps}
             className="neo-input neo-input--height-26px"
@@ -103,6 +90,19 @@ export const SingleSelectSearchable = () => {
               onKeyDown(e);
             }}
           />
+
+          {selectedItems[0] && (
+            <Chip
+              closable
+              closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}
+              onClose={(e) => {
+                e.stopPropagation();
+                reset();
+              }}
+            >
+              {selectedItems[0].children}
+            </Chip>
+          )}
 
           <input
             className="neo-display-none"
