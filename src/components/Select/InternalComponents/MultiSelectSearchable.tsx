@@ -79,17 +79,17 @@ export const MultiSelectSearchable = () => {
         {...getToggleButtonProps()}
         className="neo-multiselect-combo__header"
       >
-        <span className="neo-padded-container">
+        <span className="neo-multiselect__padded-container">
           <AutosizeInput
             {...restInputProps}
             value={inputValue}
             style={{
               border: 0,
-              height: "26px",
+              height: "36px",
               display: "inline-block",
               order: "2",
             }}
-            inputClassName="neo-input neo-input--height-26px"
+            inputClassName="neo-input"
             disabled={disabled}
             placeholder={placeholder}
             onKeyDown={(e) => {

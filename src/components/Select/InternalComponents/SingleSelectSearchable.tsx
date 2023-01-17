@@ -1,7 +1,6 @@
-import log from "loglevel";
-
 import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
+import log from "loglevel";
 import { useContext, useEffect } from "react";
 
 import { Chip } from "components/Chip";
@@ -68,10 +67,10 @@ export const SingleSelectSearchable = () => {
         {...getToggleButtonProps()}
         className="neo-multiselect-combo__header"
       >
-        <span className="neo-padded-container">
+        <span className="neo-multiselect__padded-container">
           <input
             {...restInputProps}
-            className="neo-input neo-input--height-26px"
+            className="neo-input"
             disabled={disabled}
             placeholder={placeholder}
             onKeyDown={(e) => {
