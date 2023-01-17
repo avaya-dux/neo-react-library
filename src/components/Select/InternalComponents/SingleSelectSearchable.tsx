@@ -68,7 +68,7 @@ export const SingleSelectSearchable = () => {
         {...getToggleButtonProps()}
         className="neo-multiselect-combo__header"
       >
-        <span className="neo-padded-container">
+        <span className="neo-multiselect__padded-container">
           {selectedItems[0] && (
             <Chip
               closable
@@ -84,7 +84,7 @@ export const SingleSelectSearchable = () => {
 
           <input
             {...restInputProps}
-            className="neo-input neo-input--height-26px"
+            className="neo-input"
             disabled={disabled}
             placeholder={placeholder}
             onKeyDown={(e) => {

@@ -12,7 +12,7 @@
 body .neo-multiselect__content.neo-set-keyboard-focus,
 body .neo-multiselect__content:focus-visible {
   outline-offset: 1px;
-  outline: 1px auto #1473e6;
+  outline: 1px auto var(--global-outline-color);
 }
 .neo-multiselect__content:empty {
   border: none;
@@ -78,13 +78,12 @@ div.neo-multiselect button.neo-multiselect__header {
   flex-grow: 1;
 }
 
-span.neo-multiselect-combo__header .neo-padded-container {
+span.neo-multiselect-combo__header .neo-multiselect__padded-container {
   align-items: center;
   background-color: var(--input-background-color);
   color: var(--input-font-color);
-  border: 0px solid var(--input-border-color);
+  border: 0;
   letter-spacing: 0;
-  border-radius: 2px;
   flex-wrap: wrap;
   justify-content: flex-start;
   min-height: 36px;
@@ -96,7 +95,7 @@ span.neo-multiselect-combo__header .neo-padded-container {
 
 .neo-multiselect.neo-multiselect--disabled
   .neo-multiselect-combo__header
-  .neo-padded-container {
+  .neo-multiselect__padded-container {
   background-color: var(--input-disabled-bg);
   color: var(--input-disabled-color) !important;
   cursor: not-allowed !important;
@@ -121,16 +120,17 @@ div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
   padding-bottom: 0;
 }
 
+/* multiselect button */
 .neo-multiselect
   span.neo-multiselect-combo__header
-  button.neo-multiselect__header.neo-button--width-10px {
+  button.neo-multiselect__header:last-child {
   width: 10px;
   min-height: 30px;
   height: 30px; /* same as chip */
   padding: 0;
 }
-
-.neo-multiselect-combo__header input.neo-input--height-26px {
+/* searchable auto resize input */
+.neo-multiselect-combo__header span input:first-child {
   min-height: 26px;
   height: 26px;
   padding-left: 0;
