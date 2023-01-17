@@ -59,6 +59,7 @@
     "loglevel": "^1.8.0",
     "react-click-away-listener": "^2.2.2",
     "react-focus-lock": "^2.9.1",
+    "react-input-autosize": "^3.0.0",
     "styled-components": "^5.3.6"
   },
   "peerDependencies": {
@@ -87,6 +88,7 @@
     "@types/jest-axe": "^3.5.5",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "@types/react-input-autosize": "^2.2.1",
     "@types/react-table": "^7.7.12",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",

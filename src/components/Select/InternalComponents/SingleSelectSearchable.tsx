@@ -11,7 +11,7 @@ import { SelectContext } from "../utils/SelectContext";
 import { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
-const logger = log.getLogger("single-select-searchabel");
+const logger = log.getLogger("single-select-searchable");
 logger.disableAll();
 
 export const SingleSelectSearchable = () => {
@@ -68,52 +68,57 @@ export const SingleSelectSearchable = () => {
         {...getToggleButtonProps()}
         className="neo-multiselect-combo__header"
       >
-        {selectedItems[0] && (
-          <Chip
-            closable
-            closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}
-            onClose={(e) => {
-              e.stopPropagation();
-              reset();
+        <span className="neo-multiselect__padded-container">
+          {selectedItems[0] && (
+            <Chip
+              closable
+              closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}
+              onClose={(e) => {
+                e.stopPropagation();
+                reset();
+              }}
+            >
+              {selectedItems[0].children}
+            </Chip>
+          )}
+
+          <input
+            {...restInputProps}
+            className="neo-input"
+            disabled={disabled}
+            placeholder={placeholder}
+            onKeyDown={(e) => {
+              if (
+                e.key === Keys.ENTER &&
+                filteredOptions.length === 1 &&
+                !filteredOptions[0].disabled
+              ) {
+                e.preventDefault();
+                selectItem(filteredOptions[0]);
+                closeMenu();
+              } else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
+                reset();
+              }
+
+              onKeyDown(e);
             }}
-          >
-            {selectedItems[0].children}
-          </Chip>
-        )}
+          />
 
-        <input
-          {...restInputProps}
-          className="neo-input"
-          disabled={disabled}
-          placeholder={placeholder}
-          onKeyDown={(e) => {
-            if (
-              e.key === Keys.ENTER &&
-              filteredOptions.length === 1 &&
-              !filteredOptions[0].disabled
-            ) {
-              e.preventDefault();
-              selectItem(filteredOptions[0]);
-              closeMenu();
-            } else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
-              reset();
-            }
-
-            onKeyDown(e);
-          }}
-        />
-
-        <input
-          className="neo-display-none"
-          id={id}
-          readOnly
-          tabIndex={-1}
-          value={selectedItems[0]?.value || ""}
-        />
+          <input
+            className="neo-display-none"
+            id={id}
+            readOnly
+            tabIndex={-1}
+            value={selectedItems[0]?.value || ""}
+          />
+        </span>
       </span>
 
       <div
-        className="neo-multiselect__content"
+        className={clsx(
+          "neo-multiselect__content",
+          isOpen && "neo-set-keyboard-focus"
+        )}
         aria-label={ariaLabel}
         {...getMenuProps()}
       >
