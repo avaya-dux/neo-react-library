@@ -38,7 +38,10 @@ export const Radio: React.FC<RadioProps> = ({
   id = id || generatedId;
   const { value, "aria-label": ariaLabel, disabled } = rest;
 
-  const idForLabel = useMemo(() => `Radio-label-${value}`, [value]);
+  const idForLabel = useMemo(
+    () => `Radio-label-${value}-${generatedId}`,
+    [value, generatedId]
+  );
 
   return (
     <>
