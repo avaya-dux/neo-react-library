@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { ReactNode, useEffect, useId, useState } from "react";
+import "./Accordion_shim.css";
 
 export interface AccordionProps {
   "aria-label"?: string;
