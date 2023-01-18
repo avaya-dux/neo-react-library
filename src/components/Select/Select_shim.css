@@ -76,6 +76,7 @@ div.neo-multiselect span.neo-multiselect-combo__header {
 div.neo-multiselect button.neo-multiselect__header {
   min-height: 36px;
   flex-grow: 1;
+  order: 2;
 }
 
 span.neo-multiselect-combo__header .neo-multiselect__padded-container {
@@ -128,13 +129,19 @@ div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
   min-height: 30px;
   height: 30px; /* same as chip */
   padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  order: 2;
 }
-/* searchable auto resize input */
-.neo-multiselect-combo__header span input:first-child {
+
+.neo-multiselect-combo__header
+  .neo-multiselect__padded-container
+  > input:first-child {
   min-height: 26px;
   height: 26px;
   padding-left: 0;
   padding-right: 0;
+  order: 2;
 }
 
 .neo-multiselect__content .neo-option + .neo-input-hint {
@@ -173,4 +180,11 @@ div.neo-multiselect div.neo-input-group:hover {
   .neo-input-group
   .neo-input-hint:before {
   content: "";
+}
+
+div.neo-multiselect
+  > span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container
+  > div:first-child {
+  order: 2;
 }

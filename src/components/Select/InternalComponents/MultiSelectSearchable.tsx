@@ -1,7 +1,6 @@
-import log from "loglevel";
-
 import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
+import log from "loglevel";
 import { useContext, useEffect, useMemo } from "react";
 import AutosizeInput from "react-input-autosize";
 
@@ -81,11 +80,15 @@ export const MultiSelectSearchable = () => {
         className="neo-multiselect-combo__header"
       >
         <span className="neo-multiselect__padded-container">
-          {selectedItemsAsChips}
           <AutosizeInput
             {...restInputProps}
             value={inputValue}
-            style={{ border: 0, height: "26px", display: "inline-block" }}
+            style={{
+              border: 0,
+              height: "36px",
+              display: "inline-block",
+              order: "2",
+            }}
             inputClassName="neo-input"
             disabled={disabled}
             placeholder={placeholder}
@@ -107,6 +110,7 @@ export const MultiSelectSearchable = () => {
               setInputValue(e.target.value);
             }}
           />
+          {selectedItemsAsChips}
         </span>
         <input
           className="neo-display-none"
