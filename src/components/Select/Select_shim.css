@@ -182,6 +182,9 @@ div.neo-multiselect div.neo-input-group:hover {
   content: "";
 }
 
-div.neo-multiselect > span.neo-multiselect-combo__header span.neo-multiselect__padded-container > div:first-child {
+div.neo-multiselect
+  > span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container
+  > div:first-child {
   order: 2;
 }
