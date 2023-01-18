@@ -1,7 +1,6 @@
-import log from "loglevel";
-
 import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
+import log from "loglevel";
 import { useContext, useEffect } from "react";
 
 import { Chip } from "components/Chip";
@@ -69,19 +68,6 @@ export const SingleSelectSearchable = () => {
         className="neo-multiselect-combo__header"
       >
         <span className="neo-multiselect__padded-container">
-          {selectedItems[0] && (
-            <Chip
-              closable
-              closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}
-              onClose={(e) => {
-                e.stopPropagation();
-                reset();
-              }}
-            >
-              {selectedItems[0].children}
-            </Chip>
-          )}
-
           <input
             {...restInputProps}
             className="neo-input"
@@ -103,6 +89,19 @@ export const SingleSelectSearchable = () => {
               onKeyDown(e);
             }}
           />
+
+          {selectedItems[0] && (
+            <Chip
+              closable
+              closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}
+              onClose={(e) => {
+                e.stopPropagation();
+                reset();
+              }}
+            >
+              {selectedItems[0].children}
+            </Chip>
+          )}
 
           <input
             className="neo-display-none"
