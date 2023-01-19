@@ -107,15 +107,16 @@ describe("Pagination", () => {
         >
           <div
             class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
+            id="pagination-item-display-Item count"
           >
             <div
-              aria-describedby="pagination-item-display-Item count"
+              aria-describedby=":rc:"
             >
               1-1 / 10
             </div>
             <div
               class="neo-tooltip__content neo-tooltip__content--multiline"
-              id="pagination-item-display-Item count"
+              id=":rc:"
               role="tooltip"
             >
               <div
@@ -167,9 +168,10 @@ describe("Pagination", () => {
           </nav>
           <div
             class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
+            id="pagination-items-per-page-selection-items per page"
           >
             <div
-              aria-describedby="pagination-items-per-page-selection-items per page"
+              aria-describedby=":rd:"
             >
               <label>
                 Show: 
@@ -197,7 +199,7 @@ describe("Pagination", () => {
             </div>
             <div
               class="neo-tooltip__content neo-tooltip__content--multiline"
-              id="pagination-items-per-page-selection-items per page"
+              id=":rd:"
               role="tooltip"
             >
               <div

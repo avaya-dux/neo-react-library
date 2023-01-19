@@ -27,5 +27,5 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   multiline?: boolean;
   position?: TooltipPosition;
 
-  tooltipDivProps?: Exclude<HTMLAttributes<HTMLDivElement>, "role" | "id">;
+  tooltipDivProps?: Exclude<HTMLAttributes<HTMLDivElement>, "role">;
 }

@@ -36,15 +36,16 @@ describe("Tooltip", () => {
       <div>
         <div
           class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
+          id="example"
         >
           <div
-            aria-describedby="example"
+            aria-describedby=":r1:"
           >
             text
           </div>
           <div
             class="neo-tooltip__content neo-tooltip__content--multiline"
-            id="example"
+            id=":r1:"
             role="tooltip"
           >
             <div
@@ -88,13 +89,17 @@ describe("Tooltip", () => {
   });
 
   describe("`aria-describedby` functionality", () => {
-    const id = "exampleid";
-    const idProp = `id="${id}"`;
-    const ariaProp = `aria-describedby="${id}"`;
+    const tooltipDivId = "exampleid";
+    const idProp = `id="${tooltipDivId}"`;
+    const ariaProp = `aria-describedby="${tooltipDivId}"`;
 
     it("applies an `aria-describedby` to a plain text child", () => {
       const { container } = render(
-        <Tooltip id={id} label="default tooltip text" position="top">
+        <Tooltip
+          tooltipDivProps={{ id: tooltipDivId }}
+          label="default tooltip text"
+          position="top"
+        >
           text
         </Tooltip>
       );
@@ -127,7 +132,11 @@ describe("Tooltip", () => {
 
     it("applies an `aria-describedby` to a single react element", () => {
       const { container } = render(
-        <Tooltip id={id} label="default tooltip text" position="top">
+        <Tooltip
+          tooltipDivProps={{ id: tooltipDivId }}
+          label="default tooltip text"
+          position="top"
+        >
           <p>text</p>
         </Tooltip>
       );
@@ -160,7 +169,11 @@ describe("Tooltip", () => {
 
     it("applies an `aria-describedby` to an array of react elements", () => {
       const { container } = render(
-        <Tooltip id={id} label="default tooltip text" position="top">
+        <Tooltip
+          tooltipDivProps={{ id: tooltipDivId }}
+          label="default tooltip text"
+          position="top"
+        >
           <ul>
             <li>item one</li>
             <li>item two</li>
