@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -61,6 +61,30 @@ describe("Tooltip", () => {
     const { container } = render(<Tooltip label="text">text</Tooltip>);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
+  });
+
+  it("accepts props for the wrapper div and the tooltip div", () => {
+    const dataTestId = "example-data-testid";
+    const wrapperClassName = "example-class";
+    const tooltipClassName = "example-tooltip-class";
+
+    render(
+      <Tooltip
+        label="default tooltip text"
+        data-testid={dataTestId}
+        className={wrapperClassName}
+        tooltipDivProps={{ className: tooltipClassName }}
+      >
+        ping
+      </Tooltip>
+    );
+
+    expect(
+      screen.getByTestId(dataTestId).classList.contains(wrapperClassName)
+    ).toBe(true);
+    expect(
+      screen.getByRole("tooltip").classList.contains(tooltipClassName)
+    ).toBe(true);
   });
 
   describe("`aria-describedby` functionality", () => {

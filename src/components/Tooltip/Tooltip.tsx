@@ -46,6 +46,7 @@ export const Tooltip = ({
   label,
   multiline,
   position = "auto",
+  tooltipDivProps,
 
   ...rest
 }: TooltipProps) => {
@@ -134,7 +135,12 @@ export const Tooltip = ({
       {wrappedChildren}
 
       <div
-        className={clsx("neo-tooltip__content", multilineClassName)}
+        {...tooltipDivProps}
+        className={clsx(
+          "neo-tooltip__content",
+          multilineClassName,
+          tooltipDivProps?.className
+        )}
         role="tooltip"
         id={id}
       >
