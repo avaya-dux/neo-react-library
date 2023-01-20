@@ -42,15 +42,15 @@ export const Tooltip = ({
   arrow = true,
   children,
   className,
-  id,
   label,
   multiline,
   position = "auto",
+  tooltipDivProps,
 
   ...rest
 }: TooltipProps) => {
   const generatedId = useId();
-  id = id || generatedId;
+  const tooltipId = tooltipDivProps?.id || generatedId;
   const tooltipContainerRef = useRef(null);
 
   const [tooltipPosition, setTooltipPosition] = useState("");
@@ -77,12 +77,12 @@ export const Tooltip = ({
   const wrappedChildren = useMemo(() => {
     const shouldWrap = isString(children) || Children.count(children) > 1;
     if (shouldWrap) {
-      return <div aria-describedby={id}>{children}</div>;
+      return <div aria-describedby={tooltipId}>{children}</div>;
     }
 
     const child = Children.only(children) as React.ReactElement;
-    return cloneElement(child, { "aria-describedby": id });
-  }, [children, id]);
+    return cloneElement(child, { "aria-describedby": tooltipId });
+  }, [children, tooltipId]);
 
   const [allowTooltip, setAllowTooltip] = useState(true);
   const setAllowTooltipTrue = useCallback(
@@ -134,9 +134,14 @@ export const Tooltip = ({
       {wrappedChildren}
 
       <div
-        className={clsx("neo-tooltip__content", multilineClassName)}
+        {...tooltipDivProps}
+        id={tooltipId}
         role="tooltip"
-        id={id}
+        className={clsx(
+          "neo-tooltip__content",
+          multilineClassName,
+          tooltipDivProps?.className
+        )}
       >
         {arrow && <div className="neo-arrow" />}
         {label}

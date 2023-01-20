@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -36,15 +36,16 @@ describe("Tooltip", () => {
       <div>
         <div
           class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
+          id="example"
         >
           <div
-            aria-describedby="example"
+            aria-describedby=":r1:"
           >
             text
           </div>
           <div
             class="neo-tooltip__content neo-tooltip__content--multiline"
-            id="example"
+            id=":r1:"
             role="tooltip"
           >
             <div
@@ -63,14 +64,42 @@ describe("Tooltip", () => {
     expect(results).toHaveNoViolations();
   });
 
+  it("accepts props for the wrapper div and the tooltip div", () => {
+    const dataTestId = "example-data-testid";
+    const wrapperClassName = "example-class";
+    const tooltipClassName = "example-tooltip-class";
+
+    render(
+      <Tooltip
+        label="default tooltip text"
+        data-testid={dataTestId}
+        className={wrapperClassName}
+        tooltipDivProps={{ className: tooltipClassName }}
+      >
+        ping
+      </Tooltip>
+    );
+
+    expect(
+      screen.getByTestId(dataTestId).classList.contains(wrapperClassName)
+    ).toBe(true);
+    expect(
+      screen.getByRole("tooltip").classList.contains(tooltipClassName)
+    ).toBe(true);
+  });
+
   describe("`aria-describedby` functionality", () => {
-    const id = "exampleid";
-    const idProp = `id="${id}"`;
-    const ariaProp = `aria-describedby="${id}"`;
+    const tooltipDivId = "exampleid";
+    const idProp = `id="${tooltipDivId}"`;
+    const ariaProp = `aria-describedby="${tooltipDivId}"`;
 
     it("applies an `aria-describedby` to a plain text child", () => {
       const { container } = render(
-        <Tooltip id={id} label="default tooltip text" position="top">
+        <Tooltip
+          tooltipDivProps={{ id: tooltipDivId }}
+          label="default tooltip text"
+          position="top"
+        >
           text
         </Tooltip>
       );
@@ -103,7 +132,11 @@ describe("Tooltip", () => {
 
     it("applies an `aria-describedby` to a single react element", () => {
       const { container } = render(
-        <Tooltip id={id} label="default tooltip text" position="top">
+        <Tooltip
+          tooltipDivProps={{ id: tooltipDivId }}
+          label="default tooltip text"
+          position="top"
+        >
           <p>text</p>
         </Tooltip>
       );
@@ -136,7 +169,11 @@ describe("Tooltip", () => {
 
     it("applies an `aria-describedby` to an array of react elements", () => {
       const { container } = render(
-        <Tooltip id={id} label="default tooltip text" position="top">
+        <Tooltip
+          tooltipDivProps={{ id: tooltipDivId }}
+          label="default tooltip text"
+          position="top"
+        >
           <ul>
             <li>item one</li>
             <li>item two</li>
