@@ -127,6 +127,9 @@
     "unset-value": "^2.0.1",
     "minimist": "^1.2.7",
     "pug": "^3.0.2-canary-10",
-    "uglify-js": "^3.17.4"
+    "uglify-js": "^3.17.4",
+    "glob-parent": "^6.0.2",
+    "trim": "^1.0.1",
+    "trim-newlines": "^4.0.2"
   }
 }
