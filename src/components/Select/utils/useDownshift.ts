@@ -81,6 +81,7 @@ const DownshiftWithComboboxProps = (
         setSelectedItems([clickedItem]);
       }
     },
+    // BUG: items are not announced in screen reader when selected
   });
 };
 
@@ -299,6 +300,7 @@ const DownshiftWithMultipleSelectProps = (
         setSelectedItems([...selectedItems, selectedItem]);
       }
     },
+    // BUG: items are not announced in screen reader when selected
   });
 };
 
