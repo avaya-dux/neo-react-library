@@ -122,5 +122,11 @@
     "vite": "^4.0.0",
     "vite-plugin-dts": "^1.6.6",
     "vitest": "^0.28.0"
+  },
+  "resolutions": {
+    "unset-value": "^2.0.1",
+    "minimist": "^1.2.7",
+    "pug": "^3.0.2-canary-10",
+    "uglify-js": "^3.17.4"
   }
 }
