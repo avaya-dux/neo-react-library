@@ -178,7 +178,7 @@ export const Select = (props: SelectProps) => {
   const contextValue = {
     downshiftProps,
     selectProps: {
-      ariaLabel: ariaLabel || label,
+      ariaLabel,
       disabled,
       filteredOptions,
       helperId,
