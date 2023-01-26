@@ -81,7 +81,6 @@ const DownshiftWithComboboxProps = (
         setSelectedItems([clickedItem]);
       }
     },
-    itemToString: (item) => item?.value || "",
   });
 };
 
@@ -300,7 +299,6 @@ const DownshiftWithMultipleSelectProps = (
         setSelectedItems([...selectedItems, selectedItem]);
       }
     },
-    itemToString: (item) => item?.value || "",
   });
 };
 
