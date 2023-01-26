@@ -1,0 +1,31 @@
+.neo-link {
+  text-decoration: none;
+}
+.neo-link:hover:not([class*="disabled"]) {
+  text-decoration: underline;
+}
+
+.neo-link.neo-link__inline {
+  text-decoration: underline;
+}
+.neo-link__inline:hover:not([class*="disabled"]) {
+  text-decoration: none;
+}
+
+.neo-link.neo-link__disabled,
+.neo-link.neo-link__inline.neo-link__disabled {
+  cursor: not-allowed;
+  color: var(--global-disabled-color);
+  background-color: var(--global-disabled-background);
+  pointer-events: none;
+}
+
+a[dir=ltr][class*=neo-icon-]:before {
+    padding-right: 0.5rem;
+    padding-left: 0rem;
+}
+
+a[dir=rtl][class*=neo-icon-]:before {
+    padding-left: 0.5rem;
+    padding-right: 0rem;
+}
