@@ -22,7 +22,6 @@ const DownshiftWithComboboxProps = (
   creatable: boolean,
   createMessage: string
 ) => {
-  // HACK: `onSelectedItemChange`'s `inputValue` is always `[object Object]`, no idea why
   const [inputText, setInputText] = useState("");
 
   return useCombobox({
@@ -82,6 +81,7 @@ const DownshiftWithComboboxProps = (
         setSelectedItems([clickedItem]);
       }
     },
+    itemToString: (item) => item?.value || "",
   });
 };
 
@@ -197,6 +197,7 @@ const DownshiftWithComboboxMultipleSelectProps = (
         setFilteredOptions(options);
       }
     },
+    itemToString: (item) => item?.value || "",
   });
 };
 
@@ -230,6 +231,7 @@ const DownshiftWithSelectProps = (
         setSelectedItems([selectedItem]);
       }
     },
+    itemToString: (item) => item?.value || "",
   });
 };
 
@@ -298,6 +300,7 @@ const DownshiftWithMultipleSelectProps = (
         setSelectedItems([...selectedItems, selectedItem]);
       }
     },
+    itemToString: (item) => item?.value || "",
   });
 };
 
