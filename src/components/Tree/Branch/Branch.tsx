@@ -71,7 +71,12 @@ export const Branch = ({
   }, [expanded, disabled, children]);
 
   return (
-    <li dir={dir} role="treeitem" className="neo-treeview__sub-tree-item">
+    <li
+      dir={dir}
+      role="treeitem"
+      aria-selected={active}
+      className="neo-treeview__sub-tree-item"
+    >
       <div
         className={clsx(
           "neo-treeview__item",
