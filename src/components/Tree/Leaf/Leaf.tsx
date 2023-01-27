@@ -58,6 +58,7 @@ export const Leaf = ({
       onKeyDown={handleKeyDown}
       ref={ref}
       role="treeitem"
+      aria-selected={active}
       tabIndex={tabIndex}
       {...rest}
     >
