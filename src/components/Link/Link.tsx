@@ -1,5 +1,13 @@
 import clsx from "clsx";
-import { FC, HTMLProps, useCallback } from "react";
+import {
+  FC,
+  HTMLProps,
+  KeyboardEvent,
+  MouseEvent,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  useCallback,
+} from "react";
 import { IconNamesType, Keys, handleAccessbilityError } from "utils";
 import "./Link_shim.css";
 type InlineOrIconProps =
@@ -23,8 +31,8 @@ export const Link: FC<LinkProps> = ({
   }
   const placement = "placement" in rest ? rest.placement : "left";
 
-  const clickHandler = useCallback(
-    (e) => {
+  const clickHandler: MouseEventHandler = useCallback(
+    (e: MouseEvent<HTMLAnchorElement>) => {
       if (disabled) {
         e.preventDefault();
       } else {
@@ -36,8 +44,8 @@ export const Link: FC<LinkProps> = ({
     [disabled, onClick]
   );
 
-  const keydownHandler = useCallback(
-    (e) => {
+  const keydownHandler: KeyboardEventHandler = useCallback(
+    (e: KeyboardEvent<HTMLAnchorElement>) => {
       if (disabled && e.key === Keys.ENTER) {
         e.preventDefault();
       } else {
