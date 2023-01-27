@@ -6,7 +6,7 @@
     "group:allNonMajor", // batch non-majors into one PR
     ":semanticCommits", // nicer commit messages
   ],
-  assignees: ["joe-s-avaya"],
-  reviewers: ["avaya-dux/dux-devs", "joe-s-avaya"],
+  rangeStrategy: "pin", // pin dependencies
+  reviewers: ["mrazian85", "joe-s-avaya", "enrique-prado", "yangAtSpoken"],
   schedule: ["on monday before 5am"],
 }
