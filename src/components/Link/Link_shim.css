@@ -20,12 +20,12 @@
   pointer-events: none;
 }
 
-a[dir=ltr][class*=neo-icon-]:before {
-    padding-right: 0.5rem;
-    padding-left: 0rem;
+a[dir="ltr"][class*="neo-icon-"]:before {
+  padding-right: 0.5rem;
+  padding-left: 0rem;
 }
 
-a[dir=rtl][class*=neo-icon-]:before {
-    padding-left: 0.5rem;
-    padding-right: 0rem;
+a[dir="rtl"][class*="neo-icon-"]:before {
+  padding-left: 0.5rem;
+  padding-right: 0rem;
 }

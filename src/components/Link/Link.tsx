@@ -1,9 +1,5 @@
 import clsx from "clsx";
-import {
-    FC,
-    HTMLProps,
-    useCallback
-} from "react";
+import { FC, HTMLProps, useCallback } from "react";
 import { IconNamesType, Keys, handleAccessbilityError } from "utils";
 import "./Link_shim.css";
 type InlineOrIconProps =
@@ -54,13 +50,13 @@ export const Link: FC<LinkProps> = ({
   );
 
   // remove custom property before passing rest to anchor
-  if(inline){
+  if (inline) {
     delete rest.inline;
   }
-  if(icon){
+  if (icon) {
     delete rest.icon;
   }
-  if(placement){
+  if (placement) {
     delete rest.placement;
   }
   return (
