@@ -14,6 +14,7 @@ export * from "./Image";
 export * from "./ImageLink";
 export * from "./Layout";
 export * from "./LeftNav";
+export * from "./Link";
 export * from "./List";
 export * from "./Menu";
 export * from "./Modal";
