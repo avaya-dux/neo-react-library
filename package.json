@@ -25,7 +25,7 @@
     "LICENSE-3rd-party.html"
   ],
   "engines": {
-    "node": "19.5.0"
+    "node": "16"
   },
   "browserslist": [
     "> 0.5%",
