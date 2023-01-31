@@ -67,14 +67,6 @@ This is due to how Vite optomizes dependancies. It simply doesn't view code in `
 yarn build
 ```
 
-## to run in 'develop' mode with hot module reloading
-
-This will run in watch mode and produce builds to `dist`.
-
-```
-yarn start
-```
-
 ## run storybook
 
 ```
