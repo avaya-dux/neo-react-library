@@ -1,5 +1,4 @@
 import log from "loglevel";
-
 import { useContext, useMemo } from "react";
 
 import { genId } from "utils/accessibilityUtils";
@@ -14,12 +13,12 @@ export interface InternalSelectOptionProps extends SelectOptionProps {
 
 const logger = log.getLogger("internal-select-option");
 logger.disableAll();
-/* 
+/*
 https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
- In addition, the interaction model conveyed by the listbox role to assistive 
- technologies does not support interacting with elements inside of an option. 
- Because of these traits of the listbox widget, it does not provide an accessible way 
- to present a list of interactive elements, such as links, buttons, or checkboxes. 
+ In addition, the interaction model conveyed by the listbox role to assistive
+ technologies does not support interacting with elements inside of an option.
+ Because of these traits of the listbox widget, it does not provide an accessible way
+ to present a list of interactive elements, such as links, buttons, or checkboxes.
 */
 export const InternalSelectOption = ({
   children,
@@ -56,13 +55,12 @@ export const InternalSelectOption = ({
   logger.debug(itemProps);
 
   return multiple ? (
-    <div className="neo-input-group">
+    <>
       <OptionWithCheckbox
-        aria-describedby={helperText && helperId}
-        selected={selectedItemsValues.includes(optionSelf.value)}
+        index={index}
+        helperText={helperText}
+        helperId={helperId}
         disabled={disabled}
-        value={optionSelf.value} // BUG: `value` is updated on reset, but the change needs to be propagated up
-        {...itemProps}
       >
         {children}
       </OptionWithCheckbox>
@@ -72,7 +70,7 @@ export const InternalSelectOption = ({
           {helperText}
         </p>
       )}
-    </div>
+    </>
   ) : (
     <li {...itemProps}>
       {children}

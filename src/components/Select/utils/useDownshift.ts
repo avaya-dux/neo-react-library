@@ -1,6 +1,5 @@
-import log from "loglevel";
-
 import { useCombobox, useSelect } from "downshift";
+import log from "loglevel";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { SelectOptionProps } from "./SelectTypes";
@@ -299,7 +298,7 @@ const DownshiftWithMultipleSelectProps = (
       } else {
         setSelectedItems([...selectedItems, selectedItem]);
       }
-    },
+    }
     // BUG: items are not announced in screen reader when selected
   });
 };
