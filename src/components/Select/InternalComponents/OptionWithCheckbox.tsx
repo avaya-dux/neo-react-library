@@ -14,7 +14,14 @@ export interface OptionProps
 }
 export const OptionWithCheckbox = forwardRef(
   (
-    { disabled, index, helperText, helperId, children }: OptionProps,
+    {
+      disabled,
+      index,
+      helperText,
+      helperId,
+      defaultSelected,
+      children,
+    }: OptionProps,
     ref: Ref<HTMLOptionElement>
   ) => {
     const {
@@ -48,8 +55,8 @@ export const OptionWithCheckbox = forwardRef(
         ref={ref}
         className={clsx(
           "neo-option",
-          selectedItemsValues.includes(optionSelf.value) &&
-            "neo-option--selected",
+          selectedItemsValues.includes(optionSelf.value) ||
+            (defaultSelected && "neo-option--selected"),
           disabled && "neo-option--disabled",
           index === highlightedIndex && "neo-option--focused"
         )}

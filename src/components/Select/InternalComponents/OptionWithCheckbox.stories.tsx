@@ -1,5 +1,6 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 
+import { SelectContext, SelectContextProps } from "../utils/SelectContext";
 import { OptionProps, OptionWithCheckbox } from "./OptionWithCheckbox";
 
 export default {
@@ -7,13 +8,26 @@ export default {
   component: OptionWithCheckbox,
 } as Meta<OptionProps>;
 
+const contextValue = {
+  downshiftProps: {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    getItemProps: () => {},
+  },
+  optionProps: { selectedItemsValues: [] },
+  selectProps: { filteredOptions: [] },
+};
+
 export const Default = () => {
   return (
-    <ul>
-      <OptionWithCheckbox index={0} defaultChecked>
-        Option
-      </OptionWithCheckbox>
-    </ul>
+    <SelectContext.Provider
+      value={contextValue as unknown as SelectContextProps}
+    >
+      <ul>
+        <OptionWithCheckbox index={0} defaultSelected>
+          Option
+        </OptionWithCheckbox>
+      </ul>
+    </SelectContext.Provider>
   );
 };
 
