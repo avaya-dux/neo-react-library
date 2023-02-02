@@ -1,8 +1,5 @@
 import clsx from "clsx";
-import { forwardRef, KeyboardEvent, KeyboardEventHandler, Ref, useContext, useEffect, useState } from "react";
-
-import { Keys } from "utils";
-import useControlled from "utils/useControlled";
+import { forwardRef, Ref, useContext } from "react";
 
 import { SelectContext } from "../utils/SelectContext";
 
@@ -10,28 +7,16 @@ import "./OptionWithCheckbox_shim.css";
 
 export interface OptionProps
   extends React.OptionHTMLAttributes<HTMLOptionElement> {
-  index: number,
-  helperId?: string,
-  helperText?: string,
+  index: number;
+  helperId?: string;
+  helperText?: string;
   defaultSelected?: boolean;
 }
 export const OptionWithCheckbox = forwardRef(
   (
-    {
-      disabled,
-      selected,
-      defaultSelected,
-      defaultChecked,
-      tabIndex = -1,
-      index,
-      helperText,
-      helperId,
-      children,
-      ...rest
-    }: OptionProps,
+    { disabled, index, helperText, helperId, children }: OptionProps,
     ref: Ref<HTMLOptionElement>
   ) => {
-
     const {
       downshiftProps: { getItemProps, highlightedIndex },
 
@@ -40,35 +25,20 @@ export const OptionWithCheckbox = forwardRef(
       selectProps: { filteredOptions },
     } = useContext(SelectContext);
 
-    // const [state, setState] = useControlled({
-    //   controlled: selected,
-    //   default: defaultSelected || defaultChecked,
-    //   name: "OptionWithCheckbox",
-    // });
-
-    // const handleKeyDown: KeyboardEventHandler = (
-    //   event: KeyboardEvent<HTMLOptionElement>
-    // ) => {
-    //   if (!disabled) {
-    //     switch (event.key) {
-    //       case Keys.SPACE:
-    //       case Keys.ENTER:
-    //         console.log("Key pressed");
-    //         setState(!state);
-    //         break;
-    //     }
-    //   }
-    // };
-
-    const optionSelf = filteredOptions[index];
+    const optionSelf = filteredOptions[index] || {};
     const itemProps = getItemProps({
       item: optionSelf,
       index,
-      // disabled,
-      // selected: selectedItemsValues.includes(optionSelf.value),
-      // value: optionSelf.value,
-      "aria-selected": selectedItemsValues.includes(optionSelf.value),
-      "aria-describedby": helperText && helperId
+      "aria-selected": optionSelf.value
+        ? selectedItemsValues.includes(optionSelf.value)
+        : false,
+      "aria-describedby": helperText && helperId,
+      onClick: (event) => {
+        if (disabled) (event.nativeEvent as any).preventDownshiftDefault = true;
+      },
+      onKeyDown: (event) => {
+        if (disabled) (event.nativeEvent as any).preventDownshiftDefault = true;
+      },
     });
 
     return (
@@ -76,18 +46,13 @@ export const OptionWithCheckbox = forwardRef(
         ref={ref}
         className={clsx(
           "neo-option",
-          itemProps.selected && "neo-option--selected",
+          selectedItemsValues.includes(optionSelf.value) &&
+            "neo-option--selected",
           disabled && "neo-option--disabled",
           index === highlightedIndex && "neo-option--focused"
-
         )}
-        // onClick={() => setState(!state)}
-        // onKeyDown={handleKeyDown}
-
-        // {...rest}
         {...itemProps}
         disabled={disabled}
-        tabIndex={0}
       >
         {children}
       </li>

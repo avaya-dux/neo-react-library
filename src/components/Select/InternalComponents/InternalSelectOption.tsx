@@ -29,7 +29,7 @@ export const InternalSelectOption = ({
   const {
     downshiftProps: { getItemProps },
 
-    optionProps: { multiple, selectedItemsValues },
+    optionProps: { multiple },
 
     selectProps: { filteredOptions },
   } = useContext(SelectContext);
@@ -58,9 +58,9 @@ export const InternalSelectOption = ({
     <>
       <OptionWithCheckbox
         index={index}
+        disabled={disabled}
         helperText={helperText}
         helperId={helperId}
-        disabled={disabled}
       >
         {children}
       </OptionWithCheckbox>
