@@ -77,7 +77,9 @@ export const MultiSelect = () => {
         aria-multiselectable={true}
         {...getMenuProps()}
       >
-        <OptionsWithEmptyMessageFallback />
+        <ul role="group">
+          <OptionsWithEmptyMessageFallback />
+        </ul>
       </div>
     </div>
   );
