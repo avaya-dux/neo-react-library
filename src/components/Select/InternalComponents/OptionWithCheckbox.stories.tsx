@@ -33,14 +33,18 @@ export const Default = () => {
 
 const Template: Story<OptionProps> = (props: OptionProps) => {
   return (
-    <ul>
-      <OptionWithCheckbox {...props}>Option</OptionWithCheckbox>
-    </ul>
+    <SelectContext.Provider
+      value={contextValue as unknown as SelectContextProps}
+    >
+      <ul>
+        <OptionWithCheckbox {...props}>Option</OptionWithCheckbox>
+      </ul>
+    </SelectContext.Provider>
   );
 };
 
 export const Templated = Template.bind({});
 Templated.args = {
-  selected: true,
+  defaultSelected: true,
   disabled: true,
 };
