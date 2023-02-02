@@ -286,7 +286,7 @@ const DownshiftWithMultipleSelectProps = (
           return changes;
       }
     },
-    onSelectedItemChange: ({ selectedItem, type }) => {
+    onSelectedItemChange: ({ selectedItem }) => {
       if (!selectedItem) return;
 
       const selectedItemValues = selectedItems.map((item) => item.value);

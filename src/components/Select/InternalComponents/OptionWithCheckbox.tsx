@@ -34,9 +34,13 @@ export const OptionWithCheckbox = forwardRef(
         : false,
       "aria-describedby": helperText && helperId,
       onClick: (event) => {
+        // Missing type definitions in Downshift, see https://github.com/downshift-js/downshift/issues/734
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (disabled) (event.nativeEvent as any).preventDownshiftDefault = true;
       },
       onKeyDown: (event) => {
+        // Same as above
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (disabled) (event.nativeEvent as any).preventDownshiftDefault = true;
       },
     });

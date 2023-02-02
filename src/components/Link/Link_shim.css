@@ -9,7 +9,7 @@
   text-decoration: underline;
   padding: 0 0.25rem;
 }
-.neo-link__inline:hover:not([class*="disabled"]) {
+.neo-link.neo-link__inline:hover:not([class*="disabled"]) {
   text-decoration: none;
 }
 
