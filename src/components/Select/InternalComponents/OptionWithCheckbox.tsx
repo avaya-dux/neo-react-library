@@ -29,9 +29,7 @@ export const OptionWithCheckbox = forwardRef(
     const itemProps = getItemProps({
       item: optionSelf,
       index,
-      "aria-selected": optionSelf.value
-        ? selectedItemsValues.includes(optionSelf.value)
-        : false,
+      "aria-selected": selectedItemsValues.includes(optionSelf.value),
       "aria-describedby": helperText && helperId,
       onClick: (event) => {
         // Missing type definitions in Downshift, see https://github.com/downshift-js/downshift/issues/734
