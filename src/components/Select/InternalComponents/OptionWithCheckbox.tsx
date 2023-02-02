@@ -60,10 +60,6 @@ export const OptionWithCheckbox = forwardRef(
     //   }
     // };
 
-    console.log(highlightedIndex)
-
-    console.log(filteredOptions)
-
     const optionSelf = filteredOptions[index];
     const itemProps = getItemProps({
       item: optionSelf,
@@ -91,6 +87,7 @@ export const OptionWithCheckbox = forwardRef(
         // {...rest}
         {...itemProps}
         disabled={disabled}
+        tabIndex={0}
       >
         {children}
       </li>

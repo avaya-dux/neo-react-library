@@ -245,7 +245,7 @@ const DownshiftWithMultipleSelectProps = (
   return useSelect({
     items: options,
     id: selectId,
-    selectedItem: null,
+    // selectedItem: null,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
       const { selectedItem } = changes;
@@ -260,6 +260,17 @@ const DownshiftWithMultipleSelectProps = (
         case useSelect.stateChangeTypes.MenuKeyDownEnter:
         case useSelect.stateChangeTypes.MenuKeyDownSpaceButton:
         case useSelect.stateChangeTypes.ItemClick:
+          if (!selectedItem) return changes;
+
+          const selectedItemValues = selectedItems.map((item) => item.value);
+          if (selectedItemValues.includes(selectedItem?.value)) {
+            setSelectedItems(
+              selectedItems.filter((item) => item.value !== selectedItem?.value)
+            );
+          } else {
+            setSelectedItems([...selectedItems, selectedItem]);
+          }
+
           return {
             ...changes,
             isOpen: true,
@@ -280,24 +291,31 @@ const DownshiftWithMultipleSelectProps = (
           return {
             ...changes,
             highlightedIndex: state.highlightedIndex,
-            inputValue: "",
           };
 
         default:
           return changes;
       }
     },
-    onSelectedItemChange: ({ selectedItem }) => {
-      if (!selectedItem) return;
+    // onSelectedItemChange: ({ selectedItem, type }) => {
+    //   if (!selectedItem) return;
 
-      const selectedItemValues = selectedItems.map((item) => item.value);
-      if (selectedItemValues.includes(selectedItem.value)) {
-        setSelectedItems(
-          selectedItems.filter((item) => item.value !== selectedItem.value)
-        );
-      } else {
-        setSelectedItems([...selectedItems, selectedItem]);
-      }
+    //   console.log(type);
+
+    //   const selectedItemValues = selectedItems.map((item) => item.value);
+    //   if (selectedItemValues.includes(selectedItem.value)) {
+    //     setSelectedItems(
+    //       selectedItems.filter((item) => item.value !== selectedItem.value)
+    //     );
+    //   } else {
+    //     setSelectedItems([...selectedItems, selectedItem]);
+    //   }
+    // },
+    getA11yStatusMessage: () => {
+      return ""
+    },
+    getA11ySelectionMessage: () => {
+      return ""
     }
     // BUG: items are not announced in screen reader when selected
   });
