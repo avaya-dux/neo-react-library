@@ -36,6 +36,7 @@ export const OptionWithCheckbox = forwardRef(
     const itemProps = getItemProps({
       item: optionSelf,
       index,
+      selected: selectedItemsValues.includes(optionSelf.value),
       "aria-selected": selectedItemsValues.includes(optionSelf.value),
       "aria-describedby": helperText && helperId,
       onClick: (event) => {
@@ -55,8 +56,9 @@ export const OptionWithCheckbox = forwardRef(
         ref={ref}
         className={clsx(
           "neo-option",
-          selectedItemsValues.includes(optionSelf.value) ||
-            (defaultSelected && "neo-option--selected"),
+          selectedItemsValues.includes(optionSelf.value) || defaultSelected
+            ? "neo-option--selected"
+            : "",
           disabled && "neo-option--disabled",
           index === highlightedIndex && "neo-option--focused"
         )}
