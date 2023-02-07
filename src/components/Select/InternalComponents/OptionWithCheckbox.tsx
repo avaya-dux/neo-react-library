@@ -1,60 +1,72 @@
 import clsx from "clsx";
-import { forwardRef, KeyboardEventHandler, KeyboardEvent, Ref } from "react";
-import useControlled from "utils/useControlled";
+import { forwardRef, Ref, useContext } from "react";
+
+import { SelectContext } from "../utils/SelectContext";
+
 import "./OptionWithCheckbox_shim.css";
-import { Keys } from "utils";
+
 export interface OptionProps
   extends React.OptionHTMLAttributes<HTMLOptionElement> {
+  index: number;
+  helperId?: string;
+  helperText?: string;
   defaultSelected?: boolean;
 }
 export const OptionWithCheckbox = forwardRef(
   (
     {
       disabled,
-      selected,
+      index,
+      helperText,
+      helperId,
       defaultSelected,
-      defaultChecked,
-      tabIndex = -1,
       children,
-      ...rest
     }: OptionProps,
     ref: Ref<HTMLOptionElement>
   ) => {
-    const [state, setState] = useControlled({
-      controlled: selected,
-      default: defaultSelected || defaultChecked,
-      name: "OptionWithCheckbox",
+    const {
+      downshiftProps: { getItemProps, highlightedIndex },
+
+      optionProps: { selectedItemsValues },
+
+      selectProps: { filteredOptions },
+    } = useContext(SelectContext);
+
+    const optionSelf = filteredOptions[index] || {};
+    const itemProps = getItemProps({
+      item: optionSelf,
+      index,
+      selected: selectedItemsValues.includes(optionSelf.value),
+      "aria-selected": selectedItemsValues.includes(optionSelf.value),
+      "aria-describedby": helperText && helperId,
+      onClick: (event) => {
+        // Missing type definitions in Downshift, see https://github.com/downshift-js/downshift/issues/734
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (disabled) (event.nativeEvent as any).preventDownshiftDefault = true;
+      },
+      onKeyDown: (event) => {
+        // Same as above
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (disabled) (event.nativeEvent as any).preventDownshiftDefault = true;
+      },
     });
 
-    const handleKeyDown: KeyboardEventHandler = (
-      event: KeyboardEvent<HTMLOptionElement>
-    ) => {
-      if (!disabled) {
-        switch (event.key) {
-          case Keys.SPACE:
-          case Keys.ENTER:
-            setState(!state);
-            break;
-        }
-      }
-    };
     return (
-      <option
+      <li
         ref={ref}
-        tabIndex={tabIndex}
         className={clsx(
           "neo-option",
-          state && "neo-option--selected",
-          disabled && "neo-option--disabled"
+          selectedItemsValues.includes(optionSelf.value) || defaultSelected
+            ? "neo-option--selected"
+            : "",
+          disabled && "neo-option--disabled",
+          index === highlightedIndex && "neo-option--focused"
         )}
-        onClick={() => setState(!state)}
-        onKeyDown={handleKeyDown}
-        aria-selected={state}
+        {...itemProps}
         disabled={disabled}
-        {...rest}
       >
         {children}
-      </option>
+      </li>
     );
   }
 );

@@ -74,9 +74,12 @@ export const MultiSelect = () => {
           "neo-multiselect__content",
           isOpen && "neo-set-keyboard-focus"
         )}
+        aria-multiselectable={true}
         {...getMenuProps()}
       >
-        <OptionsWithEmptyMessageFallback />
+        <ul role="group">
+          <OptionsWithEmptyMessageFallback />
+        </ul>
       </div>
     </div>
   );
