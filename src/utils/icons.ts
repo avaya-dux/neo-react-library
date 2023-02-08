@@ -949,6 +949,7 @@ export type IconNamesType =
   | "typing-3"
   | "underline"
   | "undo"
+  | "unlock"
   | "upload"
   | "usb"
   | "user-add"
