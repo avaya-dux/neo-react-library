@@ -25,7 +25,7 @@
     "LICENSE-3rd-party.html"
   ],
   "engines": {
-    "node": ">=16"
+    "node": "18"
   },
   "browserslist": [
     "> 0.5%",
@@ -35,12 +35,12 @@
   ],
   "scripts": {
     "dev": "vite build --mode dev --watch",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
     "clean": "rm -rf coverage badges dist storybook-static cypress/screenshots cypress/videos jsdocs package *.tgz",
     "format": "yarn prettier --write ./src --loglevel warn",
     "lint": "eslint src",
     "build": "tsc && vite build",
-    "build:storybook": "build-storybook",
+    "build:storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook",
     "jsdocs": "jsdoc -c .jsdoc.json",
     "jsdocs:verbose": "jsdoc -c .jsdoc.json --verbose",
     "test": "vitest run",
@@ -79,6 +79,8 @@
     "@storybook/addon-interactions": "6.5.16",
     "@storybook/addon-links": "6.5.16",
     "@storybook/builder-vite": "0.4.2",
+    "@storybook/builder-webpack5": "6.5.16",
+    "@storybook/manager-webpack5": "6.5.16",
     "@storybook/react": "6.5.16",
     "@storybook/testing-library": "0.0.13",
     "@storybook/testing-react": "1.3.0",
