@@ -35,7 +35,7 @@
   ],
   "scripts": {
     "dev": "vite build --mode dev --watch",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
     "clean": "rm -rf coverage badges dist storybook-static cypress/screenshots cypress/videos jsdocs package *.tgz",
     "format": "yarn prettier --write ./src --loglevel warn",
     "lint": "eslint src",
