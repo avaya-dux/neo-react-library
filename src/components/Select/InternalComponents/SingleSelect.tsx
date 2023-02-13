@@ -34,7 +34,6 @@ export const SingleSelect = () => {
         <button
           {...getToggleButtonProps()}
           className="neo-multiselect__header neo-multiselect__header--no-after"
-          type="button"
           aria-label={ariaLabel}
         >
           {selectedItems[0]?.children || placeholder}
@@ -46,7 +45,6 @@ export const SingleSelect = () => {
           "neo-multiselect__content",
           isOpen && "neo-set-keyboard-focus"
         )}
-        aria-label={ariaLabel}
         {...getMenuProps()}
       >
         <ul role="group">
