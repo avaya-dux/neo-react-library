@@ -29,5 +29,4 @@ cypress/screenshots/
 cypress/videos/
 dist
 dist-ssr
-jsdocs
 storybook-static
