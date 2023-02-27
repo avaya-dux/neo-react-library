@@ -12,7 +12,8 @@
       "ESNext"
     ],
     "types": [
-      "cypress-real-events"
+      "cypress-real-events",
+      "node"
     ],
     "allowJs": false,
     "skipLibCheck": true,

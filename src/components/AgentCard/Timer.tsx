@@ -6,20 +6,20 @@ export interface TimerProps {
 
 export const Timer = ({ agentStatus }: TimerProps) => {
   const [count, setCount] = useState(0);
-  const timerIdRef = useRef<NodeJS.Timeout | null | number>(null);
+  const timerIdRef = useRef<undefined | NodeJS.Timer>(undefined);
   const hour: number = Math.floor(count / 3600);
   const minute: number = Math.floor((count - hour * 3600) / 60);
   const seconds: number = count - (hour * 3600 + minute * 60);
 
   useEffect(() => {
     startTimer();
-    return () => clearInterval(timerIdRef.current as NodeJS.Timeout);
+    return () => clearInterval(timerIdRef.current);
   }, [agentStatus]);
 
   const startTimer = () => {
     setCount(0);
     if (timerIdRef.current) {
-      clearInterval(timerIdRef.current as NodeJS.Timeout);
+      clearInterval(timerIdRef.current);
     }
     timerIdRef.current = setInterval(() => setCount((c) => c + 1), 1000);
   };
