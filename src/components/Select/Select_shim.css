@@ -144,6 +144,12 @@ div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
   order: 2;
 }
 
+.neo-multiselect.neo-select__spinner
+  span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container {
+  background-color: var(--input-disabled-bg);
+}
+
 .neo-multiselect__content .neo-option + .neo-input-hint {
   white-space: nowrap;
   margin: 0;
