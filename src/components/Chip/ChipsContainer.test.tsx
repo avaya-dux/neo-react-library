@@ -1,7 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, RenderResult, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
-
-import { RenderResultType } from "test/types";
 
 import { Chip, ChipsContainer } from ".";
 import { ChipsContainerExamples } from "./Chip.stories";
@@ -32,7 +30,7 @@ describe("ChipsContainer", () => {
 
   describe("storybook tests", () => {
     describe("ChipsContainerExamples", () => {
-      let renderResult: RenderResultType;
+      let renderResult: RenderResult;
 
       beforeEach(() => {
         renderResult = render(<ChipsContainerExamples />);

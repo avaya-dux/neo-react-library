@@ -1,13 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { render, RenderResult, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
-import { RenderResultType } from "test/types";
-
-import { Default, Misc } from "./Link.stories";
-import { Link } from "./Link";
-import userEvent from "@testing-library/user-event";
 import { UserEventKeys } from "utils";
+
+import { Link } from "./Link";
+import { Default, Misc } from "./Link.stories";
 
 describe("Link", () => {
   const user = userEvent.setup();
@@ -61,7 +60,7 @@ describe("Link", () => {
   });
   describe("storybook tests", () => {
     describe("Default", () => {
-      let renderResult: RenderResultType;
+      let renderResult: RenderResult;
 
       beforeEach(() => {
         renderResult = render(<Default />);
@@ -79,7 +78,7 @@ describe("Link", () => {
       });
     });
     describe("Misc", () => {
-      let renderResult: RenderResultType;
+      let renderResult: RenderResult;
 
       beforeEach(() => {
         renderResult = render(<Misc />);
