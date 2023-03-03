@@ -1,4 +1,4 @@
-import { render, RenderResult, screen } from "@testing-library/react";
+import { act, render, RenderResult, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import log from "loglevel";
@@ -220,7 +220,9 @@ describe("Menu", () => {
 
       expect(menuRoot).not.toHaveClass(activeClassName);
       expect(menuRoot).toHaveClass(onHoverClassName);
-      await user.hover(menuButton);
+      await act(async () => {
+        await user.hover(menuButton);
+      });
       expect(menuRoot).toHaveClass(activeClassName);
     });
 
@@ -239,7 +241,9 @@ describe("Menu", () => {
 
       expect(menuRoot).not.toHaveClass(activeClassName);
       expect(menuRoot).not.toHaveClass(onHoverClassName);
-      await user.hover(menuButton);
+      await act(async () => {
+        await user.hover(menuButton);
+      });
       expect(menuRoot).not.toHaveClass(activeClassName);
       expect(menuRoot).not.toHaveClass(onHoverClassName);
     });
