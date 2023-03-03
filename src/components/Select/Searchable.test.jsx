@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 
@@ -204,17 +204,19 @@ describe("Select", () => {
       );
 
       const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
-      await user.click(comboboxBtn);
+      await act(async () => {
+        await user.click(comboboxBtn);
+      });
 
       // pre search+add we have all options in the list
       expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
-      await user.keyboard(newOptionText);
+      await act(async () => await user.keyboard(newOptionText));
       expect(screen.getAllByRole("option")).toHaveLength(1);
       expect(screen.getByRole("option")).toHaveTextContent(newOptionText);
 
-      await user.keyboard(UserEventKeys.DOWN);
-      await user.keyboard(UserEventKeys.ENTER);
+      await act(async () => await user.keyboard(UserEventKeys.DOWN));
+      await act(async () => await user.keyboard(UserEventKeys.ENTER));
 
       // now that we've added the new option, we can now see the full list, excluding
       // the new option as we do not show that in the list
@@ -224,7 +226,9 @@ describe("Select", () => {
       expect(screen.getAllByRole("button")).toHaveLength(1);
       expect(screen.getByText(newOptionText)).toBeInTheDocument();
 
-      await user.keyboard(UserEventKeys.BACKSPACE);
+      await act(async () => {
+        await user.keyboard(UserEventKeys.BACKSPACE);
+      });
       expect(screen.queryAllByRole("button")).toHaveLength(0); // chip removed
     });
 
