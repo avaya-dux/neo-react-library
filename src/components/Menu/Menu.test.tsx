@@ -220,9 +220,7 @@ describe("Menu", () => {
 
       expect(menuRoot).not.toHaveClass(activeClassName);
       expect(menuRoot).toHaveClass(onHoverClassName);
-      // await act(async () => {
       await user.hover(menuButton);
-      // });
       expect(menuRoot).toHaveClass(activeClassName);
     });
 
