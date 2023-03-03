@@ -20,10 +20,10 @@
   resolved "https://registry.yarnpkg.com/@atomic-layout/core/-/core-0.14.1.tgz#3d69be5f79775f11b8008f18bc603b04a2141ccd"
   integrity sha512-o5nhk/1djuKzB20C2LSOuetTDytsbGg4c0UfxXkq1pqoaN3hKJcHPYF9nV+p6+P5CWqNBaaJddZ32OsFSppULQ==
 
-"@avaya/neo@3.67.0":
-  version "3.67.0"
-  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.67.0.tgz#5d58042cb6bda2021ea7925e237d2fe5d62b7437"
-  integrity sha512-b0IwRbaA51YnOETIy+ii/yjz9bL02dMIE7WvUjAsrz35/uo//UpxP31HzLaD6Y6kODiZHaVAdN9qFOhw12Nu/A==
+"@avaya/neo@^3.68.0":
+  version "3.68.0"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.68.0.tgz#810642ffc21d69a4dfefec554fea98fe4885c9eb"
+  integrity sha512-eUkZyMfdT4NHbWyfBbjIWS9+IwGpbOkcaHHFmXHtqyT3Z96xCfIXIBG7U3j3HRZkfnDZ7wcffGCAvfO6Jp8e4A==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.18.6", "@babel/code-frame@^7.5.5", "@babel/code-frame@^7.8.3":
   version "7.18.6"

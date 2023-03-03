@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { getIconClass, IconNamesType } from "utils/icons";
 
 // import { SizeType } from "utils/size"; TODO https://jira.forge.avaya.com/browse/NEO-645
-type SizeType = "sm" | "lg";
+type SizeType = "sm" | "md" | "lg";
 export interface IconProps extends React.BaseHTMLAttributes<HTMLElement> {
   "aria-label": string;
   className?: string;
@@ -52,13 +52,14 @@ export const Icon: React.FC<IconProps> = ({
     }
 
     const getSizeClass = (size?: SizeType) => {
-      // TODO-645: css class names to be updated
       switch (size) {
-        case undefined:
         case "sm":
-          return undefined;
+          return "neo-icon--small";
+        case undefined:
+        case "md":
+          return "neo-icon--medium"
         case "lg":
-          return "neo-icon-state--large";
+          return "neo-icon--large"
         default:
           console.warn(`Unknown size encountered: ${size}`);
           return undefined;
