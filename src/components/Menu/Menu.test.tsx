@@ -1,4 +1,4 @@
-import { act, render, RenderResult, screen } from "@testing-library/react";
+import { render, RenderResult, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import log from "loglevel";
@@ -205,11 +205,11 @@ describe("Menu", () => {
     const activeClassName = "neo-dropdown--active";
     const onHoverClassName = "neo-dropdown--onhover";
 
-    it.skip("if `openOnHover` is set to `true`, menu shows when root element is hovered", async () => {
+    it("if `openOnHover` is set to `true`, menu shows when root element is hovered", async () => {
       render(
         <SimpleMenuTemplated
           defaultIsOpen={false}
-          openOnHover
+          openOnHover={true}
           menuRootElement={defaultRootElement}
         >
           {defaultChildren}
@@ -220,17 +220,17 @@ describe("Menu", () => {
 
       expect(menuRoot).not.toHaveClass(activeClassName);
       expect(menuRoot).toHaveClass(onHoverClassName);
-      act(async () => {
-        await user.hover(menuButton);
-      });
+      // await act(async () => {
+      await user.hover(menuButton);
+      // });
       expect(menuRoot).toHaveClass(activeClassName);
     });
 
-    it.skip("if `openOnHover` is set to `false`, menu is not shown when root element is hovered", async () => {
+    it("if `openOnHover` is set to `false`, menu is not shown when root element is hovered", async () => {
       render(
         <SimpleMenuTemplated
           defaultIsOpen={false}
-          openOnHover
+          openOnHover={false}
           menuRootElement={defaultRootElement}
         >
           {defaultChildren}
