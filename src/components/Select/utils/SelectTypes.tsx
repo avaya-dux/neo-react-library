@@ -32,5 +32,5 @@ export type SelectProps = {
   required?: boolean;
   searchable?: boolean;
   value?: string | string[];
-  isSmall?: boolean;
+  size?: "small" | "medium";
 } & LabelOrAriaLabelProps;

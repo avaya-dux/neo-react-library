@@ -18,7 +18,7 @@ export type SelectContextProps = {
     helperText?: string;
     loading: boolean;
     placeholder: string;
-    isSmall?: boolean;
+    size: "small" | "medium";
   };
 
   optionProps: {
@@ -38,6 +38,7 @@ export const SelectContext = createContext<SelectContextProps>({
     filteredOptions: [],
     loading: false,
     placeholder: "",
+    size: "medium",
   },
 
   optionProps: {
