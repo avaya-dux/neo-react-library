@@ -1,5 +1,7 @@
 import { ReactElement } from "react";
 
+import { SizeTypeSelect } from "utils";
+
 export interface SelectOptionProps {
   children: string;
   disabled?: boolean;
@@ -32,5 +34,5 @@ export type SelectProps = {
   required?: boolean;
   searchable?: boolean;
   value?: string | string[];
-  size?: "small" | "medium";
+  size?: SizeTypeSelect;
 } & LabelOrAriaLabelProps;

@@ -1,6 +1,8 @@
 import { UseComboboxReturnValue, UseSelectReturnValue } from "downshift";
 import { createContext } from "react";
 
+import { SizeTypeSelect } from "utils";
+
 import { SelectOptionProps } from "./SelectTypes";
 
 type ContextDownshiftProps =
@@ -18,7 +20,7 @@ export type SelectContextProps = {
     helperText?: string;
     loading: boolean;
     placeholder: string;
-    size: "small" | "medium";
+    size: SizeTypeSelect;
   };
 
   optionProps: {
