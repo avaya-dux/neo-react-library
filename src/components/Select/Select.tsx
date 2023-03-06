@@ -64,7 +64,7 @@ export const Select = (props: SelectProps) => {
     required,
     searchable = false,
     value,
-    size = "medium",
+    size = "md",
   } = props;
 
   const generatedId = useId();

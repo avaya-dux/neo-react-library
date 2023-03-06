@@ -40,7 +40,7 @@ export const SelectContext = createContext<SelectContextProps>({
     filteredOptions: [],
     loading: false,
     placeholder: "",
-    size: "medium",
+    size: "md",
   },
 
   optionProps: {

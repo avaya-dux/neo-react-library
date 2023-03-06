@@ -25,7 +25,7 @@ const label = "Select Label";
 
 describe("Select", () => {
   describe("base tests", () => {
-    it("has class 'neo-multiselect--small' when size is set to 'small'", () => {
+    it("has class 'neo-multiselect--small' when size is set to 'sm'", () => {
       const { container } = render(<SmallSelects />);
       expect(container.querySelector(".neo-multiselect--small")).not.toBeNull();
     });

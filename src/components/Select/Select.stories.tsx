@@ -371,7 +371,7 @@ export const SmallSelects = () => {
       <Select
         helperText="This is a small sized Select"
         label="Select a favorite food"
-        size="small"
+        size="sm"
       >
         {fruitOptions}
       </Select>
