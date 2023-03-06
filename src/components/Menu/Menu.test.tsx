@@ -1,15 +1,23 @@
-import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { act, render, RenderResult, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import log from "loglevel";
 import { vi } from "vitest";
 
+import { Button } from "components";
 import { UserEventKeys } from "utils";
 
-import { Menu, MenuButton, MenuItem } from "./";
+import { Menu, MenuButton, MenuItem } from ".";
 import { getClassNames } from "./Menu";
-import * as MenuStories from "./Menu.stories";
+import {
+  FunctionalMenu,
+  MenuSeperator,
+  MultiLevelSubMenu,
+  SimpleMenu,
+  SimpleMenuRightAlignedTemplated,
+  SimpleMenuTemplated,
+  TwoMenus,
+} from "./Menu.stories";
 
 const menuLogger = log.getLogger("menu");
 menuLogger.disableAll();
@@ -22,17 +30,14 @@ mouseLogger.disableAll();
 const menuHelpersLogger = log.getLogger("menu-helpers");
 menuHelpersLogger.disableAll();
 
-const {
-  SimpleMenu,
-  SimpleMenuTemplated,
-  SimpleMenuRightAlignedTemplated,
-  FunctionalMenu,
-  MenuSeperator,
-  MultiLevelSubMenu,
-  TwoMenus,
-} = composeStories(MenuStories);
-
 describe("Menu", () => {
+  const defaultChildren = [
+    <MenuItem key="1">Item1</MenuItem>,
+    <MenuItem key="2">Item2</MenuItem>,
+    <MenuItem key="3">Item3</MenuItem>,
+  ];
+  const defaultRootElement = <Button>Open Menu</Button>;
+
   const user = userEvent.setup();
 
   describe("Base tests", () => {
@@ -61,7 +66,7 @@ describe("Menu", () => {
   });
 
   describe("keyboard and mouse tests", () => {
-    let renderResult;
+    let renderResult: RenderResult;
     beforeEach(() => {
       renderResult = render(<MultiLevelSubMenu />);
     });
@@ -134,7 +139,7 @@ describe("Menu", () => {
     const onClickSpy = vi.fn();
     const onKeyDownSpy = vi.fn();
     const onMouseEnterSpy = vi.fn();
-    let renderResult;
+    let renderResult: RenderResult;
 
     beforeEach(() => {
       renderResult = render(
@@ -201,28 +206,44 @@ describe("Menu", () => {
     const onHoverClassName = "neo-dropdown--onhover";
 
     it("if `openOnHover` is set to `true`, menu shows when root element is hovered", async () => {
-      const { getByRole } = render(
-        <SimpleMenuTemplated defaultIsOpen={false} openOnHover />
+      render(
+        <SimpleMenuTemplated
+          defaultIsOpen={false}
+          openOnHover={true}
+          menuRootElement={defaultRootElement}
+        >
+          {defaultChildren}
+        </SimpleMenuTemplated>
       );
-      const menuRoot = getByRole("group");
-      const menuButton = getByRole("button");
+      const menuRoot = screen.getByRole("group");
+      const menuButton = screen.getByRole("button");
 
       expect(menuRoot).not.toHaveClass(activeClassName);
       expect(menuRoot).toHaveClass(onHoverClassName);
-      await user.hover(menuButton);
+      await act(async () => {
+        await user.hover(menuButton);
+      });
       expect(menuRoot).toHaveClass(activeClassName);
     });
 
     it("if `openOnHover` is set to `false`, menu is not shown when root element is hovered", async () => {
-      const { getByRole } = render(
-        <SimpleMenuTemplated defaultIsOpen={false} openOnHover={false} />
+      render(
+        <SimpleMenuTemplated
+          defaultIsOpen={false}
+          openOnHover={false}
+          menuRootElement={defaultRootElement}
+        >
+          {defaultChildren}
+        </SimpleMenuTemplated>
       );
-      const menuRoot = getByRole("group");
-      const menuButton = getByRole("button");
+      const menuRoot = screen.getByRole("group");
+      const menuButton = screen.getByRole("button");
 
       expect(menuRoot).not.toHaveClass(activeClassName);
       expect(menuRoot).not.toHaveClass(onHoverClassName);
-      await user.hover(menuButton);
+      await act(async () => {
+        await user.hover(menuButton);
+      });
       expect(menuRoot).not.toHaveClass(activeClassName);
       expect(menuRoot).not.toHaveClass(onHoverClassName);
     });
@@ -262,7 +283,7 @@ describe("Menu", () => {
 
   describe("Storybook tests", () => {
     describe("SimpleMenu", () => {
-      let renderResult;
+      let renderResult: RenderResult;
       beforeEach(() => {
         renderResult = render(<SimpleMenu />);
       });
@@ -280,9 +301,13 @@ describe("Menu", () => {
     });
 
     describe("SimpleMenuTemplated", () => {
-      let renderResult;
+      let renderResult: RenderResult;
       beforeEach(() => {
-        renderResult = render(<SimpleMenuTemplated />);
+        renderResult = render(
+          <SimpleMenuTemplated menuRootElement={defaultRootElement}>
+            {defaultChildren}
+          </SimpleMenuTemplated>
+        );
       });
 
       it("should render ok", () => {
@@ -298,9 +323,13 @@ describe("Menu", () => {
     });
 
     describe("SimpleMenuRightAlignedTemplated", () => {
-      let renderResult;
+      let renderResult: RenderResult;
       beforeEach(() => {
-        renderResult = render(<SimpleMenuRightAlignedTemplated />);
+        renderResult = render(
+          <SimpleMenuRightAlignedTemplated menuRootElement={defaultRootElement}>
+            {defaultChildren}
+          </SimpleMenuRightAlignedTemplated>
+        );
       });
 
       it("should render ok", () => {
@@ -316,7 +345,7 @@ describe("Menu", () => {
     });
 
     describe("FunctionalMenu", () => {
-      let renderResult;
+      let renderResult: RenderResult;
       beforeEach(() => {
         // ignore example `console.log` calls
         vi.spyOn(console, "log").mockImplementation(() => null);
@@ -337,7 +366,7 @@ describe("Menu", () => {
     });
 
     describe("MenuSeperator", () => {
-      let renderResult;
+      let renderResult: RenderResult;
       beforeEach(() => {
         renderResult = render(<MenuSeperator />);
       });
@@ -355,7 +384,7 @@ describe("Menu", () => {
     });
 
     describe("MultiLevelSubMenu", () => {
-      let renderResult;
+      let renderResult: RenderResult;
       beforeEach(() => {
         renderResult = render(<MultiLevelSubMenu />);
       });
@@ -373,9 +402,15 @@ describe("Menu", () => {
     });
 
     describe("TwoMenus", () => {
-      let renderResult;
+      let renderResult: RenderResult;
       beforeEach(() => {
-        renderResult = render(<TwoMenus />);
+        renderResult = render(
+          <TwoMenus
+            closeOnBlur
+            onLeftMenuClose={() => null}
+            onRightMenuClose={() => null}
+          />
+        );
       });
 
       it("should render ok", () => {
