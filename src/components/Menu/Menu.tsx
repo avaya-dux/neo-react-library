@@ -233,8 +233,8 @@ Menu.displayName = "Menu";
 export const getClassNames = (
   isOpen: boolean,
   itemAlignment: "left" | "right",
-  className: string | undefined,
-  openOnHover: boolean // NOTE: this is _only_ for the tests, it doesn't actually do anything
+  className?: string,
+  openOnHover?: boolean // NOTE: this is _only_ for the tests, it doesn't actually do anything
 ) => {
   if (isOpen) {
     logger.debug(`isOpen is ${isOpen}`);
