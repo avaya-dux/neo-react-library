@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { useMemo } from "react";
 
 import { getIconClass, IconNamesType } from "utils/icons";
 
