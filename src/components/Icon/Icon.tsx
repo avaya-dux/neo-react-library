@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useMemo } from "react";
 
 import { getIconClass, IconNamesType } from "utils/icons";
@@ -43,41 +44,18 @@ export const Icon: React.FC<IconProps> = ({
     );
   }
 
-  const componentClasses = useMemo(() => {
-    const result = [className];
-
-    if (status) {
-      result.push("neo-icon-state");
-      result.push(`neo-icon-state--${status}`);
-    }
-
-    const getSizeClass = (size?: SizeType) => {
-      switch (size) {
-        case "sm":
-          return "neo-icon--small";
-        case undefined:
-        case "md":
-          return "neo-icon--medium"
-        case "lg":
-          return "neo-icon--large"
-        default:
-          console.warn(`Unknown size encountered: ${size}`);
-          return undefined;
-      }
-    };
-
-    const sizeClass = getSizeClass(size);
-    if (sizeClass) {
-      result.push(sizeClass);
-    }
-
-    const iconClass = getIconClass(icon);
-    if (iconClass) {
-      result.push(iconClass);
-    }
-
-    return result.join(" ").trimStart();
-  }, [status, icon, size, className]);
-
-  return <span role="img" {...rest} className={componentClasses} />;
+  return (
+    <span
+      role="img"
+      {...rest}
+      className={clsx(
+        icon && getIconClass(icon),
+        status && `neo-icon-state neo-icon-state--${status}`,
+        size === "sm" && "neo-icon--small",
+        size === "md" && "neo-icon--medium",
+        size === "lg" && "neo-icon--large",
+        className
+      )}
+    />
+  );
 };
