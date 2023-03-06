@@ -24,6 +24,18 @@ const {
 const label = "Select Label";
 
 describe("Select", () => {
+  describe("base tests", () => {
+    it("has class 'neo-multiselect--small' when size is set to 'small'", () => {
+      const { container } = render(<SmallSelects />);
+      expect(container.querySelector(".neo-multiselect--small")).not.toBeNull();
+    });
+
+    it("has does not have class 'neo-multiselect--small' when size is not set", () => {
+      const { container } = render(<BasicSelects />);
+      expect(container.querySelector(".neo-multiselect--small")).toBeNull();
+    });
+  });
+
   describe("Single Select, non-searchable", () => {
     let renderResult;
 
