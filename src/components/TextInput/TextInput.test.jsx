@@ -1,7 +1,8 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
+import userEvent from "@testing-library/user-event";
 
 import { InternalTextInputElement, TextInput } from "./TextInput";
 import * as TextInputStories from "./TextInput.stories";
@@ -16,6 +17,7 @@ const {
   ReadOnly,
   Disabled,
   BadAccessibility,
+  TypeSwitch
 } = composeStories(TextInputStories);
 
 describe("TextInput", () => {
@@ -254,6 +256,36 @@ describe("TextInput", () => {
 
         expect(errorSpy).toHaveBeenCalled();
       });
+    });
+    describe("TypeSwitch", () => {
+      const user = userEvent.setup();
+
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<TypeSwitch />);
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+      
+      it("changes type to text", async () => {
+        const input = screen.getByLabelText("Text Input");
+        expect(input).toHaveAttribute("type", "password");
+        const checkbox = screen.getByRole("checkbox");
+        expect(checkbox.checked).toBeTruthy();
+        await user.click(checkbox);
+        expect(checkbox.checked).toBeFalsy();
+        expect(input).toHaveAttribute("type", "text");
+      })
     });
   });
 });

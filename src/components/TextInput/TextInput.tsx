@@ -3,6 +3,7 @@ import {
   InputHTMLAttributes,
   ReactNode,
   RefObject,
+  useEffect,
   useId,
   useRef,
   useState,
@@ -86,6 +87,13 @@ export const TextInput = ({
   const [inputType, setInputType] = useState(type);
   const [ariaPressed, setAriaPressed] = useState(false);
   const [ariaLabel, setAriaLabel] = useState(ariaLabelPasswordShow);
+
+  useEffect(() => {
+    setInputType(type);
+    if(type==="password"){
+      setEyeIcon("view-on");
+    }
+  }, [type]);
 
   const toggleIcon = () => {
     if (eyeIcon === "view-on") {
