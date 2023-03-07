@@ -90,7 +90,7 @@ export const TextInput = ({
 
   useEffect(() => {
     setInputType(type);
-    if(type==="password"){
+    if (type === "password") {
       setEyeIcon("view-on");
     }
   }, [type]);

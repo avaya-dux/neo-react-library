@@ -17,7 +17,7 @@ const {
   ReadOnly,
   Disabled,
   BadAccessibility,
-  TypeSwitch
+  TypeSwitch,
 } = composeStories(TextInputStories);
 
 describe("TextInput", () => {
@@ -276,7 +276,7 @@ describe("TextInput", () => {
         const results = await axe(container);
         expect(results).toHaveNoViolations();
       });
-      
+
       it("changes type to text", async () => {
         const input = screen.getByLabelText("Text Input");
         expect(input).toHaveAttribute("type", "password");
@@ -285,7 +285,7 @@ describe("TextInput", () => {
         await user.click(checkbox);
         expect(checkbox.checked).toBeFalsy();
         expect(input).toHaveAttribute("type", "text");
-      })
+      });
     });
   });
 });
