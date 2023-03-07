@@ -1,8 +1,9 @@
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Icon } from "components";
+import { Checkbox, Icon } from "components";
 
 import { TextInput, TextInputProps } from "./TextInput";
+import { useCallback, useState } from "react";
 
 export default {
   title: "Components/Text Input",
@@ -150,4 +151,32 @@ export const BadAccessibility = () => {
   return <TextInput />;
 };
 
+export const TypeSwitch = () => {
+  const [type, setType] = useState("password");
+  const toggle = useCallback(() => {
+    if (type === "password") {
+      setType("text");
+    } else {
+      setType("password");
+    }
+  }, [type]);
+  return (
+    <>
+      <TextInput
+        label="Text Input"
+        defaultValue="Try To Change Me"
+        type={type}
+      />
+      <Checkbox
+        onChange={toggle}
+        name="password"
+        value="password"
+        aria-label="password"
+        defaultChecked
+      >
+        Type is password
+      </Checkbox>
+    </>
+  );
+};
 // TODO: add controlled, uncontrolled, and an "inline" option
