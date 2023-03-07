@@ -1,9 +1,9 @@
-import { useMemo } from "react";
+import clsx from "clsx";
 
 import { getIconClass, IconNamesType } from "utils/icons";
 
 // import { SizeType } from "utils/size"; TODO https://jira.forge.avaya.com/browse/NEO-645
-type SizeType = "sm" | "lg";
+type SizeType = "sm" | "md" | "lg";
 export interface IconProps extends React.BaseHTMLAttributes<HTMLElement> {
   "aria-label": string;
   className?: string;
@@ -43,40 +43,18 @@ export const Icon: React.FC<IconProps> = ({
     );
   }
 
-  const componentClasses = useMemo(() => {
-    const result = [className];
-
-    if (status) {
-      result.push("neo-icon-state");
-      result.push(`neo-icon-state--${status}`);
-    }
-
-    const getSizeClass = (size?: SizeType) => {
-      // TODO-645: css class names to be updated
-      switch (size) {
-        case undefined:
-        case "sm":
-          return undefined;
-        case "lg":
-          return "neo-icon-state--large";
-        default:
-          console.warn(`Unknown size encountered: ${size}`);
-          return undefined;
-      }
-    };
-
-    const sizeClass = getSizeClass(size);
-    if (sizeClass) {
-      result.push(sizeClass);
-    }
-
-    const iconClass = getIconClass(icon);
-    if (iconClass) {
-      result.push(iconClass);
-    }
-
-    return result.join(" ");
-  }, [status, icon, size, className]);
-
-  return <span role="img" {...rest} className={componentClasses} />;
+  return (
+    <span
+      role="img"
+      {...rest}
+      className={clsx(
+        icon && getIconClass(icon),
+        status && `neo-icon-state neo-icon-state--${status}`,
+        size === "sm" && "neo-icon--small",
+        size === "md" && "neo-icon--medium",
+        size === "lg" && "neo-icon--large",
+        className
+      )}
+    />
+  );
 };

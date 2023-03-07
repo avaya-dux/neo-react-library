@@ -25,6 +25,13 @@ StandardIconSM.args = {
   "aria-label": "Testing size sm",
 };
 
+export const StandardIconMD = Template.bind({});
+StandardIconMD.args = {
+  icon: "info",
+  size: "md",
+  "aria-label": "Testing size md",
+};
+
 export const StandardIconLG = Template.bind({});
 StandardIconLG.args = {
   icon: "info",
