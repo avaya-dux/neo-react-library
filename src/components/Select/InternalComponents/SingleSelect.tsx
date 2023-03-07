@@ -15,7 +15,7 @@ export const SingleSelect = () => {
       helperText,
       loading,
       placeholder,
-      isSmall,
+      size,
     },
   } = useContext(SelectContext);
 
@@ -24,7 +24,7 @@ export const SingleSelect = () => {
       aria-describedby={helperText && helperId}
       className={clsx(
         "neo-multiselect",
-        isSmall && "neo-multiselect--small",
+        size === "sm" && "neo-multiselect--small",
         disabled && "neo-multiselect--disabled",
         loading && "neo-select__spinner",
         isOpen && "neo-multiselect--active"

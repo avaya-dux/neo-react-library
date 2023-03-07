@@ -33,7 +33,8 @@ export type CheckboxGroupProps = CheckboxGroupDefaultProps &
 
 /**
  * Checkbox group is used to render a group of related Checkbox Components.
- * It can be passed label text, or a `groupName` that matches the `htmlFor` of an existing `<label>` tag.
+ * It must be passed a `label` or an `aria-labelledby` that matches the `id` prop of an existing `<label>`.
+ * It must also be passed a `groupName` which maps the child checkbox's `name` prop.
  *
  * @example
 <CheckboxGroup

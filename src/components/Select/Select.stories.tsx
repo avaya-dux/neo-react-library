@@ -360,17 +360,18 @@ export const SmallSelects = () => {
   return (
     <Sheet title="Small Selects" style={{ width: 400 }}>
       <Select
-        helperText="Please select one"
+        helperText="This is a normal (medium) sized Select"
         label="Select a favorite food"
-        isSmall
       >
         {fruitOptions}
       </Select>
 
+      <hr />
+
       <Select
-        helperText="Please select one"
+        helperText="This is a small sized Select"
         label="Select a favorite food"
-        isSmall
+        size="sm"
       >
         {fruitOptions}
       </Select>
