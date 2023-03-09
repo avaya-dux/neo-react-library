@@ -102,7 +102,7 @@
     "@vitejs/plugin-react": "3.1.0",
     "@vitest/coverage-c8": "0.29.2",
     "@vitest/ui": "0.29.2",
-    "check-node-version": "^4.2.1",
+    "check-node-version": "4.2.1",
     "cypress": "12.7.0",
     "cypress-real-events": "1.7.6",
     "downshift": "6.1.12",
