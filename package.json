@@ -25,7 +25,7 @@
     "LICENSE-3rd-party.html"
   ],
   "engines": {
-    "node": "18"
+    "node": ">=16"
   },
   "browserslist": [
     "> 0.5%",
@@ -35,12 +35,17 @@
   ],
   "scripts": {
     "dev": "vite build --mode dev --watch",
-    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
+    "storybook16": "start-storybook -p 6006",
+    "storybook16+": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
+    "sb": "check-node-version --node 16 &> /dev/null",
+    "storybook": "check-node-version --node 16&>/dev/null  && (yarn storybook16 || echo start storybook failed with node $(node -v)) || (yarn storybook16+ || echo start storybook failed with node $(node -v))",
     "clean": "rm -rf coverage badges dist storybook-static cypress/screenshots cypress/videos package *.tgz",
     "format": "yarn prettier --write ./src --loglevel warn",
     "lint": "eslint src",
     "build": "tsc && vite build",
-    "build:storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook",
+    "build16:storybook": "build-storybook",
+    "build16+:storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook",
+    "build:storybook": "check-node-version --node 16 &>/dev/null && (yarn build16:storybook || echo build storybook failed) || yarn build16+:storybook",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
@@ -48,9 +53,12 @@
     "test:badges": "yarn test:coverage && jest-coverage-badges --output ./badges",
     "test:cypress": "cypress run --component -b chrome",
     "test:cypress-open": "cypress open --component -b chrome",
-    "github": "yarn && yarn lint && yarn build && yarn test && yarn test:cypress",
-    "netlify": "yarn && yarn build && yarn build:storybook",
-    "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build:storybook && yarn test:cypress && yarn test:badges && yarn pack"
+    "github": "yarn safe-install && yarn lint && yarn build && yarn test && yarn test:cypress",
+    "netlify": "yarn safe-install && yarn build && yarn build:storybook",
+    "safe-install": "check-node-version --node 17 &>/dev/null && yarn --ignore-engines || yarn",
+    "all16+": "yarn safe-install && yarn clean && yarn format && yarn lint && yarn build && yarn build16+:storybook && yarn test:cypress && yarn test:badges && yarn pack",
+    "all16": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build16:storybook && yarn test:cypress && yarn test:badges && yarn pack",
+    "all": "check-node-version --node 16 &>/dev/null && (yarn all16 || echo yarn all failed with node $(node -v)) || yarn all16+ || echo yarn all failed with node $(node -v)"
   },
   "dependencies": {
     "atomic-layout": "0.16.2",
@@ -95,6 +103,7 @@
     "@vitejs/plugin-react": "3.1.0",
     "@vitest/coverage-c8": "0.29.2",
     "@vitest/ui": "0.29.2",
+    "check-node-version": "4.2.1",
     "cypress": "12.7.0",
     "cypress-real-events": "1.7.6",
     "downshift": "6.1.12",
