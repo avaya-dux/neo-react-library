@@ -10,6 +10,7 @@ import * as CheckboxStories from "./Checkbox.stories";
 
 const {
   Default,
+  NoLabel,
   CheckedAndControlled,
   CheckedAndUncontrolled,
   UncheckedAndControlled,
@@ -130,6 +131,40 @@ describe("Checkbox", () => {
       it("should be accessible by space key", async () => {
         const checkboxes = screen.getAllByRole("checkbox");
         expect(checkboxes.length).toBe(2);
+        const checkboxElement = checkboxes[0];
+        expect(checkboxElement.checked).toBeFalsy();
+        await user.tab();
+        expect(checkboxElement).toHaveFocus();
+        await user.keyboard(UserEventKeys.SPACE);
+        expect(checkboxElement.checked).toBeTruthy();
+      });
+    });
+    describe(NoLabel.name, () => {
+      const user = userEvent.setup();
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<NoLabel />);
+      });
+
+      afterEach(() => {
+        cleanup();
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it("should be accessible by space key", async () => {
+        const checkboxes = screen.getAllByRole("checkbox");
+        expect(checkboxes.length).toBe(1);
         const checkboxElement = checkboxes[0];
         expect(checkboxElement.checked).toBeFalsy();
         await user.tab();
