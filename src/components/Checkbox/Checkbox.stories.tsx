@@ -24,7 +24,11 @@ export const Default = () => {
 export const NoLabel = () => {
   return (
     <>
-      <Checkbox name="example" value="2" aria-label="no label checkbox in a table row" />
+      <Checkbox
+        name="example"
+        value="2"
+        aria-label="no label checkbox in a table row"
+      />
     </>
   );
 };
