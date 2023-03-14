@@ -21,6 +21,18 @@ export const Default = () => {
   );
 };
 
+export const NoLabel = () => {
+  return (
+    <>
+      <Checkbox
+        name="example"
+        value="2"
+        aria-label="no label checkbox in a table row"
+      />
+    </>
+  );
+};
+
 const ControlledTemplate: Story<CheckboxProps> = ({
   checked: checkedProp = false,
   ...rest
