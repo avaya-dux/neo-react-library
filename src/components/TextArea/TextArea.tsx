@@ -124,3 +124,5 @@ export function getAriaDescribedBy(
 
   return { "aria-describedby": describedBy.join(" ") };
 }
+
+TextArea.displayName = "TextArea";

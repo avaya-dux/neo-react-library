@@ -26,3 +26,10 @@ export const TabPanel = (_props: TabPanelProps) => {
 export const TabPanels = (_props: TabPanelsProps) => {
   return null;
 };
+
+Tab.displayName = "Tab";
+TabLink.displayName = "TabLink";
+ClosableTab.displayName = "ClosableTab";
+TabList.displayName = "TabList";
+TabPanel.displayName = "TabPanel";
+TabPanels.displayName = "TabPanels";

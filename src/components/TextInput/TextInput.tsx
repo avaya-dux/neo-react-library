@@ -237,3 +237,5 @@ export const InternalTextInputElement = ({
     {...rest}
   />
 );
+
+TextInput.displayName = "TextInput";

@@ -47,3 +47,4 @@ export const Spinner = ({ className, size, ...rest }: SpinnerProps) => (
     {...rest}
   />
 );
+Spinner.displayName = "Spinner";

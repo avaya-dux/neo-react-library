@@ -42,3 +42,5 @@ export const Content = ({
     </div>
   );
 };
+
+Content.displayName = "Content";

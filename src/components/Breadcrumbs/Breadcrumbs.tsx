@@ -82,3 +82,5 @@ export const Breadcrumbs = ({
     </nav>
   );
 };
+
+Breadcrumbs.displayName = "Breadcrumbs";

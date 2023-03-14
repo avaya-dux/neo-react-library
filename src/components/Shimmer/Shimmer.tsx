@@ -49,3 +49,5 @@ export const Shimmer = ({
     ></div>
   );
 };
+
+Shimmer.displayName = "Shimmer";

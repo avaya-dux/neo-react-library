@@ -84,3 +84,5 @@ export const AppLayout = ({
     </Composition>
   );
 };
+
+AppLayout.displayName = "AppLayout";

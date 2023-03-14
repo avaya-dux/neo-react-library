@@ -24,3 +24,5 @@ export const SelectOption = (_: SelectOptionProps) => {
     "This shouldn't have been called, Internal Select should have been used."
   );
 };
+
+SelectOption.displayName = "SelectOption";

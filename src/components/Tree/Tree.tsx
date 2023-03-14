@@ -115,3 +115,5 @@ export const Tree = ({
     </div>
   );
 };
+
+Tree.displayName = "Tree";

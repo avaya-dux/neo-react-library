@@ -222,3 +222,5 @@ export const Select = (props: SelectProps) => {
     </NeoInputWrapper>
   );
 };
+
+Select.displayName = "Select";

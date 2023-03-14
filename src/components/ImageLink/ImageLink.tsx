@@ -40,3 +40,5 @@ export const ImageLink = ({
     <Image src={src} alt={alt} {...rest} />
   </a>
 );
+
+ImageLink.displayName = "ImageLink";

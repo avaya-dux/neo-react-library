@@ -77,3 +77,5 @@ export const Switch = ({
     </NeoInputWrapper>
   );
 };
+
+Switch.displayName = "Switch";

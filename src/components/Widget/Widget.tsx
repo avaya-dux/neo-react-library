@@ -49,3 +49,5 @@ export const Widget = ({
     </WidgetContext.Provider>
   );
 };
+
+Widget.displayName = "Widget";

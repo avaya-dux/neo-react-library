@@ -45,3 +45,5 @@ export const AgentCard = ({
     </div>
   );
 };
+
+AgentCard.displayName = "AgentCard";

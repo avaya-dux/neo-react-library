@@ -133,3 +133,5 @@ export const Branch = ({
     </li>
   );
 };
+
+Branch.displayName = "Branch";

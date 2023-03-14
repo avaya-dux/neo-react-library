@@ -33,3 +33,5 @@ export const Form: FunctionComponent<FormProps> = ({
     />
   );
 };
+
+Form.displayName = "Form";

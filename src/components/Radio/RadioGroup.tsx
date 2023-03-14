@@ -144,3 +144,5 @@ export const RadioGroup = ({
     </NeoInputWrapper>
   );
 };
+
+RadioGroup.displayName = "RadioGroup";
