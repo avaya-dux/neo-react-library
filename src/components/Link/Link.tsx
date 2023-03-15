@@ -86,3 +86,5 @@ export const Link: FC<LinkProps> = ({
     </a>
   );
 };
+
+Link.displayName = "Link";

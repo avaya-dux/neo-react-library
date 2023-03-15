@@ -95,3 +95,5 @@ export const Image = ({
     </>
   );
 };
+
+Image.displayName = "Image";

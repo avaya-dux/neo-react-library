@@ -10,3 +10,5 @@ export const NoContent = ({ icon, text = "No Content" }: NoContentProps) => (
     <p className={`neo-icon-${icon || "info"}`}>{text}</p>
   </div>
 );
+
+NoContent.displayName = "NoContent";

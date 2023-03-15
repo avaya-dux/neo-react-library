@@ -130,3 +130,5 @@ export function createAction(
   }
   return internalAction;
 }
+
+Notification.displayName = "Notification";

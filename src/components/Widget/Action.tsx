@@ -9,3 +9,5 @@ export const Action = ({ children, className, ...rest }: ActionProps) => {
     </div>
   );
 };
+
+Action.displayName = "Action";

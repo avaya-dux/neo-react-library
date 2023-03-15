@@ -243,3 +243,5 @@ export const Table = <T extends Record<string, any>>({
     </FilterContext.Provider>
   );
 };
+
+Table.displayName = "Table";

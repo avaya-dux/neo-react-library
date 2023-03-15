@@ -140,3 +140,5 @@ const BasicSheet = ({
     ></div>
   );
 };
+
+Sheet.displayName = "Sheet";

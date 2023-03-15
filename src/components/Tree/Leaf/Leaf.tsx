@@ -68,3 +68,5 @@ export const Leaf = ({
     </li>
   );
 };
+
+Leaf.displayName = "Leaf";

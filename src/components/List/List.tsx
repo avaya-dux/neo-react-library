@@ -37,3 +37,4 @@ export const List = ({ children, id, itemType = "ListItem" }: ListProps) => {
     </ul>
   );
 };
+List.displayName = "List";

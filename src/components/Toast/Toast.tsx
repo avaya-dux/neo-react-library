@@ -36,3 +36,5 @@ export const Toast = (props: ToastProps) => {
 
   return null;
 };
+
+Toast.displayName = "Toast";

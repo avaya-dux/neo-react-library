@@ -108,3 +108,5 @@ export const Accordion = ({
     </div>
   );
 };
+
+Accordion.displayName = "Accordion";

@@ -149,3 +149,5 @@ export const Tooltip = ({
     </div>
   );
 };
+
+Tooltip.displayName = "Tooltip";

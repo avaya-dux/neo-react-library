@@ -33,3 +33,5 @@ export const ChipsContainer = ({
     )}
   </div>
 );
+
+ChipsContainer.displayName = "ChipsContainer";

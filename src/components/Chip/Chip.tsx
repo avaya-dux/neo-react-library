@@ -76,3 +76,5 @@ export const Chip = ({
     </div>
   );
 };
+
+Chip.displayName = "Chip";

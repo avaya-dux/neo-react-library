@@ -224,3 +224,5 @@ export const Tabs = ({
     <>{content}</>
   );
 };
+
+Tabs.displayName = "Tabs";

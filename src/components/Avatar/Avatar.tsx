@@ -119,3 +119,5 @@ export function getAvatarImageProps({ image, label }: AvatarProps = {}) {
     alt: label,
   };
 }
+
+Avatar.displayName = "Avatar";

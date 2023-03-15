@@ -67,3 +67,5 @@ export const AccordionGroup = ({
     </div>
   );
 };
+
+AccordionGroup.displayName = "AccordionGroup";

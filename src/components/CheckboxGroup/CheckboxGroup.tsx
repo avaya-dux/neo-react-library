@@ -131,3 +131,5 @@ export const CheckboxGroup = ({
     </NeoInputWrapper>
   );
 };
+
+CheckboxGroup.displayName = "CheckboxGroup";
