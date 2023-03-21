@@ -124,7 +124,8 @@ export function createAction(
   } else if ("buttons" in action) {
     internalAction = <ButtonAction buttons={action.buttons} type={type} />;
   } else {
-    const { onClick, ...rest } = action;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { onClick, ...rest } = action as any; // HACK: should not use `any`
     const handler = createClickHandler(setClosed, onClick);
     internalAction = <ClosableAction onClick={handler} {...rest} />;
   }
