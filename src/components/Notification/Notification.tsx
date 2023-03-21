@@ -8,7 +8,12 @@ import {
   useState,
 } from "react";
 
-import { ButtonAction, ClosableAction, CounterAction } from "./Actions";
+import {
+  ButtonAction,
+  ClosableAction,
+  ClosableActionProps,
+  CounterAction,
+} from "./Actions";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
@@ -124,7 +129,7 @@ export function createAction(
   } else if ("buttons" in action) {
     internalAction = <ButtonAction buttons={action.buttons} type={type} />;
   } else {
-    const { onClick, ...rest } = action;
+    const { onClick, ...rest } = action as ClosableActionProps;
     const handler = createClickHandler(setClosed, onClick);
     internalAction = <ClosableAction onClick={handler} {...rest} />;
   }
