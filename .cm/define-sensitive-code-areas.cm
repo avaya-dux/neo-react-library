@@ -25,5 +25,5 @@ automations:
           approvals: 1
 
 sensitive:
-  - src/layouts/
-  - src/components/
+  - src/
+  - package.json
