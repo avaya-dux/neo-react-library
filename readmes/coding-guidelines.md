@@ -8,6 +8,7 @@
 - prefer react hooks over react classes
 - stronlgy enforce accessibility, `throw` if accessibility errors are encountered
 - name prop definitions well
+- run `yarn all` before opening a PR (which runs tests, formats files, ect.)
 
 :heavy_check_mark:
 
