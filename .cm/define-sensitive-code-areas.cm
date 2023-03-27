@@ -20,9 +20,6 @@ automations:
       - action: add-reviewers@v1
         args:
           team_reviewers: ['dux-devs']
-      - action: set-required-approvals@v1
-        args:
-          approvals: 1
 
 sensitive:
   - src/
