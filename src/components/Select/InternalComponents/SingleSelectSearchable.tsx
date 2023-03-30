@@ -30,7 +30,6 @@ export const SingleSelectSearchable = () => {
 
   const {
     closeMenu,
-    getComboboxProps,
     getInputProps,
     getMenuProps,
     getToggleButtonProps,
@@ -43,6 +42,8 @@ export const SingleSelectSearchable = () => {
 
   logger.debug(selectedItems[0]);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { "aria-expanded": toggleAriaExpanded, ...restToggleProps} = getToggleButtonProps();
   const { id, onKeyDown, ...restInputProps } = getInputProps();
 
   // clear the search when dropdown closes (when the user selects an item or clicks away)
@@ -54,7 +55,6 @@ export const SingleSelectSearchable = () => {
 
   return (
     <div
-      {...getComboboxProps()}
       aria-describedby={helperText && helperId}
       className={clsx(
         "neo-multiselect",
@@ -64,7 +64,7 @@ export const SingleSelectSearchable = () => {
       )}
     >
       <span
-        {...getToggleButtonProps()}
+        {...restToggleProps}
         className="neo-multiselect-combo__header"
       >
         <span className="neo-multiselect__padded-container">

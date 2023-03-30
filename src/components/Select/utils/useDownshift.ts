@@ -257,8 +257,8 @@ const DownshiftWithMultipleSelectProps = (
             isOpen: !(disabled || loading),
           };
 
-        case useSelect.stateChangeTypes.MenuKeyDownEnter:
-        case useSelect.stateChangeTypes.MenuKeyDownSpaceButton:
+        case useSelect.stateChangeTypes.ToggleButtonKeyDownEnter:
+        case useSelect.stateChangeTypes.ToggleButtonKeyDownSpaceButton:
         case useSelect.stateChangeTypes.ItemClick:
           return {
             ...changes,

@@ -37,11 +37,11 @@ describe("Select", () => {
     });
 
     it("passes the correct props to searchable element", () => {
-      const { getAllByRole } = renderResult;
-      const searchableElement = getAllByRole("textbox")[0].closest("div");
+      const { getByRole } = renderResult;
+      const searchableElement = getByRole("combobox");
       const expectedAttributes = [
-        "aria-haspopup",
-        "aria-owns",
+        "aria-autocomplete",
+        "aria-controls",
         "aria-expanded",
       ];
       expectedAttributes.forEach((attribute) =>
@@ -50,9 +50,9 @@ describe("Select", () => {
     });
 
     it("toggles aria-expanded prop on click", () => {
-      const { getAllByRole } = renderResult;
-      const toggleButton = getAllByRole("textbox")[0].closest("span");
-      const searchableElement = getAllByRole("textbox")[0].closest("div");
+      const { container, getByRole } = renderResult;
+      const toggleButton = container.querySelector("span.neo-multiselect-combo__header");
+      const searchableElement = getByRole("combobox");
       expect(searchableElement).toHaveAttribute("aria-expanded", "false");
       fireEvent.click(toggleButton);
       expect(searchableElement).toHaveAttribute("aria-expanded", "true");

@@ -30,19 +30,20 @@ export const MultiSelect = () => {
     () =>
       selectedItems.length
         ? selectedItems.map((item, index) => (
-            <Chip
-              key={`${item.children}-${index}`}
-              closable
-              closeButtonAriaLabel={`Remove ${item.children}`}
-              onClose={() => toggleItem(item)}
-            >
-              {item.children}
-            </Chip>
-          ))
+          <Chip
+            key={`${item.children}-${index}`}
+            closable
+            closeButtonAriaLabel={`Remove ${item.children}`}
+            onClose={() => toggleItem(item)}
+          >
+            {item.children}
+          </Chip>
+        ))
         : null,
     [selectedItems, toggleItem]
   );
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { role, "aria-activedescendant": ariaActiveDescendant, ...restToggleProps } = getToggleButtonProps();
   return (
     <div
       aria-describedby={helperText && helperId}
@@ -57,7 +58,7 @@ export const MultiSelect = () => {
       <span className="neo-multiselect-combo__header">
         <span className="neo-multiselect__padded-container">
           <button
-            {...getToggleButtonProps()}
+            {...restToggleProps}
             className="neo-multiselect__header neo-multiselect__header--no-after"
             type="button"
             aria-label={ariaLabel}
