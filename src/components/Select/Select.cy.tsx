@@ -12,7 +12,8 @@ describe("Single Select Scrolling Tests", () => {
         cy.get("ul li").last().should("not.be.visible");
       });
 
-    cy.get("span button").first()
+    cy.get("span button")
+      .first()
       .type(
         "{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}"
       );
@@ -34,17 +35,16 @@ describe("Single Select Searchable Scrolling Tests", () => {
       .first()
       .within(() => {
         cy.get("ul li").last().should("not.be.visible");
-
       });
 
-    cy.get("span").first()
+    cy.get("span")
+      .first()
       .type(
         "{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}"
       );
     cy.get("[role='listbox']")
       .first()
       .within(() => {
-
         cy.get("ul li").last().should("be.visible");
       });
   });
