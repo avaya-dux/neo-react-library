@@ -42,7 +42,6 @@ export const SingleSelectSearchable = () => {
 
   logger.debug(selectedItems[0]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
     getToggleButtonProps();
   const { id, onKeyDown, ...restInputProps } = getInputProps();

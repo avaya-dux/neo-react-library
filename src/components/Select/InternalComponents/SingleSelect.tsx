@@ -19,9 +19,7 @@ export const SingleSelect = () => {
     },
   } = useContext(SelectContext);
   const {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     role,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     "aria-activedescendant": ariaActiveDescendant,
     ...restToggleProps
   } = getToggleButtonProps();

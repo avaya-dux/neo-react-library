@@ -37,7 +37,6 @@ export const MultiSelectSearchable = () => {
     setInputValue,
   } = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
     getToggleButtonProps();
   const { id, onKeyDown, ...restInputProps } = getInputProps();
