@@ -42,9 +42,10 @@ export const MultiSelect = () => {
         : null,
     [selectedItems, toggleItem]
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     role,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     "aria-activedescendant": ariaActiveDescendant,
     ...restToggleProps
   } = getToggleButtonProps();
