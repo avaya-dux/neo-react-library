@@ -30,20 +30,24 @@ export const MultiSelect = () => {
     () =>
       selectedItems.length
         ? selectedItems.map((item, index) => (
-          <Chip
-            key={`${item.children}-${index}`}
-            closable
-            closeButtonAriaLabel={`Remove ${item.children}`}
-            onClose={() => toggleItem(item)}
-          >
-            {item.children}
-          </Chip>
-        ))
+            <Chip
+              key={`${item.children}-${index}`}
+              closable
+              closeButtonAriaLabel={`Remove ${item.children}`}
+              onClose={() => toggleItem(item)}
+            >
+              {item.children}
+            </Chip>
+          ))
         : null,
     [selectedItems, toggleItem]
   );
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { role, "aria-activedescendant": ariaActiveDescendant, ...restToggleProps } = getToggleButtonProps();
+  const {
+    role,
+    "aria-activedescendant": ariaActiveDescendant,
+    ...restToggleProps
+  } = getToggleButtonProps();
   return (
     <div
       aria-describedby={helperText && helperId}

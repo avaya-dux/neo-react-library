@@ -19,7 +19,11 @@ export const SingleSelect = () => {
     },
   } = useContext(SelectContext);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { role, "aria-activedescendant": ariaActiveDescendant, ...restToggleProps} = getToggleButtonProps();
+  const {
+    role,
+    "aria-activedescendant": ariaActiveDescendant,
+    ...restToggleProps
+  } = getToggleButtonProps();
   return (
     <div
       aria-describedby={helperText && helperId}

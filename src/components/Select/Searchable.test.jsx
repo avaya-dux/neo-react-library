@@ -51,7 +51,9 @@ describe("Select", () => {
 
     it("toggles aria-expanded prop on click", () => {
       const { container, getByRole } = renderResult;
-      const toggleButton = container.querySelector("span.neo-multiselect-combo__header");
+      const toggleButton = container.querySelector(
+        "span.neo-multiselect-combo__header"
+      );
       const searchableElement = getByRole("combobox");
       expect(searchableElement).toHaveAttribute("aria-expanded", "false");
       fireEvent.click(toggleButton);

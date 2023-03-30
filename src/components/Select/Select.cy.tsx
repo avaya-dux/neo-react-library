@@ -10,11 +10,15 @@ describe("Single Select Scrolling Tests", () => {
       .first()
       .within(() => {
         cy.get("ul li").last().should("not.be.visible");
-        cy.get("ul li")
-          .first()
-          .type(
-            "{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}"
-          );
+      });
+
+    cy.get("span button").first()
+      .type(
+        "{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}"
+      );
+    cy.get("[role='listbox']")
+      .first()
+      .within(() => {
         cy.get("ul li").last().should("be.visible");
       });
   });
@@ -30,7 +34,17 @@ describe("Single Select Searchable Scrolling Tests", () => {
       .first()
       .within(() => {
         cy.get("ul li").last().should("not.be.visible");
-        cy.get("ul li").first().type("{upArrow}{upArrow}");
+
+      });
+
+    cy.get("span").first()
+      .type(
+        "{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}"
+      );
+    cy.get("[role='listbox']")
+      .first()
+      .within(() => {
+
         cy.get("ul li").last().should("be.visible");
       });
   });

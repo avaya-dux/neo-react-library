@@ -37,8 +37,9 @@ export const MultiSelectSearchable = () => {
     setInputValue,
   } = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { "aria-expanded": toggleAriaExpanded, ...restToggleProps} = getToggleButtonProps();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
+    getToggleButtonProps();
   const { id, onKeyDown, ...restInputProps } = getInputProps();
 
   // clear the search when dropdown closes (when the user selects an item or clicks away)
@@ -75,10 +76,7 @@ export const MultiSelectSearchable = () => {
         isOpen && "neo-multiselect--active"
       )}
     >
-      <span
-        {...restToggleProps}
-        className="neo-multiselect-combo__header"
-      >
+      <span {...restToggleProps} className="neo-multiselect-combo__header">
         <span className="neo-multiselect__padded-container">
           <AutosizeInput
             {...restInputProps}
