@@ -42,7 +42,11 @@ export const MultiSelect = () => {
         : null,
     [selectedItems, toggleItem]
   );
-
+  const {
+    role,
+    "aria-activedescendant": ariaActiveDescendant,
+    ...restToggleProps
+  } = getToggleButtonProps();
   return (
     <div
       aria-describedby={helperText && helperId}
@@ -57,7 +61,7 @@ export const MultiSelect = () => {
       <span className="neo-multiselect-combo__header">
         <span className="neo-multiselect__padded-container">
           <button
-            {...getToggleButtonProps()}
+            {...restToggleProps}
             className="neo-multiselect__header neo-multiselect__header--no-after"
             type="button"
             aria-label={ariaLabel}

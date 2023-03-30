@@ -28,7 +28,6 @@ export const MultiSelectSearchable = () => {
     },
   } = useContext(SelectContext);
   const {
-    getComboboxProps,
     getInputProps,
     getMenuProps,
     getToggleButtonProps,
@@ -38,6 +37,8 @@ export const MultiSelectSearchable = () => {
     setInputValue,
   } = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
 
+  const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
+    getToggleButtonProps();
   const { id, onKeyDown, ...restInputProps } = getInputProps();
 
   // clear the search when dropdown closes (when the user selects an item or clicks away)
@@ -66,7 +67,6 @@ export const MultiSelectSearchable = () => {
 
   return (
     <div
-      {...getComboboxProps()}
       aria-describedby={helperText && helperId}
       className={clsx(
         "neo-multiselect",
@@ -75,10 +75,7 @@ export const MultiSelectSearchable = () => {
         isOpen && "neo-multiselect--active"
       )}
     >
-      <span
-        {...getToggleButtonProps()}
-        className="neo-multiselect-combo__header"
-      >
+      <span {...restToggleProps} className="neo-multiselect-combo__header">
         <span className="neo-multiselect__padded-container">
           <AutosizeInput
             {...restInputProps}
