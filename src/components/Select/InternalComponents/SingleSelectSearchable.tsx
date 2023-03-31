@@ -25,6 +25,7 @@ export const SingleSelectSearchable = () => {
       helperText,
       loading,
       placeholder,
+      size,
     },
   } = useContext(SelectContext);
 
@@ -58,6 +59,7 @@ export const SingleSelectSearchable = () => {
       aria-describedby={helperText && helperId}
       className={clsx(
         "neo-multiselect",
+        size === "sm" && "neo-multiselect--small",
         disabled && "neo-multiselect--disabled",
         loading && "neo-select__spinner",
         isOpen && "neo-multiselect--active"

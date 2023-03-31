@@ -375,6 +375,34 @@ export const SmallSelects = () => {
       >
         {fruitOptions}
       </Select>
+
+      <Select
+        helperText="This is a small sized searchable Select"
+        label="Select a few nice foods"
+        searchable
+        size="sm"
+      >
+        {fruitOptions}
+      </Select>
+
+      <Select
+        helperText="This is a small sized multiselect"
+        label="Select a few nice foods"
+        multiple
+        size="sm"
+      >
+        {fruitOptions}
+      </Select>
+
+      <Select
+        helperText="This is a small sized searchable multiselect"
+        label="Select a few nice foods"
+        multiple
+        searchable
+        size="sm"
+      >
+        {fruitOptions}
+      </Select>
     </Sheet>
   );
 };
