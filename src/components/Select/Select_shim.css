@@ -60,6 +60,24 @@ body .neo-multiselect__content:focus-visible {
   line-height: 1.5;
 }
 
+div.neo-multiselect
+  span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container
+  div
+  input.neo-input {
+  border: 0;
+  display: inline-block;
+  order: 2;
+}
+
+div.neo-multiselect:not(.neo-multiselect--small)
+  span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container
+  div
+  input.neo-input {
+  height: 36px;
+}
+
 /* no left padding while loading */
 .neo-multiselect.neo-select__spinner span input.neo-input {
   padding-left: 0;
@@ -106,7 +124,7 @@ div.neo-multiselect.neo-multiselect--small
   span.neo-multiselect-combo__header
   span.neo-multiselect__padded-container
   div
-  input.neo-input {
+  input.neo-input.neo-multiselect__input--small {
   max-height: 26px;
   min-height: initial;
 }

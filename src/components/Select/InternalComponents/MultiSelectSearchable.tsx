@@ -83,14 +83,10 @@ export const MultiSelectSearchable = () => {
           <AutosizeInput
             {...restInputProps}
             value={inputValue}
-            style={{
-              border: 0,
-              height: size !== "sm" ? "36px" : "",
-              maxHeight: size === "sm" ? "26px" : "",
-              display: "inline-block",
-              order: "2",
-            }}
-            inputClassName="neo-input"
+            inputClassName={clsx(
+              "neo-input",
+              size === "sm" && "neo-multiselect__input--small"
+            )}
             disabled={disabled}
             placeholder={placeholder}
             onKeyDown={(e) => {
