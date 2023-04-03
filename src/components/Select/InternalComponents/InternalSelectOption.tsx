@@ -6,6 +6,7 @@ import { genId } from "utils/accessibilityUtils";
 import { SelectContext } from "../utils/SelectContext";
 import { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionWithCheckbox } from "./OptionWithCheckbox";
+import clsx from "clsx";
 
 export interface InternalSelectOptionProps extends SelectOptionProps {
   index: number;
@@ -27,7 +28,7 @@ export const InternalSelectOption = ({
   index,
 }: InternalSelectOptionProps) => {
   const {
-    downshiftProps: { getItemProps },
+    downshiftProps: { getItemProps, highlightedIndex },
 
     optionProps: { multiple },
 
@@ -72,7 +73,13 @@ export const InternalSelectOption = ({
       )}
     </>
   ) : (
-    <li {...itemProps}>
+    <li
+      className={clsx(
+        "neo-option-plain",
+        index === highlightedIndex && "neo-option-plain--focused"
+      )}
+      {...itemProps}
+    >
       {children}
 
       {helperText && <p className="neo-input-hint">{helperText}</p>}
