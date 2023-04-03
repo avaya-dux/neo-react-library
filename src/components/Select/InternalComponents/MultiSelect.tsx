@@ -33,6 +33,7 @@ export const MultiSelect = () => {
             <Chip
               key={`${item.children}-${index}`}
               closable
+              disabled
               closeButtonAriaLabel={`Remove ${item.children}`}
               onClose={() => toggleItem(item)}
             >
@@ -40,7 +41,7 @@ export const MultiSelect = () => {
             </Chip>
           ))
         : null,
-    [selectedItems, toggleItem]
+    [selectedItems, disabled, toggleItem]
   );
   const {
     role,

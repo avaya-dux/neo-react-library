@@ -67,6 +67,8 @@ export const Chip = ({
         <button
           className="neo-close neo-close--clear"
           aria-label={closeButtonAriaLabel}
+          // TO-DO: NEO-1549: Add the below styling rule in the CSS library
+          style={{ pointerEvents: disabled ? "none" : "initial" }}
           onClick={(e) => {
             setClosed(true);
             onClose && onClose(e);
