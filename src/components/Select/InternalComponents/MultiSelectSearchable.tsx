@@ -25,6 +25,7 @@ export const MultiSelectSearchable = () => {
       helperText,
       loading,
       placeholder,
+      size,
     },
   } = useContext(SelectContext);
   const {
@@ -70,6 +71,8 @@ export const MultiSelectSearchable = () => {
       aria-describedby={helperText && helperId}
       className={clsx(
         "neo-multiselect",
+        size === "sm" &&
+          "neo-multiselect--small neo-multiselect--small-searchable",
         disabled && "neo-multiselect--disabled",
         loading && "neo-select__spinner",
         isOpen && "neo-multiselect--active"
@@ -80,13 +83,10 @@ export const MultiSelectSearchable = () => {
           <AutosizeInput
             {...restInputProps}
             value={inputValue}
-            style={{
-              border: 0,
-              height: "36px",
-              display: "inline-block",
-              order: "2",
-            }}
-            inputClassName="neo-input"
+            inputClassName={clsx(
+              "neo-input",
+              size === "sm" && "neo-multiselect__input--small"
+            )}
             disabled={disabled}
             placeholder={placeholder}
             onKeyDown={(e) => {

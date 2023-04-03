@@ -9,11 +9,13 @@
   button.neo-multiselect__header.neo-multiselect__header--no-after:after {
   display: none;
 }
+
 body .neo-multiselect__content.neo-set-keyboard-focus,
 body .neo-multiselect__content:focus-visible {
   outline-offset: 1px;
   outline: 1px auto var(--global-outline-color);
 }
+
 .neo-multiselect__content:empty {
   border: none;
   box-shadow: none;
@@ -58,6 +60,24 @@ body .neo-multiselect__content:focus-visible {
   line-height: 1.5;
 }
 
+div.neo-multiselect
+  span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container
+  div
+  input.neo-input {
+  border: 0;
+  display: inline-block;
+  order: 2;
+}
+
+div.neo-multiselect:not(.neo-multiselect--small)
+  span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container
+  div
+  input.neo-input {
+  height: 36px;
+}
+
 /* no left padding while loading */
 .neo-multiselect.neo-select__spinner span input.neo-input {
   padding-left: 0;
@@ -69,6 +89,7 @@ body .neo-multiselect__content:focus-visible {
   padding-left: 32px;
   background-color: #f1f1f1;
 }
+
 div.neo-multiselect span.neo-multiselect-combo__header {
   min-height: 36px;
 }
@@ -77,6 +98,55 @@ div.neo-multiselect button.neo-multiselect__header {
   min-height: 36px;
   flex-grow: 1;
   order: 2;
+}
+
+div.neo-multiselect.neo-multiselect--small
+  span.neo-multiselect-combo__header
+  button.neo-multiselect__header {
+  min-height: initial;
+}
+
+div.neo-multiselect.neo-multiselect--small
+  span.neo-multiselect-combo__header
+  button.neo-multiselect__header:last-child {
+  height: auto;
+  min-height: 26px;
+}
+
+div.neo-multiselect.neo-multiselect--small
+  span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container {
+  min-height: initial;
+  padding: 0px;
+}
+
+div.neo-multiselect.neo-multiselect--small
+  span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container
+  div
+  input.neo-input.neo-multiselect__input--small {
+  max-height: 26px;
+  min-height: initial;
+}
+
+div.neo-multiselect.neo-multiselect--small
+  span.neo-multiselect-combo__header
+  span.neo-multiselect__padded-container
+  .neo-chip {
+  min-height: initial;
+  max-height: 18px;
+  margin: 0px 2px;
+}
+
+.neo-multiselect.neo-multiselect--small.neo-multiselect--small-searchable:focus-within
+  .neo-multiselect-combo__header,
+.neo-multiselect.neo-multiselect--small:focus-within .neo-multiselect__header {
+  margin: 0 -1px;
+}
+
+div.neo-multiselect.neo-multiselect--small button.neo-multiselect__header,
+div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
+  min-height: 26px;
 }
 
 span.neo-multiselect-combo__header .neo-multiselect__padded-container {
@@ -100,12 +170,6 @@ span.neo-multiselect-combo__header .neo-multiselect__padded-container {
   background-color: var(--input-disabled-bg);
   color: var(--input-disabled-color) !important;
   cursor: not-allowed !important;
-}
-
-div.neo-multiselect.neo-multiselect--small button.neo-multiselect__header,
-div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
-  width: 100%;
-  min-height: 26px;
 }
 
 /* internal select option highlight styles */
