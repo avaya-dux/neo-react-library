@@ -56,6 +56,19 @@ describe("Chip", () => {
     expect(screen.queryByText(chipText)).not.toBeInTheDocument();
   });
 
+  it("does not remove closable chip from DOM if in disabled state", async () => {
+    render(
+      <Chip closable disabled>
+        {chipText}
+      </Chip>
+    );
+
+    const btn = screen.getByRole("button");
+    expect(btn).toBeInTheDocument();
+
+    await expect(user.click(btn)).rejects.toThrow();
+  });
+
   describe("storybook tests", () => {
     describe("Default", () => {
       let renderResult: RenderResult;
