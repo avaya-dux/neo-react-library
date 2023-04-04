@@ -258,3 +258,7 @@ div.neo-multiselect
   > div:first-child {
   order: 2;
 }
+
+.neo-option-plain.neo-option-plain--focused {
+  background-color: #f1f1f1;
+}
