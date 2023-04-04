@@ -1,5 +1,6 @@
 import { composeStories } from "@storybook/testing-react";
 import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -7,6 +8,7 @@ import { Select } from "./Select";
 import * as SelectStories from "./Select.stories";
 import { SelectOption } from "./SelectOption";
 import { fruitOptions } from "./utils/mockdata";
+import { UserEventKeys } from "utils";
 
 const {
   BasicSelects,
@@ -151,6 +153,8 @@ describe("Select", () => {
     });
 
     describe("integration tests", () => {
+      const user = userEvent.setup();
+
       it("only calls the event handler when option is not disabled", () => {
         const spy = vi.fn();
         const { getAllByRole } = render(
@@ -178,6 +182,31 @@ describe("Select", () => {
         });
       });
 
+      it("selects correct number of chips", async () => {
+        const { container } = render(
+          <Select multiple label="not important">
+            <SelectOption>Option 1</SelectOption>
+            <SelectOption>Option 2</SelectOption>
+            <SelectOption>Option 3</SelectOption>
+            <SelectOption>Option 4</SelectOption>
+          </Select>
+        );
+        const toggleElement = screen.getByRole("button");
+        toggleElement.focus();
+        // open menu
+        await user.keyboard(UserEventKeys.ENTER);
+        // select first
+        await user.keyboard(UserEventKeys.DOWN);
+        await user.keyboard(UserEventKeys.ENTER);
+        // select second
+        await user.keyboard(UserEventKeys.DOWN);
+        await user.keyboard(UserEventKeys.ENTER);
+        // tab away
+        await user.tab();
+        // assert there are two chips
+        const chips = container.querySelectorAll("div.neo-chip--close");
+        expect(chips.length).toEqual(2);
+      });
       it("does open content area on click after content is loaded", () => {
         const placeholder = "please select one";
         const { getByRole, rerender } = render(
