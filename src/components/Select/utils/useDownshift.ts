@@ -245,7 +245,6 @@ const DownshiftWithMultipleSelectProps = (
   return useSelect({
     items: options,
     id: selectId,
-    selectedItem: null,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
       const { selectedItem } = changes;
