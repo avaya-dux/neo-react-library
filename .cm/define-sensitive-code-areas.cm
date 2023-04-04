@@ -13,13 +13,6 @@ automations:
           label: 'non-sensitive'
           color: '#2CA44E'
       - action: approve@v1
-  require_review:
-    if:
-      - {{ files | match(list=sensitive) | some }}
-    run:
-      - action: add-reviewers@v1
-        args:
-          team_reviewers: ['dux-devs']
 
 sensitive:
   - src/
