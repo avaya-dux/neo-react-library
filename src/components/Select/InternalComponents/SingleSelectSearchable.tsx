@@ -93,6 +93,7 @@ export const SingleSelectSearchable = () => {
             <Chip
               closable
               closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}
+              disabled={disabled}
               onClose={(e) => {
                 e.stopPropagation();
                 reset();
