@@ -117,7 +117,7 @@ describe("Select", () => {
   describe("'creatable' functionality", () => {
     it("`SingleSelectSearchable` allows a user to create and remove custom options if `creatable` prop is set", async () => {
       const newOptionText = "New Option";
-      const { queryByText } = render(
+      render(
         <Select label={label} searchable creatable>
           {fruitOptions}
         </Select>
@@ -141,16 +141,16 @@ describe("Select", () => {
       expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
       // newly created text has been added
-      expect(queryByText(newOptionText)).toBeTruthy();
+      expect(screen.queryByText(newOptionText)).toBeInTheDocument();
 
       await act(async () => await user.keyboard(UserEventKeys.BACKSPACE));
-      expect(queryByText(newOptionText)).toBeFalsy(); // text removed
+      expect(screen.queryByText(newOptionText)).not.toBeInTheDocument(); // text removed
     });
 
     it("`SingleSelectSearchable` allows a user to create exactly one custom option", async () => {
       const firstOptionText = "first custom option";
       const secondOptionText = "second custom option";
-      const { queryByText } = render(
+      render(
         <Select label={label} searchable creatable>
           {fruitOptions}
         </Select>
@@ -165,7 +165,7 @@ describe("Select", () => {
       await user.keyboard(UserEventKeys.ENTER);
 
       // first option text has been created
-      expect(screen.getByText(firstOptionText)).toBeInTheDocument();
+      expect(screen.queryByText(firstOptionText)).toBeInTheDocument();
 
       // add second option
       await user.keyboard(secondOptionText);
@@ -173,7 +173,7 @@ describe("Select", () => {
       await user.keyboard(UserEventKeys.ENTER);
 
       // first option text has been removed in place of second option text
-      expect(queryByText(firstOptionText)).toBeFalsy();
+      expect(screen.queryByText(firstOptionText)).not.toBeInTheDocument();
       expect(screen.getByText(secondOptionText)).toBeInTheDocument();
     });
 
