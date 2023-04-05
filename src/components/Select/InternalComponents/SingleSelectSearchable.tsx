@@ -3,7 +3,6 @@ import { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
 import { useContext, useEffect } from "react";
 
-import { Chip } from "components/Chip";
 import { Keys } from "utils";
 
 import { SelectContext } from "../utils/SelectContext";
@@ -89,19 +88,7 @@ export const SingleSelectSearchable = () => {
             }}
           />
 
-          {selectedItems[0] && (
-            <Chip
-              closable
-              closeButtonAriaLabel={`Remove ${selectedItems[0].children}`}
-              disabled={disabled}
-              onClose={(e) => {
-                e.stopPropagation();
-                reset();
-              }}
-            >
-              {selectedItems[0].children}
-            </Chip>
-          )}
+          {selectedItems[0]?.children || placeholder}
 
           <input
             className="neo-display-none"
