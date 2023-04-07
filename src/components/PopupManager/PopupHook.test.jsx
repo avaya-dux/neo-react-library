@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
 
 import { Notification } from "components/Notification";
@@ -23,23 +23,25 @@ popupManagerLogger.disableAll();
 popupHookLogger.disableAll();
 
 describe("PopupHook", () => {
+
+  beforeEach(() => {
+    vi.spyOn(console, "error").mockImplementation(() => null);
+  })
+
   afterEach(() => {
     document.getElementsByTagName("html")[0].innerHTML = "";
+    vi.resetAllMocks();
   });
 
-  it("createContainer creates container", () => {
-    // NOTE: ignore react17 warnings (from storybook build). Should remove this line once storybook is updated to react18.
-    vi.spyOn(console, "error").mockImplementation(() => null);
-
-    vi.useFakeTimers();
+  it("createContainer creates container", async () => {
     const callback = vi.fn();
     createContainer(callback);
-    expect(callback).toBeCalledTimes(1);
+    await waitFor(() => expect(callback).toBeCalledTimes(1));
+    expect(getReady()).toBeTruthy();
+
     callback.mockClear();
     createContainer(callback);
-    vi.runAllTimers();
     expect(callback).toBeCalledTimes(1);
-    expect(getReady()).toBeTruthy();
   });
 
   it("createDivWithId creation successful", () => {
@@ -49,9 +51,6 @@ describe("PopupHook", () => {
   });
 
   it("usePopup creates container", async () => {
-    // NOTE: ignore react17 warnings (from storybook build). Should remove this line once storybook is updated to react18.
-    vi.spyOn(console, "error").mockImplementation(() => null);
-
     expect(document.getElementById(containerId)).toBeNull();
     const { result } = renderHook(() => usePopup());
     expect(result.current.mounted).toBeTruthy();
@@ -59,9 +58,6 @@ describe("PopupHook", () => {
   });
 
   it("notify ok", async () => {
-    // NOTE: ignore react17 warnings (from storybook build). Should remove this line once storybook is updated to react18.
-    vi.spyOn(console, "error").mockImplementation(() => null);
-
     const { result } = renderHook(() => usePopup());
     expect(result.current.notify).toBeTruthy();
     const notification = (
