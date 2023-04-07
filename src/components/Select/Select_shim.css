@@ -158,8 +158,6 @@ span.neo-multiselect-combo__header .neo-multiselect__padded-container {
   flex-wrap: wrap;
   justify-content: flex-start;
   min-height: 36px;
-  padding-top: 3px;
-  padding-bottom: 3px;
   flex-grow: 1;
   display: flex;
 }

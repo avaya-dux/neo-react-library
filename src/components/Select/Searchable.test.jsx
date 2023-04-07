@@ -67,24 +67,6 @@ describe("Select", () => {
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
-
-    it("toggles clicked elements", async () => {
-      expect(screen.queryAllByRole("button")).toHaveLength(0);
-      const combobox = screen.getByRole("combobox");
-      const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
-      expect(combobox).toHaveAttribute("aria-expanded", "false");
-      await user.click(comboboxBtn);
-      expect(combobox).toHaveAttribute("aria-expanded", "true");
-
-      const options = screen.getAllByRole("option");
-      fireEvent.click(options[0]);
-
-      expect(screen.getAllByRole("button")).toHaveLength(1); // has one chip
-
-      fireEvent.click(screen.getByRole("button"));
-
-      expect(screen.queryAllByRole("button")).toHaveLength(0); // chip removed
-    });
   });
 
   describe("Searchable Multi Select", () => {
@@ -158,12 +140,11 @@ describe("Select", () => {
       // the new option as we do not show that in the list
       expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
-      // newly created chip has been added
-      expect(screen.getAllByRole("button")).toHaveLength(1);
-      expect(screen.getByText(newOptionText)).toBeInTheDocument();
+      // newly created text has been added
+      expect(screen.queryByText(newOptionText)).toBeInTheDocument();
 
       await act(async () => await user.keyboard(UserEventKeys.BACKSPACE));
-      expect(screen.queryAllByRole("button")).toHaveLength(0); // chip removed
+      expect(screen.queryByText(newOptionText)).not.toBeInTheDocument(); // text removed
     });
 
     it("`SingleSelectSearchable` allows a user to create exactly one custom option", async () => {
@@ -183,17 +164,16 @@ describe("Select", () => {
       await user.keyboard(UserEventKeys.DOWN);
       await user.keyboard(UserEventKeys.ENTER);
 
-      // first option chip has been created
-      expect(screen.getAllByRole("button")).toHaveLength(1);
-      expect(screen.getByText(firstOptionText)).toBeInTheDocument();
+      // first option text has been created
+      expect(screen.queryByText(firstOptionText)).toBeInTheDocument();
 
       // add second option
       await user.keyboard(secondOptionText);
       await user.keyboard(UserEventKeys.DOWN);
       await user.keyboard(UserEventKeys.ENTER);
 
-      // first option chip has been removed in place of second option chip
-      expect(screen.getAllByRole("button")).toHaveLength(1);
+      // first option text has been removed in place of second option text
+      expect(screen.queryByText(firstOptionText)).not.toBeInTheDocument();
       expect(screen.getByText(secondOptionText)).toBeInTheDocument();
     });
 
