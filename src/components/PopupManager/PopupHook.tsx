@@ -1,6 +1,6 @@
 import log from "loglevel";
 import { createRef, useCallback, useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOMClient from "react-dom/client";
 
 import { PopupManager } from "./PopupManager";
 import {
@@ -42,15 +42,21 @@ export const [createContainer, removePopupManagerContainer, getReady] = (() => {
     }
     container = createDivWithId(containerId);
     logger.debug("container created");
-    ReactDOM.render(
-      <PopupManager ref={managerRef}></PopupManager>,
-      container,
-      () => {
-        logger.debug("global popup manager is mounted...");
-        ready = true;
-        callback();
-      }
-    );
+    const root = ReactDOMClient.createRoot(container);
+    const CallbackWrapper = ({ callback }: { callback: () => void }) => {
+      return (
+        <div ref={callback}>
+          <PopupManager ref={managerRef}></PopupManager>
+        </div>
+      );
+    };
+
+    const legacyCallBack = () => {
+      logger.debug("global popup manager is mounted...");
+      ready = true;
+      callback();
+    };
+    root.render(<CallbackWrapper callback={legacyCallBack} />);
   };
   const removePopupManagerContainer = () => {
     logger.debug("global popup hook: removing container");
