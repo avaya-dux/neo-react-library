@@ -23,10 +23,9 @@ popupManagerLogger.disableAll();
 popupHookLogger.disableAll();
 
 describe("PopupHook", () => {
-
   beforeEach(() => {
     vi.spyOn(console, "error").mockImplementation(() => null);
-  })
+  });
 
   afterEach(() => {
     document.getElementsByTagName("html")[0].innerHTML = "";
