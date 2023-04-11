@@ -4,7 +4,8 @@ import { IconNamesType } from "utils";
 
 import { TabPanelProps } from "./TabTypes";
 
-export interface InternalTabProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface InternalTabProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "content"> {
   id: string;
   name: ReactNode;
   disabled: boolean;
