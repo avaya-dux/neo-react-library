@@ -66,7 +66,7 @@ export const MultiSelect = () => {
       return { "aria-label": ariaLabel };
     }
     return { "aria-labelledby": ariaLabelledby };
-  }, [selectedItems, ariaLabel, ariaLabelledby]);
+  }, [selectedItems, ariaLabel, ariaLabelledby, filteredOptions]);
 
   return (
     <div
