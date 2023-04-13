@@ -297,7 +297,7 @@ const DownshiftWithMultipleSelectProps = (
         setSelectedItems([...selectedItems, selectedItem]);
       }
     },
-    // BUG: items are not announced in screen reader when selected
+    itemToString: (item) => item?.value || "",
   });
 };
 
