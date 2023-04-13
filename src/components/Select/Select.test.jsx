@@ -207,7 +207,10 @@ describe("Select", () => {
         const chips = container.querySelectorAll("div.neo-chip--close");
         expect(chips.length).toEqual(2);
         // assert correct aria-label on toggle button
-        expect(toggleElement).toHaveAttribute("aria-label", "Option 1 and Option 2, 2 of 4 selected");
+        expect(toggleElement).toHaveAttribute(
+          "aria-label",
+          "Option 1 and Option 2, 2 of 4 selected"
+        );
       });
       it("does open content area on click after content is loaded", () => {
         const placeholder = "please select one";

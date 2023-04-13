@@ -54,7 +54,12 @@ export const MultiSelect = () => {
   const computedAriaProperty = useMemo(() => {
     if (selectedItems && selectedItems.length > 0) {
       return {
-        "aria-label": selectedItems.map((item) => item.value).join(" and ").concat(`, ${selectedItems.length} of ${filteredOptions.length} selected`),
+        "aria-label": selectedItems
+          .map((item) => item.value)
+          .join(" and ")
+          .concat(
+            `, ${selectedItems.length} of ${filteredOptions.length} selected`
+          ),
       };
     }
     if (ariaLabel) {
