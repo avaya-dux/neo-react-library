@@ -9,6 +9,10 @@ import { SelectContext } from "./utils/SelectContext";
 import { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
 
+import log from "loglevel";
+const logger = log.getLogger("select-logger");
+logger.disableAll();
+
 import "./Select_shim.css";
 
 /**

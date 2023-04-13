@@ -62,7 +62,7 @@ describe("Select", () => {
     it("passes the correct props to toggle element", () => {
       const { getByRole } = renderResult;
       const toggleButton = getByRole("button");
-      const expectedAttributes = ["id", "aria-haspopup", "aria-labelledby"];
+      const expectedAttributes = ["id", "aria-haspopup", "aria-label"];
       expectedAttributes.forEach((attribute) =>
         expect(toggleButton).toHaveAttribute(attribute)
       );
@@ -206,6 +206,8 @@ describe("Select", () => {
         // assert there are two chips
         const chips = container.querySelectorAll("div.neo-chip--close");
         expect(chips.length).toEqual(2);
+        // assert correct aria-label on toggle button
+        expect(toggleElement).toHaveAttribute("aria-label", "Option 1 and Option 2, 2 of 4 selected");
       });
       it("does open content area on click after content is loaded", () => {
         const placeholder = "please select one";

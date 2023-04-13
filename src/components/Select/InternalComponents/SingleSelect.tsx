@@ -1,13 +1,16 @@
+import log from "loglevel";
 import clsx from "clsx";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 
 import { SelectContext } from "../utils/SelectContext";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
+const logger = log.getLogger("single-select-logger");
+logger.disableAll();
 export const SingleSelect = () => {
   const {
     downshiftProps: { getMenuProps, getToggleButtonProps, isOpen },
-    optionProps: { selectedItems },
+    optionProps: { selectedItems, selectedItemsValues },
     selectProps: {
       ariaLabel,
       disabled,
@@ -21,8 +24,24 @@ export const SingleSelect = () => {
   const {
     role,
     "aria-activedescendant": ariaActiveDescendant,
+    "aria-labelledby": ariaLabelledby,
     ...restToggleProps
   } = getToggleButtonProps();
+
+  const computedAriaProperty = useMemo(() => {
+    if (selectedItemsValues) {
+      return {
+        "aria-label": selectedItemsValues.concat(" selected"),
+      };
+    }
+    if (ariaLabel) {
+      return { "aria-label": ariaLabel };
+    }
+    return { "aria-labelledby": ariaLabelledby };
+  }, [selectedItemsValues, ariaLabel, ariaLabelledby]);
+
+  logger.log(computedAriaProperty);
+
   return (
     <div
       aria-describedby={helperText && helperId}
@@ -37,9 +56,9 @@ export const SingleSelect = () => {
       <span className="neo-multiselect-combo__header">
         <button
           {...restToggleProps}
+          {...computedAriaProperty}
           className="neo-multiselect__header neo-multiselect__header--no-after"
           type="button"
-          aria-label={ariaLabel}
         >
           {selectedItems[0]?.children || placeholder}
         </button>
@@ -50,7 +69,6 @@ export const SingleSelect = () => {
           "neo-multiselect__content",
           isOpen && "neo-set-keyboard-focus"
         )}
-        aria-label={ariaLabel}
         {...getMenuProps()}
       >
         <ul role="group">

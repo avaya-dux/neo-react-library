@@ -16,6 +16,7 @@ export const MultiSelect = () => {
     },
     optionProps: { selectedItems },
     selectProps: {
+      filteredOptions,
       ariaLabel,
       disabled,
       helperId,
@@ -46,8 +47,22 @@ export const MultiSelect = () => {
   const {
     role,
     "aria-activedescendant": ariaActiveDescendant,
+    "aria-labelledby": ariaLabelledby,
     ...restToggleProps
   } = getToggleButtonProps();
+
+  const computedAriaProperty = useMemo(() => {
+    if (selectedItems && selectedItems.length > 0) {
+      return {
+        "aria-label": selectedItems.map((item) => item.value).join(" and ").concat(`, ${selectedItems.length} of ${filteredOptions.length} selected`),
+      };
+    }
+    if (ariaLabel) {
+      return { "aria-label": ariaLabel };
+    }
+    return { "aria-labelledby": ariaLabelledby };
+  }, [selectedItems, ariaLabel, ariaLabelledby]);
+
   return (
     <div
       aria-describedby={helperText && helperId}
@@ -63,9 +78,9 @@ export const MultiSelect = () => {
         <span className="neo-multiselect__padded-container">
           <button
             {...restToggleProps}
+            {...computedAriaProperty}
             className="neo-multiselect__header neo-multiselect__header--no-after"
             type="button"
-            aria-label={ariaLabel}
           >
             {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
           </button>
