@@ -10,6 +10,10 @@ import { SelectOption } from "./SelectOption";
 import { fruitOptions } from "./utils/mockdata";
 import { UserEventKeys } from "utils";
 
+import log from "loglevel";
+const logger = log.getLogger("select-test-logger");
+logger.disableAll();
+
 const {
   BasicSelects,
   Searchable,
@@ -156,7 +160,7 @@ describe("Select", () => {
       const user = userEvent.setup();
 
       it("only calls the event handler when option is not disabled", () => {
-        const spy = vi.fn();
+        const spy = vi.fn().mockImplementation(() => logger.debug("called"));
         const { getAllByRole } = render(
           <Select multiple label="not important" onChange={spy}>
             <SelectOption>Option 1</SelectOption>
@@ -169,16 +173,21 @@ describe("Select", () => {
         expect(spy).not.toHaveBeenCalled();
 
         const listElements = getAllByRole("option");
-
-        listElements.forEach((element) => {
+        listElements.forEach((element, index) => {
+          logger.debug({ index });
           fireEvent.click(element);
-
           if (element.attributes.disabled) {
             expect(spy).not.toHaveBeenCalled();
           } else {
+            logger.debug({ element });
             expect(spy).toHaveBeenCalledTimes(1);
-            spy.mockClear();
           }
+          logger.debug({
+            disabled: element.attributes.disabled,
+            call0: spy.mock.calls[0],
+            call1: spy.mock.calls[1],
+          });
+          spy.mockClear();
         });
       });
 

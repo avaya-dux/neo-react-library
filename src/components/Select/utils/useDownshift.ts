@@ -242,12 +242,18 @@ const DownshiftWithMultipleSelectProps = (
   disabled: boolean,
   loading: boolean
 ) => {
+  logger.debug("calling DownshiftWithMultipleSelectProps");
   return useSelect({
     items: options,
     id: selectId,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
       const { selectedItem } = changes;
+
+      const selectedItemsValues = selectedItems.map((item) => item.value);
+      const shouldRemoveItem = selectedItemsValues.includes(
+        selectedItem?.value
+      );
 
       switch (type) {
         case useSelect.stateChangeTypes.ToggleButtonClick:
@@ -259,10 +265,20 @@ const DownshiftWithMultipleSelectProps = (
         case useSelect.stateChangeTypes.ToggleButtonKeyDownEnter:
         case useSelect.stateChangeTypes.ToggleButtonKeyDownSpaceButton:
         case useSelect.stateChangeTypes.ItemClick:
+          logger.debug({ type, shouldRemoveItem });
+          if (selectedItem && shouldRemoveItem) {
+            setSelectedItems(
+              selectedItems.filter((item) => item.value !== selectedItem.value)
+            );
+          } else if (selectedItem) {
+            setSelectedItems([...selectedItems, selectedItem]);
+          }
+          logger.debug({ changes });
           return {
             ...changes,
             isOpen: true,
             highlightedIndex: state.highlightedIndex,
+            selectedItem: shouldRemoveItem ? null : selectedItem,
           };
 
         case useSelect.stateChangeTypes.FunctionSelectItem:
@@ -286,14 +302,17 @@ const DownshiftWithMultipleSelectProps = (
       }
     },
     onSelectedItemChange: ({ selectedItem }) => {
+      logger.log({ onSelectedItemChange: selectedItem, selectedItems });
       if (!selectedItem) return;
 
       const selectedItemValues = selectedItems.map((item) => item.value);
       if (selectedItemValues.includes(selectedItem.value)) {
+        logger.debug({ removeSelectedItem: selectedItem });
         setSelectedItems(
           selectedItems.filter((item) => item.value !== selectedItem.value)
         );
       } else {
+        logger.debug({ addSelectedItem: selectedItem });
         setSelectedItems([...selectedItems, selectedItem]);
       }
     },

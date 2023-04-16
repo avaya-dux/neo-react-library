@@ -146,7 +146,7 @@ export const Select = (props: SelectProps) => {
         const newlySelectedValues = selectedItems.map(
           (item) => item.value as string
         );
-
+        logger.debug({ selectedItems });
         onChange(newlySelectedValues);
       } else {
         onChange(
@@ -155,7 +155,7 @@ export const Select = (props: SelectProps) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedItems]);
+  }, [JSON.stringify(selectedItems)]);
 
   const selectedItemsValues = useMemo(
     () => selectedItems.map((item) => item.value),
