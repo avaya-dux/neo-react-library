@@ -9,6 +9,10 @@ import { SelectContext } from "./utils/SelectContext";
 import { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
 
+import log from "loglevel";
+const logger = log.getLogger("select-logger");
+logger.disableAll();
+
 import "./Select_shim.css";
 
 /**
@@ -142,7 +146,7 @@ export const Select = (props: SelectProps) => {
         const newlySelectedValues = selectedItems.map(
           (item) => item.value as string
         );
-
+        logger.debug({ selectedItems });
         onChange(newlySelectedValues);
       } else {
         onChange(
@@ -151,7 +155,7 @@ export const Select = (props: SelectProps) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedItems]);
+  }, [JSON.stringify(selectedItems)]);
 
   const selectedItemsValues = useMemo(
     () => selectedItems.map((item) => item.value),

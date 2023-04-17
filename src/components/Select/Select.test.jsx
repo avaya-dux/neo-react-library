@@ -10,6 +10,10 @@ import { SelectOption } from "./SelectOption";
 import { fruitOptions } from "./utils/mockdata";
 import { UserEventKeys } from "utils";
 
+import log from "loglevel";
+const logger = log.getLogger("select-test-logger");
+logger.disableAll();
+
 const {
   BasicSelects,
   Searchable,
@@ -62,7 +66,7 @@ describe("Select", () => {
     it("passes the correct props to toggle element", () => {
       const { getByRole } = renderResult;
       const toggleButton = getByRole("button");
-      const expectedAttributes = ["id", "aria-haspopup", "aria-labelledby"];
+      const expectedAttributes = ["id", "aria-haspopup", "aria-label"];
       expectedAttributes.forEach((attribute) =>
         expect(toggleButton).toHaveAttribute(attribute)
       );
@@ -156,7 +160,7 @@ describe("Select", () => {
       const user = userEvent.setup();
 
       it("only calls the event handler when option is not disabled", () => {
-        const spy = vi.fn();
+        const spy = vi.fn().mockImplementation(() => logger.debug("called"));
         const { getAllByRole } = render(
           <Select multiple label="not important" onChange={spy}>
             <SelectOption>Option 1</SelectOption>
@@ -169,16 +173,21 @@ describe("Select", () => {
         expect(spy).not.toHaveBeenCalled();
 
         const listElements = getAllByRole("option");
-
-        listElements.forEach((element) => {
+        listElements.forEach((element, index) => {
+          logger.debug({ index });
           fireEvent.click(element);
-
           if (element.attributes.disabled) {
             expect(spy).not.toHaveBeenCalled();
           } else {
+            logger.debug({ element });
             expect(spy).toHaveBeenCalledTimes(1);
-            spy.mockClear();
           }
+          logger.debug({
+            disabled: element.attributes.disabled,
+            call0: spy.mock.calls[0],
+            call1: spy.mock.calls[1],
+          });
+          spy.mockClear();
         });
       });
 
@@ -206,6 +215,11 @@ describe("Select", () => {
         // assert there are two chips
         const chips = container.querySelectorAll("div.neo-chip--close");
         expect(chips.length).toEqual(2);
+        // assert correct aria-label on toggle button
+        expect(toggleElement).toHaveAttribute(
+          "aria-label",
+          "Option 1 and Option 2, 2 of 4 selected"
+        );
       });
       it("does open content area on click after content is loaded", () => {
         const placeholder = "please select one";
