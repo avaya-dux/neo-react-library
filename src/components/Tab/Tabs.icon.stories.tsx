@@ -101,7 +101,7 @@ export const IconTabs = Template.bind({});
 IconTabs.args = {
   icon1: "info",
   dir1: "ltr",
-  icon2: "accept",
+  icon2: "check",
   dir2: "rtl",
   icon3: "billboard",
   dir3: "rtl",

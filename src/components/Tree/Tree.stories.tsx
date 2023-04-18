@@ -300,7 +300,7 @@ const FullTreeExamples = (props: TreeProps) => (
         </Button>,
         <IconButton
           aria-label="click here for more options"
-          icon="more"
+          icon="ellipses-horizontal"
           key="sub-tree-two-button-two"
           onClick={() => alert("Branch two, button two clicked")}
           variant="tertiary"
