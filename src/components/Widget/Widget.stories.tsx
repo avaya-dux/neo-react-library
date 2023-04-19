@@ -144,7 +144,7 @@ const InteractiveWidgetTemplate: Story<WidgetProps> = ({
         </Header>
         <Action>
           <IconButton
-            icon="more"
+            icon="check"
             variant="tertiary"
             aria-label="more"
           ></IconButton>
