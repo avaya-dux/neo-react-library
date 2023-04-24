@@ -20,7 +20,7 @@
   resolved "https://registry.yarnpkg.com/@atomic-layout/core/-/core-0.14.1.tgz#3d69be5f79775f11b8008f18bc603b04a2141ccd"
   integrity sha512-o5nhk/1djuKzB20C2LSOuetTDytsbGg4c0UfxXkq1pqoaN3hKJcHPYF9nV+p6+P5CWqNBaaJddZ32OsFSppULQ==
 
-"@avaya/neo-icons@^1.0.4":
+"@avaya/neo-icons@1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.0.4.tgz#7330c10d19a5c64bd694686fd5a40e06990cce9c"
   integrity sha512-L3qUBUW3dgESh1kK9G29FYgcJrYSzdW/UUfcUqhAyLH9QUHi9x6M6fbLNHHnnjtA4w1ZX8f802gLLarCCP4G/g==
