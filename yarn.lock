@@ -25,10 +25,10 @@
   resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.0.5.tgz#3310999f74c796bb332d2f5b8c0b3d2c026f24af"
   integrity sha512-m0whlwxzt+enM1HPy9gO3DfyXiwOsZ4wuimSa5sY/1nVoaPMqdZQVkBQreDcj8youkC3C0AjA9X9LBSjZzF29Q==
 
-"@avaya/neo@3.69.0":
-  version "3.69.0"
-  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.69.0.tgz#53a9cadfd9e5a19db1262ef56fea669b01c6b708"
-  integrity sha512-NaHWzklwQ35Cq30gbXf9YToWly91ZcJgksI1zU7z+w1l0Zoun98hGhSvCYAClt2NFM0KDyfZ7bdujYUEMZ/KMA==
+"@avaya/neo@3.69.2":
+  version "3.69.2"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.69.2.tgz#5d24129e6f92e37957f9b7cae8acb41701bd2ef1"
+  integrity sha512-pG34pHxw10KbhU/6qhHZjx/07oFuejNyjMtmTVo/jY41DWpTanOAhsfmHCrrejrX0YaT0cdeu5LH6n9C5rd3xw==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.18.6", "@babel/code-frame@^7.5.5", "@babel/code-frame@^7.8.3":
   version "7.18.6"
