@@ -1,6 +1,6 @@
 {
   "name": "@avaya/neo-react",
-  "version": "0.8.7",
+  "version": "0.8.8",
   "description": "This is the React version of the shared library called 'NEO' buit by Avaya",
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": "github:avaya-dux/neo-react-library",
@@ -10,10 +10,10 @@
     "registry": "https://registry.npmjs.org/"
   },
   "source": "src/index.ts",
-  "types": "./dist/index.d.ts",
   "exports": {
     "./avaya-neo-react.css": "./dist/avaya-neo-react.css",
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/avaya-neo-react.mjs",
       "require": "./dist/avaya-neo-react.umd.js"
     }
