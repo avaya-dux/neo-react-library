@@ -66,7 +66,7 @@
     "react-click-away-listener": "2.2.3",
     "react-focus-lock": "2.9.4",
     "react-input-autosize": "3.0.0",
-    "styled-components": "5.3.10"
+    "styled-components": "5.3.11"
   },
   "peerDependencies": {
     "downshift": "7.6.0",
@@ -94,8 +94,8 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "@types/jest-axe": "3.5.5",
-    "@types/node": "18.16.14",
-    "@types/react": "18.2.6",
+    "@types/node": "18.16.16",
+    "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
     "@types/react-input-autosize": "2.2.1",
     "@types/react-table": "7.7.14",
@@ -117,7 +117,7 @@
     "eslint-plugin-storybook": "0.6.12",
     "jest-axe": "7.0.1",
     "jest-coverage-badges": "1.1.2",
-    "jsdom": "22.0.0",
+    "jsdom": "22.1.0",
     "prettier": "2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -125,7 +125,7 @@
     "react-stopwatch": "2.0.4",
     "react-table": "7.8.0",
     "typescript": "5.0.4",
-    "vite": "4.3.8",
+    "vite": "4.3.9",
     "vite-plugin-dts": "2.3.0",
     "vitest": "0.31.1"
   },
