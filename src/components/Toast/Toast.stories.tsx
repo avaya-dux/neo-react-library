@@ -1,47 +1,39 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { useEffect } from "react";
 
 import { Button } from "components/Button";
-import {
-  removePopupManagerContainer,
-  ToastOptions,
-  usePopup,
-} from "components/PopupManager";
+import { removePopupManagerContainer, usePopup } from "components/PopupManager";
 import { IconNames } from "utils";
 
-import { toastLogger as logger, Toast, ToastProps } from "./Toast";
+// TODO: add `toastLogger as logger` back in
+import { Toast } from "./Toast";
 
-const ToastTemplate: Story<ToastProps> = (props) => {
-  useEffect(() => {
-    return () => {
-      logger.debug("remove container");
-      removePopupManagerContainer();
-    };
-  }, []);
-  return <Toast {...props} />;
-};
-
-export default {
+const meta: Meta<typeof Toast> = {
   title: "Components/Toast",
-  component: ToastTemplate,
+  component: Toast,
   argTypes: {
     icon: {
       options: IconNames,
       control: { type: "select" },
     },
   },
-} as Meta<ToastOptions>;
-
-export const Default = ToastTemplate.bind({});
-Default.args = {
-  children: "Default toast, positoned top and center, for 5 seconds",
-  "aria-label": "Passed in aria label: toast lasts 5 seconds",
 };
-export const IconBottomCenter = ToastTemplate.bind({});
-IconBottomCenter.args = {
-  children: "Toast, positoned bottom and center, for 5 seconds",
-  icon: "align-bottom",
-  position: "bottom",
+
+export default meta;
+type Story = StoryObj<typeof Toast>;
+
+export const Default: Story = {
+  args: {
+    children: "Default toast, positoned top and center, for 5 seconds",
+    "aria-label": "Passed in aria label: toast lasts 5 seconds",
+  },
+};
+export const IconBottomCenter: Story = {
+  args: {
+    children: "Toast, positoned bottom and center, for 5 seconds",
+    icon: "align-bottom",
+    position: "bottom",
+  },
 };
 
 export const TwoToasts = () => {

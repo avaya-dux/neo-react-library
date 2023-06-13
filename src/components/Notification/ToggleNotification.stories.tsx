@@ -26,7 +26,6 @@ export const AlertShow = () => {
 
       {isOpen && (
         <Notification
-          icon="copy"
           type="alert"
           header="Alert"
           description="This is an alert."
@@ -57,7 +56,6 @@ export const AlertShowContainer = () => {
 
       {isOpen && (
         <Notification
-          icon="copy"
           type="alert"
           header="Alert"
           description="This is an alert."
