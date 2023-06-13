@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react/types-6-0";
+import { Meta, Story } from "@storybook/react";
 import { useState } from "react";
 
 import { IconNames, IconNamesType } from "utils";

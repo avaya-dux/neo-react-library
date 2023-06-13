@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react/types-7-0";
+import { Meta } from "@storybook/react";
 import { ReactNode } from "react";
 
 import { AppLayout, AppLayoutProps } from "./";

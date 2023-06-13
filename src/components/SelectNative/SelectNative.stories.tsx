@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react/types-6-0";
+import { Meta, Story } from "@storybook/react";
 import { useCallback, useEffect, useState } from "react";
 
 import { Button, Form } from "components";
