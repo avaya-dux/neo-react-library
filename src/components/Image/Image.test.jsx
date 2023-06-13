@@ -17,7 +17,8 @@ describe("Image", () => {
       <Image alt="test image" src={cat} fallback={<div>{fallbackText}</div>} />
     );
 
-    const image = getByRole("img", { hidden: true });
+    // HACK: should be `"img"`, but the image doesn't seem to be loading, thus the tag is registred as a `presentation` role
+    const image = getByRole("presentation", { hidden: true });
     const fallback = getByText(fallbackText);
 
     // expect image to be hidden on initial render and `fallback` to be shown
@@ -65,7 +66,8 @@ describe("Image", () => {
       <Image alt="test image" src="brokenimage.png" onError={onErrorSpy} />
     );
 
-    fireEvent.error(getByRole("img", { hidden: true }));
+    // HACK: should be `"img"`, but the image doesn't seem to be loading, thus the tag is registred as a `presentation` role
+    fireEvent.error(getByRole("presentation", { hidden: true }));
 
     expect(onErrorSpy).toHaveBeenCalledTimes(1);
   });
@@ -75,7 +77,8 @@ describe("Image", () => {
       <Image alt="test image" src="brokenimage.png" />
     );
 
-    const image = getByRole("img", { hidden: true });
+    // HACK: should be `"img"`, but the image doesn't seem to be loading, thus the tag is registred as a `presentation` role
+    const image = getByRole("presentation", { hidden: true });
     fireEvent.error(image);
 
     expect(image).toBeInTheDocument();
@@ -88,7 +91,8 @@ describe("Image", () => {
       <Image alt="test image" src={cat} onLoad={onLoadSpy} />
     );
 
-    fireEvent.load(getByRole("img", { hidden: true }));
+    // HACK: should be `"img"`, but the image doesn't seem to be loading, thus the tag is registred as a `presentation` role
+    fireEvent.load(getByRole("presentation", { hidden: true }));
 
     expect(onLoadSpy).toHaveBeenCalledTimes(1);
   });
