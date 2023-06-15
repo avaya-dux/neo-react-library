@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react/types-6-0";
+import { Meta, Story } from "@storybook/react";
 
 import { Avatar, Icon, IconButton, Switch } from "components";
 import { List } from "components/List";

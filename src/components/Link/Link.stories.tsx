@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react/types-7-0";
+import { Meta } from "@storybook/react";
 
 import { Link, LinkProps } from "./";
 
@@ -65,7 +65,7 @@ export const Misc = () => {
         <Link href="#inline" inline icon="print">
           Inline X Icon
         </Link>
-      </li> 
+      </li>
       */}
     </ul>
   );

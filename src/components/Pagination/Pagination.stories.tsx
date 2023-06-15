@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react/types-6-0";
+import { Meta, Story } from "@storybook/react";
 import { useMemo, useState } from "react";
 
 import { Form, List, ListItem, Sheet, TextInput } from "components";

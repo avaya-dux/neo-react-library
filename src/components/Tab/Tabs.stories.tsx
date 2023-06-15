@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react/types-6-0";
+import type { Meta } from "@storybook/react";
 import { useState } from "react";
 
 import { Button } from "components";

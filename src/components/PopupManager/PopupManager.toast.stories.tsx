@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react/types-6-0";
+import { Meta, Story } from "@storybook/react";
 import { useEffect, useRef } from "react";
 
 import { Toast } from "components/Toast";

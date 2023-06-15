@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react/types-6-0";
+import type { Meta } from "@storybook/react";
 import { Sheet } from "components/Sheet";
 import { Accordion } from "./Accordion";
 

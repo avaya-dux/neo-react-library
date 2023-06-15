@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react/types-6-0";
+import type { Meta } from "@storybook/react";
 import { useState } from "react";
 
 import { Button } from "components/Button";
@@ -26,7 +26,6 @@ export const AlertShow = () => {
 
       {isOpen && (
         <Notification
-          icon="copy"
           type="alert"
           header="Alert"
           description="This is an alert."
@@ -57,7 +56,6 @@ export const AlertShowContainer = () => {
 
       {isOpen && (
         <Notification
-          icon="copy"
           type="alert"
           header="Alert"
           description="This is an alert."
