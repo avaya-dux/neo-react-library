@@ -70,6 +70,7 @@ export const Notification = ({
   const icon = "icon" in rest ? rest.icon : null;
   const [closed, setClosed] = useState(false);
   const internalAction = createAction(action, type, setClosed);
+
   return closed ? null : (
     <div
       className={clsx(
@@ -80,13 +81,11 @@ export const Notification = ({
       role="alert"
       aria-live="polite"
     >
-      {icon && (
-        <div
-          role="img"
-          className={clsx("neo-notification__icon", icon && `neo-icon-${icon}`)}
-          aria-label={`icon ${icon}`}
-        />
-      )}
+      <div
+        role="img"
+        className={clsx("neo-notification__icon", icon && `neo-icon-${icon}`)}
+        aria-label={`icon ${icon}`}
+      />
       <div className="neo-notification__message">
         {header && <div className="neo-notification__title">{header}</div>}
         {description && (
