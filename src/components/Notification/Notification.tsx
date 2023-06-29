@@ -29,10 +29,15 @@ export { logger as notificationLogger };
 <Notification type="success" description="Successful action completed" />
  *
 <Notification
-  icon="check"
   type="success"
   header="Success"
   description="Successful action completed"
+/>
+ *
+<Notification
+  type="event"
+  icon="info"
+  description="For event Notifications, you should pass in your own icon"
 />
  *
 <Notification
@@ -43,14 +48,12 @@ export { logger as notificationLogger };
   action={{
     buttons: [
       { children: "Edit", onClick: () => alert("Edit Clicked") },
-      { children: "Alert", onClick: () => alert("Alert Clicked") },
     ],
   }}
 />
  *
 <Notification
   type="info"
-  icon="info"
   header="Timer Notification"
   description="You can pass a 'count' action to display a timer, but you must increment the timer yourself"
   action={{ count: "12:34:56" }}
@@ -80,13 +83,11 @@ export const Notification = ({
       role="alert"
       aria-live="polite"
     >
-      {icon && (
-        <div
-          role="img"
-          className={clsx("neo-notification__icon", icon && `neo-icon-${icon}`)}
-          aria-label={`icon ${icon}`}
-        />
-      )}
+      <div
+        role="img"
+        className={clsx("neo-notification__icon", icon && `neo-icon-${icon}`)}
+        aria-label={`icon ${icon}`}
+      />
       <div className="neo-notification__message">
         {header && <div className="neo-notification__title">{header}</div>}
         {description && (
