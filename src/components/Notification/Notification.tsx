@@ -1,19 +1,8 @@
 import clsx from "clsx";
 import log from "loglevel";
-import {
-  Dispatch,
-  isValidElement,
-  MouseEventHandler,
-  SetStateAction,
-  useState,
-} from "react";
+import { Dispatch, isValidElement, MouseEventHandler, SetStateAction, useState } from "react";
 
-import {
-  ButtonAction,
-  ClosableAction,
-  ClosableActionProps,
-  CounterAction,
-} from "./Actions";
+import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
@@ -29,10 +18,15 @@ export { logger as notificationLogger };
 <Notification type="success" description="Successful action completed" />
  *
 <Notification
-  icon="check"
   type="success"
   header="Success"
   description="Successful action completed"
+/>
+ *
+<Notification
+  type="event"
+  icon="info"
+  description="For event Notifications, you should pass in your own icon"
 />
  *
 <Notification
@@ -50,7 +44,6 @@ export { logger as notificationLogger };
  *
 <Notification
   type="info"
-  icon="info"
   header="Timer Notification"
   description="You can pass a 'count' action to display a timer, but you must increment the timer yourself"
   action={{ count: "12:34:56" }}
