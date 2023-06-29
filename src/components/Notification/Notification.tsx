@@ -1,8 +1,19 @@
 import clsx from "clsx";
 import log from "loglevel";
-import { Dispatch, isValidElement, MouseEventHandler, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  isValidElement,
+  MouseEventHandler,
+  SetStateAction,
+  useState,
+} from "react";
 
-import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
+import {
+  ButtonAction,
+  ClosableAction,
+  ClosableActionProps,
+  CounterAction,
+} from "./Actions";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
