@@ -131,7 +131,7 @@
     "storybook": "7.0.24",
     "typescript": "5.1.6",
     "vite": "4.3.9",
-    "vite-plugin-dts": "2.3.0",
+    "vite-plugin-dts": "3.0.3",
     "vitest": "0.32.4"
   },
   "resolutions": {
