@@ -1474,7 +1474,7 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
-"@cypress/request@^2.88.10":
+"@cypress/request@^2.88.11":
   version "2.88.11"
   resolved "https://registry.yarnpkg.com/@cypress/request/-/request-2.88.11.tgz#5a4c7399bc2d7e7ed56e92ce5acb620c8b187047"
   integrity sha512-M83/wfQ1EkspjkE2lNWNV5ui2Cv7UCv1swW1DqljahbzLVWltcsexQh8jYtuS/vzFXP+HySntGM83ZXA9fn17w==
@@ -3297,10 +3297,10 @@
     lz-string "^1.5.0"
     pretty-format "^27.0.2"
 
-"@testing-library/jest-dom@5.16.5":
-  version "5.16.5"
-  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-5.16.5.tgz#3912846af19a29b2dbf32a6ae9c31ef52580074e"
-  integrity sha512-N5ixQ2qKpi5OLYfwQmUb/5mSV9LneAcaUfp32pn4yCnpb8r/Yz0pXFPck21dIicKmi+ta5WRAknkZCfA8refMA==
+"@testing-library/jest-dom@5.17.0":
+  version "5.17.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-5.17.0.tgz#5e97c8f9a15ccf4656da00fecab505728de81e0c"
+  integrity sha512-ynmNeT7asXyH3aSVv4vvX4Rb+0qjOhdNHnO/3vuZNqPmhDpV/+rCSGwQ7bLcmU2cJ4dvoheIO85LQj0IbJHEtg==
   dependencies:
     "@adobe/css-tools" "^4.0.1"
     "@babel/runtime" "^7.9.2"
@@ -4858,20 +4858,15 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.12.0.tgz#ce1c9d143389679e253b314241ea9aa5cec980d3"
   integrity sha512-NmWvPnx0F1SfrQbYwOi7OeaNGokp9XhzNioJ/CSBs8Qa4vxug81mhJEAVZwxXuBmYB5KDRfMq/F3RR0BIU7sWg==
 
-axe-core@4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.5.1.tgz#04d561c11b6d76d096d34e9d14ba2c294fb20cdc"
-  integrity sha512-1exVbW0X1O/HSr/WMwnaweyqcWOgZgLiVxdLG34pvSQk4NlYQr9OUy0JLwuhFfuVNQzzqgH57eYzkFBCb3bIsQ==
+axe-core@4.7.2, axe-core@^4.2.0, axe-core@^4.6.2:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.7.2.tgz#040a7342b20765cb18bb50b628394c21bccc17a0"
+  integrity sha512-zIURGIS1E1Q4pcrMjp+nnEh+16G56eG/MUllJH8yEvw7asDo7Ac9uhC9KIH5jzpITueEZolfYglnCGIuSBz39g==
 
 axe-core@^3.5.5:
   version "3.5.6"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.5.6.tgz#e762a90d7f6dbd244ceacb4e72760ff8aad521b5"
   integrity sha512-LEUDjgmdJoA3LqklSTwKYqkjcZ4HKc4ddIYGSAiSkr46NTjzg2L9RNB+lekO9P7Dlpa87+hBtzc2Fzn/+GUWMQ==
-
-axe-core@^4.2.0, axe-core@^4.6.2:
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.7.2.tgz#040a7342b20765cb18bb50b628394c21bccc17a0"
-  integrity sha512-zIURGIS1E1Q4pcrMjp+nnEh+16G56eG/MUllJH8yEvw7asDo7Ac9uhC9KIH5jzpITueEZolfYglnCGIuSBz39g==
 
 axobject-query@^3.1.1:
   version "3.2.1"
@@ -6016,17 +6011,19 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.2.tgz#673b5f233bf34d8e602b949429f8171d9121bea3"
   integrity sha512-0sVXIohTfLqVIW3kb/0n6IiWF3Ifj5nm2XaSrLq2DI6fKIGa2fYAZdk917rUneaeLVpYfFcyXE2ft0fe3remsA==
 
-cypress-real-events@1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/cypress-real-events/-/cypress-real-events-1.8.1.tgz#d00c7fe93124bbe7c0f27296684838614d24a840"
-  integrity sha512-8fFnA8EzS3EVbAmpSEUf3A8yZCmfU3IPOSGUDVFCdE1ke1gYL1A+gvXXV6HKUbTPRuvKKt2vpaMbUwYLpDRswQ==
-
-cypress@12.17.0:
-  version "12.17.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-12.17.0.tgz#3a907a41c4afbb44be7b84e822e4914d734a6bb0"
-  integrity sha512-nq0ug8Zrjq/2khHU1PTNxg+3/n1oqtmAFCxwQhS6QzkQ4mR6RLitX+cGIOuIMfnEbDAtVub0hZh661FOA16JxA==
+cypress-real-events@1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/cypress-real-events/-/cypress-real-events-1.9.1.tgz#75fc4f73ec8b7775467ef940d52d12fe440c99e3"
+  integrity sha512-eDYW6NagNs8+68ugyPbB6U1aIsYF0E0WHR6upXo0PbTXZNqBNc2s9Y0u/N+pbU9HpFh+krl6iMhoz/ENlYBdCg==
   dependencies:
-    "@cypress/request" "^2.88.10"
+    prettier "^3.0.0"
+
+cypress@12.17.2:
+  version "12.17.2"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-12.17.2.tgz#040ac55de1e811f6e037d231a2869d5ab8c29c85"
+  integrity sha512-hxWAaWbqQBzzMuadSGSuQg5PDvIGOovm6xm0hIfpCVcORsCAj/gF2p0EvfnJ4f+jK2PCiDgP6D2eeE9/FK4Mjg==
+  dependencies:
+    "@cypress/request" "^2.88.11"
     "@cypress/xvfb" "^1.2.4"
     "@types/node" "^14.14.31"
     "@types/sinonjs__fake-timers" "8.1.1"
@@ -8656,12 +8653,12 @@ jake@^10.8.5:
     filelist "^1.0.4"
     minimatch "^3.1.2"
 
-jest-axe@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/jest-axe/-/jest-axe-7.0.1.tgz#ddc81ac979a39d081872cbd2cd32c111c7365031"
-  integrity sha512-1JoEla6gL4rcsTxEWm+VBcWMwOhP3f9w4dH7/YW3H41nU08Dds3gUFqxgdAq/pzBNPpauC3QPr/BuO+0W8eamg==
+jest-axe@8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/jest-axe/-/jest-axe-8.0.0.tgz#4d89a1756bda2999a4271e851370981319389155"
+  integrity sha512-4kNcNn7J0jPO4jANEYZOHeQ/tSBvkXS+MxTbX1CKbXGd0+ZbRGDn/v/8IYWI/MmYX15iLVyYRnRev9X3ksePWA==
   dependencies:
-    axe-core "4.5.1"
+    axe-core "4.7.2"
     chalk "4.1.2"
     jest-matcher-utils "29.2.2"
     lodash.merge "4.6.2"
@@ -10370,7 +10367,7 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha512-ESF23V4SKG6lVSGZgYNpbsiaAkdab6ZgOxe52p7+Kid3W3u3bxR4Vfd/o21dmN7jSt0IwgZ4v5MUd26FEtXE9w==
 
-prettier@3.0.0:
+prettier@3.0.0, prettier@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.0.tgz#e7b19f691245a21d618c68bc54dc06122f6105ae"
   integrity sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==
