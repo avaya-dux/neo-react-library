@@ -21,7 +21,7 @@ describe("Accordion Component", () => {
 
   it("passes basic axe compliance", async () => {
     const { container } = render(
-      <Accordion header={headerText} body={bodyText} />
+      <Accordion header={headerText} body={bodyText} />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -40,7 +40,7 @@ describe("Accordion Component", () => {
     render(
       <Accordion header={headerText} disabled>
         {bodyText}
-      </Accordion>
+      </Accordion>,
     );
     const AccordionElement = screen.getByRole("button");
     expect(AccordionElement).toHaveAttribute("disabled");

@@ -39,7 +39,7 @@ export const TableToolbar = <T extends Record<string, any>>({
 
   const selectedRowIdsStringArray = useMemo(
     () => Object.keys(selectedRowIds),
-    [selectedRowIds]
+    [selectedRowIds],
   );
 
   const [search, setSearch] = useState<string>(globalFilter || "");
@@ -48,7 +48,7 @@ export const TableToolbar = <T extends Record<string, any>>({
       setSearch(searchString);
       setGlobalFilter(searchString);
     },
-    [setSearch, setGlobalFilter]
+    [setSearch, setGlobalFilter],
   );
 
   useEffect(() => {

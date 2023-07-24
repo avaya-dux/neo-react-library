@@ -68,13 +68,13 @@ describe("TabUtils", () => {
     it("when className is defined and active is true, should return neo-tabs__container--active and className", () => {
       const className = "my-class";
       expect(getContentClasses(true, className)).toBe(
-        `${className} neo-tabs__container--active`
+        `${className} neo-tabs__container--active`,
       );
     });
     it("when className is defined and active is false, should return neo-tabs__container and className", () => {
       const className = "my-class";
       expect(getContentClasses(false, className)).toBe(
-        `${className} neo-tabs__container`
+        `${className} neo-tabs__container`,
       );
     });
   });
@@ -261,7 +261,7 @@ describe("TabUtils", () => {
           "name": "tab3",
           "onClose": undefined,
         }
-        `
+        `,
       );
     });
   });
@@ -307,7 +307,7 @@ describe("TabUtils", () => {
           "name": "tab1",
           "onClose": [Function],
         }
-      `
+      `,
       );
       expect(tabsBuilt[1]).toMatchInlineSnapshot(
         `
@@ -318,7 +318,7 @@ describe("TabUtils", () => {
           "name": "tab2",
           "onClose": undefined,
         }
-      `
+      `,
       );
       expect(tabsBuilt[2]).toMatchInlineSnapshot(
         { closableId: expect.any(String) },
@@ -331,7 +331,7 @@ describe("TabUtils", () => {
           "name": "tab3",
           "onClose": undefined,
         }
-      `
+      `,
       );
     });
   });

@@ -9,7 +9,7 @@ const logoImageSrc =
 describe("ImageLink", () => {
   it("renders without exploding", () => {
     render(
-      <ImageLink src={logoImageSrc} href={logoImageSrc} alt="Avaya Logo" />
+      <ImageLink src={logoImageSrc} href={logoImageSrc} alt="Avaya Logo" />,
     );
 
     // HACK: should be `"img"`, but the image doesn't seem to be loading, thus the tag is registred as a `presentation` role
@@ -19,7 +19,7 @@ describe("ImageLink", () => {
 
   it("passes basic axe compliance", async () => {
     const { container } = render(
-      <ImageLink src={logoImageSrc} href={logoImageSrc} alt="Avaya Logo" />
+      <ImageLink src={logoImageSrc} href={logoImageSrc} alt="Avaya Logo" />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();

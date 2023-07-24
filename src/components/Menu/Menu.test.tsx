@@ -51,7 +51,7 @@ describe("Menu", () => {
         >
           <MenuItem>placeholder one</MenuItem>
           <MenuItem>placeholder two</MenuItem>
-        </Menu>
+        </Menu>,
       );
 
       const button = getByRole("button");
@@ -157,7 +157,7 @@ describe("Menu", () => {
           <MenuItem>one</MenuItem>
           <MenuItem>two</MenuItem>
           <MenuItem>three</MenuItem>
-        </Menu>
+        </Menu>,
       );
     });
 
@@ -213,7 +213,7 @@ describe("Menu", () => {
           menuRootElement={defaultRootElement}
         >
           {defaultChildren}
-        </SimpleMenuTemplated>
+        </SimpleMenuTemplated>,
       );
       const menuRoot = screen.getByRole("group");
       const menuButton = screen.getByRole("button");
@@ -234,7 +234,7 @@ describe("Menu", () => {
           menuRootElement={defaultRootElement}
         >
           {defaultChildren}
-        </SimpleMenuTemplated>
+        </SimpleMenuTemplated>,
       );
       const menuRoot = screen.getByRole("group");
       const menuButton = screen.getByRole("button");
@@ -252,31 +252,31 @@ describe("Menu", () => {
   describe("getClassNames", () => {
     it("should return correct classes when isOpen = false and itemAlignment = false", () => {
       expect(getClassNames(false, "left")).toMatchInlineSnapshot(
-        `"neo-dropdown neo-dropdown--right"`
+        `"neo-dropdown neo-dropdown--right"`,
       );
     });
 
     it("should return correct classes when isOpen = false and itemAlignment = true", () => {
       expect(getClassNames(false, "right")).toMatchInlineSnapshot(
-        `"neo-dropdown neo-dropdown--left"`
+        `"neo-dropdown neo-dropdown--left"`,
       );
     });
 
     it("should return correct classes when isOpen = true and itemAlignment = false", () => {
       expect(getClassNames(true, "left")).toMatchInlineSnapshot(
-        `"neo-dropdown neo-dropdown--right neo-dropdown--active"`
+        `"neo-dropdown neo-dropdown--right neo-dropdown--active"`,
       );
     });
 
     it("should return correct classes when isOpen = true and itemAlignment = true", () => {
       expect(getClassNames(true, "right")).toMatchInlineSnapshot(
-        `"neo-dropdown neo-dropdown--left neo-dropdown--active"`
+        `"neo-dropdown neo-dropdown--left neo-dropdown--active"`,
       );
     });
 
     it("should return correct classes when className is passed", () => {
       expect(getClassNames(true, "right", "extraclass")).toMatchInlineSnapshot(
-        `"neo-dropdown neo-dropdown--left neo-dropdown--active extraclass"`
+        `"neo-dropdown neo-dropdown--left neo-dropdown--active extraclass"`,
       );
     });
   });
@@ -306,7 +306,7 @@ describe("Menu", () => {
         renderResult = render(
           <SimpleMenuTemplated menuRootElement={defaultRootElement}>
             {defaultChildren}
-          </SimpleMenuTemplated>
+          </SimpleMenuTemplated>,
         );
       });
 
@@ -328,7 +328,7 @@ describe("Menu", () => {
         renderResult = render(
           <SimpleMenuRightAlignedTemplated menuRootElement={defaultRootElement}>
             {defaultChildren}
-          </SimpleMenuRightAlignedTemplated>
+          </SimpleMenuRightAlignedTemplated>,
         );
       });
 
@@ -409,7 +409,7 @@ describe("Menu", () => {
             closeOnBlur
             onLeftMenuClose={() => null}
             onRightMenuClose={() => null}
-          />
+          />,
         );
       });
 

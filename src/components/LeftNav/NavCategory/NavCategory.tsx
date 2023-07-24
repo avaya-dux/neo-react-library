@@ -26,13 +26,13 @@ const LEFTNAV_CATEGORY_STYLE = "neo-leftnav__main";
 function getItemClassNames(
   expanded: boolean,
   active: boolean,
-  disabled: boolean
+  disabled: boolean,
 ) {
   const classNames = clsx(
     LEFTNAV_CATEGORY_STYLE,
     expanded && "neo-leftnav__main--expand",
     active && "neo-leftnav__main--active",
-    disabled && "neo-leftnav__disabled"
+    disabled && "neo-leftnav__disabled",
   );
 
   return classNames;
@@ -71,7 +71,7 @@ export const NavCategory = ({
   const ref = useRef(null);
   const [tabIndex, isActive, handleKeyIndex, handleClick] = useRovingTabIndex(
     ref,
-    disabled
+    disabled,
   );
   useFocusEffect(isActive, ref);
 
@@ -103,7 +103,7 @@ export const NavCategory = ({
   };
 
   const handleKeyDown: KeyboardEventHandler = (
-    event: KeyboardEvent<HTMLButtonElement>
+    event: KeyboardEvent<HTMLButtonElement>,
   ) => {
     handleKeyIndex(event);
     if (event.key !== Keys.TAB) {
@@ -152,7 +152,7 @@ export const NavCategory = ({
           "neo-btn-secondary--info",
           "neo-btn",
           icon && iconClass,
-          className
+          className,
         )}
         ref={ref}
         tabIndex={tabIndex}

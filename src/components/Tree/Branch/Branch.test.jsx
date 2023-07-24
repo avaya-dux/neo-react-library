@@ -18,7 +18,7 @@ describe("Tree", () => {
           <Leaf>one</Leaf>
           <Leaf>two</Leaf>
         </Branch>
-      </Tree>
+      </Tree>,
     );
 
     const treeitems = screen.getAllByRole("treeitem");
@@ -34,7 +34,7 @@ describe("Tree", () => {
         <Branch title="example">
           <Leaf>one</Leaf>
         </Branch>
-      </Tree>
+      </Tree>,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -47,7 +47,7 @@ describe("Tree", () => {
           <Leaf>one</Leaf>
           <Leaf>two</Leaf>
         </Branch>
-      </Tree>
+      </Tree>,
     );
 
     const treeitems = screen.getAllByRole("treeitem");
@@ -88,7 +88,7 @@ describe("Tree", () => {
           >
             <Leaf>{treeitemText}</Leaf>
           </Branch>
-        </Tree>
+        </Tree>,
       );
 
       container = c;
@@ -150,7 +150,7 @@ describe("Tree", () => {
 
     it("on keyboard left, sets active=>true and expanded=>false", async () => {
       const subTreeDiv = container.querySelector(
-        "li.neo-treeview__sub-tree-item div"
+        "li.neo-treeview__sub-tree-item div",
       );
       const subtreeEdges = screen.getByRole("group");
       const subtreeTitle = screen.getByText(subTreeText);
@@ -174,7 +174,7 @@ describe("Tree", () => {
 
     it("on keyboard right, sets active=>true and expanded=>true", async () => {
       const subTreeDiv = container.querySelector(
-        "li.neo-treeview__sub-tree-item div"
+        "li.neo-treeview__sub-tree-item div",
       );
       const subtreeEdges = screen.getByRole("group");
       const subtreeTitle = screen.getByText(subTreeText);
@@ -198,7 +198,7 @@ describe("Tree", () => {
 
     it("on keyboard up, sets active appropriately", async () => {
       const subTreeDiv = container.querySelector(
-        "li.neo-treeview__sub-tree-item div"
+        "li.neo-treeview__sub-tree-item div",
       );
       const subtreeTitle = screen.getByText(subTreeText);
 
@@ -219,7 +219,7 @@ describe("Tree", () => {
 
     it("on keyboard down, sets active=>false", async () => {
       const subTreeDiv = container.querySelector(
-        "li.neo-treeview__sub-tree-item div"
+        "li.neo-treeview__sub-tree-item div",
       );
       const subtreeTitle = screen.getByText(subTreeText);
 

@@ -18,7 +18,7 @@ const {
 describe("Button", () => {
   it("fully renders without exploding", () => {
     const { getByTestId } = render(
-      <Button data-testid="neo-button">Test</Button>
+      <Button data-testid="neo-button">Test</Button>,
     );
 
     const rootElement = getByTestId("neo-button");
@@ -29,7 +29,7 @@ describe("Button", () => {
     const { container } = render(
       <Button data-testid="neo-button" id="test-axe">
         Button
-      </Button>
+      </Button>,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -40,7 +40,7 @@ describe("Button", () => {
     const { getByTestId } = render(
       <Button data-testid="neo-button" badge={badgeText}>
         badge test
-      </Button>
+      </Button>,
     );
     const rootElement = getByTestId("neo-button");
     expect(rootElement).toHaveAttribute("data-badge", badgeText);
@@ -51,7 +51,7 @@ describe("Button", () => {
     const { getByTestId } = render(
       <Button data-testid="neo-button" badge={badgeText}>
         test
-      </Button>
+      </Button>,
     );
     const rootElement = getByTestId("neo-button");
 

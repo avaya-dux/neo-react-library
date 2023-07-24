@@ -37,7 +37,7 @@ export const AccordionGroup = ({
   children,
 }: AccordionGroupProps) => {
   const [openAccordionIndex, setOpenAccordionIndex] = useState(
-    defaultOpenAccordingIndex
+    defaultOpenAccordingIndex,
   );
 
   const controlledChildren = Children.map(children, (child, index) =>
@@ -56,7 +56,7 @@ export const AccordionGroup = ({
             }
           : undefined,
       isOpen: allowOnlyOne ? index === openAccordionIndex : child.props.isOpen,
-    })
+    }),
   );
 
   return (

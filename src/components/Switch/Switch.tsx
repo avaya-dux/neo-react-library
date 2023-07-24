@@ -54,7 +54,7 @@ export const Switch = ({
         className={clsx(
           "neo-switch",
           multiline && "neo-switch--multiline",
-          disabled && "neo-switch--disabled"
+          disabled && "neo-switch--disabled",
         )}
         htmlFor={id}
       >

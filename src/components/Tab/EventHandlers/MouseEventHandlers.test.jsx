@@ -52,7 +52,7 @@ describe("Tab Mouse event handlers", () => {
         activeTabIndex,
         setActiveTabIndex,
         setActivePanelIndex,
-        onClose
+        onClose,
       );
       expect(e.stopPropagation).toBeCalled();
       expect(e.preventDefault).toBeCalled();
@@ -81,7 +81,7 @@ describe("Tab Mouse event handlers", () => {
         activeTabIndex,
         setActiveTabIndex,
         setActivePanelIndex,
-        onClose
+        onClose,
       );
       expect(e.stopPropagation).toBeCalled();
       expect(e.preventDefault).toBeCalled();
@@ -106,7 +106,7 @@ describe("Tab Mouse event handlers", () => {
         activeTabIndex,
         setActiveTabIndex,
         setActivePanelIndex,
-        onClose
+        onClose,
       );
       expect(e.stopPropagation).toBeCalled();
       expect(e.preventDefault).toBeCalled();
@@ -143,7 +143,7 @@ describe("Tab Mouse event handlers", () => {
         scrollRef,
         tabRefs,
         setLeftCarouselButtonEnabled,
-        setRightCarouselButtonEnabled
+        setRightCarouselButtonEnabled,
       );
       expect(scrollRef.current.scrollBy).not.toBeCalled();
       expect(e.stopPropagation).toBeCalled();
@@ -158,7 +158,7 @@ describe("Tab Mouse event handlers", () => {
         scrollRef,
         tabRefs,
         setLeftCarouselButtonEnabled,
-        setRightCarouselButtonEnabled
+        setRightCarouselButtonEnabled,
       );
       expect(scrollRef.current.scrollBy).toBeCalledWith({ left: -moveAmount });
       expect(e.stopPropagation).toBeCalled();
@@ -196,7 +196,7 @@ describe("Tab Mouse event handlers", () => {
         scrollRef,
         tabRefs,
         setLeftCarouselButtonEnabled,
-        setRightCarouselButtonEnabled
+        setRightCarouselButtonEnabled,
       );
       expect(scrollRef.current.scrollBy).not.toBeCalled();
       expect(e.stopPropagation).toBeCalled();
@@ -212,7 +212,7 @@ describe("Tab Mouse event handlers", () => {
         scrollRef,
         tabRefs,
         setLeftCarouselButtonEnabled,
-        setRightCarouselButtonEnabled
+        setRightCarouselButtonEnabled,
       );
       expect(scrollRef.current.scrollBy).toBeCalledWith({ left: moveAmount });
       expect(e.stopPropagation).toBeCalled();

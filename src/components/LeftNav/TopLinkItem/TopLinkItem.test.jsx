@@ -11,7 +11,7 @@ describe("TopLinkItem", () => {
 
   it("fully renders without exploding", () => {
     const { getByText } = render(
-      <LeftNav.TopLinkItem label={TopLinkItemLabel} />
+      <LeftNav.TopLinkItem label={TopLinkItemLabel} />,
     );
     const topLinkElement = getByText(TopLinkItemLabel);
     expect(topLinkElement).toBeInTheDocument();
@@ -21,14 +21,14 @@ describe("TopLinkItem", () => {
     const { rerender } = render(
       <LeftNav currentUrl="#test" aria-label="test-label">
         <LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
-      </LeftNav>
+      </LeftNav>,
     );
     const linkElement = screen.getByRole("listitem");
     expect(linkElement).toHaveClass("neo-leftnav__main--active");
     rerender(
       <LeftNav currentUrl="#test" aria-label="test-label" isActiveOverride>
         <LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
-      </LeftNav>
+      </LeftNav>,
     );
     expect(linkElement).not.toHaveClass("neo-leftnav__main--active");
   });
@@ -37,7 +37,7 @@ describe("TopLinkItem", () => {
     const { container } = render(
       <ul>
         <LeftNav.TopLinkItem label={TopLinkItemLabel} />
-      </ul>
+      </ul>,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -86,7 +86,7 @@ describe("TopLinkItem", () => {
         currentUrl=""
       >
         <LeftNav.TopLinkItem label={TopLinkItemLabel} />
-      </LeftNav>
+      </LeftNav>,
     );
     const linkElement = getByText(TopLinkItemLabel);
     await user.click(linkElement);
@@ -95,7 +95,7 @@ describe("TopLinkItem", () => {
 
   it("uses a `<button>` when it _is_ disabled", () => {
     const { container } = render(
-      <LeftNav.TopLinkItem label={TopLinkItemLabel} disabled />
+      <LeftNav.TopLinkItem label={TopLinkItemLabel} disabled />,
     );
     const linkElement = container.querySelector("a");
     const buttonElement = container.querySelector("button");
@@ -110,7 +110,7 @@ describe("TopLinkItem", () => {
         onClick={mockedFunction}
         label={TopLinkItemLabel}
         disabled
-      />
+      />,
     );
     const linkElement = getByText(TopLinkItemLabel);
     await user.click(linkElement);

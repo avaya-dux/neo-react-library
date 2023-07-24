@@ -48,7 +48,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
   // NOTE: this is for non-TS users
   if (!ariaLabel && !rest["aria-labelledby"]) {
     handleAccessbilityError(
-      "An `aria-label` or `aria-labelledby` value is required for screen readers to identify the navigation component"
+      "An `aria-label` or `aria-labelledby` value is required for screen readers to identify the navigation component",
     );
   }
 
@@ -64,7 +64,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
         onNavigate(id, url);
       }
     },
-    [onNavigate]
+    [onNavigate],
   );
 
   const navContext: LeftNavContextType = {

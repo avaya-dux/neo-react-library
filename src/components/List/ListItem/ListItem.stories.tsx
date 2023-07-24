@@ -67,7 +67,7 @@ const basicSwitch = <Switch aria-label="Activate" defaultChecked />;
 // Specific ListItem scenarios
 
 export const ListItemTextOnly: Story<ListItemProps> = (
-  props: ListItemProps
+  props: ListItemProps,
 ) => (
   <List itemType="ListItem">
     <ListItem {...props}>First item, text Only</ListItem>
@@ -77,7 +77,7 @@ export const ListItemTextOnly: Story<ListItemProps> = (
 );
 
 export const ListItemTooltipAndDivider: Story<ListItemProps> = (
-  props: ListItemProps
+  props: ListItemProps,
 ) => (
   <List itemType="ListItem">
     <ListItem
@@ -100,7 +100,7 @@ export const ListItemTooltipAndDivider: Story<ListItemProps> = (
 
 // Specific List Section scenarios
 export const ListSectionTextOnly: Story<ListSectionProps> = (
-  props: ListSectionProps
+  props: ListSectionProps,
 ) => (
   <List itemType="ListSection">
     <ListSection {...props}>First item</ListSection>
@@ -110,7 +110,7 @@ export const ListSectionTextOnly: Story<ListSectionProps> = (
 );
 
 export const ListSectionTextOnlyWithHover: Story<ListSectionProps> = (
-  props: ListSectionProps
+  props: ListSectionProps,
 ) => (
   <List itemType="ListSection">
     <ListSection hover {...props}>
@@ -124,7 +124,7 @@ export const ListSectionTextOnlyWithHover: Story<ListSectionProps> = (
 );
 
 export const ListSectionTextWithIconAndHover: Story<ListSectionProps> = (
-  props: ListSectionProps
+  props: ListSectionProps,
 ) => (
   <List itemType="ListSection">
     <ListSection icon={iconChat} hover {...props}>

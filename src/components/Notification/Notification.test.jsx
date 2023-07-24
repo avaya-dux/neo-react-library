@@ -106,7 +106,7 @@ describe("Notification", () => {
         const closeButton = screen.getByRole("button");
         expect(closeButton).toHaveAttribute(
           "aria-label",
-          "Click this button will close this notification"
+          "Click this button will close this notification",
         );
       });
 
@@ -387,7 +387,7 @@ describe("Notification", () => {
       it("when action is ButtonActionProps and type is success", () => {
         const result = createAction(
           { buttons: [{ value: "button1" }, { value: "button2" }] },
-          "success"
+          "success",
         );
         const { container } = render(result);
         expect(container).toBeDefined();
@@ -400,7 +400,7 @@ describe("Notification", () => {
       it("when action is ButtonActionProps and type is event", () => {
         const result = createAction(
           { buttons: [{ value: "button1" }, { value: "button2" }] },
-          "event"
+          "event",
         );
         const { container } = render(result);
         expect(container).toBeDefined();

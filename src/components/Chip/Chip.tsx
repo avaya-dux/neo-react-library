@@ -44,7 +44,7 @@ export const Chip = ({
 
   if (avatarInitials && icon) {
     throw new Error(
-      "Chip cannot have both an Avatar and an Icon, it must have one or the other."
+      "Chip cannot have both an Avatar and an Icon, it must have one or the other.",
     );
   }
 
@@ -57,7 +57,7 @@ export const Chip = ({
         disabled && `neo-chip--${variant}--disabled`,
         icon && `neo-icon-${icon}`,
         closable && `neo-chip--close neo-chip--close--${variant}`,
-        className
+        className,
       )}
       {...rest}
     >

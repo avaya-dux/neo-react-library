@@ -77,32 +77,32 @@ export const createDivWithId = (id: string) => {
 };
 
 export const toastInit: PopupManager["toast"] = (
-  toastOptions: ToastOptions
+  toastOptions: ToastOptions,
 ) => {
   logger.error(
     "You called 'toast', before popup manager is ready, with",
-    toastOptions
+    toastOptions,
   );
   return { id: -1, position: "top" };
 };
 export const notifyInit: PopupManager["notify"] = (
-  notificationOptions: NotificationOptions
+  notificationOptions: NotificationOptions,
 ) => {
   logger.error(
     "You called 'notify', before popup manager is ready, with",
-    notificationOptions
+    notificationOptions,
   );
   return { id: -1, position: "top" };
 };
 
 export const removeInit: PopupManager["remove"] = (
   id: PopupId,
-  position: PopupPosition
+  position: PopupPosition,
 ) => {
   logger.error(
     "You called 'remove', before popup manager is ready, with",
     id,
-    position
+    position,
   );
 };
 
@@ -114,13 +114,13 @@ export const usePopup = (traceId?: string) => {
   const [mounted, setMounted] = useState(false);
   const [toast, settoast] = useState<PopupManager["toast"]>(() => toastInit);
   const [notify, setnotify] = useState<PopupManager["notify"]>(
-    () => notifyInit
+    () => notifyInit,
   );
   const [remove, setremove] = useState<PopupManager["remove"]>(
-    () => removeInit
+    () => removeInit,
   );
   const [removeAll, setremoveAll] = useState<PopupManager["removeAll"]>(
-    () => removeAllInit
+    () => removeAllInit,
   );
   const callback = useCallback(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

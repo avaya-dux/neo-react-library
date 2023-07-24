@@ -63,15 +63,15 @@ export const Tooltip = ({
               width: document.lastElementChild?.clientWidth || 0,
             },
             label,
-            tooltipContainerRef.current
+            tooltipContainerRef.current,
           )
-        : translatePositionToCSSName(position)
+        : translatePositionToCSSName(position),
     );
   }, [label, position, tooltipContainerRef]);
 
   const multilineClassName = useMemo(
     () => getMultilineClassName(multiline),
-    [multiline]
+    [multiline],
   );
 
   const wrappedChildren = useMemo(() => {
@@ -87,7 +87,7 @@ export const Tooltip = ({
   const [allowTooltip, setAllowTooltip] = useState(true);
   const setAllowTooltipTrue = useCallback(
     () => setAllowTooltip(true),
-    [setAllowTooltip]
+    [setAllowTooltip],
   );
   const onKeyUp = useCallback(
     (e: { key: string }) => {
@@ -95,7 +95,7 @@ export const Tooltip = ({
         setAllowTooltip(false);
       }
     },
-    [setAllowTooltip]
+    [setAllowTooltip],
   );
 
   useEffect(() => {
@@ -128,7 +128,7 @@ export const Tooltip = ({
       className={clsx(
         `neo-tooltip neo-tooltip--${tooltipPosition}`,
         allowTooltip && "neo-tooltip--onhover",
-        className
+        className,
       )}
     >
       {wrappedChildren}
@@ -140,7 +140,7 @@ export const Tooltip = ({
         className={clsx(
           "neo-tooltip__content",
           multilineClassName,
-          tooltipDivProps?.className
+          tooltipDivProps?.className,
         )}
       >
         {arrow && <div className="neo-arrow" />}

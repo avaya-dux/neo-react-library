@@ -80,7 +80,7 @@ export const Menu = forwardRef(
       openOnHover = false,
       ...rest
     }: MenuProps,
-    ref: Ref<HTMLButtonElement>
+    ref: Ref<HTMLButtonElement>,
   ) => {
     logger.debug("debugging Menu ...");
 
@@ -88,11 +88,11 @@ export const Menu = forwardRef(
     const [enterCounter, setEnterCounter] = useState(1);
     const clonedChildren = useMemo(
       () => addIdToChildren(children, SubMenu.name),
-      [children]
+      [children],
     );
     const menuIndexes: MenuIndexesType = useMemo(
       () => buildMenuIndexes(clonedChildren, SubMenu.name),
-      [clonedChildren]
+      [clonedChildren],
     );
     // remember item to have focus
     const [cursor, setCursor] = useState(0);
@@ -119,7 +119,7 @@ export const Menu = forwardRef(
     }, []);
 
     const handleMenuKeyDown: KeyboardEventHandler = (
-      e: KeyboardEvent<HTMLDivElement>
+      e: KeyboardEvent<HTMLDivElement>,
     ) => {
       return handleKeyDownEvent(
         e,
@@ -132,12 +132,12 @@ export const Menu = forwardRef(
         setEnterCounter,
         setOpen,
         closeOnSelect,
-        "Menu"
+        "Menu",
       );
     };
 
     const handleMenuBlur: FocusEventHandler = (
-      e: FocusEvent<HTMLDivElement>
+      e: FocusEvent<HTMLDivElement>,
     ) => {
       logger.debug(`handling menu blur event`);
       e.stopPropagation();
@@ -153,7 +153,7 @@ export const Menu = forwardRef(
         cursorAction,
         setCursorAction,
         enterCounter,
-        setEnterCounter
+        setEnterCounter,
       );
     };
 
@@ -212,7 +212,7 @@ export const Menu = forwardRef(
               cursorAction,
               enterCounter,
               closeOnSelect,
-              setOpen
+              setOpen,
             )}
         </MenuContext.Provider>
       </div>
@@ -226,7 +226,7 @@ export const Menu = forwardRef(
     ) : (
       content
     );
-  }
+  },
 );
 Menu.displayName = "Menu";
 
@@ -234,7 +234,7 @@ export const getClassNames = (
   isOpen: boolean,
   itemAlignment: "left" | "right",
   className?: string,
-  openOnHover?: boolean // NOTE: this is _only_ for the tests, it doesn't actually do anything
+  openOnHover?: boolean, // NOTE: this is _only_ for the tests, it doesn't actually do anything
 ) => {
   if (isOpen) {
     logger.debug(`isOpen is ${isOpen}`);
@@ -245,6 +245,6 @@ export const getClassNames = (
     itemAlignment === "right" ? "neo-dropdown--left" : "neo-dropdown--right",
     isOpen && "neo-dropdown--active",
     className,
-    openOnHover && "neo-dropdown--onhover"
+    openOnHover && "neo-dropdown--onhover",
   );
 };

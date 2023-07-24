@@ -19,7 +19,7 @@ const DownshiftWithComboboxProps = (
   loading: boolean,
   disabled: boolean,
   creatable: boolean,
-  createMessage: string
+  createMessage: string,
 ) => {
   const [inputText, setInputText] = useState("");
 
@@ -94,7 +94,7 @@ const DownshiftWithComboboxMultipleSelectProps = (
   disabled: boolean,
   loading: boolean,
   creatable: boolean,
-  createMessage: string
+  createMessage: string,
 ) => {
   return useCombobox({
     items: filteredOptions,
@@ -104,7 +104,7 @@ const DownshiftWithComboboxMultipleSelectProps = (
       const { selectedItem } = changes;
       const selectedItemsValues = selectedItems.map((item) => item.value);
       const shouldRemoveItem = selectedItemsValues.includes(
-        selectedItem?.value
+        selectedItem?.value,
       );
 
       switch (type) {
@@ -118,7 +118,7 @@ const DownshiftWithComboboxMultipleSelectProps = (
         case useCombobox.stateChangeTypes.ItemClick:
           if (selectedItem && shouldRemoveItem) {
             setSelectedItems(
-              selectedItems.filter((item) => item.value !== selectedItem.value)
+              selectedItems.filter((item) => item.value !== selectedItem.value),
             );
           } else if (
             selectedItem &&
@@ -157,7 +157,7 @@ const DownshiftWithComboboxMultipleSelectProps = (
             selectedItemsValues.includes(selectedItem.value)
           ) {
             setSelectedItems(
-              selectedItems.filter((item) => item.value !== selectedItem.value)
+              selectedItems.filter((item) => item.value !== selectedItem.value),
             );
           } else if (selectedItem) {
             setSelectedItems([...selectedItems, selectedItem]);
@@ -205,7 +205,7 @@ const DownshiftWithSelectProps = (
   selectId: string,
   setSelectedItems: Dispatch<SetStateAction<SelectOptionProps[]>>,
   disabled: boolean,
-  loading: boolean
+  loading: boolean,
 ) => {
   return useSelect({
     items,
@@ -240,7 +240,7 @@ const DownshiftWithMultipleSelectProps = (
   selectedItems: SelectOptionProps[],
   setSelectedItems: Dispatch<SetStateAction<SelectOptionProps[]>>,
   disabled: boolean,
-  loading: boolean
+  loading: boolean,
 ) => {
   logger.debug("calling DownshiftWithMultipleSelectProps");
   return useSelect({
@@ -252,7 +252,7 @@ const DownshiftWithMultipleSelectProps = (
 
       const selectedItemsValues = selectedItems.map((item) => item.value);
       const shouldRemoveItem = selectedItemsValues.includes(
-        selectedItem?.value
+        selectedItem?.value,
       );
 
       switch (type) {
@@ -268,7 +268,7 @@ const DownshiftWithMultipleSelectProps = (
           logger.debug({ type, shouldRemoveItem });
           if (selectedItem && shouldRemoveItem) {
             setSelectedItems(
-              selectedItems.filter((item) => item.value !== selectedItem.value)
+              selectedItems.filter((item) => item.value !== selectedItem.value),
             );
           } else if (selectedItem) {
             setSelectedItems([...selectedItems, selectedItem]);
@@ -286,7 +286,7 @@ const DownshiftWithMultipleSelectProps = (
           // is needed to support removing items via `Chip` click and input `backspace`
           if (selectedItem && selectedItems.includes(selectedItem)) {
             setSelectedItems(
-              selectedItems.filter((item) => item !== selectedItem)
+              selectedItems.filter((item) => item !== selectedItem),
             );
           } else if (selectedItem) {
             setSelectedItems([...selectedItems, selectedItem]);
@@ -309,7 +309,7 @@ const DownshiftWithMultipleSelectProps = (
       if (selectedItemValues.includes(selectedItem.value)) {
         logger.debug({ removeSelectedItem: selectedItem });
         setSelectedItems(
-          selectedItems.filter((item) => item.value !== selectedItem.value)
+          selectedItems.filter((item) => item.value !== selectedItem.value),
         );
       } else {
         logger.debug({ addSelectedItem: selectedItem });
@@ -332,7 +332,7 @@ export const useDownshift = (
   filteredOptions: SelectOptionProps[],
   setFilteredOptions: Dispatch<SetStateAction<SelectOptionProps[]>>,
   selectedItems: SelectOptionProps[],
-  setSelectedItems: Dispatch<SetStateAction<SelectOptionProps[]>>
+  setSelectedItems: Dispatch<SetStateAction<SelectOptionProps[]>>,
 ) => {
   /**
    * HACK: these are hooks, but because we pass and recieve
@@ -356,7 +356,7 @@ export const useDownshift = (
       disabled,
       loading,
       creatable,
-      createMessage
+      createMessage,
     );
   } else if (searchable) {
     return DownshiftWithComboboxProps(
@@ -369,7 +369,7 @@ export const useDownshift = (
       disabled,
       loading,
       creatable,
-      createMessage
+      createMessage,
     );
   } else if (multiple) {
     return DownshiftWithMultipleSelectProps(
@@ -378,7 +378,7 @@ export const useDownshift = (
       selectedItems,
       setSelectedItems,
       disabled,
-      loading
+      loading,
     );
   }
 
@@ -387,6 +387,6 @@ export const useDownshift = (
     selectId,
     setSelectedItems,
     disabled,
-    loading
+    loading,
   );
 };

@@ -69,7 +69,7 @@ export const RadioGroup = ({
         onChange(e);
       }
     },
-    [onChange]
+    [onChange],
   );
 
   const radios = useMemo(
@@ -111,7 +111,7 @@ export const RadioGroup = ({
           return cloneElement(child, childprops);
         }
       }),
-    [children, selected, groupName, helperText, onChangeHandler, disabled]
+    [children, selected, groupName, helperText, onChangeHandler, disabled],
   );
 
   return (

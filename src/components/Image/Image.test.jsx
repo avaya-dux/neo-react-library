@@ -14,7 +14,7 @@ describe("Image", () => {
   it("fully renders without exploding", async () => {
     const fallbackText = "fallback placeholder";
     const { getByRole, getByText } = render(
-      <Image alt="test image" src={cat} fallback={<div>{fallbackText}</div>} />
+      <Image alt="test image" src={cat} fallback={<div>{fallbackText}</div>} />,
     );
 
     // HACK: should be `"img"`, but the image doesn't seem to be loading, thus the tag is registred as a `presentation` role
@@ -63,7 +63,7 @@ describe("Image", () => {
     const onErrorSpy = vi.fn();
 
     const { getByRole } = render(
-      <Image alt="test image" src="brokenimage.png" onError={onErrorSpy} />
+      <Image alt="test image" src="brokenimage.png" onError={onErrorSpy} />,
     );
 
     // HACK: should be `"img"`, but the image doesn't seem to be loading, thus the tag is registred as a `presentation` role
@@ -74,7 +74,7 @@ describe("Image", () => {
 
   it("does _not_ explode if an error was thrown and no method was passed", async () => {
     const { getByRole } = render(
-      <Image alt="test image" src="brokenimage.png" />
+      <Image alt="test image" src="brokenimage.png" />,
     );
 
     // HACK: should be `"img"`, but the image doesn't seem to be loading, thus the tag is registred as a `presentation` role
@@ -88,7 +88,7 @@ describe("Image", () => {
     const onLoadSpy = vi.fn();
 
     const { getByRole } = render(
-      <Image alt="test image" src={cat} onLoad={onLoadSpy} />
+      <Image alt="test image" src={cat} onLoad={onLoadSpy} />,
     );
 
     // HACK: should be `"img"`, but the image doesn't seem to be loading, thus the tag is registred as a `presentation` role

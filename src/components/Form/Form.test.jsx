@@ -28,7 +28,7 @@ describe("Form", () => {
   describe("extends <form> appropriately", () => {
     it("takes normal <form> attributes, like `style`", () => {
       const { getByTestId } = render(
-        <Form data-testid={datatestid} style={{ color: "black" }} />
+        <Form data-testid={datatestid} style={{ color: "black" }} />,
       );
       const rootElement = getByTestId(datatestid);
       expect(rootElement.style.color).toBeTruthy();
@@ -36,7 +36,7 @@ describe("Form", () => {
 
     it("does not allow `className` to be overwritten, but it can be extended", () => {
       const { getByTestId } = render(
-        <Form data-testid={datatestid} className="fakeclassname" />
+        <Form data-testid={datatestid} className="fakeclassname" />,
       );
       const rootElement = getByTestId(datatestid);
       expect(rootElement.classList.length).toBe(2);

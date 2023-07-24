@@ -50,11 +50,11 @@ export const IconButton = forwardRef(
       variant = "primary",
       ...rest
     }: IconButtonProps,
-    ref: React.Ref<HTMLButtonElement>
+    ref: React.Ref<HTMLButtonElement>,
   ) => {
     if (!ariaLabel) {
       handleAccessbilityError(
-        "`aria-label` is REQUIRED by accessibility standards."
+        "`aria-label` is REQUIRED by accessibility standards.",
       );
     }
 
@@ -105,6 +105,6 @@ export const IconButton = forwardRef(
         )}
       </button>
     );
-  }
+  },
 );
 IconButton.displayName = "IconButton";

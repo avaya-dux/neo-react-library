@@ -17,7 +17,7 @@ export const Content = ({
         "neo-widget__body neo-widget__body",
         loading && "neo-widget__body--loading",
         disabled && "neo-widget__body-disabled",
-        className
+        className,
       )}
       {...rest}
     >
@@ -31,7 +31,7 @@ export const Content = ({
         <p
           className={clsx(
             "neo-widget__message",
-            disabled && "neo-widget__message-disabled"
+            disabled && "neo-widget__message-disabled",
           )}
         >
           {children}

@@ -14,7 +14,7 @@ export const handleCloseElementMouseClickEvent = (
   tabIndex: number,
   activeTabIndex: number,
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
-  setActivePanelIndex: Dispatch<SetStateAction<number>>
+  setActivePanelIndex: Dispatch<SetStateAction<number>>,
 ) => {
   e.stopPropagation();
   logger.debug("hanlding mouse click event on tab close element");
@@ -29,7 +29,7 @@ export const handleCloseElementMouseClickEvent = (
       tabs,
       activeTabIndex,
       setActiveTabIndex,
-      setActivePanelIndex
+      setActivePanelIndex,
     );
   }
   e.preventDefault();

@@ -21,7 +21,7 @@ describe("Group Accordion Component", () => {
         <Accordion header="Accordion 1">{bodyText}</Accordion>
         <Accordion header="Accordion 2">{bodyText}</Accordion>
         <Accordion header="Accordion 2">{bodyText}</Accordion>
-      </AccordionGroup>
+      </AccordionGroup>,
     );
     const GroupAccordionElement = screen.getByText(groupHeaderText);
     expect(GroupAccordionElement).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("Group Accordion Component", () => {
         <Accordion header="Accordion 1">{bodyText}</Accordion>
         <Accordion header="Accordion 2">{bodyText}</Accordion>
         <Accordion header="Accordion 2">{bodyText}</Accordion>
-      </AccordionGroup>
+      </AccordionGroup>,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -45,7 +45,7 @@ describe("Group Accordion Component", () => {
         </Accordion>
         <Accordion header="heading 2">{bodyText}</Accordion>
         <Accordion header="heading 3">{bodyText}</Accordion>
-      </AccordionGroup>
+      </AccordionGroup>,
     );
     const AccordionElements = screen.getAllByRole("button");
     expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
@@ -63,7 +63,7 @@ describe("Group Accordion Component", () => {
           {bodyText}
         </Accordion>
         <Accordion header="heading 3">{bodyText}</Accordion>
-      </AccordionGroup>
+      </AccordionGroup>,
     );
 
     expect(spy).not.toHaveBeenCalled();
@@ -78,7 +78,7 @@ describe("Group Accordion Component", () => {
         <Accordion header="heading 1">{bodyText}</Accordion>
         <Accordion header="heading 2">{bodyText}</Accordion>
         <Accordion header="heading 3">{bodyText}</Accordion>
-      </AccordionGroup>
+      </AccordionGroup>,
     );
     const AccordionElements = screen.getAllByRole("button");
     // by default it opens first accordion
@@ -98,7 +98,7 @@ describe("Group Accordion Component", () => {
         <Accordion header="heading 1">{bodyText}</Accordion>
         <Accordion header="heading 2">{bodyText}</Accordion>
         <Accordion header="heading 3">{bodyText}</Accordion>
-      </AccordionGroup>
+      </AccordionGroup>,
     );
     const AccordionElements = screen.getAllByRole("button")[2];
     // by default index = 1 is open but as we passed defaultOpenAccordionIndex prop we are seeing index = 2 open
@@ -113,7 +113,7 @@ describe("Group Accordion Component", () => {
         <Accordion header="heading 3" disabled>
           {bodyText}
         </Accordion>
-      </AccordionGroup>
+      </AccordionGroup>,
     );
     const AccordionElements = screen.getAllByRole("button");
     expect(AccordionElements[2]).toHaveAttribute("disabled");

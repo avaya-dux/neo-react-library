@@ -19,7 +19,7 @@ describe("InternalToast", () => {
           message="This is a toast"
           duration={5000}
           remove={remove}
-        />
+        />,
       );
     });
 
@@ -29,7 +29,7 @@ describe("InternalToast", () => {
       const toast = screen.getByRole("alert");
       expect(toast).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("5 seconds")
+        expect.stringContaining("5 seconds"),
       );
     });
 
@@ -60,7 +60,7 @@ describe("InternalToast", () => {
           message="This is a toast"
           duration={500}
           remove={remove}
-        />
+        />,
       );
     });
 
@@ -70,7 +70,7 @@ describe("InternalToast", () => {
       const toast = screen.getByRole("alert");
       expect(toast).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("1 second")
+        expect.stringContaining("1 second"),
       );
     });
 

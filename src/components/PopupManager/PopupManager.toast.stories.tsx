@@ -9,7 +9,7 @@ import { removePopupManagerContainer } from "./";
 import { popupManagerLogger as logger } from "./PopupManager";
 
 const PopupManagerToastTemplate: Story<ToastOptions> = (
-  props: ToastOptions
+  props: ToastOptions,
 ) => {
   const managerRef = useRef<PopupManager | null>(null);
 

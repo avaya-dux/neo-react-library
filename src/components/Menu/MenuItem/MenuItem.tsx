@@ -48,7 +48,7 @@ export const MenuItem = ({
   const ref = useRef(null);
 
   log.debug(
-    `debug menuitem hasFocus = ${hasFocus}, isActive=${isActive}, counter=${counter}`
+    `debug menuitem hasFocus = ${hasFocus}, isActive=${isActive}, counter=${counter}`,
   );
 
   // run it in every render
@@ -64,7 +64,7 @@ export const MenuItem = ({
         "neo-dropdown__link",
         isActive && "neo-dropdown__link-active",
         disabled && "neo-dropdown--disabled",
-        className
+        className,
       )}
       id={id}
       ref={ref}

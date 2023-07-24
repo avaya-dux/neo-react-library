@@ -64,7 +64,7 @@ export const MultiSelectSearchable = () => {
             </Chip>
           ))
         : null,
-    [selectedItems, disabled, toggleItem]
+    [selectedItems, disabled, toggleItem],
   );
 
   return (
@@ -76,7 +76,7 @@ export const MultiSelectSearchable = () => {
           "neo-multiselect--small neo-multiselect--small-searchable",
         disabled && "neo-multiselect--disabled",
         loading && "neo-select__spinner",
-        isOpen && "neo-multiselect--active"
+        isOpen && "neo-multiselect--active",
       )}
     >
       <span {...restToggleProps} className="neo-multiselect-combo__header">
@@ -86,7 +86,7 @@ export const MultiSelectSearchable = () => {
             value={inputValue}
             inputClassName={clsx(
               "neo-input",
-              size === "sm" && "neo-multiselect__input--small"
+              size === "sm" && "neo-multiselect__input--small",
             )}
             disabled={disabled}
             placeholder={placeholder}
@@ -123,7 +123,7 @@ export const MultiSelectSearchable = () => {
         aria-label={ariaLabel}
         className={clsx(
           "neo-multiselect__content",
-          isOpen && "neo-set-keyboard-focus"
+          isOpen && "neo-set-keyboard-focus",
         )}
         {...getMenuProps()}
       >

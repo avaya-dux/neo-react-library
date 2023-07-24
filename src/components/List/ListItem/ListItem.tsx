@@ -37,7 +37,7 @@ export const ListItem = ({
       className={clsx(
         "neo-group-list__wrapper",
         showDivider && "neo-divider",
-        className
+        className,
       )}
     >
       {tooltip ? (

@@ -34,7 +34,7 @@ describe("getAvatarFigureProps", () => {
       `);
 
     expect(
-      getAvatarFigureProps({ label: "Jezebel", size: "lg", variant: "bot" })
+      getAvatarFigureProps({ label: "Jezebel", size: "lg", variant: "bot" }),
     ).toMatchInlineSnapshot(`
       {
         "aria-label": "Jezebel",
@@ -47,7 +47,7 @@ describe("getAvatarFigureProps", () => {
         label: "Jerry",
         size: "sm",
         variant: "generic",
-      })
+      }),
     ).toMatchInlineSnapshot(`
       {
         "aria-label": "Jerry",
@@ -60,7 +60,7 @@ describe("getAvatarFigureProps", () => {
         label: "Jordan",
         size: "md",
         variant: "generic",
-      })
+      }),
     ).toMatchInlineSnapshot(`
       {
         "aria-label": "Jordan",
@@ -73,7 +73,7 @@ describe("getAvatarFigureProps", () => {
         label: "Jemima",
         size: "lg",
         variant: "generic",
-      })
+      }),
     ).toMatchInlineSnapshot(`
       {
         "aria-label": "Jemima",
@@ -106,7 +106,7 @@ describe("getAvatarFigureProps", () => {
         label: "John",
         initials: "JJ",
         border: "success",
-      })
+      }),
     ).toMatchInlineSnapshot(`
       {
         "aria-label": "John",
@@ -137,7 +137,7 @@ describe("getAvatarFigureProps", () => {
 describe("getAvatarImageProps", () => {
   it("returns expected props", () => {
     expect(
-      getAvatarImageProps({ label: "Free Guy", image: "/images/freeguy.png" })
+      getAvatarImageProps({ label: "Free Guy", image: "/images/freeguy.png" }),
     ).toMatchInlineSnapshot(`
       {
         "alt": "Free Guy",
@@ -218,7 +218,7 @@ describe("Avatar", () => {
         size="lg"
         border="default"
         status="available"
-      />
+      />,
     );
 
     expect(container).toMatchInlineSnapshot(`
@@ -249,7 +249,7 @@ describe("Avatar", () => {
         variant="generic"
         border="alert"
         status="available"
-      />
+      />,
     );
 
     expect(container).toMatchInlineSnapshot(`

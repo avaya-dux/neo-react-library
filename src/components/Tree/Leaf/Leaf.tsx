@@ -41,7 +41,7 @@ export const Leaf = ({
   const ref = useRef(null);
   const [tabIndex, active, handleKeyDown, handleClick] = useRovingTabIndex(
     ref,
-    disabled
+    disabled,
   );
   useFocusEffect(active, ref);
 
@@ -51,7 +51,7 @@ export const Leaf = ({
         "neo-treeview__item",
         disabled && "neo-treeview__item--disabled",
         active && "neo-treeview__item--selected",
-        className
+        className,
       )}
       dir={dir}
       onClick={handleClick}

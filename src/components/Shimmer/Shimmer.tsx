@@ -43,7 +43,7 @@ export const Shimmer = ({
         shape === "circle" && size === "md" && "neo-shimmer__circle--medium",
         shape === "circle" && size === "lg" && "neo-shimmer__circle--large",
         loopInfinitely === false && "neo-shimmer--3-count",
-        className
+        className,
       )}
       {...rest}
     ></div>

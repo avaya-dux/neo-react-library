@@ -32,7 +32,7 @@ export const NavListItemButton = ({
       <Button
         className={clsx(
           "neo-btn-square",
-          `neo-btn-square-${variant} neo-btn-square-${variant}--info`
+          `neo-btn-square-${variant} neo-btn-square-${variant}--info`,
         )}
         onClick={(e) => onPageChange(e, pageToNavigateTo)}
         variant={variant}

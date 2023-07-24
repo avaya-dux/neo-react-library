@@ -12,7 +12,7 @@ export const handleButtonKeyDownEvent = (
   e: KeyboardEvent<HTMLButtonElement>,
   menuIndexes: MenuIndexesType,
   setCursor: Dispatch<SetStateAction<number>>,
-  setOpen: Dispatch<SetStateAction<boolean>>
+  setOpen: Dispatch<SetStateAction<boolean>>,
 ) => {
   let handled = true;
   switch (e.key) {
@@ -60,7 +60,7 @@ export const handleKeyDownEvent = (
   setEnterCounter: Dispatch<SetStateAction<number>>,
   setOpen: Dispatch<SetStateAction<boolean>>,
   closeOnSelect: boolean,
-  label: string
+  label: string,
 ) => {
   logger.debug(`handle ${label} key event ${e.key}`);
   let handled = true;
@@ -145,7 +145,7 @@ export const handleKeyDownEvent = (
 export const handleBlurEvent = (
   e: FocusEvent<HTMLDivElement>,
   closeOnBlur: boolean,
-  setOpen: Dispatch<SetStateAction<boolean>>
+  setOpen: Dispatch<SetStateAction<boolean>>,
 ) => {
   logger.debug(`${e.relatedTarget} receiving focus`);
   if (e.relatedTarget === null && closeOnBlur) {

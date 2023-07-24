@@ -38,7 +38,7 @@ export const Widget = ({
         <div
           className={clsx(
             "neo-widget__header",
-            disabled && "neo-widget__header-disabled"
+            disabled && "neo-widget__header-disabled",
           )}
         >
           {headerLeft}

@@ -44,7 +44,7 @@ describe("CheckboxGroup", () => {
     const defaultCheckboxes = checkboxes(DefaultProps.groupName, true, "mixed");
     beforeEach(() => {
       renderResult = render(
-        <CheckboxGroup {...DefaultProps}>{defaultCheckboxes}</CheckboxGroup>
+        <CheckboxGroup {...DefaultProps}>{defaultCheckboxes}</CheckboxGroup>,
       );
     });
 
@@ -59,18 +59,18 @@ describe("CheckboxGroup", () => {
 
     it("checkbox renders ok", () => {
       const rootElement = screen.getByLabelText(
-        defaultCheckboxes[0].props.children
+        defaultCheckboxes[0].props.children,
       );
       expect(rootElement).toBeTruthy();
     });
 
     it("checkbox renders with correct class name", () => {
       const rootElement = screen.getByLabelText(
-        defaultCheckboxes[4].props.children
+        defaultCheckboxes[4].props.children,
       );
       expect(rootElement).toHaveAttribute(
         "class",
-        "neo-check neo-check--indeterminate"
+        "neo-check neo-check--indeterminate",
       );
     });
 
@@ -99,7 +99,7 @@ describe("CheckboxGroup", () => {
       render(
         <CheckboxGroup {...DefaultProps} helperText={helperText}>
           {defaultCheckboxes}
-        </CheckboxGroup>
+        </CheckboxGroup>,
       );
 
       expect(screen.getByText(helperText)).toBeInTheDocument();
@@ -111,12 +111,12 @@ describe("CheckboxGroup", () => {
       render(
         <CheckboxGroup label={defaultCheckboxGroupLabel} groupName={groupName}>
           {defaultCheckboxes}
-        </CheckboxGroup>
+        </CheckboxGroup>,
       );
 
       expect(screen.getByText(defaultCheckboxGroupLabel)).toHaveAttribute(
         "id",
-        labelId
+        labelId,
       );
     });
 
@@ -129,12 +129,12 @@ describe("CheckboxGroup", () => {
           <CheckboxGroup aria-labelledby={labelId} groupName="group-name">
             {defaultCheckboxes}
           </CheckboxGroup>
-        </>
+        </>,
       );
 
       expect(screen.getByLabelText(defaultCheckboxGroupLabel)).toHaveAttribute(
         "role",
-        "group"
+        "group",
       );
     });
 
@@ -144,8 +144,8 @@ describe("CheckboxGroup", () => {
         render(
           <CheckboxGroup groupName="group-name">
             {defaultCheckboxes}
-          </CheckboxGroup>
-        )
+          </CheckboxGroup>,
+        ),
       ).toThrowError();
     });
   });
@@ -158,7 +158,7 @@ describe("CheckboxGroup", () => {
       vi.spyOn(console, "warn").mockImplementation(() => null);
 
       renderResult = render(
-        <CheckboxGroup {...DefaultProps}>{checkboxes}</CheckboxGroup>
+        <CheckboxGroup {...DefaultProps}>{checkboxes}</CheckboxGroup>,
       );
     });
 
@@ -189,7 +189,7 @@ describe("CheckboxGroup", () => {
       renderResult = render(
         <CheckboxGroup {...DefaultProps}>
           {readonlyCheckboxes("readonly group")}
-        </CheckboxGroup>
+        </CheckboxGroup>,
       );
     });
 

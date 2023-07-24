@@ -43,7 +43,7 @@ describe("NeoInputWrapper", () => {
         inline
         required
         wrapperClassName="example-class-name"
-      />
+      />,
     );
     const rootElement = getByTestId(datatestid);
     const groupElement = getByTestId(groupdatatestid);
@@ -61,7 +61,11 @@ describe("NeoInputWrapper", () => {
       `);
 
       expect(
-        getNeoInputWrapperProps({ error: true, required: true, disabled: true })
+        getNeoInputWrapperProps({
+          error: true,
+          required: true,
+          disabled: true,
+        }),
       ).toMatchInlineSnapshot(`
         {
           "className": "neo-form-control neo-form-control--disabled neo-form-control--error neo-form-control--required",
@@ -73,7 +77,7 @@ describe("NeoInputWrapper", () => {
           error: true,
           required: false,
           disabled: false,
-        })
+        }),
       ).toMatchInlineSnapshot(`
         {
           "className": "neo-form-control neo-form-control--error",
@@ -83,7 +87,7 @@ describe("NeoInputWrapper", () => {
 
     it("allows extending of `className` via prop: `wrapperClassName`", () => {
       expect(
-        getNeoInputWrapperProps({ wrapperClassName: "example-class-name" })
+        getNeoInputWrapperProps({ wrapperClassName: "example-class-name" }),
       ).toMatchInlineSnapshot(`
         {
           "className": "neo-form-control example-class-name",

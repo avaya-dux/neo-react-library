@@ -20,7 +20,7 @@ describe("Menu helper methods", () => {
     it("should add id when menu item does not have id", () => {
       const menuItem = <MenuItem>View</MenuItem>;
       expect(
-        addIdToChildren([menuItem], SubMenu.name)[0].props.id
+        addIdToChildren([menuItem], SubMenu.name)[0].props.id,
       ).not.toBeNull();
     });
 
@@ -33,7 +33,7 @@ describe("Menu helper methods", () => {
       const subMenu = <SubMenu menuRootElement={<MenuItem>File</MenuItem>} />;
       expect(
         addIdToChildren([subMenu], SubMenu.name)[0].props.menuRootElement.props
-          .id
+          .id,
       ).not.toBeNull();
     });
 
@@ -43,7 +43,7 @@ describe("Menu helper methods", () => {
       );
       expect(
         addIdToChildren([subMenu], SubMenu.name)[0].props.menuRootElement.props
-          .id
+          .id,
       ).toBe("id");
     });
   });
@@ -153,7 +153,7 @@ describe("Menu helper methods", () => {
         menuIndexes,
         cursor,
         "",
-        1
+        1,
       );
       const { getByRole } = render(result);
       const menuItem = getByRole("menuitem");
@@ -200,7 +200,7 @@ describe("Menu helper methods", () => {
         menuIndexes,
         cursor,
         "ENTER_SUB_MENU",
-        10
+        10,
       );
       const { getByTestId, container } = render(result);
       const subMenu = getByTestId(testId);
@@ -297,7 +297,7 @@ describe("Menu helper methods", () => {
         menuIndexes,
         cursor,
         "",
-        1
+        1,
       );
       const { getByTestId } = render(result);
       const menuItem = getByTestId("inactive");
@@ -345,7 +345,7 @@ describe("Menu helper methods", () => {
         menuIndexes,
         cursor,
         "ENTER_SUB_MENU",
-        10
+        10,
       );
       const { getByTestId } = render(result);
       const subMenu = getByTestId(testId);
@@ -380,7 +380,7 @@ describe("Menu helper methods", () => {
         menuIndexes,
         cursor,
         "",
-        1
+        1,
       );
       const { getByTestId } = render(result);
       const menuItem = getByTestId("separator");

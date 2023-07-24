@@ -46,7 +46,7 @@ describe("TextInput", () => {
     expect(() => render(<TextInput label="truthy" />)).not.toThrow();
     expect(() => render(<TextInput aria-label="truthy" />)).not.toThrow();
     expect(() =>
-      render(<TextInput label="double" placeholder="truthy" />)
+      render(<TextInput label="double" placeholder="truthy" />),
     ).not.toThrow();
   });
 
@@ -54,7 +54,7 @@ describe("TextInput", () => {
     it("fully renders without exploding", () => {
       const testid = "testid";
       const { getByTestId } = render(
-        <InternalTextInputElement data-testid={testid} />
+        <InternalTextInputElement data-testid={testid} />,
       );
       const rootElement = getByTestId(testid);
       expect(rootElement).toBeTruthy();
@@ -67,7 +67,7 @@ describe("TextInput", () => {
     it("for the `readOnly` usecase, has an extra class name and `tabIndex === -1`", () => {
       const testid = "testid";
       const { getByTestId } = render(
-        <InternalTextInputElement data-testid={testid} readOnly />
+        <InternalTextInputElement data-testid={testid} readOnly />,
       );
       const rootElement = getByTestId(testid);
       expect(rootElement).toBeTruthy();

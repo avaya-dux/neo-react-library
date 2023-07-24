@@ -11,7 +11,7 @@ describe("ExampleComponent", () => {
         icon="settings"
         aria-label="test"
         role="figure"
-      />
+      />,
     );
 
     const rootElement = getByTestId("neo-icon");
@@ -25,7 +25,7 @@ describe("ExampleComponent", () => {
         icon="settings"
         aria-label="test"
         role="figure"
-      />
+      />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -39,7 +39,7 @@ describe("ExampleComponent", () => {
         icon="save"
         aria-label="test"
         role="figure"
-      />
+      />,
     );
 
     const rootElement = getByTestId("neo-icon");
@@ -56,7 +56,7 @@ describe("ExampleComponent", () => {
         aria-label="test"
         role="figure"
         className={customClassName}
-      />
+      />,
     );
 
     const rootElement = getByTestId("neo-icon");

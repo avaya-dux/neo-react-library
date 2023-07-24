@@ -15,7 +15,7 @@ describe("Single Select Scrolling Tests", () => {
     cy.get("span button")
       .first()
       .type(
-        "{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}"
+        "{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}",
       );
     cy.get("[role='listbox']")
       .first()
@@ -40,7 +40,7 @@ describe("Single Select Searchable Scrolling Tests", () => {
     cy.get("span")
       .first()
       .type(
-        "{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}"
+        "{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}",
       );
     cy.get("[role='listbox']")
       .first()

@@ -22,7 +22,7 @@ export const AgentCard = ({
         "neo-nav-status",
         agentStatus === "ready" && "neo-nav-status--ready",
         agentStatus === "not-ready" && "neo-nav-status--not-ready",
-        agentStatus === "connected" && "neo-nav-status--connected"
+        agentStatus === "connected" && "neo-nav-status--connected",
       )}
     >
       <div className="neo-nav-status-info">
@@ -32,7 +32,7 @@ export const AgentCard = ({
             "neo-label",
             agentStatus === "ready" && "neo-label--ready",
             agentStatus === "not-ready" && "neo-label--not-ready",
-            agentStatus === "connected" && "neo-label--connected"
+            agentStatus === "connected" && "neo-label--connected",
           )}
         >
           {agentStatus === "ready" && "Ready"}

@@ -7,7 +7,7 @@ const logger = log.getLogger("tab-event-handler-keyboard-helper");
 
 export function getNextTabIndex(
   tabs: InternalTabProps[],
-  activeTabIndex: number
+  activeTabIndex: number,
 ) {
   logger.debug("calling getNextTabIndex with activeTabIndex=", activeTabIndex);
   let nextIndex = activeTabIndex + 1;
@@ -22,7 +22,7 @@ export function getNextTabIndex(
 }
 export function getPreviousTabIndex(
   tabs: InternalTabProps[],
-  activeTabIndex: number
+  activeTabIndex: number,
 ) {
   let previousIndex = activeTabIndex - 1;
   while (previousIndex >= 0) {
@@ -39,7 +39,7 @@ export function activatePreviousTab(
   tabs: InternalTabProps[],
   activeTabIndex: number,
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
-  setActivePanelIndex?: Dispatch<SetStateAction<number>>
+  setActivePanelIndex?: Dispatch<SetStateAction<number>>,
 ): boolean {
   logger.debug("activatePreviousTab");
   const previousIndex = getPreviousTabIndex(tabs, activeTabIndex);
@@ -57,7 +57,7 @@ export function activatePreviousTab(
 
 export const isTabLink = (
   tabs: InternalTabProps[],
-  activeTabIndex: number
+  activeTabIndex: number,
 ): boolean => {
   const tab = tabs[activeTabIndex];
   return !!tab.href;

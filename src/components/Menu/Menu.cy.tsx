@@ -10,7 +10,7 @@ describe("Menu component", () => {
         closeOnBlur={true}
         onLeftMenuClose={() => null}
         onRightMenuClose={() => null}
-      />
+      />,
     );
     twoGroups();
     cy.contains(leftNavBtn).click();
@@ -28,7 +28,7 @@ describe("Menu component", () => {
         closeOnBlur={false}
         onLeftMenuClose={() => null}
         onRightMenuClose={() => null}
-      />
+      />,
     );
     twoGroups();
 

@@ -41,7 +41,7 @@ export const UseOfSeperateLabel = () => {
 };
 
 const DefaultTemplate: Story<CheckboxGroupProps> = (
-  args: CheckboxGroupProps
+  args: CheckboxGroupProps,
 ) => {
   const [checked4, setChecked4] = useState<CheckboxProps["checked"]>(true);
   const [checked5, setChecked5] = useState<CheckboxProps["checked"]>("mixed");
@@ -59,7 +59,7 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
         }
       }
     },
-    [checked4, checked5, setChecked4, setChecked5]
+    [checked4, checked5, setChecked4, setChecked5],
   );
   const [checkedValues, setCheckedValues] = useState("");
   const [ariaCheckedValues, setAriaCheckedValues] = useState("");

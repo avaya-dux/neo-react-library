@@ -26,11 +26,11 @@ export type ContextProps = {
 export type ThreeChildren = [
   ReactElement<HeaderProps>,
   ReactElement<ActionProps>,
-  ReactElement<ContentProps>
+  ReactElement<ContentProps>,
 ];
 export type TwoChildren = [
   ReactElement<HeaderProps>,
-  ReactElement<ActionProps | ContentProps>
+  ReactElement<ActionProps | ContentProps>,
 ];
 export type WidgetProps = {
   children: ThreeChildren | TwoChildren | ReactElement<HeaderProps>;

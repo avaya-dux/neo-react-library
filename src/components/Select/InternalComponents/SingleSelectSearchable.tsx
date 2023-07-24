@@ -61,7 +61,7 @@ export const SingleSelectSearchable = () => {
         size === "sm" && "neo-multiselect--small",
         disabled && "neo-multiselect--disabled",
         loading && "neo-select__spinner",
-        isOpen && "neo-multiselect--active"
+        isOpen && "neo-multiselect--active",
       )}
     >
       <span {...restToggleProps} className="neo-multiselect-combo__header">
@@ -103,7 +103,7 @@ export const SingleSelectSearchable = () => {
       <div
         className={clsx(
           "neo-multiselect__content",
-          isOpen && "neo-set-keyboard-focus"
+          isOpen && "neo-set-keyboard-focus",
         )}
         aria-label={ariaLabel}
         {...getMenuProps()}

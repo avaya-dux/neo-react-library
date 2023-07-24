@@ -20,7 +20,7 @@ export const TopNavSkipNav = ({
 }: TopNavSkipNavProps) => {
   if (!children && !rest["aria-label"]) {
     handleAccessbilityError(
-      "A Skip Navigation link must have descriptive text. Either as children or an aria-label."
+      "A Skip Navigation link must have descriptive text. Either as children or an aria-label.",
     );
   }
 

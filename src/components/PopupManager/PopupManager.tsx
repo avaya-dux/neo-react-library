@@ -92,7 +92,7 @@ export class PopupManager extends Component<Props, State> {
     const notification = { id, node: options.node, position };
     logger.debug(
       `notify: state before update at ${position} is `,
-      this.state.positions[position]
+      this.state.positions[position],
     );
     this.addPopup(position, notification);
     logger.debug("notify returns ", { id, position });
@@ -129,7 +129,7 @@ export class PopupManager extends Component<Props, State> {
       const filtered = prevPopups.positions[position].filter(
         // id may be string or number
         // eslint-disable-next-line eqeqeq
-        (popup) => popup.id != id
+        (popup) => popup.id != id,
       );
       const ret = {
         zIndex: prevPopups.zIndex,

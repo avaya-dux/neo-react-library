@@ -42,7 +42,7 @@ export const MultiSelect = () => {
             </Chip>
           ))
         : null,
-    [selectedItems, disabled, toggleItem]
+    [selectedItems, disabled, toggleItem],
   );
   const {
     role,
@@ -58,7 +58,7 @@ export const MultiSelect = () => {
           .map((item) => item.value)
           .join(" and ")
           .concat(
-            `, ${selectedItems.length} of ${filteredOptions.length} selected`
+            `, ${selectedItems.length} of ${filteredOptions.length} selected`,
           ),
       };
     }
@@ -76,7 +76,7 @@ export const MultiSelect = () => {
         size === "sm" && "neo-multiselect--small",
         disabled && "neo-multiselect--disabled",
         loading && "neo-select__spinner",
-        isOpen && "neo-multiselect--active"
+        isOpen && "neo-multiselect--active",
       )}
     >
       <span className="neo-multiselect-combo__header">
@@ -97,7 +97,7 @@ export const MultiSelect = () => {
         aria-label={ariaLabel}
         className={clsx(
           "neo-multiselect__content",
-          isOpen && "neo-set-keyboard-focus"
+          isOpen && "neo-set-keyboard-focus",
         )}
         aria-multiselectable={true}
         {...getMenuProps()}

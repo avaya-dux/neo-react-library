@@ -66,11 +66,11 @@ describe("Tabs", () => {
 
       expect(screen.getAllByRole("tab")[0]).toHaveAttribute(
         "aria-selected",
-        "true"
+        "true",
       );
       expect(screen.getAllByRole("tab")[2]).toHaveAttribute(
         "aria-selected",
-        "false"
+        "false",
       );
 
       const link = screen.getAllByRole("tab")[1];
@@ -78,11 +78,11 @@ describe("Tabs", () => {
 
       expect(screen.getAllByRole("tab")[0]).toHaveAttribute(
         "aria-selected",
-        "true"
+        "true",
       );
       expect(screen.getAllByRole("tab")[2]).toHaveAttribute(
         "aria-selected",
-        "false"
+        "false",
       );
     });
   });
@@ -111,7 +111,7 @@ describe("Tabs", () => {
 
             <TabPanel>{tab3Content}</TabPanel>
           </TabPanels>
-        </Tabs>
+        </Tabs>,
       );
     });
 
@@ -146,7 +146,7 @@ describe("Tabs", () => {
     it("should call the `onClose` method when close icon is clicked via mouse", async () => {
       expect(closableTabSpy).not.toHaveBeenCalled();
       await user.click(
-        screen.getAllByRole("tab")[1].getElementsByTagName("span")[0]
+        screen.getAllByRole("tab")[1].getElementsByTagName("span")[0],
       );
       expect(closableTabSpy).toHaveBeenCalled();
     });
@@ -171,7 +171,7 @@ describe("Tabs", () => {
 
             <TabPanel>{tab3Content}</TabPanel>
           </TabPanels>
-        </Tabs>
+        </Tabs>,
       );
 
       const tabs = screen.getAllByRole("tab");

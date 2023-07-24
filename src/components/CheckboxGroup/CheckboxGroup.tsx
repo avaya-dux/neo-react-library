@@ -73,12 +73,12 @@ export const CheckboxGroup = ({
 }: CheckboxGroupProps) => {
   const labelId = useMemo(
     () => ariaLabelledBy || `${groupName}-label`,
-    [groupName, ariaLabelledBy]
+    [groupName, ariaLabelledBy],
   );
 
   const helperTextId = useMemo(
     () => (helperText ? `${groupName}-helper-text` : undefined),
-    [groupName, helperText]
+    [groupName, helperText],
   );
 
   const onChangeHandler = useCallback(
@@ -88,12 +88,12 @@ export const CheckboxGroup = ({
         onChange(e);
       }
     },
-    [onChange]
+    [onChange],
   );
 
   if (!label && !ariaLabelledBy) {
     handleAccessbilityError(
-      "CheckboxGroup must have a `label` or `aria-labelledby`"
+      "CheckboxGroup must have a `label` or `aria-labelledby`",
     );
   }
 

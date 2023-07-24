@@ -92,7 +92,7 @@ export const Select = (props: SelectProps) => {
 
         return childprops;
       }),
-    [children]
+    [children],
   );
   const [filteredOptions, setFilteredOptions] = useState(options);
   useEffect(() => {
@@ -101,7 +101,7 @@ export const Select = (props: SelectProps) => {
     const optionsHaveChanged =
       options.length !== filteredOptions.length ||
       options.some(
-        (option, index) => option.value !== filteredOptions[index].value
+        (option, index) => option.value !== filteredOptions[index].value,
       );
 
     if (optionsHaveChanged) {
@@ -116,7 +116,7 @@ export const Select = (props: SelectProps) => {
       const userSelectedOptions = options.filter((option) =>
         multiple
           ? defaultValue.includes(option.value as string)
-          : defaultValue === option.value
+          : defaultValue === option.value,
       );
       setSelectedItems(userSelectedOptions);
     } else if (isInitialRender && options.some((o) => o.selected)) {
@@ -131,7 +131,7 @@ export const Select = (props: SelectProps) => {
         const userSelectedOptions = options.filter((option) =>
           multiple
             ? value?.includes(option.value as string)
-            : value === option.value
+            : value === option.value,
         );
 
         setSelectedItems(userSelectedOptions);
@@ -144,13 +144,13 @@ export const Select = (props: SelectProps) => {
     if (!isInitialRender && onChange) {
       if (multiple) {
         const newlySelectedValues = selectedItems.map(
-          (item) => item.value as string
+          (item) => item.value as string,
         );
         logger.debug({ selectedItems });
         onChange(newlySelectedValues);
       } else {
         onChange(
-          selectedItems.length ? (selectedItems[0].value as string) : null
+          selectedItems.length ? (selectedItems[0].value as string) : null,
         );
       }
     }
@@ -159,7 +159,7 @@ export const Select = (props: SelectProps) => {
 
   const selectedItemsValues = useMemo(
     () => selectedItems.map((item) => item.value),
-    [selectedItems]
+    [selectedItems],
   );
 
   const downshiftProps = useDownshift(
@@ -174,7 +174,7 @@ export const Select = (props: SelectProps) => {
     filteredOptions,
     setFilteredOptions,
     selectedItems,
-    setSelectedItems
+    setSelectedItems,
   );
 
   const { getLabelProps } = downshiftProps;

@@ -36,7 +36,7 @@ describe("SelectNative", () => {
   describe("helper and error text functionality", () => {
     it("shows helper text when `helperText` is passed", () => {
       const { getByText } = render(
-        <SelectNative label={defaultLabel} helperText={exampleHelperText} />
+        <SelectNative label={defaultLabel} helperText={exampleHelperText} />,
       );
 
       const labelElement = getByText(defaultLabel);
@@ -48,7 +48,7 @@ describe("SelectNative", () => {
 
     it("shows error text when `errorText` is passed", () => {
       const { getByText } = render(
-        <SelectNative label={defaultLabel} errorList={exampleErrorText} />
+        <SelectNative label={defaultLabel} errorList={exampleErrorText} />,
       );
 
       const labelElement = getByText(defaultLabel);
@@ -66,7 +66,7 @@ describe("SelectNative", () => {
           label={defaultLabel}
           helperText={exampleHelperText}
           errorList={exampleErrorText}
-        />
+        />,
       );
 
       const labelElement = getByText(defaultLabel);
@@ -103,7 +103,7 @@ describe("SelectNative", () => {
 
       it("passes basic axe compliance when `multiple === true`", async () => {
         const { container } = render(
-          <Templated label={defaultLabel} multiple />
+          <Templated label={defaultLabel} multiple />,
         );
         const results = await axe(container);
         expect(results).toHaveNoViolations();

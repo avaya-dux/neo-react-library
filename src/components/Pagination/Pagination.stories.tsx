@@ -93,7 +93,7 @@ const BookOfPages = ({ sectionWidth }: { sectionWidth?: number }) => {
               setItemsPerPage(newItemsPerPage);
 
               const maxPageIndex = Math.ceil(
-                paragraphArray.length / newItemsPerPage
+                paragraphArray.length / newItemsPerPage,
               );
               if (pageIndex > maxPageIndex) {
                 setPageIndex(maxPageIndex);

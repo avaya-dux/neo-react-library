@@ -30,7 +30,7 @@ logger.disableAll();
 
 export const addIdToChildren = (
   children: MenuProps["children"],
-  subMenuName: string
+  subMenuName: string,
 ) => {
   return children.map((child) => {
     const childTypeName = (child.type as FC)?.name || "menu-child-component";
@@ -63,7 +63,7 @@ export const layoutChildren = (
   cursorAction: ActionType,
   enterCounter: number,
   closeOnSelect: boolean,
-  setRootMenuOpen: Dispatch<SetStateAction<boolean>>
+  setRootMenuOpen: Dispatch<SetStateAction<boolean>>,
 ) => {
   return (
     <div
@@ -112,7 +112,7 @@ export const layoutChildren = (
                   isActive: false,
                   hasFocus: false,
                   tabIndex: -1,
-                }
+                },
               );
             } else if (childTypeName === subMenuName) {
               const buttonElement = (child.props as SubMenuProps)
@@ -126,7 +126,7 @@ export const layoutChildren = (
                 child as ReactElement<SubMenuProps>,
                 {
                   menuRootElement: cloneButton,
-                }
+                },
               );
             }
             if (inactiveChild) {
@@ -142,7 +142,7 @@ export const layoutChildren = (
 
 export const buildMenuIndexes = (
   children: MenuProps["children"],
-  subMenuName: string
+  subMenuName: string,
 ) => {
   const result =
     Children.map(children, (child, index) => {

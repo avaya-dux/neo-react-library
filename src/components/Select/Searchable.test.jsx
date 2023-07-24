@@ -18,7 +18,7 @@ describe("Select", () => {
       renderResult = render(
         <Select label={label} searchable>
           {fruitOptions}
-        </Select>
+        </Select>,
       );
     });
 
@@ -32,7 +32,7 @@ describe("Select", () => {
       const labelElement = getByText(label);
       const expectedAttributes = ["id", "for"];
       expectedAttributes.forEach((attribute) =>
-        expect(labelElement).toHaveAttribute(attribute)
+        expect(labelElement).toHaveAttribute(attribute),
       );
     });
 
@@ -45,14 +45,14 @@ describe("Select", () => {
         "aria-expanded",
       ];
       expectedAttributes.forEach((attribute) =>
-        expect(searchableElement).toHaveAttribute(attribute)
+        expect(searchableElement).toHaveAttribute(attribute),
       );
     });
 
     it("toggles aria-expanded prop on click", () => {
       const { container, getByRole } = renderResult;
       const toggleButton = container.querySelector(
-        "span.neo-multiselect-combo__header"
+        "span.neo-multiselect-combo__header",
       );
       const searchableElement = getByRole("combobox");
       expect(searchableElement).toHaveAttribute("aria-expanded", "false");
@@ -74,7 +74,7 @@ describe("Select", () => {
       render(
         <Select label={label} multiple searchable>
           {fruitOptions}
-        </Select>
+        </Select>,
       );
 
       expect(screen.queryAllByRole("button")).toHaveLength(0);
@@ -98,7 +98,7 @@ describe("Select", () => {
       render(
         <Select label={label} multiple searchable>
           {fruitOptions}
-        </Select>
+        </Select>,
       );
       const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
       await user.click(comboboxBtn);
@@ -120,7 +120,7 @@ describe("Select", () => {
       render(
         <Select label={label} searchable creatable>
           {fruitOptions}
-        </Select>
+        </Select>,
       );
 
       const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
@@ -153,7 +153,7 @@ describe("Select", () => {
       render(
         <Select label={label} searchable creatable>
           {fruitOptions}
-        </Select>
+        </Select>,
       );
 
       const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
@@ -182,7 +182,7 @@ describe("Select", () => {
       render(
         <Select label={label} multiple searchable creatable>
           {fruitOptions}
-        </Select>
+        </Select>,
       );
 
       const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
@@ -220,7 +220,7 @@ describe("Select", () => {
       render(
         <Select label={label} multiple searchable creatable>
           {fruitOptions}
-        </Select>
+        </Select>,
       );
 
       const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");

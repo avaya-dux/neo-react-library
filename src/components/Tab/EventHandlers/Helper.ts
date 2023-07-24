@@ -19,7 +19,7 @@ export function activateAnotherTabAndPanel(
   tabs: InternalTabProps[],
   activeTabIndex: number,
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
-  setActivePanelIndex: Dispatch<SetStateAction<number>>
+  setActivePanelIndex: Dispatch<SetStateAction<number>>,
 ) {
   logger.debug("activateAnotherTabAndPanel");
   if (
@@ -27,7 +27,7 @@ export function activateAnotherTabAndPanel(
       tabs,
       activeTabIndex,
       setActiveTabIndex,
-      setActivePanelIndex
+      setActivePanelIndex,
     )
   ) {
     const nextTab = getNextTabIndex(tabs, activeTabIndex);
@@ -43,7 +43,7 @@ export function activateAnotherTabAndPanel(
 
 export function extractProperties(
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLDivElement>[]
+  tabRefs: RefObject<HTMLDivElement>[],
 ) {
   const {
     scrollLeft = 0,
@@ -51,7 +51,7 @@ export function extractProperties(
     clientWidth: visibleWidth = 0,
   } = scrollRef.current || {};
   logger.debug(
-    `scrollWidth = ${scrollWidth} visibleWidth = ${visibleWidth} scrollLeft=${scrollLeft}`
+    `scrollWidth = ${scrollWidth} visibleWidth = ${visibleWidth} scrollLeft=${scrollLeft}`,
   );
   const tabWidths = tabRefs.map((ref) => ref.current?.clientWidth || 0);
   logger.debug(tabWidths.join(", "));
@@ -64,28 +64,28 @@ export function extractProperties(
 }
 export function enableLeftButton(
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLDivElement>[]
+  tabRefs: RefObject<HTMLDivElement>[],
 ) {
   const { scrollLeft, scrollWidth, visibleWidth } = extractProperties(
     scrollRef,
-    tabRefs
+    tabRefs,
   );
   logger.debug(
-    `enable left button? scrollLeft = ${scrollLeft} scrollWidth=${scrollWidth} visibleWidth=${visibleWidth}`
+    `enable left button? scrollLeft = ${scrollLeft} scrollWidth=${scrollWidth} visibleWidth=${visibleWidth}`,
   );
   return canMovePreviousTabToRight(scrollLeft, scrollWidth, visibleWidth);
 }
 
 export function enableRightButton(
   scrollRef: RefObject<HTMLDivElement>,
-  tabRefs: RefObject<HTMLDivElement>[]
+  tabRefs: RefObject<HTMLDivElement>[],
 ) {
   const { scrollLeft, scrollWidth, visibleWidth } = extractProperties(
     scrollRef,
-    tabRefs
+    tabRefs,
   );
   logger.debug(
-    `enable right button? scrollLeft = ${scrollLeft} scrollWidth=${scrollWidth} visibleWidth=${visibleWidth}`
+    `enable right button? scrollLeft = ${scrollLeft} scrollWidth=${scrollWidth} visibleWidth=${visibleWidth}`,
   );
 
   return canMoveNextTabToLeft(scrollLeft, scrollWidth, visibleWidth);
@@ -95,7 +95,7 @@ export function movePreviousTabToRightAmount(
   leftOffset: number,
   containerWidth: number,
   viewPortWidth: number,
-  tabWidths: number[]
+  tabWidths: number[],
 ) {
   if (!canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth)) {
     return 0;
@@ -108,7 +108,7 @@ export function moveNextTabToLeftAmount(
   leftOffset: number,
   containerWidth: number,
   viewPortWidth: number,
-  tabWidths: number[]
+  tabWidths: number[],
 ) {
   if (!canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth)) {
     logger.debug(`can not move next tab to left, returining`);
@@ -117,7 +117,7 @@ export function moveNextTabToLeftAmount(
   const [index, overshoot] = getNextTabToMoveLeft(
     leftOffset,
     viewPortWidth,
-    tabWidths
+    tabWidths,
   );
   return calculateLeftMoveAmount(index, overshoot, tabWidths);
 }

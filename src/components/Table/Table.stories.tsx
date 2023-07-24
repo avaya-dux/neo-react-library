@@ -402,7 +402,7 @@ export const PreSelectedRows = () => {
 };
 
 const Template: Story<TableProps<IDataTableMockData>> = (
-  props: TableProps<IDataTableMockData>
+  props: TableProps<IDataTableMockData>,
 ) => <Table {...props} />;
 
 export const Templated = Template.bind({});

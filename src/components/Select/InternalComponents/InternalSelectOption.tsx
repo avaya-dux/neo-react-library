@@ -43,7 +43,7 @@ export const InternalSelectOption = ({
   */
   const helperId = useMemo(
     () => `helper-text-${genId()}-${children}`,
-    [children]
+    [children],
   );
 
   const optionSelf = filteredOptions[index] || {};
@@ -76,7 +76,7 @@ export const InternalSelectOption = ({
     <li
       className={clsx(
         "neo-option-plain",
-        index === highlightedIndex && "neo-option-plain--focused"
+        index === highlightedIndex && "neo-option-plain--focused",
       )}
       {...itemProps}
     >

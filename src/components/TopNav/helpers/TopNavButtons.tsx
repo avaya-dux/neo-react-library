@@ -27,11 +27,11 @@ export const TopNavIconButton = forwardRef(
       icon,
       ...rest
     }: TopNavIconButtonProps,
-    ref: Ref<HTMLButtonElement>
+    ref: Ref<HTMLButtonElement>,
   ) => {
     if (!rest["aria-label"]) {
       handleAccessbilityError(
-        "A Icon Button must have descriptive text as an aria-label."
+        "A Icon Button must have descriptive text as an aria-label.",
       );
     }
 
@@ -41,14 +41,14 @@ export const TopNavIconButton = forwardRef(
           "neo-badge__navbutton",
           active && !disabled && "neo-badge__navbutton--active",
           disabled && !active && "neo-badge__navbutton--disabled",
-          active && disabled && "neo-badge__navbutton--active-disabled"
+          active && disabled && "neo-badge__navbutton--active-disabled",
         )}
       >
         <button
           className={clsx(
             "neo-badge__navbutton--content neo-btn",
             !!icon && `neo-icon-${icon}`,
-            className
+            className,
           )}
           disabled={disabled}
           ref={ref}
@@ -60,7 +60,7 @@ export const TopNavIconButton = forwardRef(
         )}
       </div>
     );
-  }
+  },
 );
 TopNavIconButton.displayName = "TopNavIconButton";
 
@@ -85,11 +85,11 @@ export const TopNavLinkButton = forwardRef(
       children,
       ...rest
     }: TopNavLinkButtonProps,
-    ref: Ref<HTMLAnchorElement>
+    ref: Ref<HTMLAnchorElement>,
   ) => {
     if (!rest["aria-label"] && !children) {
       handleAccessbilityError(
-        "Descriptive text must be provided as either `children` as text, or as an aria-label."
+        "Descriptive text must be provided as either `children` as text, or as an aria-label.",
       );
     }
 
@@ -98,7 +98,7 @@ export const TopNavLinkButton = forwardRef(
         className={clsx(
           "neo-nav-link-btn",
           active && "neo-nav-link-btn-active",
-          className
+          className,
         )}
         href={href}
         ref={ref}
@@ -111,7 +111,7 @@ export const TopNavLinkButton = forwardRef(
         className={clsx(
           "neo-nav-link-btn",
           active && "neo-nav-link-btn-active",
-          className
+          className,
         )}
         disabled={disabled}
         variant="tertiary"
@@ -121,6 +121,6 @@ export const TopNavLinkButton = forwardRef(
         {children}
       </Button>
     );
-  }
+  },
 );
 TopNavLinkButton.displayName = "TopNavLinkButton";

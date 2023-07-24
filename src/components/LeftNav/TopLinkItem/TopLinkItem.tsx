@@ -56,7 +56,7 @@ export const TopLinkItem = ({
       className={clsx(
         "neo-leftnav__main",
         isActive && "neo-leftnav__main--active",
-        className
+        className,
       )}
     >
       {disabled ? (

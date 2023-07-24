@@ -20,7 +20,7 @@ describe("NeoThemeProvider", () => {
 
   it("renders with given initialMode as dark", () => {
     const view = render(
-      <NeoThemeProvider initialMode="dark">Testing</NeoThemeProvider>
+      <NeoThemeProvider initialMode="dark">Testing</NeoThemeProvider>,
     );
 
     expect(view.container).toMatchInlineSnapshot(`
@@ -36,7 +36,7 @@ describe("NeoThemeProvider", () => {
 
   it("renders with given initialMode as dynamic", () => {
     const view = render(
-      <NeoThemeProvider initialMode="dynamic">Testing</NeoThemeProvider>
+      <NeoThemeProvider initialMode="dynamic">Testing</NeoThemeProvider>,
     );
 
     expect(view.container).toMatchInlineSnapshot(`
@@ -54,7 +54,7 @@ describe("NeoThemeProvider", () => {
     const view = render(
       <NeoThemeProvider>
         <ChildComponent />
-      </NeoThemeProvider>
+      </NeoThemeProvider>,
     );
 
     expect(view.container).toMatchInlineSnapshot(`

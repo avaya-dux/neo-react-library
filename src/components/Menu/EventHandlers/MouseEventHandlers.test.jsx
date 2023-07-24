@@ -53,7 +53,7 @@ describe("MENU Mouse event handlers", () => {
         "",
         setCursorAction,
         enterCounter,
-        setEnterCounter
+        setEnterCounter,
       );
       expect(setCursor).not.toBeCalled();
       expect(setCursorAction).not.toBeCalled();
@@ -74,7 +74,7 @@ describe("MENU Mouse event handlers", () => {
         "",
         setCursorAction,
         enterCounter,
-        setEnterCounter
+        setEnterCounter,
       );
       expect(setCursor).not.toBeCalled();
       expect(setCursorAction).not.toBeCalled();
@@ -95,7 +95,7 @@ describe("MENU Mouse event handlers", () => {
         "",
         setCursorAction,
         enterCounter,
-        setEnterCounter
+        setEnterCounter,
       );
       expect(setCursor).toBeCalledWith(0);
       expect(setCursorAction).not.toBeCalled();
@@ -116,7 +116,7 @@ describe("MENU Mouse event handlers", () => {
         "",
         setCursorAction,
         enterCounter,
-        setEnterCounter
+        setEnterCounter,
       );
       expect(setCursor).toBeCalledWith(0);
       expect(setCursorAction).not.toBeCalled();
@@ -139,7 +139,7 @@ describe("MENU Mouse event handlers", () => {
         "",
         setCursorAction,
         enterCounter,
-        setEnterCounter
+        setEnterCounter,
       );
       expect(target.getAttribute).toBeCalledTimes(1);
       expect(setCursor).toBeCalledWith(0);
@@ -161,7 +161,7 @@ describe("MENU Mouse event handlers", () => {
         "ENTER_SUB_MENU",
         setCursorAction,
         enterCounter,
-        setEnterCounter
+        setEnterCounter,
       );
       expect(setCursor).toBeCalledWith(0);
       expect(setCursorAction).not.toBeCalled();

@@ -45,7 +45,7 @@ export const ListSection: FunctionComponent<ListSectionProps> = ({
       className={clsx(
         "neo-group-list--actions__item",
         hover && "neo-group-list--actions__item--clickable",
-        className
+        className,
       )}
       style={style}
     >

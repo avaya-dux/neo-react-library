@@ -24,7 +24,7 @@ export { logger as tabKeyboardEventHandler };
 
 export const focus = (
   ref: RefObject<HTMLAnchorElement>,
-  activeTabId: string
+  activeTabId: string,
 ) => {
   logger.debug(`focusing on tab ${activeTabId}`);
   ref.current?.focus();
@@ -33,7 +33,7 @@ export const focus = (
 export const handleFocusEvent = (
   e: FocusEvent<HTMLAnchorElement>,
   ref: RefObject<HTMLAnchorElement>,
-  setFocus: Dispatch<SetStateAction<boolean>>
+  setFocus: Dispatch<SetStateAction<boolean>>,
 ) => {
   const target = e.target as HTMLElement;
   const id = target.getAttribute("id");
@@ -41,7 +41,7 @@ export const handleFocusEvent = (
   const fromId = relatedTarget?.getAttribute("id") || null;
   const disabled = isAriaDisabled(target);
   logger.debug(
-    `tab ${id} is ${disabled} and is receiving focus from ${fromId}`
+    `tab ${id} is ${disabled} and is receiving focus from ${fromId}`,
   );
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -60,7 +60,7 @@ export const handleFocusEvent = (
 export const handleBlurEvent = (
   e: FocusEvent<HTMLAnchorElement>,
   ref: RefObject<HTMLAnchorElement>,
-  setFocus: Dispatch<SetStateAction<boolean>>
+  setFocus: Dispatch<SetStateAction<boolean>>,
 ) => {
   const target = e.target as HTMLElement;
   const id = target.getAttribute("id");
@@ -75,7 +75,7 @@ export const handleBlurEvent = (
 
 export const blur = (
   ref: RefObject<HTMLAnchorElement>,
-  blurredTabId: string
+  blurredTabId: string,
 ) => {
   logger.debug(`blurring on tab ${blurredTabId}`);
   ref.current?.blur();
@@ -87,7 +87,7 @@ export const handleCloseElementKeyDownEvent = (
   activeTabIndex: number,
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
   setActivePanelIndex: Dispatch<SetStateAction<number>>,
-  onClose: (index: number) => void
+  onClose: (index: number) => void,
 ) => {
   logger.debug(`handle close element key event ${e.key} on ${activeTabIndex}`);
   if (tabs.length === 0) {
@@ -98,7 +98,7 @@ export const handleCloseElementKeyDownEvent = (
     tabs,
     activeTabIndex,
     setActiveTabIndex,
-    setActivePanelIndex
+    setActivePanelIndex,
   );
   onClose(activeTabIndex);
 };
@@ -111,7 +111,7 @@ export const handleKeyDownEvent = (
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
   setActivePanelIndex: Dispatch<SetStateAction<number>>,
   ref: RefObject<HTMLAnchorElement>,
-  onClose: (index: number) => void
+  onClose: (index: number) => void,
 ) => {
   logger.debug(`handle tab component key event ${e.key} on ${activeTabIndex}`);
   if (tabs.length === 0) {
@@ -155,7 +155,7 @@ export const handleKeyDownEvent = (
         activeTabIndex,
         setActiveTabIndex,
         setActivePanelIndex,
-        onClose
+        onClose,
       );
       break;
   }
@@ -165,7 +165,7 @@ export const handleKeyDownEvent = (
 function activateNextTab(
   tabs: InternalTabProps[],
   activeTabIndex: number,
-  setActiveTabIndex: Dispatch<SetStateAction<number>>
+  setActiveTabIndex: Dispatch<SetStateAction<number>>,
 ): boolean {
   const nextTabIndex = getNextTabIndex(tabs, activeTabIndex);
   if (nextTabIndex > activeTabIndex) {

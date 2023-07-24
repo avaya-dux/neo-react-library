@@ -66,11 +66,11 @@ export const TableHeader = <T extends Record<string, any>>({
 
                   if (handleRowToggled) {
                     const shouldSelectAll = [false, "mixed"].includes(
-                      checkboxCheckedValue
+                      checkboxCheckedValue,
                     );
 
                     handleRowToggled(
-                      shouldSelectAll ? Object.keys(rowsById) : []
+                      shouldSelectAll ? Object.keys(rowsById) : [],
                     );
                   }
                 }}
@@ -114,7 +114,7 @@ export const TableHeader = <T extends Record<string, any>>({
             const handleDescSort = () => toggleSortBy(column.id, true, false);
             const onSpaceOrEnter = (
               e: KeyboardEvent<HTMLDivElement>,
-              method: () => void
+              method: () => void,
             ) => {
               switch (e.key) {
                 case Keys.ENTER:

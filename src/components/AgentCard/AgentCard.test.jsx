@@ -12,24 +12,24 @@ describe("AgentCard Component", () => {
 
   it("render without errors", () => {
     const { getByText } = render(
-      <AgentCard agentName={AgentCardName} agentStatus="ready" />
+      <AgentCard agentName={AgentCardName} agentStatus="ready" />,
     );
     const AgentCardElement = getByText(AgentCardName);
     expect(AgentCardElement).toBeInTheDocument();
   });
   it("passes basic axe compliance", async () => {
     const { container } = render(
-      <AgentCard agentName={AgentCardName} agentStatus="connected" />
+      <AgentCard agentName={AgentCardName} agentStatus="connected" />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
   it("render css classes according to the status", () => {
     const { container } = render(
-      <AgentCard agentName={AgentCardName} agentStatus="connected" />
+      <AgentCard agentName={AgentCardName} agentStatus="connected" />,
     );
     const AgentCardElement = container.querySelector(
-      ".neo-nav-status--connected"
+      ".neo-nav-status--connected",
     );
     expect(AgentCardElement).toBeInTheDocument();
   });

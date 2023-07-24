@@ -43,7 +43,7 @@ describe("TopNavAvatar", () => {
         <TopNavAvatar
           avatar={<Avatar initials="MD" />}
           dropdown={dropdownItems}
-        />
+        />,
       );
     });
 

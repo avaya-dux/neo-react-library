@@ -8,7 +8,7 @@ export const getBadgeClass = (badge?: string) => (badge ? "neo-badge" : "");
 export const getVariantClasses = (
   shape: string,
   variant: string,
-  status: string
+  status: string,
 ) => {
   const classes = [
     `${rootBtnClass}-${variant}`,

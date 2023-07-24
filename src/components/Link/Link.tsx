@@ -41,7 +41,7 @@ export const Link: FC<LinkProps> = ({
         }
       }
     },
-    [disabled, onClick]
+    [disabled, onClick],
   );
 
   const keydownHandler: KeyboardEventHandler = useCallback(
@@ -54,7 +54,7 @@ export const Link: FC<LinkProps> = ({
         }
       }
     },
-    [disabled, onKeyDown]
+    [disabled, onKeyDown],
   );
 
   // remove custom property before passing rest to anchor
@@ -75,7 +75,7 @@ export const Link: FC<LinkProps> = ({
         "neo-link",
         icon && `neo-icon-${icon}`,
         inline && "neo-link__inline",
-        disabled && "neo-link__disabled"
+        disabled && "neo-link__disabled",
       )}
       dir={placement === "right" ? "rtl" : "ltr"}
       href={href}

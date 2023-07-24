@@ -173,7 +173,7 @@ export const PortalListItemExamples: Story<ListProps> = (props: ListProps) => (
 const basicSwitch = <Switch aria-label="Activate" defaultChecked />;
 
 export const PortalListSectionsExamples: Story<ListProps> = (
-  props: ListProps
+  props: ListProps,
 ) => (
   <List itemType="ListSection">
     <ListSection tooltip="This is a list section" icon={iconChat} {...props}>
