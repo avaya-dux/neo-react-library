@@ -95,9 +95,9 @@ div.neo-multiselect span.neo-multiselect-combo__header {
 }
 
 div.neo-multiselect button.neo-multiselect__header {
-  min-height: 36px;
   flex-grow: 1;
   order: 2;
+  padding: 7px 24px 7px 12px;
 }
 
 div.neo-multiselect.neo-multiselect--small
@@ -157,7 +157,6 @@ span.neo-multiselect-combo__header .neo-multiselect__padded-container {
   letter-spacing: 0;
   flex-wrap: wrap;
   justify-content: flex-start;
-  min-height: 36px;
   flex-grow: 1;
   display: flex;
 }
