@@ -15,7 +15,7 @@ describe("Tooltip component", () => {
     cy.mount(
       <Tooltip label={labelText}>
         <Avatar />
-      </Tooltip>
+      </Tooltip>,
     );
 
     cy.get(tooltipContainer).should("contain.text", labelText);
@@ -36,7 +36,7 @@ describe("Tooltip component", () => {
           <Tooltip label={labelText}>
             <Avatar />
           </Tooltip>
-        </section>
+        </section>,
       );
 
       cy.get(tooltipElement).should("not.be.visible");
@@ -44,7 +44,7 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("be.visible");
       cy.get(tooltipContainer).should(
         "have.class",
-        tooltipPositionClass("top")
+        tooltipPositionClass("top"),
       );
     });
 
@@ -54,7 +54,7 @@ describe("Tooltip component", () => {
           <Tooltip label={labelText}>
             <Avatar />
           </Tooltip>
-        </section>
+        </section>,
       );
 
       cy.get(tooltipElement).should("not.be.visible");
@@ -62,7 +62,7 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("be.visible");
       cy.get(tooltipContainer).should(
         "have.class",
-        tooltipPositionClass("top-left")
+        tooltipPositionClass("top-left"),
       );
     });
 
@@ -72,7 +72,7 @@ describe("Tooltip component", () => {
           <Tooltip label={labelText}>
             <Avatar />
           </Tooltip>
-        </section>
+        </section>,
       );
 
       cy.get(tooltipElement).should("not.be.visible");
@@ -80,7 +80,7 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("be.visible");
       cy.get(tooltipContainer).should(
         "have.class",
-        tooltipPositionClass("top-right")
+        tooltipPositionClass("top-right"),
       );
     });
 
@@ -90,7 +90,7 @@ describe("Tooltip component", () => {
           <Tooltip label={labelText}>
             <Avatar />
           </Tooltip>
-        </section>
+        </section>,
       );
 
       cy.get(tooltipElement).should("not.be.visible");
@@ -98,7 +98,7 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("be.visible");
       cy.get(tooltipContainer).should(
         "have.class",
-        tooltipPositionClass("bottom")
+        tooltipPositionClass("bottom"),
       );
     });
 
@@ -108,7 +108,7 @@ describe("Tooltip component", () => {
           <Tooltip label={labelText}>
             <Avatar />
           </Tooltip>
-        </section>
+        </section>,
       );
 
       cy.get(tooltipElement).should("not.be.visible");
@@ -116,7 +116,7 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("be.visible");
       cy.get(tooltipContainer).should(
         "have.class",
-        tooltipPositionClass("bottom-left")
+        tooltipPositionClass("bottom-left"),
       );
     });
 
@@ -126,7 +126,7 @@ describe("Tooltip component", () => {
           <Tooltip label={labelText}>
             <Avatar />
           </Tooltip>
-        </section>
+        </section>,
       );
 
       cy.get(tooltipElement).should("not.be.visible");
@@ -134,7 +134,7 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("be.visible");
       cy.get(tooltipContainer).should(
         "have.class",
-        tooltipPositionClass("bottom-right")
+        tooltipPositionClass("bottom-right"),
       );
     });
 
@@ -145,7 +145,7 @@ describe("Tooltip component", () => {
           <Tooltip label={labelText}>
             <Avatar />
           </Tooltip>
-        </section>
+        </section>,
       );
 
       cy.get(tooltipElement).should("not.be.visible");
@@ -153,7 +153,7 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("be.visible");
       cy.get(tooltipContainer).should(
         "have.class",
-        tooltipPositionClass("left")
+        tooltipPositionClass("left"),
       );
     });
 
@@ -164,7 +164,7 @@ describe("Tooltip component", () => {
           <Tooltip label={labelText}>
             <Avatar />
           </Tooltip>
-        </section>
+        </section>,
       );
 
       cy.get(tooltipElement).should("not.be.visible");
@@ -172,7 +172,7 @@ describe("Tooltip component", () => {
       cy.get(tooltipElement).should("be.visible");
       cy.get(tooltipContainer).should(
         "have.class",
-        tooltipPositionClass("right")
+        tooltipPositionClass("right"),
       );
     });
   });

@@ -38,7 +38,7 @@ describe("MENU Keyboard event handlers", () => {
         0,
         setEnterCounter,
         setOpen,
-        "label"
+        "label",
       );
       expect(setCursorAction).not.toBeCalled();
       expect(setCursor).not.toBeCalled();
@@ -63,7 +63,7 @@ describe("MENU Keyboard event handlers", () => {
           0,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("");
         expect(setCursor).toHaveBeenCalledWith(1);
@@ -87,7 +87,7 @@ describe("MENU Keyboard event handlers", () => {
           0,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("");
         expect(setCursor).toHaveBeenCalledWith(0);
@@ -113,7 +113,7 @@ describe("MENU Keyboard event handlers", () => {
           0,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("");
         expect(setCursor).toHaveBeenCalledWith(0);
@@ -137,7 +137,7 @@ describe("MENU Keyboard event handlers", () => {
           0,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("");
         expect(setCursor).toHaveBeenCalledWith(1);
@@ -165,7 +165,7 @@ describe("MENU Keyboard event handlers", () => {
           setEnterCounter,
           setOpen,
           false,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("ACTIVATE_MENU_ITEM");
         expect(setCursor).not.toBeCalled();
@@ -190,7 +190,7 @@ describe("MENU Keyboard event handlers", () => {
           0,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("ENTER_SUB_MENU");
         expect(setCursor).not.toBeCalled();
@@ -215,7 +215,7 @@ describe("MENU Keyboard event handlers", () => {
           enterCoutner,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).not.toBeCalled();
         expect(setCursor).not.toBeCalled();
@@ -243,7 +243,7 @@ describe("MENU Keyboard event handlers", () => {
           setEnterCounter,
           setOpen,
           false,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("ACTIVATE_MENU_ITEM");
         expect(setCursor).not.toBeCalled();
@@ -268,7 +268,7 @@ describe("MENU Keyboard event handlers", () => {
           0,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("ENTER_SUB_MENU");
         expect(setCursor).not.toBeCalled();
@@ -293,7 +293,7 @@ describe("MENU Keyboard event handlers", () => {
           enterCoutner,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).not.toBeCalled();
         expect(setCursor).not.toBeCalled();
@@ -320,7 +320,7 @@ describe("MENU Keyboard event handlers", () => {
           0,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).not.toBeCalled();
         expect(setCursor).not.toBeCalled();
@@ -344,7 +344,7 @@ describe("MENU Keyboard event handlers", () => {
           0,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("ENTER_SUB_MENU");
         expect(setCursor).not.toBeCalled();
@@ -369,7 +369,7 @@ describe("MENU Keyboard event handlers", () => {
           enterCoutner,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).not.toBeCalled();
         expect(setCursor).not.toBeCalled();
@@ -396,7 +396,7 @@ describe("MENU Keyboard event handlers", () => {
           enterCoutner,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("");
         expect(setCursor).toHaveBeenCalledWith(0);
@@ -423,7 +423,7 @@ describe("MENU Keyboard event handlers", () => {
           enterCoutner,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("");
         expect(setCursor).not.toBeCalled();
@@ -450,7 +450,7 @@ describe("MENU Keyboard event handlers", () => {
           enterCoutner,
           setEnterCounter,
           setOpen,
-          "label"
+          "label",
         );
         expect(setCursorAction).toHaveBeenCalledWith("");
         expect(setCursor).not.toBeCalled();

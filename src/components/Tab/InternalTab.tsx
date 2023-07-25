@@ -68,11 +68,11 @@ export const InternalTab = ({
       activeTabIndex,
       setActiveTabIndex,
       setActivePanelIndex,
-      onClose
+      onClose,
     );
 
   const handleAnchorKeyDownEvent: KeyboardEventHandler = (
-    e: KeyboardEvent<HTMLAnchorElement>
+    e: KeyboardEvent<HTMLAnchorElement>,
   ) => {
     return handleKeyDownEvent(
       e,
@@ -82,19 +82,19 @@ export const InternalTab = ({
       setActiveTabIndex,
       setActivePanelIndex,
       ref,
-      onClose
+      onClose,
     );
   };
 
   const handleAnchorFocusEvent: FocusEventHandler = (
-    e: FocusEvent<HTMLAnchorElement>
+    e: FocusEvent<HTMLAnchorElement>,
   ) => {
     setActiveTabIndex(tabIndex);
     handleFocusEvent(e, ref, setFocus);
   };
 
   const handleAnchorBlurEvent: FocusEventHandler = (
-    e: FocusEvent<HTMLAnchorElement>
+    e: FocusEvent<HTMLAnchorElement>,
   ) => {
     return handleBlurEvent(e, ref, setFocus);
   };

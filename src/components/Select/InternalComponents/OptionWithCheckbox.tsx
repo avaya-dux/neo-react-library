@@ -22,7 +22,7 @@ export const OptionWithCheckbox = forwardRef(
       defaultSelected,
       children,
     }: OptionProps,
-    ref: Ref<HTMLOptionElement>
+    ref: Ref<HTMLOptionElement>,
   ) => {
     const {
       downshiftProps: { getItemProps, highlightedIndex },
@@ -60,7 +60,7 @@ export const OptionWithCheckbox = forwardRef(
             ? "neo-option--selected"
             : "",
           disabled && "neo-option--disabled",
-          index === highlightedIndex && "neo-option--focused"
+          index === highlightedIndex && "neo-option--focused",
         )}
         {...itemProps}
         disabled={disabled}
@@ -68,6 +68,6 @@ export const OptionWithCheckbox = forwardRef(
         {children}
       </li>
     );
-  }
+  },
 );
 OptionWithCheckbox.displayName = "OptionWithCheckbox";

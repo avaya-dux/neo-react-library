@@ -44,7 +44,7 @@ export const Image = ({
   if (!alt && !isDecorativeOrBranding) {
     handleAccessbilityError(
       `Alternative text should be added to the image if it conveys meaning and is not displayed elsewhere on the page.
-        Decorative and branding images do not need alt text.`
+        Decorative and branding images do not need alt text.`,
     );
   }
 
@@ -52,7 +52,7 @@ export const Image = ({
   const [hasError, setHasError] = useState(false);
   const useFallback = useMemo(
     () => !!fallback && (isLoading || hasError),
-    [fallback, isLoading, hasError]
+    [fallback, isLoading, hasError],
   );
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export const Image = ({
         alt={alt}
         className={clsx(
           thumbnail ? "neo-thumbnail" : "neo-img neo-img--fluid",
-          className
+          className,
         )}
         src={src}
         onError={(e) => {

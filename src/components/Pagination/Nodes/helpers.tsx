@@ -29,7 +29,7 @@ export const calculateMaxNavNodes = (paginationRootWidth: number) => {
 export const buildAllNavItems = (
   currentPageIndex: number,
   onPageChange: PaginationProps["onPageChange"],
-  totalPages: number
+  totalPages: number,
 ) => {
   const result = [];
 
@@ -40,7 +40,7 @@ export const buildAllNavItems = (
         key={i}
         onPageChange={onPageChange}
         pageToNavigateTo={i}
-      />
+      />,
     );
   }
 
@@ -64,7 +64,7 @@ export const buildNavItemsWithSeparators = (
   currentPageIndex: number,
   maxNavNodes: number,
   onPageChange: PaginationProps["onPageChange"],
-  totalPages: number
+  totalPages: number,
 ) => {
   const result = [];
 
@@ -80,14 +80,14 @@ export const buildNavItemsWithSeparators = (
           key={i}
           onPageChange={onPageChange}
           pageToNavigateTo={i}
-        />
+        />,
       );
     }
 
     result.push(
       <li key="nav-dots-center">
         <span className="neo-pagination__dots">&hellip;</span>
-      </li>
+      </li>,
     );
 
     for (let i = totalPages - 1; i <= totalPages; i++) {
@@ -96,7 +96,7 @@ export const buildNavItemsWithSeparators = (
           key={i}
           onPageChange={onPageChange}
           pageToNavigateTo={i}
-        />
+        />,
       );
     }
   } else if (isCurrentIndexWithinThreeOfEnd && maxNavNodes >= 7) {
@@ -106,14 +106,14 @@ export const buildNavItemsWithSeparators = (
           key={i}
           onPageChange={onPageChange}
           pageToNavigateTo={i}
-        />
+        />,
       );
     }
 
     result.push(
       <li key="nav-dots-center">
         <span className="neo-pagination__dots">&hellip;</span>
-      </li>
+      </li>,
     );
 
     for (let i = totalPages - 3; i <= totalPages; i++) {
@@ -123,7 +123,7 @@ export const buildNavItemsWithSeparators = (
           key={i}
           onPageChange={onPageChange}
           pageToNavigateTo={i}
-        />
+        />,
       );
     }
   } else if (maxNavNodes >= 7) {
@@ -132,13 +132,13 @@ export const buildNavItemsWithSeparators = (
         key={1}
         onPageChange={onPageChange}
         pageToNavigateTo={1}
-      />
+      />,
     );
 
     result.push(
       <li key="nav-dots-left">
         <span className="neo-pagination__dots">&hellip;</span>
-      </li>
+      </li>,
     );
 
     for (let i = currentPageIndex - 1; i <= currentPageIndex + 1; i++) {
@@ -148,14 +148,14 @@ export const buildNavItemsWithSeparators = (
           key={i}
           onPageChange={onPageChange}
           pageToNavigateTo={i}
-        />
+        />,
       );
     }
 
     result.push(
       <li key="nav-dots-right">
         <span className="neo-pagination__dots">&hellip;</span>
-      </li>
+      </li>,
     );
 
     result.push(
@@ -163,7 +163,7 @@ export const buildNavItemsWithSeparators = (
         key={totalPages}
         onPageChange={onPageChange}
         pageToNavigateTo={totalPages}
-      />
+      />,
     );
   } else if (isCurrentIndexWithinThreeOfStart && maxNavNodes >= 5) {
     for (let i = 1; i <= 3; i++) {
@@ -173,14 +173,14 @@ export const buildNavItemsWithSeparators = (
           key={i}
           onPageChange={onPageChange}
           pageToNavigateTo={i}
-        />
+        />,
       );
     }
 
     result.push(
       <li key="nav-dots-center">
         <span className="neo-pagination__dots">&hellip;</span>
-      </li>
+      </li>,
     );
 
     result.push(
@@ -188,7 +188,7 @@ export const buildNavItemsWithSeparators = (
         key={totalPages}
         onPageChange={onPageChange}
         pageToNavigateTo={totalPages}
-      />
+      />,
     );
   } else if (isCurrentIndexWithinThreeOfEnd && maxNavNodes >= 5) {
     result.push(
@@ -196,13 +196,13 @@ export const buildNavItemsWithSeparators = (
         key={1}
         onPageChange={onPageChange}
         pageToNavigateTo={1}
-      />
+      />,
     );
 
     result.push(
       <li key="nav-dots-center">
         <span className="neo-pagination__dots">&hellip;</span>
-      </li>
+      </li>,
     );
 
     for (let i = totalPages - 2; i <= totalPages; i++) {
@@ -212,7 +212,7 @@ export const buildNavItemsWithSeparators = (
           key={i}
           onPageChange={onPageChange}
           pageToNavigateTo={i}
-        />
+        />,
       );
     }
   } else if (maxNavNodes >= 5) {
@@ -221,13 +221,13 @@ export const buildNavItemsWithSeparators = (
         key={1}
         onPageChange={onPageChange}
         pageToNavigateTo={1}
-      />
+      />,
     );
 
     result.push(
       <li key="nav-dots-left">
         <span className="neo-pagination__dots">&hellip;</span>
-      </li>
+      </li>,
     );
 
     result.push(
@@ -236,13 +236,13 @@ export const buildNavItemsWithSeparators = (
         key={currentPageIndex}
         onPageChange={onPageChange}
         pageToNavigateTo={currentPageIndex}
-      />
+      />,
     );
 
     result.push(
       <li key="nav-dots-right">
         <span className="neo-pagination__dots">&hellip;</span>
-      </li>
+      </li>,
     );
 
     result.push(
@@ -250,7 +250,7 @@ export const buildNavItemsWithSeparators = (
         key={totalPages}
         onPageChange={onPageChange}
         pageToNavigateTo={totalPages}
-      />
+      />,
     );
   } else {
     result.push(
@@ -259,7 +259,7 @@ export const buildNavItemsWithSeparators = (
         key={currentPageIndex}
         onPageChange={onPageChange}
         pageToNavigateTo={currentPageIndex}
-      />
+      />,
     );
 
     /**
@@ -269,7 +269,7 @@ export const buildNavItemsWithSeparators = (
      */
     if (maxNavNodes !== 0) {
       console.error(
-        `\`buildNavItemsWithSeparators\` hit unexexpected use-case: \`maxNavNodes < 5\` \nmaxNavNodes=${maxNavNodes}`
+        `\`buildNavItemsWithSeparators\` hit unexexpected use-case: \`maxNavNodes < 5\` \nmaxNavNodes=${maxNavNodes}`,
       );
     }
   }
@@ -296,7 +296,7 @@ export const buildNavItems = (
   onPageChange: PaginationProps["onPageChange"],
   totalPages: number,
   buildAllNavItemsOverride?: () => React.ReactNode[], // for testing
-  buildNavItemsWithSeparatorsOverride?: () => React.ReactNode[] // for testing
+  buildNavItemsWithSeparatorsOverride?: () => React.ReactNode[], // for testing
 ) => {
   let result = [];
 
@@ -311,7 +311,7 @@ export const buildNavItems = (
           currentPageIndex,
           maxNavNodes,
           onPageChange,
-          totalPages
+          totalPages,
         );
   }
 

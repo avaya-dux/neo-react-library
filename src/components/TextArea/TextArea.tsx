@@ -44,7 +44,7 @@ export const TextArea = ({
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const [characterCount, setCharacterCount] = useState(
-    rest.defaultValue?.toString().length || 0
+    rest.defaultValue?.toString().length || 0,
   );
   const [maxLengthExceeded, setMaxLengthExceeded] = useState(false);
 
@@ -52,7 +52,7 @@ export const TextArea = ({
     if (maxLength && characterCount > maxLength) {
       setMaxLengthExceeded(true);
       textAreaRef.current?.dispatchEvent(
-        new Event("maxCharError", { bubbles: true })
+        new Event("maxCharError", { bubbles: true }),
       );
     } else {
       setMaxLengthExceeded(false);
@@ -110,7 +110,7 @@ export function getTextAreaClassName(props?: Pick<TextAreaBase, "locked">) {
 
 export function getAriaDescribedBy(
   id: string,
-  props?: Pick<TextAreaBase, "helperText" | "maxLength">
+  props?: Pick<TextAreaBase, "helperText" | "maxLength">,
 ) {
   const describedBy = [];
 

@@ -39,7 +39,7 @@ export const Icon: React.FC<IconProps> = ({
 }: IconProps) => {
   if (!rest["aria-label"]) {
     console.error(
-      "A descriptive label is required for screen readers to identify the button's purpose"
+      "A descriptive label is required for screen readers to identify the button's purpose",
     );
   }
 
@@ -53,7 +53,7 @@ export const Icon: React.FC<IconProps> = ({
         size === "sm" && "neo-icon--small",
         size === "md" && "neo-icon--medium",
         size === "lg" && "neo-icon--large",
-        className
+        className,
       )}
     />
   );

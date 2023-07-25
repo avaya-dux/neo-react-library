@@ -29,7 +29,7 @@ export const ChipsContainer = ({
       cloneElement(child, {
         key: index,
         className: clsx(child.props.className, "neo-chips__item"),
-      })
+      }),
     )}
   </div>
 );

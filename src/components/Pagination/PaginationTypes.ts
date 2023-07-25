@@ -19,11 +19,11 @@ export type PaginationProps = {
 
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
-    pageIndex: number
+    pageIndex: number,
   ) => void;
   onItemsPerPageChange?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    itemsPerPage: number
+    itemsPerPage: number,
   ) => void;
 
   // table overrides

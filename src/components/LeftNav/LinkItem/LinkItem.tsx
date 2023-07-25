@@ -47,7 +47,7 @@ export const LinkItem = ({
   const ref = useRef(null);
   const [tabIndex, isActive, handleKeyIndex, handleClick] = useRovingTabIndex(
     ref,
-    disabled
+    disabled,
   );
   useFocusEffect(isActive, ref);
 
@@ -70,7 +70,7 @@ export const LinkItem = ({
   };
 
   const handleKeyDown: KeyboardEventHandler = (
-    event: KeyboardEvent<HTMLButtonElement>
+    event: KeyboardEvent<HTMLButtonElement>,
   ) => {
     if (event.key !== Keys.TAB) {
       event.stopPropagation();
@@ -95,7 +95,7 @@ export const LinkItem = ({
       className={clsx(
         "neo-leftnav__sub",
         active && "neo-leftnav__sub--active",
-        className
+        className,
       )}
     >
       {disabled ? (

@@ -76,7 +76,7 @@ describe("TopNav", () => {
       it("has the correct class name with sticky prop passed", () => {
         render(<StickyTopNav />);
         expect(screen.getByRole("navigation")).toHaveClass(
-          "neo-navbar--sticky"
+          "neo-navbar--sticky",
         );
       });
       it("passes basic axe compliance", async () => {

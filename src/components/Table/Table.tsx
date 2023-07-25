@@ -104,7 +104,7 @@ export const Table = <T extends Record<string, any>>({
     useGlobalFilter,
     useSortBy,
     usePagination,
-    useRowSelect
+    useRowSelect,
   );
 
   const {
@@ -118,11 +118,11 @@ export const Table = <T extends Record<string, any>>({
 
   const tableCaptionId = useMemo(
     () => `table-caption-${caption || "caption"}`,
-    [caption]
+    [caption],
   );
   const tableSummaryId = useMemo(
     () => `table-summary-${caption || "summary"}`,
-    [caption]
+    [caption],
   );
 
   const toolbarTranslations = useMemo(() => {
@@ -192,7 +192,7 @@ export const Table = <T extends Record<string, any>>({
             "neo-table",
             rowHeight === "compact" && "neo-table--compact",
             rowHeight === "medium" && "neo-table--medium",
-            showRowSeparator && "neo-table-separator"
+            showRowSeparator && "neo-table-separator",
           )}
           aria-labelledby={
             caption && tableCaptionId ? tableCaptionId : undefined

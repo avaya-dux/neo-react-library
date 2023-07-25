@@ -65,13 +65,13 @@ export const Accordion = ({
       <div
         className={clsx(
           "neo-accordion__item",
-          isActive && "neo-accordion__item--active"
+          isActive && "neo-accordion__item--active",
         )}
       >
         <div
           className={clsx(
             "neo-accordion__header",
-            disabled && "neo-accordion__header--disabled"
+            disabled && "neo-accordion__header--disabled",
           )}
           role="heading"
           aria-label={ariaLabel}

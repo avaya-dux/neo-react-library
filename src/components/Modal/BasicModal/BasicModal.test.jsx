@@ -13,7 +13,7 @@ describe("BasicModal Component", () => {
     render(
       <BasicModal title={titleText} open>
         <p>Testing content</p>
-      </BasicModal>
+      </BasicModal>,
     );
     const rootElement = screen.getByText(titleText);
     expect(rootElement).toBeInTheDocument();

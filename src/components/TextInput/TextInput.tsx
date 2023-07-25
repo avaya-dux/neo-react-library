@@ -144,7 +144,7 @@ export const TextInput = ({
             <div
               className={clsx(
                 "neo-input-editable__wrapper",
-                startIcon || endIcon ? "neo-input-icon__wrapper" : undefined
+                startIcon || endIcon ? "neo-input-icon__wrapper" : undefined,
               )}
             >
               {startIcon && <span className={`neo-icon-${startIcon}`} />}
@@ -173,7 +173,7 @@ export const TextInput = ({
                   onClick={() => {
                     dispatchInputOnChangeEvent(
                       inputRef.current as HTMLInputElement,
-                      ""
+                      "",
                     );
                   }}
                 />

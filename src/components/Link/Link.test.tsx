@@ -15,7 +15,7 @@ describe("Link", () => {
     render(
       <Link onClick={onClick} href="#main">
         Link
-      </Link>
+      </Link>,
     );
     const link = screen.getByRole("link");
     await user.click(link);
@@ -26,7 +26,7 @@ describe("Link", () => {
     render(
       <Link onClick={onClick} href="#main" disabled>
         Link
-      </Link>
+      </Link>,
     );
     const link = screen.getByRole("link");
     await user.click(link);
@@ -37,7 +37,7 @@ describe("Link", () => {
     render(
       <Link onKeyDown={onKeyDown} href="#main">
         Link
-      </Link>
+      </Link>,
     );
     const link = screen.getByRole("link");
     await user.tab();
@@ -50,7 +50,7 @@ describe("Link", () => {
     render(
       <Link onKeyDown={onKeyDown} href="#main" disabled>
         Link
-      </Link>
+      </Link>,
     );
     const link = screen.getByRole("link");
     await user.tab();

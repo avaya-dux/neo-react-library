@@ -18,7 +18,7 @@ describe("TreeItem", () => {
     const { container } = render(
       <div role="tree">
         <Leaf>example</Leaf>
-      </div>
+      </div>,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -28,7 +28,7 @@ describe("TreeItem", () => {
     render(
       <Tree aria-label="tree label">
         <Leaf>example</Leaf>
-      </Tree>
+      </Tree>,
     );
 
     const rootElement = screen.getByRole("treeitem");

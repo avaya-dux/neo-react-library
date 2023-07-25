@@ -8,7 +8,7 @@ import {
 
 export type SwitchChangeHandler = (
   event: ChangeEvent<HTMLInputElement>,
-  checked: boolean
+  checked: boolean,
 ) => void;
 
 export interface SwitchProps

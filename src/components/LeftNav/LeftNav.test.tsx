@@ -42,7 +42,7 @@ describe("LeftNav", () => {
           <h1 id={id}>Left Navigation</h1>
 
           <LeftNav aria-labelledby={id}>{examplechildren}</LeftNav>
-        </div>
+        </div>,
       );
 
       expect(screen.getByRole("navigation")).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe("LeftNav", () => {
       vi.spyOn(console, "error").mockImplementation(() => null);
 
       expect(() =>
-        render(<LeftNav aria-label="">{examplechildren}</LeftNav>)
+        render(<LeftNav aria-label="">{examplechildren}</LeftNav>),
       ).toThrowError();
     });
   });

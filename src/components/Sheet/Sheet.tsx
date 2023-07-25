@@ -63,11 +63,11 @@ export const Sheet = ({
 
   if (!(title || rest["aria-label"] || rest["aria-labelledby"])) {
     handleAccessbilityError(
-      "Sheet must have an have an accessible name. Please add a `title`, `aria-label`, or `aria-labelledby` prop."
+      "Sheet must have an have an accessible name. Please add a `title`, `aria-label`, or `aria-labelledby` prop.",
     );
   } else if (!title && buttons) {
     handleAccessbilityError(
-      "If you add buttons, you must also provide a title"
+      "If you add buttons, you must also provide a title",
     );
   } else if (!title && !buttons) {
     return (
@@ -94,7 +94,7 @@ export const Sheet = ({
         slide && open && "sheet-horizontal-slide-in-shim",
         slide && !open && "sheet-horizontal-slide-out-shim",
         !open && (initialRender || !slide) && "neo-display-none",
-        className
+        className,
       )}
       {...rest}
     >
@@ -134,7 +134,7 @@ const BasicSheet = ({
         slide && open && "sheet-horizontal-slide-in-shim",
         slide && !open && "sheet-horizontal-slide-out-shim",
         !open && (initialRender || !slide) && "neo-display-none",
-        className
+        className,
       )}
       {...rest}
     ></div>

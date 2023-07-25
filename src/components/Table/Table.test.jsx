@@ -38,7 +38,7 @@ describe("Table", () => {
 
   it("rowHeight is set to compact ", () => {
     const { getByRole } = render(
-      <Table rowHeight="compact" {...FilledFields} />
+      <Table rowHeight="compact" {...FilledFields} />,
     );
 
     const tableElement = getByRole("table");
@@ -47,7 +47,7 @@ describe("Table", () => {
 
   it("rowHeight is set to medium ", () => {
     const { getByRole } = render(
-      <Table rowHeight="medium" {...FilledFields} />
+      <Table rowHeight="medium" {...FilledFields} />,
     );
 
     const tableElement = getByRole("table");
@@ -71,7 +71,7 @@ describe("Table", () => {
             FilledFields.data[0].id,
             FilledFields.data[1].id,
           ]}
-        />
+        />,
       );
 
       const checkbox0 = getByLabelText(FilledFields.data[0].label);
@@ -93,11 +93,11 @@ describe("Table", () => {
             FilledFields.data[0].id,
             FilledFields.data[1].id,
           ]}
-        />
+        />,
       );
 
       const headerCheckbox = getByLabelText(
-        FilledFields.translations.header.selectAll
+        FilledFields.translations.header.selectAll,
       );
       const headerCheckboxLabel = container.querySelector("tr th label");
       const checkbox2 = getByLabelText(FilledFields.data[2].label);
@@ -124,7 +124,7 @@ describe("Table", () => {
 
     it("properly selects and deselects a body row", async () => {
       const { queryAllByRole } = render(
-        <Table {...FilledFields} selectableRows="multiple" />
+        <Table {...FilledFields} selectableRows="multiple" />,
       );
 
       const alltrs = queryAllByRole("row");
@@ -156,11 +156,11 @@ describe("Table", () => {
     it("properly calls it's `refresh` method", async () => {
       const mock = vi.fn();
       const { getByLabelText } = render(
-        <Table {...FilledFields} handleRefresh={mock} />
+        <Table {...FilledFields} handleRefresh={mock} />,
       );
 
       const refreshButton = getByLabelText(
-        FilledFields.translations.toolbar.refresh
+        FilledFields.translations.toolbar.refresh,
       );
 
       await user.click(refreshButton);
@@ -170,7 +170,7 @@ describe("Table", () => {
     it("it's `create` method can be called at any time", async () => {
       const mock = vi.fn();
       const { getByText, queryAllByRole } = render(
-        <Table {...FilledFields} handleCreate={mock} selectableRows="single" />
+        <Table {...FilledFields} handleCreate={mock} selectableRows="single" />,
       );
 
       const createButton = getByText(FilledFields.translations.toolbar.create);
@@ -194,7 +194,7 @@ describe("Table", () => {
           handleEdit={mock}
           itemsPerPageOptions={[50]}
           selectableRows="multiple"
-        />
+        />,
       );
 
       // expect button to not be rendered
@@ -228,12 +228,12 @@ describe("Table", () => {
           handleDelete={mock}
           itemsPerPageOptions={[50]}
           selectableRows="multiple"
-        />
+        />,
       );
 
       // expect button to not be rendered when zero rows are selected
       expect(() =>
-        getByText(FilledFields.translations.toolbar.delete)
+        getByText(FilledFields.translations.toolbar.delete),
       ).toThrow();
 
       const firstRowCheckboxLabel =
@@ -256,14 +256,14 @@ describe("Table", () => {
 
     it("properly utilizes it's `search` method", async () => {
       const { getByLabelText, queryAllByRole } = render(
-        <Table {...FilledFields} itemsPerPageOptions={[50]} />
+        <Table {...FilledFields} itemsPerPageOptions={[50]} />,
       );
 
       const alltrs = queryAllByRole("row");
       expect(alltrs).toHaveLength(FilledFields.data.length + 1);
 
       const searchInput = getByLabelText(
-        FilledFields.translations.toolbar.searchInputPlaceholder
+        FilledFields.translations.toolbar.searchInputPlaceholder,
       );
       await user.click(searchInput);
       await user.keyboard(FilledFields.data[0].label);
@@ -285,7 +285,7 @@ describe("Table", () => {
       const { container, queryAllByRole } = renderResult;
 
       const sortableColumnHeader = container.querySelector(
-        "tr th button.neo-multiselect"
+        "tr th button.neo-multiselect",
       );
 
       expect(sortableColumnHeader.querySelectorAll("span")).toHaveLength(1);
@@ -305,10 +305,10 @@ describe("Table", () => {
       const { container, getByRole, queryAllByRole } = renderResult;
 
       const firstColumnSortButton = container.querySelector(
-        "tr th button.neo-multiselect"
+        "tr th button.neo-multiselect",
       );
       expect(firstColumnSortButton).toHaveTextContent(
-        FilledFields.columns[0].Header
+        FilledFields.columns[0].Header,
       );
 
       const getFirstCellTextContent = () =>
@@ -359,18 +359,18 @@ describe("Table", () => {
         renderResult;
 
       const firstColumnSortButton = container.querySelector(
-        "tr th button.neo-multiselect"
+        "tr th button.neo-multiselect",
       );
       expect(firstColumnSortButton).toHaveTextContent(
-        FilledFields.columns[0].Header
+        FilledFields.columns[0].Header,
       );
       expect(firstColumnSortButton).toBeVisible();
 
       expect(getByRole("dialog")).not.toHaveClass(
-        "sheet-horizontal-slide-in-shim"
+        "sheet-horizontal-slide-in-shim",
       );
       expect(getByRole("dialog")).toHaveClass(
-        "sheet-horizontal-slide-out-shim"
+        "sheet-horizontal-slide-out-shim",
       );
 
       await user.click(firstColumnSortButton);
@@ -381,7 +381,7 @@ describe("Table", () => {
 
       expect(getByRole("dialog")).toHaveClass("sheet-horizontal-slide-in-shim");
       expect(getByRole("dialog")).not.toHaveClass(
-        "sheet-horizontal-slide-out-shim"
+        "sheet-horizontal-slide-out-shim",
       );
 
       const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
@@ -396,29 +396,29 @@ describe("Table", () => {
       const { container, getByRole, getByLabelText } = renderResult;
 
       const firstColumnSortButton = container.querySelector(
-        "tr th button.neo-multiselect"
+        "tr th button.neo-multiselect",
       );
       expect(firstColumnSortButton).toHaveTextContent(
-        FilledFields.columns[0].Header
+        FilledFields.columns[0].Header,
       );
       expect(firstColumnSortButton).toBeVisible();
 
       const columnFilterButton = container.querySelector(
-        `button[aria-label="${FilledFields.translations.toolbar.filterColumns}"]`
+        `button[aria-label="${FilledFields.translations.toolbar.filterColumns}"]`,
       );
 
       expect(getByRole("dialog")).not.toHaveClass(
-        "sheet-horizontal-slide-in-shim"
+        "sheet-horizontal-slide-in-shim",
       );
       expect(getByRole("dialog")).toHaveClass(
-        "sheet-horizontal-slide-out-shim"
+        "sheet-horizontal-slide-out-shim",
       );
 
       await user.click(columnFilterButton);
 
       expect(getByRole("dialog")).toHaveClass("sheet-horizontal-slide-in-shim");
       expect(getByRole("dialog")).not.toHaveClass(
-        "sheet-horizontal-slide-out-shim"
+        "sheet-horizontal-slide-out-shim",
       );
 
       const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);

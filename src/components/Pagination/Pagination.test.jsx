@@ -32,7 +32,7 @@ describe("Pagination", () => {
   it("fully renders without exploding", () => {
     vi.spyOn(console, "warn").mockImplementation(() => null);
     const { getByRole, getAllByRole } = render(
-      <Pagination {...defaultProps} />
+      <Pagination {...defaultProps} />,
     );
 
     const innerNavElement = getByRole("navigation");
@@ -82,7 +82,7 @@ describe("Pagination", () => {
       itemsPerPage: 10,
     };
     const { queryAllByRole } = render(
-      <Pagination {...props} alwaysShowPagination />
+      <Pagination {...props} alwaysShowPagination />,
     );
 
     const innerNavElement = queryAllByRole("navigation");
@@ -97,7 +97,7 @@ describe("Pagination", () => {
 
   it("matches it's previous snapshot", () => {
     const { container } = render(
-      <Pagination {...defaultProps} id="pagination-test" />
+      <Pagination {...defaultProps} id="pagination-test" />,
     );
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -327,7 +327,7 @@ describe("Pagination", () => {
       const assertTestedIndexesMatchExpectedOutputStrings = (
         testIndexes,
         expectedDisplayedText,
-        maxNodes
+        maxNodes,
       ) => {
         for (let i = 0; i < testIndexes.length; i++) {
           const currentPageIndex = testIndexes[i];
@@ -336,7 +336,7 @@ describe("Pagination", () => {
             currentPageIndex,
             maxNodes,
             null,
-            totalPages
+            totalPages,
           );
 
           expect(navArray).toHaveLength(maxNodes);
@@ -365,7 +365,7 @@ describe("Pagination", () => {
           assertTestedIndexesMatchExpectedOutputStrings(
             testIndexes,
             expectedDisplayedText,
-            maxNodes
+            maxNodes,
           );
         });
 
@@ -376,7 +376,7 @@ describe("Pagination", () => {
           assertTestedIndexesMatchExpectedOutputStrings(
             testIndexes,
             expectedDisplayedText,
-            maxNodes
+            maxNodes,
           );
         });
 
@@ -390,7 +390,7 @@ describe("Pagination", () => {
               currentPageIndex,
               maxNodes,
               null,
-              totalPages
+              totalPages,
             );
 
             expect(navArray).toHaveLength(maxNodes);
@@ -401,7 +401,7 @@ describe("Pagination", () => {
 
             const navItemLeftOfSelected = navItems[1];
             expect(navItemLeftOfSelected).toHaveTextContent(
-              currentPageIndex - 1
+              currentPageIndex - 1,
             );
             expect(navItemLeftOfSelected).toBeEnabled();
             const selectedNavItem = navItems[2];
@@ -409,7 +409,7 @@ describe("Pagination", () => {
             expect(selectedNavItem).toBeEnabled();
             const navItemRightOfSelected = navItems[3];
             expect(navItemRightOfSelected).toHaveTextContent(
-              currentPageIndex + 1
+              currentPageIndex + 1,
             );
             expect(navItemRightOfSelected).toBeEnabled();
 
@@ -429,7 +429,7 @@ describe("Pagination", () => {
           assertTestedIndexesMatchExpectedOutputStrings(
             testIndexes,
             expectedDisplayedText,
-            maxNodes
+            maxNodes,
           );
         });
 
@@ -440,7 +440,7 @@ describe("Pagination", () => {
           assertTestedIndexesMatchExpectedOutputStrings(
             testIndexes,
             expectedDisplayedText,
-            maxNodes
+            maxNodes,
           );
         });
 
@@ -454,7 +454,7 @@ describe("Pagination", () => {
               currentPageIndex,
               maxNodes,
               null,
-              totalPages
+              totalPages,
             );
 
             expect(navArray).toHaveLength(maxNodes);
@@ -506,7 +506,7 @@ describe("Pagination", () => {
           for (let i = 1; i < 5; i++) {
             const totalPages = i;
             expect(buildNavItems(pageIndex, 1, null, totalPages)).toHaveLength(
-              totalPages
+              totalPages,
             );
           }
         });
@@ -536,8 +536,8 @@ describe("Pagination", () => {
             null,
             3,
             allNavItemsSpy,
-            navItemsWithSeperatorsSpy
-          )
+            navItemsWithSeperatorsSpy,
+          ),
         ).toHaveLength(0);
         expect(allNavItemsSpy).toHaveBeenCalledTimes(1);
         expect(navItemsWithSeperatorsSpy).toHaveBeenCalledTimes(0);
@@ -554,8 +554,8 @@ describe("Pagination", () => {
             null,
             10,
             allNavItemsSpy,
-            navItemsWithSeperatorsSpy
-          )
+            navItemsWithSeperatorsSpy,
+          ),
         ).toHaveLength(0);
         expect(allNavItemsSpy).toHaveBeenCalledTimes(0);
         expect(navItemsWithSeperatorsSpy).toHaveBeenCalledTimes(1);

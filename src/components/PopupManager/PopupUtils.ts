@@ -2,7 +2,7 @@ import { PopupPosition } from "./PopupTypes";
 
 export const getContainerStyle = (
   position: PopupPosition,
-  zIndex: number
+  zIndex: number,
 ): React.CSSProperties => {
   const isTopOrBottom = position === "top" || position === "bottom";
   const margin = isTopOrBottom ? "0 auto" : undefined;
@@ -38,7 +38,7 @@ export const getContainerStyle = (
 };
 
 export function getContainerAlignStyle(
-  position: PopupPosition
+  position: PopupPosition,
 ): React.CSSProperties {
   const isRighty = position.includes("right");
   const isLefty = position.includes("left");

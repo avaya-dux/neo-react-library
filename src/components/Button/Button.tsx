@@ -49,7 +49,7 @@ export const Button = forwardRef(
       variant = "primary",
       ...rest
     }: ButtonProps,
-    ref: React.Ref<HTMLButtonElement>
+    ref: React.Ref<HTMLButtonElement>,
   ) => {
     const displaySpinner = useMemo(() => showSpinner(animation), [animation]);
 
@@ -92,6 +92,6 @@ export const Button = forwardRef(
         {children}
       </button>
     );
-  }
+  },
 );
 Button.displayName = "Button";

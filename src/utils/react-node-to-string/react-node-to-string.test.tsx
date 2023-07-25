@@ -29,7 +29,7 @@ describe("react-node-to-string", () => {
       assert.strictEqual(
         reactNodeToString(test[0]),
         test[1],
-        `Test ${index} failed`
+        `Test ${index} failed`,
       );
     });
   });

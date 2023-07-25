@@ -59,7 +59,7 @@ describe("Select", () => {
       const labelElement = getByText(label);
       const expectedAttributes = ["id", "for"];
       expectedAttributes.forEach((attribute) =>
-        expect(labelElement).toHaveAttribute(attribute)
+        expect(labelElement).toHaveAttribute(attribute),
       );
     });
 
@@ -68,7 +68,7 @@ describe("Select", () => {
       const toggleButton = getByRole("button");
       const expectedAttributes = ["id", "aria-haspopup", "aria-label"];
       expectedAttributes.forEach((attribute) =>
-        expect(toggleButton).toHaveAttribute(attribute)
+        expect(toggleButton).toHaveAttribute(attribute),
       );
     });
 
@@ -106,7 +106,7 @@ describe("Select", () => {
         renderResult = render(
           <Select multiple label={label} placeholder={placeholder}>
             <SelectOption>ping</SelectOption>
-          </Select>
+          </Select>,
         );
       });
 
@@ -120,7 +120,7 @@ describe("Select", () => {
         const labelElement = getByText(label);
         const expectedAttributes = ["id", "for"];
         expectedAttributes.forEach((attribute) =>
-          expect(labelElement).toHaveAttribute(attribute)
+          expect(labelElement).toHaveAttribute(attribute),
         );
       });
 
@@ -128,7 +128,7 @@ describe("Select", () => {
         const toggleElement = screen.getByRole("button");
         const expectedAttributes = ["id", "aria-haspopup", "aria-labelledby"];
         expectedAttributes.forEach((attribute) =>
-          expect(toggleElement).toHaveAttribute(attribute)
+          expect(toggleElement).toHaveAttribute(attribute),
         );
       });
 
@@ -167,7 +167,7 @@ describe("Select", () => {
             <SelectOption disabled>Option 2</SelectOption>
             <SelectOption>Option 3</SelectOption>
             <SelectOption>Option 4</SelectOption>
-          </Select>
+          </Select>,
         );
 
         expect(spy).not.toHaveBeenCalled();
@@ -198,7 +198,7 @@ describe("Select", () => {
             <SelectOption>Option 2</SelectOption>
             <SelectOption>Option 3</SelectOption>
             <SelectOption>Option 4</SelectOption>
-          </Select>
+          </Select>,
         );
         const toggleElement = screen.getByRole("button");
         toggleElement.focus();
@@ -218,7 +218,7 @@ describe("Select", () => {
         // assert correct aria-label on toggle button
         expect(toggleElement).toHaveAttribute(
           "aria-label",
-          "Option 1 and Option 2, 2 of 4 selected"
+          "Option 1 and Option 2, 2 of 4 selected",
         );
       });
       it("does open content area on click after content is loaded", () => {
@@ -229,7 +229,7 @@ describe("Select", () => {
             label={label}
             loading={true}
             placeholder={placeholder}
-          ></Select>
+          ></Select>,
         );
 
         const defaultSelectHeader = getByRole("button");
@@ -241,7 +241,7 @@ describe("Select", () => {
         rerender(
           <Select multiple label={label} loading={false}>
             <SelectOption>Option 1</SelectOption>
-          </Select>
+          </Select>,
         );
 
         fireEvent.click(defaultSelectHeader);

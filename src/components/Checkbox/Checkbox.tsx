@@ -60,13 +60,13 @@ export const Checkbox = forwardRef(
       "aria-label": ariaLabel,
       ...rest
     }: CheckboxProps,
-    ref: React.Ref<HTMLInputElement>
+    ref: React.Ref<HTMLInputElement>,
   ) => {
     const generatedId = useId();
     id = id || generatedId;
     if (!children && !ariaLabel && !rest["aria-labelledby"]) {
       handleAccessbilityError(
-        "Checkbox must have an have an accessible label. Please add `children`, an `aria-label`, or an `aria-labelledby` prop."
+        "Checkbox must have an have an accessible label. Please add `children`, an `aria-label`, or an `aria-labelledby` prop.",
       );
     }
     const [state, setState] = useControlled({
@@ -79,7 +79,7 @@ export const Checkbox = forwardRef(
         logger.debug(
           "clicked",
           state,
-          ref && "current" in ref && ref.current && ref.current.checked
+          ref && "current" in ref && ref.current && ref.current.checked,
         );
         if (state === "mixed") {
           setState(true);
@@ -88,7 +88,7 @@ export const Checkbox = forwardRef(
         }
         onChange(e);
       },
-      [state, setState, onChange, ref]
+      [state, setState, onChange, ref],
     );
 
     logger.debug({ checked, defaultChecked, state });
@@ -108,7 +108,7 @@ export const Checkbox = forwardRef(
             "neo-check",
             readOnly && "neo-check-readonly",
             state === "mixed" && "neo-check--indeterminate",
-            className
+            className,
           )}
           onChange={onChangeHandler}
           {...rest}
@@ -118,6 +118,6 @@ export const Checkbox = forwardRef(
         <label htmlFor={id}>{children}</label>
       </>
     );
-  }
+  },
 );
 Checkbox.displayName = "Checkbox";

@@ -25,7 +25,7 @@ export const PopCounterEvent = () => {
       header="Event"
       description="This is an event."
       action={{ count: "00:00" }}
-    />
+    />,
   );
   const popupRef = useRef<
     { id: PopupId; position: PopupPosition } | undefined
@@ -44,14 +44,14 @@ export const PopCounterEvent = () => {
           "after notify call: open is ",
           open,
           "popup is ",
-          popupRef.current
+          popupRef.current,
         );
       }
     } else {
       if (popupRef.current && managerRef.current) {
         managerRef.current.remove(
           popupRef.current.id,
-          popupRef.current.position
+          popupRef.current.position,
         );
       }
     }
@@ -109,7 +109,7 @@ export const PopClosableEvent = () => {
       header="Event"
       description="This is an event."
       action={{ onClick }}
-    />
+    />,
   );
   const popupRef = useRef<
     { id: PopupId; position: PopupPosition } | undefined
@@ -128,14 +128,14 @@ export const PopClosableEvent = () => {
           "after notify call: open is ",
           open,
           "popup is ",
-          popupRef.current
+          popupRef.current,
         );
       }
     } else {
       if (popupRef.current && managerRef.current) {
         managerRef.current.remove(
           popupRef.current.id,
-          popupRef.current.position
+          popupRef.current.position,
         );
       }
     }

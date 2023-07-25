@@ -31,7 +31,7 @@ export const BasicModal = forwardRef(
       id,
       ...rest
     }: BasicModalProps,
-    ref: React.Ref<HTMLDivElement>
+    ref: React.Ref<HTMLDivElement>,
   ) => {
     const generatedId = useId();
     id = id || generatedId;
@@ -43,7 +43,7 @@ export const BasicModal = forwardRef(
           onClose();
         }
       },
-      [open, onClose]
+      [open, onClose],
     );
 
     useEffect(() => {
@@ -84,7 +84,7 @@ export const BasicModal = forwardRef(
       </FocusLock>
     );
     return open ? ReactDOM.createPortal(modal, document.body) : null;
-  }
+  },
 );
 
 BasicModal.displayName = "BasicModal";

@@ -9,7 +9,7 @@ logger.disableAll();
 export const handleMenuButtonClickEvent = (
   e: MouseEvent,
   isOpen: boolean,
-  setOpen: Dispatch<SetStateAction<boolean>>
+  setOpen: Dispatch<SetStateAction<boolean>>,
 ) => {
   e.stopPropagation();
   logger.debug("hanlding mouse click event");
@@ -24,14 +24,14 @@ export const handleMouseMoveEvent = (
   cursorAction: ActionType,
   setCursorAction: Dispatch<SetStateAction<ActionType>>,
   enterCounter: number,
-  setEnterCounter: Dispatch<SetStateAction<number>>
+  setEnterCounter: Dispatch<SetStateAction<number>>,
 ) => {
   const target = e.target as HTMLElement;
   const id = target.getAttribute("id");
   logger.debug(`mouse event target id = ${id}`);
   if (id) {
     const desiredCursor = menuIndexes.findIndex(
-      (menuItem) => id === menuItem.id
+      (menuItem) => id === menuItem.id,
     );
     logger.debug(`desired cursor =${desiredCursor}`);
     if (desiredCursor !== -1) {
@@ -61,7 +61,7 @@ export const handleMouseMoveEvent = (
 
 export const handleMenuItemClick = (
   closeOnSelect: boolean,
-  setOpen: Dispatch<SetStateAction<boolean>>
+  setOpen: Dispatch<SetStateAction<boolean>>,
 ) => {
   if (closeOnSelect) {
     setOpen(false);

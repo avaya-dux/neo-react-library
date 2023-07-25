@@ -23,7 +23,7 @@ describe("Spinner", () => {
     it("takes normal <div> attributes, like `style`", () => {
       const datatestid = "Spinner-root";
       const { getByTestId } = render(
-        <Spinner data-testid={datatestid} style={{ color: "black" }} />
+        <Spinner data-testid={datatestid} style={{ color: "black" }} />,
       );
       const rootElement = getByTestId(datatestid);
       expect(rootElement.style.color).toBeTruthy();
@@ -32,7 +32,7 @@ describe("Spinner", () => {
     it("does not allow `className` to be overwritten, but it can be extended", () => {
       const datatestid = "Spinner-root";
       const { getByTestId } = render(
-        <Spinner data-testid={datatestid} className="fakeclassname" />
+        <Spinner data-testid={datatestid} className="fakeclassname" />,
       );
       const rootElement = getByTestId(datatestid);
       expect(rootElement.classList.length).toBe(2);

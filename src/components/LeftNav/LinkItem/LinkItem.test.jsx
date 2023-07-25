@@ -11,7 +11,7 @@ describe("LinkItem", () => {
     const { getByText } = render(
       <ul>
         <LinkItem>{linkItemText}</LinkItem>
-      </ul>
+      </ul>,
     );
 
     const linkElement = getByText(linkItemText);
@@ -22,7 +22,7 @@ describe("LinkItem", () => {
     const { container } = render(
       <ul>
         <LinkItem>{linkItemText}</LinkItem>
-      </ul>
+      </ul>,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -32,7 +32,7 @@ describe("LinkItem", () => {
     const { container } = render(
       <ul>
         <LinkItem>{linkItemText}</LinkItem>
-      </ul>
+      </ul>,
     );
 
     const linkElement = container.querySelector("a");
@@ -45,7 +45,7 @@ describe("LinkItem", () => {
     const { container } = render(
       <ul>
         <LinkItem disabled>{linkItemText}</LinkItem>
-      </ul>
+      </ul>,
     );
 
     const linkElement = container.querySelector("a");
@@ -58,7 +58,7 @@ describe("LinkItem", () => {
     const { container } = render(
       <ul>
         <LinkItem active>{linkItemText}</LinkItem>
-      </ul>
+      </ul>,
     );
 
     const linkElement = container.querySelector(".neo-leftnav__sub--active");
@@ -72,7 +72,7 @@ describe("LinkItem", () => {
     const { getByText } = render(
       <ul>
         <LinkItem onClick={mockedFunction}>{linkItemText}</LinkItem>
-      </ul>
+      </ul>,
     );
     const linkElement = getByText(linkItemText);
     fireEvent.click(linkElement);

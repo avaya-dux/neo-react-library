@@ -8,7 +8,7 @@ import { AriaAttributes } from "react";
  */
 export const calculateAriaSortValue = (
   isSorted: boolean,
-  sortedDir?: "descending" | "ascending"
+  sortedDir?: "descending" | "ascending",
 ): AriaAttributes["aria-sort"] => {
   let result: AriaAttributes["aria-sort"] = "none";
 

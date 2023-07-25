@@ -18,7 +18,7 @@ describe("RadioGroup", () => {
     render(
       <RadioGroup groupName={"radioGroup"}>
         <Radio value="Radio 1">Radio 1</Radio>
-      </RadioGroup>
+      </RadioGroup>,
     );
   });
 
@@ -80,13 +80,13 @@ describe("Storybook tests", () => {
 
       expect(radioGroup.lastChild).toHaveAttribute(
         "class",
-        "neo-tooltip neo-tooltip--right neo-tooltip--onhover"
+        "neo-tooltip neo-tooltip--right neo-tooltip--onhover",
       );
     });
 
     it("passes and responds to onChange handler correctly", async () => {
       const selectedButtonPrompt = screen.getByText(
-        "Selected button is Radio 1"
+        "Selected button is Radio 1",
       );
 
       const unselectedRadio = screen.getByLabelText("Radio 3");
@@ -94,7 +94,7 @@ describe("Storybook tests", () => {
       await user.click(unselectedRadio);
 
       expect(selectedButtonPrompt).toHaveTextContent(
-        "Selected button is Radio 3"
+        "Selected button is Radio 3",
       );
     });
   });

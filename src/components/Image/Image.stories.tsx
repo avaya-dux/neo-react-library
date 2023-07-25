@@ -54,7 +54,7 @@ const Template: ComponentStory<typeof Image> = ({
         <Button
           onClick={() =>
             setCatImage(
-              catImage === src ? "https://placekitten.com/g/200/300" : src
+              catImage === src ? "https://placekitten.com/g/200/300" : src,
             )
           }
         >

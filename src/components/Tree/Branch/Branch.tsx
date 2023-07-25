@@ -49,7 +49,7 @@ export const Branch = ({
   const ref = useRef(null);
   const [tabIndex, active, handleKeyDown, handleClick] = useRovingTabIndex(
     ref,
-    disabled
+    disabled,
   );
   useFocusEffect(active, ref);
 
@@ -82,7 +82,7 @@ export const Branch = ({
           "neo-treeview__item",
           disabled && "neo-treeview__item--disabled",
           expanded && "neo-treeview__item--expanded",
-          active && "neo-treeview__item--selected"
+          active && "neo-treeview__item--selected",
         )}
       >
         <span

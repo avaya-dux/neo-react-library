@@ -29,7 +29,7 @@ describe("handleCloseElementMouseClickEvent", () => {
       tabIndex,
       activeTabIndex,
       setActiveTabIndex,
-      setActivePanelIndex
+      setActivePanelIndex,
     );
     expect(e.stopPropagation).toBeCalled();
     expect(setActiveTabIndex).not.toBeCalled();
@@ -53,7 +53,7 @@ describe("handleCloseElementMouseClickEvent", () => {
       tabIndex,
       activeTabIndex,
       setActiveTabIndex,
-      setActivePanelIndex
+      setActivePanelIndex,
     );
     expect(e.stopPropagation).toBeCalled();
     expect(setActiveTabIndex).toBeCalledWith(0);
@@ -76,7 +76,7 @@ describe("handleCloseElementMouseClickEvent", () => {
       tabIndex,
       activeTabIndex,
       setActiveTabIndex,
-      setActivePanelIndex
+      setActivePanelIndex,
     );
     expect(e.stopPropagation).toBeCalled();
     expect(setActiveTabIndex).not.toBeCalled();

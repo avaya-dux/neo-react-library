@@ -16,7 +16,7 @@ logger.disableAll();
 
 export function debugTabs(
   logger: any,
-  tabs: { id: string; disabled: boolean }[]
+  tabs: { id: string; disabled: boolean }[],
 ) {
   if (logger.getLevel() < log.levels.INFO) {
     tabs.forEach((tab) => {
@@ -47,7 +47,7 @@ function toArray(children: ReactElement[]) {
   return Array.isArray(children) ? children : [children];
 }
 export const buildTabProps = (
-  children: TabsProps["children"]
+  children: TabsProps["children"],
 ): InternalTabProps[] => {
   const panelList = (children as any)[1];
   const panels = toArray(panelList.props.children).filter(isValidPanelElement);
@@ -67,7 +67,7 @@ export const buildTabProps = (
 };
 
 export const buildTabPropsNoPanel = (
-  children: TabsProps["children"]
+  children: TabsProps["children"],
 ): InternalTabProps[] => {
   const tablist = children as ReactElement<TabListProps>;
   const tabs = toArray(tablist.props.children)
@@ -100,7 +100,7 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
 
 const buildSingleTabPropsHasAssociatedPanel = (
   tab: any,
-  panel: any
+  panel: any,
 ): InternalTabProps => {
   const props = tab.props;
   const { id, children, ...rest } = props;
@@ -138,7 +138,7 @@ export const createTab = (
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
   setActivePanelIndex: Dispatch<SetStateAction<number>>,
   focus: boolean,
-  setFocus: Dispatch<SetStateAction<boolean>>
+  setFocus: Dispatch<SetStateAction<boolean>>,
 ) => {
   const tabId = tabProps.id;
   const active = index === activeTabIndex;
@@ -160,7 +160,7 @@ export const createTab = (
           disabled: tabProps.disabled,
           vertical: isVertical,
         }),
-        className
+        className,
       )}
       dir={closable ? "ltr" : dir}
     >
@@ -189,7 +189,7 @@ export const createTab = (
 export const createPanel = (
   key: number,
   tabProps: InternalTabProps,
-  activePanelIndex: number
+  activePanelIndex: number,
 ) => {
   const active = key === activePanelIndex;
   const { id, children, className, ...rest } = tabProps.content;

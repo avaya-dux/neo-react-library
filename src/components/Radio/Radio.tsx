@@ -40,7 +40,7 @@ export const Radio: React.FC<RadioProps> = ({
 
   const idForLabel = useMemo(
     () => `Radio-label-${value}-${generatedId}`,
-    [value, generatedId]
+    [value, generatedId],
   );
 
   return (

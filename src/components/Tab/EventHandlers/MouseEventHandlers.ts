@@ -24,7 +24,7 @@ export const handleMouseClickEvent = (
   activeTabIndex: number,
   setActiveTabIndex: Dispatch<SetStateAction<number>>,
   setActivePanelIndex: Dispatch<SetStateAction<number>>,
-  onClose: (index: number) => void
+  onClose: (index: number) => void,
 ) => {
   e.stopPropagation();
   e.preventDefault();
@@ -53,7 +53,7 @@ export const handleMouseClickEvent = (
       tabIndex,
       activeTabIndex,
       setActiveTabIndex,
-      setActivePanelIndex
+      setActivePanelIndex,
     );
     onClose(tabIndex);
   }
@@ -64,7 +64,7 @@ export const handleLeftCarouselMouseClickEvent = (
   scrollRef: RefObject<HTMLDivElement>,
   tabRefs: RefObject<HTMLDivElement>[],
   setLeftCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
-  setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>
+  setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
 ) => {
   e.stopPropagation();
   const { scrollLeft, scrollWidth, visibleWidth, tabWidths } =
@@ -73,7 +73,7 @@ export const handleLeftCarouselMouseClickEvent = (
     scrollLeft,
     scrollWidth,
     visibleWidth,
-    tabWidths
+    tabWidths,
   );
   logger.debug(`amount to move right is ${amount}`);
   if (amount !== 0) {
@@ -82,7 +82,7 @@ export const handleLeftCarouselMouseClickEvent = (
       scrollRef,
       tabRefs,
       setLeftCarouselButtonEnabled,
-      setRightCarouselButtonEnabled
+      setRightCarouselButtonEnabled,
     );
   } else {
     setLeftCarouselButtonEnabled(false);
@@ -93,7 +93,7 @@ function scrollAndUpdateButtons(
   scrollRef: RefObject<HTMLDivElement>,
   tabRefs: RefObject<HTMLDivElement>[],
   setLeftCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
-  setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>
+  setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
 ) {
   logger.debug("before scroll: ", scrollRef.current?.scrollLeft);
   scrollRef.current?.scrollBy({ left: amount });
@@ -105,7 +105,7 @@ function scrollAndUpdateButtons(
     "left enabled: ",
     enabledLeft,
     "right enabled: ",
-    enabledRight
+    enabledRight,
   );
   setLeftCarouselButtonEnabled(enabledLeft);
   setRightCarouselButtonEnabled(enabledRight);
@@ -115,7 +115,7 @@ export const handleRightCarouselMouseClickEvent = (
   scrollRef: RefObject<HTMLDivElement>,
   tabRefs: RefObject<HTMLDivElement>[],
   setLeftCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
-  setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>
+  setRightCarouselButtonEnabled: Dispatch<SetStateAction<boolean>>,
 ) => {
   e.stopPropagation();
   const { scrollLeft, scrollWidth, visibleWidth, tabWidths } =
@@ -124,7 +124,7 @@ export const handleRightCarouselMouseClickEvent = (
     scrollLeft,
     scrollWidth,
     visibleWidth,
-    tabWidths
+    tabWidths,
   );
   logger.debug(`amount to move left is ${amount}`);
   if (amount !== 0) {
@@ -133,7 +133,7 @@ export const handleRightCarouselMouseClickEvent = (
       scrollRef,
       tabRefs,
       setLeftCarouselButtonEnabled,
-      setRightCarouselButtonEnabled
+      setRightCarouselButtonEnabled,
     );
   } else {
     setRightCarouselButtonEnabled(false);

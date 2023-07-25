@@ -47,7 +47,7 @@ describe("Text Area", () => {
     render(<TextArea {...defaultTextAreaProps} />);
 
     const charCountElement = screen.getByText(
-      new RegExp(defaultTextAreaProps.translations.remaining, "i")
+      new RegExp(defaultTextAreaProps.translations.remaining, "i"),
     );
 
     expect(charCountElement).toBeDefined();
@@ -61,7 +61,7 @@ describe("Text Area", () => {
     expect(defaultTextAreaProps.maxLength).toBeLessThan(tooLongText.length);
 
     const charCountElement = screen.getByText(
-      new RegExp(defaultTextAreaProps.translations.over, "i")
+      new RegExp(defaultTextAreaProps.translations.over, "i"),
     );
 
     expect(charCountElement).toBeDefined();

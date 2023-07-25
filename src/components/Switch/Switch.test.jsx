@@ -69,7 +69,7 @@ describe("Switch Component", () => {
       const { container } = render(
         <Switch multiline disabled>
           {labelText}
-        </Switch>
+        </Switch>,
       );
 
       const input = container.querySelector("label.neo-switch");

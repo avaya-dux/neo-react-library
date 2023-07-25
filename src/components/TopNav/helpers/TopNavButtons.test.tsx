@@ -13,7 +13,7 @@ describe("TopNavIconButton", () => {
   it("renders without exploding", () => {
     const badge = "example";
     const { container } = render(
-      <TopNavIconButton aria-label={ariaLabel} badge={badge} icon={icon} />
+      <TopNavIconButton aria-label={ariaLabel} badge={badge} icon={icon} />,
     );
 
     expect(screen.getByRole("button")).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe("TopNavIconButton", () => {
 
   it("passes basic axe compliance", async () => {
     const { container } = render(
-      <TopNavIconButton aria-label={ariaLabel} icon={icon} />
+      <TopNavIconButton aria-label={ariaLabel} icon={icon} />,
     );
 
     const results = await axe(container);
@@ -46,7 +46,7 @@ describe("TopNavIconButton", () => {
           aria-label={ariaLabel}
           icon={icon}
           onClick={onClickSpy}
-        />
+        />,
       );
 
       expect(onClickSpy).toHaveBeenCalledTimes(0);
@@ -62,7 +62,7 @@ describe("TopNavIconButton", () => {
           disabled
           icon={icon}
           onClick={onClickSpy}
-        />
+        />,
       );
 
       expect(onClickSpy).not.toHaveBeenCalled();
@@ -92,7 +92,7 @@ describe("TopNavLinkButton", () => {
     render(
       <TopNavLinkButton disabled href={href}>
         {children}
-      </TopNavLinkButton>
+      </TopNavLinkButton>,
     );
 
     expect(screen.getByRole("button")).toBeInTheDocument();
@@ -102,7 +102,7 @@ describe("TopNavLinkButton", () => {
     render(
       <TopNavLinkButton active href={href}>
         {children}
-      </TopNavLinkButton>
+      </TopNavLinkButton>,
     );
 
     expect(screen.getByRole("link")).toHaveClass("neo-nav-link-btn-active");
@@ -112,7 +112,7 @@ describe("TopNavLinkButton", () => {
     render(
       <TopNavLinkButton active disabled href={href}>
         {children}
-      </TopNavLinkButton>
+      </TopNavLinkButton>,
     );
 
     expect(screen.getByRole("button")).toHaveClass("neo-nav-link-btn-active");
@@ -120,7 +120,7 @@ describe("TopNavLinkButton", () => {
 
   it("passes basic axe compliance", async () => {
     const { container } = render(
-      <TopNavLinkButton href={href}>{children}</TopNavLinkButton>
+      <TopNavLinkButton href={href}>{children}</TopNavLinkButton>,
     );
 
     const results = await axe(container);
@@ -131,7 +131,7 @@ describe("TopNavLinkButton", () => {
     const { container } = render(
       <TopNavLinkButton href={href} disabled>
         {children}
-      </TopNavLinkButton>
+      </TopNavLinkButton>,
     );
 
     const results = await axe(container);

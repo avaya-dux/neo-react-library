@@ -35,7 +35,7 @@ describe("Tab -> EventHandlers -> Helper", () => {
         tabs,
         activeTabIndex,
         setActiveTabIndex,
-        setActivePanelIndex
+        setActivePanelIndex,
       );
       expect(activatePreviousTab).toHaveBeenCalled();
     });
@@ -51,7 +51,7 @@ describe("Tab -> EventHandlers -> Helper", () => {
         tabs,
         activeTabIndex,
         setActiveTabIndex,
-        setActivePanelIndex
+        setActivePanelIndex,
       );
       expect(activatePreviousTab).toHaveBeenCalled();
       expect(getNextTabIndex).toHaveBeenCalled();
@@ -70,7 +70,7 @@ describe("Tab -> EventHandlers -> Helper", () => {
         tabs,
         activeTabIndex,
         setActiveTabIndex,
-        setActivePanelIndex
+        setActivePanelIndex,
       );
       expect(activatePreviousTab).toHaveBeenCalled();
       expect(getNextTabIndex).toHaveBeenCalled();
@@ -103,13 +103,13 @@ describe("Tab -> EventHandlers -> Helper", () => {
           leftOffset,
           containerWidth,
           viewPortWidth,
-          []
-        )
+          [],
+        ),
       ).toBe(retOfCalculateRightMoveAmount);
       expect(getPreviousTabToMoveRight).toBeCalledWith(leftOffset, tabWidths);
       expect(calculateRightMoveAmount).toBeCalledWith(
         ...retOfGetPreviousTabToMoveRight,
-        tabWidths
+        tabWidths,
       );
     });
   });
@@ -134,16 +134,16 @@ describe("Tab -> EventHandlers -> Helper", () => {
       getNextTabToMoveLeft.mockReturnValue(retOfgetNextTabToMoveLeft);
       calculateLeftMoveAmount.mockReturnValue(retOfcalculateLeftMoveAmount);
       expect(
-        moveNextTabToLeftAmount(leftOffset, containerWidth, viewPortWidth, [])
+        moveNextTabToLeftAmount(leftOffset, containerWidth, viewPortWidth, []),
       ).toBe(retOfcalculateLeftMoveAmount);
       expect(getNextTabToMoveLeft).toBeCalledWith(
         leftOffset,
         viewPortWidth,
-        tabWidths
+        tabWidths,
       );
       expect(calculateLeftMoveAmount).toBeCalledWith(
         ...retOfgetNextTabToMoveLeft,
-        tabWidths
+        tabWidths,
       );
     });
     it("When container width === sum of tabWidths, should return 0", () => {
@@ -155,8 +155,8 @@ describe("Tab -> EventHandlers -> Helper", () => {
           leftOffset,
           containerWidth,
           viewPortWidth,
-          [100, 100, 100, 100]
-        )
+          [100, 100, 100, 100],
+        ),
       ).toBe(0);
     });
   });

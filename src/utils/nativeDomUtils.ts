@@ -7,11 +7,11 @@
  */
 export function dispatchInputOnChangeEvent(
   inputEl: HTMLInputElement,
-  value: string
+  value: string,
 ) {
   const setter = Object.getOwnPropertyDescriptor(
     window.HTMLInputElement.prototype,
-    "value"
+    "value",
   )?.set;
 
   if (setter) {

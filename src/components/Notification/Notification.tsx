@@ -78,7 +78,7 @@ export const Notification = ({
       className={clsx(
         "neo-notification",
         `neo-notification--${type}`,
-        isElevated && "neo-notification__elevated"
+        isElevated && "neo-notification__elevated",
       )}
       role="alert"
       aria-live="polite"
@@ -101,7 +101,7 @@ export const Notification = ({
 
 const createClickHandler = (
   setClosed: Dispatch<SetStateAction<boolean>>,
-  callback?: MouseEventHandler<HTMLButtonElement>
+  callback?: MouseEventHandler<HTMLButtonElement>,
 ) => {
   return (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -115,7 +115,7 @@ const createClickHandler = (
 export function createAction(
   action: NotificationProps["action"],
   type: NotificationProps["type"],
-  setClosed: Dispatch<SetStateAction<boolean>>
+  setClosed: Dispatch<SetStateAction<boolean>>,
 ) {
   let internalAction = null;
   if (isValidElement(action)) {

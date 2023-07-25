@@ -17,7 +17,7 @@ describe("canMovePreviousTabToRight", () => {
     const containerWidth = 200;
     const viewPortWidth = 100;
     expect(
-      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth)
+      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth),
     ).toBeFalsy();
   });
   it("when leftOffset < 0 and containerWidth > viewPortWidth, should return false", () => {
@@ -25,7 +25,7 @@ describe("canMovePreviousTabToRight", () => {
     const containerWidth = 200;
     const viewPortWidth = 100;
     expect(
-      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth)
+      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth),
     ).toBeFalsy();
   });
   it("when leftOffset > 0 and containerWidth > viewPortWidth, should return true", () => {
@@ -33,7 +33,7 @@ describe("canMovePreviousTabToRight", () => {
     const containerWidth = 200;
     const viewPortWidth = 100;
     expect(
-      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth)
+      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth),
     ).toBeTruthy();
   });
   it("when ontainerWidth === viewPortWidth, should return false", () => {
@@ -41,7 +41,7 @@ describe("canMovePreviousTabToRight", () => {
     const containerWidth = 100;
     const viewPortWidth = 100;
     expect(
-      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth)
+      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth),
     ).toBeFalsy();
   });
   it("when containerWidth < viewPortWidth, should return false", () => {
@@ -49,7 +49,7 @@ describe("canMovePreviousTabToRight", () => {
     const containerWidth = 50;
     const viewPortWidth = 100;
     expect(
-      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth)
+      canMovePreviousTabToRight(leftOffset, containerWidth, viewPortWidth),
     ).toBeFalsy();
   });
 });
@@ -60,7 +60,7 @@ describe("canMoveNextTabToLeft", () => {
     const viewPortWidth = 100;
     const containerWidth = viewPortWidth;
     expect(
-      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth)
+      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth),
     ).toBeFalsy();
   });
   it("viewPortWidth > containerWidth, should return false", () => {
@@ -68,7 +68,7 @@ describe("canMoveNextTabToLeft", () => {
     const containerWidth = 100;
     const viewPortWidth = containerWidth + 100;
     expect(
-      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth)
+      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth),
     ).toBeFalsy();
   });
   it("when leftOffset + viewPortWidth < containerWidth and containerWidth > viewPortWidth, should return true", () => {
@@ -76,7 +76,7 @@ describe("canMoveNextTabToLeft", () => {
     const containerWidth = 200;
     const viewPortWidth = 100;
     expect(
-      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth)
+      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth),
     ).toBeTruthy();
   });
   it("when leftOffset + viewPortWidth === containerWidth and containerWidth > viewPortWidth, should return false", () => {
@@ -84,7 +84,7 @@ describe("canMoveNextTabToLeft", () => {
     const containerWidth = 200;
     const viewPortWidth = 100;
     expect(
-      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth)
+      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth),
     ).toBeFalsy();
   });
   it("when leftOffset + viewPortWidth > containerWidth and containerWidth > viewPortWidth, should return false", () => {
@@ -92,7 +92,7 @@ describe("canMoveNextTabToLeft", () => {
     const containerWidth = 200;
     const viewPortWidth = 100;
     expect(
-      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth)
+      canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth),
     ).toBeFalsy();
   });
 });
@@ -173,20 +173,20 @@ describe("calculateLeftMoveAmount", () => {
     const tabWidths = [50, 60, 70, 80];
     const overshoot = 0;
     expect(
-      calculateLeftMoveAmount(tabWidths.length - 1, overshoot, tabWidths)
+      calculateLeftMoveAmount(tabWidths.length - 1, overshoot, tabWidths),
     ).toBe(0);
   });
   it("when index === last index and overshoot < 0, should return 0", () => {
     const tabWidths = [50, 60, 70, 80];
     const overshoot = -10;
     expect(
-      calculateLeftMoveAmount(tabWidths.length - 1, overshoot, tabWidths)
+      calculateLeftMoveAmount(tabWidths.length - 1, overshoot, tabWidths),
     ).toBe(0);
   });
   it("when overshoot = 0 and index is not the , should return full tab width", () => {
     const tabWidth = 567;
     expect(calculateLeftMoveAmount(1, 0, [100, tabWidth, 100, 100])).toBe(
-      tabWidth
+      tabWidth,
     );
   });
   it("when overshoot is more than half tab width and previous tab exists, should return tabWidth - overshoot + previous tab width", () => {
@@ -199,7 +199,7 @@ describe("calculateLeftMoveAmount", () => {
         tabWidth,
         200,
         300,
-      ])
+      ]),
     ).toBe(tabWidth - overshoot + previousTabWidth);
   });
 
@@ -207,7 +207,7 @@ describe("calculateLeftMoveAmount", () => {
     const tabWidth = 500;
     const overshoot = 500 / 2 + 50;
     expect(calculateLeftMoveAmount(0, overshoot, [tabWidth, 200, 300])).toBe(
-      tabWidth - overshoot
+      tabWidth - overshoot,
     );
   });
 });
@@ -220,7 +220,7 @@ describe("calculateRightMoveAmount", () => {
   it("when overshoot = 0, should return full tab width", () => {
     const tabWidth = 567;
     expect(calculateRightMoveAmount(1, 0, [100, tabWidth, 100, 100])).toBe(
-      tabWidth
+      tabWidth,
     );
   });
   it("when overshoot is more than half tab width and next tab exists, should return tabWidth - overshoot + next tab width", () => {
@@ -228,7 +228,12 @@ describe("calculateRightMoveAmount", () => {
     const overshoot = 500 / 2 + 50;
     const nextTabWidth = 100;
     expect(
-      calculateRightMoveAmount(1, overshoot, [100, tabWidth, nextTabWidth, 300])
+      calculateRightMoveAmount(1, overshoot, [
+        100,
+        tabWidth,
+        nextTabWidth,
+        300,
+      ]),
     ).toBe(tabWidth - overshoot + nextTabWidth);
   });
 
@@ -236,7 +241,7 @@ describe("calculateRightMoveAmount", () => {
     const tabWidth = 500;
     const overshoot = 500 / 2 + 50;
     expect(calculateRightMoveAmount(2, overshoot, [200, 300, tabWidth])).toBe(
-      tabWidth - overshoot
+      tabWidth - overshoot,
     );
   });
 });

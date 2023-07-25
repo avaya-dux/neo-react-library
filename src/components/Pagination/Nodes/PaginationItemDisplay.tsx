@@ -39,7 +39,7 @@ export const PaginationItemDisplay = ({
       const startingItemIndex = (currentPageIndex - 1) * itemsPerPage + 1;
       const endingItemIndex = Math.min(
         startingItemIndex + itemsPerPage - 1,
-        itemCount
+        itemCount,
       );
 
       return `${startingItemIndex}-${endingItemIndex} / ${itemCount}`;

@@ -121,7 +121,7 @@ describe("InfoModal: ", () => {
       const { getByTestId } = render(
         <InfoModal id={datatestid} onClose={() => null} open={true}>
           This is some content
-        </InfoModal>
+        </InfoModal>,
       );
       const rootElement = getByTestId(datatestid);
       expect(rootElement).toBeTruthy();
@@ -132,7 +132,7 @@ describe("InfoModal: ", () => {
       const { queryAllByTestId } = render(
         <InfoModal id={datatestid} onClose={() => null} open={false}>
           This is some content
-        </InfoModal>
+        </InfoModal>,
       );
       const rootElement = queryAllByTestId(datatestid);
       expect(rootElement).toHaveLength(0);

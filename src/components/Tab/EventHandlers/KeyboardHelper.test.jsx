@@ -19,8 +19,8 @@ describe("Tab -> EventHandlers -> Helper", () => {
           tabs,
           activeTabIndex,
           setActiveTabIndex,
-          setActivePanelIndex
-        )
+          setActivePanelIndex,
+        ),
       ).toBeFalsy();
       expect(setActiveTabIndex).not.toBeCalled();
       expect(setActivePanelIndex).not.toBeCalled();
@@ -35,8 +35,8 @@ describe("Tab -> EventHandlers -> Helper", () => {
           tabs,
           activeTabIndex,
           setActiveTabIndex,
-          setActivePanelIndex
-        )
+          setActivePanelIndex,
+        ),
       ).toBeTruthy();
       expect(setActiveTabIndex).toHaveBeenCalledWith(0);
       expect(setActivePanelIndex).toHaveBeenCalledWith(0);
@@ -51,8 +51,8 @@ describe("Tab -> EventHandlers -> Helper", () => {
           tabs,
           activeTabIndex,
           setActiveTabIndex,
-          setActivePanelIndex
-        )
+          setActivePanelIndex,
+        ),
       ).toBeTruthy();
       expect(setActiveTabIndex).toHaveBeenCalledWith(0);
     });

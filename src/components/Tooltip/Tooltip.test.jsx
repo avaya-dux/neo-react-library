@@ -19,7 +19,7 @@ describe("Tooltip", () => {
   it("fully renders without exploding", () => {
     vi.spyOn(console, "warn").mockImplementation(() => null);
     const { getByRole } = render(
-      <Tooltip label="default tooltip text">text</Tooltip>
+      <Tooltip label="default tooltip text">text</Tooltip>,
     );
 
     const rootElement = getByRole("tooltip");
@@ -30,7 +30,7 @@ describe("Tooltip", () => {
     const { container } = render(
       <Tooltip id="example" label="default tooltip text">
         text
-      </Tooltip>
+      </Tooltip>,
     );
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -77,14 +77,14 @@ describe("Tooltip", () => {
         tooltipDivProps={{ className: tooltipClassName }}
       >
         ping
-      </Tooltip>
+      </Tooltip>,
     );
 
     expect(
-      screen.getByTestId(dataTestId).classList.contains(wrapperClassName)
+      screen.getByTestId(dataTestId).classList.contains(wrapperClassName),
     ).toBe(true);
     expect(
-      screen.getByRole("tooltip").classList.contains(tooltipClassName)
+      screen.getByRole("tooltip").classList.contains(tooltipClassName),
     ).toBe(true);
   });
 
@@ -101,7 +101,7 @@ describe("Tooltip", () => {
           position="top"
         >
           text
-        </Tooltip>
+        </Tooltip>,
       );
       expect(container.innerHTML).toContain(idProp);
       expect(container.innerHTML).toContain(ariaProp);
@@ -138,7 +138,7 @@ describe("Tooltip", () => {
           position="top"
         >
           <p>text</p>
-        </Tooltip>
+        </Tooltip>,
       );
       expect(container.innerHTML).toContain(idProp);
       expect(container.innerHTML).toContain(ariaProp);
@@ -180,7 +180,7 @@ describe("Tooltip", () => {
             <li>item three</li>
             <li>item four</li>
           </ul>
-        </Tooltip>
+        </Tooltip>,
       );
       expect(container.innerHTML).toContain(idProp);
       expect(container.innerHTML).toContain(ariaProp);
@@ -378,7 +378,7 @@ describe("Tooltip", () => {
             height: 0,
           },
           "test",
-          rootElementMock
+          rootElementMock,
         );
         const expectedResult = translatePositionToCSSName("top");
 
@@ -397,7 +397,7 @@ describe("Tooltip", () => {
         const actualResult = getIdealTooltipPosition(
           container,
           "test",
-          rootElementMock
+          rootElementMock,
         );
         const expectedResult = translatePositionToCSSName("top");
 
@@ -413,7 +413,7 @@ describe("Tooltip", () => {
         const actualResult = getIdealTooltipPosition(
           container,
           "test",
-          rootElementMock
+          rootElementMock,
         );
         const expectedResult = translatePositionToCSSName("bottom");
 
@@ -429,7 +429,7 @@ describe("Tooltip", () => {
         const actualResult = getIdealTooltipPosition(
           container,
           "test",
-          rootElementMock
+          rootElementMock,
         );
         const expectedResult = translatePositionToCSSName("left");
 
@@ -443,7 +443,7 @@ describe("Tooltip", () => {
         const actualResult = getIdealTooltipPosition(
           container,
           "test",
-          rootElementMock
+          rootElementMock,
         );
         const expectedResult = translatePositionToCSSName("right");
 
@@ -459,7 +459,7 @@ describe("Tooltip", () => {
         const actualResult = getIdealTooltipPosition(
           container,
           "test",
-          rootElementMock
+          rootElementMock,
         );
         const expectedResult = translatePositionToCSSName("top-left");
 
@@ -473,7 +473,7 @@ describe("Tooltip", () => {
         const actualResult = getIdealTooltipPosition(
           container,
           "test",
-          rootElementMock
+          rootElementMock,
         );
         const expectedResult = translatePositionToCSSName("top-right");
 
@@ -486,7 +486,7 @@ describe("Tooltip", () => {
         const actualResult = getIdealTooltipPosition(
           container,
           "test",
-          rootElementMock
+          rootElementMock,
         );
         const expectedResult = translatePositionToCSSName("bottom-left");
 
@@ -497,7 +497,7 @@ describe("Tooltip", () => {
         const actualResult = getIdealTooltipPosition(
           container,
           "test",
-          rootElementMock
+          rootElementMock,
         );
         const expectedResult = translatePositionToCSSName("bottom-right");
 

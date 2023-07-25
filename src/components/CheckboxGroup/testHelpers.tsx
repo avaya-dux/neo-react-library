@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 export const checkboxes = (
   groupName: string,
   checked4: CheckboxProps["checked"],
-  checked5: CheckboxProps["checked"]
+  checked5: CheckboxProps["checked"],
 ): ReactElement<CheckboxProps>[] => [
   <Checkbox key="check1" name={groupName} value="unchecked">
     Check 1 unchecked
@@ -45,7 +45,7 @@ export const checkboxes = (
   </Checkbox>,
 ];
 export const disabledCheckboxes = (
-  groupName: string
+  groupName: string,
 ): ReactElement<CheckboxProps>[] => [
   <Checkbox key="check1" name={groupName} value="disabled unchecked" disabled>
     disabled unchecked
@@ -88,7 +88,7 @@ export const disabledCheckboxes = (
   </Checkbox>,
 ];
 export const readonlyCheckboxes = (
-  groupName: string
+  groupName: string,
 ): ReactElement<CheckboxProps>[] => [
   <Checkbox key="check1" name={groupName} value="readonly unchecked" readOnly>
     readonly unchecked

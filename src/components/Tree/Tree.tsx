@@ -88,7 +88,7 @@ export const Tree = ({
 }: TreeProps) => {
   if (!label && !arialabel && !describedby) {
     handleAccessbilityError(
-      "Tree requires a label, an aria-label, or an aria-describedby prop"
+      "Tree requires a label, an aria-label, or an aria-describedby prop",
     );
   }
 

@@ -30,7 +30,7 @@ export interface InfoModalProps {
 export const InfoModal = forwardRef(
   (
     { children, className, id, onClose, open = false, title }: InfoModalProps,
-    ref: React.Ref<HTMLDivElement>
+    ref: React.Ref<HTMLDivElement>,
   ) => {
     const generatedId = useId();
     id = id || generatedId;
@@ -74,8 +74,8 @@ export const InfoModal = forwardRef(
           </div>
         </div>
       </div>,
-      document.body
+      document.body,
     );
-  }
+  },
 );
 InfoModal.displayName = "InfoModal";

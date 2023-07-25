@@ -37,7 +37,7 @@ export const PortalInfoModalExample = () => {
 };
 
 export const InfoModalWithDefaultProps: Story<InfoModalProps> = (
-  props: InfoModalProps
+  props: InfoModalProps,
 ) => {
   return (
     <div>

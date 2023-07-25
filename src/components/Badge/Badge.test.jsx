@@ -53,7 +53,7 @@ describe("Badge", () => {
     expect(longBadgeProps.data.length).toBe(17);
     expect(rootElement).toHaveAttribute(
       "data-badge",
-      longBadgeProps.data.slice(0, 12)
+      longBadgeProps.data.slice(0, 12),
     );
   });
 });

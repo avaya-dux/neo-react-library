@@ -40,7 +40,7 @@ describe("TopNavSkipNav", () => {
 
     it("passes basic axe compliance", async () => {
       const { container } = render(
-        <TopNavSkipNav href={href}>{text}</TopNavSkipNav>
+        <TopNavSkipNav href={href}>{text}</TopNavSkipNav>,
       );
       const results = await axe(container);
       expect(results).toHaveNoViolations();

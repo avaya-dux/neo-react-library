@@ -91,7 +91,7 @@ describe("Tab Keyboard event handlers", () => {
           0,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(setActiveTabIndex).not.toBeCalled();
         expect(setActivePanelIndex).not.toBeCalled();
@@ -105,7 +105,7 @@ describe("Tab Keyboard event handlers", () => {
           0,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(setActiveTabIndex).not.toBeCalled();
         expect(setActivePanelIndex).not.toBeCalled();
@@ -120,7 +120,7 @@ describe("Tab Keyboard event handlers", () => {
           0,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(setActiveTabIndex).toBeCalled();
       });
@@ -134,7 +134,7 @@ describe("Tab Keyboard event handlers", () => {
           2,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(setActiveTabIndex).not.toBeCalled();
       });
@@ -159,7 +159,7 @@ describe("Tab Keyboard event handlers", () => {
           0,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(activatePreviousTab).toBeCalled();
       });
@@ -173,7 +173,7 @@ describe("Tab Keyboard event handlers", () => {
           0,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(activatePreviousTab).not.toBeCalled();
       });
@@ -197,7 +197,7 @@ describe("Tab Keyboard event handlers", () => {
           e,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
       });
     });
@@ -220,7 +220,7 @@ describe("Tab Keyboard event handlers", () => {
           e,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
       });
     });
@@ -243,7 +243,7 @@ describe("Tab Keyboard event handlers", () => {
           1,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(e.stopPropagation).toHaveBeenCalled();
         expect(getNextTabIndex).not.toBeCalled();
@@ -258,7 +258,7 @@ describe("Tab Keyboard event handlers", () => {
           1,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(e.stopPropagation).toHaveBeenCalled();
         expect(setActiveTabIndex).toBeCalledWith(2);
@@ -283,7 +283,7 @@ describe("Tab Keyboard event handlers", () => {
           1,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(e.stopPropagation).toHaveBeenCalled();
         expect(activatePreviousTab).not.toBeCalled();
@@ -298,7 +298,7 @@ describe("Tab Keyboard event handlers", () => {
           1,
           setActiveTabIndex,
           setActivePanelIndex,
-          ref
+          ref,
         );
         expect(e.stopPropagation).toHaveBeenCalled();
         expect(activatePreviousTab).toBeCalled();
@@ -322,7 +322,7 @@ describe("Tab Keyboard event handlers", () => {
         0,
         setActiveTabIndex,
         setActivePanelIndex,
-        onClose
+        onClose,
       );
       expect(setActiveTabIndex).not.toBeCalled();
       expect(setActivePanelIndex).not.toBeCalled();
@@ -339,7 +339,7 @@ describe("Tab Keyboard event handlers", () => {
         e,
         setActiveTabIndex,
         setActivePanelIndex,
-        onClose
+        onClose,
       );
     });
   });
@@ -396,7 +396,7 @@ function testCloseElementKeyDown(
   e,
   setActiveTabIndex,
   setActivePanelIndex,
-  onClose
+  onClose,
 ) {
   handleCloseElementKeyDownEvent(
     e,
@@ -404,7 +404,7 @@ function testCloseElementKeyDown(
     0,
     setActiveTabIndex,
     setActivePanelIndex,
-    onClose
+    onClose,
   );
   expect(activateAnotherTabAndPanel).toBeCalled();
   expect(e.preventDefault).toBeCalled();
@@ -416,7 +416,7 @@ function testEnterOrSpaceKeyDown(
   e,
   setActiveTabIndex,
   setActivePanelIndex,
-  ref
+  ref,
 ) {
   const tabs = getTabProps();
   handleKeyDownEvent(
@@ -426,7 +426,7 @@ function testEnterOrSpaceKeyDown(
     1,
     setActiveTabIndex,
     setActivePanelIndex,
-    ref
+    ref,
   );
   expect(setActivePanelIndex).toBeCalledWith(1);
   expect(e.stopPropagation).toHaveBeenCalled();
@@ -437,7 +437,7 @@ function testLinkOpenOnEnterOrSpaceKeyDown(
   e,
   setActiveTabIndex,
   setActivePanelIndex,
-  ref
+  ref,
 ) {
   const tabs = getTabLinkProps();
   handleKeyDownEvent(
@@ -447,7 +447,7 @@ function testLinkOpenOnEnterOrSpaceKeyDown(
     1,
     setActiveTabIndex,
     setActivePanelIndex,
-    ref
+    ref,
   );
   expect(e.preventDefault).not.toBeCalled();
   expect(setActivePanelIndex).not.toBeCalled();

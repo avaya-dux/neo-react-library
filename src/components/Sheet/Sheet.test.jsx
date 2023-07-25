@@ -30,7 +30,7 @@ describe("Sheet", () => {
 
   it("fully renders with a JSX title without exploding", () => {
     const { getByRole } = render(
-      <Sheet title={<span>example JSX title</span>} />
+      <Sheet title={<span>example JSX title</span>} />,
     );
 
     const rootElement = getByRole("dialog");
@@ -42,7 +42,7 @@ describe("Sheet", () => {
       <Sheet
         title="example title"
         actions={[<Button key="example1">example</Button>]}
-      />
+      />,
     );
 
     const rootElement = getByRole("dialog");
@@ -67,8 +67,8 @@ describe("Sheet", () => {
         <Sheet
           aria-label="innapropriate aria label, need to use `title` prop"
           actions={[<Button key="example1">example</Button>]}
-        />
-      )
+        />,
+      ),
     ).toThrow();
     expect(spy).toHaveBeenCalled();
   });

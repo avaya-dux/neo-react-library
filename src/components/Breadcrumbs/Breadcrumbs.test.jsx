@@ -36,7 +36,7 @@ describe("Breadcrumbs: ", () => {
     let renderResult;
     beforeEach(() => {
       renderResult = render(
-        <Breadcrumbs {...props} data-testid={dataTestId} />
+        <Breadcrumbs {...props} data-testid={dataTestId} />,
       );
     });
 
@@ -71,7 +71,7 @@ describe("Breadcrumbs: ", () => {
     it("description is not rendered", () => {
       const { container } = renderResult;
       const description = container.querySelector(
-        ".neo-breadcrumbs__description"
+        ".neo-breadcrumbs__description",
       );
       expect(description).toBeNull();
     });

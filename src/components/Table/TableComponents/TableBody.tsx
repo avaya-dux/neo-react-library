@@ -73,7 +73,7 @@ export const TableBody = <T extends Record<string, any>>({
               key={preparedRowProps.key || `table-row-${row.id}`}
               className={clsx(
                 row.isSelected && "active",
-                preparedRowProps.className
+                preparedRowProps.className,
               )}
             >
               {shouldShowCheckbox && (

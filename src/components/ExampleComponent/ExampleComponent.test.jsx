@@ -7,7 +7,7 @@ import { ExampleComponent } from "./ExampleComponent";
 import * as ExampleComponentStories from "./ExampleComponent.stories";
 
 const { DefaultExample, TemplatedExample } = composeStories(
-  ExampleComponentStories
+  ExampleComponentStories,
 );
 
 describe("ExampleComponent", () => {

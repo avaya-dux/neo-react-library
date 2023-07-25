@@ -31,7 +31,7 @@ export function NeoThemeProvider({
           className,
           "neo-global-colors",
           mode === "dark" && "neo-dark",
-          mode === "dynamic" && "neo-dynamic"
+          mode === "dynamic" && "neo-dynamic",
         )}
         {...rest}
       />

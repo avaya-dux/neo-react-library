@@ -16,7 +16,7 @@ export const getMultilineClassName = (multiline?: boolean) => {
 };
 
 export const translatePositionToCSSName = (
-  passedPosition: Omit<TooltipPosition, "auto">
+  passedPosition: Omit<TooltipPosition, "auto">,
 ): TooltipCSSPosition => {
   switch (passedPosition) {
     case "left":
@@ -38,7 +38,7 @@ export const translatePositionToCSSName = (
 
     default:
       console.error(
-        `Unexpected position encountered: ${passedPosition}. Defaulting to default "position='up'"`
+        `Unexpected position encountered: ${passedPosition}. Defaulting to default "position='up'"`,
       );
       return "up";
   }
@@ -74,7 +74,7 @@ const tooltipTopAndBottomPadding = 8 + 8;
 export const getIdealTooltipPosition = (
   containerDimensions: { height: number; width: number },
   label: string,
-  rootElement: HTMLDivElement | null
+  rootElement: HTMLDivElement | null,
 ): TooltipCSSPosition => {
   const { height: containerHeight, width: containerWidth } =
     containerDimensions;
@@ -225,7 +225,7 @@ export const getIdealTooltipPosition = (
     result = "right";
   } else {
     console.warn(
-      `unable to find ideal position for tooltip placement, setting to default position: ${result}`
+      `unable to find ideal position for tooltip placement, setting to default position: ${result}`,
     );
   }
 

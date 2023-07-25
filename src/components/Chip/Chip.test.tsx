@@ -28,8 +28,8 @@ describe("Chip", () => {
       render(
         <Chip avatarInitials="BAD" icon="error">
           {chipText}
-        </Chip>
-      )
+        </Chip>,
+      ),
     ).toThrow();
   });
 
@@ -43,7 +43,7 @@ describe("Chip", () => {
     render(
       <Chip closable onClose={spy}>
         {chipText}
-      </Chip>
+      </Chip>,
     );
     expect(spy).not.toHaveBeenCalled();
 
@@ -60,7 +60,7 @@ describe("Chip", () => {
     render(
       <Chip closable disabled>
         {chipText}
-      </Chip>
+      </Chip>,
     );
 
     const btn = screen.getByRole("button");

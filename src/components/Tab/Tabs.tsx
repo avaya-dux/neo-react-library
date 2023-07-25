@@ -92,25 +92,25 @@ export const Tabs = ({
   const refs: RefObject<HTMLDivElement>[] = [];
   const scrollRef = useRef<HTMLDivElement>(null);
   const carouselLeftButtonClickEventHandler: MouseEventHandler = (
-    e: MouseEvent
+    e: MouseEvent,
   ) => {
     return handleLeftCarouselMouseClickEvent(
       e,
       scrollRef,
       refs,
       setLeftCarouselButtonEnabled,
-      setRightCarouselButtonEnabled
+      setRightCarouselButtonEnabled,
     );
   };
   const carouselRightButtonClickEventHandler: MouseEventHandler = (
-    e: MouseEvent
+    e: MouseEvent,
   ) => {
     return handleRightCarouselMouseClickEvent(
       e,
       scrollRef,
       refs,
       setLeftCarouselButtonEnabled,
-      setRightCarouselButtonEnabled
+      setRightCarouselButtonEnabled,
     );
   };
   const tabsNav = (
@@ -136,7 +136,7 @@ export const Tabs = ({
           setActiveTabIndex,
           setActivePanelIndex,
           focus,
-          setFocus
+          setFocus,
         );
       })}
     </div>
@@ -155,7 +155,7 @@ export const Tabs = ({
 
   useEffect(() => {
     logger.debug(
-      `useEffect: update carousel buttons disabled state on activeTab change ${activeTabIndex}`
+      `useEffect: update carousel buttons disabled state on activeTab change ${activeTabIndex}`,
     );
     updateCarouselButtonStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -164,7 +164,7 @@ export const Tabs = ({
   useEffect(() => {
     window.addEventListener("resize", updateCarouselButtonStatus);
     logger.debug(
-      `updateCarouselButtonStatus: update carousel buttons disabled status on window resize`
+      `updateCarouselButtonStatus: update carousel buttons disabled status on window resize`,
     );
     // updateCarouselButtonStatus();
     return () =>

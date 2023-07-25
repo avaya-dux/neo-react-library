@@ -6,10 +6,10 @@ logger.disableAll();
 export function canMovePreviousTabToRight(
   leftOffset: number,
   containerWidth: number,
-  viewPortWidth: number
+  viewPortWidth: number,
 ) {
   logger.debug(
-    `viewPortWidth=${viewPortWidth} containerWidth=${containerWidth} leftOffset=${leftOffset}`
+    `viewPortWidth=${viewPortWidth} containerWidth=${containerWidth} leftOffset=${leftOffset}`,
   );
   if (viewPortWidth >= containerWidth) {
     return false;
@@ -21,7 +21,7 @@ export function canMovePreviousTabToRight(
 export function canMoveNextTabToLeft(
   leftOffset: number,
   containerWidth: number,
-  viewPortWidth: number
+  viewPortWidth: number,
 ) {
   if (viewPortWidth >= containerWidth) {
     return false;
@@ -32,7 +32,7 @@ export function canMoveNextTabToLeft(
 export function calculateRightMoveAmount(
   index: number,
   overshoot: number,
-  tabWidths: number[]
+  tabWidths: number[],
 ) {
   if (index === -1) {
     return 0;
@@ -46,11 +46,11 @@ export function calculateRightMoveAmount(
 }
 export function getPreviousTabToMoveRight(
   leftOffset: number,
-  tabWidths: number[]
+  tabWidths: number[],
 ) {
   return getClosestTabWithLeftBorderToTheLeftOfTargetLine(
     leftOffset,
-    tabWidths
+    tabWidths,
   );
 }
 /**
@@ -65,7 +65,7 @@ export function getPreviousTabToMoveRight(
  */
 function getClosestTabWithLeftBorderToTheLeftOfTargetLine(
   target: number,
-  tabWidths: number[]
+  tabWidths: number[],
 ) {
   let index = 0;
   let sum = 0;
@@ -80,20 +80,20 @@ function getClosestTabWithLeftBorderToTheLeftOfTargetLine(
 export function getNextTabToMoveLeft(
   leftOffset: number,
   viewPortWidth: number,
-  tabWidths: number[]
+  tabWidths: number[],
 ) {
   return getClosestTabWithLeftBorderToTheLeftOfTargetLine(
     leftOffset + viewPortWidth,
-    tabWidths
+    tabWidths,
   );
 }
 export function calculateLeftMoveAmount(
   index: number,
   overshoot: number,
-  tabWidths: number[]
+  tabWidths: number[],
 ) {
   logger.debug(
-    `index = ${index} tabWidth=${tabWidths[index]} and overshoot = ${overshoot}`
+    `index = ${index} tabWidth=${tabWidths[index]} and overshoot = ${overshoot}`,
   );
   if (index === tabWidths.length - 1 && overshoot <= 0) {
     return 0;

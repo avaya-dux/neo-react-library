@@ -37,7 +37,7 @@ export const PaginationNavigation = ({
       currentPageIndex,
       maxNavNodes,
       onPageChange,
-      totalPages
+      totalPages,
     );
   }, [currentPageIndex, totalPages, paginationRootWidth, onPageChange]);
 

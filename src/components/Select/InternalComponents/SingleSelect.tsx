@@ -50,7 +50,7 @@ export const SingleSelect = () => {
         size === "sm" && "neo-multiselect--small",
         disabled && "neo-multiselect--disabled",
         loading && "neo-select__spinner",
-        isOpen && "neo-multiselect--active"
+        isOpen && "neo-multiselect--active",
       )}
     >
       <span className="neo-multiselect-combo__header">
@@ -67,7 +67,7 @@ export const SingleSelect = () => {
       <div
         className={clsx(
           "neo-multiselect__content",
-          isOpen && "neo-set-keyboard-focus"
+          isOpen && "neo-set-keyboard-focus",
         )}
         {...getMenuProps()}
       >

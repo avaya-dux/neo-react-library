@@ -12,7 +12,7 @@ describe("Button", () => {
         dir="rtl"
         icon="save"
         shape="square"
-      />
+      />,
     );
 
     const rootElement = getByTestId("neo-icon-button");
@@ -27,7 +27,7 @@ describe("Button", () => {
         icon="save"
         id="test-axe"
         shape="square"
-      />
+      />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -44,7 +44,7 @@ describe("Button", () => {
         aria-label="description test"
         badge={badgeText}
         data-testid="neo-icon-button"
-      />
+      />,
     );
     const rootElement = getByTestId("neo-icon-button");
     expect(rootElement).toHaveAttribute("data-badge", badgeText);
@@ -57,7 +57,7 @@ describe("Button", () => {
         aria-label="description test"
         badge={badgeText}
         data-testid="neo-icon-button"
-      />
+      />,
     );
     const rootElement = getByTestId("neo-icon-button");
 
@@ -66,7 +66,7 @@ describe("Button", () => {
   });
   it("assigns the appropriate class name when the `size` prop is passed as wide", () => {
     render(
-      <IconButton aria-label="description test" shape="square" size="wide" />
+      <IconButton aria-label="description test" shape="square" size="wide" />,
     );
     const rootElement = screen.getByRole("button");
     expect(rootElement).toHaveClass("neo-btn-wide");
