@@ -24,7 +24,7 @@ export const PopCounterEvent = () => {
       icon="copy"
       header="Event"
       description="This is an event."
-      action={{ count: "00:00" }}
+      actions={{ counter: { count: "00:00" } }}
     />,
   );
   const popupRef = useRef<
@@ -97,18 +97,18 @@ export const PopCounterEvent = () => {
 
 export const PopClosableEvent = () => {
   const managerRef = useRef<PopupManager | null>(null);
-
-  function onClick() {
-    logger.debug("onClose called");
-    setOpen(false);
-  }
   const notificationRef = useRef(
     <Notification
       type="event"
       icon="copy"
       header="Event"
       description="This is an event."
-      action={{ onClick }}
+      actions={{
+        closable: {
+          onClick: () => alert("closed"),
+          "aria-label": "Click this button will close this notification",
+        },
+      }}
     />,
   );
   const popupRef = useRef<

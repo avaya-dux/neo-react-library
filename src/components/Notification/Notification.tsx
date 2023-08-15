@@ -2,11 +2,14 @@ import clsx from "clsx";
 import log from "loglevel";
 import {
   Dispatch,
-  isValidElement,
   MouseEventHandler,
   SetStateAction,
+  useEffect,
+  useRef,
   useState,
 } from "react";
+
+import { Badge } from "components/Badge";
 
 import {
   ButtonAction,
@@ -14,11 +17,15 @@ import {
   ClosableActionProps,
   CounterAction,
 } from "./Actions";
+
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
 logger.disableAll();
 export { logger as notificationLogger };
+
+import "./notification_shim.css";
+import { IconButton } from "components/IconButton";
 
 /**
  * Notifications are used to communicate with users,
@@ -64,15 +71,41 @@ export { logger as notificationLogger };
  */
 export const Notification = ({
   type,
-  action,
+  actions,
   header,
   description,
   isElevated = false,
+  isInline = true,
+  occurences = 0,
+  locale = "en-US",
   ...rest
 }: NotificationProps) => {
   const icon = "icon" in rest ? rest.icon : null;
   const [closed, setClosed] = useState(false);
-  const internalAction = createAction(action, type, setClosed);
+  const internalActions = createActions(actions, type, setClosed);
+
+  const timestampFormat = Date.now();
+  const timestamp = new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(timestampFormat);
+
+  const notificationRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const descriptionRef = useRef<HTMLDivElement>(null);
+
+  const [width, setWidth] = useState("");
+
+  useEffect(() => {
+    if (notificationRef.current)
+      setWidth(`${notificationRef.current.offsetWidth.toString()}px`);
+  }, [notificationRef]);
+
+  const [isTruncated, setIsTruncated] = useState(true);
+
   return closed ? null : (
     <div
       className={clsx(
@@ -86,15 +119,71 @@ export const Notification = ({
       <div
         role="img"
         className={clsx("neo-notification__icon", icon && `neo-icon-${icon}`)}
-        aria-label={`icon ${icon}`}
+        aria-label={clsx("icon", icon && icon)}
       />
-      <div className="neo-notification__message">
-        {header && <div className="neo-notification__title">{header}</div>}
+      <div className="neo-notification__message" ref={notificationRef}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {!isInline && (
+            <p className="neo-notification__timestamp">{timestamp}</p>
+          )}
+          {!isInline && occurences > 1 && (
+            <Badge
+              data={occurences.toString()}
+              aria-label={`Badge representing ${occurences}`}
+            />
+          )}
+          {!isInline && (
+            <IconButton
+              className={clsx(
+                "neo-notification__button",
+                !isTruncated && "neo-notification__button--pressed",
+              )}
+              variant="tertiary"
+              icon="chevron-down"
+              aria-label="expand/collapse"
+              onClick={() => setIsTruncated(!isTruncated)}
+            ></IconButton>
+          )}
+        </div>
+
+        {header && (
+          <div
+            className={clsx(
+              "neo-notification__title",
+              isTruncated &&
+                "neo-notification__text--truncated neo-notification__title--truncated",
+            )}
+            ref={titleRef}
+            style={isTruncated ? { width } : {}}
+          >
+            {header}
+          </div>
+        )}
         {description && (
-          <div className="neo-notification__description">{description}</div>
+          <div
+            className={clsx(
+              "neo-notification__description",
+              isTruncated &&
+                "neo-notification__text--truncated neo-notification__description--truncated",
+            )}
+            style={isTruncated ? { width } : {}}
+            ref={descriptionRef}
+          >
+            {description}
+          </div>
+        )}
+        {!isInline && (
+          <div className="neo-notification__actions--multiline">
+            {internalActions.counterAction}
+            {internalActions.buttonAction}
+          </div>
         )}
       </div>
-      {internalAction}
+      <div className="neo-notification__actions">
+        {isInline && internalActions.counterAction}
+        {isInline && internalActions.buttonAction}
+        {internalActions.closableAction}
+      </div>
     </div>
   );
 };
@@ -112,29 +201,36 @@ const createClickHandler = (
     }
   };
 };
-export function createAction(
-  action: NotificationProps["action"],
+export function createActions(
+  actions: NotificationProps["actions"],
   type: NotificationProps["type"],
   setClosed: Dispatch<SetStateAction<boolean>>,
 ) {
-  let internalAction = null;
-  if (isValidElement(action)) {
-    internalAction = action;
-  } else if (
-    !(action && typeof action === "object" && action.constructor === Object)
-  ) {
-    const handler = createClickHandler(setClosed);
-    internalAction = <ClosableAction onClick={handler} />;
-  } else if ("count" in action) {
-    internalAction = <CounterAction count={action.count} />;
-  } else if ("buttons" in action) {
-    internalAction = <ButtonAction buttons={action.buttons} type={type} />;
-  } else {
-    const { onClick, ...rest } = action as ClosableActionProps;
-    const handler = createClickHandler(setClosed, onClick);
-    internalAction = <ClosableAction onClick={handler} {...rest} />;
+  let closableAction = null;
+  let counterAction = null;
+  let buttonAction = null;
+
+  if (actions) {
+    if (actions.closable) {
+      const { onClick, ...rest } = actions.closable as ClosableActionProps;
+      const handler = createClickHandler(setClosed, onClick);
+      closableAction = <ClosableAction onClick={handler} {...rest} />;
+    }
+
+    if (actions.counter) {
+      const countToPass = actions.counter.count;
+
+      counterAction = <CounterAction count={countToPass} />;
+    }
+
+    if (actions.actionButtons) {
+      const buttonsToPass = actions.actionButtons.buttons;
+
+      buttonAction = <ButtonAction buttons={buttonsToPass} type={type} />;
+    }
   }
-  return internalAction;
+
+  return { counterAction, buttonAction, closableAction };
 }
 
 Notification.displayName = "Notification";

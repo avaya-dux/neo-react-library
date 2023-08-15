@@ -57,9 +57,11 @@ export const AlertCloseAlert: Story = {
     type: "alert",
     header: "Alert",
     description: "This is an alert.",
-    action: {
-      onClick: () => alert("closed"),
-      "aria-label": "Click this button will close this notification",
+    actions: {
+      closable: {
+        onClick: () => alert("closed"),
+        "aria-label": "Click this button will close this notification",
+      },
     },
   },
 };
@@ -67,42 +69,65 @@ export const AlertCloseAlert: Story = {
 export const AlertCounter: Story = {
   args: {
     type: "alert",
-    header: "Alert",
-    description: "This is an alert.",
+    header:
+      "Placeholder text for the main header. By default the header text will be two lines of copy before it is truncated. Placeholder text for the main header. By default the header text will be two lines of copy before it is truncated.",
+    description:
+      "Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated.",
     isElevated: false,
-    action: { count: "00:00" },
-  },
-};
-
-export const AlertButtons: Story = {
-  args: {
-    type: "alert",
-    header: "Alert",
-    description: "This is an alert.",
-    isElevated: false,
-    action: {
-      buttons: [
-        { children: "Edit", onClick: () => alert("Edit Clicked") },
-        { children: "Alert", onClick: () => alert("Alert Clicked") },
-      ],
+    isInline: false,
+    occurences: 4,
+    actions: {
+      closable: {
+        onClick: () => alert("closed"),
+        "aria-label": "Click this button will close this notification",
+      },
+      actionButtons: {
+        buttons: [
+          { children: "Edit", onClick: () => alert("Edit Clicked") },
+          { children: "Alert", onClick: () => alert("Alert Clicked") },
+        ],
+      },
+      counter: { count: "00:00" },
     },
   },
 };
 
-export const AlertCustomAction: Story = {
+export const AlertButtonsCounter: Story = {
   args: {
     type: "alert",
     header: "Alert",
     description: "This is an alert.",
-    isElevated: true,
-    action: (
-      <div>
-        <h4>List</h4>
-        <ul>
-          <li>one</li>
-          <li>two</li>
-        </ul>
-      </div>
-    ),
+    isElevated: false,
+    actions: {
+      actionButtons: {
+        buttons: [
+          { children: "Edit", onClick: () => alert("Edit Clicked") },
+          { children: "Alert", onClick: () => alert("Alert Clicked") },
+        ],
+      },
+      counter: { count: "00:00" },
+    },
+  },
+};
+
+export const AlertButtonsCounterClosable: Story = {
+  args: {
+    type: "alert",
+    header: "Alert",
+    description: "This is an alert.",
+    isElevated: false,
+    actions: {
+      closable: {
+        onClick: () => alert("closed"),
+        "aria-label": "Click this button will close this notification",
+      },
+      actionButtons: {
+        buttons: [
+          { children: "Edit", onClick: () => alert("Edit Clicked") },
+          { children: "Alert", onClick: () => alert("Alert Clicked") },
+        ],
+      },
+      counter: { count: "00:00" },
+    },
   },
 };

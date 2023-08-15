@@ -8,10 +8,12 @@ export const ClosableAction = ({
   ...rest
 }: ClosableActionProps) => {
   return (
-    <button
-      aria-label={ariaLabel}
-      className={clsx("neo-icon-end", className)}
-      {...rest}
-    ></button>
+    <div className="neo-notification__close">
+      <button
+        aria-label={ariaLabel}
+        className={clsx("neo-icon-end", className)}
+        {...rest}
+      ></button>
+    </div>
   );
 };
