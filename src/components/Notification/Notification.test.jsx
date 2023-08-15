@@ -28,6 +28,11 @@
 // const { Event, EventCloseAlert, EventButtons, EventCounter } =
 //   composeStories(EventStories);
 
+describe("temp tests", () => {
+  it("will be replaced in next PR", () => {
+    console.log("This passed");
+  });
+});
 // describe("Notification", () => {
 //   const user = userEvent.setup();
 
