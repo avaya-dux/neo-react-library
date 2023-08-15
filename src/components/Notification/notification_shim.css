@@ -81,6 +81,10 @@
   border-color: var(--neo-base-1000);
 }
 
+.neo-notification__button--pressed {
+  transform: rotate(180deg);
+}
+
 .neo-notification__button:hover {
   color: var(--neo-base-1000);
   border-color: var(--neo-base-1000);
