@@ -195,3 +195,8 @@
 .neo-notification__actions--multiline > :first-child:not(:last-child) {
   margin-bottom: 1rem;
 }
+
+.neo-notification__message__wrapper {
+  display: flex;
+  align-items: center;
+}

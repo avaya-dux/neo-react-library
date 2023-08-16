@@ -1,23 +1,10 @@
 import clsx from "clsx";
 import log from "loglevel";
-import {
-  Dispatch,
-  MouseEventHandler,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, MouseEventHandler, SetStateAction, useEffect, useRef, useState } from "react";
 
 import { Badge } from "components/Badge";
 
-import {
-  ButtonAction,
-  ClosableAction,
-  ClosableActionProps,
-  CounterAction,
-} from "./Actions";
-
+import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
@@ -122,7 +109,7 @@ export const Notification = ({
         aria-label={clsx("icon", icon && icon)}
       />
       <div className="neo-notification__message" ref={notificationRef}>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div className="neo-notification__message__wrapper">
           {!isInline && (
             <p className="neo-notification__timestamp">{timestamp}</p>
           )}
