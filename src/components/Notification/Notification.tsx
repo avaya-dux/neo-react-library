@@ -77,7 +77,7 @@ export const Notification = ({
   isElevated = false,
   isInline = true,
   occurences = 0,
-  locale = "en-US",
+  locale = navigator?.languages[0] ?? "en-US",
   ...rest
 }: NotificationProps) => {
   const icon = "icon" in rest ? rest.icon : null;
