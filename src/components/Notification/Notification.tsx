@@ -4,7 +4,12 @@ import { Dispatch, MouseEventHandler, SetStateAction, useEffect, useRef, useStat
 
 import { Badge } from "components/Badge";
 
-import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
+import {
+  ButtonAction,
+  ClosableAction,
+  ClosableActionProps,
+  CounterAction,
+} from "./Actions";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
@@ -65,21 +70,21 @@ export const Notification = ({
   isElevated = false,
   isInline = true,
   occurences = 0,
-  locale = "en-US",
+  locale = navigator?.languages[0] ?? "en-US",
   ...rest
 }: NotificationProps) => {
   const icon = "icon" in rest ? rest.icon : null;
   const [closed, setClosed] = useState(false);
   const internalActions = createActions(actions, type, setClosed);
 
-  const timestampFormat = Date.now();
+  const currentTime = Date.now();
   const timestamp = new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
-  }).format(timestampFormat);
+  }).format(currentTime);
 
   const notificationRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -135,9 +140,11 @@ export const Notification = ({
       />
       <div className="neo-notification__message" ref={notificationRef}>
         <div className="neo-notification__message__wrapper">
-          <p className="neo-notification__timestamp">{timestamp}</p>
+          <p className="neo-notification__timestamp neo-body-small neo-semibold">
+            {timestamp}
+          </p>
 
-          {!isInline && occurences > 1 && (
+          {occurences > 1 && (
             <Badge
               data={occurences.toString()}
               aria-label={`Badge representing ${occurences}`}
