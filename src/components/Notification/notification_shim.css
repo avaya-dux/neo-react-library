@@ -157,8 +157,7 @@
 }
 
 .neo-notification__timestamp {
-  color: var(--neo-color-base-500);
-  font-size: 0.75rem;
+  color: var(--neo-color-base-600);
   margin-right: 0.5rem;
 }
 
