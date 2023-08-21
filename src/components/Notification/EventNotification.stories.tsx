@@ -3,11 +3,7 @@ import ReactStopwatch from "react-stopwatch";
 
 import { IconNames } from "utils";
 
-import {
-  EventNotificationProps,
-  notificationLogger as logger,
-  Notification,
-} from ".";
+import { EventNotificationProps, notificationLogger as logger, Notification } from ".";
 
 type WithoutType = Omit<EventNotificationProps, "type">;
 const EventTemplate: Story<WithoutType> = ({ ...rest }: WithoutType) => {
@@ -21,6 +17,12 @@ Event.args = {
   header: "Event",
   description: "This is an event.",
   isElevated: true,
+  actions: {
+    closable: {
+      onClick: () => alert("closed"),
+      "aria-label": "Click this button will close this notification",
+    },
+  },
 };
 
 export const EventCloseAlert = EventTemplate.bind({});

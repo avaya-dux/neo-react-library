@@ -28,6 +28,7 @@ export const AlertShow = () => {
         <Notification
           type="alert"
           header="Alert"
+          isInline={false}
           description="This is an alert."
           actions={{ counter: { count: "00:00" } }}
         />

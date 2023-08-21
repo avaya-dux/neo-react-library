@@ -1,23 +1,10 @@
 import clsx from "clsx";
 import log from "loglevel";
-import {
-  Dispatch,
-  MouseEventHandler,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, MouseEventHandler, SetStateAction, useEffect, useRef, useState } from "react";
 
 import { Badge } from "components/Badge";
 
-import {
-  ButtonAction,
-  ClosableAction,
-  ClosableActionProps,
-  CounterAction,
-} from "./Actions";
-
+import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
@@ -26,6 +13,7 @@ export { logger as notificationLogger };
 
 import "./notification_shim.css";
 import { IconButton } from "components/IconButton";
+import ReactDOM from "react-dom";
 
 /**
  * Notifications are used to communicate with users,
@@ -99,14 +87,38 @@ export const Notification = ({
 
   const [width, setWidth] = useState("");
 
-  useEffect(() => {
+  const [isTruncated, setIsTruncated] = useState(true);
+  const [needsTruncation, setNeedsTruncation] = useState(false);
+
+  function handleResize() {
+    if (
+      (descriptionRef.current &&
+        descriptionRef.current.offsetWidth <
+          descriptionRef.current.scrollWidth) ||
+      (titleRef.current &&
+        titleRef.current.offsetWidth < titleRef.current.scrollWidth)
+    ) {
+      setNeedsTruncation(true);
+    } else {
+      setNeedsTruncation(false);
+    }
+
     if (notificationRef.current)
       setWidth(`${notificationRef.current.offsetWidth.toString()}px`);
-  }, [notificationRef]);
+  }
 
-  const [isTruncated, setIsTruncated] = useState(true);
+  useEffect(() => {
+    handleResize();
 
-  return closed ? null : (
+    if (typeof window != "undefined") {
+      window.addEventListener("resize", () => handleResize());
+    }
+    return () => {
+      window.removeEventListener("resize", () => handleResize());
+    };
+  }, []);
+
+  const notification = closed ? null : (
     <div
       className={clsx(
         "neo-notification",
@@ -122,17 +134,16 @@ export const Notification = ({
         aria-label={clsx("icon", icon && icon)}
       />
       <div className="neo-notification__message" ref={notificationRef}>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          {!isInline && (
-            <p className="neo-notification__timestamp">{timestamp}</p>
-          )}
+        <div className="neo-notification__message__wrapper">
+          <p className="neo-notification__timestamp">{timestamp}</p>
+
           {!isInline && occurences > 1 && (
             <Badge
               data={occurences.toString()}
               aria-label={`Badge representing ${occurences}`}
             />
           )}
-          {!isInline && (
+          {!isInline && needsTruncation && (
             <IconButton
               className={clsx(
                 "neo-notification__button",
@@ -186,6 +197,10 @@ export const Notification = ({
       </div>
     </div>
   );
+
+  return isInline
+    ? notification
+    : ReactDOM.createPortal(notification, document.body);
 };
 
 const createClickHandler = (
