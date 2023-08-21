@@ -83,14 +83,14 @@ export const Notification = ({
   const [closed, setClosed] = useState(false);
   const internalActions = createActions(actions, type, setClosed);
 
-  const timestampFormat = Date.now();
+  const currentTime = Date.now();
   const timestamp = new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
-  }).format(timestampFormat);
+  }).format(currentTime);
 
   const notificationRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
