@@ -29,7 +29,7 @@ export const AlertShow = () => {
           type="alert"
           header="Alert"
           description="This is an alert."
-          action={{ onClick: () => setOpen(false) }}
+          actions={{ counter: { count: "00:00" } }}
         />
       )}
     </div>
@@ -59,7 +59,12 @@ export const AlertShowContainer = () => {
           type="alert"
           header="Alert"
           description="This is an alert."
-          action={{ onClick: () => setOpen(false) }}
+          actions={{
+            closable: {
+              onClick: () => alert("closed"),
+              "aria-label": "Click this button will close this notification",
+            },
+          }}
         />
       )}
       <div>

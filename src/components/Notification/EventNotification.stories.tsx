@@ -29,15 +29,21 @@ EventCloseAlert.args = {
   header: "Event",
   description: "This is an event.",
   isElevated: true,
-  action: { onClick: () => alert("closed") },
+  actions: {
+    closable: {
+      onClick: () => alert("closed"),
+      "aria-label": "Click this button will close this notification",
+    },
+  },
 };
+
 export const EventCounter = EventTemplate.bind({});
 EventCounter.args = {
   icon: "copy",
   header: "Event",
   description: "This is an event.",
   isElevated: true,
-  action: { count: "00:00" },
+  actions: { counter: { count: "00:00" } },
 };
 
 export const EventCounterUp = () => {
@@ -57,7 +63,7 @@ export const EventCounterUp = () => {
             icon="copy"
             header="Event"
             description="This is an event."
-            action={{ count: `${formatted.substring(3)}` }}
+            actions={{ counter: { count: `${formatted.substring(3)}` } }}
           />
         );
       }}
@@ -71,29 +77,14 @@ EventButtons.args = {
   header: "Event",
   description: "This is an event.",
   isElevated: true,
-  action: {
-    buttons: [
-      { children: "Edit", onClick: () => alert("Edit Clicked") },
-      { children: "Alert", onClick: () => alert("Alert Clicked") },
-    ],
+  actions: {
+    actionButtons: {
+      buttons: [
+        { children: "Edit", onClick: () => alert("Edit Clicked") },
+        { children: "Alert", onClick: () => alert("Alert Clicked") },
+      ],
+    },
   },
-};
-
-const EventCustomAction = EventTemplate.bind({});
-EventCustomAction.args = {
-  icon: "copy",
-  header: "Event",
-  description: "This is an event.",
-  isElevated: true,
-  action: (
-    <div>
-      <h4>List</h4>
-      <ul>
-        <li>one</li>
-        <li>two</li>
-      </ul>
-    </div>
-  ),
 };
 
 export default {
