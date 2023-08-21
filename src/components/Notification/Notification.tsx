@@ -1,10 +1,22 @@
 import clsx from "clsx";
 import log from "loglevel";
-import { Dispatch, MouseEventHandler, SetStateAction, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  MouseEventHandler,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { Badge } from "components/Badge";
 
-import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
+import {
+  ButtonAction,
+  ClosableAction,
+  ClosableActionProps,
+  CounterAction,
+} from "./Actions";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
@@ -110,10 +122,11 @@ export const Notification = ({
       />
       <div className="neo-notification__message" ref={notificationRef}>
         <div className="neo-notification__message__wrapper">
-          {!isInline && (
-            <p className="neo-notification__timestamp neo-body-small neo-semibold">{timestamp}</p>
-          )}
-          {!isInline && occurences > 1 && (
+          <p className="neo-notification__timestamp neo-body-small neo-semibold">
+            {timestamp}
+          </p>
+
+          {occurences > 1 && (
             <Badge
               data={occurences.toString()}
               aria-label={`Badge representing ${occurences}`}
