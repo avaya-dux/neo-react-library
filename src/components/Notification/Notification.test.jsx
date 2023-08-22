@@ -1,12 +1,23 @@
 import { composeStories } from "@storybook/testing-react";
-import { fireEvent, getByRole, getByText, render, screen } from "@testing-library/react";
+import {
+  fireEvent,
+  getByRole,
+  getByText,
+  render,
+  screen,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import { popupManagerLogger } from "components/PopupManager";
 
-import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
+import {
+  ButtonAction,
+  ClosableAction,
+  ClosableActionProps,
+  CounterAction,
+} from "./Actions";
 import * as EventStories from "./EventNotification.stories";
 import * as NonEventStories from "./NonEventNotification.stories";
 import { createActions, notificationLogger } from "./Notification";

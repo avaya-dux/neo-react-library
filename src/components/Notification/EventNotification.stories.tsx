@@ -3,7 +3,11 @@ import ReactStopwatch from "react-stopwatch";
 
 import { IconNames } from "utils";
 
-import { EventNotificationProps, notificationLogger as logger, Notification } from ".";
+import {
+  EventNotificationProps,
+  notificationLogger as logger,
+  Notification,
+} from ".";
 
 type WithoutType = Omit<EventNotificationProps, "type">;
 const EventTemplate: Story<WithoutType> = ({ ...rest }: WithoutType) => {

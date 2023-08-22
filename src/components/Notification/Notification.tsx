@@ -1,10 +1,23 @@
 import clsx from "clsx";
 import log from "loglevel";
-import { Dispatch, MouseEventHandler, SetStateAction, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Dispatch,
+  MouseEventHandler,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { Badge } from "components/Badge";
 
-import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
+import {
+  ButtonAction,
+  ClosableAction,
+  ClosableActionProps,
+  CounterAction,
+} from "./Actions";
 import { defaultTranslations } from "./Helpers";
 import { NotificationProps } from "./NotificationTypes";
 
@@ -72,7 +85,12 @@ export const Notification = ({
 }: NotificationProps) => {
   const icon = "icon" in rest ? rest.icon : null;
   const [closed, setClosed] = useState(false);
-  const internalActions = createActions(actions, type, setClosed, translations?.closeAction);
+  const internalActions = createActions(
+    actions,
+    type,
+    setClosed,
+    translations?.closeAction,
+  );
 
   const currentTime = Date.now();
   const timestamp = new Intl.DateTimeFormat(locale, {
@@ -242,7 +260,13 @@ export function createActions(
     if (actions.closable) {
       const { onClick, ...rest } = actions.closable as ClosableActionProps;
       const handler = createClickHandler(setClosed, onClick);
-      closableAction = <ClosableAction onClick={handler} aria-label={closeButtonLabel} {...rest} />;
+      closableAction = (
+        <ClosableAction
+          onClick={handler}
+          aria-label={closeButtonLabel}
+          {...rest}
+        />
+      );
     }
 
     if (actions.counter) {

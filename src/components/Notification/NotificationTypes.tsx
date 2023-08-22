@@ -23,7 +23,7 @@ type CommonProps = {
   isInline?: boolean;
   occurences?: number;
   locale?: string;
-  translations?: INotificationTranslations,
+  translations?: INotificationTranslations;
 } & AtLeastOneProps &
   ActionType;
 
