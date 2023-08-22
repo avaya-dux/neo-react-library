@@ -245,7 +245,6 @@ const createClickHandler = (
     }
   };
 };
-
 export function createActions(
   actions: NotificationProps["actions"],
   type: NotificationProps["type"],
