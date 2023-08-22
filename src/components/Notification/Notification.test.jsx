@@ -421,8 +421,8 @@ describe("Notification", () => {
         expect(container).toBeDefined();
         const buttons = screen.getAllByRole("button");
         expect(buttons.length).toEqual(2);
-        expect(buttons[0]).toHaveClass("neo-btn-secondary--default");
-        expect(buttons[1]).toHaveClass("neo-btn-secondary--default");
+        expect(buttons[0]).toHaveClass("neo-btn-secondary--event");
+        expect(buttons[1]).toHaveClass("neo-btn-secondary--event");
       });
     });
   });

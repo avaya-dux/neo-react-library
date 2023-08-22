@@ -1,15 +1,11 @@
 import clsx from "clsx";
 import log from "loglevel";
-import { Dispatch, MouseEventHandler, SetStateAction, useEffect, useRef, useState } from "react";
+import { Dispatch, MouseEventHandler, SetStateAction, useEffect, useMemo, useRef, useState } from "react";
 
 import { Badge } from "components/Badge";
 
-import {
-  ButtonAction,
-  ClosableAction,
-  ClosableActionProps,
-  CounterAction,
-} from "./Actions";
+import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
+import { defaultTranslations } from "./Helpers";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
@@ -71,11 +67,12 @@ export const Notification = ({
   isInline = true,
   occurences = 0,
   locale = navigator?.languages[0] ?? "en-US",
+  translations,
   ...rest
 }: NotificationProps) => {
   const icon = "icon" in rest ? rest.icon : null;
   const [closed, setClosed] = useState(false);
-  const internalActions = createActions(actions, type, setClosed);
+  const internalActions = createActions(actions, type, setClosed, translations?.closeAction);
 
   const currentTime = Date.now();
   const timestamp = new Intl.DateTimeFormat(locale, {
@@ -94,6 +91,13 @@ export const Notification = ({
 
   const [isTruncated, setIsTruncated] = useState(true);
   const [needsTruncation, setNeedsTruncation] = useState(false);
+
+  const notificationTranslations = useMemo(() => {
+    return {
+      ...defaultTranslations,
+      ...translations,
+    };
+  }, [translations]);
 
   function handleResize() {
     if (
@@ -136,7 +140,7 @@ export const Notification = ({
       <div
         role="img"
         className={clsx("neo-notification__icon", icon && `neo-icon-${icon}`)}
-        aria-label={clsx("icon", icon && icon)}
+        aria-label={clsx(notificationTranslations.icon, icon && icon)}
       />
       <div className="neo-notification__message" ref={notificationRef}>
         <div className="neo-notification__message__wrapper">
@@ -147,7 +151,7 @@ export const Notification = ({
           {occurences > 1 && (
             <Badge
               data={occurences.toString()}
-              aria-label={`Badge representing ${occurences}`}
+              aria-label={clsx(notificationTranslations.badge, occurences)}
             />
           )}
           {!isInline && needsTruncation && (
@@ -158,7 +162,7 @@ export const Notification = ({
               )}
               variant="tertiary"
               icon="chevron-down"
-              aria-label="expand/collapse"
+              aria-label={notificationTranslations.textTruncation}
               onClick={() => setIsTruncated(!isTruncated)}
             ></IconButton>
           )}
@@ -223,10 +227,12 @@ const createClickHandler = (
     }
   };
 };
+
 export function createActions(
   actions: NotificationProps["actions"],
   type: NotificationProps["type"],
   setClosed: Dispatch<SetStateAction<boolean>>,
+  closeButtonLabel?: string,
 ) {
   let closableAction = null;
   let counterAction = null;
@@ -236,7 +242,7 @@ export function createActions(
     if (actions.closable) {
       const { onClick, ...rest } = actions.closable as ClosableActionProps;
       const handler = createClickHandler(setClosed, onClick);
-      closableAction = <ClosableAction onClick={handler} {...rest} />;
+      closableAction = <ClosableAction onClick={handler} aria-label={closeButtonLabel} {...rest} />;
     }
 
     if (actions.counter) {
