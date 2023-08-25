@@ -4,7 +4,7 @@ import { SecondaryButtonProps } from "./ButtonActionTypes";
 
 export const SecondaryButton = ({
   children,
-  notificationType,
+  notificationType = "info",
   ...rest
 }: SecondaryButtonProps) => {
   return (

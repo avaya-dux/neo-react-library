@@ -177,7 +177,7 @@ export class PopupManager extends Component<Props, State> {
               const notificaiton =
                 popupOption as unknown as NotificationOptions;
               return (
-                <div key={`${notificaiton.id}-${index}`}>
+                <div key={`${notificaiton.id}-${index}`} style={{width: '100%'}}>
                   {notificaiton.node}
                 </div>
               );

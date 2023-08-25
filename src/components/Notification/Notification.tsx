@@ -74,10 +74,10 @@ import ReactDOM from "react-dom";
 export const Notification = ({
   type,
   actions,
-  header,
-  description,
+  header = "",
+  description = "",
   isElevated = false,
-  isInline = true,
+  isInline = false,
   occurences = 0,
   locale = navigator?.languages[0] ?? "en-US",
   translations,
@@ -105,11 +105,6 @@ export const Notification = ({
   const titleRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
 
-  const [width, setWidth] = useState("");
-
-  const [isTruncated, setIsTruncated] = useState(true);
-  const [needsTruncation, setNeedsTruncation] = useState(false);
-
   const notificationTranslations = useMemo(() => {
     return {
       ...defaultTranslations,
@@ -117,35 +112,67 @@ export const Notification = ({
     };
   }, [translations]);
 
-  function handleResize() {
+  const [width, setWidth] = useState("");
+
+  const [isTruncated, setIsTruncated] = useState(true);
+  const [needsTruncation, setNeedsTruncation] = useState(false);
+
+  const headerSize = getTextSize(header);
+
+  const descriptionSize = getTextSize(description);
+
+  const handleTextTruncation = () => {
+    let headerOffsetWidth = 0;
+    let descriptionOffsetWidth = 0;
+
+    let descriptionMaxLineWidth = 0;
+    let headerMaxLineWidth = 0;
+
+    let leftoverheaderText = 0;
+    let leftoverDescriptionText = 0;
+
+    if (descriptionRef && descriptionRef.current) {
+      descriptionOffsetWidth = descriptionRef.current.offsetWidth;
+
+      descriptionMaxLineWidth = descriptionOffsetWidth / 2;
+
+      leftoverDescriptionText = descriptionSize - descriptionOffsetWidth;
+    }
+
+    if (titleRef && titleRef.current) {
+      headerOffsetWidth = titleRef.current.offsetWidth;
+
+      headerMaxLineWidth = headerOffsetWidth / 2;
+
+      leftoverheaderText = headerSize - headerOffsetWidth;
+    }
+
     if (
-      (descriptionRef.current &&
-        descriptionRef.current.offsetWidth <
-          descriptionRef.current.scrollWidth) ||
-      (titleRef.current &&
-        titleRef.current.offsetWidth < titleRef.current.scrollWidth)
+      leftoverheaderText > headerMaxLineWidth ||
+      leftoverDescriptionText > descriptionMaxLineWidth
     ) {
       setNeedsTruncation(true);
     } else {
       setNeedsTruncation(false);
     }
 
-    if (notificationRef.current)
+    if (notificationRef.current) {
       setWidth(`${notificationRef.current.offsetWidth.toString()}px`);
+    }
   }
 
   useEffect(() => {
-    handleResize();
+    handleTextTruncation();
 
     if (typeof window != "undefined") {
-      window.addEventListener("resize", () => handleResize());
+      window.addEventListener("resize", () => handleTextTruncation());
     }
     return () => {
-      window.removeEventListener("resize", () => handleResize());
+      window.removeEventListener("resize", () => handleTextTruncation());
     };
   }, []);
 
-  const notification = closed ? null : (
+  const notification = (
     <div
       className={clsx(
         "neo-notification",
@@ -227,9 +254,7 @@ export const Notification = ({
     </div>
   );
 
-  return isInline
-    ? notification
-    : ReactDOM.createPortal(notification, document.body);
+  return notification;
 };
 
 const createClickHandler = (
@@ -282,6 +307,20 @@ export function createActions(
   }
 
   return { counterAction, buttonAction, closableAction };
+}
+
+function getTextSize(text: string) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  let textWidth = 0;
+
+  if (context) {
+    context.font = "600 14px sans-serif";
+    textWidth = context.measureText(text).width;
+  }
+
+  return textWidth;
 }
 
 Notification.displayName = "Notification";

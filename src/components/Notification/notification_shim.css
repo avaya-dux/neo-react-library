@@ -183,6 +183,7 @@ div.neo-notification__title {
   line-height: 20px;
   font-weight: 600;
   color: var(--neo-color-base-900);
+  word-break: break-all;
 }
 
 .neo-notification__title--truncated {
@@ -193,12 +194,14 @@ div.neo-notification__title {
 }
 
 div.neo-notification__description {
-  white-space: nowrap;
   color: var(--neo-color-base-900);
 }
 
 .neo-notification__description--truncated {
-  white-space: nowrap;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .neo-notification__actions--multiline > :first-child {

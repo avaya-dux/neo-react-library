@@ -1,11 +1,7 @@
 import { Meta, Story } from "@storybook/react";
 import { useEffect, useRef, useState } from "react";
 
-import {
-  EventNotificationProps,
-  notificationLogger as logger,
-  Notification,
-} from "components/Notification";
+import { EventNotificationProps, notificationLogger as logger, Notification } from "components/Notification";
 import { PopupId, PopupManager, PopupPosition } from "components/PopupManager";
 
 logger.disableAll();
@@ -23,6 +19,7 @@ export const PopCounterEvent = () => {
       type="event"
       icon="copy"
       header="Event"
+      isInline={false}
       description="This is an event."
       actions={{ counter: { count: "00:00" } }}
     />,
@@ -101,8 +98,11 @@ export const PopClosableEvent = () => {
     <Notification
       type="event"
       icon="copy"
-      header="Event"
-      description="This is an event."
+      isInline={false}
+      header =
+      "Placeholder text for the main header. By default the header text will be two lines of copy before it is truncated. Placeholder text for the main header. By default the header text will be two lines of copy before it is truncated."
+    description =
+      "Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated."
       actions={{
         closable: {
           onClick: () => alert("closed"),
