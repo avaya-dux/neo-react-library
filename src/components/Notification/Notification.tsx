@@ -123,7 +123,7 @@ export const Notification = ({
 
     const descriptionSize = getTextSize(description);
 
-    handleTextTruncation(
+    handleNotificationTextTruncation(
       notificationRef,
       descriptionRef,
       headerRef,
@@ -135,7 +135,7 @@ export const Notification = ({
 
     if (typeof window != "undefined") {
       window.addEventListener("resize", () =>
-        handleTextTruncation(
+        handleNotificationTextTruncation(
           notificationRef,
           descriptionRef,
           headerRef,
@@ -148,7 +148,7 @@ export const Notification = ({
     }
     return () => {
       window.removeEventListener("resize", () =>
-        handleTextTruncation(
+        handleNotificationTextTruncation(
           notificationRef,
           descriptionRef,
           headerRef,
@@ -314,7 +314,7 @@ function getTextSize(text: string) {
   return textWidth;
 }
 
-const handleTextTruncation = (
+function handleNotificationTextTruncation(
   notificationRef: React.RefObject<HTMLDivElement>,
   descriptionRef: React.RefObject<HTMLDivElement>,
   headerRef: React.RefObject<HTMLDivElement>,
@@ -322,7 +322,7 @@ const handleTextTruncation = (
   headerSize: number,
   setNeedsTruncation: Dispatch<SetStateAction<boolean>>,
   setWidth: Dispatch<SetStateAction<string>>,
-) => {
+) {
   let headerOffsetWidth = 0;
   let descriptionOffsetWidth = 0;
 
@@ -341,10 +341,6 @@ const handleTextTruncation = (
     leftoverHeaderText = headerSize - headerOffsetWidth;
   }
 
-  console.log(headerSize);
-  console.log(headerOffsetWidth);
-  console.log(leftoverHeaderText);
-
   if (
     leftoverHeaderText > headerOffsetWidth ||
     leftoverDescriptionText > descriptionOffsetWidth
@@ -357,6 +353,6 @@ const handleTextTruncation = (
   if (notificationRef.current) {
     setWidth(`${notificationRef.current.offsetWidth.toString()}px`);
   }
-};
+}
 
 Notification.displayName = "Notification";
