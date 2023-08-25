@@ -3,7 +3,12 @@ import { createRef, useCallback, useEffect, useState } from "react";
 import * as ReactDOMClient from "react-dom/client";
 
 import { PopupManager } from "./PopupManager";
-import { NotificationOptions, PopupId, PopupPosition, ToastOptions } from "./PopupTypes";
+import {
+  NotificationOptions,
+  PopupId,
+  PopupPosition,
+  ToastOptions,
+} from "./PopupTypes";
 
 const logger = log.getLogger("popup-hook-logger");
 logger.disableAll();

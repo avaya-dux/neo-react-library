@@ -22,6 +22,7 @@ export const Info: Story = {
     header: "Info",
     description: "This is some info.",
     isElevated: false,
+    isInline: true,
   },
 };
 
@@ -31,6 +32,7 @@ export const Success: Story = {
     header: "Success",
     description: "You are successful.",
     isElevated: true,
+    isInline: true,
   },
 };
 
@@ -40,6 +42,7 @@ export const Warning: Story = {
     header: "Warning",
     description: "This is a warning.",
     isElevated: true,
+    isInline: true,
   },
 };
 
@@ -49,6 +52,7 @@ export const Alert: Story = {
     header: "Alert",
     description: "This is an alert.",
     isElevated: false,
+    isInline: true,
   },
 };
 
@@ -57,6 +61,7 @@ export const AlertCloseAlert: Story = {
     type: "alert",
     header: "Alert",
     description: "This is an alert.",
+    isInline: true,
     actions: {
       closable: {
         onClick: () => alert("closed"),
@@ -74,7 +79,6 @@ export const AlertCounter: Story = {
     description:
       "Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated.",
     isElevated: false,
-    isInline: false,
     occurences: 4,
     actions: {
       closable: {

@@ -170,7 +170,8 @@
 .neo-notification__message .neo-badge {
   margin-left: 0.25rem;
   margin-right: 1rem;
-  top: 2px;
+  top: 12px;
+  left: 4px;
 }
 
 .neo-notification__text--truncated {

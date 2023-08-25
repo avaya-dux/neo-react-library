@@ -21,6 +21,7 @@ Event.args = {
   header: "Event",
   description: "This is an event.",
   isElevated: true,
+  isInline: true,
   actions: {
     closable: {
       onClick: () => alert("closed"),

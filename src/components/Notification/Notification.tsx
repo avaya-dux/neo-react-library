@@ -12,6 +12,8 @@ import {
 
 import { Badge } from "components/Badge";
 
+import { Tooltip } from "components/Tooltip";
+
 import {
   ButtonAction,
   ClosableAction,
@@ -27,7 +29,6 @@ export { logger as notificationLogger };
 
 import "./notification_shim.css";
 import { IconButton } from "components/IconButton";
-import ReactDOM from "react-dom";
 
 /**
  * Notifications are used to communicate with users,
@@ -102,7 +103,7 @@ export const Notification = ({
   }).format(currentTime);
 
   const notificationRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
 
   const notificationTranslations = useMemo(() => {
@@ -117,62 +118,50 @@ export const Notification = ({
   const [isTruncated, setIsTruncated] = useState(true);
   const [needsTruncation, setNeedsTruncation] = useState(false);
 
-  const headerSize = getTextSize(header);
-
-  const descriptionSize = getTextSize(description);
-
-  const handleTextTruncation = () => {
-    let headerOffsetWidth = 0;
-    let descriptionOffsetWidth = 0;
-
-    let descriptionMaxLineWidth = 0;
-    let headerMaxLineWidth = 0;
-
-    let leftoverheaderText = 0;
-    let leftoverDescriptionText = 0;
-
-    if (descriptionRef && descriptionRef.current) {
-      descriptionOffsetWidth = descriptionRef.current.offsetWidth;
-
-      descriptionMaxLineWidth = descriptionOffsetWidth / 2;
-
-      leftoverDescriptionText = descriptionSize - descriptionOffsetWidth;
-    }
-
-    if (titleRef && titleRef.current) {
-      headerOffsetWidth = titleRef.current.offsetWidth;
-
-      headerMaxLineWidth = headerOffsetWidth / 2;
-
-      leftoverheaderText = headerSize - headerOffsetWidth;
-    }
-
-    if (
-      leftoverheaderText > headerMaxLineWidth ||
-      leftoverDescriptionText > descriptionMaxLineWidth
-    ) {
-      setNeedsTruncation(true);
-    } else {
-      setNeedsTruncation(false);
-    }
-
-    if (notificationRef.current) {
-      setWidth(`${notificationRef.current.offsetWidth.toString()}px`);
-    }
-  }
-
   useEffect(() => {
-    handleTextTruncation();
+    const headerSize = getTextSize(header);
+
+    const descriptionSize = getTextSize(description);
+
+    handleTextTruncation(
+      notificationRef,
+      descriptionRef,
+      headerRef,
+      descriptionSize,
+      headerSize,
+      setNeedsTruncation,
+      setWidth,
+    );
 
     if (typeof window != "undefined") {
-      window.addEventListener("resize", () => handleTextTruncation());
+      window.addEventListener("resize", () =>
+        handleTextTruncation(
+          notificationRef,
+          descriptionRef,
+          headerRef,
+          descriptionSize,
+          headerSize,
+          setNeedsTruncation,
+          setWidth,
+        ),
+      );
     }
     return () => {
-      window.removeEventListener("resize", () => handleTextTruncation());
+      window.removeEventListener("resize", () =>
+        handleTextTruncation(
+          notificationRef,
+          descriptionRef,
+          headerRef,
+          descriptionSize,
+          headerSize,
+          setNeedsTruncation,
+          setWidth,
+        ),
+      );
     };
-  }, []);
+  }, [header, description]);
 
-  const notification = (
+  const notification = closed ? null : (
     <div
       className={clsx(
         "neo-notification",
@@ -194,10 +183,12 @@ export const Notification = ({
           </p>
 
           {occurences > 1 && (
-            <Badge
-              data={occurences.toString()}
-              aria-label={clsx(notificationTranslations.badge, occurences)}
-            />
+            <Tooltip label={clsx(notificationTranslations.badge, occurences)}>
+              <Badge
+                data={occurences.toString()}
+                aria-label={clsx(notificationTranslations.badge, occurences)}
+              />
+            </Tooltip>
           )}
           {!isInline && needsTruncation && (
             <IconButton
@@ -220,7 +211,7 @@ export const Notification = ({
               isTruncated &&
                 "neo-notification__text--truncated neo-notification__title--truncated",
             )}
-            ref={titleRef}
+            ref={headerRef}
             style={isTruncated ? { width } : {}}
           >
             {header}
@@ -322,5 +313,50 @@ function getTextSize(text: string) {
 
   return textWidth;
 }
+
+const handleTextTruncation = (
+  notificationRef: React.RefObject<HTMLDivElement>,
+  descriptionRef: React.RefObject<HTMLDivElement>,
+  headerRef: React.RefObject<HTMLDivElement>,
+  descriptionSize: number,
+  headerSize: number,
+  setNeedsTruncation: Dispatch<SetStateAction<boolean>>,
+  setWidth: Dispatch<SetStateAction<string>>,
+) => {
+  let headerOffsetWidth = 0;
+  let descriptionOffsetWidth = 0;
+
+  let leftoverHeaderText = 0;
+  let leftoverDescriptionText = 0;
+
+  if (descriptionRef && descriptionRef.current) {
+    descriptionOffsetWidth = descriptionRef.current.offsetWidth;
+
+    leftoverDescriptionText = descriptionSize - descriptionOffsetWidth;
+  }
+
+  if (headerRef && headerRef.current) {
+    headerOffsetWidth = headerRef.current.offsetWidth;
+
+    leftoverHeaderText = headerSize - headerOffsetWidth;
+  }
+
+  console.log(headerSize);
+  console.log(headerOffsetWidth);
+  console.log(leftoverHeaderText);
+
+  if (
+    leftoverHeaderText > headerOffsetWidth ||
+    leftoverDescriptionText > descriptionOffsetWidth
+  ) {
+    setNeedsTruncation(true);
+  } else {
+    setNeedsTruncation(false);
+  }
+
+  if (notificationRef.current) {
+    setWidth(`${notificationRef.current.offsetWidth.toString()}px`);
+  }
+};
 
 Notification.displayName = "Notification";
