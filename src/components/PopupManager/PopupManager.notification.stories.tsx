@@ -39,6 +39,7 @@ export const PopCounterEvent = () => {
           id: "event-counter",
           node: notificationRef.current,
           position: "bottom",
+          width: "30%",
         });
         logger.debug(
           "after notify call: open is ",

@@ -27,7 +27,7 @@ const logger = log.getLogger("notification-logger");
 logger.disableAll();
 export { logger as notificationLogger };
 
-import "./notification_shim.css";
+import "./Notification_shim.css";
 import { IconButton } from "components/IconButton";
 
 /**

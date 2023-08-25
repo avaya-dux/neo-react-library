@@ -26,6 +26,7 @@ export interface ToastOptions extends PopupOptions {
 
 export interface NotificationOptions extends PopupOptions {
   node: ReactElement<NotificationProps>;
+  width?: string;
 }
 export type PopupState = {
   zIndex: number;

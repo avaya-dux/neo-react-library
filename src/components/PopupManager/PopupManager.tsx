@@ -89,7 +89,12 @@ export class PopupManager extends Component<Props, State> {
     PopupManager.counter += 1;
     const id = options.id ?? PopupManager.counter;
     const position = options.position ?? "top";
-    const notification = { id, node: options.node, position };
+    const notification = {
+      id,
+      node: options.node,
+      position,
+      width: options.width,
+    };
     logger.debug(
       `notify: state before update at ${position} is `,
       this.state.positions[position],
@@ -174,14 +179,16 @@ export class PopupManager extends Component<Props, State> {
         >
           {popupOptions.map((popupOption, index) => {
             if ("node" in popupOption) {
-              const notificaiton =
+              const notification =
                 popupOption as unknown as NotificationOptions;
               return (
                 <div
-                  key={`${notificaiton.id}-${index}`}
-                  style={{ width: "100%" }}
+                  key={`${notification.id}-${index}`}
+                  style={{
+                    width: notification.width ? notification.width : "100%",
+                  }}
                 >
-                  {notificaiton.node}
+                  {notification.node}
                 </div>
               );
             }
