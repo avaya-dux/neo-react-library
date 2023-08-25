@@ -119,9 +119,9 @@ export const Notification = ({
   const [needsTruncation, setNeedsTruncation] = useState(false);
 
   useEffect(() => {
-    const headerSize = getTextSize(header);
+    const headerSize = getTextSize(header, true);
 
-    const descriptionSize = getTextSize(description);
+    const descriptionSize = getTextSize(description, false);
 
     handleNotificationTextTruncation(
       notificationRef,
@@ -300,14 +300,14 @@ export function createActions(
   return { counterAction, buttonAction, closableAction };
 }
 
-function getTextSize(text: string) {
+function getTextSize(text: string, isHeader: boolean) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
 
   let textWidth = 0;
 
   if (context) {
-    context.font = "600 14px sans-serif";
+    context.font = `${isHeader ? "600" : "400"} 14px sans-serif`;
     textWidth = context.measureText(text).width;
   }
 
