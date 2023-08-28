@@ -4,6 +4,8 @@ import { ButtonActionProps } from "./Actions/ButtonAction";
 import { ClosableActionProps } from "./Actions/ClosableAction";
 import { CounterActionProps } from "./Actions/CounterAction";
 
+import { INotificationTranslations } from "./Helpers";
+
 type ActionType = {
   actions?: {
     counter?: CounterActionProps;
@@ -21,6 +23,7 @@ type CommonProps = {
   isInline?: boolean;
   occurences?: number;
   locale?: string;
+  translations?: INotificationTranslations;
 } & AtLeastOneProps &
   ActionType;
 

@@ -5,11 +5,14 @@ import {
   MouseEventHandler,
   SetStateAction,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
 
 import { Badge } from "components/Badge";
+
+import { Tooltip } from "components/Tooltip";
 
 import {
   ButtonAction,
@@ -17,6 +20,7 @@ import {
   ClosableActionProps,
   CounterAction,
 } from "./Actions";
+import { defaultTranslations } from "./Helpers";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
@@ -71,17 +75,23 @@ import { IconButton } from "components/IconButton";
 export const Notification = ({
   type,
   actions,
-  header,
-  description,
+  header = "",
+  description = "",
   isElevated = false,
-  isInline = true,
+  isInline = false,
   occurences = 0,
   locale = navigator?.languages[0] ?? "en-US",
+  translations,
   ...rest
 }: NotificationProps) => {
   const icon = "icon" in rest ? rest.icon : null;
   const [closed, setClosed] = useState(false);
-  const internalActions = createActions(actions, type, setClosed);
+  const internalActions = createActions(
+    actions,
+    type,
+    setClosed,
+    translations?.closeAction,
+  );
 
   const currentTime = Date.now();
   const timestamp = new Intl.DateTimeFormat(locale, {
@@ -93,19 +103,65 @@ export const Notification = ({
   }).format(currentTime);
 
   const notificationRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
+
+  const notificationTranslations = useMemo(() => {
+    return {
+      ...defaultTranslations,
+      ...translations,
+    };
+  }, [translations]);
 
   const [width, setWidth] = useState("");
 
-  useEffect(() => {
-    if (notificationRef.current)
-      setWidth(`${notificationRef.current.offsetWidth.toString()}px`);
-  }, [notificationRef]);
-
   const [isTruncated, setIsTruncated] = useState(true);
+  const [needsTruncation, setNeedsTruncation] = useState(false);
 
-  return closed ? null : (
+  useEffect(() => {
+    const headerSize = getTextSize(header, true);
+
+    const descriptionSize = getTextSize(description, false);
+
+    handleNotificationTextTruncation(
+      notificationRef,
+      descriptionRef,
+      headerRef,
+      descriptionSize,
+      headerSize,
+      setNeedsTruncation,
+      setWidth,
+    );
+
+    if (typeof window != "undefined") {
+      window.addEventListener("resize", () =>
+        handleNotificationTextTruncation(
+          notificationRef,
+          descriptionRef,
+          headerRef,
+          descriptionSize,
+          headerSize,
+          setNeedsTruncation,
+          setWidth,
+        ),
+      );
+    }
+    return () => {
+      window.removeEventListener("resize", () =>
+        handleNotificationTextTruncation(
+          notificationRef,
+          descriptionRef,
+          headerRef,
+          descriptionSize,
+          headerSize,
+          setNeedsTruncation,
+          setWidth,
+        ),
+      );
+    };
+  }, [header, description]);
+
+  const notification = closed ? null : (
     <div
       className={clsx(
         "neo-notification",
@@ -118,7 +174,7 @@ export const Notification = ({
       <div
         role="img"
         className={clsx("neo-notification__icon", icon && `neo-icon-${icon}`)}
-        aria-label={clsx("icon", icon && icon)}
+        aria-label={clsx(notificationTranslations.icon, icon && icon)}
       />
       <div className="neo-notification__message" ref={notificationRef}>
         <div className="neo-notification__message__wrapper">
@@ -127,12 +183,14 @@ export const Notification = ({
           </p>
 
           {occurences > 1 && (
-            <Badge
-              data={occurences.toString()}
-              aria-label={`Badge representing ${occurences}`}
-            />
+            <Tooltip label={clsx(notificationTranslations.badge, occurences)}>
+              <Badge
+                data={occurences.toString()}
+                aria-label={clsx(notificationTranslations.badge, occurences)}
+              />
+            </Tooltip>
           )}
-          {!isInline && (
+          {!isInline && needsTruncation && (
             <IconButton
               className={clsx(
                 "neo-notification__button",
@@ -140,7 +198,7 @@ export const Notification = ({
               )}
               variant="tertiary"
               icon="chevron-down"
-              aria-label="expand/collapse"
+              aria-label={notificationTranslations.textTruncation}
               onClick={() => setIsTruncated(!isTruncated)}
             ></IconButton>
           )}
@@ -153,7 +211,7 @@ export const Notification = ({
               isTruncated &&
                 "neo-notification__text--truncated neo-notification__title--truncated",
             )}
-            ref={titleRef}
+            ref={headerRef}
             style={isTruncated ? { width } : {}}
           >
             {header}
@@ -186,6 +244,8 @@ export const Notification = ({
       </div>
     </div>
   );
+
+  return notification;
 };
 
 const createClickHandler = (
@@ -205,6 +265,7 @@ export function createActions(
   actions: NotificationProps["actions"],
   type: NotificationProps["type"],
   setClosed: Dispatch<SetStateAction<boolean>>,
+  closeButtonLabel?: string,
 ) {
   let closableAction = null;
   let counterAction = null;
@@ -214,7 +275,13 @@ export function createActions(
     if (actions.closable) {
       const { onClick, ...rest } = actions.closable as ClosableActionProps;
       const handler = createClickHandler(setClosed, onClick);
-      closableAction = <ClosableAction onClick={handler} {...rest} />;
+      closableAction = (
+        <ClosableAction
+          onClick={handler}
+          aria-label={closeButtonLabel}
+          {...rest}
+        />
+      );
     }
 
     if (actions.counter) {
@@ -231,6 +298,61 @@ export function createActions(
   }
 
   return { counterAction, buttonAction, closableAction };
+}
+
+function getTextSize(text: string, isHeader: boolean) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  let textWidth = 0;
+
+  if (context) {
+    context.font = `${isHeader ? "600" : "400"} 14px sans-serif`;
+    textWidth = context.measureText(text).width;
+  }
+
+  return textWidth;
+}
+
+function handleNotificationTextTruncation(
+  notificationRef: React.RefObject<HTMLDivElement>,
+  descriptionRef: React.RefObject<HTMLDivElement>,
+  headerRef: React.RefObject<HTMLDivElement>,
+  descriptionSize: number,
+  headerSize: number,
+  setNeedsTruncation: Dispatch<SetStateAction<boolean>>,
+  setWidth: Dispatch<SetStateAction<string>>,
+) {
+  let headerOffsetWidth = 0;
+  let descriptionOffsetWidth = 0;
+
+  let leftoverHeaderText = 0;
+  let leftoverDescriptionText = 0;
+
+  if (descriptionRef && descriptionRef.current) {
+    descriptionOffsetWidth = descriptionRef.current.offsetWidth;
+
+    leftoverDescriptionText = descriptionSize - descriptionOffsetWidth;
+  }
+
+  if (headerRef && headerRef.current) {
+    headerOffsetWidth = headerRef.current.offsetWidth;
+
+    leftoverHeaderText = headerSize - headerOffsetWidth;
+  }
+
+  if (
+    leftoverHeaderText > headerOffsetWidth ||
+    leftoverDescriptionText > descriptionOffsetWidth
+  ) {
+    setNeedsTruncation(true);
+  } else {
+    setNeedsTruncation(false);
+  }
+
+  if (notificationRef.current) {
+    setWidth(`${notificationRef.current.offsetWidth.toString()}px`);
+  }
 }
 
 Notification.displayName = "Notification";

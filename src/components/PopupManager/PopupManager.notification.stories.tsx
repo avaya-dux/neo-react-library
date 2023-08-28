@@ -39,6 +39,7 @@ export const PopCounterEvent = () => {
           id: "event-counter",
           node: notificationRef.current,
           position: "bottom",
+          width: "30%",
         });
         logger.debug(
           "after notify call: open is ",
@@ -101,8 +102,8 @@ export const PopClosableEvent = () => {
     <Notification
       type="event"
       icon="copy"
-      header="Event"
-      description="This is an event."
+      header="Placeholder text for the main header. By default the header text will be two lines of copy before it is truncated. Placeholder text for the main header. By default the header text will be two lines of copy before it is truncated."
+      description="Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated."
       actions={{
         closable: {
           onClick: () => alert("closed"),
