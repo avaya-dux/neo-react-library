@@ -406,3 +406,47 @@ export const SmallSelects = () => {
     </Sheet>
   );
 };
+
+export const InlineCustomWidths = () => {
+  return (
+    <Sheet title="Inline Custom Widths" style={{ width: 1000 }}>
+      <Form inline>
+        <Select label="Select a favorite food" size="sm" style={{ width: 100 }}>
+          {fruitOptions}
+        </Select>
+
+        <Select label="Select a favorite food" size="sm" style={{ width: 100 }}>
+          {fruitOptions}
+        </Select>
+
+        <Select
+          label="Select a few nice foods"
+          searchable
+          size="sm"
+          style={{ width: 200 }}
+        >
+          {fruitOptions}
+        </Select>
+
+        <Select
+          label="Select a few nice foods"
+          multiple
+          size="sm"
+          style={{ width: 200 }}
+        >
+          {fruitOptions}
+        </Select>
+
+        <Select
+          label="Select a few nice foods"
+          multiple
+          searchable
+          size="sm"
+          style={{ width: 200 }}
+        >
+          {fruitOptions}
+        </Select>
+      </Form>
+    </Sheet>
+  );
+};
