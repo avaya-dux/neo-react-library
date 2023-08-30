@@ -35,4 +35,5 @@ export type SelectProps = {
   searchable?: boolean;
   value?: string | string[];
   size?: SizeTypeSelect;
+  style?: React.CSSProperties;
 } & LabelOrAriaLabelProps;

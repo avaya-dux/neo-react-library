@@ -69,6 +69,7 @@ export const Select = (props: SelectProps) => {
     searchable = false,
     value,
     size = "md",
+    style,
   } = props;
 
   const generatedId = useId();
@@ -205,6 +206,7 @@ export const Select = (props: SelectProps) => {
       disabled={disabled || loading}
       error={errorList.length > 0}
       required={required}
+      style={style}
     >
       {label && <label {...getLabelProps()}>{label}</label>}
 
