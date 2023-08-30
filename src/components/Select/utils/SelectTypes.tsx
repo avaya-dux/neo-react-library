@@ -19,6 +19,7 @@ export type SelectProps = {
   children?:
     | ReactElement<SelectOptionProps>
     | ReactElement<SelectOptionProps>[];
+  className?: string;
   creatable?: boolean;
   createMessage?: string;
   defaultValue?: string | string[];

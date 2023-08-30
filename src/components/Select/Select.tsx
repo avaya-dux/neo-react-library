@@ -52,6 +52,7 @@ import "./Select_shim.css";
 export const Select = (props: SelectProps) => {
   const {
     "aria-label": ariaLabel,
+    className,
     createMessage = "Create:",
     children = [],
     creatable = false,
@@ -203,6 +204,7 @@ export const Select = (props: SelectProps) => {
 
   return (
     <NeoInputWrapper
+      wrapperClassName={className}
       disabled={disabled || loading}
       error={errorList.length > 0}
       required={required}
