@@ -59,7 +59,7 @@ describe("Select", () => {
       fireEvent.click(toggleButton);
       expect(searchableElement).toHaveAttribute("aria-expanded", "true");
       fireEvent.click(toggleButton);
-      expect(searchableElement).toHaveAttribute("aria-expanded", "true");
+      expect(searchableElement).toHaveAttribute("aria-expanded", "false");
     });
 
     it("passes basic axe compliance", async () => {

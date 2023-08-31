@@ -80,7 +80,7 @@ describe("Select", () => {
       fireEvent.click(toggleButton);
       expect(toggleButton).toHaveAttribute("aria-expanded", "true");
       fireEvent.click(toggleButton);
-      expect(toggleButton).toHaveAttribute("aria-expanded", "true");
+      expect(toggleButton).toHaveAttribute("aria-expanded", "false");
     });
 
     it("sets and clears error text appropriately", () => {
