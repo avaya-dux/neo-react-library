@@ -19,6 +19,7 @@ export type SelectProps = {
   children?:
     | ReactElement<SelectOptionProps>
     | ReactElement<SelectOptionProps>[];
+  className?: string;
   creatable?: boolean;
   createMessage?: string;
   defaultValue?: string | string[];
@@ -35,4 +36,5 @@ export type SelectProps = {
   searchable?: boolean;
   value?: string | string[];
   size?: SizeTypeSelect;
+  style?: React.CSSProperties;
 } & LabelOrAriaLabelProps;
