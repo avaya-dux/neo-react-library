@@ -79,7 +79,7 @@ export const MultiSelect = () => {
         isOpen && "neo-multiselect--active",
       )}
     >
-      <span className="neo-multiselect-combo__header  neo-multiselect-combo__header--no-after">
+      <span className="neo-multiselect-combo__header neo-multiselect-combo__header--no-after">
         <span className="neo-multiselect__padded-container">
           <button
             {...restToggleProps}
