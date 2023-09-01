@@ -43,16 +43,23 @@ export const Icon: React.FC<IconProps> = ({
     );
   }
 
+  let sizing = "";
+  if (status !== undefined && size === "lg") {
+    sizing = "neo-icon-state--large";
+  } else if (status === undefined) {
+    const sizeCssWord =
+      size === "lg" ? "large" : size === "md" ? "medium" : "small";
+    sizing = `neo-icon--${sizeCssWord}`;
+  }
+
   return (
     <span
       role="img"
       {...rest}
       className={clsx(
         icon && getIconClass(icon),
-        status && `neo-icon-state neo-icon-state--${status}`,
-        size === "sm" && "neo-icon--small",
-        size === "md" && "neo-icon--medium",
-        size === "lg" && "neo-icon--large",
+        sizing,
+        status !== undefined && `neo-icon-state--${status}`,
         className,
       )}
     />
