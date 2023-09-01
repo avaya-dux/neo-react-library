@@ -42,6 +42,21 @@ export const Icon: React.FC<IconProps> = ({
       "A descriptive label is required for screen readers to identify the button's purpose",
     );
   }
+  if (status !== undefined && size === "sm") {
+    console.error(
+      "Status icons are not supported in small size. Size set to small.",
+    );
+    size = "md";
+  }
+
+  let sizing = "";
+  if (status !== undefined && size === "lg") {
+    sizing = "neo-icon-state--large";
+  } else if (status === undefined) {
+    const sizeCssWord =
+      size === "lg" ? "large" : size === "md" ? "medium" : "small";
+    sizing = `neo-icon--${sizeCssWord}`;
+  }
 
   return (
     <span
@@ -49,10 +64,9 @@ export const Icon: React.FC<IconProps> = ({
       {...rest}
       className={clsx(
         icon && getIconClass(icon),
-        status && `neo-icon-state neo-icon-state--${status}`,
-        size === "sm" && "neo-icon--small",
-        size === "md" && "neo-icon--medium",
-        size === "lg" && "neo-icon--large",
+        status !== undefined && "neo-icon-state",
+        sizing,
+        status !== undefined && `neo-icon-state--${status}`,
         className,
       )}
     />
