@@ -43,7 +43,9 @@ export const Icon: React.FC<IconProps> = ({
     );
   }
   if (status !== undefined && size === "sm") {
-    console.error("Status icons are not supported in small size. Size set to small.");
+    console.error(
+      "Status icons are not supported in small size. Size set to small.",
+    );
     size = "md";
   }
 
@@ -62,6 +64,7 @@ export const Icon: React.FC<IconProps> = ({
       {...rest}
       className={clsx(
         icon && getIconClass(icon),
+        status !== undefined && "neo-icon-state",
         sizing,
         status !== undefined && `neo-icon-state--${status}`,
         className,
