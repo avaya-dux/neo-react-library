@@ -4,20 +4,24 @@ describe("Single Select Chevron tests", () => {
   it("Clicking on Chevron should make first menu item visible", () => {
     cy.mount(<BasicSelects />);
 
-    cy.get("span button").first().then(($element) => {
-      const width = $element.width();
-      const height = $element.height();
-      const chevronWidth = 14;
-      if (width && height) {
-        // click on chevron
-        cy.get("span button").first().click(width + chevronWidth / 2, height / 2)
-        cy.get("[role='listbox']")
-          .first()
-          .within(() => {
-            cy.get("ul li").first().should("be.visible");
-          });
-      }
-    });
+    cy.get("span button")
+      .first()
+      .then(($element) => {
+        const width = $element.width();
+        const height = $element.height();
+        const chevronWidth = 14;
+        if (width && height) {
+          // click on chevron
+          cy.get("span button")
+            .first()
+            .click(width + chevronWidth / 2, height / 2);
+          cy.get("[role='listbox']")
+            .first()
+            .within(() => {
+              cy.get("ul li").first().should("be.visible");
+            });
+        }
+      });
   });
 });
 
