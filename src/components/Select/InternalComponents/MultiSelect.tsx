@@ -79,12 +79,12 @@ export const MultiSelect = () => {
         isOpen && "neo-multiselect--active",
       )}
     >
-      <span className="neo-multiselect-combo__header">
+      <span className="neo-multiselect-combo__header neo-multiselect-combo__header--no-after">
         <span className="neo-multiselect__padded-container">
           <button
             {...restToggleProps}
             {...computedAriaProperty}
-            className="neo-multiselect__header neo-multiselect__header--no-after"
+            className="neo-multiselect__header"
             type="button"
           >
             {selectedItemsAsChips ? <>&nbsp;</> : placeholder}

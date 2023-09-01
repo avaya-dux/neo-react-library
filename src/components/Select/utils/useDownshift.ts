@@ -28,11 +28,13 @@ const DownshiftWithComboboxProps = (
     id: selectId,
     stateReducer: (_, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
+      const isOpen = changes.isOpen ? !(disabled || loading) : false
+      logger.debug({isOpen, type, changes})
       switch (type) {
         case useCombobox.stateChangeTypes.ToggleButtonClick:
           return {
             ...changes,
-            isOpen: !(disabled || loading),
+            isOpen,
           };
 
         default:
@@ -101,6 +103,8 @@ const DownshiftWithComboboxMultipleSelectProps = (
     id: selectId,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
+      const isOpen = changes.isOpen ? !(disabled || loading) : false
+      logger.debug({isOpen, type, changes})
       const { selectedItem } = changes;
       const selectedItemsValues = selectedItems.map((item) => item.value);
       const shouldRemoveItem = selectedItemsValues.includes(
@@ -111,7 +115,7 @@ const DownshiftWithComboboxMultipleSelectProps = (
         case useCombobox.stateChangeTypes.ToggleButtonClick:
           return {
             ...changes,
-            isOpen: !(disabled || loading),
+            isOpen,
           };
 
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
@@ -207,16 +211,19 @@ const DownshiftWithSelectProps = (
   disabled: boolean,
   loading: boolean,
 ) => {
+  logger.debug("calling DownshiftWithSelectProps")
   return useSelect({
     items,
     id: selectId,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
+      const isOpen = changes.isOpen ? !(disabled || loading) : false
+      logger.debug({isOpen, type, changes})
       switch (type) {
         case useSelect.stateChangeTypes.ToggleButtonClick:
           return {
             ...changes,
-            isOpen: !(disabled || loading),
+            isOpen,
             highlightedIndex: state.highlightedIndex,
           };
         default:
@@ -248,6 +255,8 @@ const DownshiftWithMultipleSelectProps = (
     id: selectId,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
+      const isOpen = changes.isOpen ? !(disabled || loading) : false
+      logger.debug({isOpen, type, changes})
       const { selectedItem } = changes;
 
       const selectedItemsValues = selectedItems.map((item) => item.value);
@@ -259,7 +268,7 @@ const DownshiftWithMultipleSelectProps = (
         case useSelect.stateChangeTypes.ToggleButtonClick:
           return {
             ...changes,
-            isOpen: !(disabled || loading),
+            isOpen,
           };
 
         case useSelect.stateChangeTypes.ToggleButtonKeyDownEnter:
