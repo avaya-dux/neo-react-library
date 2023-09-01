@@ -44,7 +44,7 @@ export const Icon: React.FC<IconProps> = ({
   }
   if (status !== undefined && size === "sm") {
     console.error(
-      "Status icons are not supported in small size. Size set to small.",
+      "Status icons are not supported in small size. Size set to medium.",
     );
     size = "md";
   }
