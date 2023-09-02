@@ -3,7 +3,7 @@ import { Meta, Story } from "@storybook/react";
 import { useEffect, useMemo, useState } from "react";
 import { Column, ColumnInstance } from "react-table";
 
-import { Chip, Icon, List, ListItem, SelectNative, Tooltip } from "components";
+import { Chip, Icon, List, ListItem, Menu, MenuItem, SelectNative, Tooltip } from "components";
 import { Button } from "components/Button";
 import { IconNamesType } from "utils";
 
@@ -17,6 +17,37 @@ export default {
 
 export const Default = () => (
   <Table {...FilledFields} caption="Storybook Default Table Example" />
+);
+
+export const MoreActionsMenu = () => (
+  <Table
+    caption="Last column has more actions menu."
+    columns={[
+      ...FilledFields.columns,
+      {
+        Header: "actions",
+        Cell: () => (
+          <Tooltip label="More actions">
+            <Menu menuRootElement={<Button variant="tertiary">...</Button>}>
+              <MenuItem>
+                <Icon icon="edit" size="sm" aria-label="Edits row" />
+                Edit
+              </MenuItem>
+              <MenuItem>
+                <Icon icon="trash" size="sm" aria-label="Deletes row" />
+                Delete
+              </MenuItem>
+              <MenuItem>
+                <Icon icon="copy" size="sm" aria-label="Copies row" />
+                Copy
+              </MenuItem>
+            </Menu>
+          </Tooltip>
+        ),
+      },
+    ]}
+    data={[...FilledFields.data]}
+  />
 );
 
 export const AdvancedFilteringAndSorting = () => {
