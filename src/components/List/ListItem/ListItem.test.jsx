@@ -215,7 +215,7 @@ describe("ListSection: ", () => {
               >
                 <span
                   aria-label="chat icon"
-                  class="neo-icon-chat"
+                  class="neo-icon-chat neo-icon--small"
                   data-testid="neo-icon-chat"
                   id="icon-chat"
                   role="img"
@@ -247,7 +247,7 @@ describe("ListSection: ", () => {
               >
                 <span
                   aria-label="star icon"
-                  class="neo-icon-star"
+                  class="neo-icon-star neo-icon--small"
                   data-testid="neo-icon-star"
                   id="icon-star"
                   role="img"

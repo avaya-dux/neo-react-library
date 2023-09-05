@@ -28,8 +28,8 @@ const DownshiftWithComboboxProps = (
     id: selectId,
     stateReducer: (_, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
-      const isOpen = changes.isOpen ? !(disabled || loading) : false
-      logger.debug({isOpen, type, changes})
+      const isOpen = changes.isOpen ? !(disabled || loading) : false;
+      logger.debug({ isOpen, type, changes });
       switch (type) {
         case useCombobox.stateChangeTypes.ToggleButtonClick:
           return {
@@ -103,8 +103,8 @@ const DownshiftWithComboboxMultipleSelectProps = (
     id: selectId,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
-      const isOpen = changes.isOpen ? !(disabled || loading) : false
-      logger.debug({isOpen, type, changes})
+      const isOpen = changes.isOpen ? !(disabled || loading) : false;
+      logger.debug({ isOpen, type, changes });
       const { selectedItem } = changes;
       const selectedItemsValues = selectedItems.map((item) => item.value);
       const shouldRemoveItem = selectedItemsValues.includes(
@@ -211,14 +211,14 @@ const DownshiftWithSelectProps = (
   disabled: boolean,
   loading: boolean,
 ) => {
-  logger.debug("calling DownshiftWithSelectProps")
+  logger.debug("calling DownshiftWithSelectProps");
   return useSelect({
     items,
     id: selectId,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
-      const isOpen = changes.isOpen ? !(disabled || loading) : false
-      logger.debug({isOpen, type, changes})
+      const isOpen = changes.isOpen ? !(disabled || loading) : false;
+      logger.debug({ isOpen, type, changes });
       switch (type) {
         case useSelect.stateChangeTypes.ToggleButtonClick:
           return {
@@ -255,8 +255,8 @@ const DownshiftWithMultipleSelectProps = (
     id: selectId,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
-      const isOpen = changes.isOpen ? !(disabled || loading) : false
-      logger.debug({isOpen, type, changes})
+      const isOpen = changes.isOpen ? !(disabled || loading) : false;
+      logger.debug({ isOpen, type, changes });
       const { selectedItem } = changes;
 
       const selectedItemsValues = selectedItems.map((item) => item.value);
