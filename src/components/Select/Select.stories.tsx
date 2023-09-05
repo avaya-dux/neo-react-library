@@ -8,6 +8,8 @@ import { SelectOption } from "./SelectOption";
 import { fruitOptions } from "./utils/mockdata";
 import { SelectProps } from "./utils/SelectTypes";
 
+import "./SelectStories.css";
+
 export default {
   title: "Components/Select",
   component: Select,
@@ -404,5 +406,49 @@ export const SmallSelects = () => {
         {fruitOptions}
       </Select>
     </Sheet>
+  );
+};
+
+export const InlineCustomWidths = () => {
+  return (
+    <>
+      <Sheet
+        title="Inline Custom Widths via `style` prop"
+        style={{ width: 1000 }}
+      >
+        <Form inline>
+          <Select label="Select a favorite food" style={{ width: 400 }}>
+            {fruitOptions}
+          </Select>
+
+          <Select
+            label="Select a few nice foods"
+            multiple
+            style={{ width: 400 }}
+          >
+            {fruitOptions}
+          </Select>
+        </Form>
+      </Sheet>
+
+      <Sheet
+        title="Inline Custom Widths via `className` prop"
+        style={{ width: 1000, marginTop: 20 }}
+      >
+        <Form inline>
+          <Select className="select-width-400" label="Select a favorite food">
+            {fruitOptions}
+          </Select>
+
+          <Select
+            className="select-width-400"
+            label="Select a few nice foods"
+            multiple
+          >
+            {fruitOptions}
+          </Select>
+        </Form>
+      </Sheet>
+    </>
   );
 };

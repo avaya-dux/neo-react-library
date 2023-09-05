@@ -6,7 +6,7 @@
 }
 
 .neo-multiselect
-  button.neo-multiselect__header.neo-multiselect__header--no-after:after {
+  span.neo-multiselect-combo__header.neo-multiselect-combo__header--no-after:after {
   display: none;
 }
 

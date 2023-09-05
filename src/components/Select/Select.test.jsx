@@ -25,6 +25,7 @@ const {
   SelectsWithWrongChildren,
   MoreThanOneMultipleSelect,
   SmallSelects,
+  InlineCustomWidths,
 } = composeStories(SelectStories);
 
 const label = "Select Label";
@@ -79,7 +80,7 @@ describe("Select", () => {
       fireEvent.click(toggleButton);
       expect(toggleButton).toHaveAttribute("aria-expanded", "true");
       fireEvent.click(toggleButton);
-      expect(toggleButton).toHaveAttribute("aria-expanded", "true");
+      expect(toggleButton).toHaveAttribute("aria-expanded", "false");
     });
 
     it("sets and clears error text appropriately", () => {
@@ -436,6 +437,24 @@ describe("Select", () => {
       let renderResult;
       beforeEach(() => {
         renderResult = render(<SmallSelects />);
+      });
+
+      it("renders without exploding", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("Inline Custom Widths", () => {
+      let renderResult;
+      beforeEach(() => {
+        renderResult = render(<InlineCustomWidths />);
       });
 
       it("renders without exploding", () => {

@@ -53,11 +53,11 @@ export const SingleSelect = () => {
         isOpen && "neo-multiselect--active",
       )}
     >
-      <span className="neo-multiselect-combo__header">
+      <span className="neo-multiselect-combo__header neo-multiselect-combo__header--no-after">
         <button
           {...restToggleProps}
           {...computedAriaProperty}
-          className="neo-multiselect__header neo-multiselect__header--no-after"
+          className="neo-multiselect__header"
           type="button"
         >
           {selectedItems[0]?.children || placeholder}
