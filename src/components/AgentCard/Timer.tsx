@@ -6,7 +6,7 @@ export interface TimerProps {
 
 export const Timer = ({ agentStatus }: TimerProps) => {
   const [count, setCount] = useState(0);
-  const timerIdRef = useRef<undefined | NodeJS.Timer>(undefined);
+  const timerIdRef = useRef<undefined | NodeJS.Timeout>(undefined);
   const hour: number = Math.floor(count / 3600);
   const minute: number = Math.floor((count - hour * 3600) / 60);
   const seconds: number = count - (hour * 3600 + minute * 60);

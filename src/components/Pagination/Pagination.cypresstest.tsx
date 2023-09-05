@@ -45,27 +45,37 @@ describe("Pagination component", () => {
 
     cy.get(navItems).last().click();
 
-    cy.focused().should("have.text", "20");
+    cy.focused();
 
-    cy.get(navItems).first().click();
+    cy.should("have.text", "20");
 
-    cy.focused().should("have.text", "1");
+    cy.get(navItems);
+
+    cy.first().click();
+
+    cy.focused();
+
+    cy.should("have.text", "1");
   });
 
   it("should navigate smoothly via tabbing", () => {
     cy.mount(<Default />);
 
-    cy.get("#default-pagination").click();
+    cy.get("#default-pagination");
+    cy.click();
     cy.realPress("Tab"); // 1
     cy.realPress("Tab"); // 2
     cy.realPress("Tab"); // 3
     cy.realPress("Enter");
-    cy.focused().should("have.text", "3");
+    cy.focused();
+    cy.should("have.text", "3");
 
     cy.realPress(["Shift", "Tab"]); // 2
     cy.realPress(["Shift", "Tab"]); // 1
     cy.realPress("Enter");
 
-    cy.focused().should("have.text", "1");
+    cy.focused();
+
+    cy.should("have.text", "1");
   });
 });
