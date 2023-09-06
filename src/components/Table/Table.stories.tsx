@@ -25,21 +25,21 @@ export const MoreActionsMenu = () => (
     columns={[
       ...FilledFields.columns,
       {
-        Header: "actions",
+        Header: "More Actions",
         Cell: () => (
-          <Tooltip label="More actions">
+          <Tooltip label="Show more actions for this item.">
             <Menu menuRootElement={<Button variant="tertiary">...</Button>}>
               <MenuItem>
                 <Icon icon="edit" size="sm" aria-label="Edits row" />
-                Edit
+                <span style={{ marginLeft: "8px" }}>Edit</span>
               </MenuItem>
               <MenuItem>
                 <Icon icon="trash" size="sm" aria-label="Deletes row" />
-                Delete
+                <span style={{ marginLeft: "8px" }}>Delete</span>
               </MenuItem>
               <MenuItem>
                 <Icon icon="copy" size="sm" aria-label="Copies row" />
-                Copy
+                <span style={{ marginLeft: "8px" }}>Copy</span>
               </MenuItem>
             </Menu>
           </Tooltip>
