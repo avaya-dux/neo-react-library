@@ -21,6 +21,7 @@ const {
   Default,
   EditableData,
   EmptyDataSet,
+  MoreActionsMenu,
   PreSelectedRows,
   Templated,
 } = composeStories(TableStories);
@@ -512,6 +513,25 @@ describe("Table", () => {
 
       beforeEach(() => {
         renderResult = render(<CustomActions />);
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe("More Actions Menu", () => {
+      let renderResult;
+
+      beforeEach(() => {
+        renderResult = render(<MoreActionsMenu />);
       });
 
       it("should render ok", () => {
