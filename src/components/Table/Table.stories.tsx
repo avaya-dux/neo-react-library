@@ -30,16 +30,31 @@ export const MoreActionsMenu = () => (
           <Tooltip label="Show more actions for this item.">
             <Menu menuRootElement={<Button variant="tertiary">...</Button>}>
               <MenuItem>
-                <Icon icon="edit" size="sm" aria-label="Edits row" />
-                <span style={{ marginLeft: "8px" }}>Edit</span>
+                <Icon
+                  style={{ marginRight: "8px" }}
+                  icon="edit"
+                  size="sm"
+                  aria-label="Edits row"
+                />
+                Edit
               </MenuItem>
               <MenuItem>
-                <Icon icon="trash" size="sm" aria-label="Deletes row" />
-                <span style={{ marginLeft: "8px" }}>Delete</span>
+                <Icon
+                  style={{ marginRight: "8px" }}
+                  icon="trash"
+                  size="sm"
+                  aria-label="Deletes row"
+                />
+                Delete
               </MenuItem>
               <MenuItem>
-                <Icon icon="copy" size="sm" aria-label="Copies row" />
-                <span style={{ marginLeft: "8px" }}>Copy</span>
+                <Icon
+                  style={{ marginRight: "8px" }}
+                  icon="copy"
+                  size="sm"
+                  aria-label="Copies row"
+                />
+                Copy
               </MenuItem>
             </Menu>
           </Tooltip>
