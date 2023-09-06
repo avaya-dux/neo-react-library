@@ -28,7 +28,7 @@ export const MoreActionsMenu = () => (
         Header: "More Actions",
         Cell: () => (
           <Tooltip label="Show more actions for this item.">
-            <Menu menuRootElement={<Button variant="tertiary">...</Button>}>
+            <Menu aria-label="More actions menu." menuRootElement={<Button variant="tertiary">...</Button>}>
               <MenuItem>
                 <Icon
                   style={{ marginRight: "8px" }}
