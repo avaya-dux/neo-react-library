@@ -1,11 +1,24 @@
 import clsx from "clsx";
 import log from "loglevel";
-import { Dispatch, MouseEventHandler, SetStateAction, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Dispatch,
+  MouseEventHandler,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { Badge } from "components/Badge";
 import { Tooltip } from "components/Tooltip";
 
-import { ButtonAction, ClosableAction, ClosableActionProps, CounterAction } from "./Actions";
+import {
+  ButtonAction,
+  ClosableAction,
+  ClosableActionProps,
+  CounterAction,
+} from "./Actions";
 import { defaultTranslations } from "./Helpers";
 import { NotificationProps } from "./NotificationTypes";
 
@@ -66,7 +79,7 @@ export const Notification = ({
   isElevated = false,
   isInline = false,
   occurences = 0,
-  locale = typeof navigator !== 'undefined' ? navigator.languages[0] : "en-US",
+  locale = typeof navigator !== "undefined" ? navigator.languages[0] : "en-US",
   translations,
   ...rest
 }: NotificationProps) => {
