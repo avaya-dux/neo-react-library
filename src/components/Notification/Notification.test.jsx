@@ -61,7 +61,7 @@ describe("Notification", () => {
       );
     });
 
-    it("takes value provided by navigator object for `locale` prop when  when navigator object is defined", () => {
+    it("takes value provided by navigator object for `locale` prop when navigator object is defined", () => {
       Object.defineProperty(navigator, "languages", {
         get: vi.fn().mockImplementation(() => ["fr-FR", "en-US"]),
       });
