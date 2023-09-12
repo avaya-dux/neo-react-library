@@ -42,7 +42,7 @@ describe("Notification", () => {
       minute: "2-digit",
     };
 
-    it("reverts to default value for `locale` prop when navigator object is undefined", () => {
+    it("reverts to default value for `locale` prop", () => {
       const { DateTimeFormat } = Intl;
 
       vi.spyOn(Intl, "DateTimeFormat").mockImplementation(
@@ -53,25 +53,6 @@ describe("Notification", () => {
 
       expect(Intl.DateTimeFormat).toHaveBeenCalledWith(
         "en-US",
-        dateTimeOptions,
-      );
-    });
-
-    it("takes value provided by navigator object for `locale` prop when navigator object is defined", () => {
-      Object.defineProperty(navigator, "languages", {
-        get: vi.fn().mockImplementation(() => ["fr-FR", "en-US"]),
-      });
-
-      const { DateTimeFormat } = Intl;
-
-      vi.spyOn(Intl, "DateTimeFormat").mockImplementation(
-        (locale, options) => new DateTimeFormat(locale, options),
-      );
-
-      render(<Notification />);
-
-      expect(Intl.DateTimeFormat).toHaveBeenCalledWith(
-        "fr-FR",
         dateTimeOptions,
       );
     });

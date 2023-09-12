@@ -20,7 +20,6 @@ import {
   CounterAction,
 } from "./Actions";
 import { defaultTranslations } from "./Helpers";
-import { getLocale } from "utils";
 import { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
@@ -80,7 +79,7 @@ export const Notification = ({
   isElevated = false,
   isInline = false,
   occurences = 0,
-  locale = getLocale(navigator),
+  locale = "en-US",
   translations,
   ...rest
 }: NotificationProps) => {
