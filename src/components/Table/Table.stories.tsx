@@ -3,7 +3,16 @@ import { Meta, Story } from "@storybook/react";
 import { useEffect, useMemo, useState } from "react";
 import { Column, ColumnInstance } from "react-table";
 
-import { Chip, Icon, List, ListItem, Menu, MenuItem, SelectNative, Tooltip } from "components";
+import {
+  Chip,
+  Icon,
+  List,
+  ListItem,
+  Menu,
+  MenuItem,
+  SelectNative,
+  Tooltip,
+} from "components";
 import { Button } from "components/Button";
 import { IconNamesType } from "utils";
 
@@ -28,7 +37,10 @@ export const MoreActionsMenu = () => (
         Header: "More Actions",
         Cell: () => (
           <Tooltip label="Show more actions for this item.">
-            <Menu aria-label="More actions menu." menuRootElement={<Button variant="tertiary">...</Button>}>
+            <Menu
+              aria-label="More actions menu."
+              menuRootElement={<Button variant="tertiary">...</Button>}
+            >
               <MenuItem>
                 <Icon
                   style={{ marginRight: "8px" }}

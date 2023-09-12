@@ -49,11 +49,7 @@ describe("Notification", () => {
         (locale, options) => new DateTimeFormat(locale, options),
       );
 
-      let renderResult = render(<Notification />);
-
-      const { container } = renderResult;
-
-      expect(container).toBeDefined();
+      render(<Notification />);
 
       expect(Intl.DateTimeFormat).toHaveBeenCalledWith(
         "en-US",
@@ -72,11 +68,7 @@ describe("Notification", () => {
         (locale, options) => new DateTimeFormat(locale, options),
       );
 
-      let renderResult = render(<Notification />);
-
-      const { container } = renderResult;
-
-      expect(container).toBeDefined();
+      render(<Notification />);
 
       expect(Intl.DateTimeFormat).toHaveBeenCalledWith(
         "fr-FR",
