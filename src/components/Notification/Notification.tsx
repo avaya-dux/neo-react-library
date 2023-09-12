@@ -80,7 +80,7 @@ export const Notification = ({
   isElevated = false,
   isInline = false,
   occurences = 0,
-  locale = getLocale(),
+  locale = getLocale(navigator),
   translations,
   ...rest
 }: NotificationProps) => {
