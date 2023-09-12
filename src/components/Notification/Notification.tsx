@@ -11,7 +11,6 @@ import {
 } from "react";
 
 import { Badge } from "components/Badge";
-
 import { Tooltip } from "components/Tooltip";
 
 import {
@@ -80,7 +79,7 @@ export const Notification = ({
   isElevated = false,
   isInline = false,
   occurences = 0,
-  locale = navigator?.languages[0] ?? "en-US",
+  locale = "en-US",
   translations,
   ...rest
 }: NotificationProps) => {

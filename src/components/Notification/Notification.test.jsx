@@ -9,6 +9,7 @@ import { popupManagerLogger } from "components/PopupManager";
 import * as EventStories from "./EventNotification.stories";
 import * as NonEventStories from "./NonEventNotification.stories";
 import { createActions, notificationLogger } from "./Notification";
+import { Notification } from "./Notification.tsx";
 import * as ToggleEventStories from "./ToggleNotification.stories";
 
 notificationLogger.disableAll();
@@ -31,6 +32,31 @@ const { Event, EventCloseAlert, EventButtons, EventCounter } =
 
 describe("Notification", () => {
   const user = userEvent.setup();
+
+  describe("Notification SSR behavior", () => {
+    const dateTimeOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+
+    it("reverts to default value for `locale` prop", () => {
+      const { DateTimeFormat } = Intl;
+
+      vi.spyOn(Intl, "DateTimeFormat").mockImplementation(
+        (locale, options) => new DateTimeFormat(locale, options),
+      );
+
+      render(<Notification />);
+
+      expect(Intl.DateTimeFormat).toHaveBeenCalledWith(
+        "en-US",
+        dateTimeOptions,
+      );
+    });
+  });
 
   describe("Storybook stories", () => {
     describe("Success", () => {
