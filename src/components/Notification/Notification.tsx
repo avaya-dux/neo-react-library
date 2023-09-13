@@ -54,18 +54,26 @@ import { IconButton } from "components/IconButton";
   icon="info"
   header="Alternate Options"
   description="You can override the default action with your own"
-  action={{
-    buttons: [
-      { children: "Edit", onClick: () => alert("Edit Clicked") },
-    ],
-  }}
+  actions: {
+    closable: {
+      onClick: () => alert("closed"),
+      "aria-label": "Click this button will close this notification",
+    },
+    actionButtons: {
+      buttons: [
+        { children: "Edit", onClick: () => alert("Edit Clicked") },
+        { children: "Alert", onClick: () => alert("Alert Clicked") },
+      ],
+    },
+    counter: { count: "00:00" },
+  },
 />
  *
 <Notification
   type="info"
   header="Timer Notification"
   description="You can pass a 'count' action to display a timer, but you must increment the timer yourself"
-  action={{ count: "12:34:56" }}
+  actions={ counter: { count: "00:00" } }
 />
  *
  * @see https://design.avayacloud.com/components/web/notifications-web
