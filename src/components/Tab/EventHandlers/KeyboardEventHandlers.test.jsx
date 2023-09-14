@@ -77,7 +77,7 @@ describe("Tab Keyboard event handlers", () => {
     describe(Keys.DOWN, () => {
       let e;
       beforeEach(() => {
-        e = { key: Keys.DOWN, stopPropagation: vi.fn() };
+        e = { key: Keys.DOWN, stopPropagation: vi.fn(), preventDefault: vi.fn() };
       });
       afterEach(() => {
         vi.resetAllMocks();
@@ -123,6 +123,7 @@ describe("Tab Keyboard event handlers", () => {
           ref,
         );
         expect(setActiveTabIndex).toBeCalled();
+        expect(e.preventDefault).toBeCalled();
       });
       it("should do nothing if next tab does not exist  and tab layout is vertical", () => {
         const tabs = getTabProps();
@@ -137,6 +138,7 @@ describe("Tab Keyboard event handlers", () => {
           ref,
         );
         expect(setActiveTabIndex).not.toBeCalled();
+        expect(e.preventDefault).toBeCalled();
       });
     });
     describe(Keys.UP, () => {

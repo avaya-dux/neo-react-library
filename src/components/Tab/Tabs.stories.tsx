@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { Button } from "components";
 
-import { tabMouseEventHandlerLogger } from "./EventHandlers";
+import { tabMouseEventHandlerLogger, tabKeyboardEventHandler } from "./EventHandlers";
 import {
   ClosableTab,
   Tab,
@@ -15,7 +15,8 @@ import {
 import { Tabs } from "./Tabs";
 import { TabsProps } from "./TabTypes";
 
-tabMouseEventHandlerLogger.enableAll();
+tabMouseEventHandlerLogger.disableAll();
+tabKeyboardEventHandler.enableAll();
 
 export default {
   title: "Components/Tab",
