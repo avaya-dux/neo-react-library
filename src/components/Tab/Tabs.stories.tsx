@@ -3,7 +3,10 @@ import { useState } from "react";
 
 import { Button } from "components";
 
-import { tabMouseEventHandlerLogger, tabKeyboardEventHandler } from "./EventHandlers";
+import {
+  tabMouseEventHandlerLogger,
+  tabKeyboardEventHandler,
+} from "./EventHandlers";
 import {
   ClosableTab,
   Tab,
