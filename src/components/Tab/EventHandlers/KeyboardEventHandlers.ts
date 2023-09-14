@@ -130,11 +130,15 @@ export const handleKeyDownEvent = (
       break;
     case Keys.DOWN:
       if (isTabListVertical) {
+        // prevent default scrolling
+        e.preventDefault();
         activateNextTab(tabs, activeTabIndex, setActiveTabIndex);
       }
       break;
     case Keys.UP:
       if (isTabListVertical) {
+        // prevent default scrolling
+        e.preventDefault();
         activatePreviousTab(tabs, activeTabIndex, setActiveTabIndex);
       }
       break;
