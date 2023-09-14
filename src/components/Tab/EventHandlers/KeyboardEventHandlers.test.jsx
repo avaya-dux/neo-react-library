@@ -77,7 +77,11 @@ describe("Tab Keyboard event handlers", () => {
     describe(Keys.DOWN, () => {
       let e;
       beforeEach(() => {
-        e = { key: Keys.DOWN, stopPropagation: vi.fn(), preventDefault: vi.fn() };
+        e = {
+          key: Keys.DOWN,
+          stopPropagation: vi.fn(),
+          preventDefault: vi.fn(),
+        };
       });
       afterEach(() => {
         vi.resetAllMocks();
