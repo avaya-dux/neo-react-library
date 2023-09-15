@@ -82,6 +82,12 @@ export const DifferentHTMLOutputExamples = () => {
         placeholder="Placeholder text"
         readOnly
       />
+
+      <TextInput
+        label="Small size"
+        size="sm"
+        placeholder="Placeholder text"
+      />
     </section>
   );
 };

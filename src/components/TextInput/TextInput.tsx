@@ -36,6 +36,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   required?: boolean;
   startAddon?: ReactNode;
   startIcon?: IconNamesType;
+  size?: "sm" | "md";
   value?: number | string;
 }
 
@@ -69,6 +70,7 @@ export const TextInput = ({
   required,
   startAddon,
   startIcon,
+  size="md",
   type = "text",
   id,
   value,
@@ -144,6 +146,7 @@ export const TextInput = ({
             <div
               className={clsx(
                 "neo-input-editable__wrapper",
+                size === "sm" && "neo-input-editable__wrapper--small",
                 startIcon || endIcon ? "neo-input-icon__wrapper" : undefined,
               )}
             >
