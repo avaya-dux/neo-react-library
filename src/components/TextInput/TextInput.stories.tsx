@@ -89,7 +89,7 @@ export const DifferentHTMLOutputExamples = () => {
 
       <TextInput
         label="Small size (basic)"
-        size="sm"
+        isSmall
         placeholder="Placeholder text"
       />
 
@@ -97,7 +97,7 @@ export const DifferentHTMLOutputExamples = () => {
 
       <TextInput
         label="Small size (disabled)"
-        size="sm"
+        isSmall
         disabled
         defaultValue="Try to change me"
       />
@@ -105,10 +105,10 @@ export const DifferentHTMLOutputExamples = () => {
       <br />
 
       <TextInput
-        label="Input type password"
+        label="Small size (type password)"
         placeholder="Placeholder password"
         type="password"
-        size="sm"
+        isSmall
       />
     </section>
   );
