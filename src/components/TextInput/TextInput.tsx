@@ -70,7 +70,7 @@ export const TextInput = ({
   required,
   startAddon,
   startIcon,
-  isSmall=false,
+  isSmall = false,
   type = "text",
   id,
   value,
