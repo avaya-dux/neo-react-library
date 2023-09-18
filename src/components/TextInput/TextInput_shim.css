@@ -6,6 +6,14 @@
   font-size: x-large;
 }
 
+.neo-input-editable__wrapper .neo-icon-view-on.neo-icon--small:before {
+  font-size: 1rem;
+}
+
+.neo-input-editable__wrapper .neo-icon-view-off.neo-icon--small:before {
+  font-size: 1rem;
+}
+
 .neo-input-editable__wrapper .neo-icon-view-on,
 .neo-input-editable__wrapper .neo-icon-view-off {
   background: none;

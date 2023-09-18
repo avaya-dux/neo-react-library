@@ -185,7 +185,10 @@ export const TextInput = ({
                 <button
                   aria-label={ariaLabel}
                   aria-pressed={ariaPressed}
-                  className={`neo-icon-${eyeIcon}`}
+                  className={clsx(
+                    `neo-icon-${eyeIcon}`,
+                    isSmall && "neo-icon--small",
+                  )}
                   onClick={toggleIcon}
                   type="button"
                 />
