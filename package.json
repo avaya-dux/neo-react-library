@@ -142,6 +142,6 @@
     "glob-parent": "6.0.2",
     "trim": "1.0.1",
     "trim-newlines": "5.0.0",
-    "string-width": "4.2.3"
+    "string-width": "6.1.0"
   }
 }
