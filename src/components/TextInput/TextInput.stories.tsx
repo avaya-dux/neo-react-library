@@ -82,6 +82,34 @@ export const DifferentHTMLOutputExamples = () => {
         placeholder="Placeholder text"
         readOnly
       />
+
+      <br />
+      <p style={{ fontSize: "14pt" }}> Small size variants</p>
+      <br />
+
+      <TextInput
+        label="Small size (basic)"
+        isSmall
+        placeholder="Placeholder text"
+      />
+
+      <br />
+
+      <TextInput
+        label="Small size (disabled)"
+        isSmall
+        disabled
+        defaultValue="Try to change me"
+      />
+
+      <br />
+
+      <TextInput
+        label="Small size (type password)"
+        placeholder="Placeholder password"
+        type="password"
+        isSmall
+      />
     </section>
   );
 };
