@@ -30,7 +30,7 @@ export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export const Image = ({
-  alt = "",
+  alt = "asdf",
   className,
   fallback,
   isDecorativeOrBranding = false,
