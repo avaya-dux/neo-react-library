@@ -84,7 +84,7 @@ export const Menu = forwardRef(
   ) => {
     logger.debug("debugging Menu ...");
     const _ref = useRef<HTMLButtonElement>(null);
-    const buttonRef = ref || _ref;
+    const toggleRef = ref || _ref;
 
     const [isOpen, setOpen] = useState(defaultIsOpen);
     const [enterCounter, setEnterCounter] = useState(1);
@@ -184,10 +184,10 @@ export const Menu = forwardRef(
             menuRootElement.props.onMouseEnter(e);
           }
         },
-        ref: buttonRef,
+        ref: toggleRef,
       };
       return cloneElement(menuRootElement, buttonProps);
-    }, [menuRootElement, buttonRef, isOpen, menuIndexes, openOnHover]);
+    }, [menuRootElement, toggleRef, isOpen, menuIndexes, openOnHover]);
 
     const menuContext: MenuContextType = {
       closeOnSelect,
