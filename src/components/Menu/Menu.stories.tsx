@@ -37,7 +37,7 @@ export const SimpleMenu = () => (
 );
 
 const Template: Story<MenuProps> = ({ children, ...rest }: MenuProps) => (
-  <section style={{ display: "flex", justifyContent: "center" }}>
+  <section style={{ display: "flex", justifyContent: "center", margin: "300px 50%", width: "200px" }}>
     <Menu {...rest}>{children}</Menu>
   </section>
 );

@@ -83,6 +83,8 @@ export const Menu = forwardRef(
     ref: Ref<HTMLButtonElement>,
   ) => {
     logger.debug("debugging Menu ...");
+    const _ref = useRef<HTMLButtonElement>(null)
+    const buttonRef = ref || _ref;
 
     const [isOpen, setOpen] = useState(defaultIsOpen);
     const [enterCounter, setEnterCounter] = useState(1);
@@ -99,18 +101,12 @@ export const Menu = forwardRef(
     const [cursorAction, setCursorAction] = useState<ActionType>("");
 
     useEffect(() => {
-      logger.debug(`refocusing button when open = ${isOpen}`);
-
-      // focus button after ESC
-      if (!isOpen && ref && "current" in ref && ref.current) {
-        logger.debug("focus button");
-        ref.current.focus();
-      }
+      logger.debug(`calling onMenuClose when open = ${isOpen}`);
 
       if (isOpen === false && didMount.current) {
         onMenuClose();
       }
-    }, [isOpen, onMenuClose, ref]);
+    }, [isOpen, onMenuClose]);
 
     // `didMount` must be placed _after_ any usage of it in a hook
     const didMount = useRef(false);
@@ -159,33 +155,42 @@ export const Menu = forwardRef(
 
     type MenuButtonOnClickEventType = HTMLButtonElement & HTMLDivElement;
 
-    const menuButton = cloneElement(menuRootElement, {
-      onClick: (e: MouseEvent<MenuButtonOnClickEventType>) => {
-        handleMenuButtonClickEvent(e, isOpen, setOpen);
 
-        if (menuRootElement.props.onClick) {
-          menuRootElement.props.onClick(e);
-        }
-      },
+    const menuButton = useMemo(() => {
+      const buttonProps = {
+        ...menuRootElement.props,
 
-      onKeyDown: (e: KeyboardEvent<MenuButtonOnClickEventType>) => {
-        handleButtonKeyDownEvent(e, menuIndexes, setCursor, setOpen);
+        onClick: (e: MouseEvent<MenuButtonOnClickEventType>) => {
+          handleMenuButtonClickEvent(e, isOpen, setOpen);
 
-        if (menuRootElement.props.onKeyDown) {
-          menuRootElement.props.onKeyDown(e);
-        }
-      },
+          if (menuRootElement.props.onClick) {
+            menuRootElement.props.onClick(e);
+          }
+        },
 
-      onMouseEnter: (e: MouseEvent<MenuButtonOnClickEventType>) => {
-        if (openOnHover) {
-          setOpen(true);
-        }
+        onKeyDown: (e: KeyboardEvent<MenuButtonOnClickEventType>) => {
+          handleButtonKeyDownEvent(e, menuIndexes, setCursor, setOpen);
 
-        if (menuRootElement.props.onMouseEnter) {
-          menuRootElement.props.onMouseEnter(e);
-        }
-      },
-    });
+          if (menuRootElement.props.onKeyDown) {
+            menuRootElement.props.onKeyDown(e);
+          }
+        },
+
+        onMouseEnter: (e: MouseEvent<MenuButtonOnClickEventType>) => {
+          if (openOnHover) {
+            setOpen(true);
+          }
+
+          if (menuRootElement.props.onMouseEnter) {
+            menuRootElement.props.onMouseEnter(e);
+          }
+        },
+        ref: buttonRef
+      } 
+      return cloneElement(menuRootElement, buttonProps)
+    },
+      [menuRootElement, buttonRef, isOpen, menuIndexes, openOnHover]
+    );
 
     const menuContext: MenuContextType = {
       closeOnSelect,
