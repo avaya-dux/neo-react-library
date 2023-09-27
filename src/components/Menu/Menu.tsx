@@ -83,7 +83,7 @@ export const Menu = forwardRef(
     ref: Ref<HTMLButtonElement>,
   ) => {
     logger.debug("debugging Menu ...");
-    const _ref = useRef<HTMLButtonElement>(null)
+    const _ref = useRef<HTMLButtonElement>(null);
     const buttonRef = ref || _ref;
 
     const [isOpen, setOpen] = useState(defaultIsOpen);
@@ -155,7 +155,6 @@ export const Menu = forwardRef(
 
     type MenuButtonOnClickEventType = HTMLButtonElement & HTMLDivElement;
 
-
     const menuButton = useMemo(() => {
       const buttonProps = {
         ...menuRootElement.props,
@@ -185,12 +184,10 @@ export const Menu = forwardRef(
             menuRootElement.props.onMouseEnter(e);
           }
         },
-        ref: buttonRef
-      } 
-      return cloneElement(menuRootElement, buttonProps)
-    },
-      [menuRootElement, buttonRef, isOpen, menuIndexes, openOnHover]
-    );
+        ref: buttonRef,
+      };
+      return cloneElement(menuRootElement, buttonProps);
+    }, [menuRootElement, buttonRef, isOpen, menuIndexes, openOnHover]);
 
     const menuContext: MenuContextType = {
       closeOnSelect,
