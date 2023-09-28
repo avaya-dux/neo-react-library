@@ -81,26 +81,24 @@ export const SubMenu: FC<SubMenuProps> = ({
     if (!isOpen) {
       return;
     }
-    if(toggleRef && "current" in toggleRef && toggleRef.current) {
-      const {offsetWidth:toggleWidth, offsetHeight: toggleHeight} = toggleRef.current
-      const {top, right, bottom, left} = toggleRef.current?.getBoundingClientRect() || {}
-      logger.debug({toggleWidth, toggleHeight, top, right, bottom, left})
+    if (toggleRef && "current" in toggleRef && toggleRef.current) {
+      const { offsetWidth: toggleWidth, offsetHeight: toggleHeight } =
+        toggleRef.current;
+      const { top, right, bottom, left } =
+        toggleRef.current?.getBoundingClientRect() || {};
+      logger.debug({ toggleWidth, toggleHeight, top, right, bottom, left });
 
-      if(menuRef && "current" in menuRef && menuRef.current) {
-        const {offsetWidth:menuWidth, offsetHeight: menuHeight} = menuRef.current
-        logger.debug({name: "submenu", menuWidth, menuHeight})
-        const delta =  toggleHeight - menuHeight
-        menuRef.current.style.top = `${delta}px`
+      if (menuRef && "current" in menuRef && menuRef.current) {
+        const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
+          menuRef.current;
+        logger.debug({ name: "submenu", menuWidth, menuHeight });
+        const delta = toggleHeight - menuHeight;
+        menuRef.current.style.top = `${delta}px`;
       }
-
     }
-  }, [isOpen, menuRef, toggleRef])
+  }, [isOpen, menuRef, toggleRef]);
 
-
-  const clonedChildren = useMemo(
-    () => addIdToChildren(children),
-    [children],
-  );
+  const clonedChildren = useMemo(() => addIdToChildren(children), [children]);
 
   const menuIndexes: MenuIndexesType = useMemo(
     () => buildMenuIndexes(clonedChildren),
@@ -146,12 +144,13 @@ export const SubMenu: FC<SubMenuProps> = ({
   };
 
   const buttonProps = {
-    ...menuRootElement.props, ref: toggleRef
-  }
+    ...menuRootElement.props,
+    ref: toggleRef,
+  };
 
   return (
     <div id={id} {...rest} className={getClassNames(action)}>
-      {cloneElement(menuRootElement, buttonProps) }
+      {cloneElement(menuRootElement, buttonProps)}
       {isOpen &&
         layoutChildren(
           clonedChildren,
@@ -164,7 +163,7 @@ export const SubMenu: FC<SubMenuProps> = ({
           enterCounter,
           closeOnSelect,
           setRootMenuOpen,
-          menuRef
+          menuRef,
         )}
     </div>
   );

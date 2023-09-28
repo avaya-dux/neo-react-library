@@ -104,9 +104,7 @@ export const FunctionalMenu = () => (
 
 export const MenuSeperator = () => (
   <section>
-    <Menu
-      style={{ top: "300px" }}
-      menuRootElement={<MenuButton />}>
+    <Menu style={{ top: "300px" }} menuRootElement={<MenuButton />}>
       <MenuItem>Menu Item 1</MenuItem>
       <MenuItem>Menu Item 2</MenuItem>
       <MenuSeparator />
@@ -117,9 +115,7 @@ export const MenuSeperator = () => (
 );
 
 export const MultiLevelSubMenu = () => (
-  <Menu
-    style={{ top: "300px" }}
-    menuRootElement={<MenuButton />}>
+  <Menu style={{ top: "300px" }} menuRootElement={<MenuButton />}>
     <MenuItem>Item1</MenuItem>
     <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
       <MenuItem>Sub Item1</MenuItem>

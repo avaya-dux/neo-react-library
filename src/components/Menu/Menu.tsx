@@ -88,16 +88,13 @@ export const Menu = forwardRef(
 
     const [isOpen, setOpen] = useState(defaultIsOpen);
     const [enterCounter, setEnterCounter] = useState(1);
-    const clonedChildren = useMemo(
-      () => addIdToChildren(children),
-      [children],
-    );
+    const clonedChildren = useMemo(() => addIdToChildren(children), [children]);
     const menuIndexes: MenuIndexesType = useMemo(
       () => buildMenuIndexes(clonedChildren),
       [clonedChildren],
     );
 
-    logger.debug({menuIndexes})
+    logger.debug({ menuIndexes });
     // remember item to have focus
     const [cursor, setCursor] = useState(0);
     const [cursorAction, setCursorAction] = useState<ActionType>("");
@@ -106,29 +103,30 @@ export const Menu = forwardRef(
       logger.debug(`debugging menu useEffect when open = ${isOpen}`);
 
       if (isOpen === false && didMount.current) {
-        logger.debug("calling onMenuClose")
+        logger.debug("calling onMenuClose");
         onMenuClose();
         return;
       }
 
-      if(toggleRef && "current" in toggleRef && toggleRef.current) {
-        const {offsetWidth:toggleWidth, offsetHeight: toggleHeight} = toggleRef.current
-        const {top, right, bottom, left} = toggleRef.current?.getBoundingClientRect() || {}
-        logger.debug({toggleWidth, toggleHeight, top, right, bottom, left})
+      if (toggleRef && "current" in toggleRef && toggleRef.current) {
+        const { offsetWidth: toggleWidth, offsetHeight: toggleHeight } =
+          toggleRef.current;
+        const { top, right, bottom, left } =
+          toggleRef.current?.getBoundingClientRect() || {};
+        logger.debug({ toggleWidth, toggleHeight, top, right, bottom, left });
 
-        if(menuRef && "current" in menuRef && menuRef.current) {
-          const {offsetWidth:menuWidth, offsetHeight: menuHeight} = menuRef.current || {}
-          logger.debug({menuWidth, menuHeight})
-          const delta =  - menuHeight
-          menuRef.current.style.top = `${delta}px`
+        if (menuRef && "current" in menuRef && menuRef.current) {
+          const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
+            menuRef.current || {};
+          logger.debug({ menuWidth, menuHeight });
+          const delta = -menuHeight;
+          menuRef.current.style.top = `${delta}px`;
         }
-  
       }
 
-      const {clientHeight: viewHeight, clientWidth: viewWidth} = document.lastElementChild || {}
-      logger.debug({viewWidth, viewHeight})
-
-
+      const { clientHeight: viewHeight, clientWidth: viewWidth } =
+        document.lastElementChild || {};
+      logger.debug({ viewWidth, viewHeight });
     }, [isOpen, onMenuClose, toggleRef]);
 
     // `didMount` must be placed _after_ any usage of it in a hook
@@ -237,7 +235,7 @@ export const Menu = forwardRef(
               enterCounter,
               closeOnSelect,
               setOpen,
-              menuRef
+              menuRef,
             )}
         </MenuContext.Provider>
       </div>

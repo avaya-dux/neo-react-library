@@ -29,11 +29,9 @@ import { SubMenu } from "../SubMenu";
 const logger = log.getLogger("menu-helpers");
 logger.disableAll();
 
-export const addIdToChildren = (
-  children: MenuProps["children"],
-) => {
+export const addIdToChildren = (children: MenuProps["children"]) => {
   return children.map((child) => {
-    const childType = child.type
+    const childType = child.type;
 
     if (childType === MenuItem) {
       return cloneElement(child, { id: child.props.id || genId() });
@@ -65,7 +63,7 @@ export const layoutChildren = (
   setRootMenuOpen: Dispatch<SetStateAction<boolean>>,
   ref: Ref<HTMLDivElement>,
 ) => {
-  logger.debug(`cursor = ${cursor}; menuIndexes = ${menuIndexes}`)
+  logger.debug(`cursor = ${cursor}; menuIndexes = ${menuIndexes}`);
   return (
     <div
       ref={ref}
@@ -78,12 +76,12 @@ export const layoutChildren = (
       onBlur={handleMenuBlur}
     >
       {children.map((child, index) => {
-        const childType = child.type
+        const childType = child.type;
 
         if (menuIndexes[cursor]?.index === index) {
           let activeChild;
           if (childType === MenuItem) {
-            logger.debug(`active child `)
+            logger.debug(`active child `);
             activeChild = cloneElement(child, {
               isActive: true,
               hasFocus: true,
@@ -143,16 +141,14 @@ export const layoutChildren = (
   );
 };
 
-export const buildMenuIndexes = (
-  children: MenuProps["children"],
-) => {
-  logger.debug({name: "buildMenuIndexes", children})
+export const buildMenuIndexes = (children: MenuProps["children"]) => {
+  logger.debug({ name: "buildMenuIndexes", children });
   const result =
     Children.map(children, (child, index) => {
       logger.debug(`building index ${index}`);
 
-      const childType = child.type
-      logger.debug({childType})
+      const childType = child.type;
+      logger.debug({ childType });
       if (childType === MenuItem) {
         return { index, id: child.props.id };
       } else if (childType === SubMenu) {

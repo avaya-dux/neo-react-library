@@ -19,9 +19,7 @@ describe("Menu helper methods", () => {
 
     it("should add id when menu item does not have id", () => {
       const menuItem = <MenuItem>View</MenuItem>;
-      expect(
-        addIdToChildren([menuItem])[0].props.id,
-      ).not.toBeNull();
+      expect(addIdToChildren([menuItem])[0].props.id).not.toBeNull();
     });
 
     it("should keep the id when menu item has id", () => {
@@ -32,8 +30,7 @@ describe("Menu helper methods", () => {
     it("should add id to button when submenu button does not have id", () => {
       const subMenu = <SubMenu menuRootElement={<MenuItem>File</MenuItem>} />;
       expect(
-        addIdToChildren([subMenu])[0].props.menuRootElement.props
-          .id,
+        addIdToChildren([subMenu])[0].props.menuRootElement.props.id,
       ).not.toBeNull();
     });
 
@@ -41,10 +38,9 @@ describe("Menu helper methods", () => {
       const subMenu = (
         <SubMenu menuRootElement={<MenuItem id="id">File</MenuItem>} />
       );
-      expect(
-        addIdToChildren([subMenu])[0].props.menuRootElement.props
-          .id,
-      ).toBe("id");
+      expect(addIdToChildren([subMenu])[0].props.menuRootElement.props.id).toBe(
+        "id",
+      );
     });
   });
 
