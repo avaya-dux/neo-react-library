@@ -70,6 +70,8 @@ export const handleKeyDownEvent = (
 
   switch (e.key) {
     case Keys.DOWN:
+      // stop scrolling parent
+      e.preventDefault();
       setCursorAction("");
       if (cursor + 1 >= menuIndexes.length) {
         setCursor(0);
@@ -79,6 +81,8 @@ export const handleKeyDownEvent = (
       break;
 
     case Keys.UP:
+      // stop scrolling parent
+      e.preventDefault();
       setCursorAction("");
       if (cursor - 1 < 0) {
         setCursor(menuIndexes.length - 1);

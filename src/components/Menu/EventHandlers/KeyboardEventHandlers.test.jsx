@@ -50,6 +50,7 @@ describe("MENU Keyboard event handlers", () => {
       it("should increment cursor if it is not the biggest index currently.", () => {
         const e = {
           key: Keys.DOWN,
+          preventDefault: vi.fn(),
           stopPropagation: vi.fn(),
         };
         const menuIndexes = [{ index: 0 }, { index: 1 }];
@@ -69,11 +70,13 @@ describe("MENU Keyboard event handlers", () => {
         expect(setCursor).toHaveBeenCalledWith(1);
         expect(setEnterCounter).not.toBeCalled();
         expect(setOpen).not.toBeCalled();
+        expect(e.preventDefault).toHaveBeenCalled();
         expect(e.stopPropagation).toHaveBeenCalled();
       });
       it("should set cursor to 0 if it is already the biggest index", () => {
         const e = {
           key: Keys.DOWN,
+          preventDefault: vi.fn(),
           stopPropagation: vi.fn(),
         };
         const menuIndexes = [{ index: 0 }, { index: 1 }];
@@ -93,6 +96,7 @@ describe("MENU Keyboard event handlers", () => {
         expect(setCursor).toHaveBeenCalledWith(0);
         expect(setEnterCounter).not.toBeCalled();
         expect(setOpen).not.toBeCalled();
+        expect(e.preventDefault).toHaveBeenCalled();
         expect(e.stopPropagation).toHaveBeenCalled();
       });
     });
@@ -100,6 +104,7 @@ describe("MENU Keyboard event handlers", () => {
       it("should decrement cursor if it is greater than 0.", () => {
         const e = {
           key: Keys.UP,
+          preventDefault: vi.fn(),
           stopPropagation: vi.fn(),
         };
         const menuIndexes = [{ index: 0 }, { index: 1 }];
@@ -119,11 +124,13 @@ describe("MENU Keyboard event handlers", () => {
         expect(setCursor).toHaveBeenCalledWith(0);
         expect(setEnterCounter).not.toBeCalled();
         expect(setOpen).not.toBeCalled();
+        expect(e.preventDefault).toHaveBeenCalled();
         expect(e.stopPropagation).toHaveBeenCalled();
       });
       it("should set cursor to largest index if it is 0.", () => {
         const e = {
           key: Keys.UP,
+          preventDefault: vi.fn(),
           stopPropagation: vi.fn(),
         };
         const menuIndexes = [{ index: 0 }, { index: 1 }];
@@ -143,6 +150,7 @@ describe("MENU Keyboard event handlers", () => {
         expect(setCursor).toHaveBeenCalledWith(1);
         expect(setEnterCounter).not.toBeCalled();
         expect(setOpen).not.toBeCalled();
+        expect(e.preventDefault).toHaveBeenCalled();
         expect(e.stopPropagation).toHaveBeenCalled();
       });
     });

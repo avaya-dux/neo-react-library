@@ -21,6 +21,8 @@ const menuLogger = log.getLogger("menu");
 menuLogger.enableAll();
 const subMenuLogger = log.getLogger("submenu");
 subMenuLogger.enableAll();
+const menuItemLogger = log.getLogger("menu-item");
+menuItemLogger.enableAll();
 const keyboardLogger = log.getLogger("menu-keyboard-event-handler");
 keyboardLogger.enableAll();
 const mouseLogger = log.getLogger("menu-mouse-event-handler");
@@ -75,6 +77,7 @@ SimpleMenuRightAlignedTemplated.args = {
 export const FunctionalMenu = () => (
   <section>
     <Menu
+      style={{ top: "300px" }}
       onMenuClose={() => console.log("Functional Menu closed")}
       menuRootElement={
         <MenuButton onClick={() => console.log("Functional Menu opened")}>
@@ -100,17 +103,23 @@ export const FunctionalMenu = () => (
 );
 
 export const MenuSeperator = () => (
-  <Menu menuRootElement={<MenuButton />}>
-    <MenuItem>Menu Item 1</MenuItem>
-    <MenuItem>Menu Item 2</MenuItem>
-    <MenuSeparator />
-    <MenuItem>Menu Item 3</MenuItem>
-    <MenuItem>Menu Item 4</MenuItem>
-  </Menu>
+  <section>
+    <Menu
+      style={{ top: "300px" }}
+      menuRootElement={<MenuButton />}>
+      <MenuItem>Menu Item 1</MenuItem>
+      <MenuItem>Menu Item 2</MenuItem>
+      <MenuSeparator />
+      <MenuItem>Menu Item 3</MenuItem>
+      <MenuItem>Menu Item 4</MenuItem>
+    </Menu>
+  </section>
 );
 
 export const MultiLevelSubMenu = () => (
-  <Menu menuRootElement={<MenuButton />}>
+  <Menu
+    style={{ top: "300px" }}
+    menuRootElement={<MenuButton />}>
     <MenuItem>Item1</MenuItem>
     <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
       <MenuItem>Sub Item1</MenuItem>

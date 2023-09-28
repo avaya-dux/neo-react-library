@@ -14,25 +14,25 @@ describe("Menu helper methods", () => {
   describe("addIdToChildren", () => {
     it("should do nothing when child is not menu item or sub menu", () => {
       const children = [<MenuSeparator key="separator" />];
-      expect(addIdToChildren(children, SubMenu.name)).toEqual(children);
+      expect(addIdToChildren(children)).toEqual(children);
     });
 
     it("should add id when menu item does not have id", () => {
       const menuItem = <MenuItem>View</MenuItem>;
       expect(
-        addIdToChildren([menuItem], SubMenu.name)[0].props.id,
+        addIdToChildren([menuItem])[0].props.id,
       ).not.toBeNull();
     });
 
     it("should keep the id when menu item has id", () => {
       const menuItem = <MenuItem id="id">View</MenuItem>;
-      expect(addIdToChildren([menuItem], SubMenu.name)[0].props.id).toBe("id");
+      expect(addIdToChildren([menuItem])[0].props.id).toBe("id");
     });
 
     it("should add id to button when submenu button does not have id", () => {
       const subMenu = <SubMenu menuRootElement={<MenuItem>File</MenuItem>} />;
       expect(
-        addIdToChildren([subMenu], SubMenu.name)[0].props.menuRootElement.props
+        addIdToChildren([subMenu])[0].props.menuRootElement.props
           .id,
       ).not.toBeNull();
     });
@@ -42,7 +42,7 @@ describe("Menu helper methods", () => {
         <SubMenu menuRootElement={<MenuItem id="id">File</MenuItem>} />
       );
       expect(
-        addIdToChildren([subMenu], SubMenu.name)[0].props.menuRootElement.props
+        addIdToChildren([subMenu])[0].props.menuRootElement.props
           .id,
       ).toBe("id");
     });
@@ -51,17 +51,17 @@ describe("Menu helper methods", () => {
   describe("buildMenuIndexes", () => {
     it("should return empty array with empty children", () => {
       const children = [];
-      expect(buildMenuIndexes(children, SubMenu.name)).toEqual([]);
+      expect(buildMenuIndexes(children)).toEqual([]);
     });
 
     it("should return empty array with just MenuSeparator", () => {
       const children = [<MenuSeparator key="separator" />];
-      expect(buildMenuIndexes(children, SubMenu.name)).toEqual([]);
+      expect(buildMenuIndexes(children)).toEqual([]);
     });
 
     it("should return correct result with one MenuItem", () => {
       const children = [<MenuItem key="menuitem">View</MenuItem>];
-      expect(buildMenuIndexes(children, SubMenu.name)).toMatchInlineSnapshot(`
+      expect(buildMenuIndexes(children)).toMatchInlineSnapshot(`
         [
           {
             "id": undefined,
@@ -83,7 +83,7 @@ describe("Menu helper methods", () => {
           <MenuItem>Delete</MenuItem>
         </SubMenu>,
       ];
-      expect(buildMenuIndexes(children, SubMenu.name)).toMatchInlineSnapshot(`
+      expect(buildMenuIndexes(children)).toMatchInlineSnapshot(`
         [
           {
             "id": "button",
@@ -109,7 +109,7 @@ describe("Menu helper methods", () => {
           Help
         </MenuItem>,
       ];
-      expect(buildMenuIndexes(children, SubMenu.name)).toMatchInlineSnapshot(`
+      expect(buildMenuIndexes(children)).toMatchInlineSnapshot(`
         [
           {
             "id": "button",
@@ -146,7 +146,6 @@ describe("Menu helper methods", () => {
       ];
       const result = layoutChildren(
         children,
-        SubMenu.name,
         handleMenuKeyDown,
         handleMenuMouseMove,
         handleMenuBlur,
@@ -193,7 +192,6 @@ describe("Menu helper methods", () => {
       ];
       const result = layoutChildren(
         children,
-        SubMenu.name,
         handleMenuKeyDown,
         handleMenuMouseMove,
         handleMenuBlur,
@@ -246,6 +244,7 @@ describe("Menu helper methods", () => {
               <div
                 class="neo-dropdown__content"
                 role="menu"
+                style="top: 0px;"
                 tabindex="-1"
               >
                 <div
@@ -290,7 +289,6 @@ describe("Menu helper methods", () => {
       ];
       const result = layoutChildren(
         children,
-        SubMenu.name,
         handleMenuKeyDown,
         handleMenuMouseMove,
         handleMenuBlur,
@@ -338,7 +336,6 @@ describe("Menu helper methods", () => {
       ];
       const result = layoutChildren(
         children,
-        SubMenu.name,
         handleMenuKeyDown,
         handleMenuMouseMove,
         handleMenuBlur,
@@ -373,7 +370,6 @@ describe("Menu helper methods", () => {
       ];
       const result = layoutChildren(
         children,
-        SubMenu.name,
         handleMenuKeyDown,
         handleMenuMouseMove,
         handleMenuBlur,

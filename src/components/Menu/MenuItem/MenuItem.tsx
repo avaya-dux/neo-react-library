@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import log from "loglevel";
-import { RefObject, useEffect, useId, useRef } from "react";
+import { MutableRefObject, Ref, RefObject, forwardRef, useEffect, useId, useRef } from "react";
 
 import { MenuItemProps } from "../MenuTypes";
 
@@ -32,7 +32,7 @@ logger.disableAll();
       </MenuItem>
     </Menu>
  */
-export const MenuItem = ({
+export const MenuItem = forwardRef(({
   children,
   className,
   counter,
@@ -42,19 +42,20 @@ export const MenuItem = ({
   isActive = false,
   tabIndex = 0,
   ...rest
-}: MenuItemProps) => {
+}: MenuItemProps, ref: Ref<HTMLDivElement>) => {
   const generatedId = useId();
   id = id || generatedId;
-  const ref = useRef(null);
+  const _ref = useRef(null);
+  ref = ref || _ref;
 
-  log.debug(
+  logger.debug(
     `debug menuitem hasFocus = ${hasFocus}, isActive=${isActive}, counter=${counter}`,
   );
 
   // run it in every render
   useEffect(() => {
-    log.debug(`trigger focus ${counter}`);
-    focus(hasFocus, ref);
+    logger.debug(`trigger focus ${counter}`);
+    focus(hasFocus, ref as MutableRefObject<HTMLDivElement>);
   });
 
   return (
@@ -74,12 +75,12 @@ export const MenuItem = ({
       {children}
     </div>
   );
-};
+});
 MenuItem.displayName = "MenuItem";
 
 export const focus = (hasFocus: boolean, ref: RefObject<HTMLDivElement>) => {
   if (hasFocus) {
-    log.debug("focusing menu item");
+    logger.debug("focusing menu item");
     ref.current?.focus();
   }
 };
