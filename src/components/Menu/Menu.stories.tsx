@@ -38,12 +38,50 @@ export const SimpleMenu = () => (
   </Menu>
 );
 
+export const UpGoingMenus = () => (
+  <>
+    <Menu
+      style={{ position: "absolute", bottom: "50px" }}
+      menuRootElement={<MenuButton>Multilevel Menu</MenuButton>}
+    >
+      <MenuItem>Item1</MenuItem>
+      <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
+        <MenuItem>Sub Item1</MenuItem>
+        <MenuItem>Sub Item2</MenuItem>
+        <MenuItem>Sub Item3</MenuItem>
+        <SubMenu menuRootElement={<MenuItem>Sub SubMenu</MenuItem>}>
+          <MenuItem>Sub Sub Item1</MenuItem>
+          <MenuItem>Sub Sub Item2</MenuItem>
+          <MenuItem>Sub Sub Item3</MenuItem>
+        </SubMenu>
+      </SubMenu>
+      <MenuItem>Item3</MenuItem>
+    </Menu>
+    <Menu
+      style={{ position: "absolute", left: "50%", bottom: "50px" }}
+      menuRootElement={<Button>Simple & Left Align</Button>}
+    >
+      <MenuItem>Menu Item 1</MenuItem>
+      <MenuItem>Menu Item 2</MenuItem>
+      <MenuItem>Menu Item 3</MenuItem>
+    </Menu>
+    <Menu
+      style={{ position: "absolute", bottom: "50px", right: "20px" }}
+      itemAlignment="right"
+      menuRootElement={<Button>Simple & Right Align</Button>}
+    >
+      <MenuItem>Menu Item 1</MenuItem>
+      <MenuItem>Menu Item 2</MenuItem>
+      <MenuItem>Menu Item 3</MenuItem>
+    </Menu>
+  </>
+);
 const Template: Story<MenuProps> = ({ children, ...rest }: MenuProps) => (
   <section
     style={{
       display: "flex",
       justifyContent: "center",
-      margin: "300px 50%",
+      margin: "0px 50%",
       width: "200px",
     }}
   >
@@ -77,7 +115,6 @@ SimpleMenuRightAlignedTemplated.args = {
 export const FunctionalMenu = () => (
   <section>
     <Menu
-      style={{ top: "300px" }}
       onMenuClose={() => console.log("Functional Menu closed")}
       menuRootElement={
         <MenuButton onClick={() => console.log("Functional Menu opened")}>
@@ -104,7 +141,7 @@ export const FunctionalMenu = () => (
 
 export const MenuSeperator = () => (
   <section>
-    <Menu style={{ top: "300px" }} menuRootElement={<MenuButton />}>
+    <Menu menuRootElement={<MenuButton />}>
       <MenuItem>Menu Item 1</MenuItem>
       <MenuItem>Menu Item 2</MenuItem>
       <MenuSeparator />
@@ -115,7 +152,7 @@ export const MenuSeperator = () => (
 );
 
 export const MultiLevelSubMenu = () => (
-  <Menu style={{ top: "300px" }} menuRootElement={<MenuButton />}>
+  <Menu menuRootElement={<MenuButton />}>
     <MenuItem>Item1</MenuItem>
     <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
       <MenuItem>Sub Item1</MenuItem>

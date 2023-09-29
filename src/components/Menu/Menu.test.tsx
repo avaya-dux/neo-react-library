@@ -17,6 +17,7 @@ import {
   SimpleMenuRightAlignedTemplated,
   SimpleMenuTemplated,
   TwoMenus,
+  UpGoingMenus,
 } from "./Menu.stories";
 
 const menuLogger = log.getLogger("menu");
@@ -411,6 +412,23 @@ describe("Menu", () => {
             onRightMenuClose={() => null}
           />,
         );
+      });
+
+      it("should render ok", () => {
+        const { container } = renderResult;
+        expect(container).not.toBe(null);
+      });
+
+      it("passes basic axe compliance", async () => {
+        const { container } = renderResult;
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+    describe("UpGoingMenus", () => {
+      let renderResult: RenderResult;
+      beforeEach(() => {
+        renderResult = render(<UpGoingMenus />);
       });
 
       it("should render ok", () => {
