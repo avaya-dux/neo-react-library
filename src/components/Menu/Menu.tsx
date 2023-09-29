@@ -88,7 +88,7 @@ export const Menu = forwardRef(
 
     const [isOpen, setOpen] = useState(defaultIsOpen);
     const [enterCounter, setEnterCounter] = useState(1);
-    const [up, setUp] = useState(false)
+    const [up, setUp] = useState(false);
     const clonedChildren = useMemo(() => addIdToChildren(children), [children]);
     const menuIndexes: MenuIndexesType = useMemo(
       () => buildMenuIndexes(clonedChildren),
@@ -100,41 +100,38 @@ export const Menu = forwardRef(
     const [cursor, setCursor] = useState(0);
     const [cursorAction, setCursorAction] = useState<ActionType>("");
 
-    const adjustPosition = useCallback(
-      () => {
-        if (!isOpen) {
-          return;
-        }
-        const { clientHeight: viewHeight, clientWidth: viewWidth } =
-          document.lastElementChild || { clientHeight: 0, clientWidth: 0 };
-        logger.debug({ viewWidth, viewHeight });
+    const adjustPosition = useCallback(() => {
+      if (!isOpen) {
+        return;
+      }
+      const { clientHeight: viewHeight, clientWidth: viewWidth } =
+        document.lastElementChild || { clientHeight: 0, clientWidth: 0 };
+      logger.debug({ viewWidth, viewHeight });
 
-        if (toggleRef && "current" in toggleRef && toggleRef.current) {
-          const { offsetWidth: toggleWidth, offsetHeight: toggleHeight } =
-            toggleRef.current;
-          const { top, right, bottom, left } =
-            toggleRef.current?.getBoundingClientRect() || {};
-          logger.debug({ toggleWidth, toggleHeight, top, right, bottom, left });
+      if (toggleRef && "current" in toggleRef && toggleRef.current) {
+        const { offsetWidth: toggleWidth, offsetHeight: toggleHeight } =
+          toggleRef.current;
+        const { top, right, bottom, left } =
+          toggleRef.current?.getBoundingClientRect() || {};
+        logger.debug({ toggleWidth, toggleHeight, top, right, bottom, left });
 
-          if (menuRef && "current" in menuRef && menuRef.current) {
-            const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
-              menuRef.current || {};
-            logger.debug({ menuWidth, menuHeight });
-            const noSpaceBelow = bottom + menuHeight > viewHeight;
-            const haveSpaceAbove = menuHeight < top;
-            logger.debug({ noSpaceBelow, haveSpaceAbove })
-            if (noSpaceBelow && haveSpaceAbove) {
-              setUp(true)
-              const delta = -menuHeight;
-              menuRef.current.style.top = `${delta}px`;
-            } else {
-              setUp(false)
-            }
+        if (menuRef && "current" in menuRef && menuRef.current) {
+          const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
+            menuRef.current || {};
+          logger.debug({ menuWidth, menuHeight });
+          const noSpaceBelow = bottom + menuHeight > viewHeight;
+          const haveSpaceAbove = menuHeight < top;
+          logger.debug({ noSpaceBelow, haveSpaceAbove });
+          if (noSpaceBelow && haveSpaceAbove) {
+            setUp(true);
+            const delta = -menuHeight;
+            menuRef.current.style.top = `${delta}px`;
+          } else {
+            setUp(false);
           }
         }
-      },
-      [isOpen, toggleRef],
-    )
+      }
+    }, [isOpen, toggleRef]);
 
     useEffect(() => {
       logger.debug(`debugging menu useEffect when open = ${isOpen}`);
@@ -147,8 +144,7 @@ export const Menu = forwardRef(
       adjustPosition();
       window.addEventListener("resize", adjustPosition);
 
-      return () =>
-        window.removeEventListener("resize", adjustPosition);
+      return () => window.removeEventListener("resize", adjustPosition);
     }, [adjustPosition, isOpen, onMenuClose]);
 
     // `didMount` must be placed _after_ any usage of it in a hook

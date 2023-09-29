@@ -92,7 +92,7 @@ export const SubMenu: FC<SubMenuProps> = ({
         const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
           menuRef.current;
         logger.debug({ name: "submenu", menuWidth, menuHeight });
-        if(up){
+        if (up) {
           const delta = toggleHeight - menuHeight;
           menuRef.current.style.top = `${delta}px`;
         }
