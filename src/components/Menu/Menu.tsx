@@ -88,7 +88,7 @@ export const Menu = forwardRef(
 
     const [isOpen, setOpen] = useState(defaultIsOpen);
     const [enterCounter, setEnterCounter] = useState(1);
-    const [up, setUp] = useState(false);
+    const [upwards, setUpwards] = useState(false);
     const clonedChildren = useMemo(() => addIdToChildren(children), [children]);
     const menuIndexes: MenuIndexesType = useMemo(
       () => buildMenuIndexes(clonedChildren),
@@ -123,11 +123,11 @@ export const Menu = forwardRef(
           const haveSpaceAbove = menuHeight < top;
           logger.debug({ noSpaceBelow, haveSpaceAbove });
           if (noSpaceBelow && haveSpaceAbove) {
-            setUp(true);
+            setUpwards(true);
             const delta = -menuHeight;
             menuRef.current.style.top = `${delta}px`;
           } else {
-            setUp(false);
+            setUpwards(false);
           }
         }
       }
@@ -230,7 +230,7 @@ export const Menu = forwardRef(
 
     const menuContext: MenuContextType = {
       closeOnSelect,
-      up,
+      upwards,
       setRootMenuOpen: setOpen,
     };
 

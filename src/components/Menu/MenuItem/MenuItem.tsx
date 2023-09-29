@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import log from "loglevel";
 import {
-  MutableRefObject,
   Ref,
   RefObject,
   forwardRef,
@@ -67,7 +66,7 @@ export const MenuItem = forwardRef(
     // run it in every render
     useEffect(() => {
       logger.debug(`trigger focus ${counter}`);
-      focus(hasFocus, ref as MutableRefObject<HTMLDivElement>);
+      focus(hasFocus, ref as RefObject<HTMLDivElement>);
     });
 
     return (
