@@ -81,8 +81,6 @@ const Template: Story<MenuProps> = ({ children, ...rest }: MenuProps) => (
     style={{
       display: "flex",
       justifyContent: "center",
-      margin: "0px 50%",
-      width: "200px",
     }}
   >
     <Menu {...rest}>{children}</Menu>
