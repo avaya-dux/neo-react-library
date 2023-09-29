@@ -60,7 +60,7 @@ export const SubMenu: FC<SubMenuProps> = ({
 }) => {
   const generatedId = useId();
   id = id || generatedId;
-  const { closeOnSelect, setRootMenuOpen } = useContext(MenuContext);
+  const { closeOnSelect, setRootMenuOpen, up } = useContext(MenuContext);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const { children: btnChildren, isActive, hasFocus } = menuRootElement.props;
@@ -92,11 +92,13 @@ export const SubMenu: FC<SubMenuProps> = ({
         const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
           menuRef.current;
         logger.debug({ name: "submenu", menuWidth, menuHeight });
-        const delta = toggleHeight - menuHeight;
-        menuRef.current.style.top = `${delta}px`;
+        if(up){
+          const delta = toggleHeight - menuHeight;
+          menuRef.current.style.top = `${delta}px`;
+        }
       }
     }
-  }, [isOpen, menuRef, toggleRef]);
+  }, [isOpen, menuRef, toggleRef, up]);
 
   const clonedChildren = useMemo(() => addIdToChildren(children), [children]);
 

@@ -90,7 +90,6 @@ export const layoutChildren = (
             });
           } else {
             const buttonElement = (child.props as SubMenuProps).menuRootElement;
-            // todo: add ref to button element here
             const cloneButton = cloneElement(buttonElement, {
               isActive: true,
               hasFocus: true,

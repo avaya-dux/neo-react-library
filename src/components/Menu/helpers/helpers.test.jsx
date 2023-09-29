@@ -240,7 +240,6 @@ describe("Menu helper methods", () => {
               <div
                 class="neo-dropdown__content"
                 role="menu"
-                style="top: 0px;"
                 tabindex="-1"
               >
                 <div
