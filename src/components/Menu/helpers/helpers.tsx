@@ -3,13 +3,13 @@ import {
   Children,
   cloneElement,
   Dispatch,
-  FC,
   FocusEventHandler,
   Fragment,
   isValidElement,
   KeyboardEventHandler,
   MouseEventHandler,
   ReactElement,
+  Ref,
   SetStateAction,
 } from "react";
 
@@ -24,20 +24,18 @@ import {
   MenuProps,
   SubMenuProps,
 } from "../MenuTypes";
+import { SubMenu } from "../SubMenu";
 
 const logger = log.getLogger("menu-helpers");
 logger.disableAll();
 
-export const addIdToChildren = (
-  children: MenuProps["children"],
-  subMenuName: string,
-) => {
+export const addIdToChildren = (children: MenuProps["children"]) => {
   return children.map((child) => {
-    const childTypeName = (child.type as FC)?.name || "menu-child-component";
+    const childType = child.type;
 
-    if (childTypeName === MenuItem.name) {
+    if (childType === MenuItem) {
       return cloneElement(child, { id: child.props.id || genId() });
-    } else if (childTypeName === subMenuName) {
+    } else if (childType === SubMenu) {
       const buttonElement = (child.props as SubMenuProps).menuRootElement;
       const buttonElementId = buttonElement.props.id || genId();
       const cloneButton = cloneElement(buttonElement, {
@@ -54,7 +52,6 @@ export const addIdToChildren = (
 
 export const layoutChildren = (
   children: MenuProps["children"],
-  subMenuName: string,
   handleMenuKeyDown: KeyboardEventHandler<HTMLDivElement>,
   handleMenuMouseMove: MouseEventHandler,
   handleMenuBlur: FocusEventHandler,
@@ -64,9 +61,12 @@ export const layoutChildren = (
   enterCounter: number,
   closeOnSelect: boolean,
   setRootMenuOpen: Dispatch<SetStateAction<boolean>>,
+  ref: Ref<HTMLDivElement>,
 ) => {
+  logger.debug(`cursor = ${cursor}; menuIndexes = ${menuIndexes}`);
   return (
     <div
+      ref={ref}
       className="neo-dropdown__content"
       role="menu"
       tabIndex={-1}
@@ -76,12 +76,12 @@ export const layoutChildren = (
       onBlur={handleMenuBlur}
     >
       {children.map((child, index) => {
-        const childTypeName =
-          (child.type as FC)?.name || "menu-child-component";
+        const childType = child.type;
 
         if (menuIndexes[cursor]?.index === index) {
           let activeChild;
-          if (childTypeName === MenuItem.name) {
+          if (childType === MenuItem) {
+            logger.debug(`active child `);
             activeChild = cloneElement(child, {
               isActive: true,
               hasFocus: true,
@@ -105,7 +105,7 @@ export const layoutChildren = (
         } else {
           if (isValidElement(child)) {
             let inactiveChild;
-            if (childTypeName === MenuItem.name) {
+            if (childType === MenuItem) {
               inactiveChild = cloneElement(
                 child as ReactElement<MenuItemProps>,
                 {
@@ -114,7 +114,7 @@ export const layoutChildren = (
                   tabIndex: -1,
                 },
               );
-            } else if (childTypeName === subMenuName) {
+            } else if (childType === SubMenu) {
               const buttonElement = (child.props as SubMenuProps)
                 .menuRootElement;
               const cloneButton = cloneElement(buttonElement, {
@@ -140,19 +140,17 @@ export const layoutChildren = (
   );
 };
 
-export const buildMenuIndexes = (
-  children: MenuProps["children"],
-  subMenuName: string,
-) => {
+export const buildMenuIndexes = (children: MenuProps["children"]) => {
+  logger.debug({ name: "buildMenuIndexes", children });
   const result =
     Children.map(children, (child, index) => {
       logger.debug(`building index ${index}`);
 
-      const childTypeName = (child.type as FC)?.name || "menu-child-component";
-
-      if (childTypeName === MenuItem.name) {
+      const childType = child.type;
+      logger.debug({ childType });
+      if (childType === MenuItem) {
         return { index, id: child.props.id };
-      } else if (childTypeName === subMenuName) {
+      } else if (childType === SubMenu) {
         const props = child.props as SubMenuProps;
         return {
           index,

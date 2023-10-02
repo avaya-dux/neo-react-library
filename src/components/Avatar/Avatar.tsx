@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { forwardRef, Ref, HTMLAttributes } from "react";
 
 const SizeMap = {
   sm: "small",
@@ -27,18 +27,20 @@ export interface SmallAvatarProps extends AvatarProps {
  *
  * @see https://design.avayacloud.com/components/web/avatar-web
  */
-export function Avatar(props: AvatarProps) {
-  const figureProps = getAvatarFigureProps(props);
-  const statusProps = getAvatarStatusProps(props);
-  const imageProps = getAvatarImageProps(props);
+export const Avatar = forwardRef(
+  (props: AvatarProps, ref: Ref<HTMLElement>) => {
+    const figureProps = getAvatarFigureProps(props);
+    const statusProps = getAvatarStatusProps(props);
+    const imageProps = getAvatarImageProps(props);
 
-  return (
-    <figure {...figureProps}>
-      {!!props?.image && <img {...imageProps} alt={imageProps.alt} />}
-      {!!props?.status && <div {...statusProps} />}
-    </figure>
-  );
-}
+    return (
+      <figure ref={ref} {...figureProps}>
+        {!!props?.image && <img {...imageProps} alt={imageProps.alt} />}
+        {!!props?.status && <div {...statusProps} />}
+      </figure>
+    );
+  },
+);
 
 /**
  * Derives all the HTML props for the `figure` element, based

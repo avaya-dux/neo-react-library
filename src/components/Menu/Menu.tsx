@@ -33,7 +33,6 @@ import {
   MenuIndexesType,
   MenuProps,
 } from "./MenuTypes";
-import { SubMenu } from "./SubMenu";
 
 const logger = log.getLogger("menu");
 logger.disableAll();
@@ -83,34 +82,70 @@ export const Menu = forwardRef(
     ref: Ref<HTMLButtonElement>,
   ) => {
     logger.debug("debugging Menu ...");
+    const _ref = useRef<HTMLButtonElement>(null);
+    const toggleRef = ref || _ref;
+    const menuRef = useRef<HTMLDivElement>(null);
 
     const [isOpen, setOpen] = useState(defaultIsOpen);
     const [enterCounter, setEnterCounter] = useState(1);
-    const clonedChildren = useMemo(
-      () => addIdToChildren(children, SubMenu.name),
-      [children],
-    );
+    const [upwards, setUpwards] = useState(false);
+    const clonedChildren = useMemo(() => addIdToChildren(children), [children]);
     const menuIndexes: MenuIndexesType = useMemo(
-      () => buildMenuIndexes(clonedChildren, SubMenu.name),
+      () => buildMenuIndexes(clonedChildren),
       [clonedChildren],
     );
+
+    logger.debug({ menuIndexes });
     // remember item to have focus
     const [cursor, setCursor] = useState(0);
     const [cursorAction, setCursorAction] = useState<ActionType>("");
 
-    useEffect(() => {
-      logger.debug(`refocusing button when open = ${isOpen}`);
-
-      // focus button after ESC
-      if (!isOpen && ref && "current" in ref && ref.current) {
-        logger.debug("focus button");
-        ref.current.focus();
+    const adjustPosition = useCallback(() => {
+      if (!isOpen) {
+        return;
       }
+      const { clientHeight: viewHeight, clientWidth: viewWidth } =
+        document.lastElementChild || { clientHeight: 0, clientWidth: 0 };
+      logger.debug({ viewWidth, viewHeight });
+
+      if (toggleRef && "current" in toggleRef && toggleRef.current) {
+        const { offsetWidth: toggleWidth, offsetHeight: toggleHeight } =
+          toggleRef.current;
+        const { top, right, bottom, left } =
+          toggleRef.current?.getBoundingClientRect() || {};
+        logger.debug({ toggleWidth, toggleHeight, top, right, bottom, left });
+
+        if (menuRef && "current" in menuRef && menuRef.current) {
+          const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
+            menuRef.current || {};
+          logger.debug({ menuWidth, menuHeight });
+          const noSpaceBelow = bottom + menuHeight > viewHeight;
+          const haveSpaceAbove = menuHeight < top;
+          logger.debug({ noSpaceBelow, haveSpaceAbove });
+          if (noSpaceBelow && haveSpaceAbove) {
+            setUpwards(true);
+            const delta = -menuHeight;
+            menuRef.current.style.top = `${delta}px`;
+          } else {
+            setUpwards(false);
+          }
+        }
+      }
+    }, [isOpen, toggleRef]);
+
+    useEffect(() => {
+      logger.debug(`debugging menu useEffect when open = ${isOpen}`);
 
       if (isOpen === false && didMount.current) {
+        logger.debug("calling onMenuClose");
         onMenuClose();
+        return;
       }
-    }, [isOpen, onMenuClose, ref]);
+      adjustPosition();
+      window.addEventListener("resize", adjustPosition);
+
+      return () => window.removeEventListener("resize", adjustPosition);
+    }, [adjustPosition, isOpen, onMenuClose]);
 
     // `didMount` must be placed _after_ any usage of it in a hook
     const didMount = useRef(false);
@@ -159,36 +194,43 @@ export const Menu = forwardRef(
 
     type MenuButtonOnClickEventType = HTMLButtonElement & HTMLDivElement;
 
-    const menuButton = cloneElement(menuRootElement, {
-      onClick: (e: MouseEvent<MenuButtonOnClickEventType>) => {
-        handleMenuButtonClickEvent(e, isOpen, setOpen);
+    const menuButton = useMemo(() => {
+      const buttonProps = {
+        ...menuRootElement.props,
 
-        if (menuRootElement.props.onClick) {
-          menuRootElement.props.onClick(e);
-        }
-      },
+        onClick: (e: MouseEvent<MenuButtonOnClickEventType>) => {
+          handleMenuButtonClickEvent(e, isOpen, setOpen);
 
-      onKeyDown: (e: KeyboardEvent<MenuButtonOnClickEventType>) => {
-        handleButtonKeyDownEvent(e, menuIndexes, setCursor, setOpen);
+          if (menuRootElement.props.onClick) {
+            menuRootElement.props.onClick(e);
+          }
+        },
 
-        if (menuRootElement.props.onKeyDown) {
-          menuRootElement.props.onKeyDown(e);
-        }
-      },
+        onKeyDown: (e: KeyboardEvent<MenuButtonOnClickEventType>) => {
+          handleButtonKeyDownEvent(e, menuIndexes, setCursor, setOpen);
 
-      onMouseEnter: (e: MouseEvent<MenuButtonOnClickEventType>) => {
-        if (openOnHover) {
-          setOpen(true);
-        }
+          if (menuRootElement.props.onKeyDown) {
+            menuRootElement.props.onKeyDown(e);
+          }
+        },
 
-        if (menuRootElement.props.onMouseEnter) {
-          menuRootElement.props.onMouseEnter(e);
-        }
-      },
-    });
+        onMouseEnter: (e: MouseEvent<MenuButtonOnClickEventType>) => {
+          if (openOnHover) {
+            setOpen(true);
+          }
+
+          if (menuRootElement.props.onMouseEnter) {
+            menuRootElement.props.onMouseEnter(e);
+          }
+        },
+        ref: toggleRef,
+      };
+      return cloneElement(menuRootElement, buttonProps);
+    }, [menuRootElement, toggleRef, isOpen, menuIndexes, openOnHover]);
 
     const menuContext: MenuContextType = {
       closeOnSelect,
+      upwards,
       setRootMenuOpen: setOpen,
     };
 
@@ -203,7 +245,6 @@ export const Menu = forwardRef(
           {isOpen &&
             layoutChildren(
               clonedChildren,
-              SubMenu.name,
               handleMenuKeyDown,
               handleMenuMouseMove,
               handleMenuBlur,
@@ -213,6 +254,7 @@ export const Menu = forwardRef(
               enterCounter,
               closeOnSelect,
               setOpen,
+              menuRef,
             )}
         </MenuContext.Provider>
       </div>

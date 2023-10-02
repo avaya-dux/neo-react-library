@@ -44,5 +44,6 @@ export type MenuIndexesType = {
 
 export interface MenuContextType
   extends Required<Pick<MenuProps, "closeOnSelect">> {
+  upwards: boolean;
   setRootMenuOpen: Dispatch<SetStateAction<boolean>>;
 }

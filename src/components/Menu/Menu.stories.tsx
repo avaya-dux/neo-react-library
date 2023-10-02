@@ -1,8 +1,5 @@
 import { Meta, Story } from "@storybook/react";
 import log from "loglevel";
-
-import { Button } from "components/Button";
-
 import {
   Menu,
   MenuButton,
@@ -21,6 +18,8 @@ const menuLogger = log.getLogger("menu");
 menuLogger.enableAll();
 const subMenuLogger = log.getLogger("submenu");
 subMenuLogger.enableAll();
+const menuItemLogger = log.getLogger("menu-item");
+menuItemLogger.enableAll();
 const keyboardLogger = log.getLogger("menu-keyboard-event-handler");
 keyboardLogger.enableAll();
 const mouseLogger = log.getLogger("menu-mouse-event-handler");
@@ -29,15 +28,64 @@ const menuHelpersLogger = log.getLogger("menu-helpers");
 menuHelpersLogger.enableAll();
 
 export const SimpleMenu = () => (
-  <Menu menuRootElement={<Button>Open Menu</Button>}>
+  <Menu menuRootElement={<MenuButton>Open Menu</MenuButton>}>
     <MenuItem>Menu Item 1</MenuItem>
     <MenuItem>Menu Item 2</MenuItem>
     <MenuItem>Menu Item 3</MenuItem>
   </Menu>
 );
 
+export const UpGoingMenus = () => (
+  <>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eum
+      cupiditate dolorum nihil, quo a impedit tenetur delectus repellat totam
+      possimus inventore corrupti dolor. Nobis deserunt aspernatur temporibus
+      nemo dolores?
+    </p>
+    <Menu
+      style={{ position: "fixed", bottom: "50px" }}
+      menuRootElement={<MenuButton>Multilevel Menu</MenuButton>}
+    >
+      <MenuItem>Item1</MenuItem>
+      <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
+        <MenuItem>Sub Item1</MenuItem>
+        <MenuItem>Sub Item2</MenuItem>
+        <MenuItem>Sub Item3</MenuItem>
+        <SubMenu menuRootElement={<MenuItem>Sub SubMenu</MenuItem>}>
+          <MenuItem>Sub Sub Item1</MenuItem>
+          <MenuItem>Sub Sub Item2</MenuItem>
+          <MenuItem>Sub Sub Item3</MenuItem>
+        </SubMenu>
+      </SubMenu>
+      <MenuItem>Item3</MenuItem>
+    </Menu>
+    <Menu
+      style={{ position: "fixed", left: "50%", bottom: "50px" }}
+      menuRootElement={<MenuButton>Simple & Left Align</MenuButton>}
+    >
+      <MenuItem>Menu Item 1</MenuItem>
+      <MenuItem>Menu Item 2</MenuItem>
+      <MenuItem>Menu Item 3</MenuItem>
+    </Menu>
+    <Menu
+      style={{ position: "fixed", bottom: "50px", right: "20px" }}
+      itemAlignment="right"
+      menuRootElement={<MenuButton>Simple & Right Align</MenuButton>}
+    >
+      <MenuItem>Menu Item 1</MenuItem>
+      <MenuItem>Menu Item 2</MenuItem>
+      <MenuItem>Menu Item 3</MenuItem>
+    </Menu>
+  </>
+);
 const Template: Story<MenuProps> = ({ children, ...rest }: MenuProps) => (
-  <section style={{ display: "flex", justifyContent: "center" }}>
+  <section
+    style={{
+      display: "flex",
+      justifyContent: "center",
+    }}
+  >
     <Menu {...rest}>{children}</Menu>
   </section>
 );
@@ -93,13 +141,15 @@ export const FunctionalMenu = () => (
 );
 
 export const MenuSeperator = () => (
-  <Menu menuRootElement={<MenuButton />}>
-    <MenuItem>Menu Item 1</MenuItem>
-    <MenuItem>Menu Item 2</MenuItem>
-    <MenuSeparator />
-    <MenuItem>Menu Item 3</MenuItem>
-    <MenuItem>Menu Item 4</MenuItem>
-  </Menu>
+  <section>
+    <Menu menuRootElement={<MenuButton />}>
+      <MenuItem>Menu Item 1</MenuItem>
+      <MenuItem>Menu Item 2</MenuItem>
+      <MenuSeparator />
+      <MenuItem>Menu Item 3</MenuItem>
+      <MenuItem>Menu Item 4</MenuItem>
+    </Menu>
+  </section>
 );
 
 export const MultiLevelSubMenu = () => (
