@@ -110,6 +110,7 @@
     "clsx": "2.0.0",
     "cypress": "13.2.0",
     "cypress-real-events": "1.10.3",
+    "diffable-html": "5.0.0",
     "downshift": "7.6.2",
     "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
