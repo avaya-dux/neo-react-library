@@ -5,6 +5,7 @@ import { IconNamesType } from "utils";
 
 export interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;
+  key?: string;
   children: ReactNode;
   disabled?: boolean;
   icon?: IconNamesType;
