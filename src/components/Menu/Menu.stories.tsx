@@ -1,8 +1,5 @@
 import { Meta, Story } from "@storybook/react";
 import log from "loglevel";
-
-import { Button } from "components/Button";
-
 import {
   Menu,
   MenuButton,
@@ -40,7 +37,12 @@ export const SimpleMenu = () => (
 
 export const UpGoingMenus = () => (
   <>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eum cupiditate dolorum nihil, quo a impedit tenetur delectus repellat totam possimus inventore corrupti dolor. Nobis deserunt aspernatur temporibus nemo dolores?</p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eum
+      cupiditate dolorum nihil, quo a impedit tenetur delectus repellat totam
+      possimus inventore corrupti dolor. Nobis deserunt aspernatur temporibus
+      nemo dolores?
+    </p>
     <Menu
       style={{ position: "fixed", bottom: "50px" }}
       menuRootElement={<MenuButton>Multilevel Menu</MenuButton>}
