@@ -559,7 +559,7 @@ describe("MENU Keyboard event handlers", () => {
         const menuIndexes = [];
         handleButtonKeyDownEvent(e, menuIndexes, setCursor, setOpen);
         expect(e.stopPropagation).toBeCalled();
-        expect(e.preventDefault).not.toBeCalled();
+        expect(e.preventDefault).toBeCalled();
         expect(setCursor).not.toBeCalled();
       });
       it("should open menu and set cursor to 1", () => {
@@ -571,7 +571,7 @@ describe("MENU Keyboard event handlers", () => {
         const menuIndexes = [{ index: 0 }, { index: 1 }];
         handleButtonKeyDownEvent(e, menuIndexes, setCursor, setOpen);
         expect(e.stopPropagation).toBeCalled();
-        expect(e.preventDefault).not.toBeCalled();
+        expect(e.preventDefault).toBeCalled();
         expect(setCursor).toBeCalledWith(1);
       });
     });
