@@ -29,6 +29,7 @@ export const handleButtonKeyDownEvent = (
       break;
     case Keys.UP:
       logger.debug("activate menu up...");
+      e.preventDefault();
       setOpen(true);
       if (menuIndexes.length > 0) {
         setCursor(menuIndexes.length - 1);

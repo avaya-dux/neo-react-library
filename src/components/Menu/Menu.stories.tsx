@@ -31,7 +31,7 @@ const menuHelpersLogger = log.getLogger("menu-helpers");
 menuHelpersLogger.enableAll();
 
 export const SimpleMenu = () => (
-  <Menu menuRootElement={<Button>Open Menu</Button>}>
+  <Menu menuRootElement={<MenuButton>Open Menu</MenuButton>}>
     <MenuItem>Menu Item 1</MenuItem>
     <MenuItem>Menu Item 2</MenuItem>
     <MenuItem>Menu Item 3</MenuItem>
@@ -40,8 +40,9 @@ export const SimpleMenu = () => (
 
 export const UpGoingMenus = () => (
   <>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eum cupiditate dolorum nihil, quo a impedit tenetur delectus repellat totam possimus inventore corrupti dolor. Nobis deserunt aspernatur temporibus nemo dolores?</p>
     <Menu
-      style={{ position: "absolute", bottom: "50px" }}
+      style={{ position: "fixed", bottom: "50px" }}
       menuRootElement={<MenuButton>Multilevel Menu</MenuButton>}
     >
       <MenuItem>Item1</MenuItem>
@@ -58,17 +59,17 @@ export const UpGoingMenus = () => (
       <MenuItem>Item3</MenuItem>
     </Menu>
     <Menu
-      style={{ position: "absolute", left: "50%", bottom: "50px" }}
-      menuRootElement={<Button>Simple & Left Align</Button>}
+      style={{ position: "fixed", left: "50%", bottom: "50px" }}
+      menuRootElement={<MenuButton>Simple & Left Align</MenuButton>}
     >
       <MenuItem>Menu Item 1</MenuItem>
       <MenuItem>Menu Item 2</MenuItem>
       <MenuItem>Menu Item 3</MenuItem>
     </Menu>
     <Menu
-      style={{ position: "absolute", bottom: "50px", right: "20px" }}
+      style={{ position: "fixed", bottom: "50px", right: "20px" }}
       itemAlignment="right"
-      menuRootElement={<Button>Simple & Right Align</Button>}
+      menuRootElement={<MenuButton>Simple & Right Align</MenuButton>}
     >
       <MenuItem>Menu Item 1</MenuItem>
       <MenuItem>Menu Item 2</MenuItem>
