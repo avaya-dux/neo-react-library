@@ -1,5 +1,6 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -20,6 +21,7 @@ const {
 } = composeStories(PaginationStories);
 
 describe("Pagination", () => {
+  const user = userEvent.setup();
   const defaultProps = {
     currentPageIndex: 1,
     itemCount: 10,
@@ -91,7 +93,7 @@ describe("Pagination", () => {
     const navItems = queryAllByRole("button");
     expect(navItems).toHaveLength(3); // left, 1, right
     expect(navItems[0]).toBeDisabled();
-    expect(navItems[1]).toBeEnabled();
+    expect(navItems[1]).toBeDisabled();
     expect(navItems[2]).toBeDisabled();
   });
 
@@ -149,6 +151,7 @@ describe("Pagination", () => {
                 <button
                   class="neo-btn neo-btn--default neo-btn-secondary neo-btn-secondary--default neo-btn-square neo-btn-square-secondary neo-btn-square-secondary--info"
                   data-badge=""
+                  disabled=""
                 >
                   1
                 </button>
@@ -323,7 +326,7 @@ describe("Pagination", () => {
 
     describe("buildNavItemsWithSeparators", () => {
       const totalPages = 10;
-
+      const secondaryButtonClass = "neo-btn neo-btn--default neo-btn-secondary neo-btn-secondary--default neo-btn-square neo-btn-square-secondary neo-btn-square-secondary--info";
       const assertTestedIndexesMatchExpectedOutputStrings = (
         testIndexes,
         expectedDisplayedText,
@@ -347,7 +350,8 @@ describe("Pagination", () => {
 
           navItems.forEach((navItem, index) => {
             expect(navItem).toHaveTextContent(expectedDisplayedText[index]);
-            expect(navItem).toBeEnabled();
+            if(index != currentPageIndex)
+              expect(navItem).toHaveAttribute("data-badge");
           });
 
           // unmount to avoid memory leak
@@ -403,16 +407,15 @@ describe("Pagination", () => {
             expect(navItemLeftOfSelected).toHaveTextContent(
               currentPageIndex - 1,
             );
-            expect(navItemLeftOfSelected).toBeEnabled();
+            expect(navItemLeftOfSelected).toHaveAttribute("data-badge");
             const selectedNavItem = navItems[2];
             expect(selectedNavItem).toHaveTextContent(currentPageIndex);
-            expect(selectedNavItem).toBeEnabled();
+            expect(selectedNavItem).toBeDisabled();
             const navItemRightOfSelected = navItems[3];
             expect(navItemRightOfSelected).toHaveTextContent(
               currentPageIndex + 1,
             );
-            expect(navItemRightOfSelected).toBeEnabled();
-
+            expect(navItemRightOfSelected).toHaveAttribute("data-badge");
             // unmount to avoid memory leak
             unmount();
           }
@@ -465,7 +468,7 @@ describe("Pagination", () => {
 
             const selectedNavItem = navItems[1];
             expect(selectedNavItem).toHaveTextContent(currentPageIndex);
-            expect(selectedNavItem).toBeEnabled();
+            expect(selectedNavItem).toBeDisabled();
 
             // unmount to avoid memory leak
             unmount();
@@ -487,7 +490,7 @@ describe("Pagination", () => {
 
           const navItem = navItems[0];
           expect(navItem).toHaveTextContent(i);
-          expect(navItem).toBeEnabled();
+          expect(navItem).toBeDisabled();
 
           // unmount to avoid memory leak
           unmount();
@@ -571,5 +574,41 @@ describe("Pagination", () => {
         expect(buildNavItems(pageIndex, 5, null, 100)).toHaveLength(5);
       });
     });
+  });
+
+  it("properly disables navigation button corresponding to the current page", () => {
+    const props = {
+      ...defaultProps,
+      itemCount: 20,
+      itemsPerPage: 5,
+      currentPageIndex: 3,
+    }
+
+    const { queryAllByRole } = render(<Pagination {...props}/>);
+
+    const navItems = queryAllByRole("button");
+
+    expect(navItems).toHaveLength(6);
+
+    expect(navItems[3]).toHaveAttribute("disabled");
+  });
+
+  it("properly disables navigation button corresponding to the current page when page is changed", async () => {
+    const props = {
+      ...defaultProps,
+      itemCount: 20,
+      itemsPerPage: 5,
+      currentPageIndex: 3,
+    }
+
+    const { queryAllByRole, rerender } = render(<Pagination {...props}/>);
+
+    const navItems = queryAllByRole("button");
+
+    expect(navItems[3]).toHaveAttribute("disabled");
+
+    rerender(<Pagination {...props} currentPageIndex={2}/>);
+
+    expect(queryAllByRole("button")[2]).toHaveAttribute("disabled");
   });
 });
