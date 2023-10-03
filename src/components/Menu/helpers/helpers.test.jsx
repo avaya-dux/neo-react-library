@@ -5,7 +5,12 @@ import { vi } from "vitest";
 import { MenuItem } from "../MenuItem";
 import { MenuSeparator } from "../MenuSeparator";
 import { SubMenu } from "../SubMenu";
-import { addIdToChildren, buildMenuIndexes, layoutChildren } from "./";
+import {
+  addIdToChildren,
+  buildMenuIndexes,
+  layoutChildren,
+  getContentCss,
+} from "./";
 
 const menuHelpersLogger = log.getLogger("menu-helpers");
 menuHelpersLogger.disableAll();
@@ -381,6 +386,24 @@ describe("Menu helper methods", () => {
           data-testid="separator"
         />
       `);
+    });
+  });
+  describe("getContentCss", () => {
+    it("returns neo-dropdown__content when input is below", () => {
+      expect(getContentCss("below")).toEqual("neo-dropdown__content");
+    });
+
+    it("contains neo-dropdown__content--toggle-right when input is right", () => {
+      expect(getContentCss("right")).toContain("neo-dropdown__content");
+      expect(getContentCss("right")).toContain(
+        "neo-dropdown__content--toggle-right",
+      );
+    });
+    it("returns neo-dropdown__content--toggle-left when input is left", () => {
+      expect(getContentCss("left")).toContain("neo-dropdown__content");
+      expect(getContentCss("left")).toContain(
+        "neo-dropdown__content--toggle-left",
+      );
     });
   });
 });
