@@ -253,7 +253,7 @@ export const Menu = forwardRef(
         {...rest}
       >
         <MenuContext.Provider value={menuContext}>
-          {positionToToggle !== "left" && menuButton}
+          {menuButton}
           {isOpen &&
             layoutChildren(
               clonedChildren,
@@ -269,7 +269,6 @@ export const Menu = forwardRef(
               menuRef,
               positionToToggle,
             )}
-          {positionToToggle === "left" && menuButton}
         </MenuContext.Provider>
       </div>
     );

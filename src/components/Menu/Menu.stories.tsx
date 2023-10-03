@@ -36,6 +36,24 @@ export const SimpleMenu = () => (
         <MenuItem>Menu Item 3</MenuItem>
       </Menu>
       <Menu
+        positionToToggle="right"
+        menuRootElement={<MenuButton>Multilevel Right</MenuButton>}
+      >
+        <MenuItem>Item1</MenuItem>
+        <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
+          <MenuItem>Sub Item1</MenuItem>
+          <MenuItem>Sub Item2</MenuItem>
+          <MenuItem>Sub Item3</MenuItem>
+          <SubMenu menuRootElement={<MenuItem>Sub SubMenu</MenuItem>}>
+            <MenuItem>Sub Sub Item1</MenuItem>
+            <MenuItem>Sub Sub Item2</MenuItem>
+            <MenuItem>Sub Sub Item3</MenuItem>
+          </SubMenu>
+        </SubMenu>
+        <MenuItem>Item3</MenuItem>
+      </Menu>
+
+      <Menu
         menuRootElement={<MenuButton>To the right of Toggle</MenuButton>}
         positionToToggle="right"
       >
@@ -65,6 +83,23 @@ export const SimpleMenu = () => (
         <MenuItem>Menu Item 1</MenuItem>
         <MenuItem>Menu Item 2</MenuItem>
         <MenuItem>Menu Item 3</MenuItem>
+      </Menu>
+      <Menu
+        positionToToggle="right"
+        menuRootElement={<MenuButton>Multilevel Right</MenuButton>}
+      >
+        <MenuItem>Item1</MenuItem>
+        <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
+          <MenuItem>Sub Item1</MenuItem>
+          <MenuItem>Sub Item2</MenuItem>
+          <MenuItem>Sub Item3</MenuItem>
+          <SubMenu menuRootElement={<MenuItem>Sub SubMenu</MenuItem>}>
+            <MenuItem>Sub Sub Item1</MenuItem>
+            <MenuItem>Sub Sub Item2</MenuItem>
+            <MenuItem>Sub Sub Item3</MenuItem>
+          </SubMenu>
+        </SubMenu>
+        <MenuItem>Item3</MenuItem>
       </Menu>
       <Menu
         menuRootElement={<MenuButton>To the right of Toggle</MenuButton>}
@@ -98,7 +133,7 @@ export const UpGoingMenus = () => (
       style={{
         display: "flex",
         justifyContent: "space-between",
-        position: "fixed",
+        position: "absolute",
         bottom: "50px",
         width: "100%",
       }}
