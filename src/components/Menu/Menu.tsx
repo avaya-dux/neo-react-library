@@ -18,6 +18,8 @@ import {
 } from "react";
 import ClickAwayListener from "react-click-away-listener";
 
+import "./Menu_shim.css";
+
 import {
   handleBlurEvent,
   handleButtonKeyDownEvent,
@@ -77,6 +79,7 @@ export const Menu = forwardRef(
       menuRootElement,
       onMenuClose = () => null,
       openOnHover = false,
+      positionToToggle = "below",
       ...rest
     }: MenuProps,
     ref: Ref<HTMLButtonElement>,
@@ -119,12 +122,21 @@ export const Menu = forwardRef(
           const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
             menuRef.current || {};
           logger.debug({ menuWidth, menuHeight });
-          const noSpaceBelow = bottom + menuHeight > viewHeight;
-          const haveSpaceAbove = menuHeight < top;
+          const noSpaceBelow =
+            positionToToggle === "below"
+              ? bottom + menuHeight > viewHeight
+              : top + menuHeight > viewHeight;
+          const haveSpaceAbove =
+            positionToToggle === "below"
+              ? menuHeight < top
+              : menuHeight < bottom;
           logger.debug({ noSpaceBelow, haveSpaceAbove });
           if (noSpaceBelow && haveSpaceAbove) {
             setUpwards(true);
-            const delta = -menuHeight;
+            const delta =
+              positionToToggle === "below"
+                ? -menuHeight
+                : toggleHeight - menuHeight;
             menuRef.current.style.top = `${delta}px`;
           } else {
             setUpwards(false);
@@ -241,7 +253,7 @@ export const Menu = forwardRef(
         {...rest}
       >
         <MenuContext.Provider value={menuContext}>
-          {menuButton}
+          {positionToToggle !== "left" && menuButton}
           {isOpen &&
             layoutChildren(
               clonedChildren,
@@ -255,7 +267,9 @@ export const Menu = forwardRef(
               closeOnSelect,
               setOpen,
               menuRef,
+              positionToToggle,
             )}
+          {positionToToggle === "left" && menuButton}
         </MenuContext.Provider>
       </div>
     );

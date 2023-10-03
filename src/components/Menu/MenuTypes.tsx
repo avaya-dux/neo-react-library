@@ -34,6 +34,7 @@ export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
   menuRootElement: ReactElement<ButtonProps | AvatarProps>;
   onMenuClose?: () => void;
   openOnHover?: boolean;
+  positionToToggle?: "below" | "left" | "right";
 }
 
 export type MenuIndexesType = {

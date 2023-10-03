@@ -50,6 +50,18 @@ export const addIdToChildren = (children: MenuProps["children"]) => {
   });
 };
 
+export const getContentCss = (
+  positionToToggle: MenuProps["positionToToggle"],
+) => {
+  const css = ["neo-dropdown__content"];
+  if (positionToToggle === "right") {
+    css.push("neo-dropdown__content--toggle-right");
+  } else if (positionToToggle === "left") {
+    css.push("neo-dropdown__content--toggle-left");
+  }
+
+  return css.join(" ");
+};
 export const layoutChildren = (
   children: MenuProps["children"],
   handleMenuKeyDown: KeyboardEventHandler<HTMLDivElement>,
@@ -62,12 +74,16 @@ export const layoutChildren = (
   closeOnSelect: boolean,
   setRootMenuOpen: Dispatch<SetStateAction<boolean>>,
   ref: Ref<HTMLDivElement>,
+  positionToToggle?: MenuProps["positionToToggle"],
 ) => {
   logger.debug(`cursor = ${cursor}; menuIndexes = ${menuIndexes}`);
+  if (positionToToggle === undefined) {
+    positionToToggle = "below";
+  }
   return (
     <div
       ref={ref}
-      className="neo-dropdown__content"
+      className={getContentCss(positionToToggle)}
       role="menu"
       tabIndex={-1}
       onKeyDown={handleMenuKeyDown}
