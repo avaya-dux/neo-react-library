@@ -131,19 +131,10 @@ export const Menu = forwardRef(
               ? menuHeight < top
               : menuHeight < bottom;
           logger.debug({ noSpaceBelow, haveSpaceAbove });
-          if (noSpaceBelow && haveSpaceAbove) {
-            setUpwards(true);
-            const delta =
-              positionToToggle === "below"
-                ? -menuHeight
-                : toggleHeight - menuHeight;
-            menuRef.current.style.top = `${delta}px`;
-          } else {
-            setUpwards(false);
-          }
+          setUpwards(noSpaceBelow && haveSpaceAbove);
         }
       }
-    }, [isOpen, toggleRef]);
+    }, [isOpen, positionToToggle, toggleRef]);
 
     useEffect(() => {
       logger.debug(`debugging menu useEffect when open = ${isOpen}`);
@@ -268,6 +259,7 @@ export const Menu = forwardRef(
               setOpen,
               menuRef,
               positionToToggle,
+              upwards,
             )}
         </MenuContext.Provider>
       </div>
