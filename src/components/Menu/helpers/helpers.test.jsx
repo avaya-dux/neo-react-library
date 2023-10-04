@@ -389,21 +389,43 @@ describe("Menu helper methods", () => {
     });
   });
   describe("getContentCss", () => {
-    it("returns neo-dropdown__content when input is below", () => {
-      expect(getContentCss("below")).toEqual("neo-dropdown__content");
+    it("returns correct results when input=below and up is undefined", () => {
+      const result = getContentCss("below");
+      expect(result).toEqual("neo-dropdown__content");
+      expect(result).not.toContain("neo-dropdown__content--aside-upwards");
+      expect(result).not.toContain("neo-dropdown__content--below-upwards");
+    });
+    it("returns correct results when input=below and up=true", () => {
+      const result = getContentCss("below", true);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).not.toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--below-upwards");
     });
 
-    it("contains neo-dropdown__content--toggle-right when input is right", () => {
-      expect(getContentCss("right")).toContain("neo-dropdown__content");
-      expect(getContentCss("right")).toContain(
-        "neo-dropdown__content--toggle-right",
-      );
+    it("returns correct results when input=right and up=false", () => {
+      const result = getContentCss("right", false);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).not.toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--toggle-right");
     });
-    it("returns neo-dropdown__content--toggle-left when input is left", () => {
-      expect(getContentCss("left")).toContain("neo-dropdown__content");
-      expect(getContentCss("left")).toContain(
-        "neo-dropdown__content--toggle-left",
-      );
+    it("returns correct results when input=right and up=true", () => {
+      const result = getContentCss("right", true);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--toggle-right");
+    });
+
+    it("returns correct results when input=left and up=false", () => {
+      const result = getContentCss("left", false);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).not.toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--toggle-left");
+    });
+    it("returns correct results when input=left and up=true", () => {
+      const result = getContentCss("left", true);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--toggle-left");
     });
   });
 });

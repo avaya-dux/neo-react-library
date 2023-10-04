@@ -52,7 +52,7 @@ export const addIdToChildren = (children: MenuProps["children"]) => {
 
 export const getContentCss = (
   positionToToggle: MenuProps["positionToToggle"] | "submenu",
-  up: boolean,
+  up?: boolean,
 ) => {
   const css = ["neo-dropdown__content"];
   if (positionToToggle === "right") {
@@ -62,9 +62,9 @@ export const getContentCss = (
   }
   if (up) {
     if (positionToToggle !== "below") {
-      css.push(`neo-dropdown__content--aside--upwards`);
+      css.push("neo-dropdown__content--aside-upwards");
     } else {
-      css.push(`neo-dropdown__content--below--upwards`);
+      css.push("neo-dropdown__content--below-upwards");
     }
   }
   return css.join(" ");

@@ -22,21 +22,21 @@
 }
 
 .neo-dropdown--onhover:hover
-  > .neo-dropdown__content.neo-dropdown__content--below--upwards,
+  > .neo-dropdown__content.neo-dropdown__content--below-upwards,
 .neo-dropdown--active
-  > .neo-dropdown__content.neo-dropdown__content--below--upwards,
+  > .neo-dropdown__content.neo-dropdown__content--below-upwards,
 .neo-dropdown--onhover:focus
-  > .neo-dropdown__content.neo-dropdown__content--below--upwards {
+  > .neo-dropdown__content.neo-dropdown__content--below-upwards {
   top: auto;
   bottom: 100%;
 }
 
 .neo-dropdown--onhover:hover
-  > .neo-dropdown__content.neo-dropdown__content--aside--upwards,
+  > .neo-dropdown__content.neo-dropdown__content--aside-upwards,
 .neo-dropdown--active
-  > .neo-dropdown__content.neo-dropdown__content--aside--upwards,
+  > .neo-dropdown__content.neo-dropdown__content--aside-upwards,
 .neo-dropdown--onhover:focus
-  > .neo-dropdown__content.neo-dropdown__content--aside--upwards {
+  > .neo-dropdown__content.neo-dropdown__content--aside-upwards {
   top: auto;
   bottom: calc(100% - 36px);
 }
