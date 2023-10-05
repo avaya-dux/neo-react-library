@@ -5,7 +5,12 @@ import { vi } from "vitest";
 import { MenuItem } from "../MenuItem";
 import { MenuSeparator } from "../MenuSeparator";
 import { SubMenu } from "../SubMenu";
-import { addIdToChildren, buildMenuIndexes, layoutChildren } from "./";
+import {
+  addIdToChildren,
+  buildMenuIndexes,
+  layoutChildren,
+  getContentCss,
+} from "./";
 
 const menuHelpersLogger = log.getLogger("menu-helpers");
 menuHelpersLogger.disableAll();
@@ -381,6 +386,46 @@ describe("Menu helper methods", () => {
           data-testid="separator"
         />
       `);
+    });
+  });
+  describe("getContentCss", () => {
+    it("returns correct results when input=below and up is undefined", () => {
+      const result = getContentCss("below");
+      expect(result).toEqual("neo-dropdown__content");
+      expect(result).not.toContain("neo-dropdown__content--aside-upwards");
+      expect(result).not.toContain("neo-dropdown__content--below-upwards");
+    });
+    it("returns correct results when input=below and up=true", () => {
+      const result = getContentCss("below", true);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).not.toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--below-upwards");
+    });
+
+    it("returns correct results when input=right and up=false", () => {
+      const result = getContentCss("right", false);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).not.toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--toggle-right");
+    });
+    it("returns correct results when input=right and up=true", () => {
+      const result = getContentCss("right", true);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--toggle-right");
+    });
+
+    it("returns correct results when input=left and up=false", () => {
+      const result = getContentCss("left", false);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).not.toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--toggle-left");
+    });
+    it("returns correct results when input=left and up=true", () => {
+      const result = getContentCss("left", true);
+      expect(result).toContain("neo-dropdown__content");
+      expect(result).toContain("neo-dropdown__content--aside-upwards");
+      expect(result).toContain("neo-dropdown__content--toggle-left");
     });
   });
 });

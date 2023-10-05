@@ -18,6 +18,8 @@ import {
 } from "react";
 import ClickAwayListener from "react-click-away-listener";
 
+import "./Menu_shim.css";
+
 import {
   handleBlurEvent,
   handleButtonKeyDownEvent,
@@ -77,6 +79,7 @@ export const Menu = forwardRef(
       menuRootElement,
       onMenuClose = () => null,
       openOnHover = false,
+      positionToToggle = "below",
       ...rest
     }: MenuProps,
     ref: Ref<HTMLButtonElement>,
@@ -119,19 +122,19 @@ export const Menu = forwardRef(
           const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
             menuRef.current || {};
           logger.debug({ menuWidth, menuHeight });
-          const noSpaceBelow = bottom + menuHeight > viewHeight;
-          const haveSpaceAbove = menuHeight < top;
+          const noSpaceBelow =
+            positionToToggle === "below"
+              ? bottom + menuHeight > viewHeight
+              : top + menuHeight > viewHeight;
+          const haveSpaceAbove =
+            positionToToggle === "below"
+              ? menuHeight < top
+              : menuHeight < bottom;
           logger.debug({ noSpaceBelow, haveSpaceAbove });
-          if (noSpaceBelow && haveSpaceAbove) {
-            setUpwards(true);
-            const delta = -menuHeight;
-            menuRef.current.style.top = `${delta}px`;
-          } else {
-            setUpwards(false);
-          }
+          setUpwards(noSpaceBelow && haveSpaceAbove);
         }
       }
-    }, [isOpen, toggleRef]);
+    }, [isOpen, positionToToggle, toggleRef]);
 
     useEffect(() => {
       logger.debug(`debugging menu useEffect when open = ${isOpen}`);
@@ -139,13 +142,20 @@ export const Menu = forwardRef(
       if (isOpen === false && didMount.current) {
         logger.debug("calling onMenuClose");
         onMenuClose();
+
+        // focus button after ESC
+        if (toggleRef && "current" in toggleRef && toggleRef.current) {
+          logger.debug("focus button");
+          toggleRef.current.focus();
+        }
         return;
       }
+
       adjustPosition();
       window.addEventListener("resize", adjustPosition);
 
       return () => window.removeEventListener("resize", adjustPosition);
-    }, [adjustPosition, isOpen, onMenuClose]);
+    }, [adjustPosition, isOpen, onMenuClose, toggleRef]);
 
     // `didMount` must be placed _after_ any usage of it in a hook
     const didMount = useRef(false);
@@ -255,6 +265,8 @@ export const Menu = forwardRef(
               closeOnSelect,
               setOpen,
               menuRef,
+              positionToToggle,
+              upwards,
             )}
         </MenuContext.Provider>
       </div>

@@ -77,29 +77,6 @@ export const SubMenu: FC<SubMenuProps> = ({
     setOpen(action === "ENTER_SUB_MENU");
   }, [action, counter]);
 
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-    if (toggleRef && "current" in toggleRef && toggleRef.current) {
-      const { offsetWidth: toggleWidth, offsetHeight: toggleHeight } =
-        toggleRef.current;
-      const { top, right, bottom, left } =
-        toggleRef.current?.getBoundingClientRect() || {};
-      logger.debug({ toggleWidth, toggleHeight, top, right, bottom, left });
-
-      if (menuRef && "current" in menuRef && menuRef.current) {
-        const { offsetWidth: menuWidth, offsetHeight: menuHeight } =
-          menuRef.current;
-        logger.debug({ name: "submenu", menuWidth, menuHeight });
-        if (upwards) {
-          const delta = toggleHeight - menuHeight;
-          menuRef.current.style.top = `${delta}px`;
-        }
-      }
-    }
-  }, [isOpen, menuRef, toggleRef, upwards]);
-
   const clonedChildren = useMemo(() => addIdToChildren(children), [children]);
 
   const menuIndexes: MenuIndexesType = useMemo(
@@ -166,6 +143,8 @@ export const SubMenu: FC<SubMenuProps> = ({
           closeOnSelect,
           setRootMenuOpen,
           menuRef,
+          "submenu",
+          upwards,
         )}
     </div>
   );
