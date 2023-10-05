@@ -17,6 +17,7 @@ describe("Menu component", () => {
     numberOfMenus(1);
     leftMenuHasThreeMenuItems();
 
+    cy.contains(rightNavBtn).focus();
     cy.contains(rightNavBtn).click();
     numberOfMenus(1);
     rightMenuHasTwoMenuItems();

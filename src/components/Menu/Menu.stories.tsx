@@ -28,11 +28,97 @@ const menuHelpersLogger = log.getLogger("menu-helpers");
 menuHelpersLogger.enableAll();
 
 export const SimpleMenu = () => (
-  <Menu menuRootElement={<MenuButton>Open Menu</MenuButton>}>
-    <MenuItem>Menu Item 1</MenuItem>
-    <MenuItem>Menu Item 2</MenuItem>
-    <MenuItem>Menu Item 3</MenuItem>
-  </Menu>
+  <div>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <Menu menuRootElement={<MenuButton>Open Menu</MenuButton>}>
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+      </Menu>
+      <Menu
+        positionToToggle="right"
+        menuRootElement={<MenuButton>Multilevel Right</MenuButton>}
+      >
+        <MenuItem>Item1</MenuItem>
+        <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
+          <MenuItem>Sub Item1</MenuItem>
+          <MenuItem>Sub Item2</MenuItem>
+          <MenuItem>Sub Item3</MenuItem>
+          <SubMenu menuRootElement={<MenuItem>Sub SubMenu</MenuItem>}>
+            <MenuItem>Sub Sub Item1</MenuItem>
+            <MenuItem>Sub Sub Item2</MenuItem>
+            <MenuItem>Sub Sub Item3</MenuItem>
+          </SubMenu>
+        </SubMenu>
+        <MenuItem>Item3</MenuItem>
+      </Menu>
+
+      <Menu
+        menuRootElement={<MenuButton>To the right of Toggle</MenuButton>}
+        positionToToggle="right"
+      >
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+      </Menu>
+      <Menu
+        menuRootElement={<MenuButton>To the left of Toggle</MenuButton>}
+        positionToToggle="left"
+      >
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+      </Menu>
+    </div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        position: "fixed",
+        bottom: "50px",
+        width: "100%",
+      }}
+    >
+      <Menu menuRootElement={<MenuButton>Open Menu</MenuButton>}>
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+      </Menu>
+      <Menu
+        positionToToggle="right"
+        menuRootElement={<MenuButton>Multilevel Right</MenuButton>}
+      >
+        <MenuItem>Item1</MenuItem>
+        <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
+          <MenuItem>Sub Item1</MenuItem>
+          <MenuItem>Sub Item2</MenuItem>
+          <MenuItem>Sub Item3</MenuItem>
+          <SubMenu menuRootElement={<MenuItem>Sub SubMenu</MenuItem>}>
+            <MenuItem>Sub Sub Item1</MenuItem>
+            <MenuItem>Sub Sub Item2</MenuItem>
+            <MenuItem>Sub Sub Item3</MenuItem>
+          </SubMenu>
+        </SubMenu>
+        <MenuItem>Item3</MenuItem>
+      </Menu>
+      <Menu
+        menuRootElement={<MenuButton>To the right of Toggle</MenuButton>}
+        positionToToggle="right"
+      >
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+      </Menu>
+      <Menu
+        menuRootElement={<MenuButton>To the left of Toggle</MenuButton>}
+        positionToToggle="left"
+      >
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+      </Menu>
+    </div>
+  </div>
 );
 
 export const UpGoingMenus = () => (
@@ -43,40 +129,45 @@ export const UpGoingMenus = () => (
       possimus inventore corrupti dolor. Nobis deserunt aspernatur temporibus
       nemo dolores?
     </p>
-    <Menu
-      style={{ position: "fixed", bottom: "50px" }}
-      menuRootElement={<MenuButton>Multilevel Menu</MenuButton>}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        position: "absolute",
+        bottom: "50px",
+        width: "100%",
+      }}
     >
-      <MenuItem>Item1</MenuItem>
-      <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
-        <MenuItem>Sub Item1</MenuItem>
-        <MenuItem>Sub Item2</MenuItem>
-        <MenuItem>Sub Item3</MenuItem>
-        <SubMenu menuRootElement={<MenuItem>Sub SubMenu</MenuItem>}>
-          <MenuItem>Sub Sub Item1</MenuItem>
-          <MenuItem>Sub Sub Item2</MenuItem>
-          <MenuItem>Sub Sub Item3</MenuItem>
+      <Menu menuRootElement={<MenuButton>Multilevel Menu</MenuButton>}>
+        <MenuItem>Item1</MenuItem>
+        <SubMenu menuRootElement={<MenuItem>SubMenu</MenuItem>}>
+          <MenuItem>Sub Item1</MenuItem>
+          <MenuItem>Sub Item2</MenuItem>
+          <MenuItem>Sub Item3</MenuItem>
+          <SubMenu menuRootElement={<MenuItem>Sub SubMenu</MenuItem>}>
+            <MenuItem>Sub Sub Item1</MenuItem>
+            <MenuItem>Sub Sub Item2</MenuItem>
+            <MenuItem>Sub Sub Item3</MenuItem>
+          </SubMenu>
         </SubMenu>
-      </SubMenu>
-      <MenuItem>Item3</MenuItem>
-    </Menu>
-    <Menu
-      style={{ position: "fixed", left: "50%", bottom: "50px" }}
-      menuRootElement={<MenuButton>Simple & Left Align</MenuButton>}
-    >
-      <MenuItem>Menu Item 1</MenuItem>
-      <MenuItem>Menu Item 2</MenuItem>
-      <MenuItem>Menu Item 3</MenuItem>
-    </Menu>
-    <Menu
-      style={{ position: "fixed", bottom: "50px", right: "20px" }}
-      itemAlignment="right"
-      menuRootElement={<MenuButton>Simple & Right Align</MenuButton>}
-    >
-      <MenuItem>Menu Item 1</MenuItem>
-      <MenuItem>Menu Item 2</MenuItem>
-      <MenuItem>Menu Item 3</MenuItem>
-    </Menu>
+        <MenuItem>Item3</MenuItem>
+      </Menu>
+      |
+      <Menu menuRootElement={<MenuButton>Simple & Left Align</MenuButton>}>
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+      </Menu>
+      |
+      <Menu
+        itemAlignment="right"
+        menuRootElement={<MenuButton>Simple & Right Align</MenuButton>}
+      >
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+      </Menu>
+    </div>
   </>
 );
 const Template: Story<MenuProps> = ({ children, ...rest }: MenuProps) => (
