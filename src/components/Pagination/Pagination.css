@@ -1,0 +1,13 @@
+.neo-btn-square-secondary--info{
+    background-image: none;
+    background-color: var(--global-background);
+}
+
+.neo-btn-square-secondary--info:active{
+    background-color: var(--global-background);
+}
+
+.neo-btn-square-secondary--info:hover, 
+.neo-btn-square-secondary--info:focus {
+    background-color: var(--global-background);
+}
