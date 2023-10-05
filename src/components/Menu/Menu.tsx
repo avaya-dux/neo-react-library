@@ -142,13 +142,20 @@ export const Menu = forwardRef(
       if (isOpen === false && didMount.current) {
         logger.debug("calling onMenuClose");
         onMenuClose();
+
+        // focus button after ESC
+        if (toggleRef && "current" in toggleRef && toggleRef.current) {
+          logger.debug("focus button");
+          toggleRef.current.focus();
+        }
         return;
       }
+
       adjustPosition();
       window.addEventListener("resize", adjustPosition);
 
       return () => window.removeEventListener("resize", adjustPosition);
-    }, [adjustPosition, isOpen, onMenuClose]);
+    }, [adjustPosition, isOpen, onMenuClose, toggleRef]);
 
     // `didMount` must be placed _after_ any usage of it in a hook
     const didMount = useRef(false);
