@@ -1,13 +1,19 @@
 .neo-btn-square-secondary--info{
     background-image: none;
     background-color: var(--global-background);
+    border-color: var(--neo-color-blue-500);
+    color: var(--neo-color-blue-500);
 }
 
 .neo-btn-square-secondary--info:active{
     background-color: var(--global-background);
+    border-color: var(--neo-color-blue-500);
+    color: var(--neo-color-blue-500);
 }
 
 .neo-btn-square-secondary--info:hover, 
 .neo-btn-square-secondary--info:focus {
     background-color: var(--global-background);
+    border-color: var(--neo-color-blue-500);
+    color: var(--neo-color-blue-500);
 }
