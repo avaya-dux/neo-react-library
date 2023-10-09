@@ -34,9 +34,10 @@ export const NavListItemButton = ({
           "neo-btn-square",
           `neo-btn-square-${variant} neo-btn-square-${variant}--info`,
         )}
-        onClick={(e)=>{
-          if(!isCurrentPage)
-           onPageChange(e, pageToNavigateTo)
+        onClick={(e) => {
+          if (!isCurrentPage) {
+            onPageChange(e, pageToNavigateTo);
+          }
         }}
         variant={variant}
       >
