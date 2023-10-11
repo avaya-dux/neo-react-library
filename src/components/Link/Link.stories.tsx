@@ -29,11 +29,7 @@ export const Misc = () => {
         </Link>
       </li>
       <li>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-        <Link href="#inline" inline>
-          Inline
-        </Link>
-        a, in accusamus ullam quam. In reiciendis delectus explicabo, ducimus
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt <Link href="#inline" inline>Inline</Link> a, in accusamus ullam quam. In reiciendis delectus explicabo, ducimus
         dignissimos quas cumque! Placeat, deleniti possimus.
       </li>
       <li>
@@ -52,11 +48,9 @@ export const Misc = () => {
         </Link>
       </li>
       <li>
-        Lorem ipsum dolor sit amet consectetur
-        <Link href="#inline" inline disabled>
-          Inline
-        </Link>
-        adipisicing elit. Quisquam omnis, non velit, reiciendis corporis
+        Lorem ipsum dolor sit amet consectetur <Link href="#inline" inline disabled> 
+        Inline 
+        </Link> adipisicing elit. Quisquam omnis, non velit, reiciendis corporis
         assumenda dolores delectus sapiente perspiciatis, est voluptas tempora
         dolor corrupti? Voluptate porro quaerat quam nisi id.
       </li>
