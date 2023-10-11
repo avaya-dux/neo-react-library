@@ -135,7 +135,7 @@ export const UpGoingMenus = () => (
         justifyContent: "space-between",
         position: "absolute",
         bottom: "50px",
-        width: "100%",
+        width: "90%",
       }}
     >
       <Menu menuRootElement={<MenuButton>Multilevel Menu</MenuButton>}>

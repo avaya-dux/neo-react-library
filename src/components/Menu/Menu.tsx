@@ -18,8 +18,6 @@ import {
 } from "react";
 import ClickAwayListener from "react-click-away-listener";
 
-import "./Menu_shim.css";
-
 import {
   handleBlurEvent,
   handleButtonKeyDownEvent,
