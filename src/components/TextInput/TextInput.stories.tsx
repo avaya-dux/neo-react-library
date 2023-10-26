@@ -22,8 +22,10 @@ export const Default = () => {
 
 export const DifferentHTMLOutputExamples = () => {
   return (
-    <section>
+    <section className="neo-form">
       <TextInput label="Just a Label" />
+
+      <TextInput required label="This is required" />
 
       <TextInput
         label="With start adorment icon"
