@@ -45,11 +45,16 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
  * They’re used in forms, modal dialogs, tables, and other
  * surfaces where text input is required.
  *
+ * IMPORTANT: The TextInput component is designed to be contained within a
+ * <Form> component in order for all the styles to render correctly.
+ *
  * @example
- * <TextInput label="Just a Label" />
- * <TextInput label="Password" type="password" />
- * <TextInput label="Email" type="email" />
- * <TextInput label="Search" startIcon="search" clearable={true} />
+ * <Form>
+ *  <TextInput label="Just a Label" />
+ *  <TextInput label="Password" type="password" />
+ *  <TextInput label="Email" type="email" />
+ *  <TextInput label="Search" startIcon="search" clearable={true} />
+ * </Form>
  *
  * @see https://design.avayacloud.com/components/web/input-web
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-text-input
