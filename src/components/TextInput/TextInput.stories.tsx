@@ -40,6 +40,7 @@ export const DifferentHTMLOutputExamples = () => {
           label="Input type password"
           placeholder="Placeholder password"
           type="password"
+          required
         />
 
         <TextInput
@@ -212,8 +213,9 @@ export const TypeSwitch = () => {
     <Form>
       <TextInput
         label="Text Input"
-        defaultValue="Try To Change Me"
+        defaultValue="Now I'm a simple input."
         type={type}
+        required
       />
       <Checkbox
         onChange={toggle}
