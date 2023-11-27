@@ -194,9 +194,9 @@ export const Disabled = () => {
 
 export const BadAccessibility = () => {
   return (
-  <Form>
-    <TextInput />
-  </Form>
+    <Form>
+      <TextInput />
+    </Form>
   );
 };
 
