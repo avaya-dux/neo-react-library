@@ -2,15 +2,16 @@ import { composeStories } from "@storybook/testing-react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
+import log from "loglevel";
 import { vi } from "vitest";
+
+import { UserEventKeys } from "utils";
 
 import { Select } from "./Select";
 import * as SelectStories from "./Select.stories";
 import { SelectOption } from "./SelectOption";
 import { fruitOptions } from "./utils/mockdata";
-import { UserEventKeys } from "utils";
 
-import log from "loglevel";
 const logger = log.getLogger("select-test-logger");
 logger.disableAll();
 
