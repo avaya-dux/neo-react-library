@@ -2,9 +2,12 @@ import clsx from "clsx";
 import { useContext, useMemo } from "react";
 
 import { Chip } from "components/Chip";
+import { IconButton } from "components/IconButton";
 
 import { SelectContext } from "../utils/SelectContext";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
+
+import "./MultiSelect.css";
 
 export const MultiSelect = () => {
   const {
@@ -14,7 +17,7 @@ export const MultiSelect = () => {
       isOpen,
       selectItem: toggleItem, // NOTE: I've adjusted the hook for this case (multi-select) such that the "select" is actually a "toggle" now
     },
-    optionProps: { selectedItems },
+    optionProps: { selectedItems, setSelectedItems },
     selectProps: {
       filteredOptions,
       ariaLabel,
@@ -106,6 +109,18 @@ export const MultiSelect = () => {
           <OptionsWithEmptyMessageFallback />
         </ul>
       </div>
+
+      <IconButton
+        aria-label="clear selections"
+        icon="close"
+        variant="tertiary"
+        className={clsx(
+          "neo-multiselect-clear-icon-button",
+          (selectedItems.length === 0 || isOpen) && "neo-display-none",
+        )}
+        disabled={selectedItems.length === 0}
+        onClick={() => setSelectedItems([])}
+      />
     </div>
   );
 };

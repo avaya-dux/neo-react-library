@@ -5,18 +5,21 @@ import { useContext, useEffect, useMemo } from "react";
 import AutosizeInput from "react-input-autosize";
 
 import { Chip } from "components/Chip";
+import { IconButton } from "components/IconButton";
 import { Keys } from "utils";
 
 import { SelectContext } from "../utils/SelectContext";
 import { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
+import "./MultiSelect.css";
+
 const logger = log.getLogger("multiple-select-searchable");
 logger.disableAll();
 export const MultiSelectSearchable = () => {
   const {
     downshiftProps,
-    optionProps: { selectedItems },
+    optionProps: { selectedItems, setSelectedItems },
     selectProps: {
       ariaLabel,
       disabled,
@@ -110,6 +113,7 @@ export const MultiSelectSearchable = () => {
           />
           {selectedItemsAsChips}
         </span>
+
         <input
           className="neo-display-none"
           id={id}
@@ -129,6 +133,18 @@ export const MultiSelectSearchable = () => {
       >
         <OptionsWithEmptyMessageFallback />
       </div>
+
+      <IconButton
+        aria-label="clear selections"
+        icon="close"
+        variant="tertiary"
+        className={clsx(
+          "neo-multiselect-clear-icon-button",
+          (selectedItems.length === 0 || isOpen) && "neo-display-none",
+        )}
+        disabled={selectedItems.length === 0}
+        onClick={() => setSelectedItems([])}
+      />
     </div>
   );
 };

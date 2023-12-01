@@ -29,6 +29,7 @@ export type SelectContextProps = {
     options: SelectOptionProps[];
     selectedItems: SelectOptionProps[];
     selectedItemsValues: (string | undefined)[];
+    setSelectedItems: (items: SelectOptionProps[]) => void;
   };
 };
 
@@ -49,5 +50,6 @@ export const SelectContext = createContext<SelectContextProps>({
     options: [],
     selectedItems: [],
     selectedItemsValues: [],
+    setSelectedItems: () => {},
   },
 });
