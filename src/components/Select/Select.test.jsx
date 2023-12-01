@@ -41,6 +41,45 @@ describe("Select", () => {
       const { container } = render(<BasicSelects />);
       expect(container.querySelector(".neo-multiselect--small")).toBeNull();
     });
+
+    it("has a clear button for non-searchable multiselect", () => {
+      render(
+        <Select multiple label="not important">
+          <SelectOption>Option 1</SelectOption>
+          <SelectOption>Option 2</SelectOption>
+          <SelectOption>Option 3</SelectOption>
+          <SelectOption>Option 4</SelectOption>
+        </Select>,
+      );
+
+      const buttons = screen.getAllByRole("button");
+      expect(buttons).toHaveLength(2);
+
+      const toggleButton = buttons[0];
+      expect(toggleButton).toHaveClass("neo-multiselect__header");
+
+      const clearButton = buttons[1];
+      expect(clearButton).toHaveClass("neo-multiselect-clear-icon-button");
+      expect(clearButton).toBeDisabled();
+    });
+
+    it("has a clear button for a multiselect that is searchable", () => {
+      render(
+        <Select multiple searchable label="not important">
+          <SelectOption>Option 1</SelectOption>
+          <SelectOption>Option 2</SelectOption>
+          <SelectOption>Option 3</SelectOption>
+          <SelectOption>Option 4</SelectOption>
+        </Select>,
+      );
+
+      const buttons = screen.getAllByRole("button");
+      expect(buttons).toHaveLength(1);
+
+      const clearButton = buttons[0];
+      expect(clearButton).toHaveClass("neo-multiselect-clear-icon-button");
+      expect(clearButton).toBeDisabled();
+    });
   });
 
   describe("Single Select, non-searchable", () => {
