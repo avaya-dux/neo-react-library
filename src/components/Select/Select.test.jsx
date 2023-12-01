@@ -288,6 +288,78 @@ describe("Select", () => {
         fireEvent.click(defaultSelectHeader);
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "true");
       });
+
+      it("clears the selection when the clear button is clicked", () => {
+        const { container } = render(
+          <Select multiple label="not important">
+            <SelectOption>Option 1</SelectOption>
+            <SelectOption>Option 2</SelectOption>
+            <SelectOption>Option 3</SelectOption>
+            <SelectOption>Option 4</SelectOption>
+          </Select>,
+        );
+
+        const buttons = screen.getAllByRole("button");
+        const toggleButton = buttons[0];
+
+        const clearButton = buttons[1];
+
+        // open menu
+        toggleButton.focus();
+        fireEvent.click(toggleButton);
+
+        // select first
+        fireEvent.click(container.querySelector("li"));
+
+        // assert there is one chip
+        expect(
+          container.querySelectorAll("div.neo-chip--close").length,
+        ).toEqual(1);
+
+        // click clear button
+        fireEvent.click(clearButton);
+
+        // assert there are no chips
+        expect(
+          container.querySelectorAll("div.neo-chip--close").length,
+        ).toEqual(0);
+      });
+    });
+  });
+
+  describe("Multiple Select, is searchable", () => {
+    it("clears the selection when the clear button is clicked", () => {
+      const { container } = render(
+        <Select multiple searchable label="not important">
+          <SelectOption>Option 1</SelectOption>
+          <SelectOption>Option 2</SelectOption>
+          <SelectOption>Option 3</SelectOption>
+          <SelectOption>Option 4</SelectOption>
+        </Select>,
+      );
+
+      const toggleElement = screen.getByRole("combobox");
+      const clearButton = screen.getByRole("button");
+
+      // open menu
+      toggleElement.focus();
+      fireEvent.click(toggleElement);
+
+      // select first
+      fireEvent.click(container.querySelector("li"));
+
+      // assert there is one chip
+      expect(container.querySelectorAll("div.neo-chip--close").length).toEqual(
+        1,
+      );
+
+      // click clear button
+      fireEvent.click(clearButton);
+
+      // assert there are no chips
+      expect(container.querySelectorAll("div.neo-chip--close").length).toEqual(
+        0,
+      );
     });
   });
 
