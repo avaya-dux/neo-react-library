@@ -139,7 +139,6 @@ describe("Pagination", () => {
             >
               <span
                 class="neo-icon-arrow-left"
-                style="font-size: 20px;"
               />
             </button>
             <ul
@@ -162,7 +161,6 @@ describe("Pagination", () => {
             >
               <span
                 class="neo-icon-arrow-right"
-                style="font-size: 20px;"
               />
             </button>
           </nav>
