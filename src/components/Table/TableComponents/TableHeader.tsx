@@ -175,14 +175,14 @@ export const TableHeader = <T extends Record<string, any>>({
                   onClick={handleAscSort}
                   onKeyDown={(e) => onSpaceOrEnter(e, handleAscSort)}
                 >
-                  A - Z
+                  {translations.sortAscending || "A - Z"}
                 </MenuItem>
 
                 <MenuItem
                   onClick={handleDescSort}
                   onKeyDown={(e) => onSpaceOrEnter(e, handleDescSort)}
                 >
-                  Z - A
+                  {translations.sortDescending || "Z - A"}
                 </MenuItem>
 
                 {allowColumnFilter ? (

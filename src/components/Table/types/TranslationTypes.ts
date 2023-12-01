@@ -29,6 +29,8 @@ export interface ITableHeaderTranslations {
   clearSort?: string;
   filterColumn?: string;
   selectAll: string;
+  sortAscending?: string;
+  sortDescending?: string;
 }
 
 export interface ITableTranslations {
