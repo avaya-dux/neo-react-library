@@ -101,7 +101,7 @@ export const IconButton = forwardRef(
         {displaySpinner ? (
           <Spinner style={{ color: "inherit" }} />
         ) : (
-          <span className={`neo-icon-${icon}`} style={{ fontSize: 20 }} />
+          <span className={`neo-icon-${icon}`} />
         )}
       </button>
     );
