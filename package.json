@@ -121,7 +121,7 @@
     "eslint-plugin-storybook": "0.6.15",
     "jest-axe": "7.0.1",
     "jest-coverage-badges": "1.1.2",
-    "jsdom": "22.1.0",
+    "jsdom": "23.0.1",
     "prettier": "3.0.3",
     "prop-types": "15.8.1",
     "react": "18.2.0",
