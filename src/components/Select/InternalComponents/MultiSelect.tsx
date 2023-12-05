@@ -83,14 +83,29 @@ export const MultiSelect = () => {
     >
       <span className="neo-multiselect-combo__header neo-multiselect-combo__header--no-after">
         <span className="neo-multiselect__padded-container">
-          <button
-            {...restToggleProps}
-            {...computedAriaProperty}
-            className="neo-multiselect__header"
-            type="button"
-          >
-            {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
-          </button>
+          <div className="neo-multiselect-combo__buttons-container">
+            <button
+              {...restToggleProps}
+              {...computedAriaProperty}
+              className="neo-multiselect__header"
+              type="button"
+            >
+              {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
+            </button>
+
+            <button
+              aria-label="clear selections"
+              className={clsx(
+                "neo-input-edit__icon neo-icon-end",
+                "neo-multiselect-clear-icon-button",
+                selectedItems.length === 0 && "neo-display-none",
+              )}
+              type="button"
+              disabled={selectedItems.length === 0}
+              onClick={() => setSelectedItems([])}
+            />
+          </div>
+
           {selectedItemsAsChips}
         </span>
       </span>
@@ -108,18 +123,6 @@ export const MultiSelect = () => {
           <OptionsWithEmptyMessageFallback />
         </ul>
       </div>
-
-      <button
-        aria-label="clear selections"
-        className={clsx(
-          "neo-input-edit__icon neo-icon-end",
-          "neo-multiselect-clear-icon-button",
-          selectedItems.length === 0 && "neo-display-none",
-        )}
-        type="button"
-        disabled={selectedItems.length === 0}
-        onClick={() => setSelectedItems([])}
-      />
     </div>
   );
 };
