@@ -140,7 +140,7 @@ export const MultiSelectSearchable = () => {
         variant="tertiary"
         className={clsx(
           "neo-multiselect-clear-icon-button",
-          (selectedItems.length === 0 || isOpen) && "neo-display-none",
+          selectedItems.length === 0 && "neo-display-none",
         )}
         disabled={selectedItems.length === 0}
         onClick={() => setSelectedItems([])}
