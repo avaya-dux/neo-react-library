@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { useContext, useMemo } from "react";
 
 import { Chip } from "components/Chip";
-import { IconButton } from "components/IconButton";
 
 import { SelectContext } from "../utils/SelectContext";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
@@ -110,14 +109,14 @@ export const MultiSelect = () => {
         </ul>
       </div>
 
-      <IconButton
+      <button
         aria-label="clear selections"
-        icon="close"
-        variant="tertiary"
         className={clsx(
+          "neo-input-edit__icon neo-icon-end",
           "neo-multiselect-clear-icon-button",
           selectedItems.length === 0 && "neo-display-none",
         )}
+        type="button"
         disabled={selectedItems.length === 0}
         onClick={() => setSelectedItems([])}
       />

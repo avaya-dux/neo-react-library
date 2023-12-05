@@ -5,7 +5,6 @@ import { useContext, useEffect, useMemo } from "react";
 import AutosizeInput from "react-input-autosize";
 
 import { Chip } from "components/Chip";
-import { IconButton } from "components/IconButton";
 import { Keys } from "utils";
 
 import { SelectContext } from "../utils/SelectContext";
@@ -134,14 +133,14 @@ export const MultiSelectSearchable = () => {
         <OptionsWithEmptyMessageFallback />
       </div>
 
-      <IconButton
+      <button
         aria-label="clear selections"
-        icon="close"
-        variant="tertiary"
         className={clsx(
+          "neo-input-edit__icon neo-icon-end",
           "neo-multiselect-clear-icon-button",
           selectedItems.length === 0 && "neo-display-none",
         )}
+        type="button"
         disabled={selectedItems.length === 0}
         onClick={() => setSelectedItems([])}
       />
