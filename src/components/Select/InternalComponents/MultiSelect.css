@@ -10,4 +10,8 @@
   &:hover {
     cursor: pointer;
   }
+
+  &:focus-visible {
+    outline-offset: -5px;
+  }
 }
