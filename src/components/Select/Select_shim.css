@@ -97,8 +97,9 @@ div.neo-multiselect span.neo-multiselect-combo__header {
 div.neo-multiselect
   span.neo-multiselect-combo__header
   div.neo-multiselect-combo__buttons-container {
-  flex-grow: 1;
   display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 div.neo-multiselect button.neo-multiselect__header {

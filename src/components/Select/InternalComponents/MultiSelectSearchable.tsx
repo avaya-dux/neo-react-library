@@ -83,33 +83,51 @@ export const MultiSelectSearchable = () => {
     >
       <span {...restToggleProps} className="neo-multiselect-combo__header">
         <span className="neo-multiselect__padded-container">
-          <AutosizeInput
-            {...restInputProps}
-            value={inputValue}
-            inputClassName={clsx(
-              "neo-input",
-              size === "sm" && "neo-multiselect__input--small",
-            )}
-            disabled={disabled}
-            placeholder={placeholder}
-            onKeyDown={(e) => {
-              if (
-                e.key === Keys.ENTER &&
-                filteredOptions.length === 1 &&
-                !filteredOptions[0].disabled
-              ) {
-                toggleItem(filteredOptions[0]);
-              } else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
-                toggleItem(selectedItems[selectedItems.length - 1]);
-              }
-              logger.debug(e);
-              onKeyDown(e);
-            }}
-            onChange={(e) => {
-              logger.debug({ onChangeCalled: e.target.value });
-              setInputValue(e.target.value);
-            }}
-          />
+          <div className="neo-multiselect-combo__buttons-container">
+            <AutosizeInput
+              {...restInputProps}
+              value={inputValue}
+              inputClassName={clsx(
+                "neo-input",
+                size === "sm" && "neo-multiselect__input--small",
+              )}
+              disabled={disabled}
+              placeholder={placeholder}
+              onKeyDown={(e) => {
+                if (
+                  e.key === Keys.ENTER &&
+                  filteredOptions.length === 1 &&
+                  !filteredOptions[0].disabled
+                ) {
+                  toggleItem(filteredOptions[0]);
+                } else if (
+                  e.key === Keys.BACKSPACE &&
+                  inputValue.length === 0
+                ) {
+                  toggleItem(selectedItems[selectedItems.length - 1]);
+                }
+                logger.debug(e);
+                onKeyDown(e);
+              }}
+              onChange={(e) => {
+                logger.debug({ onChangeCalled: e.target.value });
+                setInputValue(e.target.value);
+              }}
+            />
+
+            <button
+              aria-label="clear selections"
+              className={clsx(
+                "neo-input-edit__icon neo-icon-end",
+                "neo-multiselect-clear-icon-button",
+                selectedItems.length === 0 && "neo-display-none",
+              )}
+              type="button"
+              disabled={selectedItems.length === 0}
+              onClick={() => setSelectedItems([])}
+            />
+          </div>
+
           {selectedItemsAsChips}
         </span>
 
@@ -132,18 +150,6 @@ export const MultiSelectSearchable = () => {
       >
         <OptionsWithEmptyMessageFallback />
       </div>
-
-      <button
-        aria-label="clear selections"
-        className={clsx(
-          "neo-input-edit__icon neo-icon-end",
-          "neo-multiselect-clear-icon-button",
-          selectedItems.length === 0 && "neo-display-none",
-        )}
-        type="button"
-        disabled={selectedItems.length === 0}
-        onClick={() => setSelectedItems([])}
-      />
     </div>
   );
 };
