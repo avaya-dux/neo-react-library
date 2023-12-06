@@ -247,6 +247,7 @@ export const Menu = forwardRef(
         className={getClassNames(isOpen, itemAlignment, className, openOnHover)}
         role="group"
         {...rest}
+        title="override of toggle sort by"
       >
         <MenuContext.Provider value={menuContext}>
           {menuButton}
