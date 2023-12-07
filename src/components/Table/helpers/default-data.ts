@@ -19,6 +19,7 @@ export const translations: ITableTranslations = {
     selectAll: "select all",
     sortAscending: "A - Z",
     sortDescending: "Z - A",
+    toggleSortBy: "Toggle SortBy",
   },
   body: {
     noDataAvailable: "no data available",

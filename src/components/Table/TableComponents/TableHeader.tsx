@@ -107,6 +107,7 @@ export const TableHeader = <T extends Record<string, any>>({
               },
             });
 
+            thDivProps.title =  translations.toggleSortBy || undefined;
             const sortIcon: IconNamesType =
               ariasort === "descending" ? "arrow-up" : "arrow-down";
 
