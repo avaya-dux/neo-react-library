@@ -2,15 +2,16 @@ import { composeStories } from "@storybook/testing-react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
+import log from "loglevel";
 import { vi } from "vitest";
+
+import { UserEventKeys } from "utils";
 
 import { Select } from "./Select";
 import * as SelectStories from "./Select.stories";
 import { SelectOption } from "./SelectOption";
 import { fruitOptions } from "./utils/mockdata";
-import { UserEventKeys } from "utils";
 
-import log from "loglevel";
 const logger = log.getLogger("select-test-logger");
 logger.disableAll();
 
@@ -40,6 +41,45 @@ describe("Select", () => {
     it("has does not have class 'neo-multiselect--small' when size is not set", () => {
       const { container } = render(<BasicSelects />);
       expect(container.querySelector(".neo-multiselect--small")).toBeNull();
+    });
+
+    it("has a clear button for non-searchable multiselect", () => {
+      render(
+        <Select multiple label="not important">
+          <SelectOption>Option 1</SelectOption>
+          <SelectOption>Option 2</SelectOption>
+          <SelectOption>Option 3</SelectOption>
+          <SelectOption>Option 4</SelectOption>
+        </Select>,
+      );
+
+      const buttons = screen.getAllByRole("button");
+      expect(buttons).toHaveLength(2);
+
+      const toggleButton = buttons[0];
+      expect(toggleButton).toHaveClass("neo-multiselect__header");
+
+      const clearButton = buttons[1];
+      expect(clearButton).toHaveClass("neo-multiselect-clear-icon-button");
+      expect(clearButton).toBeDisabled();
+    });
+
+    it("has a clear button for a multiselect that is searchable", () => {
+      render(
+        <Select multiple searchable label="not important">
+          <SelectOption>Option 1</SelectOption>
+          <SelectOption>Option 2</SelectOption>
+          <SelectOption>Option 3</SelectOption>
+          <SelectOption>Option 4</SelectOption>
+        </Select>,
+      );
+
+      const buttons = screen.getAllByRole("button");
+      expect(buttons).toHaveLength(1);
+
+      const clearButton = buttons[0];
+      expect(clearButton).toHaveClass("neo-multiselect-clear-icon-button");
+      expect(clearButton).toBeDisabled();
     });
   });
 
@@ -126,7 +166,7 @@ describe("Select", () => {
       });
 
       it("passes the correct props to toggle element", () => {
-        const toggleElement = screen.getByRole("button");
+        const toggleElement = screen.getAllByRole("button")[0];
         const expectedAttributes = ["id", "aria-haspopup", "aria-labelledby"];
         expectedAttributes.forEach((attribute) =>
           expect(toggleElement).toHaveAttribute(attribute),
@@ -134,7 +174,7 @@ describe("Select", () => {
       });
 
       it("toggles aria-expanded prop on click", () => {
-        const toggleElement = screen.getByRole("button");
+        const toggleElement = screen.getAllByRole("button")[0];
         expect(toggleElement).toHaveTextContent(placeholder);
         expect(toggleElement).toHaveAttribute("aria-expanded", "false");
         fireEvent.click(toggleElement);
@@ -201,7 +241,7 @@ describe("Select", () => {
             <SelectOption>Option 4</SelectOption>
           </Select>,
         );
-        const toggleElement = screen.getByRole("button");
+        const toggleElement = screen.getAllByRole("button")[0];
         toggleElement.focus();
         // open menu
         await user.keyboard(UserEventKeys.ENTER);
@@ -222,9 +262,10 @@ describe("Select", () => {
           "Option 1 and Option 2, 2 of 4 selected",
         );
       });
+
       it("does open content area on click after content is loaded", () => {
         const placeholder = "please select one";
-        const { getByRole, rerender } = render(
+        const { getAllByRole, rerender } = render(
           <Select
             multiple
             label={label}
@@ -233,7 +274,7 @@ describe("Select", () => {
           ></Select>,
         );
 
-        const defaultSelectHeader = getByRole("button");
+        const defaultSelectHeader = getAllByRole("button")[0];
         expect(defaultSelectHeader).toHaveTextContent(placeholder);
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
         fireEvent.click(defaultSelectHeader);
@@ -247,6 +288,42 @@ describe("Select", () => {
 
         fireEvent.click(defaultSelectHeader);
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "true");
+      });
+
+      it("clears the selection when the clear button is clicked", () => {
+        const { container } = render(
+          <Select multiple label="not important">
+            <SelectOption>Option 1</SelectOption>
+            <SelectOption>Option 2</SelectOption>
+            <SelectOption>Option 3</SelectOption>
+            <SelectOption>Option 4</SelectOption>
+          </Select>,
+        );
+
+        const buttons = screen.getAllByRole("button");
+        const toggleButton = buttons[0];
+
+        const clearButton = buttons[1];
+
+        // open menu
+        toggleButton.focus();
+        fireEvent.click(toggleButton);
+
+        // select first
+        fireEvent.click(container.querySelector("li"));
+
+        // assert there is one chip
+        expect(
+          container.querySelectorAll("div.neo-chip--close").length,
+        ).toEqual(1);
+
+        // click clear button
+        fireEvent.click(clearButton);
+
+        // assert there are no chips
+        expect(
+          container.querySelectorAll("div.neo-chip--close").length,
+        ).toEqual(0);
       });
     });
   });
@@ -356,7 +433,7 @@ describe("Select", () => {
       });
     });
 
-    describe("Loading", () => {
+    describe("Load Options", () => {
       let renderResult;
 
       beforeEach(() => {
@@ -364,8 +441,8 @@ describe("Select", () => {
       });
 
       it("does not open content area on click when loading", () => {
-        const { getByRole } = renderResult;
-        const defaultSelectHeader = getByRole("button");
+        const { getAllByRole } = renderResult;
+        const defaultSelectHeader = getAllByRole("button")[0];
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
         fireEvent.click(defaultSelectHeader);
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
