@@ -1,0 +1,17 @@
+.neo-multiselect-clear-icon-button {
+  font-size: 1rem;
+  height: 34px;
+  width: 34px;
+
+  background-color: var(--input-background-color);
+  color: var(--input-font-color);
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus-visible {
+    outline-offset: -5px;
+  }
+}

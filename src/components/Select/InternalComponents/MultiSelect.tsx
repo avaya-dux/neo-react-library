@@ -6,6 +6,8 @@ import { Chip } from "components/Chip";
 import { SelectContext } from "../utils/SelectContext";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
+import "./MultiSelect.css";
+
 export const MultiSelect = () => {
   const {
     downshiftProps: {
@@ -14,7 +16,7 @@ export const MultiSelect = () => {
       isOpen,
       selectItem: toggleItem, // NOTE: I've adjusted the hook for this case (multi-select) such that the "select" is actually a "toggle" now
     },
-    optionProps: { selectedItems },
+    optionProps: { selectedItems, setSelectedItems },
     selectProps: {
       filteredOptions,
       ariaLabel,
@@ -81,14 +83,29 @@ export const MultiSelect = () => {
     >
       <span className="neo-multiselect-combo__header neo-multiselect-combo__header--no-after">
         <span className="neo-multiselect__padded-container">
-          <button
-            {...restToggleProps}
-            {...computedAriaProperty}
-            className="neo-multiselect__header"
-            type="button"
-          >
-            {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
-          </button>
+          <div className="neo-multiselect-combo__buttons-container">
+            <button
+              {...restToggleProps}
+              {...computedAriaProperty}
+              className="neo-multiselect__header"
+              type="button"
+            >
+              {selectedItemsAsChips ? <>&nbsp;</> : placeholder}
+            </button>
+
+            <button
+              aria-label="clear selections"
+              className={clsx(
+                "neo-input-edit__icon neo-icon-end",
+                "neo-multiselect-clear-icon-button",
+                selectedItems.length === 0 && "neo-display-none",
+              )}
+              type="button"
+              disabled={selectedItems.length === 0}
+              onClick={() => setSelectedItems([])}
+            />
+          </div>
+
           {selectedItemsAsChips}
         </span>
       </span>

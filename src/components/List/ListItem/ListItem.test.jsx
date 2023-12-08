@@ -234,7 +234,6 @@ describe("ListSection: ", () => {
                 >
                   <span
                     class="neo-icon-call-transfer"
-                    style="font-size: 20px;"
                   />
                 </button>
               </div>

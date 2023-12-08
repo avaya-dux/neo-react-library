@@ -199,6 +199,7 @@ export const Select = (props: SelectProps) => {
       options,
       selectedItems,
       selectedItemsValues,
+      setSelectedItems,
     },
   };
 

@@ -77,7 +77,7 @@ describe("Select", () => {
         </Select>,
       );
 
-      expect(screen.queryAllByRole("button")).toHaveLength(0);
+      expect(screen.queryAllByRole("button")).toHaveLength(1);
       const combobox = screen.getByRole("combobox");
       const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
       expect(combobox).toHaveAttribute("aria-expanded", "false");
@@ -87,11 +87,11 @@ describe("Select", () => {
       const options = screen.getAllByRole("option");
       fireEvent.click(options[0]);
 
-      expect(screen.getAllByRole("button")).toHaveLength(1); // has one chip
+      expect(screen.getAllByRole("button")).toHaveLength(2); // has one chip
 
       fireEvent.click(options[0]);
 
-      expect(screen.queryAllByRole("button")).toHaveLength(0); // chip removed
+      expect(screen.queryAllByRole("button")).toHaveLength(1); // chip removed
     });
 
     it("can select and remove items via the keyboard", async () => {
@@ -106,11 +106,42 @@ describe("Select", () => {
       await user.keyboard(fruitOptions[0].props.children);
       await user.keyboard(UserEventKeys.ENTER);
 
-      expect(screen.getAllByRole("button")).toHaveLength(1); // has one chip
+      expect(screen.getAllByRole("button")).toHaveLength(2); // has one chip
 
       await user.keyboard(UserEventKeys.BACKSPACE);
 
-      expect(screen.queryAllByRole("button")).toHaveLength(0); // chip removed
+      expect(screen.queryAllByRole("button")).toHaveLength(1); // chip removed
+    });
+
+    it("clears the selection when the clear button is clicked", () => {
+      const { container } = render(
+        <Select multiple searchable label="not important">
+          {fruitOptions}
+        </Select>,
+      );
+
+      const toggleElement = screen.getByRole("combobox");
+      const clearButton = screen.getByRole("button");
+
+      // open menu
+      toggleElement.focus();
+      fireEvent.click(toggleElement);
+
+      // select first
+      fireEvent.click(container.querySelector("li"));
+
+      // assert there is one chip
+      expect(container.querySelectorAll("div.neo-chip--close").length).toEqual(
+        1,
+      );
+
+      // click clear button
+      fireEvent.click(clearButton);
+
+      // assert there are no chips
+      expect(container.querySelectorAll("div.neo-chip--close").length).toEqual(
+        0,
+      );
     });
   });
 
@@ -205,13 +236,13 @@ describe("Select", () => {
       expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
       // newly created chip has been added
-      expect(screen.getAllByRole("button")).toHaveLength(1);
+      expect(screen.getAllByRole("button")).toHaveLength(2);
       expect(screen.getByText(newOptionText)).toBeInTheDocument();
 
       await act(async () => {
         await user.keyboard(UserEventKeys.BACKSPACE);
       });
-      expect(screen.queryAllByRole("button")).toHaveLength(0); // chip removed
+      expect(screen.queryAllByRole("button")).toHaveLength(1); // chip removed
     });
 
     it("`MultiSelectSearchable` allows a user to create multiple custom options", async () => {
@@ -232,7 +263,7 @@ describe("Select", () => {
       await user.keyboard(UserEventKeys.ENTER);
 
       // first option chip has been created
-      expect(screen.getAllByRole("button")).toHaveLength(1);
+      expect(screen.getAllByRole("button")).toHaveLength(2);
       expect(screen.getByText(firstOptionText)).toBeInTheDocument();
 
       // add second option
@@ -241,7 +272,7 @@ describe("Select", () => {
       await user.keyboard(UserEventKeys.ENTER);
 
       // both chips have been created
-      expect(screen.getAllByRole("button")).toHaveLength(2);
+      expect(screen.getAllByRole("button")).toHaveLength(3);
       expect(screen.getByText(secondOptionText)).toBeInTheDocument();
     });
   });
