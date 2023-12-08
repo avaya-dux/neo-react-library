@@ -31,6 +31,7 @@ export interface ITableHeaderTranslations {
   selectAll: string;
   sortAscending?: string;
   sortDescending?: string;
+  toggleSortBy?: string;
 }
 
 export interface ITableTranslations {
