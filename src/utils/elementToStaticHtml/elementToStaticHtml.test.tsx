@@ -17,7 +17,7 @@ describe("elementToStaticHtml", () => {
     const element = <div className="foo">hello world</div>;
 
     expect(elementToStaticHtml(element)).toMatchInlineSnapshot(`
-      "<div class=\\"foo\\">
+      "<div class="foo">
         hello world
       </div>"
     `);
@@ -28,8 +28,8 @@ describe("elementToStaticHtml", () => {
 
     expect(elementToStaticHtml(element)).toMatchInlineSnapshot(`
       "<figure
-        class=\\"neo-avatar neo-avatar--generic\\"
-        aria-label=\\"Joey Joe Joe Jr.\\"
+        class="neo-avatar neo-avatar--generic"
+        aria-label="Joey Joe Joe Jr."
       >
       </figure>"
     `);
@@ -40,7 +40,7 @@ describe("elementToStaticHtml", () => {
 
     expect(elementToStaticHtml(element)).toMatchInlineSnapshot(`
       "<button
-        class=\\"neo-btn neo-btn--default neo-btn-primary neo-btn-primary--success\\"
+        class="neo-btn neo-btn--default neo-btn-primary neo-btn-primary--success"
         data-badge
       >
         Hello world
