@@ -104,8 +104,8 @@
     "@typescript-eslint/eslint-plugin": "6.8.0",
     "@typescript-eslint/parser": "6.8.0",
     "@vitejs/plugin-react": "4.1.0",
-    "@vitest/coverage-v8": "0.34.6",
-    "@vitest/ui": "0.34.6",
+    "@vitest/coverage-v8": "1.0.4",
+    "@vitest/ui": "1.0.4",
     "check-node-version": "4.2.1",
     "clsx": "2.0.0",
     "cypress": "13.3.1",
@@ -133,7 +133,7 @@
     "typescript": "5.2.2",
     "vite": "5.0.6",
     "vite-plugin-dts": "3.6.0",
-    "vitest": "0.34.6"
+    "vitest": "1.0.4"
   },
   "resolutions": {
     "unset-value": "2.0.1",
