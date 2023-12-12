@@ -54,7 +54,17 @@ export default defineConfig(({ mode }) => {
       environment: "jsdom",
       setupFiles: "./src/test/setup.ts",
       coverage: {
-        exclude: ["src/**/*.stories.*", "src/**/*.test.*"],
+        exclude: [
+          "src/index.ts", // if we included this in the tests it's cause a circular dependency
+          "**/*.d.ts",
+          "**/*.cy.*",
+          "**/*.cypresstest.*",
+          "**/*.test.*",
+          "**/*.stories.*",
+          "**/storybook-static/**",
+          "**/standalone-stories/**",
+          "**/.storybook/**",
+        ],
         reporter: ["text", "json", "json-summary", "html", "lcov"],
       },
     },
