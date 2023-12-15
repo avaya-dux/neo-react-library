@@ -384,7 +384,7 @@ export const EmptyDataSet = () => (
 
 export const PaginationPushedDown = () => (
   <Table
-    caption="Storybook Empty Date Set Table Example"
+    caption="Storybook Pagination Pushed Down Table Example"
     columns={FilledFields.columns}
     data={[FilledFields.data[0]]}
     handleRefresh={() => undefined}
