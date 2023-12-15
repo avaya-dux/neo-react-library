@@ -35,3 +35,13 @@
 .neo-table-separator td {
   border-bottom: 1px solid #f1f1f1;
 }
+
+.neo-table--push-pagination-down {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 20px);
+}
+.neo-table--push-pagination-down div.neo-pagination__row {
+  flex-grow: 1;
+  align-items: end;
+}

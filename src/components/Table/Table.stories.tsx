@@ -3,16 +3,7 @@ import { Meta, Story } from "@storybook/react";
 import { useEffect, useMemo, useState } from "react";
 import { Column, ColumnInstance } from "react-table";
 
-import {
-  Chip,
-  Icon,
-  List,
-  ListItem,
-  Menu,
-  MenuItem,
-  SelectNative,
-  Tooltip,
-} from "components";
+import { Chip, Icon, List, ListItem, Menu, MenuItem, SelectNative, Tooltip } from "components";
 import { Button } from "components/Button";
 import { IconNamesType } from "utils";
 
@@ -388,6 +379,17 @@ export const EmptyDataSet = () => (
     columns={FilledFields.columns}
     data={[]}
     handleRefresh={() => undefined}
+  />
+);
+
+export const PaginationPushedDown = () => (
+  <Table
+    caption="Storybook Pagination Pushed Down Table Example"
+    columns={FilledFields.columns}
+    data={[FilledFields.data[0]]}
+    handleRefresh={() => undefined}
+    showPagination
+    pushPaginationDown
   />
 );
 
