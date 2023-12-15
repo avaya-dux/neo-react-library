@@ -49,6 +49,7 @@ export type TableProps<T extends Record<string, any>> = {
   caption?: string;
   id?: string;
   showPagination?: boolean;
+  pushPaginationDown?: boolean;
   itemsPerPageOptions?: number[];
   defaultSelectedRowIds?: string[];
   rowHeight?: "compact" | "medium" | "large";

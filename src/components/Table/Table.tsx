@@ -79,6 +79,7 @@ export const Table = <T extends Record<string, any>>({
   rowHeight = "large",
   selectableRows = "none",
   showPagination = true,
+  pushPaginationDown = false,
   showRowSeparator = false,
   translations,
 
@@ -165,7 +166,14 @@ export const Table = <T extends Record<string, any>>({
 
   return (
     <FilterContext.Provider value={filterContext}>
-      <div id={id} data-testid={id} className={containerClassName}>
+      <div
+        id={id}
+        data-testid={id}
+        className={clsx(
+          containerClassName,
+          pushPaginationDown && "neo-table--push-pagination-down",
+        )}
+      >
         {(caption || summary) && (
           <>
             {caption && <h4 id={tableCaptionId}>{caption}</h4>}
