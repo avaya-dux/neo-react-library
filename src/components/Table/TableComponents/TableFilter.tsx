@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext, useState } from "react";
 import { TableInstance } from "react-table";
 
 import { Button } from "components/Button";
@@ -34,6 +34,13 @@ export const TableFilter = <T extends Record<string, any>>({
   const { filterSheetVisible, toggleFilterSheetVisible } =
     useContext(FilterContext);
 
+  const [slide, setSlide] = useState(filterSheetVisible);
+
+  const onClickHandler = useCallback(() => {
+    toggleFilterSheetVisible();
+    setSlide(true);
+  }, [toggleFilterSheetVisible, setSlide]);
+
   const buttons = [
     <IconButton
       aria-label={close}
@@ -41,7 +48,7 @@ export const TableFilter = <T extends Record<string, any>>({
       shape="circle"
       style={{ color: "black" }}
       variant="tertiary"
-      onClick={toggleFilterSheetVisible}
+      onClick={onClickHandler}
       key="table-filter-close-icon-button"
     />,
   ];
@@ -52,13 +59,14 @@ export const TableFilter = <T extends Record<string, any>>({
         aria-label={filterColumns}
         icon="filter"
         shape="square"
-        onClick={toggleFilterSheetVisible}
+        onClick={onClickHandler}
       />
 
       <Sheet
         actions={buttons}
         className="neo-table__filters--sheet"
         open={filterSheetVisible}
+        slide={slide}
         title={filterColumns}
       >
         <section>
