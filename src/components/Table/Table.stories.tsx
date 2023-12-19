@@ -3,7 +3,16 @@ import { Meta, Story } from "@storybook/react";
 import { useEffect, useMemo, useState } from "react";
 import { Column, ColumnInstance } from "react-table";
 
-import { Chip, Icon, List, ListItem, Menu, MenuItem, SelectNative, Tooltip } from "components";
+import {
+  Chip,
+  Icon,
+  List,
+  ListItem,
+  Menu,
+  MenuItem,
+  SelectNative,
+  Tooltip,
+} from "components";
 import { Button } from "components/Button";
 import { IconNamesType } from "utils";
 
