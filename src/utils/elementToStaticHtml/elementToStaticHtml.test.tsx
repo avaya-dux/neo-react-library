@@ -8,7 +8,7 @@ describe("elementToStaticHtml", () => {
 
     expect(elementToStaticHtml(element)).toMatchInlineSnapshot(`
       "<div>
-        hello world
+        hello world to break
       </div>"
     `);
   });
