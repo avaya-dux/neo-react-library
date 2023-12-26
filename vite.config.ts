@@ -55,7 +55,7 @@ export default defineConfig(({ mode }) => {
       setupFiles: "./src/test/setup.ts",
       coverage: {
         exclude: [
-          "src/index.ts", // if we included this in the tests it's cause a circular dependency
+          "src/index.ts", // if we included this in the tests it causes a circular dependency
           "**/*.d.ts",
           "**/*.cy.*",
           "**/*.cypresstest.*",
