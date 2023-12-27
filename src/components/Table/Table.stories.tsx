@@ -353,9 +353,8 @@ export const EditableData = () => {
         handleEdit={(row: IDataTableMockData) => {
           const rowToEditIndex = data.findIndex((r) => r.id === row.id);
           const dataCopy = [...data];
-          dataCopy[
-            rowToEditIndex
-          ].name = `${dataCopy[rowToEditIndex]?.name} (edited)`;
+          dataCopy[rowToEditIndex].name =
+            `${dataCopy[rowToEditIndex]?.name} (edited)`;
 
           setData(dataCopy);
         }}

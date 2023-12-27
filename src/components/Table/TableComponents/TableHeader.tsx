@@ -49,8 +49,8 @@ export const TableHeader = <T extends Record<string, any>>({
   const checkboxCheckedValue = allRowsAreSelected
     ? true
     : selectedRows.length === 0
-    ? false
-    : "mixed";
+      ? false
+      : "mixed";
 
   return (
     <thead>
