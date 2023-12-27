@@ -4,7 +4,7 @@
   "description": "This is the React version of the shared library called 'NEO' built by Avaya",
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": "github:avaya-dux/neo-react-library",
-  "homepage": "https://design.avayacloud.com/components/web/setup-web#InstallReactviaNodePackageManager",
+  "homepage": "https://design.avaya.com/docs/setup",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
