@@ -64,6 +64,7 @@ export const Searchable = () => {
       <Select
         helperText="Please select one"
         label="Select a favorite food"
+        placeholder="Click to open"
         searchable
         onChange={(value) => {
           setFavFood(value as string);
@@ -76,6 +77,7 @@ export const Searchable = () => {
         id="multi-searchable-select"
         helperText="Please select one or more"
         label="Select a few nice foods"
+        placeholder="Click to open"
         multiple
         onChange={(value) => setFoods(value as string[])}
         searchable

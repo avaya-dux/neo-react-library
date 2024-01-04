@@ -70,7 +70,7 @@ export const SingleSelectSearchable = () => {
             {...restInputProps}
             className="neo-input"
             disabled={disabled}
-            placeholder={placeholder}
+            placeholder={selectedItems.length ? undefined : placeholder}
             onKeyDown={(e) => {
               if (
                 e.key === Keys.ENTER &&
@@ -88,7 +88,7 @@ export const SingleSelectSearchable = () => {
             }}
           />
 
-          {selectedItems[0]?.children || placeholder}
+          {selectedItems[0]?.children}
 
           <input
             className="neo-display-none"
