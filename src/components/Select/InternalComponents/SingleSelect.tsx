@@ -11,15 +11,7 @@ export const SingleSelect = () => {
   const {
     downshiftProps: { getMenuProps, getToggleButtonProps, isOpen },
     optionProps: { selectedItems, selectedItemsValues },
-    selectProps: {
-      ariaLabel,
-      disabled,
-      helperId,
-      helperText,
-      loading,
-      placeholder,
-      size,
-    },
+    selectProps: { ariaLabel, disabled, helperId, helperText, loading, size },
   } = useContext(SelectContext);
   const {
     role,
@@ -60,7 +52,7 @@ export const SingleSelect = () => {
           className="neo-multiselect__header"
           type="button"
         >
-          {selectedItems[0]?.children || placeholder}
+          {selectedItems[0]?.children}
         </button>
       </span>
 

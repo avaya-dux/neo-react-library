@@ -80,6 +80,12 @@ export const Select = (props: SelectProps) => {
     handleAccessbilityError("Select requires a label prop or aria-label");
   }
 
+  if (!searchable && placeholder) {
+    console.warn(
+      `For Select with id ${id}, the placeholder prop is ignored when component is not searchable`,
+    );
+  }
+
   const helperId = useMemo(() => `helper-text-${id}`, [id]);
   const isInitialRender = useIsInitialRender();
 
