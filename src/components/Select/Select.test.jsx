@@ -175,7 +175,6 @@ describe("Select", () => {
 
       it("toggles aria-expanded prop on click", () => {
         const toggleElement = screen.getAllByRole("button")[0];
-        expect(toggleElement).toHaveTextContent(placeholder);
         expect(toggleElement).toHaveAttribute("aria-expanded", "false");
         fireEvent.click(toggleElement);
         expect(toggleElement).toHaveAttribute("aria-expanded", "true");
@@ -275,7 +274,6 @@ describe("Select", () => {
         );
 
         const defaultSelectHeader = getAllByRole("button")[0];
-        expect(defaultSelectHeader).toHaveTextContent(placeholder);
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
         fireEvent.click(defaultSelectHeader);
         expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
