@@ -71,6 +71,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
     currentUrl: curUrl,
     onSelectedLink: handleSelectedLink,
     isActiveOverride,
+    hasCustomOnNavigate: onNavigate ? true : false,
   };
 
   return (

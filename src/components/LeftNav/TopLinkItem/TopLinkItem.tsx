@@ -47,9 +47,12 @@ export const TopLinkItem = ({
   }, [ctx.currentUrl, ctx.isActiveOverride, isActive, href]);
 
   const onClick: MouseEventHandler = (e) => {
-    e.preventDefault();
+    console.log("hasCustomOnNavigate = ", ctx?.hasCustomOnNavigate);
+    if (ctx.hasCustomOnNavigate) {
+      e.preventDefault();
+    };
     ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
-  };
+  }
 
   return (
     <li
