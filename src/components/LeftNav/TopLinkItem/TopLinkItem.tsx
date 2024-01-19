@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import {
+  createRef,
   MouseEventHandler,
   useContext,
   useEffect,
@@ -40,16 +41,23 @@ export const TopLinkItem = ({
   const ctx = useContext(LeftNavContext);
   const [isActive, setIsActive] = useState(false);
 
+  const anchorRef = createRef<HTMLAnchorElement>();
+
   useEffect(() => {
     !ctx.isActiveOverride
       ? setIsActive(href === ctx.currentUrl)
       : setIsActive(false);
   }, [ctx.currentUrl, ctx.isActiveOverride, isActive, href]);
 
+  useEffect(() => {
+    if (href === ctx.currentUrl) {
+      anchorRef?.current?.scrollIntoView();
+    }
+  }, [ctx.currentUrl, isActive, href]);
+
   const onClick: MouseEventHandler = (e) => {
-    console.log("hasCustomOnNavigate = ", ctx?.hasCustomOnNavigate);
     if (ctx.hasCustomOnNavigate) {
-      e.preventDefault();
+      e.preventDefault(); // Override anchor default behavior if a custom event handler is provided
     };
     ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
   }
@@ -69,6 +77,7 @@ export const TopLinkItem = ({
       ) : (
         <a
           href={href}
+          ref={anchorRef}
           className={clsx(icon && `neo-icon-${icon}`)}
           onClick={onClick}
         >
