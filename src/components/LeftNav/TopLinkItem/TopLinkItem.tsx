@@ -53,7 +53,7 @@ export const TopLinkItem = ({
     if (href === ctx.currentUrl) {
       anchorRef?.current?.scrollIntoView();
     }
-  }, [ctx.currentUrl, isActive, href]);
+  }, [ctx.currentUrl, anchorRef, isActive, href]);
 
   const onClick: MouseEventHandler = (e) => {
     if (ctx.hasCustomOnNavigate) {
