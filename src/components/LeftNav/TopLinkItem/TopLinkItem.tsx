@@ -58,9 +58,9 @@ export const TopLinkItem = ({
   const onClick: MouseEventHandler = (e) => {
     if (ctx.hasCustomOnNavigate) {
       e.preventDefault(); // Override anchor default behavior if a custom event handler is provided
-    };
+    }
     ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
-  }
+  };
 
   return (
     <li
