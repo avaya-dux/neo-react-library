@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import {
-  createRef,
   MouseEventHandler,
   useContext,
   useEffect,
   useId,
+  useRef,
   useState,
 } from "react";
 
@@ -41,7 +41,7 @@ export const TopLinkItem = ({
   const ctx = useContext(LeftNavContext);
   const [isActive, setIsActive] = useState(false);
 
-  const anchorRef = createRef<HTMLAnchorElement>();
+  const anchorRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     !ctx.isActiveOverride
