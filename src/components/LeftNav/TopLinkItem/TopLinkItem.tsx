@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useId,
+  useRef,
   useState,
 } from "react";
 
@@ -40,14 +41,24 @@ export const TopLinkItem = ({
   const ctx = useContext(LeftNavContext);
   const [isActive, setIsActive] = useState(false);
 
+  const anchorRef = useRef<HTMLAnchorElement>(null);
+
   useEffect(() => {
     !ctx.isActiveOverride
       ? setIsActive(href === ctx.currentUrl)
       : setIsActive(false);
   }, [ctx.currentUrl, ctx.isActiveOverride, isActive, href]);
 
+  useEffect(() => {
+    if (href === ctx.currentUrl) {
+      anchorRef?.current?.scrollIntoView();
+    }
+  }, [ctx.currentUrl, anchorRef, href]);
+
   const onClick: MouseEventHandler = (e) => {
-    e.preventDefault();
+    if (ctx.hasCustomOnNavigate) {
+      e.preventDefault(); // Override anchor default behavior if a custom event handler is provided
+    }
     ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
   };
 
@@ -66,6 +77,7 @@ export const TopLinkItem = ({
       ) : (
         <a
           href={href}
+          ref={anchorRef}
           className={clsx(icon && `neo-icon-${icon}`)}
           onClick={onClick}
         >

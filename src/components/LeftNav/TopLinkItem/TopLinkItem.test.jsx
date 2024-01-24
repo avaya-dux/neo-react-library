@@ -9,6 +9,8 @@ describe("TopLinkItem", () => {
   const user = userEvent.setup();
   const TopLinkItemLabel = "label for top link";
 
+  window.HTMLElement.prototype.scrollIntoView = vi.fn();
+
   it("fully renders without exploding", () => {
     const { getByText } = render(
       <LeftNav.TopLinkItem label={TopLinkItemLabel} />,

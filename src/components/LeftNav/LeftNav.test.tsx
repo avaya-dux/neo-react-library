@@ -11,6 +11,7 @@ import {
 } from "./LeftNav.stories";
 
 describe("LeftNav", () => {
+  window.HTMLElement.prototype.scrollIntoView = vi.fn();
   describe("a11y tests", () => {
     const examplechildren = (
       <>

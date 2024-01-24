@@ -54,4 +54,5 @@ export interface LeftNavContextType {
   currentUrl: string;
   onSelectedLink?: (id: string, url: string) => void;
   isActiveOverride?: boolean;
+  hasCustomOnNavigate?: boolean;
 }
