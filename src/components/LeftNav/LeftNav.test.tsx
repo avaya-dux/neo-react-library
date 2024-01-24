@@ -10,13 +10,6 @@ import {
   DoesNotConflictWithOtherNavs,
 } from "./LeftNav.stories";
 
-// domjs does not not implement the scrollIntoView() api so we need to mock it at global scope.
-// const ElementMock = vi.fn(() => ({
-//   scrollIntoView: vi.fn(),
-// }));
-
-// vi.stubGlobal("Element", ElementMock);
-
 describe("LeftNav", () => {
   window.HTMLElement.prototype.scrollIntoView = vi.fn();
   describe("a11y tests", () => {
