@@ -9,6 +9,8 @@ describe("TopLinkItem", () => {
   const user = userEvent.setup();
   const TopLinkItemLabel = "label for top link";
 
+  window.HTMLElement.prototype.scrollIntoView = vi.fn();
+
   it("fully renders without exploding", () => {
     const { getByText } = render(
       <LeftNav.TopLinkItem label={TopLinkItemLabel} />,
@@ -17,22 +19,21 @@ describe("TopLinkItem", () => {
     expect(topLinkElement).toBeInTheDocument();
   });
 
-  // This test is incorrectly failing. Needs to be re-written
-  // it("accepts override of internal setting of active state", () => {
-  //   const { rerender } = render(
-  //     <LeftNav currentUrl="#test" aria-label="test-label">
-  //       <LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
-  //     </LeftNav>,
-  //   );
-  //   const linkElement = screen.getByRole("listitem");
-  //   expect(linkElement).toHaveClass("neo-leftnav__main--active");
-  //   rerender(
-  //     <LeftNav currentUrl="#test" aria-label="test-label" isActiveOverride>
-  //       <LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
-  //     </LeftNav>,
-  //   );
-  //   expect(linkElement).not.toHaveClass("neo-leftnav__main--active");
-  // });
+  it("accepts override of internal setting of active state", () => {
+    const { rerender } = render(
+      <LeftNav currentUrl="#test" aria-label="test-label">
+        <LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
+      </LeftNav>,
+    );
+    const linkElement = screen.getByRole("listitem");
+    expect(linkElement).toHaveClass("neo-leftnav__main--active");
+    rerender(
+      <LeftNav currentUrl="#test" aria-label="test-label" isActiveOverride>
+        <LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
+      </LeftNav>,
+    );
+    expect(linkElement).not.toHaveClass("neo-leftnav__main--active");
+  });
 
   it("passes basic axe compliance", async () => {
     const { container } = render(
@@ -78,22 +79,21 @@ describe("TopLinkItem", () => {
   //   expect(linkElement).toHaveClass("neo-icon-address-book");
   // });
 
-  // This test is incorrectly failing. Needs to be re-written
-  // it("should simulate onclick function when not disabled", async () => {
-  //   const mockedFunction = vi.fn();
-  //   const { getByText } = render(
-  //     <LeftNav
-  //       aria-label="Main Navigation"
-  //       onNavigate={mockedFunction}
-  //       currentUrl=""
-  //     >
-  //       <LeftNav.TopLinkItem label={TopLinkItemLabel} />
-  //     </LeftNav>,
-  //   );
-  //   const linkElement = getByText(TopLinkItemLabel);
-  //   await user.click(linkElement);
-  //   expect(mockedFunction).toHaveBeenCalled();
-  // });
+  it("should simulate onclick function when not disabled", async () => {
+    const mockedFunction = vi.fn();
+    const { getByText } = render(
+      <LeftNav
+        aria-label="Main Navigation"
+        onNavigate={mockedFunction}
+        currentUrl=""
+      >
+        <LeftNav.TopLinkItem label={TopLinkItemLabel} />
+      </LeftNav>,
+    );
+    const linkElement = getByText(TopLinkItemLabel);
+    await user.click(linkElement);
+    expect(mockedFunction).toHaveBeenCalled();
+  });
 
   it("uses a `<button>` when it _is_ disabled", () => {
     const { container } = render(
