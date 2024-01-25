@@ -26,6 +26,17 @@ export const Info: Story = {
   },
 };
 
+export const InfoNoTimestamp: Story = {
+  args: {
+    type: "info",
+    header: "Info",
+    description: "This is some info with no timestamp.",
+    showTimestamp: false,
+    isElevated: false,
+    isInline: true,
+  },
+};
+
 export const Success: Story = {
   args: {
     type: "success",
