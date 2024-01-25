@@ -19,6 +19,7 @@ type AtLeastOneProps =
   | { header?: string; description: string };
 
 type CommonProps = {
+  showTimestamp?: boolean;
   isElevated?: boolean;
   isInline?: boolean;
   occurences?: number;

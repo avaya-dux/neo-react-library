@@ -84,6 +84,7 @@ export const Notification = ({
   actions,
   header = "",
   description = "",
+  showTimestamp = true,
   isElevated = false,
   isInline = false,
   occurences = 0,
@@ -185,9 +186,11 @@ export const Notification = ({
       />
       <div className="neo-notification__message" ref={notificationRef}>
         <div className="neo-notification__message__wrapper">
-          <p className="neo-notification__timestamp neo-body-small neo-semibold">
+          {showTimestamp && (
+            <p className="neo-notification__timestamp neo-body-small neo-semibold">
             {timestamp}
-          </p>
+            </p>
+          )}
 
           {occurences > 1 && (
             <Tooltip label={clsx(notificationTranslations.badge, occurences)}>
