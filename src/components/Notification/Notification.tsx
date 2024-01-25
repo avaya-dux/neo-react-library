@@ -188,7 +188,7 @@ export const Notification = ({
         <div className="neo-notification__message__wrapper">
           {showTimestamp && (
             <p className="neo-notification__timestamp neo-body-small neo-semibold">
-            {timestamp}
+              {timestamp}
             </p>
           )}
 
