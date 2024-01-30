@@ -51,7 +51,7 @@ export const TopLinkItem = ({
 
   useEffect(() => {
     if (href === ctx.currentUrl) {
-      anchorRef?.current?.scrollIntoView();
+      anchorRef?.current?.scrollIntoView(false);
     }
   }, [ctx.currentUrl, anchorRef, href]);
 
