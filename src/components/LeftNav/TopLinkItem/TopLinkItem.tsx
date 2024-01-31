@@ -51,7 +51,7 @@ export const TopLinkItem = ({
 
   useEffect(() => {
     if (href === ctx.currentUrl) {
-      anchorRef?.current?.scrollIntoView(false);
+      anchorRef?.current?.scrollIntoView({ inline: "nearest" });
     }
   }, [ctx.currentUrl, anchorRef, href]);
 
