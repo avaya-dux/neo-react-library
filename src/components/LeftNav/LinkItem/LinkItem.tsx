@@ -64,8 +64,10 @@ export const LinkItem = ({
   }, [disabled, parentHasIcon]);
 
   const handleOnClick: MouseEventHandler = (e) => {
+    if (ctx.hasCustomOnNavigate) {
+      e.preventDefault(); // Override anchor default behavior if a custom event handler is provided
+    }
     handleClick();
-    e.preventDefault();
     ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
   };
 
