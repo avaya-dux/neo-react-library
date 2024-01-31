@@ -121,6 +121,48 @@ export const SimpleMenu = () => (
   </div>
 );
 
+export const RTLExample = () => (
+  <div style={{ display: "flex", justifyContent: "center", gap: "2rem" }}>
+    <div dir="ltr">
+      <h2>LTR Menu Layout</h2>
+      <Menu menuRootElement={<MenuButton>Open Menu</MenuButton>}>
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+        <SubMenu menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
+          <MenuItem>Sub Item1</MenuItem>
+          <MenuItem>Sub Item2</MenuItem>
+          <MenuItem>Sub Item3</MenuItem>
+          <SubMenu menuRootElement={<MenuItem>Sub-sub SubMenu</MenuItem>}>
+            <MenuItem>Sub-sub Item1</MenuItem>
+            <MenuItem>Sub-sub Item2</MenuItem>
+            <MenuItem>Sub-sub Item3</MenuItem>
+          </SubMenu>
+        </SubMenu>
+      </Menu>
+    </div>
+
+    <div dir="rtl">
+      <h2>RTL Menu Layout</h2>
+      <Menu menuRootElement={<MenuButton>Open Menu</MenuButton>}>
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Menu Item 3</MenuItem>
+        <SubMenu menuRootElement={<MenuItem>Sub Menu</MenuItem>}>
+          <MenuItem>Sub Item1</MenuItem>
+          <MenuItem>Sub Item2</MenuItem>
+          <MenuItem>Sub Item3</MenuItem>
+          <SubMenu menuRootElement={<MenuItem>Sub-sub SubMenu</MenuItem>}>
+            <MenuItem>Sub-sub Item1</MenuItem>
+            <MenuItem>Sub-sub Item2</MenuItem>
+            <MenuItem>Sub-sub Item3</MenuItem>
+          </SubMenu>
+        </SubMenu>
+      </Menu>
+    </div>
+  </div>
+);
+
 export const UpGoingMenus = () => (
   <>
     <p>
