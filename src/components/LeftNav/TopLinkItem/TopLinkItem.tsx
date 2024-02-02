@@ -43,6 +43,21 @@ export const TopLinkItem = ({
 
   const anchorRef = useRef<HTMLAnchorElement>(null);
 
+  type posType = number | undefined;
+  const [xPos, setXPos] = useState<posType>(undefined);
+  const [yPos, setYPos] = useState<posType>(undefined);
+
+  const updateItemPosition = () => {
+    const x = anchorRef?.current?.offsetLeft;
+    console.log("setXPos to ", x)
+    setXPos(x);
+
+    const y = anchorRef?.current?.offsetTop;
+    console.log("setXPos to ", y);
+    setYPos(y);
+  };
+
+
   useEffect(() => {
     !ctx.isActiveOverride
       ? setIsActive(href === ctx.currentUrl)
@@ -51,11 +66,20 @@ export const TopLinkItem = ({
 
   useEffect(() => {
     if (href === ctx.currentUrl) {
-      anchorRef?.current?.scrollIntoView({ inline: "nearest" });
+      // anchorRef?.current?.scrollIntoView({ block: "nearest", inline: "start" });
+      if (xPos !== undefined && yPos !== undefined) {
+        console.log("CALLING scrollTo ", xPos, yPos);
+        anchorRef?.current?.scrollTo(xPos, yPos);
+      }
     }
   }, [ctx.currentUrl, anchorRef, href]);
 
   const onClick: MouseEventHandler = (e) => {
+    console.log(
+      "onClick CALLED scrollTo, hasCustomOnNavigate: ",
+      ctx.hasCustomOnNavigate,
+    );
+    updateItemPosition();
     if (ctx.hasCustomOnNavigate) {
       e.preventDefault(); // Override anchor default behavior if a custom event handler is provided
     }
