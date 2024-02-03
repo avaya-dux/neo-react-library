@@ -43,10 +43,6 @@ export const TopLinkItem = ({
 
   const anchorRef = useRef<HTMLAnchorElement>(null);
 
-  type posType = number | undefined;
-  const [xPos, setXPos] = useState<posType>(undefined);
-  const [yPos, setYPos] = useState<posType>(undefined);
-
   useEffect(() => {
     !ctx.isActiveOverride
       ? setIsActive(href === ctx.currentUrl)
