@@ -1,4 +1,4 @@
-import { KeyboardEvent, useContext } from "react";
+import { KeyboardEvent, useCallback, useContext, useMemo } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
@@ -46,11 +46,28 @@ export const TableHeader = <T extends Record<string, any>>({
   const allRowsAreSelected = selectedRows.length === page.length;
   const shouldHaveCheckboxColumn = selectableRows !== "none";
   const shouldHaveCheckbox = selectableRows === "multiple";
-  const checkboxCheckedValue = allRowsAreSelected
-    ? true
-    : selectedRows.length === 0
-      ? false
-      : "mixed";
+  const checkboxCheckedValue = useMemo(() => {
+    return allRowsAreSelected
+      ? true
+      : selectedRows.length === 0
+        ? false
+        : "mixed";
+  }, [allRowsAreSelected, selectedRows]);
+  const handleRowToggledInternal = useCallback(() => {
+    toggleAllRowsSelected(!allRowsAreSelected);
+
+    if (handleRowToggled) {
+      const shouldSelectAll = [false, "mixed"].includes(checkboxCheckedValue);
+
+      handleRowToggled(shouldSelectAll ? Object.keys(rowsById) : []);
+    }
+  }, [
+    toggleAllRowsSelected,
+    allRowsAreSelected,
+    handleRowToggled,
+    checkboxCheckedValue,
+    rowsById,
+  ]);
 
   return (
     <thead>
@@ -61,19 +78,7 @@ export const TableHeader = <T extends Record<string, any>>({
               <Checkbox
                 checked={checkboxCheckedValue}
                 aria-label={translations.selectAll}
-                onChange={() => {
-                  toggleAllRowsSelected();
-
-                  if (handleRowToggled) {
-                    const shouldSelectAll = [false, "mixed"].includes(
-                      checkboxCheckedValue,
-                    );
-
-                    handleRowToggled(
-                      shouldSelectAll ? Object.keys(rowsById) : [],
-                    );
-                  }
-                }}
+                onChange={handleRowToggledInternal}
                 value="all"
               />
             )}
