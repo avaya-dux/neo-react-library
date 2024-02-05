@@ -49,11 +49,12 @@ export const TopLinkItem = ({
       : setIsActive(false);
   }, [ctx.currentUrl, ctx.isActiveOverride, isActive, href]);
 
+  // Ensure the link is visible in the viewport when it matches the current URL
   useEffect(() => {
     if (href === ctx.currentUrl) {
-      anchorRef?.current?.scrollIntoView();
+      anchorRef?.current?.scrollIntoView({ block: "nearest", inline: "start" });
     }
-  }, [ctx.currentUrl, anchorRef, href]);
+  }, [ctx.currentUrl, href]);
 
   const onClick: MouseEventHandler = (e) => {
     if (ctx.hasCustomOnNavigate) {
