@@ -1,4 +1,4 @@
-Copyright 2020-2022 Avaya Inc. All Rights Reserved.
+Copyright 2020-2024 Avaya Inc. All Rights Reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of these image files and .css software and associated documentation files (the "Image and .CSS Software"), the rights to use, copy, modify, merge, publish, distribute, sublicense, and to permit persons to whom the Image and .CSS Software is furnished to do so, subject to the following conditions:
 
