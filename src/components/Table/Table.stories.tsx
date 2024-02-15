@@ -450,7 +450,7 @@ export const PreSelectedRows = () => {
       <Table
         caption="Storybook Selectable Rows Table Example"
         columns={FilledFields.columns}
-        data={[...FilledFields.data]}
+        data={FilledFields.data}
         handleRowToggled={handleToggle}
         selectableRows="multiple"
         defaultSelectedRowIds={defaultSelectedRowIds}
