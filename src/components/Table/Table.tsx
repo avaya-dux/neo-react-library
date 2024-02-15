@@ -51,7 +51,7 @@ import "./Table_shim.css";
     columns={columns}
     data={data}
     handleRefresh={() => {
-      callApi().then(data => setData(data));
+      callApi().then(updatedData => setData(updatedData));
     }}
   />);
  *
