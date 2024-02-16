@@ -25,10 +25,10 @@
   resolved "https://registry.yarnpkg.com/@atomic-layout/core/-/core-0.14.1.tgz#3d69be5f79775f11b8008f18bc603b04a2141ccd"
   integrity sha512-o5nhk/1djuKzB20C2LSOuetTDytsbGg4c0UfxXkq1pqoaN3hKJcHPYF9nV+p6+P5CWqNBaaJddZ32OsFSppULQ==
 
-"@avaya/neo-icons@1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.1.tgz#ba82bc5d754b074b6d3ff9a56e9af2165ee9fb8a"
-  integrity sha512-TVbwT65nBR4EIaCyFsyXTmkj1SsTMCUHjYrUCJ3MRyzElxx7AXtj/CC5rQ7IU1MSI+BqPpH3mBOv/BMHpGeMDg==
+"@avaya/neo-icons@1.8.4":
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.4.tgz#8cad87fa613f418718a17f41724adb71f40f2c91"
+  integrity sha512-tr2fe5lgXEXexZje6q/LPq62RT0xdRr3EdKsHB6+ygAQsIJZN9/kJLYcLrZIj+B/+6sF1m6CJc9B8n3J5Saayg==
 
 "@avaya/neo@3.80.2":
   version "3.80.2"
