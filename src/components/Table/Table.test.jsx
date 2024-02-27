@@ -380,9 +380,7 @@ describe("Table", () => {
       expect(menuItems).toHaveLength(4);
       await user.click(queryAllByRole("menuitem")[3]);
 
-      expect(getByRole("dialog")).not.toHaveClass(
-        "sheet-horizontal-slide-in-shim",
-      );
+      expect(getByRole("dialog")).toHaveClass("sheet-horizontal-slide-in-shim");
       expect(getByRole("dialog")).not.toHaveClass(
         "sheet-horizontal-slide-out-shim",
       );

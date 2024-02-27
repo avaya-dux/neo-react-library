@@ -11,6 +11,11 @@ import {
   Menu,
   MenuItem,
   SelectNative,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
   Tooltip,
 } from "components";
 import { Button } from "components/Button";
@@ -288,6 +293,33 @@ export const AdvancedFilteringAndSorting = () => {
     </section>
   );
 };
+
+export const TableInTabs = () => (
+  <section>
+    <h3>Table inside of a Tab</h3>
+
+    <Tabs>
+      <TabList>
+        <Tab id="tab1">Nothing</Tab>
+
+        <Tab id="tab2">Table</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>
+          <p>Nothing of consequence</p>
+        </TabPanel>
+
+        <TabPanel>
+          <Table
+            allowColumnFilter
+            columns={[...FilledFields.columns]}
+            data={[...FilledFields.data]}
+          />
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  </section>
+);
 
 export const CustomActions = () => (
   <Table
