@@ -46,6 +46,7 @@
     "build16:storybook": "storybook build",
     "build16+:storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook build",
     "build:storybook": "check-node-version --node 16 && (yarn build16:storybook || echo build storybook failed) || yarn build16+:storybook || echo build storybook failed with node $(node -v)",
+    "build:release": "yarn install && mkdir -p dist && yarn build && yarn pack",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
