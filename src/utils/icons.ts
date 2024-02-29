@@ -5,7 +5,7 @@ import type { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 // used by neo-react stories
 export const IconNames = icons.map((icon) => icon.name);
 
-// used by neo-react components
+// Generates a CSS class name for a given icon name
 export const getIconClass = (icon?: IconNamesType) =>
   icon ? `neo-icon-${icon}` : "";
 
