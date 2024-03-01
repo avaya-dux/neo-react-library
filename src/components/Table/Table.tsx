@@ -81,6 +81,7 @@ export const Table = <T extends Record<string, any>>({
   showPagination = true,
   pushPaginationDown = false,
   showRowSeparator = false,
+  showRowHeightMenu = true,
   translations,
 
   ...rest

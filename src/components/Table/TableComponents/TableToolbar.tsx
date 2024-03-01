@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import { Button } from "components/Button";
 import { IconButton } from "components/IconButton";
+import { Menu, MenuItem } from "components/Menu";
 import { TextInput } from "components/TextInput";
 
 import { FilterContext } from "../helpers";
@@ -137,6 +138,23 @@ export const TableToolbar = <T extends Record<string, any>>({
             style={{ color: "blue" }}
             variant="tertiary"
           />
+        )}
+
+        {handleRefresh && (
+          <Menu
+            itemAlignment="right"
+            menuRootElement={
+              <Button
+                icon="preferences"
+                aria-label={translations.refresh || "Select Row Height"}
+                variant="tertiary"
+              />
+            }
+          >
+            <MenuItem>Large</MenuItem>
+            <MenuItem>Medium</MenuItem>
+            <MenuItem>Small</MenuItem>
+          </Menu>
         )}
       </div>
     </div>
