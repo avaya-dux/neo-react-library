@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   useFilters,
   useGlobalFilter,
@@ -18,9 +18,13 @@ import {
   FilterContext,
 } from "./helpers";
 import { TableBody, TableHeader, TableToolbar } from "./TableComponents";
-import { IFilterContext } from "./types";
+import { IFilterContext, RowHeight } from "./types";
 
 import "./Table_shim.css";
+
+import log from "loglevel";
+const logger = log.getLogger("table-logger");
+logger.disableAll();
 
 /**
  * The Table is used to organize and display data within rows and columns.
@@ -157,6 +161,15 @@ export const Table = <T extends Record<string, any>>({
 
   const [filterSheetVisible, setFilterSheetVisible] = useState(false);
   const toggleFilterSheetVisible = () => setFilterSheetVisible((v) => !v);
+  const [rowHeightValue, setRowHeightValue] = useState(rowHeight);
+
+  const onRowHeightChangeHandler = useCallback(
+    (newHeight: RowHeight) => {
+      logger.debug(newHeight);
+      setRowHeightValue(newHeight);
+    },
+    [],
+  );
 
   const filterContext: IFilterContext = {
     allowColumnFilter,
@@ -189,6 +202,7 @@ export const Table = <T extends Record<string, any>>({
             handleDelete={handleDelete}
             handleEdit={handleEdit}
             handleRefresh={handleRefresh}
+            handleRowHeightChange={onRowHeightChangeHandler}
             instance={instance}
             readonly={readonly}
             translations={toolbarTranslations}
@@ -199,8 +213,8 @@ export const Table = <T extends Record<string, any>>({
           {...getTableProps()}
           className={clsx(
             "neo-table",
-            rowHeight === "compact" && "neo-table--compact",
-            rowHeight === "medium" && "neo-table--medium",
+            rowHeightValue === "compact" && "neo-table--compact",
+            rowHeightValue === "medium" && "neo-table--medium",
             showRowSeparator && "neo-table-separator",
           )}
           aria-labelledby={

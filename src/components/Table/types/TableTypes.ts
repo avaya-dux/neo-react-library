@@ -22,6 +22,7 @@ interface ToolbarSharedProps<T extends Record<string, any>> {
 export type TableToolbarProps<T extends Record<string, any>> = {
   instance: TableInstance<T>;
   translations: IToolbarTranslations;
+  handleRowHeightChange: (newHeight: RowHeight) => Promise<void> | void;
 } & ToolbarSharedProps<T>;
 
 interface TableHeaderBodySharedProps<T extends Record<string, any>> {
@@ -45,6 +46,8 @@ export interface IFilterContext {
   toggleFilterSheetVisible: () => void;
 }
 
+export type RowHeight = "compact" | "medium" | "large";
+
 export type TableProps<T extends Record<string, any>> = {
   caption?: string;
   id?: string;
@@ -52,7 +55,7 @@ export type TableProps<T extends Record<string, any>> = {
   pushPaginationDown?: boolean;
   itemsPerPageOptions?: number[];
   defaultSelectedRowIds?: string[];
-  rowHeight?: "compact" | "medium" | "large";
+  rowHeight?: RowHeight;
   showRowSeparator?: boolean;
   showRowHeightMenu?: boolean;
   summary?: string;

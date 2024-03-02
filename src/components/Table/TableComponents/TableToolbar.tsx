@@ -27,6 +27,7 @@ export const TableToolbar = <T extends Record<string, any>>({
   handleDelete,
   handleEdit,
   handleRefresh,
+  handleRowHeightChange,
   instance,
   readonly = false,
   translations,
@@ -140,7 +141,7 @@ export const TableToolbar = <T extends Record<string, any>>({
           />
         )}
 
-        {handleRefresh && (
+        {handleRowHeightChange && (
           <Menu
             itemAlignment="right"
             menuRootElement={
@@ -151,9 +152,15 @@ export const TableToolbar = <T extends Record<string, any>>({
               />
             }
           >
-            <MenuItem>Large</MenuItem>
-            <MenuItem>Medium</MenuItem>
-            <MenuItem>Small</MenuItem>
+            <MenuItem onClick={() => handleRowHeightChange("large")}>
+              Large
+            </MenuItem>
+            <MenuItem onClick={() => handleRowHeightChange("medium")}>
+              Medium
+            </MenuItem>
+            <MenuItem onClick={() => handleRowHeightChange("compact")}>
+              Small
+            </MenuItem>
           </Menu>
         )}
       </div>
