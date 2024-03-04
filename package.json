@@ -1,6 +1,6 @@
 {
   "name": "@avaya/neo-react",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "This is the React version of the shared library called 'NEO' built by Avaya",
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": "github:avaya-dux/neo-react-library",
@@ -46,6 +46,7 @@
     "build16:storybook": "storybook build",
     "build16+:storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook build",
     "build:storybook": "check-node-version --node 16 && (yarn build16:storybook || echo build storybook failed) || yarn build16+:storybook || echo build storybook failed with node $(node -v)",
+    "build:release": "yarn install && mkdir -p dist && yarn build && yarn pack",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
