@@ -18,6 +18,7 @@ interface ToolbarSharedProps<T extends Record<string, any>> {
   handleDelete?: (selectedRowIds: string[]) => Promise<void> | void;
   handleEdit?: (selectedRow: T) => Promise<void> | void;
   handleRefresh?: () => Promise<void> | void;
+  showRowHeightMenu?: boolean;
 }
 export type TableToolbarProps<T extends Record<string, any>> = {
   instance: TableInstance<T>;
@@ -57,7 +58,6 @@ export type TableProps<T extends Record<string, any>> = {
   defaultSelectedRowIds?: string[];
   rowHeight?: RowHeight;
   showRowSeparator?: boolean;
-  showRowHeightMenu?: boolean;
   summary?: string;
   containerClassName?: string;
   translations?: ITableTranslations;

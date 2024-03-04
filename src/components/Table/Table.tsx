@@ -163,13 +163,10 @@ export const Table = <T extends Record<string, any>>({
   const toggleFilterSheetVisible = () => setFilterSheetVisible((v) => !v);
   const [rowHeightValue, setRowHeightValue] = useState(rowHeight);
 
-  const onRowHeightChangeHandler = useCallback(
-    (newHeight: RowHeight) => {
-      logger.debug(newHeight);
-      setRowHeightValue(newHeight);
-    },
-    [],
-  );
+  const onRowHeightChangeHandler = useCallback((newHeight: RowHeight) => {
+    logger.debug(newHeight);
+    setRowHeightValue(newHeight);
+  }, []);
 
   const filterContext: IFilterContext = {
     allowColumnFilter,
@@ -203,6 +200,7 @@ export const Table = <T extends Record<string, any>>({
             handleEdit={handleEdit}
             handleRefresh={handleRefresh}
             handleRowHeightChange={onRowHeightChangeHandler}
+            showRowHeightMenu={showRowHeightMenu}
             instance={instance}
             readonly={readonly}
             translations={toolbarTranslations}

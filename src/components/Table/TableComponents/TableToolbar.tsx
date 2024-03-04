@@ -28,6 +28,7 @@ export const TableToolbar = <T extends Record<string, any>>({
   handleEdit,
   handleRefresh,
   handleRowHeightChange,
+  showRowHeightMenu,
   instance,
   readonly = false,
   translations,
@@ -141,25 +142,29 @@ export const TableToolbar = <T extends Record<string, any>>({
           />
         )}
 
-        {handleRowHeightChange && (
+        {showRowHeightMenu && (
           <Menu
             itemAlignment="right"
             menuRootElement={
               <Button
                 icon="preferences"
-                aria-label={translations.refresh || "Select Row Height"}
+                aria-label={translations.selectRowHeight || "Select row height"}
                 variant="tertiary"
               />
             }
           >
-            <MenuItem onClick={() => handleRowHeightChange("large")}>
-              Large
+            <MenuItem
+              onClick={() => {
+                handleRowHeightChange("large");
+              }}
+            >
+              {translations.large || "Large"}
             </MenuItem>
             <MenuItem onClick={() => handleRowHeightChange("medium")}>
-              Medium
+              {translations.medium || "Medium"}
             </MenuItem>
             <MenuItem onClick={() => handleRowHeightChange("compact")}>
-              Small
+              {translations.small || "Small"}
             </MenuItem>
           </Menu>
         )}
