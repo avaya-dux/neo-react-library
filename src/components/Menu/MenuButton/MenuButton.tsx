@@ -38,7 +38,7 @@ export const MenuButton = forwardRef(
       className={clsx("neo-dropdown__link-header", className)}
       {...rest}
     >
-      {children || ""}
+      {children || "Menu Button"}
     </Button>
   ),
 );
