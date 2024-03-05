@@ -12,7 +12,7 @@
     "visualstudioexptteam.vscodeintellicode",
     "vscode-icons-team.vscode-icons",
     "wayou.vscode-todo-highlight",
-    "zixuanchen.vitest-explorer",
+    "vitest.explorer",
     "unifiedjs.vscode-mdx"
   ]
 }
