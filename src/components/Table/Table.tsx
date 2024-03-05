@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   useFilters,
   useGlobalFilter,
@@ -162,6 +162,10 @@ export const Table = <T extends Record<string, any>>({
   const [filterSheetVisible, setFilterSheetVisible] = useState(false);
   const toggleFilterSheetVisible = () => setFilterSheetVisible((v) => !v);
   const [rowHeightValue, setRowHeightValue] = useState(rowHeight);
+
+  useEffect(() => {
+    setRowHeightValue(rowHeight);
+  }, [rowHeight]);
 
   const onRowHeightChangeHandler = useCallback((newHeight: RowHeight) => {
     logger.debug(newHeight);
