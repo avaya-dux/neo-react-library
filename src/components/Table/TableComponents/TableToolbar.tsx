@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import { Button } from "components/Button";
 import { IconButton } from "components/IconButton";
+import { Menu, MenuItem } from "components/Menu";
 import { TextInput } from "components/TextInput";
 
 import { FilterContext } from "../helpers";
@@ -26,6 +27,9 @@ export const TableToolbar = <T extends Record<string, any>>({
   handleDelete,
   handleEdit,
   handleRefresh,
+  handleRowHeightChange,
+  showRowHeightMenu,
+  rowHeight,
   instance,
   readonly = false,
   translations,
@@ -134,9 +138,43 @@ export const TableToolbar = <T extends Record<string, any>>({
             icon="refresh"
             onClick={handleRefresh}
             shape="square"
-            style={{ color: "blue" }}
             variant="tertiary"
           />
+        )}
+
+        {showRowHeightMenu && (
+          <Menu
+            itemAlignment="right"
+            menuRootElement={
+              <IconButton
+                icon="preferences"
+                aria-label={translations.selectRowHeight || "Select row height"}
+                variant="tertiary"
+                shape="square"
+              />
+            }
+          >
+            <MenuItem
+              isActive={rowHeight === "large"}
+              onClick={() => {
+                handleRowHeightChange("large");
+              }}
+            >
+              {translations.large || "Large"}
+            </MenuItem>
+            <MenuItem
+              isActive={rowHeight === "medium"}
+              onClick={() => handleRowHeightChange("medium")}
+            >
+              {translations.medium || "Medium"}
+            </MenuItem>
+            <MenuItem
+              isActive={rowHeight === "compact"}
+              onClick={() => handleRowHeightChange("compact")}
+            >
+              {translations.small || "Small"}
+            </MenuItem>
+          </Menu>
         )}
       </div>
     </div>

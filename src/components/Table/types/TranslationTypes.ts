@@ -7,10 +7,14 @@ export interface IToolbarTranslations extends ITableFilterTranslations {
   create?: string;
   delete?: string;
   edit?: string;
+  large?: string;
+  medium?: string;
   noDataAvailable?: string;
   refresh?: string;
   rowsPerPage?: string;
   searchInputPlaceholder?: string;
+  selectRowHeight?: string;
+  small?: string;
 }
 
 export interface IBodyTranslations {
