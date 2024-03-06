@@ -22,10 +22,6 @@ import { IFilterContext, RowHeight } from "./types";
 
 import "./Table_shim.css";
 
-import log from "loglevel";
-const logger = log.getLogger("table-logger");
-logger.disableAll();
-
 /**
  * The Table is used to organize and display data within rows and columns.
  * It comes with built in pagination. The `id` column in data is required.
@@ -168,7 +164,6 @@ export const Table = <T extends Record<string, any>>({
   }, [rowHeight]);
 
   const onRowHeightChangeHandler = useCallback((newHeight: RowHeight) => {
-    logger.debug(newHeight);
     setRowHeightValue(newHeight);
   }, []);
 
