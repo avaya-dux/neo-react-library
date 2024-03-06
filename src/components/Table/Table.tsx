@@ -204,6 +204,7 @@ export const Table = <T extends Record<string, any>>({
             handleEdit={handleEdit}
             handleRefresh={handleRefresh}
             handleRowHeightChange={onRowHeightChangeHandler}
+            rowHeight={rowHeightValue}
             showRowHeightMenu={showRowHeightMenu}
             instance={instance}
             readonly={readonly}

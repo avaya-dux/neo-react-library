@@ -19,6 +19,7 @@ interface ToolbarSharedProps<T extends Record<string, any>> {
   handleEdit?: (selectedRow: T) => Promise<void> | void;
   handleRefresh?: () => Promise<void> | void;
   showRowHeightMenu?: boolean;
+  rowHeight?: RowHeight;
 }
 export type TableToolbarProps<T extends Record<string, any>> = {
   instance: TableInstance<T>;
@@ -56,7 +57,6 @@ export type TableProps<T extends Record<string, any>> = {
   pushPaginationDown?: boolean;
   itemsPerPageOptions?: number[];
   defaultSelectedRowIds?: string[];
-  rowHeight?: RowHeight;
   showRowSeparator?: boolean;
   summary?: string;
   containerClassName?: string;
