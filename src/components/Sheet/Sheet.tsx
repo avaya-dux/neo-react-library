@@ -4,6 +4,7 @@ import { useId } from "react";
 import { handleAccessbilityError, useIsInitialRender } from "utils";
 
 import "./Sheet_shim.css";
+import { Button } from "components/Button";
 
 type EnforcedAccessibleLabel =
   | {
@@ -72,6 +73,7 @@ export const Sheet = ({
   } else if (!title && !buttons) {
     return (
       <BasicSheet
+        children={children}
         className={className}
         open={open}
         id={id}
@@ -79,7 +81,6 @@ export const Sheet = ({
         slide={slide}
         {...rest}
       >
-        {children}
       </BasicSheet>
     );
   }
@@ -112,6 +113,7 @@ export const Sheet = ({
 };
 
 const BasicSheet = ({
+  children,
   className,
   initialRender,
   open,
@@ -137,7 +139,18 @@ const BasicSheet = ({
         className,
       )}
       {...rest}
-    ></div>
+    >
+      <div className="neo-sheet__header">
+        <div className="neo-sheet__header--left">
+          <Button>Back</Button>
+        </div>
+
+        <div className="neo-sheet__header--right">
+          <Button>Close</Button>
+        </div>
+      </div>
+      {children}
+    </div>
   );
 };
 
