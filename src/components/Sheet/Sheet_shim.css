@@ -13,6 +13,17 @@
   animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
+.neo-sheet__header--left > .neo-sheet-icon-chevron-left {
+    color: var(--neo-color-base-800);
+    background-color: transparent;
+}
+
+.neo-sheet__header--right > .neo-sheet-icon-close {
+    color: var(--neo-color-base-800);
+    background-color: transparent;
+}
+
+
 @keyframes slideInRightShim {
   0% {
     opacity: 0;

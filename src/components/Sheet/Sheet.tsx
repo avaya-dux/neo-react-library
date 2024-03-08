@@ -5,6 +5,7 @@ import { handleAccessbilityError, useIsInitialRender } from "utils";
 
 import "./Sheet_shim.css";
 import { Button } from "components/Button";
+import { IconButton } from "components/IconButton";
 
 type EnforcedAccessibleLabel =
   | {
@@ -151,11 +152,29 @@ const BasicSheet = ({
     >
       <div className="neo-sheet__header">
         <div className="neo-sheet__header--left">
-          {onBack !== undefined && <Button>Back</Button>}
+          {onBack !== undefined && (
+            <IconButton
+              onClick={onBack}
+              variant="tertiary"
+              shape="square"
+              aria-label="back" // TODO: localize this aria-lable
+              icon="chevron-left"
+              className="neo-sheet-icon-chevron-left"
+            />
+          )}
         </div>
 
         <div className="neo-sheet__header--right">
-          {onClose !== undefined && <Button onClick={onClose}>Close</Button>}
+          {onClose !== undefined && (
+            <IconButton
+              onClick={onClose}
+              variant="tertiary"
+              shape="square"
+              aria-label="close"
+              icon="close"
+              className="neo-sheet-icon-close"
+            />
+          )}
         </div>
       </div>
       {children}

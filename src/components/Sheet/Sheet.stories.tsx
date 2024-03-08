@@ -53,7 +53,7 @@ export const Default = () => {
         </p>
       </Sheet>
 
-      <Sheet open={sheetTwoOpen} aria-label="sheet two" onClose={closeSheetTwo}>
+      <Sheet open={sheetTwoOpen} aria-label="sheet two" onBack={closeSheetTwo} onClose={closeSheetTwo}>
         <p>sheet two content (no header/title, just content)</p>
       </Sheet>
 
