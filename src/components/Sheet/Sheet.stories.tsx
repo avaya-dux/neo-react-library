@@ -15,6 +15,10 @@ export const Default = () => {
   const [sheetTwoOpen, setSheetTwoOpen] = useState(false);
   const [sheetThreeOpen, setSheetThreeOpen] = useState(false);
 
+  const closeSheetTwo = () => {
+    setSheetTwoOpen(false);
+  }
+
   return (
     <main>
       <section
@@ -49,7 +53,7 @@ export const Default = () => {
         </p>
       </Sheet>
 
-      <Sheet open={sheetTwoOpen} aria-label="sheet two">
+      <Sheet open={sheetTwoOpen} aria-label="sheet two" onClose={closeSheetTwo}>
         <p>sheet two content (no header/title, just content)</p>
       </Sheet>
 
@@ -61,7 +65,6 @@ export const Default = () => {
 };
 
 const Template: Story<SheetProps> = (props: SheetProps) => <Sheet {...props} />;
-
 export const Templated = Template.bind({});
 Templated.args = {
   id: "example",

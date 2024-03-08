@@ -28,6 +28,8 @@ interface BaseSheetProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   children?: React.ReactNode;
   id?: string;
+  onBack?: () => void;
+  onClose?: () => void;
   open?: boolean;
   slide?: boolean;
 }
@@ -54,6 +56,8 @@ export const Sheet = ({
   open = true,
   slide = true,
   title,
+  onBack,
+  onClose,
 
   ...rest
 }: SheetProps) => {
@@ -75,13 +79,14 @@ export const Sheet = ({
       <BasicSheet
         children={children}
         className={className}
+        onBack={onBack}
+        onClose={onClose}
         open={open}
         id={id}
         initialRender={initialRender}
         slide={slide}
         {...rest}
-      >
-      </BasicSheet>
+      ></BasicSheet>
     );
   }
 
@@ -116,6 +121,8 @@ const BasicSheet = ({
   children,
   className,
   initialRender,
+  onBack,
+  onClose,
   open,
   slide,
   ...rest
@@ -124,6 +131,8 @@ const BasicSheet = ({
   className?: string;
   id?: string;
   initialRender: boolean;
+  onBack?: () => void;
+  onClose?: () => void;
   open: boolean;
   slide: boolean;
 }) => {
@@ -142,11 +151,11 @@ const BasicSheet = ({
     >
       <div className="neo-sheet__header">
         <div className="neo-sheet__header--left">
-          <Button>Back</Button>
+          {onBack !== undefined && <Button>Back</Button>}
         </div>
 
         <div className="neo-sheet__header--right">
-          <Button>Close</Button>
+          {onClose !== undefined && <Button onClick={onClose}>Close</Button>}
         </div>
       </div>
       {children}
