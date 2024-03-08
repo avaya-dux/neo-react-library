@@ -14,9 +14,25 @@ export const Default = () => {
   const [sheetOneOpen, setSheetOneOpen] = useState(false);
   const [sheetTwoOpen, setSheetTwoOpen] = useState(false);
   const [sheetThreeOpen, setSheetThreeOpen] = useState(false);
+  const [sheetFourOpen, setSheetFourOpen] = useState(false);
+  const [sheetFiveOpen, setSheetFiveOpen] = useState(false);
 
-  const closeSheetTwo = () => {
-    setSheetTwoOpen(false);
+  const closeSheetByNumber = (sheetNumber: number) => {
+    switch (sheetNumber) {
+      case 1:
+        setSheetOneOpen(false);
+        break;
+      case 2:
+        setSheetTwoOpen(false);
+        break;
+      case 3:
+        setSheetThreeOpen(false);
+      case 4:
+        setSheetFourOpen(false);
+      case 5:
+        setSheetFiveOpen(false);
+        break;
+    }
   }
 
   return (
@@ -30,13 +46,19 @@ export const Default = () => {
         }}
       >
         <Button onClick={() => setSheetOneOpen(!sheetOneOpen)}>
-          Toggle Sheet One Open
+          Toggle Sheet 1 Open
         </Button>
         <Button onClick={() => setSheetTwoOpen(!sheetTwoOpen)}>
-          Toggle Sheet Two Open
+          Toggle Sheet 2 Open
         </Button>
         <Button onClick={() => setSheetThreeOpen(!sheetThreeOpen)}>
-          Toggle Sheet Three Open
+          Toggle Sheet 3 Open
+        </Button>
+        <Button onClick={() => setSheetFourOpen(!sheetFourOpen)}>
+          Toggle Sheet 4 Open
+        </Button>
+        <Button onClick={() => setSheetFiveOpen(!sheetFiveOpen)}>
+          Toggle Sheet 5 Open
         </Button>
       </section>
 
@@ -44,21 +66,50 @@ export const Default = () => {
         open={sheetOneOpen}
         title="Sheet one"
         actions={[
-          <Button key="btn1">button 1</Button>,
-          <Button key="btn2">second btn</Button>,
+          <Button key="btn1">Custom Action 1</Button>,
+          <Button key="btn2">Custom Action 2</Button>,
         ]}
       >
         <p>
-          sheet one content, has non-functional buttons as a part of the header
+          This sheet should have two buttons with custom actions as a part of
+          the header
         </p>
       </Sheet>
 
-      <Sheet open={sheetTwoOpen} aria-label="sheet two" onBack={closeSheetTwo} onClose={closeSheetTwo}>
-        <p>sheet two content (no header/title, just content)</p>
+      <Sheet
+        open={sheetTwoOpen}
+        aria-label="sheet two"
+        onBack={() => {
+          closeSheetByNumber(2);
+        }}
+        onClose={() => {
+          closeSheetByNumber(2);
+        }}
+      >
+        <p>This sheet should have a Back and Close button</p>
       </Sheet>
 
       <Sheet open={sheetThreeOpen} aria-label="sheet three">
         <p>sheet three content (no header/title, just content)</p>
+      </Sheet>
+      <Sheet
+        open={sheetFourOpen}
+        aria-label="sheet four"
+        onBack={() => {
+          closeSheetByNumber(4);
+        }}
+      >
+        <p>This sheet should have a Back button only</p>
+      </Sheet>
+
+      <Sheet
+        open={sheetFiveOpen}
+        aria-label="sheet five"
+        onClose={() => {
+          closeSheetByNumber(5);
+        }}
+      >
+        <p>This sheet should have a Close button only</p>
       </Sheet>
     </main>
   );
