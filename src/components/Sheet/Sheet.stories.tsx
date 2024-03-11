@@ -27,8 +27,10 @@ export const Default = () => {
         break;
       case 3:
         setSheetThreeOpen(false);
+        break;
       case 4:
         setSheetFourOpen(false);
+        break;
       case 5:
         setSheetFiveOpen(false);
         break;

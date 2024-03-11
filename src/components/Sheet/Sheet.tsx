@@ -4,7 +4,6 @@ import { useId } from "react";
 import { handleAccessbilityError, useIsInitialRender } from "utils";
 
 import "./Sheet_shim.css";
-import { Button } from "components/Button";
 import { IconButton } from "components/IconButton";
 
 type EnforcedAccessibleLabel =
@@ -78,7 +77,6 @@ export const Sheet = ({
   } else if (!title && !buttons) {
     return (
       <BasicSheet
-        children={children}
         className={className}
         onBack={onBack}
         onClose={onClose}
@@ -87,7 +85,9 @@ export const Sheet = ({
         initialRender={initialRender}
         slide={slide}
         {...rest}
-      ></BasicSheet>
+      >
+        {children}
+      </BasicSheet>
     );
   }
 
