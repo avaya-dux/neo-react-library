@@ -157,7 +157,7 @@ const BasicSheet = ({
               onClick={onBack}
               variant="tertiary"
               shape="square"
-              aria-label="back" // TODO: localize this aria-lable
+              aria-label="back" // TODO: localize this aria-label
               icon="chevron-left"
               className="neo-sheet-icon-chevron-left"
             />
@@ -170,7 +170,7 @@ const BasicSheet = ({
               onClick={onClose}
               variant="tertiary"
               shape="square"
-              aria-label="close"
+              aria-label="close" // TODO: localize this aria-label
               icon="close"
               className="neo-sheet-icon-close"
             />

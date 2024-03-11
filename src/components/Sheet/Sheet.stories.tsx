@@ -88,7 +88,7 @@ export const Default = () => {
           closeSheetByNumber(2);
         }}
       >
-        <p>This sheet should have a Back and Close button</p>
+        <p>This sheet should have both Back and Close buttons</p>
       </Sheet>
 
       <Sheet open={sheetThreeOpen} aria-label="sheet three">
