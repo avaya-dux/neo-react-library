@@ -81,6 +81,7 @@ export const Default = () => {
       <Sheet
         open={sheetTwoOpen}
         aria-label="sheet two"
+        title="This is a title"
         onBack={() => {
           closeSheetByNumber(2);
         }}
@@ -88,7 +89,7 @@ export const Default = () => {
           closeSheetByNumber(2);
         }}
       >
-        <p>This sheet should have both Back and Close buttons</p>
+        <p>This sheet should have both Back and Close buttons and also a title</p>
       </Sheet>
 
       <Sheet open={sheetThreeOpen} aria-label="sheet three">
@@ -107,11 +108,12 @@ export const Default = () => {
       <Sheet
         open={sheetFiveOpen}
         aria-label="sheet five"
+        title="Sheet with Close button"
         onClose={() => {
           closeSheetByNumber(5);
         }}
       >
-        <p>This sheet should have a Close button only</p>
+        <p>This sheet should have a Close button only and a title</p>
       </Sheet>
     </main>
   );

@@ -16,11 +16,14 @@
 .neo-sheet__header--left > .neo-sheet-icon-chevron-left {
     color: var(--neo-color-base-800);
     background-color: transparent;
+    font-size: 21px;
+    margin-right: 8px;
 }
 
 .neo-sheet__header--right > .neo-sheet-icon-close {
     color: var(--neo-color-base-800);
     background-color: transparent;
+    font-size: 21px;
 }
 
 

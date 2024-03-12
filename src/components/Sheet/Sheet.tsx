@@ -74,7 +74,7 @@ export const Sheet = ({
     handleAccessbilityError(
       "If you add buttons, you must also provide a title",
     );
-  } else if (!title && !buttons) {
+  } else if (!buttons) {
     return (
       <BasicSheet
         className={className}
@@ -84,6 +84,7 @@ export const Sheet = ({
         id={id}
         initialRender={initialRender}
         slide={slide}
+        title={title}
         {...rest}
       >
         {children}
@@ -126,6 +127,7 @@ const BasicSheet = ({
   onClose,
   open,
   slide,
+  title,
   ...rest
 }: {
   children?: React.ReactNode;
@@ -136,6 +138,7 @@ const BasicSheet = ({
   onClose?: () => void;
   open: boolean;
   slide: boolean;
+  title?: string | JSX.Element;
 }) => {
   return (
     <div
@@ -162,6 +165,7 @@ const BasicSheet = ({
               className="neo-sheet-icon-chevron-left"
             />
           )}
+          <div>{title}</div>
         </div>
 
         <div className="neo-sheet__header--right">
