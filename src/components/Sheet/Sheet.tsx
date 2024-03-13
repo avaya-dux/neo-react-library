@@ -122,6 +122,7 @@ export const Sheet = ({
 const BasicSheet = ({
   children,
   className,
+  id,
   initialRender,
   onBack,
   onClose,
@@ -143,6 +144,7 @@ const BasicSheet = ({
   return (
     <div
       role="dialog"
+      aria-labelledby={id}
       className={clsx(
         "neo-sheet",
         slide && "neo-slide",
@@ -165,7 +167,7 @@ const BasicSheet = ({
               className="neo-sheet-icon-chevron-left"
             />
           )}
-          <div>{title}</div>
+          <div id={id}>{title}</div>
         </div>
 
         <div className="neo-sheet__header--right">
