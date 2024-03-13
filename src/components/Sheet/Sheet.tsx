@@ -4,6 +4,7 @@ import { useId } from "react";
 import { handleAccessbilityError, useIsInitialRender } from "utils";
 
 import "./Sheet_shim.css";
+import { IconButton } from "components/IconButton";
 
 type EnforcedAccessibleLabel =
   | {
@@ -27,6 +28,8 @@ interface BaseSheetProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   children?: React.ReactNode;
   id?: string;
+  onBack?: () => void;
+  onClose?: () => void;
   open?: boolean;
   slide?: boolean;
 }
@@ -53,6 +56,8 @@ export const Sheet = ({
   open = true,
   slide = true,
   title,
+  onBack,
+  onClose,
 
   ...rest
 }: SheetProps) => {
@@ -69,14 +74,17 @@ export const Sheet = ({
     handleAccessbilityError(
       "If you add buttons, you must also provide a title",
     );
-  } else if (!title && !buttons) {
+  } else if (!buttons) {
     return (
       <BasicSheet
         className={className}
+        onBack={onBack}
+        onClose={onClose}
         open={open}
         id={id}
         initialRender={initialRender}
         slide={slide}
+        title={title}
         {...rest}
       >
         {children}
@@ -112,22 +120,31 @@ export const Sheet = ({
 };
 
 const BasicSheet = ({
+  children,
   className,
+  id,
   initialRender,
+  onBack,
+  onClose,
   open,
   slide,
+  title,
   ...rest
 }: {
   children?: React.ReactNode;
   className?: string;
   id?: string;
   initialRender: boolean;
+  onBack?: () => void;
+  onClose?: () => void;
   open: boolean;
   slide: boolean;
+  title?: string | JSX.Element;
 }) => {
   return (
     <div
       role="dialog"
+      aria-labelledby={id}
       className={clsx(
         "neo-sheet",
         slide && "neo-slide",
@@ -137,7 +154,37 @@ const BasicSheet = ({
         className,
       )}
       {...rest}
-    ></div>
+    >
+      <div className="neo-sheet__header">
+        <div className="neo-sheet__header--left">
+          {onBack !== undefined && (
+            <IconButton
+              onClick={onBack}
+              variant="tertiary"
+              shape="square"
+              aria-label="back" // TODO: localize this aria-label
+              icon="chevron-left"
+              className="neo-sheet-icon-chevron-left"
+            />
+          )}
+          <div id={id}>{title}</div>
+        </div>
+
+        <div className="neo-sheet__header--right">
+          {onClose !== undefined && (
+            <IconButton
+              onClick={onClose}
+              variant="tertiary"
+              shape="square"
+              aria-label="close" // TODO: localize this aria-label
+              icon="close"
+              className="neo-sheet-icon-close"
+            />
+          )}
+        </div>
+      </div>
+      {children}
+    </div>
   );
 };
 
