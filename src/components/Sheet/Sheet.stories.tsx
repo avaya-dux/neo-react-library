@@ -35,7 +35,7 @@ export const Default = () => {
         setSheetFiveOpen(false);
         break;
     }
-  }
+  };
 
   return (
     <main>
@@ -89,7 +89,9 @@ export const Default = () => {
           closeSheetByNumber(2);
         }}
       >
-        <p>This sheet should have both Back and Close buttons and also a title</p>
+        <p>
+          This sheet should have both Back and Close buttons and also a title
+        </p>
       </Sheet>
 
       <Sheet open={sheetThreeOpen} aria-label="sheet three">
