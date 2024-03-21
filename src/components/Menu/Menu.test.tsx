@@ -136,6 +136,50 @@ describe("Menu", () => {
     });
   });
 
+  describe("focus testing", () => {
+    it("menu button should have focus after menu is closed via item selection by keyboard ENTER", async () => {
+      render(
+        <Menu menuRootElement={defaultRootElement}>{defaultChildren}</Menu>,
+      );
+      const button = screen.getByRole("button");
+      await user.click(button);
+
+      const menuItems = screen.getAllByRole("menuitem");
+      expect(menuItems[0]).toHaveFocus();
+
+      await user.keyboard(UserEventKeys.ENTER);
+      expect(button).toHaveFocus();
+    });
+
+    it("menu button should have focus after menu is closed via item selection by keyboard ESC", async () => {
+      render(
+        <Menu menuRootElement={defaultRootElement}>{defaultChildren}</Menu>,
+      );
+      const button = screen.getByRole("button");
+      await user.click(button);
+
+      const menuItems = screen.getAllByRole("menuitem");
+      expect(menuItems[0]).toHaveFocus();
+
+      await user.keyboard(UserEventKeys.ESC);
+      expect(button).toHaveFocus();
+    });
+
+    it("menu button should have focus after menu is closed via item selection by mouse click", async () => {
+      render(
+        <Menu menuRootElement={defaultRootElement}>{defaultChildren}</Menu>,
+      );
+      const button = screen.getByRole("button");
+      await user.click(button);
+
+      const menuItems = screen.getAllByRole("menuitem");
+      expect(menuItems[0]).toHaveFocus();
+
+      await user.click(menuItems[1]);
+      expect(button).toHaveFocus();
+    });
+  });
+
   describe("MenuButton retains any passed functionality", () => {
     const onClickSpy = vi.fn();
     const onKeyDownSpy = vi.fn();
