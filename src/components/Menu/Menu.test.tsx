@@ -141,7 +141,9 @@ describe("Menu", () => {
       render(
         <Menu menuRootElement={defaultRootElement}>{defaultChildren}</Menu>,
       );
+
       const button = screen.getByRole("button");
+      expect(button).not.toHaveFocus();
       await user.click(button);
 
       const menuItems = screen.getAllByRole("menuitem");
@@ -155,7 +157,9 @@ describe("Menu", () => {
       render(
         <Menu menuRootElement={defaultRootElement}>{defaultChildren}</Menu>,
       );
+
       const button = screen.getByRole("button");
+      expect(button).not.toHaveFocus();
       await user.click(button);
 
       const menuItems = screen.getAllByRole("menuitem");
@@ -169,7 +173,9 @@ describe("Menu", () => {
       render(
         <Menu menuRootElement={defaultRootElement}>{defaultChildren}</Menu>,
       );
+
       const button = screen.getByRole("button");
+      expect(button).not.toHaveFocus();
       await user.click(button);
 
       const menuItems = screen.getAllByRole("menuitem");
