@@ -139,7 +139,8 @@ export const Menu = forwardRef(
       if (isOpen === true && !userHasInteracted) {
         setUserHasInteracted(true);
       }
-    }, [isOpen, userHasInteracted]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen]);
 
     useEffect(() => {
       logger.debug(`debugging menu useEffect when open = ${isOpen}`);
