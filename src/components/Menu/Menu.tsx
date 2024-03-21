@@ -90,6 +90,7 @@ export const Menu = forwardRef(
     const [isOpen, setOpen] = useState(defaultIsOpen);
     const [enterCounter, setEnterCounter] = useState(1);
     const [upwards, setUpwards] = useState(false);
+    const [userHasInteracted, setUserHasInteracted] = useState(false);
     const clonedChildren = useMemo(() => addIdToChildren(children), [children]);
     const menuIndexes: MenuIndexesType = useMemo(
       () => buildMenuIndexes(clonedChildren),
@@ -135,14 +136,26 @@ export const Menu = forwardRef(
     }, [isOpen, positionToToggle, toggleRef]);
 
     useEffect(() => {
+      if (isOpen === true && !userHasInteracted) {
+        setUserHasInteracted(true);
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen]);
+
+    useEffect(() => {
       logger.debug(`debugging menu useEffect when open = ${isOpen}`);
 
       if (isOpen === false && didMount.current) {
         logger.debug("calling onMenuClose");
         onMenuClose();
 
-        // focus button after ESC
-        if (toggleRef && "current" in toggleRef && toggleRef.current) {
+        // focus button after closing menu
+        if (
+          toggleRef &&
+          "current" in toggleRef &&
+          toggleRef.current &&
+          userHasInteracted // only focus if user has interacted with the menu (i.e. not on initial render)
+        ) {
           logger.debug("focus button");
           toggleRef.current.focus();
         }
@@ -153,6 +166,7 @@ export const Menu = forwardRef(
       window.addEventListener("resize", adjustPosition);
 
       return () => window.removeEventListener("resize", adjustPosition);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [adjustPosition, isOpen, onMenuClose, toggleRef]);
 
     // `didMount` must be placed _after_ any usage of it in a hook
