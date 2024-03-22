@@ -1,0 +1,4 @@
+/* TODO: ask Matt what the color is supposed to be, as #575757 doesn't appear to exist in neo-css */
+.neo-stepper__item-description {
+  color: #575757;
+}

@@ -13,11 +13,17 @@ const meta: Meta<typeof Stepper> = {
     ],
     activeStep: 1,
     direction: "horizontal",
+    type: "linear",
+    setActiveStep: () => {}, // TODO: implement
   },
   argTypes: {
     direction: {
       control: { type: "radio" },
       options: ["horizontal", "vertical"],
+    },
+    type: {
+      control: { type: "radio" },
+      options: ["linear", "editable"],
     },
     setActiveStep: { table: { disable: true } },
   },
@@ -25,8 +31,4 @@ const meta: Meta<typeof Stepper> = {
 export default meta;
 
 type Story = StoryObj<typeof Stepper>;
-export const Template: Story = {
-  args: {
-    setActiveStep: () => {},
-  },
-};
+export const Template: Story = {};

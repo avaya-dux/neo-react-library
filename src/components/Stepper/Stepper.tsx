@@ -1,5 +1,7 @@
 import clsx from "clsx";
 
+import "./Stepper_shim.css";
+
 export interface StepperProps {
   steps: Steps[];
   activeStep: number;
@@ -64,14 +66,18 @@ const LinearStepper = ({ steps, activeStep }: LinnearStepperProps) => {
           )}
         >
           <div>{step.title}</div>
-          {step.description && <div>{step.description}</div>}
+          {step.description && (
+            <div className="neo-stepper__item-description">
+              {step.description}
+            </div>
+          )}
         </span>
       ))}
     </>
   );
 };
 
-// TODO: test EditableStepper
+// TODO: implement
 const EditableStepper = ({
   steps,
   activeStep,
