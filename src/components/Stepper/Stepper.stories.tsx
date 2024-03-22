@@ -4,19 +4,23 @@ import { Stepper, Steps } from "./Stepper";
 import { useState } from "react";
 import { Button } from "components/Button";
 
+const steps: Steps[] = [
+  { title: "Step 1", description: "This is step 1" },
+  { title: "Step 2", description: "This is step 2" },
+  { title: "Step 3", description: "This is step 3" },
+  { title: "Step 4", description: "This is step 4" },
+  { title: "Step 5", description: "This is step 5" },
+];
+
 const meta: Meta<typeof Stepper> = {
   component: Stepper,
   title: "Components/Stepper",
   args: {
-    steps: [
-      { title: "Step 1", description: "This is step 1" },
-      { title: "Step 2", description: "This is step 2" },
-      { title: "Step 3", description: "This is step 3" },
-    ],
+    steps: steps,
     activeStep: 1,
     direction: "horizontal",
     type: "linear",
-    // setActiveStep: () => {}, // TODO: implement
+    // onStepClick: () => {}, // TODO: implement
   },
   argTypes: {
     direction: {
@@ -27,7 +31,7 @@ const meta: Meta<typeof Stepper> = {
       control: { type: "radio" },
       options: ["linear", "editable"],
     },
-    // setActiveStep: { table: { disable: true } },
+    // onStepClick: { table: { disable: true } },
   },
 };
 export default meta;
@@ -35,11 +39,6 @@ export default meta;
 type Story = StoryObj<typeof Stepper>;
 export const Template: Story = {};
 
-const steps: Steps[] = [
-  { title: "Step 1", description: "This is step 1" },
-  { title: "Step 2", description: "This is step 2" },
-  { title: "Step 3", description: "This is step 3" },
-];
 export const LinearHorizontal: Story = {
   argTypes: {
     direction: { table: { disable: true } },
@@ -51,11 +50,7 @@ export const LinearHorizontal: Story = {
     return (
       <section>
         <Stepper
-          steps={[
-            { title: "Step 1", description: "This is step 1" },
-            { title: "Step 2", description: "This is step 2" },
-            { title: "Step 3", description: "This is step 3" },
-          ]}
+          steps={steps}
           activeStep={activeStep}
           direction="horizontal"
           type="editable"
