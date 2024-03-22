@@ -1,35 +1,19 @@
 import clsx from "clsx";
 
-import "./Stepper_shim.css";
-
 export interface StepperProps {
-  steps: Steps[];
   activeStep: number;
-  setActiveStep: (step: number) => void;
-
-  type?: "linear" | "editable";
   direction?: "horizontal" | "vertical";
-}
-// TODO: expand :pointup: to use either linear or editable stepper and not dupe types
-
-export interface Steps {
-  title: string;
-  description?: string;
-}
-
-export interface LinnearStepperProps {
   steps: Steps[];
-  activeStep: number;
+  type?: "linear" | "editable";
 }
-
-export interface EditableStepperProps extends LinnearStepperProps {
-  setActiveStep: (step: number) => void;
+export interface Steps {
+  description?: string;
+  title: string;
 }
 
 export const Stepper = ({
   steps,
   activeStep,
-  setActiveStep,
   type = "linear",
   direction = "horizontal",
 }: StepperProps) => {
@@ -42,17 +26,13 @@ export const Stepper = ({
       {type === "linear" ? (
         <LinearStepper steps={steps} activeStep={activeStep} />
       ) : (
-        <EditableStepper
-          steps={steps}
-          activeStep={activeStep}
-          setActiveStep={setActiveStep}
-        />
+        <EditableStepper steps={steps} activeStep={activeStep} />
       )}
     </div>
   );
 };
 
-const LinearStepper = ({ steps, activeStep }: LinnearStepperProps) => {
+const LinearStepper = ({ steps, activeStep }: StepperProps) => {
   return (
     <>
       {steps.map((step, index) => (
@@ -65,40 +45,33 @@ const LinearStepper = ({ steps, activeStep }: LinnearStepperProps) => {
             index > activeStep && "neo-stepper__item--disabled",
           )}
         >
-          <div>{step.title}</div>
-          {step.description && (
-            <div className="neo-stepper__item-description">
-              {step.description}
-            </div>
-          )}
+          <p>{step.title}</p>
+          {step.description && <p>{step.description}</p>}
         </span>
       ))}
     </>
   );
 };
 
-// TODO: implement
-const EditableStepper = ({
-  steps,
-  activeStep,
-  setActiveStep,
-}: EditableStepperProps) => {
+const EditableStepper = ({ steps, activeStep }: StepperProps) => {
   return (
     <>
       {steps.map((step, index) => (
-        <span
+        <div
           key={`${step.title}-${index}`}
+          role="button"
+          tabIndex={0}
           className={clsx(
             "neo-stepper__item",
             index < activeStep && "neo-stepper__item--complete",
             index === activeStep && "neo-stepper__item--active",
             index > activeStep && "neo-stepper__item--disabled",
           )}
-          onClick={() => setActiveStep(index)}
+          // onClick={() => setActiveStep(index)} // TODO: implement
         >
-          <div>{step.title}</div>
-          {step.description && <div>{step.description}</div>}
-        </span>
+          <p>{step.title}</p>
+          {step.description && <p>{step.description}</p>}
+        </div>
       ))}
     </>
   );
