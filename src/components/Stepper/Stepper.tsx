@@ -14,6 +14,15 @@ export interface Steps {
   title: string;
 }
 
+/**
+ * TODOs
+ * - Check with Matt on the line after "active" being green (instead of gray)
+ * - Implement editable icons (in neo-css)
+ * - Implement onStepClick
+ * - Fix vertical stepper
+ * - Add tests
+ */
+
 export const Stepper = ({
   steps,
   activeStep,
@@ -77,7 +86,7 @@ const LinearStepper = ({
   activeStep,
   classes,
   steps,
-}: StepperProps & StepperClassNames) => {
+}: InnerStepperProps & StepperClassNames) => {
   return (
     <>
       {steps.map((step, index) => (
@@ -103,7 +112,7 @@ const EditableStepper = ({
   activeStep,
   classes,
   steps,
-}: StepperProps & StepperClassNames) => {
+}: InnerStepperProps & StepperClassNames) => {
   return (
     <>
       {steps.map((step, index) => (
