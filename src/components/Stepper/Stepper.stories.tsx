@@ -41,8 +41,8 @@ export const Template: Story = {};
 
 export const LinearHorizontal: Story = {
   argTypes: {
-    direction: { table: { disable: true } },
-    type: { table: { disable: true } },
+    direction: { control: false },
+    type: { control: false },
   },
   render: () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -81,8 +81,8 @@ export const LinearHorizontal: Story = {
 
 export const EditableHorizontal: Story = {
   argTypes: {
-    direction: { table: { disable: true } },
-    type: { table: { disable: true } },
+    direction: { control: false },
+    type: { control: false },
   },
   render: () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
