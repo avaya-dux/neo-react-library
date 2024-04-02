@@ -139,7 +139,7 @@ export const Menu = forwardRef(
       if (isOpen === true && !userHasInteracted) {
         setUserHasInteracted(true);
       }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen]);
 
     useEffect(() => {

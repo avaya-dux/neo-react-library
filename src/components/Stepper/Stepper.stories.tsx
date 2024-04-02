@@ -45,6 +45,7 @@ export const LinearHorizontal: Story = {
     type: { table: { disable: true } },
   },
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [activeStep, setActiveStep] = useState(0);
 
     return (

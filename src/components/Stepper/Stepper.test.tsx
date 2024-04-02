@@ -22,7 +22,7 @@ describe("Stepper", () => {
   });
 
   it("appropriately assigns active state", async () => {
-    const wrapper = render(<Stepper steps={steps} activeStep={1} />);
+    render(<Stepper steps={steps} activeStep={1} />);
 
     const firstStep = (await screen.findByText(steps[0].title)).parentElement;
     const secondStep = (await screen.findByText(steps[1].title)).parentElement;
