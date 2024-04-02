@@ -20,7 +20,7 @@ const meta: Meta<typeof Stepper> = {
     activeStep: 1,
     direction: "horizontal",
     type: "linear",
-    // onStepClick: () => {}, // TODO: implement
+    onStepClick: () => {},
   },
   argTypes: {
     direction: {
@@ -31,7 +31,7 @@ const meta: Meta<typeof Stepper> = {
       control: { type: "radio" },
       options: ["linear", "editable"],
     },
-    // onStepClick: { table: { disable: true } },
+    onStepClick: { table: { disable: true } },
   },
 };
 export default meta;
@@ -54,6 +54,47 @@ export const LinearHorizontal: Story = {
           steps={steps}
           activeStep={activeStep}
           direction="horizontal"
+          type="linear"
+        />
+
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <Button
+            variant="secondary"
+            disabled={activeStep < 1}
+            onClick={() => setActiveStep(activeStep - 1)}
+          >
+            Previous
+          </Button>
+
+          <Button
+            variant="primary"
+            disabled={activeStep > steps.length - 1}
+            onClick={() => setActiveStep(activeStep + 1)}
+          >
+            {activeStep === steps.length - 1 ? "Finish" : "Next"}
+          </Button>
+        </div>
+      </section>
+    );
+  },
+};
+
+export const EditableHorizontal: Story = {
+  argTypes: {
+    direction: { table: { disable: true } },
+    type: { table: { disable: true } },
+  },
+  render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [activeStep, setActiveStep] = useState(0);
+
+    return (
+      <section>
+        <Stepper
+          activeStep={activeStep}
+          direction="horizontal"
+          onStepClick={(index) => setActiveStep(index)}
+          steps={steps}
           type="editable"
         />
 

@@ -1,9 +1,11 @@
 import clsx from "clsx";
 import { useMemo } from "react";
+import { Keys } from "utils";
 
 export interface InnerStepperProps {
   activeStep: number;
   steps: Steps[];
+  onStepClick?: (index: number) => void;
 }
 export interface StepperProps extends InnerStepperProps {
   direction?: "horizontal" | "vertical";
@@ -28,6 +30,7 @@ export const Stepper = ({
   activeStep,
   type = "linear",
   direction = "horizontal",
+  onStepClick,
 }: StepperProps) => {
   const classes = useMemo(() => {
     return {
@@ -67,6 +70,7 @@ export const Stepper = ({
           steps={steps}
           activeStep={activeStep}
           classes={classes}
+          onStepClick={onStepClick}
         />
       )}
     </div>
@@ -112,6 +116,7 @@ const EditableStepper = ({
   activeStep,
   classes,
   steps,
+  onStepClick,
 }: InnerStepperProps & StepperClassNames) => {
   return (
     <>
@@ -120,6 +125,12 @@ const EditableStepper = ({
           key={`${step.title}-${index}`}
           role="button"
           tabIndex={0}
+          onClick={() => onStepClick?.(index)}
+          onKeyUp={(e) => {
+            if (e.key === Keys.ENTER) {
+              onStepClick?.(index);
+            }
+          }}
           className={clsx(
             "neo-stepper__item",
             index < activeStep && classes.complete,
@@ -127,7 +138,6 @@ const EditableStepper = ({
             index > activeStep && classes.disabled,
             index > activeStep && classes.disabledNext,
           )}
-          // onClick={() => onStepClick(index)} // TODO: implement
         >
           <p>{step.title}</p>
           {step.description && <p>{step.description}</p>}
