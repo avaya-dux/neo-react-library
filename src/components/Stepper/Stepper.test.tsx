@@ -92,7 +92,7 @@ describe("Stepper", () => {
       expect(spy).toHaveBeenCalledWith(0);
     });
 
-    it("does not notifies the user when a future step is clicked", async () => {
+    it("does not notify the user when a future step is clicked", async () => {
       const spy = vi.fn();
       render(
         <Stepper
