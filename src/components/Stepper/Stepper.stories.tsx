@@ -93,7 +93,10 @@ export const EditableHorizontal: Story = {
         <Stepper
           activeStep={activeStep}
           direction="horizontal"
-          onStepClick={(index) => setActiveStep(index)}
+          onStepClick={(index) => {
+            console.info("Clicked index:", index);
+            setActiveStep(index);
+          }}
           steps={steps}
           type="editable"
         />

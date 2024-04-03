@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { vi } from "vitest";
 
 import { Stepper, Steps } from "./Stepper";
 
@@ -37,5 +38,60 @@ describe("Stepper", () => {
   });
 
   // describe("linear stepper functionality", () => {});
-  // describe("editable stepper functionality", () => {});
+
+  describe("editable stepper functionality", () => {
+    it("notifies the user when a previous step is clicked", async () => {
+      const spy = vi.fn();
+      render(
+        <Stepper
+          steps={steps}
+          activeStep={1}
+          type="editable"
+          onStepClick={spy}
+        />,
+      );
+
+      const firstStep = (await screen.findByText(steps[0].title)).parentElement;
+      const secondStep = (await screen.findByText(steps[1].title))
+        .parentElement;
+
+      expect(firstStep).not.toHaveClass("neo-stepper__item--active");
+      expect(firstStep).toHaveClass("neo-stepper__item--complete");
+
+      expect(secondStep).toHaveClass("neo-stepper__item--active");
+      expect(secondStep).not.toHaveClass("neo-stepper__item--complete");
+
+      expect(firstStep).toBeDefined();
+      firstStep?.click();
+
+      expect(spy).toHaveBeenCalledWith(0);
+    });
+
+    it("does not notifies the user when a future step is clicked", async () => {
+      const spy = vi.fn();
+      render(
+        <Stepper
+          steps={steps}
+          activeStep={1}
+          type="editable"
+          onStepClick={spy}
+        />,
+      );
+
+      const secondStep = (await screen.findByText(steps[1].title))
+        .parentElement;
+      const thirdStep = (await screen.findByText(steps[2].title)).parentElement;
+
+      expect(secondStep).toHaveClass("neo-stepper__item--active");
+      expect(secondStep).not.toHaveClass("neo-stepper__item--complete");
+
+      expect(thirdStep).not.toHaveClass("neo-stepper__item--active");
+      expect(thirdStep).not.toHaveClass("neo-stepper__item--complete");
+
+      expect(thirdStep).toBeDefined();
+      thirdStep?.click();
+
+      expect(spy).not.toHaveBeenCalled();
+    });
+  });
 });

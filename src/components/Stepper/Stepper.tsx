@@ -125,9 +125,13 @@ const EditableStepper = ({
           key={`${step.title}-${index}`}
           role="button"
           tabIndex={0}
-          onClick={() => onStepClick?.(index)}
+          onClick={() => {
+            if (index < activeStep) {
+              onStepClick?.(index);
+            }
+          }}
           onKeyUp={(e) => {
-            if (e.key === Keys.ENTER) {
+            if (index < activeStep && e.key === Keys.ENTER) {
               onStepClick?.(index);
             }
           }}
