@@ -16,11 +16,6 @@ export interface Steps {
   title: string;
 }
 
-/**
- * TODOs
- * - Fix vertical stepper
- */
-
 export const Stepper = ({
   steps,
   activeStep,
