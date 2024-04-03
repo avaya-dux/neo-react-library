@@ -37,7 +37,36 @@ describe("Stepper", () => {
     expect(secondStep).not.toHaveClass("neo-stepper__item--complete");
   });
 
-  // describe("linear stepper functionality", () => {});
+  describe("linear stepper functionality", () => {
+    it("does not notify the user when a step is clicked", async () => {
+      const activeStep = 2;
+      const spy = vi.fn();
+      render(
+        <Stepper steps={steps} activeStep={activeStep} onStepClick={spy} />,
+      );
+
+      const previousStep = (
+        await screen.findByText(steps[activeStep - 1].title)
+      ).parentElement;
+      const currentStep = (await screen.findByText(steps[activeStep].title))
+        .parentElement;
+      const nextStep = (await screen.findByText(steps[activeStep + 1].title))
+        .parentElement;
+      0;
+      expect(previousStep).toBeDefined();
+      expect(currentStep).toBeDefined();
+      expect(nextStep).toBeDefined();
+
+      previousStep?.click();
+      expect(spy).not.toHaveBeenCalled();
+
+      currentStep?.click();
+      expect(spy).not.toHaveBeenCalled();
+
+      nextStep?.click();
+      expect(spy).not.toHaveBeenCalled();
+    });
+  });
 
   describe("editable stepper functionality", () => {
     it("notifies the user when a previous step is clicked", async () => {
