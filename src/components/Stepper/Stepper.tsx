@@ -18,11 +18,7 @@ export interface Steps {
 
 /**
  * TODOs
- * - Check with Matt on the line after "active" being green (instead of gray)
- * - Implement editable icons (in neo-css)
- * - Implement onStepClick
  * - Fix vertical stepper
- * - Add tests
  */
 
 export const Stepper = ({
