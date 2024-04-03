@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Keys } from "utils";
 
 export interface InnerStepperProps {
@@ -114,6 +114,15 @@ const EditableStepper = ({
   steps,
   onStepClick,
 }: InnerStepperProps & StepperClassNames) => {
+  const handleStepInteraction = useCallback(
+    (index: number, currentStep: number) => {
+      if (index < currentStep) {
+        onStepClick?.(index);
+      }
+    },
+    [onStepClick],
+  );
+
   return (
     <>
       {steps.map((step, index) => (
@@ -121,16 +130,10 @@ const EditableStepper = ({
           key={`${step.title}-${index}`}
           role="button"
           tabIndex={0}
-          onClick={() => {
-            if (index < activeStep) {
-              onStepClick?.(index);
-            }
-          }}
-          onKeyUp={(e) => {
-            if (index < activeStep && e.key === Keys.ENTER) {
-              onStepClick?.(index);
-            }
-          }}
+          onClick={() => handleStepInteraction(index, activeStep)}
+          onKeyUp={(e) =>
+            e.key === Keys.ENTER && handleStepInteraction(index, activeStep)
+          }
           className={clsx(
             "neo-stepper__item",
             index < activeStep && classes.complete,
