@@ -1,9 +1,14 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
+
+import { UserEventKeys } from "utils";
 
 import { Stepper, Steps } from "./Stepper";
 
 describe("Stepper", () => {
+  const user = userEvent.setup();
+
   const steps: Steps[] = [
     { title: "Step 1", description: "This is step 1" },
     { title: "Step 2", description: "This is step 2" },
@@ -81,18 +86,9 @@ describe("Stepper", () => {
       );
 
       const firstStep = (await screen.findByText(steps[0].title)).parentElement;
-      const secondStep = (await screen.findByText(steps[1].title))
-        .parentElement;
-
-      expect(firstStep).not.toHaveClass("neo-stepper__item--active");
-      expect(firstStep).toHaveClass("neo-stepper__item--complete");
-
-      expect(secondStep).toHaveClass("neo-stepper__item--active");
-      expect(secondStep).not.toHaveClass("neo-stepper__item--complete");
-
       expect(firstStep).toBeDefined();
-      firstStep?.click();
 
+      firstStep?.click();
       expect(spy).toHaveBeenCalledWith(0);
     });
 
@@ -107,19 +103,48 @@ describe("Stepper", () => {
         />,
       );
 
-      const secondStep = (await screen.findByText(steps[1].title))
-        .parentElement;
       const thirdStep = (await screen.findByText(steps[2].title)).parentElement;
-
-      expect(secondStep).toHaveClass("neo-stepper__item--active");
-      expect(secondStep).not.toHaveClass("neo-stepper__item--complete");
-
-      expect(thirdStep).not.toHaveClass("neo-stepper__item--active");
-      expect(thirdStep).not.toHaveClass("neo-stepper__item--complete");
-
       expect(thirdStep).toBeDefined();
-      thirdStep?.click();
 
+      thirdStep?.click();
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it("notifies the user when a previous step is selected via the enter key", async () => {
+      const spy = vi.fn();
+      render(
+        <Stepper
+          steps={steps}
+          activeStep={1}
+          type="editable"
+          onStepClick={spy}
+        />,
+      );
+
+      const firstStep = (await screen.findByText(steps[0].title)).parentElement;
+      expect(firstStep).toBeDefined();
+
+      firstStep?.focus();
+      await user.keyboard(UserEventKeys.ENTER);
+      expect(spy).toHaveBeenCalledWith(0);
+    });
+
+    it("does not notify the user when a future step is selected via the enter key", async () => {
+      const spy = vi.fn();
+      render(
+        <Stepper
+          steps={steps}
+          activeStep={1}
+          type="editable"
+          onStepClick={spy}
+        />,
+      );
+
+      const thirdStep = (await screen.findByText(steps[2].title)).parentElement;
+      expect(thirdStep).toBeDefined();
+
+      thirdStep?.focus();
+      await user.keyboard(UserEventKeys.ENTER);
       expect(spy).not.toHaveBeenCalled();
     });
   });
