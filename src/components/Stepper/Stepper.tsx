@@ -17,6 +17,13 @@ export interface Steps {
   title: string;
 }
 
+/**
+ * TODOs
+ * fix vertical stepper
+ * fix a11y when using the keyboard
+ * fix post-current step line color
+ */
+
 export const Stepper = ({
   steps,
   activeStep,
