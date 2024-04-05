@@ -17,6 +17,9 @@ describe("Stepper", () => {
     { title: "Step 5", description: "This is step 5" },
   ];
 
+  const getStep = async (index: number) =>
+    (await screen.findByText(steps[index].title)).parentElement?.parentElement;
+
   it("fully renders without exploding", () => {
     const { container } = render(
       <Stepper steps={steps} activeStep={0} direction="vertical" />,
@@ -34,10 +37,8 @@ describe("Stepper", () => {
   it("appropriately assigns active state", async () => {
     render(<Stepper steps={steps} activeStep={1} />);
 
-    const firstStep = (await screen.findByText(steps[0].title)).parentElement
-      ?.parentElement;
-    const secondStep = (await screen.findByText(steps[1].title)).parentElement
-      ?.parentElement;
+    const firstStep = await getStep(0);
+    const secondStep = await getStep(1);
 
     expect(firstStep).toHaveClass("neo-stepper__item");
     expect(firstStep).not.toHaveClass("neo-stepper__item--active");
@@ -56,14 +57,10 @@ describe("Stepper", () => {
         <Stepper steps={steps} activeStep={activeStep} onStepClick={spy} />,
       );
 
-      const previousStep = (
-        await screen.findByText(steps[activeStep - 1].title)
-      ).parentElement?.parentElement;
-      const currentStep = (await screen.findByText(steps[activeStep].title))
-        .parentElement?.parentElement;
-      const nextStep = (await screen.findByText(steps[activeStep + 1].title))
-        .parentElement?.parentElement;
-      0;
+      const previousStep = await getStep(activeStep - 1);
+      const currentStep = await getStep(activeStep);
+      const nextStep = await getStep(activeStep + 1);
+
       expect(previousStep).toBeDefined();
       expect(currentStep).toBeDefined();
       expect(nextStep).toBeDefined();
@@ -91,8 +88,7 @@ describe("Stepper", () => {
         />,
       );
 
-      const firstStep = (await screen.findByText(steps[0].title)).parentElement
-        ?.parentElement;
+      const firstStep = await getStep(0);
       expect(firstStep).toBeDefined();
 
       firstStep?.click();
@@ -110,7 +106,7 @@ describe("Stepper", () => {
         />,
       );
 
-      const thirdStep = (await screen.findByText(steps[2].title)).parentElement;
+      const thirdStep = await getStep(2);
       expect(thirdStep).toBeDefined();
 
       thirdStep?.click();
@@ -128,8 +124,7 @@ describe("Stepper", () => {
         />,
       );
 
-      const firstStep = (await screen.findByText(steps[0].title)).parentElement
-        ?.parentElement;
+      const firstStep = await getStep(0);
       expect(firstStep).toBeDefined();
 
       firstStep?.focus();
@@ -148,8 +143,7 @@ describe("Stepper", () => {
         />,
       );
 
-      const thirdStep = (await screen.findByText(steps[2].title)).parentElement
-        ?.parentElement;
+      const thirdStep = await getStep(2);
       expect(thirdStep).toBeDefined();
 
       thirdStep?.focus();
