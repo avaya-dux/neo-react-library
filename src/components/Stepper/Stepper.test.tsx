@@ -18,10 +18,14 @@ describe("Stepper", () => {
   ];
 
   it("fully renders without exploding", () => {
-    const { container } = render(<Stepper steps={steps} activeStep={1} />);
+    const { container } = render(
+      <Stepper steps={steps} activeStep={0} direction="vertical" />,
+    );
 
     const rootElement = container.querySelector(".neo-stepper");
-    const stepElements = container.querySelectorAll(".neo-stepper__item");
+    const stepElements = container.querySelectorAll(
+      ".neo-stepper--vertical__item",
+    );
 
     expect(rootElement).toBeInTheDocument();
     expect(stepElements).toHaveLength(steps.length);
