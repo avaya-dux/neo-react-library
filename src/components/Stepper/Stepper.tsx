@@ -41,7 +41,7 @@ export const Stepper = ({
       active:
         direction === "horizontal"
           ? "neo-stepper__item--active"
-          : "neo-stepper__item--active-vertical",
+          : "neo-stepper--vertical__item--active",
       complete:
         direction === "horizontal"
           ? "neo-stepper__item--complete"

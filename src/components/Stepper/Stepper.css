@@ -4,3 +4,8 @@
   background-color: var(--stepper-disabled-dash-color);
   height: 1px;
 }
+
+.neo-stepper--vertical__item.neo-stepper--vertical__item--active:after {
+  background-color: var(--stepper-disabled-dash-color);
+  width: 1px;
+}
