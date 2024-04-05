@@ -34,6 +34,10 @@ export const Stepper = ({
 }: StepperProps) => {
   const classes = useMemo(() => {
     return {
+      item:
+        direction === "horizontal"
+          ? "neo-stepper__item"
+          : "neo-stepper--vertical__item",
       active:
         direction === "horizontal"
           ? "neo-stepper__item--active"
@@ -83,6 +87,7 @@ interface StepperClassNames {
     complete: string;
     disabled: string;
     disabledNext: string;
+    item: string;
   };
 }
 
@@ -97,7 +102,7 @@ const LinearStepper = ({
         <span
           key={`${step.title}-${index}`}
           className={clsx(
-            "neo-stepper__item",
+            classes.item,
             index < activeStep && classes.complete,
             index === activeStep && classes.active,
             index > activeStep && classes.disabled,
@@ -139,7 +144,7 @@ const EditableStepper = ({
             e.key === Keys.ENTER && handleStepInteraction(index, activeStep)
           }
           className={clsx(
-            "neo-stepper__item",
+            classes.item,
             index < activeStep && classes.complete,
             index === activeStep && classes.active,
             index > activeStep && classes.disabled,
