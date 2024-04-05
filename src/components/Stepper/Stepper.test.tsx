@@ -30,8 +30,10 @@ describe("Stepper", () => {
   it("appropriately assigns active state", async () => {
     render(<Stepper steps={steps} activeStep={1} />);
 
-    const firstStep = (await screen.findByText(steps[0].title)).parentElement;
-    const secondStep = (await screen.findByText(steps[1].title)).parentElement;
+    const firstStep = (await screen.findByText(steps[0].title)).parentElement
+      ?.parentElement;
+    const secondStep = (await screen.findByText(steps[1].title)).parentElement
+      ?.parentElement;
 
     expect(firstStep).toHaveClass("neo-stepper__item");
     expect(firstStep).not.toHaveClass("neo-stepper__item--active");
@@ -52,11 +54,11 @@ describe("Stepper", () => {
 
       const previousStep = (
         await screen.findByText(steps[activeStep - 1].title)
-      ).parentElement;
+      ).parentElement?.parentElement;
       const currentStep = (await screen.findByText(steps[activeStep].title))
-        .parentElement;
+        .parentElement?.parentElement;
       const nextStep = (await screen.findByText(steps[activeStep + 1].title))
-        .parentElement;
+        .parentElement?.parentElement;
       0;
       expect(previousStep).toBeDefined();
       expect(currentStep).toBeDefined();
@@ -85,7 +87,8 @@ describe("Stepper", () => {
         />,
       );
 
-      const firstStep = (await screen.findByText(steps[0].title)).parentElement;
+      const firstStep = (await screen.findByText(steps[0].title)).parentElement
+        ?.parentElement;
       expect(firstStep).toBeDefined();
 
       firstStep?.click();
@@ -121,7 +124,8 @@ describe("Stepper", () => {
         />,
       );
 
-      const firstStep = (await screen.findByText(steps[0].title)).parentElement;
+      const firstStep = (await screen.findByText(steps[0].title)).parentElement
+        ?.parentElement;
       expect(firstStep).toBeDefined();
 
       firstStep?.focus();
@@ -140,7 +144,8 @@ describe("Stepper", () => {
         />,
       );
 
-      const thirdStep = (await screen.findByText(steps[2].title)).parentElement;
+      const thirdStep = (await screen.findByText(steps[2].title)).parentElement
+        ?.parentElement;
       expect(thirdStep).toBeDefined();
 
       thirdStep?.focus();
