@@ -20,15 +20,25 @@ describe("Stepper", () => {
   const getStep = async (index: number) =>
     (await screen.findByText(steps[index].title)).parentElement?.parentElement;
 
-  it("fully renders without exploding", () => {
+  it("fully renders vertical view without exploding", () => {
     const { container } = render(
       <Stepper steps={steps} activeStep={0} direction="vertical" />,
     );
 
-    const rootElement = container.querySelector(".neo-stepper");
+    const rootElement = container.querySelector(".neo-stepper--vertical");
     const stepElements = container.querySelectorAll(
       ".neo-stepper--vertical__item",
     );
+
+    expect(rootElement).toBeInTheDocument();
+    expect(stepElements).toHaveLength(steps.length);
+  });
+
+  it("fully renders horizontal view without exploding", () => {
+    const { container } = render(<Stepper steps={steps} activeStep={0} />);
+
+    const rootElement = container.querySelector(".neo-stepper");
+    const stepElements = container.querySelectorAll(".neo-stepper__item");
 
     expect(rootElement).toBeInTheDocument();
     expect(stepElements).toHaveLength(steps.length);
