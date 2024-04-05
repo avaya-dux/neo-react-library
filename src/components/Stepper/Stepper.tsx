@@ -46,6 +46,10 @@ export const Stepper = ({
         direction === "horizontal"
           ? "neo-stepper__item--complete"
           : "neo-stepper--vertical__item--complete",
+      content:
+        direction === "horizontal"
+          ? undefined
+          : "neo-stepper--vertical__content",
       disabled:
         direction === "horizontal"
           ? "neo-stepper__item--disabled"
@@ -85,6 +89,7 @@ interface StepperClassNames {
   classes: {
     active: string;
     complete: string;
+    content?: string;
     disabled: string;
     disabledNext: string;
     item: string;
@@ -109,7 +114,7 @@ const LinearStepper = ({
             index > activeStep && classes.disabledNext,
           )}
         >
-          <p>{step.title}</p>
+          <p className={classes.content}>{step.title}</p>
           {step.description && <p>{step.description}</p>}
         </span>
       ))}
@@ -151,7 +156,7 @@ const EditableStepper = ({
             index > activeStep && classes.disabledNext,
           )}
         >
-          <p>{step.title}</p>
+          <p className={classes.content}>{step.title}</p>
           {step.description && <p>{step.description}</p>}
         </div>
       ))}
