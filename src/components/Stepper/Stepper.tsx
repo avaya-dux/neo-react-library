@@ -19,11 +19,6 @@ export interface Steps {
   title: string;
 }
 
-/**
- * TODOs
- * fix a11y when using the keyboard: https://developer.mozilla.org/en-US/plus/settings
- */
-
 export const Stepper = ({
   steps,
   activeStep,
