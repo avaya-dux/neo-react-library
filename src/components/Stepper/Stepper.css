@@ -1,0 +1,6 @@
+/* TODO: remove this file after neo-css-library is updated to/past 3.80.6 */
+/* and confirm that everything looks correct */
+.neo-stepper__item.neo-stepper__item--active:after {
+  background-color: var(--stepper-disabled-dash-color);
+  height: 1px;
+}

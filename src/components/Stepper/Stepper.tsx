@@ -3,6 +3,8 @@ import { useCallback, useMemo } from "react";
 
 import { Keys } from "utils";
 
+import "./Stepper.css";
+
 export interface InnerStepperProps {
   activeStep: number;
   steps: Steps[];
@@ -21,7 +23,6 @@ export interface Steps {
  * TODOs
  * fix vertical stepper
  * fix a11y when using the keyboard
- * fix post-current step line color
  */
 
 export const Stepper = ({
