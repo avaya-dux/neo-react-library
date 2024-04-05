@@ -3,6 +3,8 @@ import { useCallback, useMemo } from "react";
 
 import { Keys } from "utils";
 
+import "./Stepper.css";
+
 export interface InnerStepperProps {
   activeStep: number;
   steps: Steps[];
@@ -26,14 +28,22 @@ export const Stepper = ({
 }: StepperProps) => {
   const classes = useMemo(() => {
     return {
+      item:
+        direction === "horizontal"
+          ? "neo-stepper__item"
+          : "neo-stepper--vertical__item",
       active:
         direction === "horizontal"
           ? "neo-stepper__item--active"
-          : "neo-stepper__item--active-vertical",
+          : "neo-stepper--vertical__item--active",
       complete:
         direction === "horizontal"
           ? "neo-stepper__item--complete"
           : "neo-stepper--vertical__item--complete",
+      content:
+        direction === "horizontal"
+          ? undefined
+          : "neo-stepper--vertical__content",
       disabled:
         direction === "horizontal"
           ? "neo-stepper__item--disabled"
@@ -73,8 +83,10 @@ interface StepperClassNames {
   classes: {
     active: string;
     complete: string;
+    content?: string;
     disabled: string;
     disabledNext: string;
+    item: string;
   };
 }
 
@@ -89,15 +101,18 @@ const LinearStepper = ({
         <span
           key={`${step.title}-${index}`}
           className={clsx(
-            "neo-stepper__item",
+            classes.item,
             index < activeStep && classes.complete,
             index === activeStep && classes.active,
             index > activeStep && classes.disabled,
             index > activeStep && classes.disabledNext,
           )}
         >
-          <p>{step.title}</p>
-          {step.description && <p>{step.description}</p>}
+          <StepText
+            title={step.title}
+            description={step.description}
+            containerClass={classes.content}
+          />
         </span>
       ))}
     </>
@@ -131,17 +146,31 @@ const EditableStepper = ({
             e.key === Keys.ENTER && handleStepInteraction(index, activeStep)
           }
           className={clsx(
-            "neo-stepper__item",
+            classes.item,
             index < activeStep && classes.complete,
             index === activeStep && classes.active,
             index > activeStep && classes.disabled,
             index > activeStep && classes.disabledNext,
           )}
         >
-          <p>{step.title}</p>
-          {step.description && <p>{step.description}</p>}
+          <StepText
+            title={step.title}
+            description={step.description}
+            containerClass={classes.content}
+          />
         </div>
       ))}
     </>
   );
 };
+
+const StepText = ({
+  title,
+  description,
+  containerClass,
+}: Steps & { containerClass?: string }) => (
+  <div className={containerClass}>
+    <p>{title}</p>
+    {description && <p>{description}</p>}
+  </div>
+);
