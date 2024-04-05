@@ -21,8 +21,7 @@ export interface Steps {
 
 /**
  * TODOs
- * fix vertical stepper
- * fix a11y when using the keyboard
+ * fix a11y when using the keyboard: https://developer.mozilla.org/en-US/plus/settings
  */
 
 export const Stepper = ({
@@ -114,8 +113,10 @@ const LinearStepper = ({
             index > activeStep && classes.disabledNext,
           )}
         >
-          <p className={classes.content}>{step.title}</p>
-          {step.description && <p>{step.description}</p>}
+          <div className={classes.content}>
+            <p>{step.title}</p>
+            {step.description && <p>{step.description}</p>}
+          </div>
         </span>
       ))}
     </>
@@ -156,8 +157,10 @@ const EditableStepper = ({
             index > activeStep && classes.disabledNext,
           )}
         >
-          <p className={classes.content}>{step.title}</p>
-          {step.description && <p>{step.description}</p>}
+          <div className={classes.content}>
+            <p>{step.title}</p>
+            {step.description && <p>{step.description}</p>}
+          </div>
         </div>
       ))}
     </>
