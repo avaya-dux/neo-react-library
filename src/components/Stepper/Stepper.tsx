@@ -113,10 +113,11 @@ const LinearStepper = ({
             index > activeStep && classes.disabledNext,
           )}
         >
-          <div className={classes.content}>
-            <p>{step.title}</p>
-            {step.description && <p>{step.description}</p>}
-          </div>
+          <StepText
+            title={step.title}
+            description={step.description}
+            containerClass={classes.content}
+          />
         </span>
       ))}
     </>
@@ -157,12 +158,24 @@ const EditableStepper = ({
             index > activeStep && classes.disabledNext,
           )}
         >
-          <div className={classes.content}>
-            <p>{step.title}</p>
-            {step.description && <p>{step.description}</p>}
-          </div>
+          <StepText
+            title={step.title}
+            description={step.description}
+            containerClass={classes.content}
+          />
         </div>
       ))}
     </>
   );
 };
+
+const StepText = ({
+  title,
+  description,
+  containerClass,
+}: Steps & { containerClass?: string }) => (
+  <div className={containerClass}>
+    <p>{title}</p>
+    {description && <p>{description}</p>}
+  </div>
+);
