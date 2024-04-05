@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Stepper, Steps } from "./Stepper";
@@ -45,7 +46,6 @@ export const LinearHorizontal: Story = {
     type: { control: false },
   },
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [activeStep, setActiveStep] = useState(0);
 
     return (
@@ -85,7 +85,6 @@ export const EditableHorizontal: Story = {
     type: { control: false },
   },
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [activeStep, setActiveStep] = useState(0);
 
     return (
