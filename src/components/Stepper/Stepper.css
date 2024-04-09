@@ -9,3 +9,7 @@
   background-color: var(--stepper-disabled-dash-color);
   width: 1px;
 }
+
+.neo-stepper__item.neo-stepper__item--editable:before {
+  content: "\f19b";
+}
