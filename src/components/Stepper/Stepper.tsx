@@ -3,8 +3,6 @@ import { useCallback, useMemo } from "react";
 
 import { Keys } from "utils";
 
-import "./Stepper.css";
-
 export interface InnerStepperProps {
   activeStep: number;
   steps: Steps[];
@@ -148,6 +146,7 @@ const EditableStepper = ({
           className={clsx(
             classes.item,
             index < activeStep && classes.complete,
+            index < activeStep && "neo-stepper__item--editable",
             index === activeStep && classes.active,
             index > activeStep && classes.disabled,
             index > activeStep && classes.disabledNext,
