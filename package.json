@@ -1,6 +1,6 @@
 {
   "name": "@avaya/neo-react",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "This is the React version of the shared library called 'NEO' built by Avaya",
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": "github:avaya-dux/neo-react-library",
@@ -77,8 +77,8 @@
     "react-table": "7.8.0"
   },
   "devDependencies": {
-    "@avaya/neo": "3.80.4",
-    "@avaya/neo-icons": "1.8.6",
+    "@avaya/neo": "3.80.6",
+    "@avaya/neo-icons": "1.8.7",
     "@storybook/addon-a11y": "7.6.17",
     "@storybook/addon-actions": "7.6.17",
     "@storybook/addon-docs": "7.6.17",

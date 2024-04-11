@@ -3,8 +3,6 @@ import { useCallback, useMemo } from "react";
 
 import { Keys } from "utils";
 
-import "./Stepper.css";
-
 export interface InnerStepperProps {
   activeStep: number;
   steps: Steps[];
