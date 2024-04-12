@@ -20,6 +20,7 @@ export * from "./Menu";
 export * from "./Modal";
 export * from "./NeoInputWrapper";
 export * from "./NoContent";
+export * from "./Notes";
 export * from "./Notification";
 export * from "./Pagination";
 export * from "./PopupManager";
