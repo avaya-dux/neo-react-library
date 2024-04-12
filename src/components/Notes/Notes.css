@@ -1,0 +1,13 @@
+.neo-notes {
+  display: flex;
+  flex-direction: column;
+
+  /* neo-notes__heading */
+  /* neo-notes__interaction */
+  /* neo-notes__interaction__heading */
+  /* neo-notes__interaction__message */
+  /* neo-notes__interaction__message__title */
+  /* neo-notes__interaction__message__content */
+
+  /* TODO: neo-notes__interaction:not(:last-child) selector, give seperator (top border) */
+}
