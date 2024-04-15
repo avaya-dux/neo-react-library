@@ -10,9 +10,6 @@ import "./Notes.stories.css";
 const meta: Meta<typeof Notes> = {
   component: Notes,
   title: "Components/Notes",
-  args: {
-    children: "Notes", // TODO: setup something useful, or just remove
-  },
 };
 export default meta;
 
