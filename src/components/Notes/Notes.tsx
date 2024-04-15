@@ -23,14 +23,32 @@ export const Notes = ({ children, ...rest }: CommonProps) => {
 };
 Notes.displayName = "Notes";
 
-export const Heading = ({ children, ...rest }: CommonProps) => (
-  <div {...rest}>{children}</div>
-);
+export const Heading = ({ children, ...rest }: CommonProps) => {
+  const classNames = useMemo(
+    () => clsx("neo-notes__heading", rest.className),
+    [rest.className],
+  );
+
+  return (
+    <div {...rest} className={classNames}>
+      {children}
+    </div>
+  );
+};
 Heading.displayName = "Heading";
 
-export const Interaction = ({ children, ...rest }: CommonProps) => (
-  <div {...rest}>{children}</div>
-);
+export const Interaction = ({ children, ...rest }: CommonProps) => {
+  const classNames = useMemo(
+    () => clsx("neo-notes__interaction", rest.className),
+    [rest.className],
+  );
+
+  return (
+    <div {...rest} className={classNames}>
+      {children}
+    </div>
+  );
+};
 Interaction.displayName = "Interaction";
 
 export const InteractionHeading = ({ children, ...rest }: CommonProps) => (

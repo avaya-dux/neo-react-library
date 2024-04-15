@@ -2,12 +2,17 @@
   display: flex;
   flex-direction: column;
 
-  /* neo-notes__heading */
-  /* neo-notes__interaction */
-  /* neo-notes__interaction__heading */
-  /* neo-notes__interaction__message */
-  /* neo-notes__interaction__message__title */
-  /* neo-notes__interaction__message__content */
+  .neo-notes__heading {
+    margin-bottom: 1rem;
+  }
 
-  /* TODO: neo-notes__interaction:not(:last-child) selector, give seperator (top border) */
+  .neo-notes__interaction:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 2rem;
+
+    /* neo-notes__interaction__heading */
+    /* neo-notes__interaction__message */
+    /* neo-notes__interaction__message__title */
+    /* neo-notes__interaction__message__content */
+  }
 }
