@@ -32,110 +32,67 @@ export const StaticNotesExample: Story = {
 
         <Notes.Interaction>
           <Notes.Interaction.Heading>
-            <Icon icon="email-inbound" aria-label="email inbound" size="lg" />
+            <Icon icon="email-inbound" aria-label="email inbound" size="md" />
 
             <p>March 19, 2024 | 12:50 PM</p>
           </Notes.Interaction.Heading>
 
           <Notes.Interaction.Message>
             <Notes.Interaction.Message.Title>
-              Message ONE Title
+              March 19, 2024 | 12:50 AM
             </Notes.Interaction.Message.Title>
 
-            <Notes.Interaction.Message.Content>
-              Message ONE Content
+            <Notes.Interaction.Message.Content self>
+              Client has sent an email. They did not receive any feedback on
+              this claim. They are quite upset. I have set up a meeting to call
+              on Monday.
             </Notes.Interaction.Message.Content>
           </Notes.Interaction.Message>
 
           <Notes.Interaction.Message>
             <Notes.Interaction.Message.Title>
-              Message TWO Title
+              March 19, 2024 | 12:32 AM
             </Notes.Interaction.Message.Title>
 
             <Notes.Interaction.Message.Content>
-              Message TWO Content
-            </Notes.Interaction.Message.Content>
-          </Notes.Interaction.Message>
-
-          <Notes.Interaction.Message>
-            <Notes.Interaction.Message.Title>
-              Message THREE Title
-            </Notes.Interaction.Message.Title>
-
-            <Notes.Interaction.Message.Content>
-              Message THREE Content
+              Transferring this to you. I think we need to escalate this.
             </Notes.Interaction.Message.Content>
           </Notes.Interaction.Message>
         </Notes.Interaction>
 
         <Notes.Interaction>
           <Notes.Interaction.Heading>
-            <h2>Interaction TWO Heading</h2>
+            <Icon icon="call-outbound" aria-label="call outbound" size="md" />
+
+            <p>March 15, 2024 | 12:28 AM</p>
           </Notes.Interaction.Heading>
 
           <Notes.Interaction.Message>
             <Notes.Interaction.Message.Title>
-              Message ONE Title
+              May 10, 2024 | 12:28 AM
             </Notes.Interaction.Message.Title>
 
             <Notes.Interaction.Message.Content>
-              Message ONE Content
-            </Notes.Interaction.Message.Content>
-          </Notes.Interaction.Message>
-
-          <Notes.Interaction.Message>
-            <Notes.Interaction.Message.Title>
-              Message TWO Title
-            </Notes.Interaction.Message.Title>
-
-            <Notes.Interaction.Message.Content>
-              Message TWO Content
-            </Notes.Interaction.Message.Content>
-          </Notes.Interaction.Message>
-
-          <Notes.Interaction.Message>
-            <Notes.Interaction.Message.Title>
-              Message THREE Title
-            </Notes.Interaction.Message.Title>
-
-            <Notes.Interaction.Message.Content>
-              Message THREE Content
+              Client called to ask for an update. Sent an email to the claim
+              department. Need to call when we have an update.
             </Notes.Interaction.Message.Content>
           </Notes.Interaction.Message>
         </Notes.Interaction>
 
         <Notes.Interaction>
           <Notes.Interaction.Heading>
-            <h2>Interaction THREE Heading</h2>
+            <Icon icon="call-outbound" aria-label="call outbound" size="md" />
+
+            <p>March 8, 2024 | 12:28 AM</p>
           </Notes.Interaction.Heading>
 
           <Notes.Interaction.Message>
             <Notes.Interaction.Message.Title>
-              Message ONE Title
+              March 8, 2024 | 12:32 AM
             </Notes.Interaction.Message.Title>
 
             <Notes.Interaction.Message.Content>
-              Message ONE Content
-            </Notes.Interaction.Message.Content>
-          </Notes.Interaction.Message>
-
-          <Notes.Interaction.Message>
-            <Notes.Interaction.Message.Title>
-              Message TWO Title
-            </Notes.Interaction.Message.Title>
-
-            <Notes.Interaction.Message.Content>
-              Message TWO Content
-            </Notes.Interaction.Message.Content>
-          </Notes.Interaction.Message>
-
-          <Notes.Interaction.Message>
-            <Notes.Interaction.Message.Title>
-              Message THREE Title
-            </Notes.Interaction.Message.Title>
-
-            <Notes.Interaction.Message.Content>
-              Message THREE Content
+              Client has been in accident, and would like a claim started.
             </Notes.Interaction.Message.Content>
           </Notes.Interaction.Message>
         </Notes.Interaction>
