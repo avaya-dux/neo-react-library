@@ -1,28 +1,31 @@
-import { ReactNode } from "react";
+import clsx from "clsx";
+import { useMemo } from "react";
 
-export interface CommonProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-}
-export const Message = ({ children, ...rest }: CommonProps) => (
+import { CommonProps } from "../Notes";
+
+export const Message = ({ children, ...rest }: CommonProps) => {
+  const classNames = useMemo(
+    () => clsx("neo-notes__interaction__message", rest.className),
+    [rest.className],
+  );
+
+  return (
+    <div {...rest} className={classNames}>
+      {children}
+    </div>
+  );
+};
+Message.displayName = "NotesInteractionMessage";
+
+export const Title = ({ children, ...rest }: CommonProps) => (
   <div {...rest}>{children}</div>
 );
-Message.displayName = "Message";
+Title.displayName = "NotesInteractionMessageTitle";
 
-export interface TitleProps {
-  children: ReactNode;
-}
-export const Title = ({ children, ...rest }: TitleProps) => (
+export const Content = ({ children, ...rest }: CommonProps) => (
   <div {...rest}>{children}</div>
 );
-Title.displayName = "Title";
-
-export interface ContentProps {
-  children: ReactNode;
-}
-export const Content = ({ children, ...rest }: ContentProps) => (
-  <div {...rest}>{children}</div>
-);
-Content.displayName = "Content";
+Content.displayName = "NotesInteractionMessageContent";
 
 Message.Title = Title;
 Message.Content = Content;

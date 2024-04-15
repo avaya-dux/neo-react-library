@@ -3,6 +3,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Notes } from "./";
 import { Button } from "components/Button";
+import { Icon } from "components/Icon";
+
+import "./Notes.stories.css";
 
 const meta: Meta<typeof Notes> = {
   component: Notes,
@@ -14,14 +17,13 @@ const meta: Meta<typeof Notes> = {
 export default meta;
 
 type Story = StoryObj<typeof Notes>;
-// export const Template: Story = {}; // TODO: is this helpful?
 
 export const StaticNotesExample: Story = {
   render: () => (
-    <section style={{ width: 400 }}>
+    <section className="notes-container">
       <Notes>
         <Notes.Heading>
-          <div>Notes</div>
+          <p>Notes</p>
 
           <Button variant="primary" size="wide" disabled>
             Add a new note
@@ -30,7 +32,9 @@ export const StaticNotesExample: Story = {
 
         <Notes.Interaction>
           <Notes.Interaction.Heading>
-            <h2>Interaction ONE Heading</h2>
+            <Icon icon="email-inbound" aria-label="email inbound" size="lg" />
+
+            <p>March 19, 2024 | 12:50 PM</p>
           </Notes.Interaction.Heading>
 
           <Notes.Interaction.Message>

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { ReactNode, useMemo } from "react";
 
-import { Message } from "./Message";
+import { Interaction } from "./Interaction";
 
 import "./Notes.css";
 
@@ -35,29 +35,7 @@ export const Heading = ({ children, ...rest }: CommonProps) => {
     </div>
   );
 };
-Heading.displayName = "Heading";
-
-export const Interaction = ({ children, ...rest }: CommonProps) => {
-  const classNames = useMemo(
-    () => clsx("neo-notes__interaction", rest.className),
-    [rest.className],
-  );
-
-  return (
-    <div {...rest} className={classNames}>
-      {children}
-    </div>
-  );
-};
-Interaction.displayName = "Interaction";
-
-export const InteractionHeading = ({ children, ...rest }: CommonProps) => (
-  <div {...rest}>{children}</div>
-);
-InteractionHeading.displayName = "InteractionHeading";
-
-Interaction.Message = Message;
-Interaction.Heading = InteractionHeading;
+Heading.displayName = "NotesHeading";
 
 Notes.Heading = Heading;
 Notes.Interaction = Interaction;
