@@ -8,21 +8,21 @@ const meta: Meta<typeof Notes> = {
   component: Notes,
   title: "Components/Notes",
   args: {
-    children: "Notes", // TODO: setup something useful
+    children: "Notes", // TODO: setup something useful, or just remove
   },
 };
 export default meta;
 
 type Story = StoryObj<typeof Notes>;
-export const Template: Story = {};
+// export const Template: Story = {}; // TODO: is this helpful?
 
 export const StaticNotesExample: Story = {
   render: () => (
     <Notes>
       <Notes.Heading>
-        <h1>Notes from Blah Blah</h1>
+        <div>Notes</div>
 
-        <Button variant="primary" disabled>
+        <Button variant="primary" size="wide" disabled>
           Add a new note
         </Button>
       </Notes.Heading>
