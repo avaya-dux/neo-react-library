@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 
 import { CommonProps } from "../Notes";
 
@@ -31,11 +31,16 @@ export const Title = ({ children, ...rest }: CommonProps) => {
 };
 Title.displayName = "NotesInteractionMessageTitle";
 
+export interface ContentProps extends CommonProps {
+  author: ReactNode;
+  self?: boolean;
+}
 export const Content = ({
+  author,
   children,
   self = false,
   ...rest
-}: CommonProps & { self?: boolean }) => {
+}: ContentProps) => {
   const classNames = useMemo(
     () =>
       clsx(
@@ -48,7 +53,11 @@ export const Content = ({
 
   return (
     <div {...rest} className={classNames}>
-      {children}
+      <p className="neo-notes__interaction__message__content__author">
+        {author}
+      </p>
+
+      <p>{children}</p>
     </div>
   );
 };

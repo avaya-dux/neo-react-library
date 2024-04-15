@@ -66,6 +66,10 @@
         &.gray {
           background-color: var(--notes-gray-note);
         }
+
+        .neo-notes__interaction__message__content__author {
+          font-weight: 600;
+        }
       }
     }
   }

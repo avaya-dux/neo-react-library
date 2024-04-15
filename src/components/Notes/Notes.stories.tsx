@@ -42,7 +42,7 @@ export const StaticNotesExample: Story = {
               March 19, 2024 | 12:50 AM
             </Notes.Interaction.Message.Title>
 
-            <Notes.Interaction.Message.Content self>
+            <Notes.Interaction.Message.Content author="Me" self>
               Client has sent an email. They did not receive any feedback on
               this claim. They are quite upset. I have set up a meeting to call
               on Monday.
@@ -54,7 +54,7 @@ export const StaticNotesExample: Story = {
               March 19, 2024 | 12:32 AM
             </Notes.Interaction.Message.Title>
 
-            <Notes.Interaction.Message.Content>
+            <Notes.Interaction.Message.Content author="Barbara Leyton">
               Transferring this to you. I think we need to escalate this.
             </Notes.Interaction.Message.Content>
           </Notes.Interaction.Message>
@@ -72,7 +72,7 @@ export const StaticNotesExample: Story = {
               May 10, 2024 | 12:28 AM
             </Notes.Interaction.Message.Title>
 
-            <Notes.Interaction.Message.Content>
+            <Notes.Interaction.Message.Content author="Barbara Leyton">
               Client called to ask for an update. Sent an email to the claim
               department. Need to call when we have an update.
             </Notes.Interaction.Message.Content>
@@ -91,7 +91,7 @@ export const StaticNotesExample: Story = {
               March 8, 2024 | 12:32 AM
             </Notes.Interaction.Message.Title>
 
-            <Notes.Interaction.Message.Content>
+            <Notes.Interaction.Message.Content author="Barbara Leyton">
               Client has been in accident, and would like a claim started.
             </Notes.Interaction.Message.Content>
           </Notes.Interaction.Message>
