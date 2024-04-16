@@ -61,7 +61,7 @@
       }
 
       .neo-notes__interaction__message__content {
-        padding: 1rem;
+        padding: 12px 16px;
         border-radius: var(--notes-border-radius);
 
         &.blue {
