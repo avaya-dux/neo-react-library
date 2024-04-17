@@ -6,6 +6,13 @@ import { Button } from "components/Button";
 import { Icon } from "components/Icon";
 
 import "./Notes.stories.css";
+import { useState } from "react";
+import { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
+
+type NotesAndAuthor = React.ComponentProps<typeof Notes> & {
+  author?: string;
+  canEdit?: boolean;
+};
 
 const meta: Meta<typeof Notes> = {
   component: Notes,
@@ -13,9 +20,9 @@ const meta: Meta<typeof Notes> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof Notes>;
+type Story = StoryObj<NotesAndAuthor>;
 
-const interactions = [
+const defaultInteractions = [
   <Notes.Interaction key={1}>
     <Notes.Interaction.Heading>
       <Icon icon="email-inbound" aria-label="email inbound" size="md" />
@@ -82,7 +89,6 @@ const interactions = [
     </Notes.Interaction.Message>
   </Notes.Interaction>,
 ];
-
 export const StaticNotesExample: Story = {
   render: () => (
     <section className="notes-container">
@@ -95,19 +101,114 @@ export const StaticNotesExample: Story = {
           </Button>
         </Notes.Heading>
 
-        {interactions}
+        {defaultInteractions}
       </Notes>
     </section>
   ),
 };
 
-/*
-  TODO: dynamic example (with edit/delete), probably needs:
-  - "as supervisor" (can edit any message)
-  - "as agent" (can only edit/delete their own messages)
-*/
+const mockApiResult = [
+  {
+    id: "email-1",
+    date: "March 19, 2024 | 12:50 AM",
+    type: "email-inbound", // per Steve Kiser: this may not exist
+    messages: [
+      {
+        id: "email-1-note-1",
+        date: "March 19, 2024 | 12:50 AM",
+        author: "Bob Frank",
+        content:
+          "Client has sent an email. They did not receive any feedback on this claim. They are quite upset. I have set up a meeting to call on Monday.",
+      },
+      {
+        id: "email-1-note-2",
+        date: "March 19, 2024 | 12:32 AM",
+        author: "Barbara Leyton",
+        content: "Transferring this to you. I think we need to escalate this.",
+      },
+    ],
+  },
+  {
+    id: "call-1",
+    date: "May 10, 2024 | 12:28 AM",
+    type: "call-outbound",
+    messages: [
+      {
+        id: "call-1-note-1",
+        date: "May 10, 2024 | 12:28 AM",
+        author: "Barbara Leyton",
+        content:
+          "Client called to ask for an update. Sent an email to the claim department. Need to call when we have an update.",
+      },
+    ],
+  },
+  {
+    id: "call-2",
+    date: "March 8, 2024 | 12:32 AM",
+    type: "call-outbound",
+    messages: [
+      {
+        id: "call-2-note-1",
+        date: "March 8, 2024 | 12:32 AM",
+        author: "Barbara Leyton",
+        content: "Client has been in accident, and would like a claim started.",
+      },
+    ],
+  },
+];
+export const DynamicNotesExample: Story = {
+  args: {
+    author: "Bob Frank",
+    canEdit: true,
+  },
+  render: ({ author, canEdit }) => {
+    const [interactions] = useState(mockApiResult);
+    // const [interactions, setInteractions] = useState(mockApiResult);
+    // TODO: add a new note functionality
+    // TODO: edit a note functionality
+    // TODO: remove a note functionality
 
-/**
- * TODO: add a full exammple of adding a new notes (array of messages that is added to),
- * removing a message, and editing a message.
- */
+    return (
+      <section className="notes-container">
+        <Notes>
+          <Notes.Heading>
+            <p>Notes</p>
+
+            <Button variant="primary" size="wide" disabled={canEdit === false}>
+              Add a new note
+            </Button>
+          </Notes.Heading>
+
+          {interactions.map((interaction) => (
+            <Notes.Interaction key={interaction.id}>
+              <Notes.Interaction.Heading>
+                <Icon
+                  icon={interaction.type as IconNamesType}
+                  aria-label={interaction.type.replace("-", " ")}
+                  size="md"
+                />
+
+                <p>{interaction.date}</p>
+              </Notes.Interaction.Heading>
+
+              {interaction.messages.map((message) => (
+                <Notes.Interaction.Message key={message.id}>
+                  <Notes.Interaction.Message.Title>
+                    {message.date}
+                  </Notes.Interaction.Message.Title>
+
+                  <Notes.Interaction.Message.Content
+                    author={message.author === author ? "Me" : message.author}
+                    self={message.author === author}
+                  >
+                    {message.content}
+                  </Notes.Interaction.Message.Content>
+                </Notes.Interaction.Message>
+              ))}
+            </Notes.Interaction>
+          ))}
+        </Notes>
+      </section>
+    );
+  },
+};
