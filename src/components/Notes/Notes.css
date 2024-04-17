@@ -1,14 +1,14 @@
 .neo-notes {
   --notes-border-color: var(--neo-color-base-200);
-  --notes-blue-note: var(--neo-color-blue-100);
-  --notes-gray-note: var(--neo-color-base-100);
+  --notes-message-primary-background-color: var(--neo-color-blue-100);
+  --notes-message-secondary-background-color: var(--neo-color-base-100);
   --notes-border-radius: 12px;
 
   @media (prefers-color-scheme: dark) {
     :root {
       --notes-border-color: var(--neo-color-base-600);
-      --notes-blue-note: var(--neo-color-blue-800);
-      --notes-gray-note: var(--neo-color-base-850);
+      --notes-message-primary-background-color: var(--neo-color-blue-800);
+      --notes-message-secondary-background-color: var(--neo-color-base-850);
     }
   }
 }
@@ -64,11 +64,11 @@
         padding: 12px 16px;
         border-radius: var(--notes-border-radius);
 
-        &.blue {
-          background-color: var(--notes-blue-note);
+        &.neo-notes__interaction__message__content--primary {
+          background-color: var(--notes-message-primary-background-color);
         }
-        &.gray {
-          background-color: var(--notes-gray-note);
+        &.neo-notes__interaction__message__content--secondary {
+          background-color: var(--notes-message-secondary-background-color);
         }
 
         .neo-notes__interaction__message__content__author {

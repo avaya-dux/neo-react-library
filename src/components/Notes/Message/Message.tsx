@@ -45,7 +45,9 @@ export const Content = ({
     () =>
       clsx(
         "neo-notes__interaction__message__content",
-        self ? "blue" : "gray",
+        self
+          ? "neo-notes__interaction__message__content--primary"
+          : "neo-notes__interaction__message__content--secondary",
         rest.className,
       ),
     [rest.className, self],
