@@ -20,19 +20,3 @@ export const IconMenu = ({ children, ...rest }: CommonProps) => {
   );
 };
 IconMenu.displayName = "IconMenu";
-
-export const Heading = ({ children, ...rest }: CommonProps) => {
-  const classNames = useMemo(
-    () => clsx("neo-iconmenu__heading", rest.className),
-    [rest.className],
-  );
-
-  return (
-    <div {...rest} className={classNames}>
-      {children}
-    </div>
-  );
-};
-Heading.displayName = "IconMenuHeading";
-
-IconMenu.Heading = Heading;

@@ -1,3 +1,36 @@
-.iconmenu-container {
+.stories-iconmenu-container {
   width: 350px;
+
+  .stories-heading {
+    p {
+      font-size: 1.5rem;
+      font-weight: 400;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+
+  .stories-interaction {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1.5rem;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--notes-border-color);
+      padding-bottom: 2rem;
+    }
+
+    .stories-interaction__heading {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      p {
+        font-size: 12px; /* neo-body-small */
+        line-height: 16px; /* neo-body-small */
+        font-weight: 600; /* neo-semibold */
+      }
+    }
+  }
 }

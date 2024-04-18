@@ -17,13 +17,4 @@
   border: 1px solid var(--notes-border-color);
   border-radius: var(--notes-border-radius);
   padding: 1rem;
-
-  .neo-iconmenu__heading {
-    p {
-      font-size: 1.5rem;
-      font-weight: 400;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-  }
 }

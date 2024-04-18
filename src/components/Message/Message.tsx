@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import { ReactNode, useMemo } from "react";
 
+import "./Message.css";
+
 export interface CommonProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }

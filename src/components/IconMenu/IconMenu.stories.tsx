@@ -1,9 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { IconMenu } from "./IconMenu";
-import "./IconMenu.stories.css";
+import { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 import { useState } from "react";
+
+import { IconMenu } from "./IconMenu";
+import { Button } from "components/Button";
+import { Icon } from "components/Icon/Icon";
+import { Message } from "components/Message";
+
+import "./IconMenu.stories.css";
 
 type IconMenuAndAuthor = React.ComponentProps<typeof IconMenu> & {
   author?: string;
@@ -17,88 +23,6 @@ const meta: Meta<typeof IconMenu> = {
 export default meta;
 
 type Story = StoryObj<IconMenuAndAuthor>;
-
-export const StaticAgentNotesExample: Story = {
-  render: () => (
-    <section className="iconmenu-container">
-      {/* <Notes>
-        <Notes.Heading>
-          <p>Notes</p>
-
-          <Button variant="primary" size="wide" disabled>
-            Add a new note
-          </Button>
-        </Notes.Heading>
-
-        <Notes.Interaction>
-          <Notes.Interaction.Heading>
-            <Icon icon="email-inbound" aria-label="email inbound" size="md" />
-
-            <p>March 19, 2024 | 12:50 PM</p>
-          </Notes.Interaction.Heading>
-
-          <Notes.Interaction.Message>
-            <Notes.Interaction.Message.Title>
-              March 19, 2024 | 12:50 AM
-            </Notes.Interaction.Message.Title>
-
-            <Notes.Interaction.Message.Content author="Me" self>
-              Client has sent an email. They did not receive any feedback on this
-              claim. They are quite upset. I have set up a meeting to call on Monday.
-            </Notes.Interaction.Message.Content>
-          </Notes.Interaction.Message>
-
-          <Notes.Interaction.Message>
-            <Notes.Interaction.Message.Title>
-              March 19, 2024 | 12:32 AM
-            </Notes.Interaction.Message.Title>
-
-            <Notes.Interaction.Message.Content author="Barbara Leyton">
-              Transferring this to you. I think we need to escalate this.
-            </Notes.Interaction.Message.Content>
-          </Notes.Interaction.Message>
-        </Notes.Interaction>
-
-        <Notes.Interaction>
-          <Notes.Interaction.Heading>
-            <Icon icon="call-outbound" aria-label="call outbound" size="md" />
-
-            <p>March 15, 2024 | 12:28 AM</p>
-          </Notes.Interaction.Heading>
-
-          <Notes.Interaction.Message>
-            <Notes.Interaction.Message.Title>
-              May 10, 2024 | 12:28 AM
-            </Notes.Interaction.Message.Title>
-
-            <Notes.Interaction.Message.Content author="Barbara Leyton">
-              Client called to ask for an update. Sent an email to the claim
-              department. Need to call when we have an update.
-            </Notes.Interaction.Message.Content>
-          </Notes.Interaction.Message>
-        </Notes.Interaction>
-
-        <Notes.Interaction>
-          <Notes.Interaction.Heading>
-            <Icon icon="call-outbound" aria-label="call outbound" size="md" />
-
-            <p>March 8, 2024 | 12:28 AM</p>
-          </Notes.Interaction.Heading>
-
-          <Notes.Interaction.Message>
-            <Notes.Interaction.Message.Title>
-              March 8, 2024 | 12:32 AM
-            </Notes.Interaction.Message.Title>
-
-            <Notes.Interaction.Message.Content author="Barbara Leyton">
-              Client has been in accident, and would like a claim started.
-            </Notes.Interaction.Message.Content>
-          </Notes.Interaction.Message>
-        </Notes.Interaction>
-      </Notes> */}
-    </section>
-  ),
-};
 
 const mockApiResult = [
   {
@@ -149,31 +73,32 @@ const mockApiResult = [
     ],
   },
 ];
-export const DynamicAgentNotesExample: Story = {
+export const AgentNotesExample: Story = {
   args: {
     author: "Bob Frank",
     canEdit: true,
   },
   render: ({ author, canEdit }) => {
+    const [interactions] = useState(mockApiResult);
     // const [interactions, setInteractions] = useState(mockApiResult);
     // TODO: add a new note functionality
     // TODO: edit a note functionality
     // TODO: remove a note functionality
 
     return (
-      <section className="iconmenu-container">
-        {/* <Notes>
-          <Notes.Heading>
+      <section className="stories-iconmenu-container">
+        <IconMenu>
+          <div className="stories-heading">
             <p>Notes</p>
 
             <Button variant="primary" size="wide" disabled={canEdit === false}>
               Add a new note
             </Button>
-          </Notes.Heading>
+          </div>
 
           {interactions.map((interaction) => (
-            <Notes.Interaction key={interaction.id}>
-              <Notes.Interaction.Heading>
+            <div className="stories-interaction" key={interaction.id}>
+              <div className="stories-interaction__heading">
                 <Icon
                   icon={interaction.type as IconNamesType}
                   aria-label={interaction.type.replace("-", " ")}
@@ -181,25 +106,23 @@ export const DynamicAgentNotesExample: Story = {
                 />
 
                 <p>{interaction.date}</p>
-              </Notes.Interaction.Heading>
+              </div>
 
               {interaction.messages.map((message) => (
-                <Notes.Interaction.Message key={message.id}>
-                  <Notes.Interaction.Message.Title>
-                    {message.date}
-                  </Notes.Interaction.Message.Title>
+                <Message key={message.id}>
+                  <Message.Title>{message.date}</Message.Title>
 
-                  <Notes.Interaction.Message.Content
+                  <Message.Content
                     author={message.author === author ? "Me" : message.author}
                     self={message.author === author}
                   >
                     {message.content}
-                  </Notes.Interaction.Message.Content>
-                </Notes.Interaction.Message>
+                  </Message.Content>
+                </Message>
               ))}
-            </Notes.Interaction>
+            </div>
           ))}
-        </Notes> */}
+        </IconMenu>
       </section>
     );
   },
