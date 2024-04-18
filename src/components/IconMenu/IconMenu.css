@@ -1,12 +1,10 @@
 .neo-iconmenu {
-  --notes-border-color: var(--neo-color-base-200);
-
-  /* TODO: --notes-border-radius is in many places, need to centralize */
-  --notes-border-radius: 12px;
+  --iconmenu-border-color: var(--neo-color-base-200);
+  --iconmenu-border-radius: 12px;
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --notes-border-color: var(--neo-color-base-600);
+      --iconmenu-border-color: var(--neo-color-base-600);
     }
   }
 }
@@ -14,7 +12,7 @@
 .neo-iconmenu {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--notes-border-color);
-  border-radius: var(--notes-border-radius);
+  border: 1px solid var(--iconmenu-border-color);
+  border-radius: var(--iconmenu-border-radius);
   padding: 1rem;
 }

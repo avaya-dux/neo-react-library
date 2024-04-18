@@ -1,14 +1,14 @@
 .neo-message {
-  --notes-border-color: var(--neo-color-base-200);
-  --notes-message-primary-background-color: var(--neo-color-blue-100);
-  --notes-message-secondary-background-color: var(--neo-color-base-100);
-  --notes-border-radius: 12px;
+  --message-border-color: var(--neo-color-base-200);
+  --message-primary-background-color: var(--neo-color-blue-100);
+  --message-secondary-background-color: var(--neo-color-base-100);
+  --message-border-radius: 12px;
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --notes-border-color: var(--neo-color-base-600);
-      --notes-message-primary-background-color: var(--neo-color-blue-800);
-      --notes-message-secondary-background-color: var(--neo-color-base-850);
+      --message-border-color: var(--neo-color-base-600);
+      --message-primary-background-color: var(--neo-color-blue-800);
+      --message-secondary-background-color: var(--neo-color-base-850);
     }
   }
 }
@@ -23,13 +23,13 @@
 
   .neo-message__content {
     padding: 12px 16px;
-    border-radius: var(--notes-border-radius);
+    border-radius: var(--message-border-radius);
 
     &.neo-message__content--primary {
-      background-color: var(--notes-message-primary-background-color);
+      background-color: var(--message-primary-background-color);
     }
     &.neo-message__content--secondary {
-      background-color: var(--notes-message-secondary-background-color);
+      background-color: var(--message-secondary-background-color);
     }
 
     .neo-message__content__author {
