@@ -62,7 +62,6 @@ const mockApiResult = [
   {
     id: "call-2",
     date: "March 8, 2024 | 12:32 AM",
-    type: "call-outbound",
     messages: [
       {
         id: "call-2-note-1",
@@ -99,11 +98,19 @@ export const AgentNotesExample: Story = {
           {interactions.map((interaction) => (
             <div className="stories-interaction" key={interaction.id}>
               <div className="stories-interaction__heading">
-                <Icon
-                  icon={interaction.type as IconNamesType}
-                  aria-label={interaction.type.replace("-", " ")}
-                  size="md"
-                />
+                {interaction.type ? (
+                  <Icon
+                    icon={interaction.type as IconNamesType}
+                    aria-label={interaction.type.replace("-", " ")}
+                    size="md"
+                  />
+                ) : (
+                  <Icon
+                    icon="input-output"
+                    aria-label="unknown interaction type"
+                    size="md"
+                  />
+                )}
 
                 <p>{interaction.date}</p>
               </div>
