@@ -1,11 +1,13 @@
 import clsx from "clsx";
 import { ReactNode, useMemo } from "react";
 
-import { CommonProps } from "../Notes";
+export interface CommonProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+}
 
 export const Message = ({ children, ...rest }: CommonProps) => {
   const classNames = useMemo(
-    () => clsx("neo-notes__interaction__message", rest.className),
+    () => clsx("neo-message", rest.className),
     [rest.className],
   );
 
@@ -15,11 +17,11 @@ export const Message = ({ children, ...rest }: CommonProps) => {
     </div>
   );
 };
-Message.displayName = "NotesInteractionMessage";
+Message.displayName = "Message";
 
 export const Title = ({ children, ...rest }: CommonProps) => {
   const classNames = useMemo(
-    () => clsx("neo-notes__interaction__message__title", rest.className),
+    () => clsx("neo-message__title", rest.className),
     [rest.className],
   );
 
@@ -29,7 +31,7 @@ export const Title = ({ children, ...rest }: CommonProps) => {
     </div>
   );
 };
-Title.displayName = "NotesInteractionMessageTitle";
+Title.displayName = "MessageTitle";
 
 export interface ContentProps extends CommonProps {
   author: ReactNode;
@@ -44,10 +46,10 @@ export const Content = ({
   const classNames = useMemo(
     () =>
       clsx(
-        "neo-notes__interaction__message__content",
+        "neo-message__content",
         self
-          ? "neo-notes__interaction__message__content--primary"
-          : "neo-notes__interaction__message__content--secondary",
+          ? "neo-message__content--primary"
+          : "neo-message__content--secondary",
         rest.className,
       ),
     [rest.className, self],
@@ -55,15 +57,13 @@ export const Content = ({
 
   return (
     <div {...rest} className={classNames}>
-      <p className="neo-notes__interaction__message__content__author">
-        {author}
-      </p>
+      <p className="neo-message__content__author">{author}</p>
 
       <p>{children}</p>
     </div>
   );
 };
-Content.displayName = "NotesInteractionMessageContent";
+Content.displayName = "MessageContent";
 
 Message.Title = Title;
 Message.Content = Content;

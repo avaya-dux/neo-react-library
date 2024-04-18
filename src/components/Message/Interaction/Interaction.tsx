@@ -1,12 +1,15 @@
 import clsx from "clsx";
-import { useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 
-import { Message } from "../Message";
-import { CommonProps } from "../Notes";
+import { Message } from "..";
+
+export interface CommonProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+}
 
 export const Interaction = ({ children, ...rest }: CommonProps) => {
   const classNames = useMemo(
-    () => clsx("neo-notes__interaction", rest.className),
+    () => clsx("neo-interaction", rest.className),
     [rest.className],
   );
 
@@ -16,11 +19,11 @@ export const Interaction = ({ children, ...rest }: CommonProps) => {
     </div>
   );
 };
-Interaction.displayName = "NotesInteraction";
+Interaction.displayName = "MessageInteraction";
 
 export const Heading = ({ children, ...rest }: CommonProps) => {
   const classNames = useMemo(
-    () => clsx("neo-notes__interaction__heading", rest.className),
+    () => clsx("neo-interaction__heading", rest.className),
     [rest.className],
   );
 
@@ -30,7 +33,7 @@ export const Heading = ({ children, ...rest }: CommonProps) => {
     </div>
   );
 };
-Heading.displayName = "NotesInteractionHeading";
+Heading.displayName = "MessageInteractionHeading";
 
 Interaction.Message = Message;
 Interaction.Heading = Heading;

@@ -1,17 +1,15 @@
 import clsx from "clsx";
 import { ReactNode, useMemo } from "react";
 
-import { Interaction } from "./Interaction";
-
-import "./Notes.css";
+import "./IconMenu.css";
 
 export interface CommonProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export const Notes = ({ children, ...rest }: CommonProps) => {
+export const IconMenu = ({ children, ...rest }: CommonProps) => {
   const classNames = useMemo(
-    () => clsx("neo-notes", rest.className),
+    () => clsx("neo-iconmenu", rest.className),
     [rest.className],
   );
 
@@ -21,11 +19,11 @@ export const Notes = ({ children, ...rest }: CommonProps) => {
     </div>
   );
 };
-Notes.displayName = "Notes";
+IconMenu.displayName = "IconMenu";
 
 export const Heading = ({ children, ...rest }: CommonProps) => {
   const classNames = useMemo(
-    () => clsx("neo-notes__heading", rest.className),
+    () => clsx("neo-iconmenu__heading", rest.className),
     [rest.className],
   );
 
@@ -35,7 +33,6 @@ export const Heading = ({ children, ...rest }: CommonProps) => {
     </div>
   );
 };
-Heading.displayName = "NotesHeading";
+Heading.displayName = "IconMenuHeading";
 
-Notes.Heading = Heading;
-Notes.Interaction = Interaction;
+IconMenu.Heading = Heading;
