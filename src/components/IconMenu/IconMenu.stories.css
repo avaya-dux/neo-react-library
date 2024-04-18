@@ -17,7 +17,7 @@
     padding-top: 1.5rem;
 
     &:not(:last-child) {
-      border-bottom: 1px solid var(--iconmenu-border-radius);
+      border-bottom: 1px solid var(--iconmenu-border-color);
       padding-bottom: 2rem;
     }
 
