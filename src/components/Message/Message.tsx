@@ -3,11 +3,11 @@ import { ReactNode, useMemo } from "react";
 
 import "./Message.css";
 
-export interface CommonProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export const Message = ({ children, ...rest }: CommonProps) => {
+export const Message = ({ children, ...rest }: MessageProps) => {
   const classNames = useMemo(
     () => clsx("neo-message", rest.className),
     [rest.className],
@@ -21,7 +21,9 @@ export const Message = ({ children, ...rest }: CommonProps) => {
 };
 Message.displayName = "Message";
 
-export const Title = ({ children, ...rest }: CommonProps) => {
+export interface TitleProps extends MessageProps {}
+
+export const Title = ({ children, ...rest }: TitleProps) => {
   const classNames = useMemo(
     () => clsx("neo-message__title", rest.className),
     [rest.className],
@@ -35,7 +37,7 @@ export const Title = ({ children, ...rest }: CommonProps) => {
 };
 Title.displayName = "MessageTitle";
 
-export interface ContentProps extends CommonProps {
+export interface ContentProps extends MessageProps {
   author: ReactNode;
   self?: boolean;
 }

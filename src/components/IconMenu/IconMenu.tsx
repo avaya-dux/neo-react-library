@@ -3,11 +3,11 @@ import { ReactNode, useMemo } from "react";
 
 import "./IconMenu.css";
 
-export interface CommonProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IconMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export const IconMenu = ({ children, ...rest }: CommonProps) => {
+export const IconMenu = ({ children, ...rest }: IconMenuProps) => {
   const classNames = useMemo(
     () => clsx("neo-iconmenu", rest.className),
     [rest.className],
