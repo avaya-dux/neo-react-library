@@ -11,8 +11,55 @@
 
 .neo-iconmenu {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   border: 1px solid var(--iconmenu-border-color);
   border-radius: var(--iconmenu-border-radius);
-  padding: 1rem;
+
+  .neo-iconmenu__menuitems {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px 0;
+
+    .neo-iconmenu__menuitems-item {
+      padding: 20px 24px;
+
+      /* TODO: better naming */
+      &.active {
+        border-left: none;
+        border-right: 2px solid var(--leftnav-main-active-color);
+
+        [dir="rtl"] & {
+          border-right: none;
+          border-left: 2px solid var(--leftnav-main-active-color);
+        }
+      }
+    }
+
+    .neo-iconmenu__menuitems-expand {
+      padding: 20px 24px;
+
+      /* TODO: better naming */
+      &.invert {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+
+  .neo-iconmenu__panels {
+    margin: 1rem 0;
+    padding: 0 1rem;
+
+    border-left: none;
+    border-right: 1px solid var(--iconmenu-border-color);
+    [dir="rtl"] & {
+      border-right: none;
+      border-left: 1px solid var(--iconmenu-border-color);
+    }
+
+    &.collapsed {
+      display: none;
+    }
+  }
 }
