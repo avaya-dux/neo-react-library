@@ -46,3 +46,5 @@ export const MessageWithCustomAuthor: Story = {
     </Message>
   ),
 };
+
+// export const MessageInEditMode: Story = {};
