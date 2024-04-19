@@ -48,8 +48,8 @@
   }
 
   .neo-iconmenu__panels {
-    margin: 1rem 0;
-    padding: 0 1rem;
+    margin: 12px 0;
+    padding: 0 12px;
 
     border-left: none;
     border-right: 1px solid var(--iconmenu-border-color);
