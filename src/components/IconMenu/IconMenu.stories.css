@@ -6,6 +6,10 @@
 
   .neo-iconmenu {
     height: calc(100vh - 2rem);
+
+    .neo-iconmenu__panels-panel {
+      min-width: 10rem;
+    }
   }
 
   .stories-heading {

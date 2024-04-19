@@ -38,7 +38,7 @@
     }
 
     .neo-iconmenu__menuitems-expand {
-      padding: 20px 24px;
+      padding: 20px 25px; /* one extra pixel to adjsut for the border */
 
       /* TODO: better naming */
       &.invert {
