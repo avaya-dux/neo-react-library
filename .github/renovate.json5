@@ -6,7 +6,7 @@
     "group:allNonMajor", // batch non-majors into one PR
     ":semanticCommits", // nicer commit messages
   ],
-  rangeStrategy: "pin", // pin dependencies
+  rangeStrategy: "pin",
   reviewers: ["joe-s-avaya", "enrique-prado"],
   schedule: ["on monday before 5am"],
   ignoreDeps: ["node", "downshift", "jest-axe", "@types/react", "eslint"],
