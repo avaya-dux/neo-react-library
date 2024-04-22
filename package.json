@@ -114,7 +114,7 @@
     "cypress-real-events": "1.12.0",
     "diffable-html": "5.0.0",
     "downshift": "7.6.2",
-    "eslint": "8.57.0",
+    "eslint": "9.1.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-cypress": "2.15.2",
     "eslint-plugin-jsx-a11y": "6.8.0",
