@@ -107,7 +107,7 @@ export const IconButton = forwardRef(
           <span
             className={clsx(
               `neo-icon-${icon}`,
-              iconSize === "lg" ? "neo-icon-state--large" : "neo-icon--medium",
+              iconSize === "lg" && "neo-icon-state--large",
             )}
           />
         )}
