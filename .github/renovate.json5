@@ -7,7 +7,7 @@
     ":semanticCommits", // nicer commit messages
   ],
   rangeStrategy: "pin", // pin dependencies
-  reviewers: ["mrazian85", "joe-s-avaya", "enrique-prado", "yangAtSpoken"],
+  reviewers: ["joe-s-avaya", "enrique-prado"],
   schedule: ["on monday before 5am"],
   ignoreDeps: ["node", "downshift", "jest-axe", "@types/react", "eslint"],
   ignorePaths: ["~/.nvmrc"],
