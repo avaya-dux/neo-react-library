@@ -91,6 +91,8 @@ export const AgentNotesExample: Story = {
     canEdit: true,
   },
   render: ({ author, canEdit }) => {
+    const [index, setIndex] = useState(0);
+    const [expanded, setExpanded] = useState(true);
     const [interactions] = useState(mockApiResult);
     // const [interactions, setInteractions] = useState(mockApiResult);
     // TODO: add a new note functionality
@@ -100,48 +102,104 @@ export const AgentNotesExample: Story = {
     return (
       <section className="stories-iconmenu-container">
         <IconMenu>
-          <div className="stories-heading">
-            <p>Notes</p>
+          <div
+            className={clsx("neo-iconmenu__panels", !expanded && "collapsed")}
+          >
+            <div className="neo-iconmenu__panels-panel" hidden={index !== 0}>
+              <div className="stories-heading">
+                <p>Notes</p>
 
-            <Button variant="primary" size="wide" disabled={canEdit === false}>
-              Add a new note
-            </Button>
-          </div>
-
-          {interactions.map((interaction) => (
-            <section className="stories-interaction" key={interaction.id}>
-              <div className="stories-interaction__heading">
-                {interaction.type ? (
-                  <Icon
-                    icon={interaction.type as IconNamesType}
-                    aria-label={interaction.type.replace("-", " ")}
-                    size="md"
-                  />
-                ) : (
-                  <Icon
-                    icon="input-output"
-                    aria-label="unknown interaction type"
-                    size="md"
-                  />
-                )}
-
-                <p>{interaction.date}</p>
+                <Button
+                  variant="primary"
+                  size="wide"
+                  disabled={canEdit === false}
+                >
+                  Add a new note
+                </Button>
               </div>
 
-              {interaction.messages.map((message) => (
-                <Message key={message.id}>
-                  <Message.Title>{message.date}</Message.Title>
+              {interactions.map((interaction) => (
+                <section className="stories-interaction" key={interaction.id}>
+                  <div className="stories-interaction__heading">
+                    {interaction.type ? (
+                      <Icon
+                        icon={interaction.type as IconNamesType}
+                        aria-label={interaction.type.replace("-", " ")}
+                        size="md"
+                      />
+                    ) : (
+                      <Icon
+                        icon="input-output"
+                        aria-label="unknown interaction type"
+                        size="md"
+                      />
+                    )}
 
-                  <Message.Content
-                    author={message.author === author ? "Me" : message.author}
-                    self={message.author === author}
-                  >
-                    {message.content}
-                  </Message.Content>
-                </Message>
+                    <p>{interaction.date}</p>
+                  </div>
+
+                  {interaction.messages.map((message) => (
+                    <Message key={message.id}>
+                      <Message.Title>{message.date}</Message.Title>
+
+                      <Message.Content
+                        author={
+                          message.author === author ? "Me" : message.author
+                        }
+                        self={message.author === author}
+                      >
+                        {message.content}
+                      </Message.Content>
+                    </Message>
+                  ))}
+                </section>
               ))}
-            </section>
-          ))}
+            </div>
+
+            <div className="neo-iconmenu__panels-panel" hidden={index !== 1}>
+              <p>No Content</p>
+            </div>
+          </div>
+
+          <div className="neo-iconmenu__menuitems">
+            <div>
+              <IconButton
+                className={clsx(
+                  "neo-iconmenu__menuitems-item",
+                  index === 0 && "active",
+                )}
+                onClick={() => setIndex(0)}
+                aria-label="Agent notes"
+                icon="posts"
+                iconSize="md"
+                variant="tertiary"
+              />
+
+              <IconButton
+                className={clsx(
+                  "neo-iconmenu__menuitems-item",
+                  index === 1 && "active",
+                )}
+                onClick={() => setIndex(1)}
+                aria-label="Agents"
+                icon="agents"
+                iconSize="md"
+                variant="tertiary"
+              />
+            </div>
+
+            <IconButton
+              className={clsx(
+                "neo-iconmenu__menuitems-expand",
+                !expanded && "invert",
+              )}
+              onClick={() => setExpanded(!expanded)}
+              aria-label={expanded ? "Collapse" : "Expand"}
+              icon="page-last"
+              iconSize="md"
+              variant="tertiary"
+            />
+          </div>
         </IconMenu>
       </section>
     );
@@ -155,7 +213,7 @@ export const SimpleIconMenu: Story = {
 
     return (
       <section className="stories-iconmenu-container">
-        <div className="neo-iconmenu">
+        <IconMenu>
           <div
             className={clsx("neo-iconmenu__panels", !expanded && "collapsed")}
           >
@@ -223,7 +281,7 @@ export const SimpleIconMenu: Story = {
               variant="tertiary"
             />
           </div>
-        </div>
+        </IconMenu>
       </section>
     );
   },
