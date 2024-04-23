@@ -182,7 +182,7 @@ export const SimpleIconMenu: Story = {
                 onClick={() => setIndex(0)}
                 aria-label="Example One"
                 icon="email-inbound"
-                size="large"
+                iconSize="md"
                 variant="tertiary"
               />
 
@@ -194,6 +194,7 @@ export const SimpleIconMenu: Story = {
                 onClick={() => setIndex(1)}
                 aria-label="Example Two"
                 icon="email-outbound"
+                iconSize="md"
                 variant="tertiary"
               />
 
@@ -205,6 +206,7 @@ export const SimpleIconMenu: Story = {
                 onClick={() => setIndex(2)}
                 aria-label="Example Three"
                 icon="input-output"
+                iconSize="md"
                 variant="tertiary"
               />
             </div>
@@ -217,6 +219,7 @@ export const SimpleIconMenu: Story = {
               onClick={() => setExpanded(!expanded)}
               aria-label={expanded ? "Collapse" : "Expand"}
               icon="page-last"
+              iconSize="md"
               variant="tertiary"
             />
           </div>

@@ -22,7 +22,7 @@ export interface IconButtonProps
   icon: IconNamesType;
   shape?: "circle" | "square";
   size?: "default" | "compact" | "wide" | "large";
-  iconSize?: "md" | "lg";
+  iconSize?: "sm" | "md" | "lg";
   status?: "default" | "success" | "alert" | "warning" | "info" | "event";
   variant?: "primary" | "secondary" | "tertiary";
 }
@@ -48,7 +48,7 @@ export const IconButton = forwardRef(
       icon,
       shape = "square",
       size = "default",
-      iconSize = "md",
+      iconSize = "sm",
       status = "default",
       variant = "primary",
       ...rest
@@ -108,6 +108,7 @@ export const IconButton = forwardRef(
             className={clsx(
               `neo-icon-${icon}`,
               iconSize === "lg" && "neo-icon-state--large",
+              iconSize === "md" && "neo-icon--medium",
             )}
           />
         )}
