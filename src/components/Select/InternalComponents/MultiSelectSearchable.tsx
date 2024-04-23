@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
 import { useContext, useEffect, useMemo } from "react";
-import AutosizeInput from "react-input-autosize";
 
 import { Chip } from "components/Chip";
 import { Keys } from "utils";
@@ -84,10 +83,10 @@ export const MultiSelectSearchable = () => {
       <span {...restToggleProps} className="neo-multiselect-combo__header">
         <span className="neo-multiselect__padded-container">
           <div className="neo-multiselect-combo__buttons-container">
-            <AutosizeInput
+            <input
               {...restInputProps}
               value={inputValue}
-              inputClassName={clsx(
+              className={clsx(
                 "neo-input",
                 size === "sm" && "neo-multiselect__input--small",
               )}
