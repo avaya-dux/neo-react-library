@@ -67,7 +67,6 @@ div.neo-multiselect
   input.neo-input {
   border: 0;
   display: inline-block;
-  order: 2;
 }
 
 div.neo-multiselect:not(.neo-multiselect--small)
