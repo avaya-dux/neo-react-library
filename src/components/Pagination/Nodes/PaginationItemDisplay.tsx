@@ -22,14 +22,16 @@ import { PaginationProps } from "..";
 export const PaginationItemDisplay = ({
   currentPageIndex,
   itemCount,
+  itemDisplayTooltipPosition = "auto",
   itemDisplayType = "count",
   itemsPerPage,
-  tooltipForCurrentPage = "Item count", // TODO: localize
+  tooltipForCurrentPage = "Item count",
   totalPages,
 }: { totalPages: number } & Pick<
   PaginationProps,
   | "currentPageIndex"
   | "itemCount"
+  | "itemDisplayTooltipPosition"
   | "itemDisplayType"
   | "itemsPerPage"
   | "tooltipForCurrentPage"
@@ -54,6 +56,7 @@ export const PaginationItemDisplay = ({
     <Tooltip
       id={`pagination-item-display-${tooltipForCurrentPage}`}
       label={tooltipForCurrentPage}
+      position={itemDisplayTooltipPosition}
     >
       {display}
     </Tooltip>

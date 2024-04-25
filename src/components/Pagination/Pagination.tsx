@@ -43,6 +43,9 @@ export const Pagination = ({
   itemsPerPageLabel,
   itemsPerPageOptions,
 
+  itemDisplayTooltipPosition,
+  itemsPerPageTooltipPosition,
+
   alwaysShowPagination,
   itemDisplayType,
 
@@ -89,6 +92,7 @@ export const Pagination = ({
           currentPageIndex={currentPageIndex}
           itemCount={itemCount}
           itemDisplayType={itemDisplayType}
+          itemDisplayTooltipPosition={itemDisplayTooltipPosition}
           itemsPerPage={itemsPerPage}
           totalPages={totalPages}
         />
@@ -111,6 +115,7 @@ export const Pagination = ({
           itemsPerPage={itemsPerPage}
           itemsPerPageLabel={itemsPerPageLabel}
           itemsPerPageOptions={itemsPerPageOptions}
+          itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
           onItemsPerPageChange={onItemsPerPageChange}
           tooltipForShownPagesSelect={tooltipForShownPagesSelect}
         />
