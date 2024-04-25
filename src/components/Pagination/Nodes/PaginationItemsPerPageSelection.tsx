@@ -4,10 +4,10 @@ import { PaginationProps } from "..";
 
 export const PaginationItemsPerPageSelection = ({
   itemsPerPage,
-  itemsPerPageLabel = "Show: ", // TODO: localize
+  itemsPerPageLabel = "Show: ",
   itemsPerPageOptions = [],
   onItemsPerPageChange,
-  tooltipForShownPagesSelect = "items per page", // TODO: localize
+  tooltipForShownPagesSelect = "items per page",
 }: Pick<
   PaginationProps,
   | "itemsPerPage"
