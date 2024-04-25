@@ -139,3 +139,10 @@ Templated.args = {
   onPageChange: () => null,
   onItemsPerPageChange: () => null,
 };
+
+export const TooltipPositions = Template.bind({});
+TooltipPositions.args = {
+  ...Templated.args,
+  itemsPerPageTooltipPosition: "left",
+  itemDisplayTooltipPosition: "right",
+};
