@@ -4,19 +4,19 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Note } from "./Note";
 import { Icon } from "components/Icon";
 
-type MessageAndSelf = React.ComponentProps<typeof Note> & {
+type NoteAndSelf = React.ComponentProps<typeof Note> & {
   self: boolean;
 };
 
 const meta: Meta<typeof Note> = {
   component: Note,
-  title: "Components/Message",
+  title: "Components/Note",
 };
 export default meta;
 
-type Story = StoryObj<MessageAndSelf>;
+type Story = StoryObj<NoteAndSelf>;
 
-export const SingleMessage: Story = {
+export const SingleNote: Story = {
   args: {
     self: false,
   },
@@ -30,7 +30,7 @@ export const SingleMessage: Story = {
   ),
 };
 
-export const MessageWithCustomAuthor: Story = {
+export const NoteWithCustomAuthor: Story = {
   render: () => (
     <Note>
       <Note.Title>Title</Note.Title>
