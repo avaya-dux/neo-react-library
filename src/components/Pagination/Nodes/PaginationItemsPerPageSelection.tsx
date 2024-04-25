@@ -4,10 +4,11 @@ import { PaginationProps } from "..";
 
 export const PaginationItemsPerPageSelection = ({
   itemsPerPage,
-  itemsPerPageLabel = "Show: ", // TODO: localize
+  itemsPerPageLabel = "Show: ",
   itemsPerPageOptions = [],
+  itemsPerPageTooltipPosition = "auto",
   onItemsPerPageChange,
-  tooltipForShownPagesSelect = "items per page", // TODO: localize
+  tooltipForShownPagesSelect = "items per page",
 }: Pick<
   PaginationProps,
   | "itemsPerPage"
@@ -15,6 +16,7 @@ export const PaginationItemsPerPageSelection = ({
   | "itemsPerPageOptions"
   | "onItemsPerPageChange"
   | "tooltipForShownPagesSelect"
+  | "itemsPerPageTooltipPosition"
 >) => {
   if (itemsPerPageOptions.length <= 0) {
     return null;
@@ -24,6 +26,7 @@ export const PaginationItemsPerPageSelection = ({
     <Tooltip
       id={`pagination-items-per-page-selection-${tooltipForShownPagesSelect}`}
       label={tooltipForShownPagesSelect}
+      position={itemsPerPageTooltipPosition}
     >
       <label>{itemsPerPageLabel}</label>
 

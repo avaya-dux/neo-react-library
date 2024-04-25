@@ -1,3 +1,5 @@
+import { TooltipPosition } from "components/Tooltip";
+
 interface PaginationTranslations {
   backIconButtonText?: string;
   itemsPerPageLabel?: string;
@@ -16,6 +18,9 @@ export type PaginationProps = {
 
   alwaysShowPagination?: boolean;
   itemDisplayType?: "count" | "page" | "none";
+
+  itemDisplayTooltipPosition?: TooltipPosition;
+  itemsPerPageTooltipPosition?: TooltipPosition;
 
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
