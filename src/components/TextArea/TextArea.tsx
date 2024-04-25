@@ -32,6 +32,7 @@ export const TextArea = ({
   maxLength,
   placeholder,
   required,
+  onChange,
   translations = {
     remaining: "remaining",
     over: "over",
@@ -75,7 +76,13 @@ export const TextArea = ({
         ref={textAreaRef}
         placeholder={placeholder}
         disabled={disabled}
-        onChange={(e) => setCharacterCount(e.target.value.length)}
+        onChange={(e) => {
+          setCharacterCount(e.target.value.length);
+
+          if (onChange) {
+            onChange(e);
+          }
+        }}
         {...rest}
       />
       <div className="neo-input-textarea__helper">
