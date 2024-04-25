@@ -1,0 +1,38 @@
+@media (prefers-color-scheme: dark) {
+  :root .neo-dynamic .neo-note,
+  :root .neo-dark .neo-note {
+    --note-primary-background-color: var(--neo-color-blue-800);
+    --note-secondary-background-color: var(--neo-color-base-850);
+  }
+}
+:root .neo-note {
+  --note-primary-background-color: var(--neo-color-blue-100);
+  --note-secondary-background-color: var(--neo-color-base-100);
+}
+
+.neo-note {
+  .neo-note__title {
+    padding-bottom: 4px;
+
+    font-size: 12px; /* neo-body-small */
+    line-height: 16px; /* neo-body-small */
+  }
+
+  .neo-note__content {
+    padding: 12px 16px;
+    border-radius: 12px;
+
+    &.neo-note__content--primary {
+      background-color: var(--note-primary-background-color);
+    }
+    &.neo-note__content--secondary {
+      background-color: var(--note-secondary-background-color);
+    }
+
+    .neo-note__content__author {
+      font-size: 12px; /* neo-body-small */
+      line-height: 16px; /* neo-body-small */
+      font-weight: 600; /* neo-semibold */
+    }
+  }
+}
