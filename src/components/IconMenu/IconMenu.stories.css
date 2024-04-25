@@ -1,5 +1,16 @@
 .stories-iconmenu-container {
-  width: 350px;
+  max-width: 350px;
+
+  display: flex;
+  flex-direction: row-reverse;
+
+  .neo-iconmenu {
+    min-height: calc(100vh - 2rem);
+
+    .neo-iconmenu__panels-panel {
+      min-width: 10rem;
+    }
+  }
 
   .stories-heading {
     p {

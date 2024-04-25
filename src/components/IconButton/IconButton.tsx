@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { forwardRef, useMemo } from "react";
 
 import { Spinner } from "components/Spinner";
@@ -20,7 +21,8 @@ export interface IconButtonProps
   badge?: string;
   icon: IconNamesType;
   shape?: "circle" | "square";
-  size?: "default" | "compact" | "wide";
+  size?: "default" | "compact" | "wide" | "large";
+  iconSize?: "sm" | "md" | "lg";
   status?: "default" | "success" | "alert" | "warning" | "info" | "event";
   variant?: "primary" | "secondary" | "tertiary";
 }
@@ -46,6 +48,7 @@ export const IconButton = forwardRef(
       icon,
       shape = "square",
       size = "default",
+      iconSize = "sm",
       status = "default",
       variant = "primary",
       ...rest
@@ -101,7 +104,13 @@ export const IconButton = forwardRef(
         {displaySpinner ? (
           <Spinner style={{ color: "inherit" }} />
         ) : (
-          <span className={`neo-icon-${icon}`} />
+          <span
+            className={clsx(
+              `neo-icon-${icon}`,
+              iconSize === "lg" && "neo-icon-state--large",
+              iconSize === "md" && "neo-icon--medium",
+            )}
+          />
         )}
       </button>
     );
