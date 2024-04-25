@@ -76,7 +76,7 @@ export const NoteInEditMode: Story = {
           Edit
         </MenuItem>
 
-        <MenuItem onClick={() => console.log("delete")}>
+        <MenuItem onClick={() => alert("delete not implemented for this story")}>
           <Icon
             style={{ marginRight: "8px" }}
             icon="trash"
