@@ -10,7 +10,6 @@ export * from "./Chip";
 export * from "./Form";
 export * from "./Icon";
 export * from "./IconButton";
-export * from "./IconMenu";
 export * from "./Image";
 export * from "./ImageLink";
 export * from "./Layout";
