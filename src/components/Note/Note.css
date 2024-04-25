@@ -12,10 +12,15 @@
 
 .neo-note {
   .neo-note__title {
+    min-height: 32px;
     padding-bottom: 4px;
 
     font-size: 12px; /* neo-body-small */
     line-height: 16px; /* neo-body-small */
+
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
   }
 
   .neo-note__content {
@@ -30,9 +35,19 @@
     }
 
     .neo-note__content__author {
+      margin-bottom: 4px;
+
       font-size: 12px; /* neo-body-small */
       line-height: 16px; /* neo-body-small */
       font-weight: 600; /* neo-semibold */
+    }
+
+    .neo-note__content__actions {
+      display: flex;
+      justify-content: right;
+      gap: 8px;
+
+      margin-top: 8px;
     }
   }
 }
