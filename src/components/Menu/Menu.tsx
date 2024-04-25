@@ -149,7 +149,7 @@ export const Menu = forwardRef(
         logger.debug("calling onMenuClose");
         onMenuClose();
 
-        // focus button after closing menu
+        // set focus to parent button on menu closed
         if (
           toggleRef &&
           "current" in toggleRef &&
@@ -158,6 +158,7 @@ export const Menu = forwardRef(
         ) {
           logger.debug("focus button");
           toggleRef.current.focus();
+          setUserHasInteracted(false); // user is done using the menu, reset userHasInteracted
         }
         return;
       }
