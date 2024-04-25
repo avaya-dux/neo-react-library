@@ -1,11 +1,11 @@
 import clsx from "clsx";
-import { ReactNode, useMemo } from "react";
+import { useMemo } from "react";
+
+import type { NoteProps, ContentProps, TitleProps } from "./NoteTypes";
 
 import "./Note.css";
-
-export interface NoteProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-}
+import { TextArea } from "components/TextArea";
+import { genId } from "utils";
 
 export const Note = ({ children, ...rest }: NoteProps) => {
   const classNames = useMemo(
@@ -21,9 +21,7 @@ export const Note = ({ children, ...rest }: NoteProps) => {
 };
 Note.displayName = "Note";
 
-export interface TitleProps extends NoteProps {}
-
-export const Title = ({ children, ...rest }: TitleProps) => {
+export const Title = ({ actions, children, ...rest }: TitleProps) => {
   const classNames = useMemo(
     () => clsx("neo-note__title", rest.className),
     [rest.className],
@@ -31,20 +29,27 @@ export const Title = ({ children, ...rest }: TitleProps) => {
 
   return (
     <div {...rest} className={classNames}>
-      {children}
+      <div>{children}</div>
+
+      <div>{actions}</div>
     </div>
   );
 };
 Title.displayName = "NoteTitle";
 
-export interface ContentProps extends NoteProps {
-  author: ReactNode;
-  self?: boolean;
-}
 export const Content = ({
+  actions,
   author,
   children,
+  className,
+  editable = false,
+  id,
+  onTextAreaChange,
   self = false,
+  translations = {
+    remaining: "remaining",
+    over: "over",
+  },
   ...rest
 }: ContentProps) => {
   const classNames = useMemo(
@@ -52,16 +57,35 @@ export const Content = ({
       clsx(
         "neo-note__content",
         self ? "neo-note__content--primary" : "neo-note__content--secondary",
-        rest.className,
+        className,
       ),
-    [rest.className, self],
+    [className, self],
   );
 
-  return (
-    <div {...rest} className={classNames}>
-      <p className="neo-note__content__author">{author}</p>
+  const authorId = useMemo(() => id || `note-content-${genId()}`, [id]);
 
-      <p>{children}</p>
+  return (
+    <div {...rest} className={classNames} id={id}>
+      <div className="neo-note__content__author" id={authorId}>
+        {author}
+      </div>
+
+      {editable ? (
+        <>
+          <TextArea
+            label=""
+            defaultValue={children as string}
+            htmlFor={authorId}
+            maxLength={500}
+            translations={translations}
+            onChange={(e) => onTextAreaChange?.(e)}
+          />
+
+          <div className="neo-note__content__actions">{actions}</div>
+        </>
+      ) : (
+        <>{children}</>
+      )}
     </div>
   );
 };
