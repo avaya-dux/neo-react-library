@@ -53,6 +53,7 @@ export const NoteWithCustomAuthor: Story = {
 export const NoteInEditMode: Story = {
   render: () => {
     const [content, setContent] = useState("Content");
+    const [textAreaContent, setTextAreaContent] = useState("Content");
     const [edit, setEdit] = useState(false);
 
     const titleActions = (
@@ -92,7 +93,10 @@ export const NoteInEditMode: Story = {
         <Button
           variant="secondary"
           size="compact"
-          onClick={() => setEdit(false)}
+          onClick={() => {
+            setEdit(false);
+            setTextAreaContent(content);
+          }}
         >
           Cancel
         </Button>
@@ -102,7 +106,7 @@ export const NoteInEditMode: Story = {
           size="compact"
           onClick={() => {
             setEdit(false);
-            setContent("New content");
+            setContent(textAreaContent);
           }}
         >
           Save
@@ -114,7 +118,14 @@ export const NoteInEditMode: Story = {
       <Note>
         <Note.Title actions={titleActions}>Title</Note.Title>
 
-        <Note.Content author="Author" editable={edit} actions={contentActions}>
+        <Note.Content
+          author="Author"
+          editable={edit}
+          actions={contentActions}
+          onTextAreaChange={(e) => {
+            setTextAreaContent(e.currentTarget.value);
+          }}
+        >
           {content}
         </Note.Content>
       </Note>
