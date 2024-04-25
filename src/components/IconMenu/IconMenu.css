@@ -25,23 +25,32 @@
     .neo-iconmenu__menuitems-item {
       color: var(--global-font-color);
       padding: 20px 24px;
-      border-left: 2px solid transparent;
+      border-left: 2px solid var(--global-background);
+      border-right: 2px solid var(--global-background);
       border-radius: 0;
+
+      &:hover {
+        border-color: var(--button-tertiary-hover-background-color);
+      }
 
       &.active {
         color: var(--button-color-primary);
-        border-left: 2px solid transparent; /* TODO: 2px solid, here and active and -expand*/
-        border-right: 2px solid var(--leftnav-main-active-color);
 
+        border-right-color: var(--leftnav-main-active-color);
         [dir="rtl"] & {
           border-left: 2px solid var(--leftnav-main-active-color);
-          border-right: none;
+        }
+
+        &:focus {
+          border-left-color: var(--button-tertiary-hover-background-color);
         }
       }
     }
 
     .neo-iconmenu__menuitems-expand {
       color: var(--global-font-color);
+      border-radius: 0;
+      margin-left: 1px;
       padding: 20px 25px; /* one extra pixel to adjust for the border */
 
       &.invert {
