@@ -1,15 +1,15 @@
 import clsx from "clsx";
 import { ReactNode, useMemo } from "react";
 
-import "./Message.css";
+import "./Note.css";
 
-export interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface NoteProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export const Message = ({ children, ...rest }: MessageProps) => {
+export const Note = ({ children, ...rest }: NoteProps) => {
   const classNames = useMemo(
-    () => clsx("neo-message", rest.className),
+    () => clsx("neo-note", rest.className),
     [rest.className],
   );
 
@@ -19,13 +19,13 @@ export const Message = ({ children, ...rest }: MessageProps) => {
     </div>
   );
 };
-Message.displayName = "Message";
+Note.displayName = "Note";
 
-export interface TitleProps extends MessageProps {}
+export interface TitleProps extends NoteProps {}
 
 export const Title = ({ children, ...rest }: TitleProps) => {
   const classNames = useMemo(
-    () => clsx("neo-message__title", rest.className),
+    () => clsx("neo-note__title", rest.className),
     [rest.className],
   );
 
@@ -35,9 +35,9 @@ export const Title = ({ children, ...rest }: TitleProps) => {
     </div>
   );
 };
-Title.displayName = "MessageTitle";
+Title.displayName = "NoteTitle";
 
-export interface ContentProps extends MessageProps {
+export interface ContentProps extends NoteProps {
   author: ReactNode;
   self?: boolean;
 }
@@ -50,10 +50,8 @@ export const Content = ({
   const classNames = useMemo(
     () =>
       clsx(
-        "neo-message__content",
-        self
-          ? "neo-message__content--primary"
-          : "neo-message__content--secondary",
+        "neo-note__content",
+        self ? "neo-note__content--primary" : "neo-note__content--secondary",
         rest.className,
       ),
     [rest.className, self],
@@ -61,13 +59,13 @@ export const Content = ({
 
   return (
     <div {...rest} className={classNames}>
-      <p className="neo-message__content__author">{author}</p>
+      <p className="neo-note__content__author">{author}</p>
 
       <p>{children}</p>
     </div>
   );
 };
-Content.displayName = "MessageContent";
+Content.displayName = "NoteContent";
 
-Message.Title = Title;
-Message.Content = Content;
+Note.Title = Title;
+Note.Content = Content;

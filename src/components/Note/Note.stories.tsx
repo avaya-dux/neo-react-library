@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Message } from "./Message";
+import { Note } from "./Note";
 import { Icon } from "components/Icon";
 
-type MessageAndSelf = React.ComponentProps<typeof Message> & {
+type MessageAndSelf = React.ComponentProps<typeof Note> & {
   self: boolean;
 };
 
-const meta: Meta<typeof Message> = {
-  component: Message,
+const meta: Meta<typeof Note> = {
+  component: Note,
   title: "Components/Message",
 };
 export default meta;
@@ -21,20 +21,20 @@ export const SingleMessage: Story = {
     self: false,
   },
   render: ({ self }) => (
-    <Message>
-      <Message.Title>Title</Message.Title>
-      <Message.Content author="Author" self={self}>
+    <Note>
+      <Note.Title>Title</Note.Title>
+      <Note.Content author="Author" self={self}>
         Content
-      </Message.Content>
-    </Message>
+      </Note.Content>
+    </Note>
   ),
 };
 
 export const MessageWithCustomAuthor: Story = {
   render: () => (
-    <Message>
-      <Message.Title>Title</Message.Title>
-      <Message.Content
+    <Note>
+      <Note.Title>Title</Note.Title>
+      <Note.Content
         author={
           <div>
             <Icon icon="thumbs-up" aria-label="thumbs up" /> Fred
@@ -42,8 +42,8 @@ export const MessageWithCustomAuthor: Story = {
         }
       >
         Content
-      </Message.Content>
-    </Message>
+      </Note.Content>
+    </Note>
   ),
 };
 
