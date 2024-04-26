@@ -62,7 +62,7 @@ export const Editable: Story = {
         itemAlignment="right"
         menuRootElement={
           <button
-            className="neo-btn-square neo-btn-square--compact neo-btn-square-tertiary neo-btn-square-tertiary--info neo-icon-typing"
+            className="neo-btn-square neo-btn-square--compact neo-btn-square-tertiary neo-btn-square-tertiary--info neo-icon-ellipses-horizontal"
             aria-label="menu actions"
           ></button>
         }
