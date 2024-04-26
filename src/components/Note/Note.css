@@ -3,11 +3,15 @@
   :root .neo-dark .neo-note {
     --note-primary-background-color: var(--neo-color-blue-800);
     --note-secondary-background-color: var(--neo-color-base-850);
+
+    --note-title-actions-icon-color: var(--neo-color-base-150);
   }
 }
 :root .neo-note {
   --note-primary-background-color: var(--neo-color-blue-100);
   --note-secondary-background-color: var(--neo-color-base-100);
+
+  --note-title-actions-icon-color: var(--neo-color-base-800);
 }
 
 .neo-note {
@@ -31,6 +35,10 @@
 
     .neo-note__title__actions {
       transform: scale(0);
+
+      .neo-btn-square-tertiary.neo-icon-ellipses-horizontal {
+        color: var(--note-title-actions-icon-color);
+      }
     }
   }
 
