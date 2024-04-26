@@ -50,7 +50,7 @@ export const NoteWithCustomAuthor: Story = {
   ),
 };
 
-export const NoteInEditMode: Story = {
+export const Editable: Story = {
   render: () => {
     const [content, setContent] = useState("Content");
     const [textAreaContent, setTextAreaContent] = useState("Content");
@@ -61,9 +61,10 @@ export const NoteInEditMode: Story = {
         aria-label="Actions"
         itemAlignment="right"
         menuRootElement={
-          <Button variant="tertiary" size="compact">
-            <Icon icon="typing" size="sm" aria-label="menu" />
-          </Button>
+          <button
+            className="neo-btn-square neo-btn-square--compact neo-btn-square-tertiary neo-btn-square-tertiary--info neo-icon-typing"
+            aria-label="menu actions"
+          ></button>
         }
       >
         <MenuItem onClick={() => setEdit(true)}>
@@ -76,7 +77,9 @@ export const NoteInEditMode: Story = {
           Edit
         </MenuItem>
 
-        <MenuItem onClick={() => alert("delete not implemented for this story")}>
+        <MenuItem
+          onClick={() => alert("delete not implemented for this story")}
+        >
           <Icon
             style={{ marginRight: "8px" }}
             icon="trash"

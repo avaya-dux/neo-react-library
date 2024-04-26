@@ -2,10 +2,10 @@ import clsx from "clsx";
 import { useMemo } from "react";
 
 import type { NoteProps, ContentProps, TitleProps } from "./NoteTypes";
-
-import "./Note.css";
 import { TextArea } from "components/TextArea";
 import { genId } from "utils";
+
+import "./Note.css";
 
 export const Note = ({ children, ...rest }: NoteProps) => {
   const classNames = useMemo(
@@ -74,8 +74,8 @@ export const Content = ({
         <>
           <TextArea
             label=""
+            aria-labelledby={authorId}
             defaultValue={children as string}
-            htmlFor={authorId}
             maxLength={500}
             translations={translations}
             onChange={(e) => onTextAreaChange?.(e)}
