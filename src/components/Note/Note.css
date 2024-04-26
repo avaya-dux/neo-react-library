@@ -11,6 +11,13 @@
 }
 
 .neo-note {
+  &:hover .neo-note__title .neo-note__title__actions,
+  &:active .neo-note__title .neo-note__title__actions,
+  &:focus .neo-note__title .neo-note__title__actions,
+  &:focus-within .neo-note__title .neo-note__title__actions {
+    transform: scale(1);
+  }
+
   .neo-note__title {
     min-height: 24px;
     padding-bottom: 4px;
@@ -21,6 +28,10 @@
     display: flex;
     justify-content: space-between;
     align-items: end;
+
+    .neo-note__title__actions {
+      transform: scale(0);
+    }
   }
 
   .neo-note__content {
@@ -44,7 +55,7 @@
 
     .neo-note__content__actions {
       display: flex;
-      justify-content: right;
+      justify-content: end;
       gap: 8px;
 
       margin-top: 8px;
