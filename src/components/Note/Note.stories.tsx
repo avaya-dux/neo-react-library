@@ -118,12 +118,11 @@ export const Editable: Story = {
     );
 
     return (
-      <Note>
+      <Note state={edit ? "edit" : "readonly"}>
         <Note.Title actions={titleActions}>Title</Note.Title>
 
         <Note.Content
           author="Author"
-          editable={edit}
           actions={contentActions}
           onTextAreaChange={(e) => {
             setTextAreaContent(e.currentTarget.value);

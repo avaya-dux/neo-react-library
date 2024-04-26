@@ -13,7 +13,6 @@ export interface TitleProps extends CoreProps {
 export interface ContentProps extends CoreProps {
   actions?: ReactNode;
   author: ReactNode;
-  editable?: boolean;
   id?: string;
   onTextAreaChange?: (event: FormEvent<HTMLTextAreaElement>) => void;
   self?: boolean;

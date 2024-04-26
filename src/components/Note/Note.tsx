@@ -1,22 +1,30 @@
 import clsx from "clsx";
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 
 import type { NoteProps, ContentProps, TitleProps } from "./NoteTypes";
+import type { INoteContext } from "./NoteContext";
+import { NoteContext } from "./NoteContext";
 import { TextArea } from "components/TextArea";
 import { genId } from "utils";
 
 import "./Note.css";
 
-export const Note = ({ children, ...rest }: NoteProps) => {
+export const Note = ({
+  children,
+  state,
+  ...rest
+}: NoteProps & INoteContext) => {
   const classNames = useMemo(
     () => clsx("neo-note", rest.className),
     [rest.className],
   );
 
   return (
-    <div {...rest} className={classNames}>
-      {children}
-    </div>
+    <NoteContext.Provider value={{ state }}>
+      <div {...rest} className={classNames}>
+        {children}
+      </div>
+    </NoteContext.Provider>
   );
 };
 Note.displayName = "Note";
@@ -27,11 +35,15 @@ export const Title = ({ actions, children, ...rest }: TitleProps) => {
     [rest.className],
   );
 
+  const { state } = useContext(NoteContext);
+
   return (
     <div {...rest} className={classNames}>
       <div>{children}</div>
 
-      <div>{actions}</div>
+      <div className="neo-note__title__actions">
+        {state !== "edit" && actions}
+      </div>
     </div>
   );
 };
@@ -42,7 +54,6 @@ export const Content = ({
   author,
   children,
   className,
-  editable = false,
   id,
   onTextAreaChange,
   self = false,
@@ -62,6 +73,8 @@ export const Content = ({
     [className, self],
   );
 
+  const { state } = useContext(NoteContext);
+
   const authorId = useMemo(() => id || `note-content-${genId()}`, [id]);
 
   return (
@@ -70,7 +83,7 @@ export const Content = ({
         {author}
       </div>
 
-      {editable ? (
+      {state === "edit" ? (
         <>
           <TextArea
             label=""
