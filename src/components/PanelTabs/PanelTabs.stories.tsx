@@ -4,25 +4,25 @@ import clsx from "clsx";
 import { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 import { useState } from "react";
 
-import { IconMenu } from "./IconMenu";
+import { PanelTabs } from "./PanelTabs";
 import { Button } from "components/Button";
 import { Icon } from "components/Icon/Icon";
-import { Message } from "components/Message";
+import { Note } from "components/Note";
 import { IconButton } from "components/IconButton";
 
-import "./IconMenu.stories.css";
+import "./PanelTabs.stories.css";
 
-const meta: Meta<typeof IconMenu> = {
-  component: IconMenu,
-  title: "Components/Icon Menu",
+const meta: Meta<typeof PanelTabs> = {
+  component: PanelTabs,
+  title: "Components/Panel Tabs",
 };
 export default meta;
 
-type IconMenuAndAuthor = React.ComponentProps<typeof IconMenu> & {
+type PanelTabsAndAuthor = React.ComponentProps<typeof PanelTabs> & {
   author?: string;
   canEdit?: boolean;
 };
-type Story = StoryObj<IconMenuAndAuthor>;
+type Story = StoryObj<PanelTabsAndAuthor>;
 
 const mockApiResult = [
   {
@@ -100,12 +100,12 @@ export const AgentNotesExample: Story = {
     // TODO: remove a note functionality
 
     return (
-      <section className="stories-iconmenu-container">
-        <IconMenu>
+      <section className="stories-paneltabs-container">
+        <PanelTabs>
           <div
-            className={clsx("neo-iconmenu__panels", !expanded && "collapsed")}
+            className={clsx("neo-paneltabs__panels", !expanded && "collapsed")}
           >
-            <div className="neo-iconmenu__panels-panel" hidden={index !== 0}>
+            <div className="neo-paneltabs__panels-panel" hidden={index !== 0}>
               <div className="stories-heading">
                 <p>Notes</p>
 
@@ -139,33 +139,33 @@ export const AgentNotesExample: Story = {
                   </div>
 
                   {interaction.messages.map((message) => (
-                    <Message key={message.id}>
-                      <Message.Title>{message.date}</Message.Title>
+                    <Note key={message.id}>
+                      <Note.Title>{message.date}</Note.Title>
 
-                      <Message.Content
+                      <Note.Content
                         author={
                           message.author === author ? "Me" : message.author
                         }
                         self={message.author === author}
                       >
                         {message.content}
-                      </Message.Content>
-                    </Message>
+                      </Note.Content>
+                    </Note>
                   ))}
                 </section>
               ))}
             </div>
 
-            <div className="neo-iconmenu__panels-panel" hidden={index !== 1}>
+            <div className="neo-paneltabs__panels-panel" hidden={index !== 1}>
               <p>No Content</p>
             </div>
           </div>
 
-          <div className="neo-iconmenu__menuitems">
+          <div className="neo-paneltabs__menuitems">
             <div>
               <IconButton
                 className={clsx(
-                  "neo-iconmenu__menuitems-item",
+                  "neo-paneltabs__menuitems-item",
                   index === 0 && "active",
                 )}
                 onClick={() => setIndex(0)}
@@ -177,7 +177,7 @@ export const AgentNotesExample: Story = {
 
               <IconButton
                 className={clsx(
-                  "neo-iconmenu__menuitems-item",
+                  "neo-paneltabs__menuitems-item",
                   index === 1 && "active",
                 )}
                 onClick={() => setIndex(1)}
@@ -190,7 +190,7 @@ export const AgentNotesExample: Story = {
 
             <IconButton
               className={clsx(
-                "neo-iconmenu__menuitems-expand",
+                "neo-paneltabs__menuitems-expand",
                 !expanded && "invert",
               )}
               onClick={() => setExpanded(!expanded)}
@@ -200,41 +200,41 @@ export const AgentNotesExample: Story = {
               variant="tertiary"
             />
           </div>
-        </IconMenu>
+        </PanelTabs>
       </section>
     );
   },
 };
 
-export const SimpleIconMenu: Story = {
+export const SimplePanelTabs: Story = {
   render: () => {
     const [index, setIndex] = useState(0);
     const [expanded, setExpanded] = useState(true);
 
     return (
-      <section className="stories-iconmenu-container">
-        <IconMenu>
+      <section className="stories-paneltabs-container">
+        <PanelTabs>
           <div
-            className={clsx("neo-iconmenu__panels", !expanded && "collapsed")}
+            className={clsx("neo-paneltabs__panels", !expanded && "collapsed")}
           >
-            <div className="neo-iconmenu__panels-panel" hidden={index !== 0}>
+            <div className="neo-paneltabs__panels-panel" hidden={index !== 0}>
               <p>email inbound</p>
             </div>
 
-            <div className="neo-iconmenu__panels-panel" hidden={index !== 1}>
+            <div className="neo-paneltabs__panels-panel" hidden={index !== 1}>
               <p>email outbound</p>
             </div>
 
-            <div className="neo-iconmenu__panels-panel" hidden={index !== 2}>
+            <div className="neo-paneltabs__panels-panel" hidden={index !== 2}>
               <p>input output</p>
             </div>
           </div>
 
-          <div className="neo-iconmenu__menuitems">
+          <div className="neo-paneltabs__menuitems">
             <div>
               <IconButton
                 className={clsx(
-                  "neo-iconmenu__menuitems-item",
+                  "neo-paneltabs__menuitems-item",
                   index === 0 && "active",
                 )}
                 onClick={() => setIndex(0)}
@@ -246,7 +246,7 @@ export const SimpleIconMenu: Story = {
 
               <IconButton
                 className={clsx(
-                  "neo-iconmenu__menuitems-item",
+                  "neo-paneltabs__menuitems-item",
                   index === 1 && "active",
                 )}
                 onClick={() => setIndex(1)}
@@ -258,7 +258,7 @@ export const SimpleIconMenu: Story = {
 
               <IconButton
                 className={clsx(
-                  "neo-iconmenu__menuitems-item",
+                  "neo-paneltabs__menuitems-item",
                   index === 2 && "active",
                 )}
                 onClick={() => setIndex(2)}
@@ -271,7 +271,7 @@ export const SimpleIconMenu: Story = {
 
             <IconButton
               className={clsx(
-                "neo-iconmenu__menuitems-expand",
+                "neo-paneltabs__menuitems-expand",
                 !expanded && "invert",
               )}
               onClick={() => setExpanded(!expanded)}
@@ -281,7 +281,7 @@ export const SimpleIconMenu: Story = {
               variant="tertiary"
             />
           </div>
-        </IconMenu>
+        </PanelTabs>
       </section>
     );
   },

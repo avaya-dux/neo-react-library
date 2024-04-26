@@ -1,28 +1,28 @@
-.neo-iconmenu {
-  --iconmenu-border-color: var(--neo-color-base-200);
-  --iconmenu-border-radius: 8px;
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --iconmenu-border-color: var(--neo-color-base-600);
-    }
+@media (prefers-color-scheme: dark) {
+  :root .neo-dynamic .neo-paneltabs,
+  :root .neo-dark .neo-paneltabs {
+    --paneltabs-border-color: var(--neo-color-base-600);
   }
 }
+:root .neo-paneltabs {
+  --paneltabs-border-color: var(--neo-color-base-200);
+  --paneltabs-border-radius: 8px;
+}
 
-.neo-iconmenu {
+.neo-paneltabs {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: 1px solid var(--iconmenu-border-color);
-  border-radius: var(--iconmenu-border-radius);
+  border: 1px solid var(--paneltabs-border-color);
+  border-radius: var(--paneltabs-border-radius);
 
-  .neo-iconmenu__menuitems {
+  .neo-paneltabs__tabs {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 8px 0;
 
-    .neo-iconmenu__menuitems-item {
+    .neo-paneltabs__tabs-item {
       color: var(--global-font-color);
       padding: 20px 24px;
       border-left: 2px solid var(--global-background);
@@ -47,7 +47,7 @@
       }
     }
 
-    .neo-iconmenu__menuitems-expand {
+    .neo-paneltabs__tabs-expand {
       color: var(--global-font-color);
       border-radius: 0;
       margin-left: 1px;
@@ -59,15 +59,15 @@
     }
   }
 
-  .neo-iconmenu__panels {
+  .neo-paneltabs__panels {
     margin: 8px 0;
     padding: 0 16px;
 
     border-left: none;
-    border-right: 1px solid var(--iconmenu-border-color);
+    border-right: 1px solid var(--paneltabs-border-color);
     [dir="rtl"] & {
       border-right: none;
-      border-left: 1px solid var(--iconmenu-border-color);
+      border-left: 1px solid var(--paneltabs-border-color);
     }
 
     &.collapsed {
