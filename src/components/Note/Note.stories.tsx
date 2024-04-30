@@ -118,19 +118,25 @@ export const Editable: Story = {
     );
 
     return (
-      <Note state={edit ? "edit" : "readonly"}>
-        <Note.Title actions={titleActions}>Title</Note.Title>
+      <section>
+        <p>
+          INSTRUCTIONS: make an edit to see the "history" section of the Note.
+        </p>
 
-        <Note.Content
-          author="Author"
-          actions={contentActions}
-          onTextAreaChange={(e) => {
-            setTextAreaContent(e.currentTarget.value);
-          }}
-        >
-          {content}
-        </Note.Content>
-      </Note>
+        <Note state={edit ? "edit" : "readonly"}>
+          <Note.Title actions={titleActions}>Title</Note.Title>
+
+          <Note.Content
+            author="Author"
+            actions={contentActions}
+            onTextAreaChange={(e) => {
+              setTextAreaContent(e.currentTarget.value);
+            }}
+          >
+            {content}
+          </Note.Content>
+        </Note>
+      </section>
     );
   },
 };
