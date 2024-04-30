@@ -120,7 +120,8 @@ export const Editable: Story = {
     return (
       <section>
         <p>
-          INSTRUCTIONS: make an edit to see the "history" section of the Note.
+          INSTRUCTIONS: make an edit to see the &ldquo;history&rdquo; section of
+          the Note.
         </p>
 
         <Note state={edit ? "edit" : "readonly"}>
