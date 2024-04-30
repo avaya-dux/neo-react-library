@@ -1,27 +1,34 @@
+:root .neo-note,
+:root .neo-light .neo-note {
+  --note-primary-background-color: var(--neo-color-blue-100);
+  --note-secondary-background-color: var(--neo-color-base-100);
+
+  --note-title-actions-icon-color: var(--neo-color-base-800);
+}
+:root .neo-dark .neo-note {
+  --note-primary-background-color: var(--neo-color-blue-800);
+  --note-secondary-background-color: var(--neo-color-base-850);
+
+  --note-title-actions-icon-color: var(--neo-color-base-150);
+}
+@media (prefers-color-scheme: light) {
+  :root .neo-dynamic .neo-note {
+    --note-primary-background-color: var(--neo-color-blue-100);
+    --note-secondary-background-color: var(--neo-color-base-100);
+
+    --note-title-actions-icon-color: var(--neo-color-base-800);
+  }
+}
 @media (prefers-color-scheme: dark) {
-  :root .neo-dynamic .neo-note,
-  :root .neo-dark .neo-note {
+  :root .neo-dynamic .neo-note {
     --note-primary-background-color: var(--neo-color-blue-800);
     --note-secondary-background-color: var(--neo-color-base-850);
 
     --note-title-actions-icon-color: var(--neo-color-base-150);
   }
 }
-:root .neo-note {
-  --note-primary-background-color: var(--neo-color-blue-100);
-  --note-secondary-background-color: var(--neo-color-base-100);
-
-  --note-title-actions-icon-color: var(--neo-color-base-800);
-}
 
 .neo-note {
-  &:hover .neo-note__title .neo-note__title__actions,
-  &:active .neo-note__title .neo-note__title__actions,
-  &:focus .neo-note__title .neo-note__title__actions,
-  &:focus-within .neo-note__title .neo-note__title__actions {
-    transform: scale(1);
-  }
-
   .neo-note__title {
     min-height: 24px;
     padding-bottom: 4px;
@@ -34,8 +41,6 @@
     align-items: end;
 
     .neo-note__title__actions {
-      transform: scale(0);
-
       .neo-btn-square-tertiary.neo-icon-ellipses-horizontal {
         color: var(--note-title-actions-icon-color);
       }
