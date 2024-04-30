@@ -16,6 +16,7 @@ export interface ContentProps extends CoreProps {
   id?: string;
   onTextAreaChange?: (event: FormEvent<HTMLTextAreaElement>) => void;
   self?: boolean;
+  subtext?: ReactNode;
   translations?: {
     remaining: string;
     over: string;

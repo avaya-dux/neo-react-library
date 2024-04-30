@@ -53,6 +53,7 @@ export const NoteWithCustomAuthor: Story = {
 export const Editable: Story = {
   render: () => {
     const [content, setContent] = useState("Content");
+    const [subtext, setSubtext] = useState<JSX.Element | undefined>(undefined);
     const [textAreaContent, setTextAreaContent] = useState("Content");
     const [edit, setEdit] = useState(false);
 
@@ -130,8 +131,29 @@ export const Editable: Story = {
           <Note.Content
             author="Author"
             actions={contentActions}
+            subtext={subtext}
             onTextAreaChange={(e) => {
               setTextAreaContent(e.currentTarget.value);
+
+              const date = new Date();
+              const [month, day, year] = [
+                date.toLocaleString("default", { month: "long" }),
+                date.getDate(),
+                date.getFullYear(),
+              ];
+              const minutes = date.getMinutes();
+              const minute = minutes < 10 ? `0${minutes}` : minutes;
+              const hours = date.getHours();
+              const hour = hours > 12 ? hours - 12 : hours;
+              const period = hours > 12 ? "PM" : "AM";
+              setSubtext(
+                <>
+                  <p>Edited: Me</p>
+                  <p>
+                    {month} {day}, {year} | {hour}:{minute} {period}
+                  </p>
+                </>,
+              );
             }}
           >
             {content}

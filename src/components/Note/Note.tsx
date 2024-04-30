@@ -57,6 +57,7 @@ export const Content = ({
   id,
   onTextAreaChange,
   self = false,
+  subtext,
   translations = {
     remaining: "remaining",
     over: "over",
@@ -97,7 +98,15 @@ export const Content = ({
           <div className="neo-note__content__actions">{actions}</div>
         </>
       ) : (
-        <>{children}</>
+        <>
+          {children}
+
+          {subtext && (
+            <div className="neo-note__content__subtext neo-body-small">
+              {subtext}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
