@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useState } from "react";
 
 import type { NoteProps, ContentProps, TitleProps } from "./NoteTypes";
 import type { INoteContext } from "./NoteContext";
@@ -58,9 +58,13 @@ export const Content = ({
   onTextAreaChange,
   self = false,
   subtext,
+
+  // text area props
+  maxLength = 500,
   translations = {
     remaining: "remaining",
     over: "over",
+    error: "Over the limit.",
   },
   ...rest
 }: ContentProps) => {
@@ -78,6 +82,12 @@ export const Content = ({
 
   const authorId = useMemo(() => id || `note-content-${genId()}`, [id]);
 
+  const [inputLength, setInputLength] = useState(0);
+  const error = useMemo(
+    () => inputLength > maxLength,
+    [inputLength, maxLength],
+  );
+
   return (
     <div {...rest} className={classNames} id={id}>
       <div className="neo-note__content__author" id={authorId}>
@@ -90,9 +100,14 @@ export const Content = ({
             label=""
             aria-labelledby={authorId}
             defaultValue={children as string}
-            maxLength={500}
+            maxLength={maxLength}
             translations={translations}
-            onChange={(e) => onTextAreaChange?.(e)}
+            error={error}
+            helperText={error ? translations.error : undefined}
+            onChange={(e) => {
+              onTextAreaChange?.(e);
+              setInputLength(e.target.value.length);
+            }}
           />
 
           <div className="neo-note__content__actions">{actions}</div>
