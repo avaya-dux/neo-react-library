@@ -74,6 +74,11 @@
       margin-top: 8px;
     }
 
+    .neo-form-control--textarea textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
     .neo-note__content__subtext {
       display: flex;
       flex-direction: column;
