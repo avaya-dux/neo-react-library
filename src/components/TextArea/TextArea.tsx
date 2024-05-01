@@ -6,6 +6,7 @@ interface TextAreaBase extends HTMLProps<HTMLTextAreaElement> {
   error?: boolean;
   helperText?: string;
   locked?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   translations?: {
     remaining: string;
     over: string;
