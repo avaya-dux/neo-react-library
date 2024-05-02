@@ -7,8 +7,6 @@ import { NoteContext } from "./NoteContext";
 import { TextArea } from "components/TextArea";
 import { genId } from "utils";
 
-import "./Note.css";
-
 export const Note = ({
   children,
   state,
