@@ -203,3 +203,42 @@ export const EditableVertical: Story = {
     );
   },
 };
+
+export const NoTextExample: Story = {
+  argTypes: {
+    direction: { control: false },
+    type: { control: false },
+  },
+  render: () => {
+    const [activeStep, setActiveStep] = useState(0);
+
+    return (
+      <section>
+        <Stepper
+          steps={steps.map(() => ({}))}
+          activeStep={activeStep}
+          direction="horizontal"
+          type="linear"
+        />
+
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <Button
+            variant="secondary"
+            disabled={activeStep < 1}
+            onClick={() => setActiveStep(activeStep - 1)}
+          >
+            Previous
+          </Button>
+
+          <Button
+            variant="primary"
+            disabled={activeStep > steps.length - 1}
+            onClick={() => setActiveStep(activeStep + 1)}
+          >
+            {activeStep === steps.length - 1 ? "Finish" : "Next"}
+          </Button>
+        </div>
+      </section>
+    );
+  },
+};

@@ -18,7 +18,8 @@ describe("Stepper", () => {
   ];
 
   const getStep = async (index: number) =>
-    (await screen.findByText(steps[index].title)).parentElement?.parentElement;
+    (await screen.findByText(steps[index].title as string)).parentElement
+      ?.parentElement;
 
   it("fully renders vertical view without exploding", () => {
     const { container } = render(
@@ -42,6 +43,15 @@ describe("Stepper", () => {
 
     expect(rootElement).toBeInTheDocument();
     expect(stepElements).toHaveLength(steps.length);
+  });
+
+  it("fully renders without exploding when steps have no title or description", () => {
+    const { container } = render(
+      <Stepper steps={steps.map(() => ({}))} activeStep={0} />,
+    );
+
+    const rootElement = container.querySelector(".neo-stepper");
+    expect(rootElement).toBeInTheDocument();
   });
 
   it("appropriately assigns active state", async () => {
