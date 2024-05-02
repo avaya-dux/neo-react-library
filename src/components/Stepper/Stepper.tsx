@@ -14,7 +14,7 @@ export interface StepperProps extends InnerStepperProps {
 }
 export interface Steps {
   description?: string;
-  title: string;
+  title?: string;
 }
 
 export const Stepper = ({
