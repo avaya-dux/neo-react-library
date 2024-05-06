@@ -3,16 +3,16 @@
   --paneltabs-border-color: var(--neo-color-base-200);
   --paneltabs-border-radius: 8px;
 }
-:root .neo-dark .neo-paneltabss {
+:root .neo-dark .neo-paneltabs {
   --paneltabs-border-color: var(--neo-color-base-600);
 }
 @media (prefers-color-scheme: light) {
-  :root .neo-dynamic .neo-paneltabss {
+  :root .neo-dynamic .neo-paneltabs {
     --paneltabs-border-color: var(--neo-color-base-200);
   }
 }
 @media (prefers-color-scheme: dark) {
-  :root .neo-dynamic .neo-paneltabss {
+  :root .neo-dynamic .neo-paneltabs {
     --paneltabs-border-color: var(--neo-color-base-600);
   }
 }
