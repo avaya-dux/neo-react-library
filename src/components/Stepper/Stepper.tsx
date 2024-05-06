@@ -76,6 +76,7 @@ export const Stepper = ({
     </div>
   );
 };
+Stepper.displayName = "Stepper";
 
 interface StepperClassNames {
   classes: {
