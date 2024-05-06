@@ -103,9 +103,9 @@ export const AgentNotesExample: Story = {
       <section className="stories-paneltabs-container">
         <PanelTabs>
           <div
-            className={clsx("neo-paneltabs__panels", !expanded && "collapsed")}
+            className={clsx("neo-paneltabs__panel", !expanded && "collapsed")}
           >
-            <div className="neo-paneltabs__panels-panel" hidden={index !== 0}>
+            <div className="neo-paneltabs__panel-content" hidden={index !== 0}>
               <div className="stories-heading">
                 <p>Notes</p>
 
@@ -156,7 +156,7 @@ export const AgentNotesExample: Story = {
               ))}
             </div>
 
-            <div className="neo-paneltabs__panels-panel" hidden={index !== 1}>
+            <div className="neo-paneltabs__panel-content" hidden={index !== 1}>
               <p>No Content</p>
             </div>
           </div>
@@ -215,17 +215,17 @@ export const SimplePanelTabs: Story = {
       <section className="stories-paneltabs-container">
         <PanelTabs>
           <div
-            className={clsx("neo-paneltabs__panels", !expanded && "collapsed")}
+            className={clsx("neo-paneltabs__panel", !expanded && "collapsed")}
           >
-            <div className="neo-paneltabs__panels-panel" hidden={index !== 0}>
+            <div className="neo-paneltabs__panel-content" hidden={index !== 0}>
               <p>email inbound</p>
             </div>
 
-            <div className="neo-paneltabs__panels-panel" hidden={index !== 1}>
+            <div className="neo-paneltabs__panel-content" hidden={index !== 1}>
               <p>email outbound</p>
             </div>
 
-            <div className="neo-paneltabs__panels-panel" hidden={index !== 2}>
+            <div className="neo-paneltabs__panel-content" hidden={index !== 2}>
               <p>input output</p>
             </div>
           </div>
