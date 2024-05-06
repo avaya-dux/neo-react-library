@@ -1,13 +1,13 @@
-.stories-iconmenu-container {
+.stories-paneltabs-container {
   max-width: 350px;
 
   display: flex;
   flex-direction: row-reverse;
 
-  .neo-iconmenu {
+  .neo-paneltabs {
     min-height: calc(100vh - 2rem);
 
-    .neo-iconmenu__panels-panel {
+    .neo-paneltabs__panels-panel {
       min-width: 10rem;
     }
   }
@@ -28,7 +28,7 @@
     padding-top: 1.5rem;
 
     &:not(:last-child) {
-      border-bottom: 1px solid var(--iconmenu-border-color);
+      border-bottom: 1px solid var(--paneltabs-border-color);
       padding-bottom: 2rem;
     }
 

@@ -161,11 +161,11 @@ export const AgentNotesExample: Story = {
             </div>
           </div>
 
-          <div className="neo-paneltabs__menuitems">
+          <div className="neo-paneltabs__tabs">
             <div>
               <IconButton
                 className={clsx(
-                  "neo-paneltabs__menuitems-item",
+                  "neo-paneltabs__tabs-item",
                   index === 0 && "active",
                 )}
                 onClick={() => setIndex(0)}
@@ -177,7 +177,7 @@ export const AgentNotesExample: Story = {
 
               <IconButton
                 className={clsx(
-                  "neo-paneltabs__menuitems-item",
+                  "neo-paneltabs__tabs-item",
                   index === 1 && "active",
                 )}
                 onClick={() => setIndex(1)}
@@ -190,7 +190,7 @@ export const AgentNotesExample: Story = {
 
             <IconButton
               className={clsx(
-                "neo-paneltabs__menuitems-expand",
+                "neo-paneltabs__tabs-expand",
                 !expanded && "invert",
               )}
               onClick={() => setExpanded(!expanded)}
@@ -230,11 +230,11 @@ export const SimplePanelTabs: Story = {
             </div>
           </div>
 
-          <div className="neo-paneltabs__menuitems">
+          <div className="neo-paneltabs__tabs">
             <div>
               <IconButton
                 className={clsx(
-                  "neo-paneltabs__menuitems-item",
+                  "neo-paneltabs__tabs-item",
                   index === 0 && "active",
                 )}
                 onClick={() => setIndex(0)}
@@ -246,7 +246,7 @@ export const SimplePanelTabs: Story = {
 
               <IconButton
                 className={clsx(
-                  "neo-paneltabs__menuitems-item",
+                  "neo-paneltabs__tabs-item",
                   index === 1 && "active",
                 )}
                 onClick={() => setIndex(1)}
@@ -258,7 +258,7 @@ export const SimplePanelTabs: Story = {
 
               <IconButton
                 className={clsx(
-                  "neo-paneltabs__menuitems-item",
+                  "neo-paneltabs__tabs-item",
                   index === 2 && "active",
                 )}
                 onClick={() => setIndex(2)}
@@ -271,7 +271,7 @@ export const SimplePanelTabs: Story = {
 
             <IconButton
               className={clsx(
-                "neo-paneltabs__menuitems-expand",
+                "neo-paneltabs__tabs-expand",
                 !expanded && "invert",
               )}
               onClick={() => setExpanded(!expanded)}
