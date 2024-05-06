@@ -235,7 +235,7 @@ export const SimplePanelTabs: Story = {
               <IconButton
                 className={clsx(
                   "neo-paneltabs__tabs-item",
-                  index === 0 && "active",
+                  index === 0 && expanded && "active",
                 )}
                 onClick={() => setIndex(0)}
                 aria-label="Example One"
@@ -247,7 +247,7 @@ export const SimplePanelTabs: Story = {
               <IconButton
                 className={clsx(
                   "neo-paneltabs__tabs-item",
-                  index === 1 && "active",
+                  index === 1 && expanded && "active",
                 )}
                 onClick={() => setIndex(1)}
                 aria-label="Example Two"
@@ -259,7 +259,7 @@ export const SimplePanelTabs: Story = {
               <IconButton
                 className={clsx(
                   "neo-paneltabs__tabs-item",
-                  index === 2 && "active",
+                  index === 2 && expanded && "active",
                 )}
                 onClick={() => setIndex(2)}
                 aria-label="Example Three"
