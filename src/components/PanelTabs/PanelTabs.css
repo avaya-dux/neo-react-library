@@ -1,12 +1,20 @@
-@media (prefers-color-scheme: dark) {
-  :root .neo-dynamic .neo-paneltabs,
-  :root .neo-dark .neo-paneltabs {
-    --paneltabs-border-color: var(--neo-color-base-600);
-  }
-}
-:root .neo-paneltabs {
+:root .neo-paneltabs,
+:root .neo-light .neo-paneltabs {
   --paneltabs-border-color: var(--neo-color-base-200);
   --paneltabs-border-radius: 8px;
+}
+:root .neo-dark .neo-paneltabss {
+  --paneltabs-border-color: var(--neo-color-base-600);
+}
+@media (prefers-color-scheme: light) {
+  :root .neo-dynamic .neo-paneltabss {
+    --paneltabs-border-color: var(--neo-color-base-200);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root .neo-dynamic .neo-paneltabss {
+    --paneltabs-border-color: var(--neo-color-base-600);
+  }
 }
 
 .neo-paneltabs {
