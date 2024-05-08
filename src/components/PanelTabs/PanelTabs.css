@@ -62,6 +62,10 @@
           border-left: 2px solid var(--leftnav-main-active-color);
           padding-left: 22px;
         }
+
+        &.neo-badge::after {
+          right: 12px;
+        }
       }
 
       &.neo-badge::after {
