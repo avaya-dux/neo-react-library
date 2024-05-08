@@ -11,7 +11,13 @@ export default {
   component: Pagination,
 } as Meta<PaginationProps>;
 
-const BookOfPages = ({ sectionWidth, direction="ltr" }: { sectionWidth?: number, direction?:string }) => {
+const BookOfPages = ({
+  sectionWidth,
+  direction = "ltr",
+}: {
+  sectionWidth?: number;
+  direction?: string;
+}) => {
   const paginationId = "default-pagination";
   const logsId = "default-pagination-logs";
 
