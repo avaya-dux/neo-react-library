@@ -26,9 +26,11 @@ export interface TabItemProps extends React.HTMLAttributes<HTMLButtonElement> {
   "aria-label": string;
   icon: IconNamesType;
   active?: boolean;
+  badge?: boolean;
 }
 export const TabItem = ({
   active = false,
+  badge = false,
   className,
   icon,
   ...rest
@@ -40,9 +42,10 @@ export const TabItem = ({
         "neo-btn-square neo-btn-square-tertiary neo-btn-square-tertiary--info",
         `neo-icon-${icon}`,
         active && "neo-paneltabs__tabs-item--active",
+        badge && "neo-badge",
         className,
       ),
-    [active, icon, className],
+    [active, badge, className, icon],
   );
 
   return <button className={classNames} {...rest}></button>;

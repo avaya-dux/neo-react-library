@@ -63,6 +63,13 @@
           padding-left: 22px;
         }
       }
+
+      &.neo-badge::after {
+        height: 14px;
+        min-width: 14px;
+        top: 14px;
+        right: 14px;
+      }
     }
 
     .neo-paneltabs__tabs-expand {

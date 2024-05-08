@@ -246,7 +246,8 @@ export const SimplePanelTabs: Story = {
             <PanelTabs.TabItem
               active={index === 2 && expanded}
               aria-label="Example Three"
-              icon="input-output"
+              badge
+              icon="add"
               onClick={() => setIndex(2)}
             />
 
