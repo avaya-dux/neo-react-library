@@ -230,37 +230,29 @@ export const SimplePanelTabs: Story = {
             </div>
           </div>
 
-          <div className="neo-paneltabs__tabs">
+          <PanelTabs.TabsContainer>
             <PanelTabs.TabItem
-              active={index === 0 && expanded}
+              active={index === 0}
               aria-label="Example One"
               icon="email-inbound"
               onClick={() => setIndex(0)}
             />
+
             <PanelTabs.TabItem
-              active={index === 1 && expanded}
+              active={index === 1}
               aria-label="Example Two"
               icon="email-outbound"
               onClick={() => setIndex(1)}
             />
+
             <PanelTabs.TabItem
-              active={index === 2 && expanded}
+              active={index === 2}
               aria-label="Example Three"
               badge
               icon="add"
               onClick={() => setIndex(2)}
             />
-
-            <PanelTabs.TabItem
-              aria-label={expanded ? "Collapse" : "Expand"}
-              icon="page-last"
-              onClick={() => setExpanded(!expanded)}
-              className={clsx(
-                "neo-paneltabs__tabs-expand",
-                !expanded && "neo-paneltabs__tabs-expand--invert",
-              )}
-            />
-          </div>
+          </PanelTabs.TabsContainer>
         </PanelTabs>
       </section>
     );
