@@ -1,7 +1,7 @@
 :root .neo-paneltabs,
 :root .neo-light .neo-paneltabs {
   --paneltabs-border-color: var(--neo-color-base-200);
-  --paneltabs-border-radius: 8px;
+  --paneltabs-border-radius: 4px;
 }
 :root .neo-dark .neo-paneltabs {
   --paneltabs-border-color: var(--neo-color-base-600);
