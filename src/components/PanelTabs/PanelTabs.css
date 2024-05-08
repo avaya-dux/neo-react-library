@@ -35,7 +35,7 @@
       border-left: 1px solid var(--paneltabs-border-color);
     }
 
-    &.collapsed {
+    &.neo-paneltabs__panel--collapsed {
       display: none;
     }
   }
