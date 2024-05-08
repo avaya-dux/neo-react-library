@@ -109,11 +109,15 @@ describe("Pagination", () => {
             class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
             id="pagination-item-display-Item count"
           >
-            <div
+            <bdi
               aria-describedby=":rc:"
             >
-              1-1 / 10
-            </div>
+              1
+              -
+              1
+               / 
+              10
+            </bdi>
             <div
               class="neo-tooltip__content neo-tooltip__content--multiline"
               id=":rc:"
