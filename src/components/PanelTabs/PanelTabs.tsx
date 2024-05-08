@@ -35,6 +35,35 @@ export const PanelTabs = ({ children, ...rest }: PanelTabsProps) => {
 };
 PanelTabs.displayName = "PanelTabs";
 
+export const Panel = ({ children }: { children: ReactNode }) => {
+  const { expanded } = useContext(TabsContext);
+
+  return (
+    <div
+      className={clsx(
+        "neo-paneltabs__panel",
+        !expanded && "neo-paneltabs__panel--collapsed",
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+Panel.displayName = "PanelTabsPanel";
+
+export const PanelContent = ({
+  active,
+  children,
+}: {
+  active: boolean;
+  children: ReactNode;
+}) => (
+  <div className="neo-paneltabs__panel-content" hidden={!active}>
+    {children}
+  </div>
+);
+PanelContent.displayName = "PanelTabsPanelContent";
+
 export interface TabsContainerProps {
   children: ReactNode;
   translations?: {
@@ -68,7 +97,7 @@ export const TabsContainer = ({
     </div>
   );
 };
-TabsContainer.displayName = "TabsContainer";
+TabsContainer.displayName = "PanelTabsTabsContainer";
 
 export interface TabItemProps extends React.HTMLAttributes<HTMLButtonElement> {
   "aria-label": string;
@@ -100,7 +129,9 @@ export const TabItem = ({
 
   return <button className={classNames} {...rest}></button>;
 };
-TabItem.displayName = "TabItem";
+TabItem.displayName = "PanelTabsTabItem";
 
+PanelTabs.Panel = Panel;
+PanelTabs.PanelContent = PanelContent;
 PanelTabs.TabsContainer = TabsContainer;
 PanelTabs.TabItem = TabItem;

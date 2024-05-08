@@ -209,26 +209,23 @@ export const AgentNotesExample: Story = {
 export const SimplePanelTabs: Story = {
   render: () => {
     const [index, setIndex] = useState(0);
-    const [expanded, setExpanded] = useState(true);
 
     return (
       <section className="stories-paneltabs-container">
         <PanelTabs>
-          <div
-            className={clsx("neo-paneltabs__panel", !expanded && "collapsed")}
-          >
-            <div className="neo-paneltabs__panel-content" hidden={index !== 0}>
+          <PanelTabs.Panel>
+            <PanelTabs.PanelContent active={index === 0}>
               <p>email inbound</p>
-            </div>
+            </PanelTabs.PanelContent>
 
-            <div className="neo-paneltabs__panel-content" hidden={index !== 1}>
+            <PanelTabs.PanelContent active={index === 1}>
               <p>email outbound</p>
-            </div>
+            </PanelTabs.PanelContent>
 
-            <div className="neo-paneltabs__panel-content" hidden={index !== 2}>
+            <PanelTabs.PanelContent active={index === 2}>
               <p>input output</p>
-            </div>
-          </div>
+            </PanelTabs.PanelContent>
+          </PanelTabs.Panel>
 
           <PanelTabs.TabsContainer>
             <PanelTabs.TabItem
