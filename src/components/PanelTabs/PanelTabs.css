@@ -43,36 +43,30 @@
   .neo-paneltabs__tabs {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     .neo-paneltabs__tabs-item {
       color: var(--global-font-color);
-      padding: 20px 24px;
-      border-left: 2px solid var(--global-background);
-      border-right: 2px solid var(--global-background);
-      border-radius: 0;
+      padding: 24px 24px;
 
-      &:hover {
-        border-color: var(--button-tertiary-hover-background-color);
+      &::before {
+        font-size: 24px;
       }
 
-      &.active {
+      &.neo-paneltabs__tabs-item--active {
         color: var(--button-color-primary);
+        border-right: 2px solid var(--leftnav-main-active-color);
+        padding-right: 22px;
 
-        border-right-color: var(--leftnav-main-active-color);
         [dir="rtl"] & {
+          border-right: none;
           border-left: 2px solid var(--leftnav-main-active-color);
-        }
-
-        &:focus {
-          border-left-color: var(--button-tertiary-hover-background-color);
+          padding-left: 22px;
         }
       }
     }
 
     .neo-paneltabs__tabs-expand {
-      color: var(--global-font-color);
-      padding: 20px 26px; /* extra pixels to adjust for the border */
+      margin-top: auto;
 
       &.invert {
         transform: rotate(-180deg);

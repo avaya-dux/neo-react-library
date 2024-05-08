@@ -231,54 +231,33 @@ export const SimplePanelTabs: Story = {
           </div>
 
           <div className="neo-paneltabs__tabs">
-            <div>
-              <IconButton
-                className={clsx(
-                  "neo-paneltabs__tabs-item",
-                  index === 0 && expanded && "active",
-                )}
-                onClick={() => setIndex(0)}
-                aria-label="Example One"
-                icon="email-inbound"
-                iconSize="md"
-                variant="tertiary"
-              />
+            <PanelTabs.TabItem
+              active={index === 0 && expanded}
+              aria-label="Example One"
+              icon="email-inbound"
+              onClick={() => setIndex(0)}
+            />
+            <PanelTabs.TabItem
+              active={index === 1 && expanded}
+              aria-label="Example Two"
+              icon="email-outbound"
+              onClick={() => setIndex(1)}
+            />
+            <PanelTabs.TabItem
+              active={index === 2 && expanded}
+              aria-label="Example Three"
+              icon="input-output"
+              onClick={() => setIndex(2)}
+            />
 
-              <IconButton
-                className={clsx(
-                  "neo-paneltabs__tabs-item",
-                  index === 1 && expanded && "active",
-                )}
-                onClick={() => setIndex(1)}
-                aria-label="Example Two"
-                icon="email-outbound"
-                iconSize="md"
-                variant="tertiary"
-              />
-
-              <IconButton
-                className={clsx(
-                  "neo-paneltabs__tabs-item",
-                  index === 2 && expanded && "active",
-                )}
-                onClick={() => setIndex(2)}
-                aria-label="Example Three"
-                icon="input-output"
-                iconSize="md"
-                variant="tertiary"
-              />
-            </div>
-
-            <IconButton
+            <PanelTabs.TabItem
+              aria-label={expanded ? "Collapse" : "Expand"}
+              icon="page-last"
+              onClick={() => setExpanded(!expanded)}
               className={clsx(
                 "neo-paneltabs__tabs-expand",
                 !expanded && "invert",
               )}
-              onClick={() => setExpanded(!expanded)}
-              aria-label={expanded ? "Collapse" : "Expand"}
-              icon="page-last"
-              iconSize="md"
-              variant="tertiary"
             />
           </div>
         </PanelTabs>
