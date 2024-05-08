@@ -79,7 +79,7 @@
     .neo-paneltabs__tabs-expand {
       margin-top: auto;
 
-      &.invert {
+      &.neo-paneltabs__tabs-expand--invert {
         transform: rotate(-180deg);
       }
     }

@@ -257,7 +257,7 @@ export const SimplePanelTabs: Story = {
               onClick={() => setExpanded(!expanded)}
               className={clsx(
                 "neo-paneltabs__tabs-expand",
-                !expanded && "invert",
+                !expanded && "neo-paneltabs__tabs-expand--invert",
               )}
             />
           </div>
