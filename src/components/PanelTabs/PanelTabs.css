@@ -52,6 +52,10 @@
         font-size: 24px;
       }
 
+      &.neo-btn-square {
+        border-radius: 0;
+      }
+
       &.neo-paneltabs__tabs-item--active {
         color: var(--button-color-primary);
         border-right: 2px solid var(--leftnav-main-active-color);
