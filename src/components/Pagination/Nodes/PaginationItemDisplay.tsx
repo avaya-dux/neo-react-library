@@ -44,9 +44,17 @@ export const PaginationItemDisplay = ({
         itemCount,
       );
 
-      return `${startingItemIndex}-${endingItemIndex} / ${itemCount}`;
+      return (
+        <bdi>
+          {startingItemIndex}-{endingItemIndex} / {itemCount}
+        </bdi>
+      );
     } else if (itemDisplayType === "page") {
-      return `${currentPageIndex} / ${totalPages}`;
+      return (
+        <bdi>
+          {currentPageIndex} / {totalPages}
+        </bdi>
+      );
     }
 
     return <></>;
