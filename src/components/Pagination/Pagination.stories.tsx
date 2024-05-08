@@ -11,7 +11,7 @@ export default {
   component: Pagination,
 } as Meta<PaginationProps>;
 
-const BookOfPages = ({ sectionWidth }: { sectionWidth?: number }) => {
+const BookOfPages = ({ sectionWidth, direction="ltr" }: { sectionWidth?: number, direction?:string }) => {
   const paginationId = "default-pagination";
   const logsId = "default-pagination-logs";
 
@@ -44,7 +44,7 @@ const BookOfPages = ({ sectionWidth }: { sectionWidth?: number }) => {
   const [logItems, setLogItems] = useState<JSX.Element[]>([]);
 
   return (
-    <main>
+    <main dir={direction}>
       <section>
         <h3>
           Pagination example for paging through a &quot;book&quot; of pages
@@ -113,6 +113,10 @@ const BookOfPages = ({ sectionWidth }: { sectionWidth?: number }) => {
 };
 
 export const Default = () => <BookOfPages />;
+
+export const WithRTLSettings = () => (
+  <BookOfPages direction="rtl" sectionWidth={500} />
+);
 
 export const WithSpaceForFiveNavItems = () => (
   <BookOfPages sectionWidth={500} />
