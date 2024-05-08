@@ -30,10 +30,10 @@
   resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.8.tgz#9dce5f80bd5bb1a4f7e12ba430d285045864f1f7"
   integrity sha512-gqFlO5+5O3ozQS9QlgrYNuNRZL0x8C/oOBRMcuQSJWVe8YS/BC+ddwtm8LYCZF0kRe0GYTzp16kgur/LWj6IAg==
 
-"@avaya/neo@3.81.1":
-  version "3.81.1"
-  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.1.tgz#5a6b6eca1219cd24e2433e6a36b530ccc3ac3111"
-  integrity sha512-1FJvXY1Z/O/BTpkLzhiFRXpjNdUbK/Y+XJLuHYnpXXCuet5+lw2zBd4kWnoYsGxJQ90gEPd9ZIkXjn6AAXvCLA==
+"@avaya/neo@3.81.2":
+  version "3.81.2"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.2.tgz#723ce26f5ba1c8f043d2522b7b86e9f484c22f77"
+  integrity sha512-Y5h/escEfPKvrArre9duvtPNnMMg1oNekOPPfTh7QJNeJu+yBMN2rfdCHpGRWuxq+Gk9ynXCbJ9x2UlQlgOvwg==
 
 "@aw-web-design/x-default-browser@1.4.126":
   version "1.4.126"
