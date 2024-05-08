@@ -69,8 +69,8 @@
       }
 
       &.neo-badge::after {
-        height: 14px;
-        min-width: 14px;
+        height: 12px;
+        min-width: 12px;
         top: 14px;
         right: 14px;
       }
