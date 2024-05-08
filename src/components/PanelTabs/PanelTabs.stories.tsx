@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
-import clsx from "clsx";
 import { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 import { useState } from "react";
 
-import { PanelTabs } from "./PanelTabs";
 import { Button } from "components/Button";
 import { Icon } from "components/Icon/Icon";
 import { Note } from "components/Note";
-import { IconButton } from "components/IconButton";
+
+import { PanelTabs } from "./PanelTabs";
 
 import "./PanelTabs.stories.css";
 
@@ -20,7 +19,6 @@ export default meta;
 
 type PanelTabsAndAuthor = React.ComponentProps<typeof PanelTabs> & {
   author?: string;
-  canEdit?: boolean;
 };
 type Story = StoryObj<PanelTabsAndAuthor>;
 
@@ -88,32 +86,20 @@ const mockApiResult = [
 export const AgentNotesExample: Story = {
   args: {
     author: "Bob Frank",
-    canEdit: true,
   },
-  render: ({ author, canEdit }) => {
+  render: ({ author }) => {
     const [index, setIndex] = useState(0);
-    const [expanded, setExpanded] = useState(true);
     const [interactions] = useState(mockApiResult);
-    // const [interactions, setInteractions] = useState(mockApiResult);
-    // TODO: add a new note functionality
-    // TODO: edit a note functionality
-    // TODO: remove a note functionality
 
     return (
       <section className="stories-paneltabs-container">
         <PanelTabs>
-          <div
-            className={clsx("neo-paneltabs__panel", !expanded && "collapsed")}
-          >
-            <div className="neo-paneltabs__panel-content" hidden={index !== 0}>
+          <PanelTabs.Panel>
+            <PanelTabs.PanelContent active={index === 0}>
               <div className="stories-heading">
                 <p>Notes</p>
 
-                <Button
-                  variant="primary"
-                  size="wide"
-                  disabled={canEdit === false}
-                >
+                <Button variant="primary" size="wide" disabled>
                   Add a new note
                 </Button>
               </div>
@@ -154,52 +140,28 @@ export const AgentNotesExample: Story = {
                   ))}
                 </section>
               ))}
-            </div>
+            </PanelTabs.PanelContent>
 
-            <div className="neo-paneltabs__panel-content" hidden={index !== 1}>
+            <PanelTabs.PanelContent active={index === 1}>
               <p>No Content</p>
-            </div>
-          </div>
+            </PanelTabs.PanelContent>
+          </PanelTabs.Panel>
 
-          <div className="neo-paneltabs__tabs">
-            <div>
-              <IconButton
-                className={clsx(
-                  "neo-paneltabs__tabs-item",
-                  index === 0 && "active",
-                )}
-                onClick={() => setIndex(0)}
-                aria-label="Agent notes"
-                icon="posts"
-                iconSize="md"
-                variant="tertiary"
-              />
-
-              <IconButton
-                className={clsx(
-                  "neo-paneltabs__tabs-item",
-                  index === 1 && "active",
-                )}
-                onClick={() => setIndex(1)}
-                aria-label="Agents"
-                icon="agents"
-                iconSize="md"
-                variant="tertiary"
-              />
-            </div>
-
-            <IconButton
-              className={clsx(
-                "neo-paneltabs__tabs-expand",
-                !expanded && "invert",
-              )}
-              onClick={() => setExpanded(!expanded)}
-              aria-label={expanded ? "Collapse" : "Expand"}
-              icon="page-last"
-              iconSize="md"
-              variant="tertiary"
+          <PanelTabs.TabsContainer>
+            <PanelTabs.TabItem
+              active={index === 0}
+              aria-label="Agent notes"
+              icon="posts"
+              onClick={() => setIndex(0)}
             />
-          </div>
+
+            <PanelTabs.TabItem
+              active={index === 1}
+              aria-label="Agents"
+              icon="agents"
+              onClick={() => setIndex(1)}
+            />
+          </PanelTabs.TabsContainer>
         </PanelTabs>
       </section>
     );
