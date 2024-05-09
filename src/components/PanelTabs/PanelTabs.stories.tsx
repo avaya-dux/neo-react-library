@@ -185,7 +185,7 @@ export const AgentNotesExample: Story = {
             </PanelTabs.PanelContent>
 
             <PanelTabs.PanelContent
-              className="agent-notes-content-width"
+              className="fixed-content-width"
               active={index === 1}
             >
               <p>No Content</p>
@@ -221,15 +221,24 @@ export const SimplePanelTabs: Story = {
       <section className="stories-paneltabs-container">
         <PanelTabs>
           <PanelTabs.Panel>
-            <PanelTabs.PanelContent active={index === 0}>
+            <PanelTabs.PanelContent
+              active={index === 0}
+              className="fixed-content-width"
+            >
               <p>email inbound</p>
             </PanelTabs.PanelContent>
 
-            <PanelTabs.PanelContent active={index === 1}>
+            <PanelTabs.PanelContent
+              active={index === 1}
+              className="fixed-content-width"
+            >
               <p>email outbound</p>
             </PanelTabs.PanelContent>
 
-            <PanelTabs.PanelContent active={index === 2}>
+            <PanelTabs.PanelContent
+              active={index === 2}
+              className="fixed-content-width"
+            >
               <p>input output</p>
             </PanelTabs.PanelContent>
           </PanelTabs.Panel>
