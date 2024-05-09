@@ -10,6 +10,7 @@ import { Note } from "components/Note";
 import { PanelTabs } from "./PanelTabs";
 
 import "./PanelTabs.stories.css";
+import { Menu, MenuItem } from "components/Menu";
 
 const meta: Meta<typeof PanelTabs> = {
   component: PanelTabs,
@@ -91,6 +92,41 @@ export const AgentNotesExample: Story = {
     const [index, setIndex] = useState(0);
     const [interactions] = useState(mockApiResult);
 
+    const titleActions = (
+      <Menu
+        aria-label="menu actions"
+        itemAlignment="right"
+        menuRootElement={
+          <button
+            aria-label="menu actions"
+            className="neo-btn-square neo-btn-square--compact neo-btn-square-tertiary neo-btn-square-tertiary--info neo-icon-ellipses-horizontal"
+          ></button>
+        }
+      >
+        <MenuItem onClick={() => alert("edit not implemented for this story")}>
+          <Icon
+            style={{ marginRight: "8px" }}
+            icon="edit"
+            size="sm"
+            aria-label="edit"
+          />
+          Edit
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => alert("delete not implemented for this story")}
+        >
+          <Icon
+            style={{ marginRight: "8px" }}
+            icon="trash"
+            size="sm"
+            aria-label="delete"
+          />
+          Delete
+        </MenuItem>
+      </Menu>
+    );
+
     return (
       <section className="stories-paneltabs-container">
         <PanelTabs>
@@ -126,7 +162,13 @@ export const AgentNotesExample: Story = {
 
                   {interaction.messages.map((message) => (
                     <Note key={message.id}>
-                      <Note.Title>{message.date}</Note.Title>
+                      <Note.Title
+                        actions={
+                          message.author === author ? titleActions : undefined
+                        }
+                      >
+                        {message.date}
+                      </Note.Title>
 
                       <Note.Content
                         author={
