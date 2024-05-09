@@ -51,14 +51,21 @@ export const Panel = ({ children }: { children: ReactNode }) => {
 };
 Panel.displayName = "PanelTabsPanel";
 
-export const PanelContent = ({
-  active,
-  children,
-}: {
+export interface PanelContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   active: boolean;
   children: ReactNode;
-}) => (
-  <div className="neo-paneltabs__panel-content" hidden={!active}>
+}
+
+export const PanelContent = ({
+  active,
+  className,
+  children,
+}: PanelContentProps) => (
+  <div
+    className={clsx("neo-paneltabs__panel-content", className)}
+    hidden={!active}
+  >
     {children}
   </div>
 );

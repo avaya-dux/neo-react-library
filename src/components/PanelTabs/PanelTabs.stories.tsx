@@ -142,7 +142,10 @@ export const AgentNotesExample: Story = {
               ))}
             </PanelTabs.PanelContent>
 
-            <PanelTabs.PanelContent active={index === 1}>
+            <PanelTabs.PanelContent
+              className="agent-notes-content-width"
+              active={index === 1}
+            >
               <p>No Content</p>
             </PanelTabs.PanelContent>
           </PanelTabs.Panel>

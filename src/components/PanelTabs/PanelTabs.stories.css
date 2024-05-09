@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: row-reverse;
 
+  .agent-notes-content-width {
+    width: 267px;
+  }
+
   .neo-paneltabs {
     min-height: calc(100vh - 2rem);
 
