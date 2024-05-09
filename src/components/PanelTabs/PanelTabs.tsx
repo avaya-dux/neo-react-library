@@ -117,9 +117,10 @@ export const TabItem = ({
   badge = false,
   className,
   icon,
+  onClick,
   ...rest
 }: TabItemProps) => {
-  const { expanded } = useContext(TabsContext);
+  const { expanded, setExpanded } = useContext(TabsContext);
 
   const classNames = useMemo(
     () =>
@@ -134,7 +135,16 @@ export const TabItem = ({
     [active, badge, className, expanded, icon],
   );
 
-  return <button className={classNames} {...rest}></button>;
+  return (
+    <button
+      className={classNames}
+      onClick={(e) => {
+        setExpanded(true);
+        onClick?.(e);
+      }}
+      {...rest}
+    ></button>
+  );
 };
 TabItem.displayName = "PanelTabsTabItem";
 
