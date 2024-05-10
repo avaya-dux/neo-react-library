@@ -1,0 +1,91 @@
+:root .neo-paneltabs,
+:root .neo-light .neo-paneltabs {
+  --paneltabs-border-color: var(--neo-color-base-200);
+  --paneltabs-border-radius: 4px;
+}
+:root .neo-dark .neo-paneltabs {
+  --paneltabs-border-color: var(--neo-color-base-600);
+}
+@media (prefers-color-scheme: light) {
+  :root .neo-dynamic .neo-paneltabs {
+    --paneltabs-border-color: var(--neo-color-base-200);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root .neo-dynamic .neo-paneltabs {
+    --paneltabs-border-color: var(--neo-color-base-600);
+  }
+}
+
+.neo-paneltabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid var(--paneltabs-border-color);
+  border-radius: var(--paneltabs-border-radius);
+  padding: 16px 0;
+
+  .neo-paneltabs__panel {
+    padding: 0 16px;
+
+    border-left: none;
+    border-right: 1px solid var(--paneltabs-border-color);
+    [dir="rtl"] & {
+      border-right: none;
+      border-left: 1px solid var(--paneltabs-border-color);
+    }
+
+    &.neo-paneltabs__panel--collapsed {
+      display: none;
+    }
+  }
+
+  .neo-paneltabs__tabs {
+    display: flex;
+    flex-direction: column;
+
+    .neo-paneltabs__tabs-item {
+      color: var(--global-font-color);
+      padding: 24px 24px;
+
+      &::before {
+        font-size: 24px;
+      }
+
+      &.neo-btn-square {
+        border-radius: 0;
+      }
+
+      &.neo-paneltabs__tabs-item--active {
+        color: var(--button-color-primary);
+        border-right: 2px solid var(--leftnav-main-active-color);
+        padding-right: 22px;
+
+        [dir="rtl"] & {
+          border-right: none;
+          border-left: 2px solid var(--leftnav-main-active-color);
+          padding-left: 22px;
+        }
+
+        &.neo-badge::after {
+          right: 12px;
+        }
+      }
+
+      &.neo-badge::after {
+        height: 12px;
+        min-width: 12px;
+        top: 14px;
+        right: 14px;
+      }
+    }
+
+    .neo-paneltabs__tabs-expand {
+      margin-top: auto;
+
+      &.neo-paneltabs__tabs-expand--invert {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+}

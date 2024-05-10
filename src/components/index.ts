@@ -23,6 +23,7 @@ export * from "./NoContent";
 export * from "./Note";
 export * from "./Notification";
 export * from "./Pagination";
+export * from "./PanelTabs";
 export * from "./PopupManager";
 export * from "./Radio";
 export * from "./Select";
