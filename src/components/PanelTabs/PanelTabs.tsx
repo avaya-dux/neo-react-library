@@ -64,14 +64,18 @@ export const PanelContent = ({
   active = false,
   className,
   children,
-}: PanelContentProps) => (
-  <div
-    className={clsx("neo-paneltabs__panel-content", className)}
-    hidden={!active}
-  >
-    {children}
-  </div>
-);
+}: PanelContentProps) => {
+  const { expanded } = useContext(TabsContext);
+
+  return (
+    <div
+      className={clsx("neo-paneltabs__panel-content", className)}
+      hidden={!active || !expanded}
+    >
+      {children}
+    </div>
+  );
+};
 PanelContent.displayName = "PanelTabsPanelContent";
 
 export interface TabsContainerProps {
