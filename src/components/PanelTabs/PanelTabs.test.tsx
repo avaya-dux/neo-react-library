@@ -2,9 +2,11 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
-import { PanelTabs } from "./PanelTabs";
+import { PanelTabs } from "./";
 
 describe("Panel Tabs", () => {
+  const user = userEvent.setup();
+
   const panel1Content = "email inbound";
   const panel2Content = "email outbound";
   const panel3Content = "add";
@@ -12,6 +14,8 @@ describe("Panel Tabs", () => {
   const tab1AriaLabel = "Example One";
   const tab2AriaLabel = "Example Two";
   const tab3AriaLabel = "Example Three";
+
+  const toggleButtonSelector = ".neo-paneltabs__tabs-expand";
 
   describe("base visual tests", () => {
     const standardContent = (
@@ -52,6 +56,40 @@ describe("Panel Tabs", () => {
       expect(screen.queryByText(panel3Content)).not.toBeVisible();
     });
 
+    it("accepts translations", async () => {
+      const spanish = {
+        expand: "Expandir",
+        collapse: "Colapsar",
+      };
+
+      const { container } = render(
+        <PanelTabs>
+          <PanelTabs.Panel>
+            <PanelTabs.PanelContent>
+              <p>{panel1Content}</p>
+            </PanelTabs.PanelContent>
+          </PanelTabs.Panel>
+
+          <PanelTabs.TabsContainer translations={spanish}>
+            <PanelTabs.TabItem
+              aria-label={tab1AriaLabel}
+              icon="email-inbound"
+            />
+          </PanelTabs.TabsContainer>
+        </PanelTabs>,
+      );
+
+      const toggleButton = container.querySelector(toggleButtonSelector);
+
+      expect(screen.getByLabelText(spanish.collapse)).toBeInTheDocument();
+      expect(toggleButton).toHaveAttribute("aria-label", spanish.collapse);
+
+      await user.click(toggleButton as Element);
+
+      expect(screen.getByLabelText(spanish.expand)).toBeInTheDocument();
+      expect(toggleButton).toHaveAttribute("aria-label", spanish.expand);
+    });
+
     it("defaults to expanded", () => {
       const { container } = render(<PanelTabs>{standardContent}</PanelTabs>);
 
@@ -70,8 +108,6 @@ describe("Panel Tabs", () => {
   });
 
   describe("functionality tests", () => {
-    const user = userEvent.setup();
-
     const collapsedClassName = "neo-paneltabs__tabs-expand--invert";
 
     it("respects the `onClick` events", async () => {
@@ -147,9 +183,7 @@ describe("Panel Tabs", () => {
         </PanelTabs>,
       );
 
-      const toggleButton = container.querySelector(
-        ".neo-paneltabs__tabs-expand",
-      );
+      const toggleButton = container.querySelector(toggleButtonSelector);
       expect(toggleButton).toBeInTheDocument();
       expect(toggleButton).not.toHaveClass(collapsedClassName);
 
