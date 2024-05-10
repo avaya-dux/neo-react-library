@@ -137,7 +137,9 @@ export const TabItem = ({
     <button
       className={classNames}
       onClick={(e) => {
-        setExpanded(true);
+        if (active && expanded) setExpanded(false);
+        else if (!expanded) setExpanded(true);
+
         onClick?.(e);
       }}
       {...rest}
