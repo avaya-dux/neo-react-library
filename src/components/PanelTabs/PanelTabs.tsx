@@ -13,10 +13,15 @@ export const TabsContext = createContext<ITabsContext>({
 
 export interface PanelTabsProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  defaultExpanded?: boolean;
 }
 
-export const PanelTabs = ({ children, ...rest }: PanelTabsProps) => {
-  const [expanded, setExpanded] = useState(true);
+export const PanelTabs = ({
+  children,
+  defaultExpanded = true,
+  ...rest
+}: PanelTabsProps) => {
+  const [expanded, setExpanded] = useState(defaultExpanded);
 
   const classNames = useMemo(
     () => clsx("neo-paneltabs", rest.className),
@@ -51,22 +56,26 @@ Panel.displayName = "PanelTabsPanel";
 
 export interface PanelContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  active: boolean;
+  active?: boolean;
   children: ReactNode;
 }
 
 export const PanelContent = ({
-  active,
+  active = false,
   className,
   children,
-}: PanelContentProps) => (
-  <div
-    className={clsx("neo-paneltabs__panel-content", className)}
-    hidden={!active}
-  >
-    {children}
-  </div>
-);
+}: PanelContentProps) => {
+  const { expanded } = useContext(TabsContext);
+
+  return (
+    <div
+      className={clsx("neo-paneltabs__panel-content", className)}
+      hidden={!active || !expanded}
+    >
+      {children}
+    </div>
+  );
+};
 PanelContent.displayName = "PanelTabsPanelContent";
 
 export interface TabsContainerProps {

@@ -219,7 +219,7 @@ export const SimplePanelTabs: Story = {
 
     return (
       <section className="stories-paneltabs-container">
-        <PanelTabs>
+        <PanelTabs defaultExpanded={false}>
           <PanelTabs.Panel>
             <PanelTabs.PanelContent
               active={index === 0}
