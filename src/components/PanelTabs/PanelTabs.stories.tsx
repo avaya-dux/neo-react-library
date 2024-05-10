@@ -6,11 +6,11 @@ import { useState } from "react";
 import { Button } from "components/Button";
 import { Icon } from "components/Icon/Icon";
 import { Note } from "components/Note";
+import { Menu, MenuItem } from "components/Menu";
 
 import { PanelTabs } from "./PanelTabs";
 
 import "./PanelTabs.stories.css";
-import { Menu, MenuItem } from "components/Menu";
 
 const meta: Meta<typeof PanelTabs> = {
   component: PanelTabs,
