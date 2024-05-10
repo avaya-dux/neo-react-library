@@ -2,8 +2,6 @@ import type { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 import clsx from "clsx";
 import { createContext, ReactNode, useContext, useMemo, useState } from "react";
 
-import "./PanelTabs.css";
-
 interface ITabsContext {
   expanded: boolean;
   setExpanded: (expanded: boolean) => void;

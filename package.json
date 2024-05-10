@@ -76,7 +76,7 @@
     "react-table": "7.8.0"
   },
   "devDependencies": {
-    "@avaya/neo": "3.81.2",
+    "@avaya/neo": "3.81.3",
     "@avaya/neo-icons": "1.8.8",
     "@storybook/addon-a11y": "7.6.19",
     "@storybook/addon-actions": "7.6.19",
