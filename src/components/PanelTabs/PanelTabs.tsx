@@ -13,10 +13,15 @@ export const TabsContext = createContext<ITabsContext>({
 
 export interface PanelTabsProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  defaultExpanded?: boolean;
 }
 
-export const PanelTabs = ({ children, ...rest }: PanelTabsProps) => {
-  const [expanded, setExpanded] = useState(true);
+export const PanelTabs = ({
+  children,
+  defaultExpanded = true,
+  ...rest
+}: PanelTabsProps) => {
+  const [expanded, setExpanded] = useState(defaultExpanded);
 
   const classNames = useMemo(
     () => clsx("neo-paneltabs", rest.className),
