@@ -56,12 +56,12 @@ Panel.displayName = "PanelTabsPanel";
 
 export interface PanelContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  active: boolean;
+  active?: boolean;
   children: ReactNode;
 }
 
 export const PanelContent = ({
-  active,
+  active = false,
   className,
   children,
 }: PanelContentProps) => (
