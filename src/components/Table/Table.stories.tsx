@@ -34,10 +34,12 @@ export const Default = () => (
 );
 
 export const TooltipPositioning = () => (
-  <Table {...FilledFields}
+  <Table
+    {...FilledFields}
     itemDisplayTooltipPosition="right"
     itemsPerPageTooltipPosition="left"
-    caption="Tooltip positioning in Pagination Example" />
+    caption="Tooltip positioning in Pagination Example"
+  />
 );
 
 export const MoreActionsMenu = () => (
