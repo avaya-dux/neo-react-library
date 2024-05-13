@@ -66,6 +66,7 @@ export const Table = <T extends Record<string, any>>({
   summary,
   itemsPerPageOptions,
   defaultSelectedRowIds,
+  initialStatePageIndex = 0,
 
   allowColumnFilter = false,
   containerClassName = "",
@@ -86,6 +87,9 @@ export const Table = <T extends Record<string, any>>({
 
   ...rest
 }: TableProps<T>) => {
+  const [rootLevelPageIndex, setRootLevelPageIndex] = useState(
+    initialStatePageIndex,
+  );
   const instance = useTable<T>(
     {
       columns,
@@ -99,6 +103,7 @@ export const Table = <T extends Record<string, any>>({
       initialState: {
         pageSize: itemsPerPageOptions?.[0] || 10,
         selectedRowIds: convertRowIdsArrayToObject(defaultSelectedRowIds || []),
+        pageIndex: rootLevelPageIndex,
       },
       ...rest,
     },
@@ -246,10 +251,16 @@ export const Table = <T extends Record<string, any>>({
             onPageChange={(e, newIndex) => {
               e?.preventDefault();
               gotoPage(newIndex - 1);
+              setRootLevelPageIndex(newIndex - 1);
             }}
             onItemsPerPageChange={(e, newItemsPerPage) => {
               e?.preventDefault();
               setPageSize(newItemsPerPage);
+
+              const maxPageIndex = Math.ceil(rowCount / newItemsPerPage);
+              if (pageIndex > maxPageIndex) {
+                gotoPage(maxPageIndex - 1);
+              }
             }}
             backIconButtonText={paginationTranslations.backIconButtonText}
             itemsPerPageLabel={paginationTranslations.itemsPerPageLabel}

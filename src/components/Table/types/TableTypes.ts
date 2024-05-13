@@ -56,6 +56,7 @@ export type TableProps<T extends Record<string, any>> = {
   showPagination?: boolean;
   pushPaginationDown?: boolean;
   itemsPerPageOptions?: number[];
+  initialStatePageIndex?: number;
   defaultSelectedRowIds?: string[];
   showRowSeparator?: boolean;
   summary?: string;
