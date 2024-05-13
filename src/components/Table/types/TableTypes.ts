@@ -43,9 +43,13 @@ export type TableBodyProps<T extends Record<string, any>> = {
 
 export interface IFilterContext {
   allowColumnFilter: boolean;
+
   filterSheetVisible: boolean;
   setFilterSheetVisible: (visible: boolean) => void;
   toggleFilterSheetVisible: () => void;
+
+  rootLevelPageIndex: number;
+  setRootLevelPageIndex: (pageIndex: number) => void;
 }
 
 export type RowHeight = "compact" | "medium" | "large";
@@ -56,6 +60,7 @@ export type TableProps<T extends Record<string, any>> = {
   showPagination?: boolean;
   pushPaginationDown?: boolean;
   itemsPerPageOptions?: number[];
+  initialStatePageIndex?: number;
   defaultSelectedRowIds?: string[];
   showRowSeparator?: boolean;
   summary?: string;

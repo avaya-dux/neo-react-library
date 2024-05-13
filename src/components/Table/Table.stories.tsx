@@ -445,7 +445,6 @@ export const WithRowSeparator = () => (
   />
 );
 
-// BUG: initial values work, but they are unchangable
 export const PreSelectedRows = () => {
   const defaultSelectedRowIds = [
     FilledFields.data[1].id.toString(),
@@ -497,6 +496,85 @@ export const PreSelectedRows = () => {
           ))}
         </List>
       </section>
+    </section>
+  );
+};
+
+export const SecondPage = () => {
+  const [data, setData] = useState(FilledFields.data);
+  const [readonly, setReadonly] = useState(false);
+
+  return (
+    <section>
+      <div style={{ marginBottom: "3rem", maxWidth: "31rem" }}>
+        <h3>Explanation of functionality</h3>
+
+        <p>
+          This table shows the functionality related to defaulting to the second
+          page.
+        </p>
+
+        <ul style={{ marginLeft: "2rem" }}>
+          <li>
+            If the table's data is refreshed, it will return to the last
+            selected page.
+          </li>
+
+          <li>
+            If a row is added, edited, or removed, it will stay on the currently
+            selected page.
+          </li>
+
+          <li>
+            If you are on the final page available and remove a row or increase
+            the number of rows shown per page, the table will jump to the "new"
+            final page.
+          </li>
+        </ul>
+      </div>
+
+      <Table
+        caption="Second Page Table Example"
+        columns={FilledFields.columns}
+        data={data}
+        readonly={readonly}
+        selectableRows="multiple"
+        itemsPerPageOptions={[2, 5]}
+        initialStatePageIndex={1}
+        handleCreate={() => {
+          const newRow: IDataTableMockData = {
+            id: "new-row-" + Math.random(),
+            name: "The new guy",
+            label: "New Row",
+            other: "Lorem Ipsum",
+            date: new Date(),
+            status: "inactive",
+            hexValue: "003300",
+            level: "high",
+            hasOnCallBeeper: false,
+          };
+          setData([...data, newRow]);
+        }}
+        handleDelete={(rowIds: string[]) => {
+          setData(data.filter((row) => !rowIds.includes(row.id)));
+        }}
+        handleEdit={(row: IDataTableMockData) => {
+          const rowToEditIndex = data.findIndex((r) => r.id === row.id);
+          const dataCopy = [...data];
+          dataCopy[rowToEditIndex].name =
+            `${dataCopy[rowToEditIndex]?.name} (edited)`;
+
+          setData(dataCopy);
+        }}
+        handleRefresh={() => {
+          setReadonly(true);
+          setData([]);
+          setTimeout(() => {
+            setData(FilledFields.data);
+            setReadonly(false);
+          }, 1000);
+        }}
+      />
     </section>
   );
 };

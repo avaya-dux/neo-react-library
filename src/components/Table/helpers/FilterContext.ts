@@ -7,4 +7,6 @@ export const FilterContext = createContext<IFilterContext>({
   filterSheetVisible: false,
   setFilterSheetVisible: () => null,
   toggleFilterSheetVisible: () => null,
+  rootLevelPageIndex: 0,
+  setRootLevelPageIndex: () => null,
 });

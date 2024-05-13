@@ -134,6 +134,31 @@ export const WithSpaceForSevenNavItems = () => (
 
 export const WithSpaceForTenNavItems = () => <BookOfPages sectionWidth={800} />;
 
+export const SettingTheDefaultIndex = () => {
+  const [pageIndex, setPageIndex] = useState(5);
+
+  return (
+    <main>
+      <section>
+        <h3>Setting the default page index to 5</h3>
+
+        <Pagination
+          id="default-page-index-pagination"
+          currentPageIndex={pageIndex}
+          itemCount={100}
+          itemsPerPage={5}
+          itemsPerPageOptions={[1, 2, 5, 10]}
+          onPageChange={(e, newIndex) => {
+            e?.preventDefault();
+            setPageIndex(newIndex);
+          }}
+          onItemsPerPageChange={() => null}
+        />
+      </section>
+    </main>
+  );
+};
+
 const Template: Story<PaginationProps> = (props: PaginationProps) => (
   <Pagination {...props} />
 );
