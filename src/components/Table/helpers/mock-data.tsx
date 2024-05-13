@@ -126,6 +126,28 @@ const dataExample: IDataTableMockData[] = [
     level: "medium",
     hasOnCallBeeper: false,
   },
+  {
+    id: "90",
+    label: "Alfred",
+    name: "Alfred the Great",
+    other: "Cupidatat non proident",
+    date: new Date(2001, 2, 12),
+    status: "active",
+    hexValue: "00AA00",
+    level: "medium",
+    hasOnCallBeeper: false,
+  },
+  {
+    id: "100",
+    label: "Bruce",
+    name: "Bruce Splingsteen",
+    other: "Eunt in culpa qui officia",
+    date: new Date(2002, 1, 1),
+    status: "active",
+    hexValue: "0000AA",
+    level: "medium",
+    hasOnCallBeeper: false,
+  },
 ];
 
 export const FilledFields: TableProps<IDataTableMockData> = {
