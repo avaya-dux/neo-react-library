@@ -32,7 +32,7 @@ export const TableHeader = <T extends Record<string, any>>({
 }: TableHeaderProps<T>) => {
   const {
     headers,
-    page,
+    rows,
     rowsById,
     state: { selectedRowIds },
     toggleAllRowsSelected,
@@ -43,7 +43,7 @@ export const TableHeader = <T extends Record<string, any>>({
     useContext(FilterContext);
 
   const selectedRows = Object.keys(selectedRowIds);
-  const allRowsAreSelected = selectedRows.length === page.length;
+  const allRowsAreSelected = selectedRows.length === rows.length;
   const shouldHaveCheckboxColumn = selectableRows !== "none";
   const shouldHaveCheckbox = selectableRows === "multiple";
   const checkboxCheckedValue = useMemo(() => {
