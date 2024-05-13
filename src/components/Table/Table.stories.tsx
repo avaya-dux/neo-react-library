@@ -445,7 +445,6 @@ export const WithRowSeparator = () => (
   />
 );
 
-// BUG: initial values work, but they are unchangable
 export const PreSelectedRows = () => {
   const defaultSelectedRowIds = [
     FilledFields.data[1].id.toString(),
