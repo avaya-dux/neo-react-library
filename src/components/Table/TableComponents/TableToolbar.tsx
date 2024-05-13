@@ -106,7 +106,7 @@ export const TableToolbar = <T extends Record<string, any>>({
             onClick={() => {
               handleDelete(selectedRowIdsStringArray);
 
-              // update row index if necessary
+              // update `setRootLevelPageIndex` if necessary
               const currentRowCount = instance.rows.length;
               const currentPageCount = instance.state.pageSize;
 

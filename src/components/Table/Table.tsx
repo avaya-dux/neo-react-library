@@ -259,6 +259,7 @@ export const Table = <T extends Record<string, any>>({
               e?.preventDefault();
               setPageSize(newItemsPerPage);
 
+              // when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page
               const maxPageIndex = Math.ceil(rowCount / newItemsPerPage);
               if (pageIndex > maxPageIndex) {
                 gotoPage(maxPageIndex - 1);
