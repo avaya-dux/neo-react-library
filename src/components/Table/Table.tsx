@@ -177,6 +177,8 @@ export const Table = <T extends Record<string, any>>({
     filterSheetVisible,
     setFilterSheetVisible,
     toggleFilterSheetVisible,
+    rootLevelPageIndex,
+    setRootLevelPageIndex,
   };
 
   return (

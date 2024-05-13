@@ -43,9 +43,13 @@ export type TableBodyProps<T extends Record<string, any>> = {
 
 export interface IFilterContext {
   allowColumnFilter: boolean;
+
   filterSheetVisible: boolean;
   setFilterSheetVisible: (visible: boolean) => void;
   toggleFilterSheetVisible: () => void;
+
+  rootLevelPageIndex: number;
+  setRootLevelPageIndex: (pageIndex: number) => void;
 }
 
 export type RowHeight = "compact" | "medium" | "large";
