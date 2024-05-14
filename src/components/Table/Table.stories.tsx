@@ -36,8 +36,8 @@ export const Default = () => (
 export const TooltipPositioning = () => (
   <Table
     {...FilledFields}
-    itemDisplayTooltipPosition="right"
-    itemsPerPageTooltipPosition="left"
+    itemDisplayTooltipPosition="top-right"
+    itemsPerPageTooltipPosition="top-left"
     caption="Tooltip positioning in Pagination Example"
   />
 );
