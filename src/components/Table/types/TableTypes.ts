@@ -9,6 +9,7 @@ import {
   ITableTranslations,
   IToolbarTranslations,
 } from ".";
+import { TooltipPosition } from "components/Tooltip/TooltipTypes";
 
 interface ToolbarSharedProps<T extends Record<string, any>> {
   readonly?: boolean;
@@ -59,6 +60,8 @@ export type TableProps<T extends Record<string, any>> = {
   id?: string;
   showPagination?: boolean;
   pushPaginationDown?: boolean;
+  itemDisplayTooltipPosition?: TooltipPosition;
+  itemsPerPageTooltipPosition?: TooltipPosition;
   itemsPerPageOptions?: number[];
   initialStatePageIndex?: number;
   defaultSelectedRowIds?: string[];
