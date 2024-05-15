@@ -31,6 +31,8 @@ describe("Table", () => {
   const user = userEvent.setup();
   vi.spyOn(console, "warn").mockImplementation(() => null); // ignore tooltip warnings
 
+  const selectedPageClass = "neo-btn-secondary";
+
   it("fully renders without exploding", () => {
     const { getByRole } = render(<Table {...FilledFields} />);
 
@@ -63,8 +65,6 @@ describe("Table", () => {
   });
 
   describe("pagination functionality", () => {
-    const selectedPageClass = "neo-btn-secondary";
-
     it("allows the passing of `initialStatePageIndex`", () => {
       render(<Table {...FilledFields} initialStatePageIndex={2} />);
 
@@ -354,6 +354,33 @@ describe("Table", () => {
       // callable when multiple rows are selected
       await user.click(deleteButton);
       expect(mock).toHaveBeenCalledTimes(2);
+    });
+
+    it("properly handles `delete` when the last row of a page is deleted", async () => {
+      render(<SecondPage initialStatePageIndex={4} />);
+
+      await user.click(screen.getAllByText("5")[0]);
+      expect(screen.getAllByText("5")).toHaveLength(2);
+      expect(screen.getAllByText("5")[0]).toHaveClass(selectedPageClass);
+      expect(screen.queryAllByText("4")).toHaveLength(0);
+
+      const firstRowCheckboxLabel = screen
+        .queryAllByRole("row")[1]
+        .querySelector("label");
+      await user.click(firstRowCheckboxLabel);
+      const secondRowCheckboxLabel = screen
+        .queryAllByRole("row")[2]
+        .querySelector("label");
+      await user.click(secondRowCheckboxLabel);
+
+      const deleteButton = screen.getByText(
+        FilledFields.translations.toolbar.delete,
+      );
+      await user.click(deleteButton);
+
+      expect(screen.getAllByText("5")).toHaveLength(1);
+      expect(screen.getAllByText("4")).toHaveLength(1);
+      expect(screen.getByText("4")).toHaveClass(selectedPageClass);
     });
 
     it("properly utilizes it's `search` method", async () => {

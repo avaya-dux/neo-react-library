@@ -509,7 +509,8 @@ export const PreSelectedRows = () => {
   );
 };
 
-export const SecondPage = () => {
+// NOTE: passing `props` here to make a "toolbar functionality" test easier
+export const SecondPage = (props: object) => {
   const [data, setData] = useState(FilledFields.data);
   const [readonly, setReadonly] = useState(false);
 
@@ -583,6 +584,7 @@ export const SecondPage = () => {
             setReadonly(false);
           }, 1000);
         }}
+        {...props}
       />
     </section>
   );
