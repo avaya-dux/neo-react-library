@@ -40,28 +40,48 @@ describe("Table", () => {
     expect(tableElement).toBeTruthy();
   });
 
-  it("rowHeight is set to compact ", () => {
-    const { getByRole } = render(
-      <Table rowHeight="compact" {...FilledFields} />,
-    );
-
-    const tableElement = getByRole("table");
-    expect(tableElement).toHaveClass("neo-table--compact");
-  });
-
-  it("rowHeight is set to medium ", () => {
-    const { getByRole } = render(
-      <Table rowHeight="medium" {...FilledFields} />,
-    );
-
-    const tableElement = getByRole("table");
-    expect(tableElement).toHaveClass("neo-table--medium");
-  });
-
   it("passes basic axe compliance", async () => {
     const { container } = render(<Table {...FilledFields} />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
+  });
+
+  describe("row height functionality", () => {
+    it("rowHeight is set to compact ", () => {
+      const { getByRole } = render(
+        <Table rowHeight="compact" {...FilledFields} />,
+      );
+
+      const tableElement = getByRole("table");
+      expect(tableElement).toHaveClass("neo-table--compact");
+    });
+
+    it("rowHeight is set to medium ", () => {
+      const { getByRole } = render(
+        <Table rowHeight="medium" {...FilledFields} />,
+      );
+
+      const tableElement = getByRole("table");
+      expect(tableElement).toHaveClass("neo-table--medium");
+    });
+
+    it("modifies the row height when the select is changed", async () => {
+      render(<Table rowHeight="compact" {...FilledFields} />);
+
+      expect(screen.getByRole("table").classList).toHaveLength(2);
+      expect(screen.getByRole("table")).toHaveClass("neo-table--compact");
+
+      await user.click(screen.getByLabelText("Select row height"));
+      await user.click(screen.getByText("Medium"));
+
+      expect(screen.getByRole("table").classList).toHaveLength(2);
+      expect(screen.getByRole("table")).toHaveClass("neo-table--medium");
+
+      await user.click(screen.getByLabelText("Select row height"));
+      await user.click(screen.getByText("Large"));
+
+      expect(screen.getByRole("table").classList).toHaveLength(1);
+    });
   });
 
   describe("pagination functionality", () => {
