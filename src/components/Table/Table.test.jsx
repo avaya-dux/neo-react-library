@@ -24,6 +24,7 @@ const {
   MoreActionsMenu,
   PreSelectedRows,
   Templated,
+  SecondPage,
 } = composeStories(TableStories);
 
 describe("Table", () => {
@@ -239,6 +240,19 @@ describe("Table", () => {
       expect(firstRowCheckbox.checked).toBeFalsy();
       expect(firstBodyRow.classList.length).toBe(0);
       expect(firstBodyRow).not.toHaveClass("active");
+    });
+
+    it("deselects the header checkbox when all rows are deleted", async () => {
+      render(<SecondPage />);
+
+      await user.click(screen.getByLabelText("select all"));
+
+      const deleteButton = screen.getByText("Delete");
+      await user.click(deleteButton);
+
+      expect(screen.getByText("no data available")).toBeVisible();
+
+      expect(screen.getByLabelText("select all").checked).toBeFalsy();
     });
   });
 
