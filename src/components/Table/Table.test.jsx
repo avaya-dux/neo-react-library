@@ -170,6 +170,48 @@ describe("Table", () => {
       expect(checkbox2.checked).toBeFalsy();
     });
 
+    it("properly selects 'all' and 'none' of the checkboxes when paginated", async () => {
+      const { container } = render(
+        <Table
+          {...FilledFields}
+          selectableRows="multiple"
+          itemsPerPageOptions={[2]}
+          defaultSelectedRowIds={[
+            FilledFields.data[0].id,
+            FilledFields.data[1].id,
+          ]}
+        />,
+      );
+
+      const headerCheckbox = screen.getByLabelText(
+        FilledFields.translations.header.selectAll,
+      );
+      const headerCheckboxLabel = container.querySelector("tr th label");
+      const checkbox2 = screen.getByLabelText(FilledFields.data[1].label);
+
+      // header checkbox is in "mixed" state
+      expect(headerCheckbox.checked).toBeTruthy();
+      expect(headerCheckbox).toHaveClass("neo-check--indeterminate");
+      expect(headerCheckbox).toHaveAttribute("aria-checked", "mixed");
+      expect(checkbox2.checked).toBeTruthy();
+
+      await user.click(headerCheckboxLabel);
+
+      // header checkbox is in `true` state
+      expect(headerCheckbox.checked).toBeTruthy();
+      expect(headerCheckbox).not.toHaveClass("neo-check--indeterminate");
+      expect(headerCheckbox).toHaveAttribute("aria-checked", "true");
+      expect(checkbox2.checked).toBeTruthy();
+
+      await user.click(headerCheckboxLabel);
+
+      // header checkbox is in `false` state
+      expect(headerCheckbox.checked).toBeFalsy();
+      expect(headerCheckbox).not.toHaveClass("neo-check--indeterminate");
+      expect(headerCheckbox).toHaveAttribute("aria-checked", "false");
+      expect(checkbox2.checked).toBeFalsy();
+    });
+
     it("properly selects and deselects a body row", async () => {
       const { queryAllByRole } = render(
         <Table {...FilledFields} selectableRows="multiple" />,
