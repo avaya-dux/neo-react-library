@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
@@ -59,6 +59,40 @@ describe("Table", () => {
     const { container } = render(<Table {...FilledFields} />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
+  });
+
+  describe("pagination functionality", () => {
+    const selectedPageClass = "neo-btn-secondary";
+
+    it("allows the passing of `initialStatePageIndex`", () => {
+      render(<Table {...FilledFields} initialStatePageIndex={2} />);
+
+      const page3Buttons = screen.getAllByText("3");
+      const page3Button = page3Buttons[0];
+      expect(page3Button).toHaveClass(selectedPageClass);
+    });
+
+    it("apropriately sets the new page when a page size is changed to be larger", async () => {
+      render(
+        <Table
+          {...FilledFields}
+          initialStatePageIndex={4}
+          itemsPerPageOptions={[2, 5]}
+        />,
+      );
+
+      const page5Buttons = screen.getAllByText("5");
+      const page5Button = page5Buttons[0];
+      expect(page5Button).toBeVisible();
+
+      const itemsPerPageSelect = screen.getByLabelText("items per page");
+      await userEvent.selectOptions(itemsPerPageSelect, "5");
+
+      const page2Buttons = screen.getAllByText("2");
+      const page2Button = page2Buttons[0];
+      expect(page2Button).toHaveClass(selectedPageClass);
+      expect(page5Button).not.toBeVisible();
+    });
   });
 
   describe("row selection functionality", () => {
@@ -156,11 +190,9 @@ describe("Table", () => {
   describe("toolbar functionality", () => {
     it("properly calls it's `refresh` method", async () => {
       const mock = vi.fn();
-      const { getByLabelText } = render(
-        <Table {...FilledFields} handleRefresh={mock} />,
-      );
+      render(<Table {...FilledFields} handleRefresh={mock} />);
 
-      const refreshButton = getByLabelText(
+      const refreshButton = screen.getByLabelText(
         FilledFields.translations.toolbar.refresh,
       );
 
