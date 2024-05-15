@@ -72,6 +72,19 @@ describe("Table", () => {
       expect(page3Button).toHaveClass(selectedPageClass);
     });
 
+    it("respects when a user clicks to the next page", async () => {
+      render(<Table {...FilledFields} itemsPerPageOptions={[1, 2]} />);
+
+      expect(screen.getAllByText("1")).toHaveLength(2);
+      expect(screen.getAllByText("2")).toHaveLength(1);
+
+      const nextButton = screen.getByLabelText("next");
+      await user.click(nextButton);
+
+      expect(screen.getAllByText("1")).toHaveLength(1);
+      expect(screen.getAllByText("2")).toHaveLength(2);
+    });
+
     it("apropriately sets the new page when a page size is changed to be larger", async () => {
       render(
         <Table
