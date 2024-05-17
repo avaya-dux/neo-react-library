@@ -39,7 +39,7 @@ jobs:
           auth: ${{ secrets.GIST_SECRET }}
           gistID: e90dadd4c95bbcf46094100f6591134e
           filename: code-coverage.json
-          label: code-coverage
+          label: Coverage
           message: ${{ steps.coverageOutput.outputs.coverage }}%
           color: ${{ steps.coverageOutput.outputs.color }}
           namedLogo: react

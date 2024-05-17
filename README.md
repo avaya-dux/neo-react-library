@@ -1,13 +1,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/825502d6-02db-45a6-88bc-6aed064eb748/deploy-status)](https://app.netlify.com/sites/neo-react-library-storybook/deploys)
 ![github workflow status](https://github.com/avaya-dux/neo-react-library/actions/workflows/run-yarn.yml/badge.svg)
 [![npm version](https://badge.fury.io/js/@avaya%2Fneo-react.svg)](https://badge.fury.io/js/@avaya%2Fneo-react)
-
-<!-- ![Coverage lines](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-lines.svg)
-![Coverage functions](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-functions.svg)
-![Coverage branches](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-branches.svg)
-![Coverage statements](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-statements.svg) -->
-
-![code-coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/joe-s-avaya/e90dadd4c95bbcf46094100f6591134e/raw/jest-coverage-comment__main.json)
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/joe-s-avaya/e90dadd4c95bbcf46094100f6591134e/raw/code-coverage.json)
 
 # Neo React Component Library
 
