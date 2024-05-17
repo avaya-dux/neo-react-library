@@ -75,8 +75,6 @@ export const BasicSelects = () => {
 };
 
 export const Localized = () => {
-  const [favFood, setFavFood] = useState<string | string[] | null>("");
-  const [foods, setFoods] = useState<string[]>([]);
   const [lang, setLang] = useState("English");
   const [currTranslations, setCurrTranslations] = useState(englishTrans);
 
@@ -125,7 +123,6 @@ export const Localized = () => {
           <Select
             helperText={currTranslations.helper}
             label={currTranslations.label}
-            onChange={(value) => setFavFood(value)}
           >
             {options.map((option) => (
               <SelectOption
@@ -137,18 +134,12 @@ export const Localized = () => {
             ))}
           </Select>
 
-          <div>
-            <p>
-              {currTranslations.fave}: {favFood || currTranslations.none}
-            </p>
-          </div>
           <br />
           <h5> Multiple Select variant</h5>
           <br />
           <Select
             label={currTranslations.labelMulti}
             multiple
-            onChange={(value) => setFoods(value as string[])}
           >
             {options.map((option) => (
               <SelectOption
@@ -169,7 +160,6 @@ export const Localized = () => {
             helperText={currTranslations.helper}
             label={currTranslations.label}
             searchable
-            onChange={(value) => setFavFood(value)}
           >
             {options.map((option) => (
               <SelectOption
@@ -181,11 +171,6 @@ export const Localized = () => {
             ))}
           </Select>
 
-          <div>
-            <p>
-              {currTranslations.fave}: {favFood || currTranslations.none}
-            </p>
-          </div>
           <br />
           <h5> Searchable Multiple Select variant</h5>
           <br />
@@ -193,7 +178,6 @@ export const Localized = () => {
             label={currTranslations.labelMulti}
             multiple
             searchable
-            onChange={(value) => setFoods(value as string[])}
           >
             {options.map((option) => (
               <SelectOption
