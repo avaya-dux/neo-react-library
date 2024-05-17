@@ -1,0 +1,44 @@
+name: Generate Unit Test Coverage Report
+on:
+  push:
+    branches: main
+
+jobs:
+  build:
+    name: generate coverage report
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: generate coverage report
+        run: yarn install && yarn test:coverage
+
+      - name: coverage report
+        id: coverageOutput
+        uses: MishaKav/jest-coverage-comment@main
+        with:
+          hide-comment: true
+          coverage-summary-path: ./coverage/coverage-summary.json
+
+      - name: display coverage report highlights
+        run: |
+          echo "Coverage Percentage - ${{ steps.coverageOutput.outputs.coverage }}"
+          echo "Coverage Color - ${{ steps.coverageOutput.outputs.color }}"
+          echo "Summary HTML - ${{ steps.coverageOutput.outputs.summaryHtml }}"
+
+      - name: create the badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: e90dadd4c95bbcf46094100f6591134e
+          filename: code-coverage.json
+          label: Coverage
+          message: ${{ steps.coverageOutput.outputs.coverage }}%
+          color: ${{ steps.coverageOutput.outputs.color }}
+          namedLogo: react
