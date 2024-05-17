@@ -43,7 +43,8 @@ export const TableHeader = <T extends Record<string, any>>({
     useContext(FilterContext);
 
   const selectedRows = Object.keys(selectedRowIds);
-  const allRowsAreSelected = selectedRows.length === rows.length;
+  const allRowsAreSelected =
+    rows.length === 0 ? false : selectedRows.length === rows.length;
   const shouldHaveCheckboxColumn = selectableRows !== "none";
   const shouldHaveCheckbox = selectableRows === "multiple";
   const checkboxCheckedValue = useMemo(() => {

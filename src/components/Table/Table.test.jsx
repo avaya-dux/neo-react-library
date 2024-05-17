@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
@@ -24,11 +24,14 @@ const {
   MoreActionsMenu,
   PreSelectedRows,
   Templated,
+  SecondPage,
 } = composeStories(TableStories);
 
 describe("Table", () => {
   const user = userEvent.setup();
   vi.spyOn(console, "warn").mockImplementation(() => null); // ignore tooltip warnings
+
+  const selectedPageClass = "neo-btn-secondary";
 
   it("fully renders without exploding", () => {
     const { getByRole } = render(<Table {...FilledFields} />);
@@ -37,28 +40,93 @@ describe("Table", () => {
     expect(tableElement).toBeTruthy();
   });
 
-  it("rowHeight is set to compact ", () => {
-    const { getByRole } = render(
-      <Table rowHeight="compact" {...FilledFields} />,
-    );
-
-    const tableElement = getByRole("table");
-    expect(tableElement).toHaveClass("neo-table--compact");
-  });
-
-  it("rowHeight is set to medium ", () => {
-    const { getByRole } = render(
-      <Table rowHeight="medium" {...FilledFields} />,
-    );
-
-    const tableElement = getByRole("table");
-    expect(tableElement).toHaveClass("neo-table--medium");
-  });
-
   it("passes basic axe compliance", async () => {
     const { container } = render(<Table {...FilledFields} />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
+  });
+
+  describe("row height functionality", () => {
+    it("rowHeight is set to compact ", () => {
+      const { getByRole } = render(
+        <Table rowHeight="compact" {...FilledFields} />,
+      );
+
+      const tableElement = getByRole("table");
+      expect(tableElement).toHaveClass("neo-table--compact");
+    });
+
+    it("rowHeight is set to medium ", () => {
+      const { getByRole } = render(
+        <Table rowHeight="medium" {...FilledFields} />,
+      );
+
+      const tableElement = getByRole("table");
+      expect(tableElement).toHaveClass("neo-table--medium");
+    });
+
+    it("modifies the row height when the select is changed", async () => {
+      render(<Table rowHeight="compact" {...FilledFields} />);
+
+      expect(screen.getByRole("table").classList).toHaveLength(2);
+      expect(screen.getByRole("table")).toHaveClass("neo-table--compact");
+
+      await user.click(screen.getByLabelText("Select row height"));
+      await user.click(screen.getByText("Medium"));
+
+      expect(screen.getByRole("table").classList).toHaveLength(2);
+      expect(screen.getByRole("table")).toHaveClass("neo-table--medium");
+
+      await user.click(screen.getByLabelText("Select row height"));
+      await user.click(screen.getByText("Large"));
+
+      expect(screen.getByRole("table").classList).toHaveLength(1);
+    });
+  });
+
+  describe("pagination functionality", () => {
+    it("allows the passing of `initialStatePageIndex`", () => {
+      render(<Table {...FilledFields} initialStatePageIndex={2} />);
+
+      const page3Buttons = screen.getAllByText("3");
+      const page3Button = page3Buttons[0];
+      expect(page3Button).toHaveClass(selectedPageClass);
+    });
+
+    it("respects when a user clicks to the next page", async () => {
+      render(<Table {...FilledFields} itemsPerPageOptions={[1, 2]} />);
+
+      expect(screen.getAllByText("1")).toHaveLength(2);
+      expect(screen.getAllByText("2")).toHaveLength(1);
+
+      const nextButton = screen.getByLabelText("next");
+      await user.click(nextButton);
+
+      expect(screen.getAllByText("1")).toHaveLength(1);
+      expect(screen.getAllByText("2")).toHaveLength(2);
+    });
+
+    it("apropriately sets the new page when a page size is changed to be larger", async () => {
+      render(
+        <Table
+          {...FilledFields}
+          initialStatePageIndex={4}
+          itemsPerPageOptions={[2, 5]}
+        />,
+      );
+
+      const page5Buttons = screen.getAllByText("5");
+      const page5Button = page5Buttons[0];
+      expect(page5Button).toBeVisible();
+
+      const itemsPerPageSelect = screen.getByLabelText("items per page");
+      await userEvent.selectOptions(itemsPerPageSelect, "5");
+
+      const page2Buttons = screen.getAllByText("2");
+      const page2Button = page2Buttons[0];
+      expect(page2Button).toHaveClass(selectedPageClass);
+      expect(page5Button).not.toBeVisible();
+    });
   });
 
   describe("row selection functionality", () => {
@@ -123,6 +191,48 @@ describe("Table", () => {
       expect(checkbox2.checked).toBeFalsy();
     });
 
+    it("properly selects 'all' and 'none' of the checkboxes when paginated", async () => {
+      const { container } = render(
+        <Table
+          {...FilledFields}
+          selectableRows="multiple"
+          itemsPerPageOptions={[2]}
+          defaultSelectedRowIds={[
+            FilledFields.data[0].id,
+            FilledFields.data[1].id,
+          ]}
+        />,
+      );
+
+      const headerCheckbox = screen.getByLabelText(
+        FilledFields.translations.header.selectAll,
+      );
+      const headerCheckboxLabel = container.querySelector("tr th label");
+      const checkbox2 = screen.getByLabelText(FilledFields.data[1].label);
+
+      // header checkbox is in "mixed" state
+      expect(headerCheckbox.checked).toBeTruthy();
+      expect(headerCheckbox).toHaveClass("neo-check--indeterminate");
+      expect(headerCheckbox).toHaveAttribute("aria-checked", "mixed");
+      expect(checkbox2.checked).toBeTruthy();
+
+      await user.click(headerCheckboxLabel);
+
+      // header checkbox is in `true` state
+      expect(headerCheckbox.checked).toBeTruthy();
+      expect(headerCheckbox).not.toHaveClass("neo-check--indeterminate");
+      expect(headerCheckbox).toHaveAttribute("aria-checked", "true");
+      expect(checkbox2.checked).toBeTruthy();
+
+      await user.click(headerCheckboxLabel);
+
+      // header checkbox is in `false` state
+      expect(headerCheckbox.checked).toBeFalsy();
+      expect(headerCheckbox).not.toHaveClass("neo-check--indeterminate");
+      expect(headerCheckbox).toHaveAttribute("aria-checked", "false");
+      expect(checkbox2.checked).toBeFalsy();
+    });
+
     it("properly selects and deselects a body row", async () => {
       const { queryAllByRole } = render(
         <Table {...FilledFields} selectableRows="multiple" />,
@@ -151,16 +261,27 @@ describe("Table", () => {
       expect(firstBodyRow.classList.length).toBe(0);
       expect(firstBodyRow).not.toHaveClass("active");
     });
+
+    it("deselects the header checkbox when all rows are deleted", async () => {
+      render(<SecondPage />);
+
+      await user.click(screen.getByLabelText("select all"));
+
+      const deleteButton = screen.getByText("Delete");
+      await user.click(deleteButton);
+
+      expect(screen.getByText("no data available")).toBeVisible();
+
+      expect(screen.getByLabelText("select all").checked).toBeFalsy();
+    });
   });
 
   describe("toolbar functionality", () => {
     it("properly calls it's `refresh` method", async () => {
       const mock = vi.fn();
-      const { getByLabelText } = render(
-        <Table {...FilledFields} handleRefresh={mock} />,
-      );
+      render(<Table {...FilledFields} handleRefresh={mock} />);
 
-      const refreshButton = getByLabelText(
+      const refreshButton = screen.getByLabelText(
         FilledFields.translations.toolbar.refresh,
       );
 
@@ -253,6 +374,33 @@ describe("Table", () => {
       // callable when multiple rows are selected
       await user.click(deleteButton);
       expect(mock).toHaveBeenCalledTimes(2);
+    });
+
+    it("properly handles `delete` when the last row of a page is deleted", async () => {
+      render(<SecondPage initialStatePageIndex={4} />);
+
+      await user.click(screen.getAllByText("5")[0]);
+      expect(screen.getAllByText("5")).toHaveLength(2);
+      expect(screen.getAllByText("5")[0]).toHaveClass(selectedPageClass);
+      expect(screen.queryAllByText("4")).toHaveLength(0);
+
+      const firstRowCheckboxLabel = screen
+        .queryAllByRole("row")[1]
+        .querySelector("label");
+      await user.click(firstRowCheckboxLabel);
+      const secondRowCheckboxLabel = screen
+        .queryAllByRole("row")[2]
+        .querySelector("label");
+      await user.click(secondRowCheckboxLabel);
+
+      const deleteButton = screen.getByText(
+        FilledFields.translations.toolbar.delete,
+      );
+      await user.click(deleteButton);
+
+      expect(screen.getAllByText("5")).toHaveLength(1);
+      expect(screen.getAllByText("4")).toHaveLength(1);
+      expect(screen.getByText("4")).toHaveClass(selectedPageClass);
     });
 
     it("properly utilizes it's `search` method", async () => {
