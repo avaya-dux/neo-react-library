@@ -17,20 +17,9 @@ jobs:
         with:
           node-version: 20
 
-      - name: install and build
-        run: yarn install && yarn build
-
       - name: generate coverage report
         if: github.ref == 'refs/heads/main'
-        run: yarn test:coverage
-
-      - name: save coverage report
-        if: github.ref == 'refs/heads/main'
-        id: coverageComment
-        uses: MishaKav/jest-coverage-comment@main
-        with:
-          hide-comment: true
-          coverage-summary-path: ./coverage/coverage-summary.json
+        run: yarn install && yarn build && yarn test:coverage
 
       - name: check the output coverage
         if: github.ref == 'refs/heads/main'

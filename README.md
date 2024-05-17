@@ -7,7 +7,7 @@
 ![Coverage branches](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-branches.svg)
 ![Coverage statements](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-statements.svg) -->
 
-![code-coverage](https://img.shields.io/endpoint?url=https://gist.github.com/joe-s-avaya/e90dadd4c95bbcf46094100f6591134e#file-jest-coverage-comment__main-json)
+![code-coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/joe-s-avaya/e90dadd4c95bbcf46094100f6591134e/raw/jest-coverage-comment__main.json)
 
 # Neo React Component Library
 
