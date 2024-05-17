@@ -18,27 +18,21 @@ jobs:
           node-version: 20
 
       - name: generate coverage report
+        id: report
         run: yarn install && yarn build && yarn test:coverage
 
-      - name: generate coverage output
-        id: coverageComment
-        uses: MishaKav/jest-coverage-comment@main
-        with:
-          hide-comment: true
-          coverage-summary-path: ./coverage/coverage-summary.json
-
-      - name: check the output coverage
+      - name: display coverage report highlights
         run: |
-          echo "Coverage Percentage - ${{ steps.coverageComment.outputs.coverage }}"
-          echo "Coverage Color - ${{ steps.coverageComment.outputs.color }}"
-          echo "Summary HTML - ${{ steps.coverageComment.outputs.summaryHtml }}"
+          echo "Coverage Percentage - ${{ steps.report.outputs.coverage }}"
+          echo "Coverage Color - ${{ steps.report.outputs.color }}"
+          echo "Summary HTML - ${{ steps.report.outputs.summaryHtml }}"
 
       - name: create the badge
         uses: schneegans/dynamic-badges-action@v1.7.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
           gistID: e90dadd4c95bbcf46094100f6591134e
-          filename: jest-coverage-comment__main.json
+          filename: code-coverage.json
           label: code-coverage
           message: ${{ steps.coverageComment.outputs.coverage }}%
           color: ${{ steps.coverageComment.outputs.color }}
