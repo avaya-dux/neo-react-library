@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-import { Button, Form, Sheet } from "components";
+import { Button, Form, Radio, RadioGroup, Sheet } from "components";
 
 import { Select } from "./Select";
 import { SelectOption } from "./SelectOption";
@@ -9,6 +9,23 @@ import { fruitOptions } from "./utils/mockdata";
 import { SelectProps } from "./utils/SelectTypes";
 
 import "./SelectStories.css";
+
+const englishTrans = {
+  apple: "apple",
+  pear: "pear",
+  helper: "Please select one",
+  label: "Select a favorite food",
+  fave: "Favorite Food",
+  none: "None selected",
+};
+const spanishTrans = {
+  apple: "manzana",
+  pear: "pera",
+  helper: "Por favor, seleccione uno",
+  label: "Seleccione una comida favorita",
+  fave: "Comida favoritav",
+  none: "Ninguna seleccionada",
+};
 
 export default {
   title: "Components/Select",
@@ -54,6 +71,65 @@ export const BasicSelects = () => {
     </Sheet>
   );
 };
+
+export const Localized = () => {
+  const [favFood, setFavFood] = useState<string | string[] |null>("");
+  const [lang, setLang] = useState("English");
+  const [currTranslations, setCurrTranslations] = useState(englishTrans);
+
+  const handleLangChange = (value:string) => {
+    setLang(value);
+    value === "English"
+      ? setCurrTranslations(englishTrans)
+      : setCurrTranslations(spanishTrans);
+  };
+
+  const options = useMemo(() => {
+    return [
+      { label: currTranslations.apple, value: 1 },
+      { label: currTranslations.pear, value: 2 },
+    ];
+  }, [lang]);
+
+  return (
+    <div>
+      <h3>Select Translations</h3>
+
+      <section style={{ paddingTop: "1rem" }}>
+        <Form id="radio-form">
+          <RadioGroup
+            groupName="Language Selection"
+            selected={lang}
+            onChange={(e) => handleLangChange(e.target.value)}
+          >
+            <Radio value="English">English</Radio>
+            <Radio value="Spanish">Spanish</Radio>
+          </RadioGroup>
+        </Form>
+      </section>
+
+      <Sheet title={lang} style={{ width: 400 }}>
+        <Select
+          helperText={currTranslations.helper}
+          label={currTranslations.label}
+          onChange={(value) => setFavFood(value)}
+        >
+          {options.map((option) => (
+            <SelectOption value={option.value.toString()} key={option.label + lang}>
+              {option.label}
+            </SelectOption>
+          ))}
+        </Select>
+
+        <div>
+          <p>
+            {currTranslations.fave}: {favFood || currTranslations.none}
+          </p>
+        </div>
+      </Sheet>
+    </div>
+  );
+}
 
 export const Searchable = () => {
   const [favFood, setFavFood] = useState("");
