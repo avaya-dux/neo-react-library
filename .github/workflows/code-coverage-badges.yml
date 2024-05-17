@@ -18,18 +18,15 @@ jobs:
           node-version: 20
 
       - name: generate coverage report
-        if: github.ref == 'refs/heads/main'
         run: yarn install && yarn build && yarn test:coverage
 
       - name: check the output coverage
-        if: github.ref == 'refs/heads/main'
         run: |
           echo "Coverage Percentage - ${{ steps.coverageComment.outputs.coverage }}"
           echo "Coverage Color - ${{ steps.coverageComment.outputs.color }}"
           echo "Summary HTML - ${{ steps.coverageComment.outputs.summaryHtml }}"
 
       - name: create the badge
-        if: github.ref == 'refs/heads/main'
         uses: schneegans/dynamic-badges-action@v1.7.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
