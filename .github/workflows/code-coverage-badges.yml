@@ -20,6 +20,13 @@ jobs:
       - name: generate coverage report
         run: yarn install && yarn build && yarn test:coverage
 
+      - name: generate coverage output
+        id: coverageComment
+        uses: MishaKav/jest-coverage-comment@main
+        with:
+          hide-comment: true
+          coverage-summary-path: ./src/packages/svelte-lib/coverage/coverage-summary.json
+
       - name: check the output coverage
         run: |
           echo "Coverage Percentage - ${{ steps.coverageComment.outputs.coverage }}"
