@@ -15,15 +15,17 @@ const englishTrans = {
   pear: "pear",
   helper: "Please select one",
   label: "Select a favorite food",
+  labelMulti: "Select one or more foods",
   fave: "Favorite Food",
   none: "None selected",
 };
 const spanishTrans = {
   apple: "manzana",
   pear: "pera",
-  helper: "Por favor, seleccione uno",
+  helper: "Por favor, seleccione una",
+  labelMulti: "Seleccione una o mas comidas",
   label: "Seleccione una comida favorita",
-  fave: "Comida favoritav",
+  fave: "Comida favorita",
   none: "Ninguna seleccionada",
 };
 
@@ -73,11 +75,12 @@ export const BasicSelects = () => {
 };
 
 export const Localized = () => {
-  const [favFood, setFavFood] = useState<string | string[] |null>("");
+  const [favFood, setFavFood] = useState<string | string[] | null>("");
+  const [foods, setFoods] = useState<string[]>([]);
   const [lang, setLang] = useState("English");
   const [currTranslations, setCurrTranslations] = useState(englishTrans);
 
-  const handleLangChange = (value:string) => {
+  const handleLangChange = (value: string) => {
     setLang(value);
     value === "English"
       ? setCurrTranslations(englishTrans)
@@ -93,7 +96,7 @@ export const Localized = () => {
 
   return (
     <div>
-      <h3>Select Translations</h3>
+      <h3>Select component (Localized)</h3>
 
       <section style={{ paddingTop: "1rem" }}>
         <Form id="radio-form">
@@ -103,33 +106,109 @@ export const Localized = () => {
             onChange={(e) => handleLangChange(e.target.value)}
           >
             <Radio value="English">English</Radio>
-            <Radio value="Spanish">Spanish</Radio>
+            <Radio value="Español">Español</Radio>
           </RadioGroup>
         </Form>
       </section>
 
-      <Sheet title={lang} style={{ width: 400 }}>
-        <Select
-          helperText={currTranslations.helper}
-          label={currTranslations.label}
-          onChange={(value) => setFavFood(value)}
-        >
-          {options.map((option) => (
-            <SelectOption value={option.value.toString()} key={option.label + lang}>
-              {option.label}
-            </SelectOption>
-          ))}
-        </Select>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+        }}
+      >
+        <Sheet title={lang} style={{ width: 400 }}>
+          <br />
+          <h5> Single Select variant</h5>
+          <br />
 
-        <div>
-          <p>
-            {currTranslations.fave}: {favFood || currTranslations.none}
-          </p>
-        </div>
-      </Sheet>
+          <Select
+            helperText={currTranslations.helper}
+            label={currTranslations.label}
+            onChange={(value) => setFavFood(value)}
+          >
+            {options.map((option) => (
+              <SelectOption
+                value={option.value.toString()}
+                key={option.label + lang}
+              >
+                {option.label}
+              </SelectOption>
+            ))}
+          </Select>
+
+          <div>
+            <p>
+              {currTranslations.fave}: {favFood || currTranslations.none}
+            </p>
+          </div>
+          <br />
+          <h5> Multiple Select variant</h5>
+          <br />
+          <Select
+            label={currTranslations.labelMulti}
+            multiple
+            onChange={(value) => setFoods(value as string[])}
+          >
+            {options.map((option) => (
+              <SelectOption
+                value={option.value.toString()}
+                key={option.label + lang}
+              >
+                {option.label}
+              </SelectOption>
+            ))}
+          </Select>
+        </Sheet>
+        <Sheet title={lang} style={{ width: 400 }}>
+          <br />
+          <h5> Searchable Single Select variant</h5>
+          <br />
+
+          <Select
+            helperText={currTranslations.helper}
+            label={currTranslations.label}
+            searchable
+            onChange={(value) => setFavFood(value)}
+          >
+            {options.map((option) => (
+              <SelectOption
+                value={option.value.toString()}
+                key={option.label + lang}
+              >
+                {option.label}
+              </SelectOption>
+            ))}
+          </Select>
+
+          <div>
+            <p>
+              {currTranslations.fave}: {favFood || currTranslations.none}
+            </p>
+          </div>
+          <br />
+          <h5> Searchable Multiple Select variant</h5>
+          <br />
+          <Select
+            label={currTranslations.labelMulti}
+            multiple
+            searchable
+            onChange={(value) => setFoods(value as string[])}
+          >
+            {options.map((option) => (
+              <SelectOption
+                value={option.value.toString()}
+                key={option.label + lang}
+              >
+                {option.label}
+              </SelectOption>
+            ))}
+          </Select>
+        </Sheet>
+      </div>
     </div>
   );
-}
+};
 
 export const Searchable = () => {
   const [favFood, setFavFood] = useState("");
