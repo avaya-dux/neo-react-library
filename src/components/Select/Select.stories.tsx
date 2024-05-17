@@ -90,7 +90,7 @@ export const Localized = () => {
       { label: currTranslations.apple, value: 1 },
       { label: currTranslations.pear, value: 2 },
     ];
-  }, [lang]);
+  }, [lang, currTranslations.apple, currTranslations.pear]);
 
   return (
     <div>
