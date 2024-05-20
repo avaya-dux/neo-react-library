@@ -9,4 +9,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: (yarn github && echo "DigitalFlavio approves this PR") || (echo "DigitalFlavio has fainted"; exit 1)
+      - run: (yarn all && echo "DigitalFlavio approves this PR") || (echo "DigitalFlavio has fainted"; exit 1)
