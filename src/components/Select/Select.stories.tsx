@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-import { Button, Form, Sheet } from "components";
+import { Button, Form, Radio, RadioGroup, Sheet } from "components";
 
 import { Select } from "./Select";
 import { SelectOption } from "./SelectOption";
@@ -9,6 +9,25 @@ import { fruitOptions } from "./utils/mockdata";
 import { SelectProps } from "./utils/SelectTypes";
 
 import "./SelectStories.css";
+
+const englishTrans = {
+  apple: "apple",
+  pear: "pear",
+  helper: "Please select one",
+  label: "Select a favorite food",
+  labelMulti: "Select one or more foods",
+  fave: "Favorite Food",
+  none: "None selected",
+};
+const spanishTrans = {
+  apple: "manzana",
+  pear: "pera",
+  helper: "Por favor, seleccione una",
+  labelMulti: "Seleccione una o mas comidas",
+  label: "Seleccione una comida favorita",
+  fave: "Comida favorita",
+  none: "Ninguna seleccionada",
+};
 
 export default {
   title: "Components/Select",
@@ -52,6 +71,117 @@ export const BasicSelects = () => {
         </ul>
       </div>
     </Sheet>
+  );
+};
+
+export const Localized = () => {
+  const [lang, setLang] = useState("English");
+  const [currTranslations, setCurrTranslations] = useState(englishTrans);
+
+  const handleLangChange = (value: string) => {
+    setLang(value);
+    value === "English"
+      ? setCurrTranslations(englishTrans)
+      : setCurrTranslations(spanishTrans);
+  };
+
+  const options = useMemo(() => {
+    return [
+      { label: currTranslations.apple, value: 1 },
+      { label: currTranslations.pear, value: 2 },
+    ];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
+
+  return (
+    <div>
+      <h3>Select component (Localized)</h3>
+
+      <section style={{ paddingTop: "1rem" }}>
+        <Form id="radio-form">
+          <RadioGroup
+            groupName="Language Selection"
+            selected={lang}
+            onChange={(e) => handleLangChange(e.target.value)}
+          >
+            <Radio value="English">English</Radio>
+            <Radio value="Español">Español</Radio>
+          </RadioGroup>
+        </Form>
+      </section>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+        }}
+      >
+        <Sheet title={lang} style={{ width: 400 }}>
+          <br />
+          <h5> Single Select variant</h5>
+          <br />
+
+          <Select
+            helperText={currTranslations.helper}
+            label={currTranslations.label}
+          >
+            {options.map((option) => (
+              <SelectOption
+                value={option.value.toString()}
+                key={option.label + lang}
+              >
+                {option.label}
+              </SelectOption>
+            ))}
+          </Select>
+
+          <br />
+          <h5> Multiple Select variant</h5>
+          <br />
+          <Select label={currTranslations.labelMulti} multiple>
+            {options.map((option) => (
+              <SelectOption
+                value={option.value.toString()}
+                key={option.label + lang}
+              >
+                {option.label}
+              </SelectOption>
+            ))}
+          </Select>
+        </Sheet>
+        <Sheet title={lang} style={{ width: 400 }}>
+          <br />
+          <h5> Searchable Single Select variant</h5>
+          <br />
+
+          <Select
+            helperText={currTranslations.helper}
+            label={currTranslations.label}
+            searchable
+          >
+            {options.map((option) => (
+              <SelectOption value={option.value.toString()} key={option.label}>
+                {option.label}
+              </SelectOption>
+            ))}
+          </Select>
+
+          <br />
+          <h5> Searchable Multiple Select variant</h5>
+          <br />
+          <Select label={currTranslations.labelMulti} multiple searchable>
+            {options.map((option) => (
+              <SelectOption
+                value={option.value.toString()}
+                key={option.label + lang}
+              >
+                {option.label}
+              </SelectOption>
+            ))}
+          </Select>
+        </Sheet>
+      </div>
+    </div>
   );
 };
 

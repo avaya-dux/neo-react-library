@@ -104,18 +104,7 @@ export const Select = (props: SelectProps) => {
   );
   const [filteredOptions, setFilteredOptions] = useState(options);
   useEffect(() => {
-    // HACK: _sometimes_ when going from/to empty options (loading options), the code gets
-    // into an infinite loop. I'm not sure why, so this is my hack around that issue.
-    const optionsHaveChanged =
-      options.length !== filteredOptions.length ||
-      options.some(
-        (option, index) => option.value !== filteredOptions[index].value,
-      );
-
-    if (optionsHaveChanged) {
-      setFilteredOptions(options);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setFilteredOptions(options);
   }, [options]);
 
   const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);
