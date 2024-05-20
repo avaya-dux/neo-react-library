@@ -137,10 +137,7 @@ export const Localized = () => {
           <br />
           <h5> Multiple Select variant</h5>
           <br />
-          <Select
-            label={currTranslations.labelMulti}
-            multiple
-          >
+          <Select label={currTranslations.labelMulti} multiple>
             {options.map((option) => (
               <SelectOption
                 value={option.value.toString()}
@@ -174,11 +171,7 @@ export const Localized = () => {
           <br />
           <h5> Searchable Multiple Select variant</h5>
           <br />
-          <Select
-            label={currTranslations.labelMulti}
-            multiple
-            searchable
-          >
+          <Select label={currTranslations.labelMulti} multiple searchable>
             {options.map((option) => (
               <SelectOption
                 value={option.value.toString()}
