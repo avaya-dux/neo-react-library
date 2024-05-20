@@ -90,7 +90,8 @@ export const Localized = () => {
       { label: currTranslations.apple, value: 1 },
       { label: currTranslations.pear, value: 2 },
     ];
-  }, [lang, currTranslations.apple, currTranslations.pear]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   return (
     <div>
@@ -159,10 +160,7 @@ export const Localized = () => {
             searchable
           >
             {options.map((option) => (
-              <SelectOption
-                value={option.value.toString()}
-                key={option.label}
-              >
+              <SelectOption value={option.value.toString()} key={option.label}>
                 {option.label}
               </SelectOption>
             ))}
