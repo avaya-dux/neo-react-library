@@ -1,15 +1,11 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/825502d6-02db-45a6-88bc-6aed064eb748/deploy-status)](https://app.netlify.com/sites/neo-react-library-storybook/deploys)
 ![github workflow status](https://github.com/avaya-dux/neo-react-library/actions/workflows/run-yarn.yml/badge.svg)
 [![npm version](https://badge.fury.io/js/@avaya%2Fneo-react.svg)](https://badge.fury.io/js/@avaya%2Fneo-react)
-
-![Coverage lines](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-lines.svg)
-![Coverage functions](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-functions.svg)
-![Coverage branches](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-branches.svg)
-![Coverage statements](https://github.com/avaya-dux/neo-react-library/blob/main/badges/badge-statements.svg)
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/joe-s-avaya/e90dadd4c95bbcf46094100f6591134e/raw/code-coverage.json)
 
 # Neo React Component Library
 
-> This is the react version of the shared library called "NEO" buit by Avaya ([storybook site](https://neo-react-library-storybook.netlify.app/))
+> This is the React version of the shared library called "NEO" buit by Avaya ([storybook site](https://neo-react-library-storybook.netlify.app/))
 
 ## Install
 
@@ -62,7 +58,7 @@ export default defineConfig({
 
 ### [Vite w/ TS](https://vitejs.dev/guide/)
 
-This team has experience building projects (both apps and libraries) using [CRA (create-react-app)](https://create-react-app.dev/), [Vite](https://vitejs.dev/), [Webpack](https://webpack.js.org/), [Parcel](https://parceljs.org/), and [Rollup](https://www.rollupjs.org/guide/en/). Of those, we recommend using Vite to build out brand new projects. Vite has shown itself to be not only a faster build tool, but also to be a better DX (Developer eXperience) due to its excellent documentation and intelligent defaults. [See this article](https://blog.logrocket.com/vite-3-vs-create-react-app-comparison-migration-guide/) for some further details on those points.
+This team has experience building projects (both apps and libraries) using [CRA (create-react-app)](https://create-react-app.dev/), [Vite](https://vitejs.dev/), [Webpack](https://webpack.js.org/), [Parcel](https://parceljs.org/), and [Rollup](https://www.rollupjs.org/guide/en/). Of those, we recommend using Vite to build out brand-new projects. Vite has shown itself to be not only a faster build tool, but also to be a better DX (Developer eXperience) due to its excellent documentation and intelligent defaults. [See this article](https://blog.logrocket.com/vite-3-vs-create-react-app-comparison-migration-guide/) for some further details on those points.
 
 Example app creation with Vite using React+TS: `pnpm create vite my-react-ts-app --template react-ts`
 
