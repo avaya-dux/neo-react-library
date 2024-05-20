@@ -161,7 +161,7 @@ export const Localized = () => {
             {options.map((option) => (
               <SelectOption
                 value={option.value.toString()}
-                key={option.label + lang}
+                key={option.label}
               >
                 {option.label}
               </SelectOption>
