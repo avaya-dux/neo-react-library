@@ -48,7 +48,7 @@
     "test:coverage": "vitest run --coverage",
     "test:cypress": "cypress run --component -b chrome",
     "test:cypress-open": "cypress open --component -b chrome",
-    "github": "yarn && yarn lint && yarn build && yarn test && yarn test:cypress",
+    "github": "(yarn && yarn lint && yarn build && yarn test && yarn test:cypress && echo 'DigitalFlavio approves this PR') || (echo 'DigitalFlavio has fainted'; exit 1)",
     "netlify": "yarn && yarn build && yarn build:storybook",
     "all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build:storybook && yarn test && yarn test:cypress && yarn pack"
   },
