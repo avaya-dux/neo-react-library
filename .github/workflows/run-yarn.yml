@@ -1,7 +1,7 @@
 name: CI (lint+build+tests)
 on: [push]
 jobs:
-  build:
+  ci-run:
     name: DigitalFlavio
     runs-on: ubuntu-latest
     steps:
