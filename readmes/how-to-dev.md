@@ -136,21 +136,3 @@ yarn lint --fix
 ## publishing this repo
 
 see [how to publish readme](./how-to-publish.md)
-
-## running github actions locally w/ `nektos/act`
-
-> for more details on [nektos/act](https://github.com/nektos/act) see [this guide](https://www.freecodecamp.org/news/how-to-run-github-actions-locally/#environment-variables) or the [official docs](https://nektosact.com/usage/index.html)
-
-### prerequisites
-
-`homebrew act`: install act on your mac
-
-### running jobs
-
-`act`: run this from the repository root
-
-`act -h`: list docs
-
-`act -l`: list all actions
-
-`act --job ci-run --container-architecture linux/amd64 -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:js-latest`: run the "DigitalFlavio" job for M1 Mac and use the `ubuntu:js-latest` docker container so that we can utilize Yarn
