@@ -41,8 +41,6 @@ export const TableToolbar = <T extends Record<string, any>>({
     state: { globalFilter, selectedRowIds },
   } = instance;
 
-  const { setRootLevelPageIndex } = useContext(FilterContext);
-
   const selectedRowIdsStringArray = useMemo(
     () => Object.keys(selectedRowIds),
     [selectedRowIds],
@@ -105,19 +103,6 @@ export const TableToolbar = <T extends Record<string, any>>({
             status="alert"
             onClick={() => {
               handleDelete(selectedRowIdsStringArray);
-
-              // update `setRootLevelPageIndex` if necessary
-              const currentRowCount = instance.rows.length;
-              const currentPageCount = instance.state.pageSize;
-
-              const newRowCount =
-                currentRowCount - selectedRowIdsStringArray.length;
-              const newPageCount = Math.ceil(newRowCount / currentPageCount);
-
-              const currentPageIndex = instance.state.pageIndex;
-              if (currentPageIndex >= newPageCount) {
-                setRootLevelPageIndex(newPageCount - 1); // HACK: should be able to use `gotoPage` but it's not working as expected
-              }
             }}
           >
             {translations.delete}
