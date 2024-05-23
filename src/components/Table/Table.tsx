@@ -125,6 +125,15 @@ export const Table = <T extends Record<string, any>>({
   } = instance;
   const rowCount = rows.length;
 
+  // update shown page if necessary
+  useEffect(() => {
+    const newPageCount = Math.ceil(rowCount / pageSize);
+    if (pageIndex >= newPageCount) {
+      setRootLevelPageIndex(newPageCount - 1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rowCount, pageSize]);
+
   const tableCaptionId = useMemo(
     () => `table-caption-${caption || "caption"}`,
     [caption],
@@ -179,8 +188,6 @@ export const Table = <T extends Record<string, any>>({
     filterSheetVisible,
     setFilterSheetVisible,
     toggleFilterSheetVisible,
-    rootLevelPageIndex,
-    setRootLevelPageIndex,
   };
 
   return (
