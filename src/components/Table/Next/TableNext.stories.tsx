@@ -10,7 +10,7 @@ const meta: Meta<typeof TableNext> = {
   component: TableNext,
   title: "Components/Table (Next)",
   args: {
-    data: makeData(10),
+    data: makeData(100),
     columns: [
       columnHelper.accessor("firstName", {
         cell: (info) => info.getValue(),
