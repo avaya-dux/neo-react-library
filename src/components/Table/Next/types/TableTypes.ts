@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import type { RowHeight } from "../../types";
 import { TooltipPosition } from "components/Tooltip";
+import { ITableNextTranslations } from "./TranslationTypes";
 
 export interface TableNextProps<T> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,4 +20,6 @@ export interface TableNextProps<T> {
   itemDisplayTooltipPosition?: TooltipPosition;
   itemsPerPageTooltipPosition?: TooltipPosition;
   pushPaginationDown?: boolean;
+
+  translations?: ITableNextTranslations;
 }

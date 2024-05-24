@@ -1,16 +1,50 @@
-import type { PaginationState, Table } from "@tanstack/react-table";
+import type { PaginationState } from "@tanstack/react-table";
 import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useMemo, useState } from "react";
 import clsx from "clsx";
 
 import type { TableNextProps } from "./types";
-import "../Table_shim.css";
-import { useState } from "react";
+import { Pagination } from "components/Pagination";
 
+import "../Table_shim.css";
+
+import { translations as defaultTranslations } from "../helpers";
+
+/**
+ * The `TableNext` component is a WIP replacement for the `Table` component.
+ *
+ * @example
+  const columnHelper = createColumnHelper<TableDataDefinition>();
+  const columns = [
+    columnHelper.accessor("firstName", {
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor((row) => row.lastName, {
+      id: "lastName",
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <i>Last Name</i>,
+    }),
+    columnHelper.accessor("age", {
+      header: () => "Age",
+      cell: (info) => info.renderValue(),
+    }),
+  ];
+
+  const data = [
+    { id: 1, firstName: "John", lastName: "Doe", age: 25 },
+    { id: 2, firstName: "Jane", lastName: "Doe", age: 27 },
+  ];
+
+  return <TableNext data={data} columns={columns} />;
+ *
+ * @see https://design.avayacloud.com/components/web/tables-web
+ * @see https://neo-react-library-storybook.netlify.app/?path=/docs/components-table-next--docs
+ */
 export const TableNext = ({
   data,
   columns,
@@ -23,8 +57,12 @@ export const TableNext = ({
   showRowSeparator = false,
 
   // pagination options
-  itemsPerPageOptions,
+  itemsPerPageOptions = [10, 25, 50, 100],
   initialStatePageIndex = 0,
+  itemDisplayTooltipPosition = "auto",
+  itemsPerPageTooltipPosition = "auto",
+
+  translations,
 
   ...rest
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,6 +71,12 @@ export const TableNext = ({
     pageIndex: initialStatePageIndex,
     pageSize: itemsPerPageOptions?.[0] || 10,
   });
+  const paginationTranslations = useMemo(() => {
+    return {
+      ...defaultTranslations.pagination,
+      ...translations?.pagination,
+    };
+  }, [translations]);
 
   const table = useReactTable({
     data,
@@ -46,6 +90,12 @@ export const TableNext = ({
 
     ...rest,
   });
+
+  const { getPageCount, getRowCount, getState, setPageIndex, setPageSize } =
+    table;
+  const { pageIndex, pageSize } = getState().pagination;
+
+  const rowCount = getRowCount();
 
   return (
     <div
@@ -92,97 +142,37 @@ export const TableNext = ({
         </tbody>
       </table>
 
-      {table.getPageCount() > 1 && <TablePagination table={table} />}
-    </div>
-  );
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const TablePagination = ({ table }: { table: Table<any> }) => {
-  const {
-    firstPage,
-    getCanNextPage,
-    getCanPreviousPage,
-    getPageCount,
-    getRowCount,
-    getRowModel,
-    getState,
-    lastPage,
-    nextPage,
-    previousPage,
-    setPageIndex,
-    setPageSize,
-  } = table;
-  const { pagination } = getState();
-  const { pageIndex, pageSize } = pagination;
-
-  return (
-    <div>
-      <div className="flex items-center gap-2">
-        <button
-          className="border rounded p-1"
-          onClick={() => firstPage()}
-          disabled={!getCanPreviousPage()}
-        >
-          {"<<"}
-        </button>
-        <button
-          className="border rounded p-1"
-          onClick={() => previousPage()}
-          disabled={!getCanPreviousPage()}
-        >
-          {"<"}
-        </button>
-        <button
-          className="border rounded p-1"
-          onClick={() => nextPage()}
-          disabled={!getCanNextPage()}
-        >
-          {">"}
-        </button>
-        <button
-          className="border rounded p-1"
-          onClick={() => lastPage()}
-          disabled={!getCanNextPage()}
-        >
-          {">>"}
-        </button>
-        <span className="flex items-center gap-1">
-          <div>Page</div>
-          <strong>
-            {pageIndex + 1} of {getPageCount().toLocaleString()}
-          </strong>
-        </span>
-        <span className="flex items-center gap-1">
-          | Go to page:
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              setPageIndex(page);
-            }}
-            className="border p-1 rounded w-16"
-          />
-        </span>
-        <select
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value));
+      {getPageCount() < 1 ? undefined : (
+        <Pagination
+          currentPageIndex={pageIndex + 1}
+          itemCount={rowCount}
+          itemsPerPage={pageSize}
+          itemsPerPageOptions={itemsPerPageOptions}
+          onPageChange={(e, newIndex) => {
+            e?.preventDefault();
+            setPageIndex(newIndex - 1);
           }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        Showing {getRowModel().rows.length.toLocaleString()} of{" "}
-        {getRowCount().toLocaleString()} Rows
-      </div>
-      <pre>{JSON.stringify(pagination, null, 2)}</pre>
+          onItemsPerPageChange={(e, newItemsPerPage) => {
+            e?.preventDefault();
+            setPageSize(newItemsPerPage);
+
+            // when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page
+            const maxPageIndex = Math.ceil(rowCount / newItemsPerPage);
+            if (pageIndex > maxPageIndex) {
+              setPageIndex(maxPageIndex - 1);
+            }
+          }}
+          backIconButtonText={paginationTranslations.backIconButtonText}
+          itemsPerPageLabel={paginationTranslations.itemsPerPageLabel}
+          nextIconButtonText={paginationTranslations.nextIconButtonText}
+          tooltipForCurrentPage={paginationTranslations.tooltipForCurrentPage}
+          tooltipForShownPagesSelect={
+            paginationTranslations.tooltipForShownPagesSelect
+          }
+          itemDisplayTooltipPosition={itemDisplayTooltipPosition}
+          itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
+        />
+      )}
     </div>
   );
 };
