@@ -5,15 +5,14 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 
 import type { TableNextProps } from "./types";
-import { Pagination } from "components/Pagination";
 
 import "../Table_shim.css";
 
-import { translations as defaultTranslations } from "../helpers";
+import { TablePagination } from "./TablePagination";
 
 /**
  * The `TableNext` component is a WIP replacement for the `Table` component.
@@ -71,12 +70,6 @@ export const TableNext = ({
     pageIndex: initialStatePageIndex,
     pageSize: itemsPerPageOptions?.[0] || 10,
   });
-  const paginationTranslations = useMemo(() => {
-    return {
-      ...defaultTranslations.pagination,
-      ...translations?.pagination,
-    };
-  }, [translations]);
 
   const table = useReactTable({
     data,
@@ -90,12 +83,6 @@ export const TableNext = ({
 
     ...rest,
   });
-
-  const { getPageCount, getRowCount, getState, setPageIndex, setPageSize } =
-    table;
-  const { pageIndex, pageSize } = getState().pagination;
-
-  const rowCount = getRowCount();
 
   return (
     <div
@@ -142,37 +129,13 @@ export const TableNext = ({
         </tbody>
       </table>
 
-      {getPageCount() < 1 ? undefined : (
-        <Pagination
-          currentPageIndex={pageIndex + 1}
-          itemCount={rowCount}
-          itemsPerPage={pageSize}
-          itemsPerPageOptions={itemsPerPageOptions}
-          onPageChange={(e, newIndex) => {
-            e?.preventDefault();
-            setPageIndex(newIndex - 1);
-          }}
-          onItemsPerPageChange={(e, newItemsPerPage) => {
-            e?.preventDefault();
-            setPageSize(newItemsPerPage);
-
-            // when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page
-            const maxPageIndex = Math.ceil(rowCount / newItemsPerPage);
-            if (pageIndex > maxPageIndex) {
-              setPageIndex(maxPageIndex - 1);
-            }
-          }}
-          backIconButtonText={paginationTranslations.backIconButtonText}
-          itemsPerPageLabel={paginationTranslations.itemsPerPageLabel}
-          nextIconButtonText={paginationTranslations.nextIconButtonText}
-          tooltipForCurrentPage={paginationTranslations.tooltipForCurrentPage}
-          tooltipForShownPagesSelect={
-            paginationTranslations.tooltipForShownPagesSelect
-          }
-          itemDisplayTooltipPosition={itemDisplayTooltipPosition}
-          itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
-        />
-      )}
+      <TablePagination
+        table={table}
+        itemsPerPageOptions={itemsPerPageOptions}
+        translations={translations}
+        itemDisplayTooltipPosition={itemDisplayTooltipPosition}
+        itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
+      />
     </div>
   );
 };
