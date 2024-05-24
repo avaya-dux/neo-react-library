@@ -4,7 +4,6 @@ import { TableInstance, TableOptions } from "react-table";
 
 import {
   IBodyTranslations,
-  IPaginationTranslations,
   ITableHeaderTranslations,
   ITableTranslations,
   IToolbarTranslations,
