@@ -60,6 +60,7 @@
     "styled-components": "6.1.11"
   },
   "peerDependencies": {
+    "@tanstack/react-table": "8.17.3",
     "downshift": "7.6.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -69,6 +70,7 @@
   "devDependencies": {
     "@avaya/neo": "3.81.4",
     "@avaya/neo-icons": "1.8.9",
+    "@faker-js/faker": "8.4.1",
     "@storybook/addon-a11y": "7.6.19",
     "@storybook/addon-actions": "7.6.19",
     "@storybook/addon-docs": "7.6.19",
@@ -84,6 +86,7 @@
     "@storybook/testing-library": "0.2.2",
     "@storybook/testing-react": "2.0.1",
     "@storybook/theming": "7.6.19",
+    "@tanstack/react-table": "8.17.3",
     "@testing-library/jest-dom": "6.4.5",
     "@testing-library/react": "14.3.1",
     "@testing-library/user-event": "14.5.2",

@@ -4,7 +4,6 @@ import { TableInstance, TableOptions } from "react-table";
 
 import {
   IBodyTranslations,
-  IPaginationTranslations,
   ITableHeaderTranslations,
   ITableTranslations,
   IToolbarTranslations,
@@ -70,8 +69,3 @@ export type TableProps<T extends Record<string, any>> = {
   TableOptions<T> &
   Pick<TableBodyProps<T>, "handleRowToggled"> &
   Partial<Pick<IFilterContext, "allowColumnFilter">>;
-
-export type PaginationProps<T extends Record<string, any>> = {
-  instance: TableInstance<T>;
-  translations: IPaginationTranslations;
-};

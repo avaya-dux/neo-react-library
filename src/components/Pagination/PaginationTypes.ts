@@ -1,6 +1,6 @@
 import { TooltipPosition } from "components/Tooltip";
 
-interface PaginationTranslations {
+export interface PaginationTranslations {
   backIconButtonText?: string;
   itemsPerPageLabel?: string;
   nextIconButtonText?: string;
