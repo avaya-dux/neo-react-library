@@ -1,26 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import clsx from "clsx";
 
+import type { TableNextProps } from "./types";
 import "../Table_shim.css";
-
-import type { RowHeight } from "../types";
-
-export interface TableNextProps<T> {
-  data: T[];
-
-  columns: ColumnDef<T, any>[];
-
-  containerClassName?: string;
-  pushPaginationDown?: boolean;
-  rowHeight?: RowHeight;
-  showRowSeparator?: boolean;
-}
 
 export const TableNext = ({
   data,
@@ -32,6 +18,7 @@ export const TableNext = ({
   showRowSeparator = false,
 
   ...rest
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: TableNextProps<any>) => {
   const table = useReactTable({
     data,
