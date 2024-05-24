@@ -7,6 +7,7 @@ export * from "./Button";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./Chip";
+export * from "./Drawer";
 export * from "./Form";
 export * from "./Icon";
 export * from "./IconButton";

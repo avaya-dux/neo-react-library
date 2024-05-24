@@ -1,0 +1,23 @@
+@keyframes slideInRightShim {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRightShim {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
