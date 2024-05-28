@@ -75,7 +75,7 @@ export const SubMenu: FC<SubMenuProps> = ({
 
 	useEffect(() => {
 		setOpen(action === "ENTER_SUB_MENU");
-	}, [action, counter]);
+	}, [action]);
 
 	const clonedChildren = useMemo(() => addIdToChildren(children), [children]);
 

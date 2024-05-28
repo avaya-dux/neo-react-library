@@ -100,18 +100,6 @@ export const Tooltip = ({
 		};
 	}, [onKeyUp]);
 
-	/**
-	 * NOTE: on the subject of the 'eslint-disable-next-line' below:
-	 * According to both MDN [1], W3 [2], and deque [3], we _must_ use JS to appropriately
-	 * hide the tooltip when the user clicks the "ESC" key. But jsx-a11y does
-	 * not like that we have event handlers on a static element [4]. I see no way
-	 * around this, so I'm having eslint ignore the rule for this instance.
-	 *
-	 * [1] https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tooltip_role
-	 * [2] https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
-	 * [3] https://dequeuniversity.com/library/aria/tooltip
-	 * [4] https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/4abc751d87a8491219a9a3d2dacd80ea8adcb79b/docs/rules/no-static-element-interactions.md
-	 */
 	return (
 		<div
 			{...rest}

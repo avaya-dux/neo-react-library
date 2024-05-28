@@ -57,7 +57,7 @@ export const MenuItem = forwardRef(
 		const generatedId = useId();
 		id = id || generatedId;
 		const _ref = useRef(null);
-		ref = ref || _ref;
+		const localRef = ref || _ref;
 
 		logger.debug(
 			`debug menuitem hasFocus = ${hasFocus}, isActive=${isActive}, counter=${counter}`,
@@ -66,7 +66,7 @@ export const MenuItem = forwardRef(
 		// run it in every render
 		useEffect(() => {
 			logger.debug(`trigger focus ${counter}`);
-			focus(hasFocus, ref as RefObject<HTMLDivElement>);
+			focus(hasFocus, localRef as RefObject<HTMLDivElement>);
 		});
 
 		return (
@@ -79,7 +79,7 @@ export const MenuItem = forwardRef(
 					className,
 				)}
 				id={id}
-				ref={ref}
+				ref={localRef}
 				role="menuitem"
 				tabIndex={tabIndex}
 			>

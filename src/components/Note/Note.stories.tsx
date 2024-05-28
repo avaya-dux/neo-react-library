@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from "components/Button";
@@ -63,6 +62,7 @@ export const Editable: Story = {
 				itemAlignment="right"
 				menuRootElement={
 					<button
+						type="button"
 						aria-label="menu actions"
 						className="neo-btn-square neo-btn-square--compact neo-btn-square-tertiary neo-btn-square-tertiary--info neo-icon-ellipses-horizontal"
 					/>

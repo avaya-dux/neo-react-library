@@ -12,7 +12,7 @@ const logger = log.getLogger("tab-utils-logger");
 logger.disableAll();
 
 export function debugTabs(
-	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these
 	logger: any,
 	tabs: { id: string; disabled: boolean }[],
 ) {
@@ -47,11 +47,11 @@ function toArray(children: ReactElement[]) {
 export const buildTabProps = (
 	children: TabsProps["children"],
 ): InternalTabProps[] => {
-	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these
 	const panelList = (children as any)[1];
 	const panels = toArray(panelList.props.children).filter(isValidPanelElement);
 
-	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these
 	const tablist = (children as any)[0];
 	const tabs = toArray(tablist.props.children)
 		.filter(isValidTabElement)
@@ -77,7 +77,7 @@ export const buildTabPropsNoPanel = (
 	return tabs;
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
+// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these
 const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
 	const props = tab.props;
 	const { id, children, ...rest } = props;
@@ -100,9 +100,9 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
 };
 
 const buildSingleTabPropsHasAssociatedPanel = (
-	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these
 	tab: any,
-	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these
 	panel: any,
 ): InternalTabProps => {
 	const props = tab.props;

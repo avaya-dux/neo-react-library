@@ -1,7 +1,3 @@
-// BUG: we shouldn't need to disable these rule as W3 recommends using these roles
-// https://www.w3.org/TR/wai-aria-practices-1.1/examples/treeview/treeview-1/treeview-1a.html
-/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
-
 import clsx from "clsx";
 import {
 	type DetailedHTMLProps,

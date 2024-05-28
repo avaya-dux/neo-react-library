@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import type { Meta, Story } from "@storybook/react";
 import { useEffect, useMemo, useState } from "react";
 import type { Column, ColumnInstance } from "react-table";

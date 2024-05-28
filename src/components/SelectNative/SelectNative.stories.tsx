@@ -99,7 +99,7 @@ export const LoadOptions = () => {
 		}, 2000);
 	}, []);
 
-	useEffect(fakeLoad, [fakeLoad]);
+	useEffect(fakeLoad, []);
 
 	return (
 		<>

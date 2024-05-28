@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ReactNode } from "react";
 import type { TableInstance, TableOptions } from "react-table";
 
@@ -10,7 +9,10 @@ import type {
 	IToolbarTranslations,
 } from ".";
 
-interface ToolbarSharedProps<T extends Record<string, any>> {
+// biome-ignore lint/suspicious/noExplicitAny: We require maximum flexibility here
+type AnyRecord = Record<string, any>;
+
+interface ToolbarSharedProps<T extends AnyRecord> {
 	readonly?: boolean;
 	selectableRows?: "none" | "single" | "multiple";
 	customActionsNode?: ReactNode;
@@ -21,23 +23,23 @@ interface ToolbarSharedProps<T extends Record<string, any>> {
 	showRowHeightMenu?: boolean;
 	rowHeight?: RowHeight;
 }
-export type TableToolbarProps<T extends Record<string, any>> = {
+export type TableToolbarProps<T extends AnyRecord> = {
 	instance: TableInstance<T>;
 	translations: IToolbarTranslations;
 	handleRowHeightChange: (newHeight: RowHeight) => Promise<void> | void;
 } & ToolbarSharedProps<T>;
 
-interface TableHeaderBodySharedProps<T extends Record<string, any>> {
+interface TableHeaderBodySharedProps<T extends AnyRecord> {
 	handleRowToggled?: (selectedRowIds: string[], row?: T) => void;
 	instance: TableInstance<T>;
 	selectableRows: "none" | "single" | "multiple";
 }
 
-export type TableHeaderProps<T extends Record<string, any>> = {
+export type TableHeaderProps<T extends AnyRecord> = {
 	translations: ITableHeaderTranslations;
 } & TableHeaderBodySharedProps<T>;
 
-export type TableBodyProps<T extends Record<string, any>> = {
+export type TableBodyProps<T extends AnyRecord> = {
 	translations: IBodyTranslations;
 } & TableHeaderBodySharedProps<T>;
 
@@ -51,7 +53,7 @@ export interface IFilterContext {
 
 export type RowHeight = "compact" | "medium" | "large";
 
-export type TableProps<T extends Record<string, any>> = {
+export type TableProps<T extends AnyRecord> = {
 	caption?: string;
 	id?: string;
 	showPagination?: boolean;
