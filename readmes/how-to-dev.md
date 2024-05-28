@@ -2,7 +2,7 @@
 
 > Scaffolded via [Vite](https://vitejs.dev/).
 
-> For unit testing we use [Vitest](https://vitest.dev/), for integration testing we use [Cypress](https://www.cypress.io/how-it-works), for linting we use [ESLint](https://eslint.org/) and for code consistency we use [Prettier](https://prettier.io/).
+> For unit testing we use [Vitest](https://vitest.dev/), for integration testing we use [Cypress](https://www.cypress.io/how-it-works), for linting and formatting we use [Biome JS](https://github.com/biomejs/biome).
 
 > You can see an overview of [the libraries structure here](https://app.codesee.io/maps/public/fe362a60-1da7-11ed-8a0e-8356adbc562c). Generated via [CodeSee](https://www.codesee.io/).
 
