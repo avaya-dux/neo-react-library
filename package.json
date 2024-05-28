@@ -41,7 +41,7 @@
 		"test:cypress-open": "cypress open --component -b chrome",
 		"github": "(yarn && yarn lint && yarn build && yarn test && yarn test:cypress && echo 'DigitalFlavio approves this PR') || (echo 'DigitalFlavio has fainted'; exit 1)",
 		"netlify": "yarn && yarn build && yarn build:storybook",
-		"all": "yarn && yarn clean && yarn format && yarn lint && yarn build && yarn build:storybook && yarn test && yarn test:cypress && yarn pack"
+		"all": "yarn && yarn clean && yarn format && yarn build && yarn build:storybook && yarn test && yarn test:cypress && yarn pack"
 	},
 	"dependencies": {
 		"atomic-layout": "0.16.2",
