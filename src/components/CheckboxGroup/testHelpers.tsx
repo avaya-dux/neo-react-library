@@ -1,5 +1,5 @@
-import { Checkbox, CheckboxProps } from "components/Checkbox";
-import { ReactElement } from "react";
+import { Checkbox, type CheckboxProps } from "components/Checkbox";
+import type { ReactElement } from "react";
 
 export const checkboxes = (
 	groupName: string,

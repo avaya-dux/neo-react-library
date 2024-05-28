@@ -2,8 +2,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { TableNext } from "./";
-import { ITableNextMockData, makeData } from "./mock-data";
-import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+import { type ITableNextMockData, makeData } from "./mock-data";
+import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
 
 const columnHelper = createColumnHelper<ITableNextMockData>();
 const meta: Meta<typeof TableNext> = {

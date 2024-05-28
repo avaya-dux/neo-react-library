@@ -1,8 +1,8 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { Icon } from "components";
 
-import { MenuItemProps } from "../MenuTypes";
+import type { MenuItemProps } from "../MenuTypes";
 import { MenuItem } from "./MenuItem";
 
 export default {

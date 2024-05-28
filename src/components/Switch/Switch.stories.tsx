@@ -1,10 +1,10 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useState } from "react";
 
 import { Button } from "components/Button";
 import { Form } from "components/Form";
 
-import { Switch, SwitchProps } from "./";
+import { Switch, type SwitchProps } from "./";
 
 export default {
 	title: "Components/Switch",

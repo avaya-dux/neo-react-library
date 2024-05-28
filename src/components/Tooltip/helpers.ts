@@ -1,4 +1,4 @@
-import { TooltipCSSPosition, TooltipPosition } from "./TooltipTypes";
+import type { TooltipCSSPosition, TooltipPosition } from "./TooltipTypes";
 
 export const MultilineClassName = "neo-tooltip__content--multiline";
 export const getMultilineClassName = (multiline?: boolean) => {

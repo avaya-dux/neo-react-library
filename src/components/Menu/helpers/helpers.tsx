@@ -2,22 +2,22 @@ import log from "loglevel";
 import {
 	Children,
 	cloneElement,
-	Dispatch,
-	FocusEventHandler,
+	type Dispatch,
+	type FocusEventHandler,
 	Fragment,
 	isValidElement,
-	KeyboardEventHandler,
-	MouseEventHandler,
-	ReactElement,
-	Ref,
-	SetStateAction,
+	type KeyboardEventHandler,
+	type MouseEventHandler,
+	type ReactElement,
+	type Ref,
+	type SetStateAction,
 } from "react";
 
 import { genId } from "utils";
 
 import { handleMenuItemClick } from "../EventHandlers";
 import { MenuItem } from "../MenuItem";
-import {
+import type {
 	ActionType,
 	MenuIndexesType,
 	MenuItemProps,

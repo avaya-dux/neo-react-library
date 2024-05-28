@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { HTMLAttributes, useId, useMemo } from "react";
+import { type HTMLAttributes, useId, useMemo } from "react";
 
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 import { handleAccessbilityError } from "utils/accessibilityUtils";

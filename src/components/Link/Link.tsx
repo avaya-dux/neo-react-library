@@ -1,14 +1,14 @@
 import clsx from "clsx";
 import {
-	FC,
-	HTMLProps,
-	KeyboardEvent,
-	MouseEvent,
-	KeyboardEventHandler,
-	MouseEventHandler,
+	type FC,
+	type HTMLProps,
+	type KeyboardEvent,
+	type MouseEvent,
+	type KeyboardEventHandler,
+	type MouseEventHandler,
 	useCallback,
 } from "react";
-import { IconNamesType, Keys, handleAccessbilityError } from "utils";
+import { type IconNamesType, Keys, handleAccessbilityError } from "utils";
 import "./Link_shim.css";
 type InlineOrIconProps =
 	| { inline?: boolean; icon?: never; placement?: never }

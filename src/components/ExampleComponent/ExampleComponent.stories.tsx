@@ -1,7 +1,7 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { ExampleComponent } from "./";
-import { Props } from "./ExampleComponentTypes";
+import type { Props } from "./ExampleComponentTypes";
 
 export default {
 	title: "Components/Example Component",

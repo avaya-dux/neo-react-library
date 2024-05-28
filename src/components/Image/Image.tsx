@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import {
-	ImgHTMLAttributes,
-	ReactElement,
+	type ImgHTMLAttributes,
+	type ReactElement,
 	useEffect,
 	useMemo,
 	useState,

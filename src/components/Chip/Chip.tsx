@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import { HTMLAttributes, MouseEventHandler, useState } from "react";
+import { type HTMLAttributes, type MouseEventHandler, useState } from "react";
 
 import { Avatar } from "components/Avatar";
-import { IconNamesType } from "utils";
+import type { IconNamesType } from "utils";
 
 export interface ChipProps
 	extends Exclude<HTMLAttributes<HTMLDivElement>, "onClick"> {

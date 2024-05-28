@@ -1,12 +1,12 @@
 import log from "loglevel";
 import {
 	cloneElement,
-	FC,
-	FocusEvent,
-	FocusEventHandler,
-	KeyboardEventHandler,
-	MouseEvent,
-	MouseEventHandler,
+	type FC,
+	type FocusEvent,
+	type FocusEventHandler,
+	type KeyboardEventHandler,
+	type MouseEvent,
+	type MouseEventHandler,
 	useContext,
 	useEffect,
 	useId,
@@ -22,7 +22,7 @@ import {
 } from "../EventHandlers";
 import { addIdToChildren, buildMenuIndexes, layoutChildren } from "../helpers";
 import { MenuContext } from "../MenuContext";
-import { ActionType, MenuIndexesType, SubMenuProps } from "../MenuTypes";
+import type { ActionType, MenuIndexesType, SubMenuProps } from "../MenuTypes";
 
 const logger = log.getLogger("submenu");
 logger.disableAll();

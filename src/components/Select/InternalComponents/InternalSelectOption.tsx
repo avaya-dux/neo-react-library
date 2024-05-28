@@ -4,7 +4,7 @@ import { useContext, useMemo } from "react";
 import { genId } from "utils/accessibilityUtils";
 
 import { SelectContext } from "../utils/SelectContext";
-import { SelectOptionProps } from "../utils/SelectTypes";
+import type { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionWithCheckbox } from "./OptionWithCheckbox";
 import clsx from "clsx";
 

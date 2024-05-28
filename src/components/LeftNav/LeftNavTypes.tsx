@@ -1,6 +1,6 @@
-import { HTMLAttributes, ReactElement } from "react";
+import type { HTMLAttributes, ReactElement } from "react";
 
-import { IconNamesType } from "utils";
+import type { IconNamesType } from "utils";
 
 export interface TopLinkItemProps {
 	label: string;

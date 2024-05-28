@@ -2,7 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { render, screen } from "@testing-library/react";
 
 import { TableNext } from "./";
-import { ITableNextMockData, makeData } from "./mock-data";
+import { type ITableNextMockData, makeData } from "./mock-data";
 
 describe("Table (Next)", () => {
 	const columnHelper = createColumnHelper<ITableNextMockData>();

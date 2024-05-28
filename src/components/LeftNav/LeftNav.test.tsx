@@ -1,4 +1,4 @@
-import { render, RenderResult, screen } from "@testing-library/react";
+import { render, type RenderResult, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 

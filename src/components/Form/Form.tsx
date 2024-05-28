@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FunctionComponent, HTMLAttributes } from "react";
+import type { FunctionComponent, HTMLAttributes } from "react";
 
 /**
  * @prop {boolean} [inline] display form elements inline

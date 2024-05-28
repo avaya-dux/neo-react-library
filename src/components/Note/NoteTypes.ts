@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode } from "react";
+import type { FormEvent, ReactNode } from "react";
 
 interface CoreProps extends React.HTMLAttributes<HTMLDivElement> {
 	children: ReactNode;

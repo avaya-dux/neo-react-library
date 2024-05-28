@@ -1,4 +1,4 @@
-import { ButtonProps, NotificationType } from "./ButtonActionTypes";
+import type { ButtonProps, NotificationType } from "./ButtonActionTypes";
 import { SecondaryButton } from "./SecondaryButton";
 
 export interface ButtonActionProps {

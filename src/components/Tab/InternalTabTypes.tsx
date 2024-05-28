@@ -1,8 +1,8 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import type { Dispatch, ReactNode, SetStateAction } from "react";
 
-import { IconNamesType } from "utils";
+import type { IconNamesType } from "utils";
 
-import { TabPanelProps } from "./TabTypes";
+import type { TabPanelProps } from "./TabTypes";
 
 export interface InternalTabProps
 	extends Omit<React.HTMLAttributes<HTMLDivElement>, "content"> {

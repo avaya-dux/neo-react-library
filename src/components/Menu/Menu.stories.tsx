@@ -1,10 +1,10 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import log from "loglevel";
 import {
 	Menu,
 	MenuButton,
 	MenuItem,
-	MenuProps,
+	type MenuProps,
 	MenuSeparator,
 	SubMenu,
 } from "./";

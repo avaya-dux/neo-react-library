@@ -1,8 +1,8 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { Button } from "components/Button";
 
-import { Breadcrumbs, BreadcrumbsProps } from "./Breadcrumbs";
+import { Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 
 export default {
 	title: "Components/Breadcrumbs",

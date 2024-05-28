@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { forwardRef, Ref, useContext } from "react";
+import { forwardRef, type Ref, useContext } from "react";
 
 import { SelectContext } from "../utils/SelectContext";
 

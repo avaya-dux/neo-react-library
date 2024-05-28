@@ -1,6 +1,6 @@
 import type { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 import clsx from "clsx";
-import { createContext, ReactNode, useContext, useMemo, useState } from "react";
+import { createContext, type ReactNode, useContext, useMemo, useState } from "react";
 
 interface ITabsContext {
 	expanded: boolean;

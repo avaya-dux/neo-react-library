@@ -1,6 +1,6 @@
 import { Tooltip } from "components/Tooltip";
 
-import { PaginationProps } from "..";
+import type { PaginationProps } from "..";
 
 export const PaginationItemsPerPageSelection = ({
 	itemsPerPage,
@@ -36,11 +36,11 @@ export const PaginationItemsPerPageSelection = ({
 				defaultValue={itemsPerPage}
 				onBlur={(e) => {
 					onItemsPerPageChange &&
-						onItemsPerPageChange(e, parseInt(e.target.value, 10));
+						onItemsPerPageChange(e, Number.parseInt(e.target.value, 10));
 				}}
 				onChange={(e) => {
 					onItemsPerPageChange &&
-						onItemsPerPageChange(e, parseInt(e.target.value, 10));
+						onItemsPerPageChange(e, Number.parseInt(e.target.value, 10));
 				}}
 			>
 				{itemsPerPageOptions.map((option, i) => (

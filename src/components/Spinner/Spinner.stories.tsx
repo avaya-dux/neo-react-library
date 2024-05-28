@@ -1,6 +1,6 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
-import { SpinnerProps, Spinner } from "./";
+import { type SpinnerProps, Spinner } from "./";
 
 export default {
 	title: "Components/Spinner",

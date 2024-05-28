@@ -1,4 +1,4 @@
-import { PopupPosition } from "./PopupTypes";
+import type { PopupPosition } from "./PopupTypes";
 
 export const getContainerStyle = (
 	position: PopupPosition,

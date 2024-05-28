@@ -1,12 +1,12 @@
 import clsx from "clsx";
-import { UseComboboxReturnValue } from "downshift";
+import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
 import { useContext, useEffect } from "react";
 
 import { Keys } from "utils";
 
 import { SelectContext } from "../utils/SelectContext";
-import { SelectOptionProps } from "../utils/SelectTypes";
+import type { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
 const logger = log.getLogger("single-select-searchable");

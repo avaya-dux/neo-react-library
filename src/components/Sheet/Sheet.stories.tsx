@@ -1,9 +1,9 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useState } from "react";
 
 import { Button } from "components/Button";
 
-import { Sheet, SheetProps } from "./";
+import { Sheet, type SheetProps } from "./";
 
 export default {
 	title: "Components/Sheet",

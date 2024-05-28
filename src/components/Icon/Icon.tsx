@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { getIconClass, IconNamesType } from "utils/icons";
+import { getIconClass, type IconNamesType } from "utils/icons";
 
 // import { SizeType } from "utils/size"; TODO https://jira.forge.avaya.com/browse/NEO-645
 type SizeType = "sm" | "md" | "lg";

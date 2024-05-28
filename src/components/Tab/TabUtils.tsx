@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import log from "loglevel";
-import { Dispatch, ReactElement, RefObject, SetStateAction } from "react";
+import type { Dispatch, ReactElement, RefObject, SetStateAction } from "react";
 import clsx from "clsx";
 import { genId } from "utils";
 
 import { InternalTab } from "./InternalTab";
-import { InternalTabProps } from "./InternalTabTypes";
+import type { InternalTabProps } from "./InternalTabTypes";
 import { ClosableTab, Tab, TabLink, TabPanel } from "./TabComponents";
-import { TabListProps, TabsProps } from "./TabTypes";
+import type { TabListProps, TabsProps } from "./TabTypes";
 
 const logger = log.getLogger("tab-utils-logger");
 logger.disableAll();

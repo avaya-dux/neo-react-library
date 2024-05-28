@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect, forwardRef, useId } from "react";
+import { type ReactNode, useCallback, useEffect, forwardRef, useId } from "react";
 import ReactDOM from "react-dom";
 import FocusLock from "react-focus-lock";
 import clsx from "clsx";

@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { Action } from "./Action";
 import { Content } from "./Content";
 import { WidgetContext } from "./WidgetContext";
-import { ThreeChildren, WidgetProps } from "./WidgetTypes";
+import type { ThreeChildren, WidgetProps } from "./WidgetTypes";
 
 /**
  * normalize children to an array of three elements

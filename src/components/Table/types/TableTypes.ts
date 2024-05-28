@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactNode } from "react";
-import { TableInstance, TableOptions } from "react-table";
+import type { ReactNode } from "react";
+import type { TableInstance, TableOptions } from "react-table";
 
-import {
+import type {
 	IBodyTranslations,
 	ITableHeaderTranslations,
 	ITableTranslations,
 	IToolbarTranslations,
 } from ".";
-import { TooltipPosition } from "components/Tooltip/TooltipTypes";
+import type { TooltipPosition } from "components/Tooltip/TooltipTypes";
 
 interface ToolbarSharedProps<T extends Record<string, any>> {
 	readonly?: boolean;

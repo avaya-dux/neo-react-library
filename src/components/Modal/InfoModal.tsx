@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { forwardRef, ReactNode, useId } from "react";
+import { forwardRef, type ReactNode, useId } from "react";
 import ReactDOM from "react-dom";
 
 import "./BasicModal/BasicModal_shim.css";

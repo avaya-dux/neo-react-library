@@ -1,9 +1,9 @@
 import log from "loglevel";
-import { Dispatch, MouseEvent, RefObject, SetStateAction } from "react";
+import type { Dispatch, MouseEvent, RefObject, SetStateAction } from "react";
 
 import { isAriaDisabled } from "utils";
 
-import { InternalTabProps } from "../InternalTabTypes";
+import type { InternalTabProps } from "../InternalTabTypes";
 import {
 	enableLeftButton,
 	enableRightButton,

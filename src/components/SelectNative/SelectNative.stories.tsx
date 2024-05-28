@@ -1,9 +1,9 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useCallback, useEffect, useState } from "react";
 
 import { Button, Form } from "components";
 
-import { SelectNative, SelectNativeProps } from ".";
+import { SelectNative, type SelectNativeProps } from ".";
 
 export default {
 	title: "Components/Select/Native Select",

@@ -1,5 +1,5 @@
-import { Table, TableProps } from ".";
-import { FilledFields, IDataTableMockData } from "./helpers";
+import { Table, type TableProps } from ".";
+import { FilledFields, type IDataTableMockData } from "./helpers";
 
 describe("Table component", () => {
 	const headerCheckbox = "table thead th input[type='checkbox']";

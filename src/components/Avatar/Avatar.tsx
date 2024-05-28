@@ -1,4 +1,4 @@
-import { forwardRef, Ref, HTMLAttributes } from "react";
+import { forwardRef, type Ref, type HTMLAttributes } from "react";
 
 const SizeMap = {
 	sm: "small",

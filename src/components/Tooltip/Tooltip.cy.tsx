@@ -1,6 +1,6 @@
 import { Avatar } from "components/Avatar";
 
-import { Tooltip, TooltipPosition } from ".";
+import { Tooltip, type TooltipPosition } from ".";
 import { translatePositionToCSSName } from "./helpers";
 
 import "./cypress-styles.css";

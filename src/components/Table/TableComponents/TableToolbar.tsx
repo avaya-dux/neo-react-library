@@ -6,7 +6,7 @@ import { Menu, MenuItem } from "components/Menu";
 import { TextInput } from "components/TextInput";
 
 import { FilterContext } from "../helpers";
-import { TableToolbarProps } from "../types";
+import type { TableToolbarProps } from "../types";
 import { TableFilter } from "./TableFilter";
 
 /**

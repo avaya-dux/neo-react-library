@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { LeftNavContextType } from "./LeftNavTypes";
+import type { LeftNavContextType } from "./LeftNavTypes";
 
 export const LeftNavContext = createContext<LeftNavContextType>({
 	currentUrl: "",

@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
-import { SizeTypeSelect } from "utils";
+import type { SizeTypeSelect } from "utils";
 
 export interface SelectOptionProps {
 	children: string;

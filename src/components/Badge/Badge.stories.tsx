@@ -1,6 +1,6 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
-import { Badge, BadgeProps } from "./Badge";
+import { Badge, type BadgeProps } from "./Badge";
 
 export default {
 	title: "Components/Badge",

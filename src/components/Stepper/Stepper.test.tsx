@@ -4,7 +4,7 @@ import { vi } from "vitest";
 
 import { UserEventKeys } from "utils";
 
-import { Stepper, Steps } from "./Stepper";
+import { Stepper, type Steps } from "./Stepper";
 
 describe("Stepper", () => {
 	const user = userEvent.setup();

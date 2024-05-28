@@ -7,7 +7,7 @@ import {
 	TopNavSearch,
 	TopNavSkipNav,
 } from "./helpers";
-import { TopNavProps } from "./TopNavTypes";
+import type { TopNavProps } from "./TopNavTypes";
 
 import "./TopNav_shim.css";
 

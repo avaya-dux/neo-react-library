@@ -1,4 +1,4 @@
-import { IconNamesType } from "utils/icons";
+import type { IconNamesType } from "utils/icons";
 
 export interface NoContentProps {
 	icon?: IconNamesType;

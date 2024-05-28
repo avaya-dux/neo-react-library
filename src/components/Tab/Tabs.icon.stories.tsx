@@ -1,7 +1,7 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useState } from "react";
 
-import { IconNames, IconNamesType } from "utils";
+import { IconNames, type IconNamesType } from "utils";
 
 import { tabMouseEventHandlerLogger } from "./EventHandlers";
 import { Tab, TabList, TabPanel, TabPanels } from "./TabComponents";

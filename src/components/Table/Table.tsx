@@ -11,14 +11,14 @@ import {
 
 import { Pagination } from "components/Pagination";
 
-import { TableProps } from ".";
+import type { TableProps } from ".";
 import {
 	convertRowIdsArrayToObject,
 	translations as defaultTranslations,
 	FilterContext,
 } from "./helpers";
 import { TableBody, TableHeader, TableToolbar } from "./TableComponents";
-import { IFilterContext, RowHeight } from "./types";
+import type { IFilterContext, RowHeight } from "./types";
 
 import "./Table_shim.css";
 

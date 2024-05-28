@@ -1,7 +1,7 @@
-import { ComponentStory } from "@storybook/react";
+import type { ComponentStory } from "@storybook/react";
 import type { Meta } from "@storybook/react";
 
-import { Icon, IconProps } from ".";
+import { Icon, type IconProps } from ".";
 
 export default {
 	title: "Components/Icon",

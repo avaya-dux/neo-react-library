@@ -1,10 +1,10 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useEffect, useRef } from "react";
 
 import { Toast } from "components/Toast";
 import { IconNames } from "utils";
 
-import { PopupManager, ToastOptions } from ".";
+import { PopupManager, type ToastOptions } from ".";
 import { removePopupManagerContainer } from "./";
 import { popupManagerLogger as logger } from "./PopupManager";
 

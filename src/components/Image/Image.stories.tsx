@@ -1,4 +1,4 @@
-import { ComponentStory } from "@storybook/react";
+import type { ComponentStory } from "@storybook/react";
 import type { Meta } from "@storybook/react";
 import { useState } from "react";
 
@@ -6,7 +6,7 @@ import { Button } from "components/Button";
 import { Icon } from "components/Icon";
 
 import cat from "./200by300image.jpeg";
-import { Image, ImageProps } from "./Image";
+import { Image, type ImageProps } from "./Image";
 
 export default {
 	title: "Components/Image",

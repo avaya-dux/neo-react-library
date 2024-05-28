@@ -1,4 +1,4 @@
-import { TextInput, TextInputProps } from "components/TextInput";
+import { TextInput, type TextInputProps } from "components/TextInput";
 
 /**
  * Provides several defaults for the TextInput component making it easier

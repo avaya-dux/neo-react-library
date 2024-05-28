@@ -8,7 +8,7 @@ import {
 	getIconClass,
 	getSizeClass,
 	getVariantClasses,
-	IconNamesType,
+	type IconNamesType,
 	rootBtnClass,
 	showSpinner,
 } from "utils";

@@ -1,10 +1,10 @@
-import { Story } from "@storybook/react";
-import { FormEvent, useCallback, useState } from "react";
+import type { Story } from "@storybook/react";
+import { type FormEvent, useCallback, useState } from "react";
 
 import { Button, TextArea } from "components";
-import { Checkbox, CheckboxProps } from "components/Checkbox/Checkbox";
+import { Checkbox, type CheckboxProps } from "components/Checkbox/Checkbox";
 
-import { CheckboxGroup, CheckboxGroupProps } from "./CheckboxGroup";
+import { CheckboxGroup, type CheckboxGroupProps } from "./CheckboxGroup";
 import {
 	checkboxes,
 	disabledCheckboxes,

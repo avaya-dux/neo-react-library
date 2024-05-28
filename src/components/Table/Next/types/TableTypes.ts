@@ -1,8 +1,8 @@
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 
 import type { RowHeight } from "../../types";
-import { TooltipPosition } from "components/Tooltip";
-import { ITableNextTranslations } from "./TranslationTypes";
+import type { TooltipPosition } from "components/Tooltip";
+import type { ITableNextTranslations } from "./TranslationTypes";
 
 export interface TableNextProps<T> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

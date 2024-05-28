@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import log from "loglevel";
-import { Ref, RefObject, forwardRef, useEffect, useId, useRef } from "react";
+import { type Ref, type RefObject, forwardRef, useEffect, useId, useRef } from "react";
 
-import { MenuItemProps } from "../MenuTypes";
+import type { MenuItemProps } from "../MenuTypes";
 
 const logger = log.getLogger("menu-item");
 logger.disableAll();

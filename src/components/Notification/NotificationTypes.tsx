@@ -1,10 +1,10 @@
-import { IconNamesType } from "utils";
+import type { IconNamesType } from "utils";
 
-import { ButtonActionProps } from "./Actions/ButtonAction";
-import { ClosableActionProps } from "./Actions/ClosableAction";
-import { CounterActionProps } from "./Actions/CounterAction";
+import type { ButtonActionProps } from "./Actions/ButtonAction";
+import type { ClosableActionProps } from "./Actions/ClosableAction";
+import type { CounterActionProps } from "./Actions/CounterAction";
 
-import { INotificationTranslations } from "./Helpers";
+import type { INotificationTranslations } from "./Helpers";
 
 type ActionType = {
 	actions?: {

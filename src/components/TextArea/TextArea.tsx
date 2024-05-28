@@ -1,4 +1,4 @@
-import { HTMLProps, useEffect, useId, useRef, useState } from "react";
+import { type HTMLProps, useEffect, useId, useRef, useState } from "react";
 
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 

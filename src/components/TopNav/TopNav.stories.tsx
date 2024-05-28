@@ -1,5 +1,5 @@
-import { Meta, Story } from "@storybook/react";
-import { cloneElement, FormEvent, useState } from "react";
+import type { Meta, Story } from "@storybook/react";
+import { cloneElement, type FormEvent, useState } from "react";
 
 import {
 	AgentCard,
@@ -17,7 +17,7 @@ import {
 	Tabs,
 } from "components";
 
-import { TopNav, TopNavProps } from ".";
+import { TopNav, type TopNavProps } from ".";
 import fpo from "./logo-fpo.png";
 
 export default {

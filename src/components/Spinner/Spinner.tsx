@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
-import { SizeType } from "utils/size";
+import type { SizeType } from "utils/size";
 
 /**
  * SpinnerProps

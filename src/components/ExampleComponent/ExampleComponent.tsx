@@ -1,6 +1,6 @@
 import { handleAccessbilityError } from "utils";
 
-import { Props } from "./ExampleComponentTypes";
+import type { Props } from "./ExampleComponentTypes";
 
 /**
  * The ExampleComponent does very cool things that are very useful. :rofl:

@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import log from "loglevel";
 import {
-	Dispatch,
-	MouseEventHandler,
-	SetStateAction,
+	type Dispatch,
+	type MouseEventHandler,
+	type SetStateAction,
 	useEffect,
 	useMemo,
 	useRef,
@@ -16,11 +16,11 @@ import { Tooltip } from "components/Tooltip";
 import {
 	ButtonAction,
 	ClosableAction,
-	ClosableActionProps,
+	type ClosableActionProps,
 	CounterAction,
 } from "./Actions";
 import { defaultTranslations } from "./Helpers";
-import { NotificationProps } from "./NotificationTypes";
+import type { NotificationProps } from "./NotificationTypes";
 
 const logger = log.getLogger("notification-logger");
 logger.disableAll();

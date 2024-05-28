@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react";
 import { Accordion } from "../Accordion";
-import { AccordionGroup, AccordionGroupProps } from "./AccordionGroup";
+import { AccordionGroup, type AccordionGroupProps } from "./AccordionGroup";
 import { Sheet } from "components/Sheet";
 
 export default {

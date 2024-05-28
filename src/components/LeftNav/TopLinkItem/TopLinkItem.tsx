@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import {
-	MouseEventHandler,
+	type MouseEventHandler,
 	useContext,
 	useEffect,
 	useId,
@@ -11,7 +11,7 @@ import {
 import { Button } from "components/Button";
 
 import { LeftNavContext } from "../LeftNavContext";
-import { TopLinkItemProps } from "../LeftNavTypes";
+import type { TopLinkItemProps } from "../LeftNavTypes";
 
 import "./TopLinkItem_shim.css";
 

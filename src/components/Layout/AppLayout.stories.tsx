@@ -1,7 +1,7 @@
-import { Meta } from "@storybook/react";
-import { ReactNode } from "react";
+import type { Meta } from "@storybook/react";
+import type { ReactNode } from "react";
 
-import { AppLayout, AppLayoutProps } from "./";
+import { AppLayout, type AppLayoutProps } from "./";
 import { LeftNav } from "components/LeftNav";
 import { Widget } from "components/Widget";
 import { Icon } from "components/Icon";

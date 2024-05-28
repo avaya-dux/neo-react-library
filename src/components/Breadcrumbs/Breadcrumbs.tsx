@@ -1,6 +1,6 @@
-import { Fragment, ReactElement } from "react";
+import { Fragment, type ReactElement } from "react";
 
-import { ButtonProps } from "components/Button";
+import type { ButtonProps } from "components/Button";
 
 type RequiredAttributes = Required<
 	Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">

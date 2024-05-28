@@ -5,7 +5,7 @@ import {
 	PaginationItemsPerPageSelection,
 	PaginationNavigation,
 } from "./Nodes/";
-import { PaginationProps } from "./PaginationTypes";
+import type { PaginationProps } from "./PaginationTypes";
 
 import "./Pagination.css";
 

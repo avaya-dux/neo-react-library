@@ -6,7 +6,7 @@ import { Button, Form, Radio, RadioGroup, Sheet } from "components";
 import { Select } from "./Select";
 import { SelectOption } from "./SelectOption";
 import { fruitOptions } from "./utils/mockdata";
-import { SelectProps } from "./utils/SelectTypes";
+import type { SelectProps } from "./utils/SelectTypes";
 
 import "./SelectStories.css";
 

@@ -1,6 +1,6 @@
 import { Button } from "components/Button";
 
-import { SecondaryButtonProps } from "./ButtonActionTypes";
+import type { SecondaryButtonProps } from "./ButtonActionTypes";
 
 export const SecondaryButton = ({
 	children,

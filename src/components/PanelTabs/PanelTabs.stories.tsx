@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
-import { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
+import type { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 import { useState } from "react";
 
 import { Button } from "components/Button";

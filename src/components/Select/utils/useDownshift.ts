@@ -1,8 +1,8 @@
 import { useCombobox, useSelect } from "downshift";
 import log from "loglevel";
-import { Dispatch, SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 
-import { SelectOptionProps } from "./SelectTypes";
+import type { SelectOptionProps } from "./SelectTypes";
 
 const logger = log.getLogger("use-downshfit");
 logger.disableAll();

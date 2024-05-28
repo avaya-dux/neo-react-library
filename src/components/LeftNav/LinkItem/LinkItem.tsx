@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import {
-	KeyboardEvent,
-	KeyboardEventHandler,
-	MouseEventHandler,
+	type KeyboardEvent,
+	type KeyboardEventHandler,
+	type MouseEventHandler,
 	useContext,
 	useEffect,
 	useId,
@@ -15,7 +15,7 @@ import { Button } from "components/Button";
 import { Keys } from "utils";
 
 import { LeftNavContext } from "../LeftNavContext";
-import { LinkItemProps } from "../LeftNavTypes";
+import type { LinkItemProps } from "../LeftNavTypes";
 
 /**
  * Is meant to be used as a link that is nested under a `NavCategory`.

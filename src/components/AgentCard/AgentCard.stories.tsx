@@ -1,8 +1,8 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { Avatar } from "components/Avatar";
 
-import { AgentCard, AgentCardProps } from "./AgentCard";
+import { AgentCard, type AgentCardProps } from "./AgentCard";
 
 export default {
 	title: "Components/AgentCard",

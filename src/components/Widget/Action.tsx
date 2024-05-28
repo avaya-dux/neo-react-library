@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { ActionProps } from "./WidgetTypes";
+import type { ActionProps } from "./WidgetTypes";
 
 export const Action = ({ children, className, ...rest }: ActionProps) => {
 	return (

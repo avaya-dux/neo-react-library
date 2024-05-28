@@ -1,10 +1,10 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import ReactStopwatch from "react-stopwatch";
 
 import { IconNames } from "utils";
 
 import {
-	EventNotificationProps,
+	type EventNotificationProps,
 	notificationLogger as logger,
 	Notification,
 } from ".";

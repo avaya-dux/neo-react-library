@@ -1,4 +1,4 @@
-import { ITableTranslations } from "../types";
+import type { ITableTranslations } from "../types";
 
 export const translations: ITableTranslations = {
 	toolbar: {

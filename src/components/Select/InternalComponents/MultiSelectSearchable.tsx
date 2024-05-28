@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { UseComboboxReturnValue } from "downshift";
+import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
 import { useContext, useEffect, useMemo } from "react";
 
@@ -7,7 +7,7 @@ import { Chip } from "components/Chip";
 import { Keys } from "utils";
 
 import { SelectContext } from "../utils/SelectContext";
-import { SelectOptionProps } from "../utils/SelectTypes";
+import type { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
 import "./MultiSelect.css";

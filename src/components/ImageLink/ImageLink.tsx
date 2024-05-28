@@ -1,6 +1,6 @@
-import { HTMLAttributeReferrerPolicy } from "react";
+import type { HTMLAttributeReferrerPolicy } from "react";
 
-import { Image, ImageProps } from "components/Image";
+import { Image, type ImageProps } from "components/Image";
 
 export interface ImageLinkProps extends ImageProps {
 	href: string;

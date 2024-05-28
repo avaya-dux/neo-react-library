@@ -9,7 +9,7 @@ import {
 	getSizeClass,
 	getVariantClasses,
 	handleAccessbilityError,
-	IconNamesType,
+	type IconNamesType,
 	rootBtnClass,
 	showSpinner,
 } from "utils";

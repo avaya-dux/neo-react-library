@@ -1,5 +1,5 @@
 import log from "loglevel";
-import {
+import type {
 	Dispatch,
 	FocusEvent,
 	KeyboardEvent,
@@ -9,7 +9,7 @@ import {
 
 import { isAriaDisabled, Keys } from "utils";
 
-import { InternalTabProps } from "../InternalTabTypes";
+import type { InternalTabProps } from "../InternalTabTypes";
 import { activateAnotherTabAndPanel } from "./Helper";
 import {
 	activatePreviousTab,

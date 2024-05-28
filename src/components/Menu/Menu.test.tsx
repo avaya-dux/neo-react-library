@@ -1,4 +1,4 @@
-import { act, render, RenderResult, screen } from "@testing-library/react";
+import { act, render, type RenderResult, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import log from "loglevel";

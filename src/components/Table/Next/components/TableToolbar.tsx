@@ -1,4 +1,4 @@
-import { Table } from "@tanstack/react-table";
+import type { Table } from "@tanstack/react-table";
 
 import type { IToolbarTranslations, RowHeight } from "components/Table/types";
 import { IconButton } from "components/IconButton";

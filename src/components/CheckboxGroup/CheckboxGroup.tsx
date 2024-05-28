@@ -1,7 +1,7 @@
 import log from "loglevel";
-import { Children, ReactElement, useCallback, useMemo } from "react";
+import { Children, type ReactElement, useCallback, useMemo } from "react";
 
-import { Checkbox, CheckboxProps } from "components/Checkbox";
+import { Checkbox, type CheckboxProps } from "components/Checkbox";
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 import { handleAccessbilityError } from "utils";
 

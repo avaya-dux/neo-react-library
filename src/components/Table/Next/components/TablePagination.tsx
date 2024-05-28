@@ -1,9 +1,9 @@
-import { Table } from "@tanstack/react-table";
+import type { Table } from "@tanstack/react-table";
 import { useMemo } from "react";
 
 import { Pagination } from "components/Pagination";
-import { PaginationTranslations } from "components/Pagination/PaginationTypes";
-import { TooltipPosition } from "components/Tooltip";
+import type { PaginationTranslations } from "components/Pagination/PaginationTypes";
+import type { TooltipPosition } from "components/Tooltip";
 
 import { translations as defaultTranslations } from "../../helpers";
 

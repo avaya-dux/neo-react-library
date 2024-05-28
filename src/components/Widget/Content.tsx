@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useContext } from "react";
 
 import { WidgetContext } from "./WidgetContext";
-import { ContentProps } from "./WidgetTypes";
+import type { ContentProps } from "./WidgetTypes";
 
 export const Content = ({
 	children,

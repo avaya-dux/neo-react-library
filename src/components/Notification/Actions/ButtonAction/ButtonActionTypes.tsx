@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, MouseEventHandler } from "react";
+import type { ButtonHTMLAttributes, MouseEventHandler } from "react";
 
 export type NotificationType =
 	| "success"

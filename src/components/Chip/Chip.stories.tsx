@@ -1,6 +1,6 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
-import { Chip, ChipProps, ChipsContainer } from "./";
+import { Chip, type ChipProps, ChipsContainer } from "./";
 
 export default {
 	title: "Components/Chips",

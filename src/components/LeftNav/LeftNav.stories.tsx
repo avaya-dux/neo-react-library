@@ -1,6 +1,6 @@
-import { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
-import { LeftNav, LeftNavProps } from "./";
+import { LeftNav, type LeftNavProps } from "./";
 
 export default {
 	title: "Components/Left Navigation",

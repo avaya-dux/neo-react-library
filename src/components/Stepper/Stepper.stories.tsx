@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Stepper, Steps } from "./Stepper";
+import { Stepper, type Steps } from "./Stepper";
 import { useState } from "react";
 import { Button } from "components/Button";
 

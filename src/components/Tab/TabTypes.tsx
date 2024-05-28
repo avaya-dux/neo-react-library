@@ -1,7 +1,7 @@
-import { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 
-import { MenuProps } from "components/Menu";
-import { IconNamesType } from "utils";
+import type { MenuProps } from "components/Menu";
+import type { IconNamesType } from "utils";
 
 export interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
 	id?: string;

@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import { Children, cloneElement, HTMLAttributes, ReactElement } from "react";
+import { Children, cloneElement, type HTMLAttributes, type ReactElement } from "react";
 
-import { ChipProps } from "./Chip";
+import type { ChipProps } from "./Chip";
 
 export interface ChipsContainerProps extends HTMLAttributes<HTMLDivElement> {
 	children: ReactElement<ChipProps> | ReactElement<ChipProps>[];

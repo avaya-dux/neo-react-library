@@ -6,7 +6,7 @@ import { useIsInitialRender } from "utils/hooks/useIsInitialRender";
 
 import { InternalSelect } from "./InternalComponents";
 import { SelectContext } from "./utils/SelectContext";
-import { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
+import type { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
 
 import log from "loglevel";

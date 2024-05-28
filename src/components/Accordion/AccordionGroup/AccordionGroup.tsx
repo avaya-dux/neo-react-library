@@ -1,5 +1,5 @@
-import { ReactElement, useState, cloneElement, Children } from "react";
-import { AccordionProps } from "../Accordion";
+import { type ReactElement, useState, cloneElement, Children } from "react";
+import type { AccordionProps } from "../Accordion";
 import "./AccordionGroup_shim.css";
 
 export interface AccordionGroupProps {

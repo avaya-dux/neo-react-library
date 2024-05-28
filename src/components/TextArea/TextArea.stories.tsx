@@ -1,6 +1,6 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
-import { TextArea, TextAreaProps } from "./TextArea";
+import { TextArea, type TextAreaProps } from "./TextArea";
 
 export default {
 	title: "Components/Text Area",

@@ -1,6 +1,6 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
-import { NoContent, NoContentProps } from "./";
+import { NoContent, type NoContentProps } from "./";
 
 export default {
 	title: "Components/No Content",

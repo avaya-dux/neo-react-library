@@ -1,10 +1,10 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes, forwardRef, Ref } from "react";
+import { type ButtonHTMLAttributes, forwardRef, type Ref } from "react";
 
 import { Button } from "components/Button";
 import { computeBadge, handleAccessbilityError } from "utils";
 
-import { TopNavIconButtonProps, TopNavLinkButtonProps } from "../TopNavTypes";
+import type { TopNavIconButtonProps, TopNavLinkButtonProps } from "../TopNavTypes";
 
 /**
  * Is meant to be used as a button that is nested under a `TopNav`.

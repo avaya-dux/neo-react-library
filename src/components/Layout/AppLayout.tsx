@@ -1,5 +1,5 @@
 import { Composition } from "atomic-layout";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export interface AppLayoutProps {
 	desktopAreas?: string;

@@ -1,16 +1,16 @@
-import {
+import type {
 	AnchorHTMLAttributes,
 	ButtonHTMLAttributes,
 	ReactElement,
 	ReactNode,
 } from "react";
 
-import { AvatarProps } from "components/Avatar";
-import { ImageProps } from "components/Image";
-import { ImageLinkProps } from "components/ImageLink";
-import { MenuProps } from "components/Menu";
-import { TextInputProps } from "components/TextInput";
-import { IconNamesType } from "utils";
+import type { AvatarProps } from "components/Avatar";
+import type { ImageProps } from "components/Image";
+import type { ImageLinkProps } from "components/ImageLink";
+import type { MenuProps } from "components/Menu";
+import type { TextInputProps } from "components/TextInput";
+import type { IconNamesType } from "utils";
 
 export interface TopNavAvatarProps {
 	avatar: ReactElement<Omit<AvatarProps, "size" | "border" | "status">>;

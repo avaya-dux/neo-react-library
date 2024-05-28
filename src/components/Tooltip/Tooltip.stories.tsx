@@ -1,9 +1,9 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { Avatar } from "components/Avatar";
 import { Button } from "components/Button";
 
-import { Tooltip, TooltipProps } from "./";
+import { Tooltip, type TooltipProps } from "./";
 
 export default {
 	title: "Components/Tooltip",

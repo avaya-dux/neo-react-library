@@ -3,7 +3,7 @@ import { createRef, useCallback, useEffect, useState } from "react";
 import * as ReactDOMClient from "react-dom/client";
 
 import { PopupManager } from "./PopupManager";
-import {
+import type {
 	NotificationOptions,
 	PopupId,
 	PopupPosition,

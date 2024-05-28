@@ -6,9 +6,9 @@
 import clsx from "clsx";
 import {
 	cloneElement,
-	FC,
-	ReactElement,
-	ReactNode,
+	type FC,
+	type ReactElement,
+	type ReactNode,
 	useContext,
 	useMemo,
 	useRef,
@@ -18,7 +18,7 @@ import { useFocusEffect, useRovingTabIndex } from "react-roving-tabindex";
 
 import { Keys } from "utils";
 
-import { LeafProps } from "..";
+import type { LeafProps } from "..";
 import { TreeContext } from "../TreeContext";
 
 export interface BranchProps {

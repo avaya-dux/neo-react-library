@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { Fragment, ReactElement, ReactNode } from "react";
+import { Fragment, type ReactElement, type ReactNode } from "react";
 
-import { AvatarProps } from "components/Avatar";
-import { IconProps } from "components/Icon";
-import { Tooltip, TooltipPosition } from "components/Tooltip";
+import type { AvatarProps } from "components/Avatar";
+import type { IconProps } from "components/Icon";
+import { Tooltip, type TooltipPosition } from "components/Tooltip";
 
 export interface ListItemProps {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

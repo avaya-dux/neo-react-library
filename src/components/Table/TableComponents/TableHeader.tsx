@@ -1,13 +1,13 @@
-import { KeyboardEvent, useCallback, useContext, useMemo } from "react";
+import { type KeyboardEvent, useCallback, useContext, useMemo } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
 import { Menu, MenuButton, MenuItem } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
-import { IconNamesType, Keys } from "utils";
+import { type IconNamesType, Keys } from "utils";
 
 import { calculateAriaSortValue, FilterContext } from "../helpers";
-import { TableHeaderProps } from "../types";
+import type { TableHeaderProps } from "../types";
 
 /**
  * There are more filtering examples to be found here:

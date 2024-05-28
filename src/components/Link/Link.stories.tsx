@@ -1,6 +1,6 @@
-import { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
-import { Link, LinkProps } from "./";
+import { Link, type LinkProps } from "./";
 
 import "./Stories_shim.css";
 

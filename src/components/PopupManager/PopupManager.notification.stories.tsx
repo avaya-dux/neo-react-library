@@ -1,12 +1,12 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useEffect, useRef, useState } from "react";
 
 import {
-	EventNotificationProps,
+	type EventNotificationProps,
 	notificationLogger as logger,
 	Notification,
 } from "components/Notification";
-import { PopupId, PopupManager, PopupPosition } from "components/PopupManager";
+import { type PopupId, PopupManager, type PopupPosition } from "components/PopupManager";
 
 logger.disableAll();
 type WithoutType = Omit<EventNotificationProps, "type">;

@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { Row } from "react-table";
+import type { Row } from "react-table";
 
 import { Checkbox } from "components/Checkbox";
 
-import { TableBodyProps } from "../types";
+import type { TableBodyProps } from "../types";
 
 /**
  * TableBody is used by the Table component to render the table body (<tr>s and <td>s)

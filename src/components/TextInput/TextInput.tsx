@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import {
-	InputHTMLAttributes,
-	ReactNode,
-	RefObject,
+	type InputHTMLAttributes,
+	type ReactNode,
+	type RefObject,
 	useEffect,
 	useId,
 	useRef,
@@ -14,7 +14,7 @@ import {
 	ConditionalWrapper,
 	dispatchInputOnChangeEvent,
 	handleAccessbilityError,
-	IconNamesType,
+	type IconNamesType,
 } from "utils";
 
 import "./TextInput_shim.css";

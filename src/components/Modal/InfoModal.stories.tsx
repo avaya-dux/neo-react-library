@@ -1,9 +1,9 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { Button } from "components/Button";
 import { Icon } from "components/Icon";
 
-import { InfoModal, InfoModalProps } from "./";
+import { InfoModal, type InfoModalProps } from "./";
 import useModal from "./useModal";
 
 export default {

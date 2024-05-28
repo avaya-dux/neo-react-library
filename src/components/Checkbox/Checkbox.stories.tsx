@@ -1,7 +1,7 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useCallback, useRef, useState } from "react";
 
-import { Checkbox, CheckboxProps } from "./";
+import { Checkbox, type CheckboxProps } from "./";
 
 export default {
 	title: "Components/Checkbox",

@@ -1,5 +1,5 @@
 // copy-paste from: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-table/Readme.md
-import {
+import type {
 	UseColumnOrderInstanceProps,
 	UseColumnOrderState,
 	UseExpandedHooks,

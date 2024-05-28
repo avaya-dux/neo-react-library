@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { Tooltip } from "components/Tooltip";
 
-import { PaginationProps } from "..";
+import type { PaginationProps } from "..";
 
 /**
  * Displays the currently selected item(s) out of the total number of items.

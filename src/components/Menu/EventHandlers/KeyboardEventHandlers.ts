@@ -1,9 +1,9 @@
 import log from "loglevel";
-import { Dispatch, FocusEvent, KeyboardEvent, SetStateAction } from "react";
+import type { Dispatch, FocusEvent, KeyboardEvent, SetStateAction } from "react";
 
 import { Keys } from "utils";
 
-import { ActionType, MenuIndexesType } from "../MenuTypes";
+import type { ActionType, MenuIndexesType } from "../MenuTypes";
 
 const logger = log.getLogger("menu-keyboard-event-handler");
 logger.disableAll();

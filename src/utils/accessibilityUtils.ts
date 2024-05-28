@@ -37,7 +37,7 @@ export const genId = () => {
 			performance.now &&
 			performance.now() * 1000) ||
 		0;
-	return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+	return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
 		let r = Math.random() * 16; //random number between 0 and 16
 		if (d > 0) {
 			r = ((d + r) % 16) | 0;

@@ -1,15 +1,16 @@
 // mostly copy-pasted from: https://github.com/sunknudsen/react-node-to-string
 
-import React, { isValidElement } from "react";
+import type React from "react";
+import { isValidElement } from "react";
 
-export const reactNodeToString = function (reactNode: React.ReactNode): string {
+export const reactNodeToString = (reactNode: React.ReactNode): string => {
 	let string = "";
 	if (typeof reactNode === "string") {
 		string = reactNode;
 	} else if (typeof reactNode === "number") {
 		string = reactNode.toString();
 	} else if (reactNode instanceof Array) {
-		reactNode.forEach(function (child) {
+		reactNode.forEach((child) => {
 			string += reactNodeToString(child);
 		});
 	} else if (isValidElement(reactNode)) {

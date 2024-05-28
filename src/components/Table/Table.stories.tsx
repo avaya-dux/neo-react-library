@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useEffect, useMemo, useState } from "react";
-import { Column, ColumnInstance } from "react-table";
+import type { Column, ColumnInstance } from "react-table";
 
 import {
 	Chip,
@@ -19,10 +19,10 @@ import {
 	Tooltip,
 } from "components";
 import { Button } from "components/Button";
-import { IconNamesType } from "utils";
+import type { IconNamesType } from "utils";
 
-import { Table, TableProps } from "./";
-import { FilledFields, IDataTableMockData } from "./helpers";
+import { Table, type TableProps } from "./";
+import { FilledFields, type IDataTableMockData } from "./helpers";
 
 export default {
 	title: "Components/Table",

@@ -1,4 +1,4 @@
-import { TooltipPosition } from "components/Tooltip";
+import type { TooltipPosition } from "components/Tooltip";
 
 export interface PaginationTranslations {
 	backIconButtonText?: string;

@@ -1,9 +1,9 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { Avatar, Icon, IconButton, Switch, Tooltip } from "components";
 import { ListItem, ListSection } from "components/List/ListItem";
 
-import { List, ListProps } from ".";
+import { List, type ListProps } from ".";
 
 export default {
 	title: "Components/List",

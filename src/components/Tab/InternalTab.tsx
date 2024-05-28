@@ -1,11 +1,11 @@
 import log from "loglevel";
 import {
-	FocusEvent,
-	FocusEventHandler,
-	KeyboardEvent,
-	KeyboardEventHandler,
-	MouseEvent,
-	MouseEventHandler,
+	type FocusEvent,
+	type FocusEventHandler,
+	type KeyboardEvent,
+	type KeyboardEventHandler,
+	type MouseEvent,
+	type MouseEventHandler,
 	useEffect,
 	useRef,
 } from "react";
@@ -13,7 +13,7 @@ import {
 import { reactNodeToString } from "utils";
 
 import { Icon } from "components/Icon";
-import { IconNamesType } from "utils";
+import type { IconNamesType } from "utils";
 
 import "./InternalTab_shim.css";
 
@@ -24,7 +24,7 @@ import {
 	handleMouseClickEvent,
 } from "./EventHandlers";
 import { noop } from "./EventHandlers/Helper";
-import { InteractiveTabProps, InternalTabProps } from "./InternalTabTypes";
+import type { InteractiveTabProps, InternalTabProps } from "./InternalTabTypes";
 
 const logger = log.getLogger("tab-head-logger");
 logger.disableAll();

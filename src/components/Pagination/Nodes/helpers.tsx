@@ -1,4 +1,4 @@
-import { PaginationProps } from "../PaginationTypes";
+import type { PaginationProps } from "../PaginationTypes";
 import { NavListItemButton } from "./NavListItemButton";
 
 /**

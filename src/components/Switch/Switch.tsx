@@ -3,7 +3,7 @@ import { useId } from "react";
 
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 
-import { SwitchProps } from "./SwitchTypes";
+import type { SwitchProps } from "./SwitchTypes";
 
 /**
  * A `Switch` consists of a checkbox and some text as label. Thus it allows end-users to toggle between a true/false state.

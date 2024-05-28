@@ -2,14 +2,14 @@ import clsx from "clsx";
 import log from "loglevel";
 import {
 	cloneElement,
-	FocusEvent,
-	FocusEventHandler,
+	type FocusEvent,
+	type FocusEventHandler,
 	forwardRef,
-	KeyboardEvent,
-	KeyboardEventHandler,
-	MouseEvent,
-	MouseEventHandler,
-	Ref,
+	type KeyboardEvent,
+	type KeyboardEventHandler,
+	type MouseEvent,
+	type MouseEventHandler,
+	type Ref,
 	useCallback,
 	useEffect,
 	useMemo,
@@ -27,7 +27,7 @@ import {
 } from "./EventHandlers";
 import { addIdToChildren, buildMenuIndexes, layoutChildren } from "./helpers";
 import { MenuContext } from "./MenuContext";
-import {
+import type {
 	ActionType,
 	MenuContextType,
 	MenuIndexesType,

@@ -1,6 +1,6 @@
 import { handleAccessbilityError } from "utils";
 
-import { TopNavSkipNavProps } from "../TopNavTypes";
+import type { TopNavSkipNavProps } from "../TopNavTypes";
 
 /**
  * Moves the user to the main content of the page.

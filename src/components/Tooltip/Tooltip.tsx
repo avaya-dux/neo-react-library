@@ -17,7 +17,7 @@ import {
 	getMultilineClassName,
 	translatePositionToCSSName,
 } from "./helpers";
-import { TooltipProps } from "./TooltipTypes";
+import type { TooltipProps } from "./TooltipTypes";
 
 /**
  * Wraps any text or element and shows a tooltip when that text/element is hovered.

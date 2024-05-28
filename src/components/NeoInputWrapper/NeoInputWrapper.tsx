@@ -1,4 +1,4 @@
-import { FunctionComponent, HTMLAttributes } from "react";
+import type { FunctionComponent, HTMLAttributes } from "react";
 
 interface NeoInputWrapperProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, "className"> {

@@ -1,8 +1,8 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { TextInput } from "components";
 
-import { Form, FormProps } from ".";
+import { Form, type FormProps } from ".";
 
 export default {
 	title: "Components/Form Base",

@@ -1,6 +1,6 @@
 import { cloneElement } from "react";
 
-import { TopNavAvatarProps } from "../TopNavTypes";
+import type { TopNavAvatarProps } from "../TopNavTypes";
 
 /**
  *

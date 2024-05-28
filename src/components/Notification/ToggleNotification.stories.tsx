@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { Button } from "components/Button";
 
-import { NonEventNotificationProps, Notification } from ".";
+import { type NonEventNotificationProps, Notification } from ".";
 
 export default {
 	title: "Components/Notification",

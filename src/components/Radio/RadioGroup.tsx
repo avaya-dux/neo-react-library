@@ -1,7 +1,7 @@
 import {
 	Children,
 	cloneElement,
-	ReactElement,
+	type ReactElement,
 	useCallback,
 	useId,
 	useMemo,

@@ -4,9 +4,9 @@
 
 import clsx from "clsx";
 import {
-	DetailedHTMLProps,
-	LiHTMLAttributes,
-	ReactNode,
+	type DetailedHTMLProps,
+	type LiHTMLAttributes,
+	type ReactNode,
 	useContext,
 	useRef,
 } from "react";

@@ -1,6 +1,6 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
-import { Avatar, AvatarProps, SmallAvatarProps } from "./Avatar";
+import { Avatar, type AvatarProps, type SmallAvatarProps } from "./Avatar";
 
 export default {
 	title: "Components/Avatar",

@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { IFilterContext } from "../types";
+import type { IFilterContext } from "../types";
 
 export const FilterContext = createContext<IFilterContext>({
 	allowColumnFilter: false,

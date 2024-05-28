@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { TableInstance } from "react-table";
+import type { TableInstance } from "react-table";
 
 import { Button } from "components/Button";
 import { Checkbox } from "components/Checkbox";
@@ -7,7 +7,7 @@ import { IconButton } from "components/IconButton";
 import { Sheet } from "components/Sheet";
 
 import { translations as defaultTranslations, FilterContext } from "../helpers";
-import { ITableFilterTranslations } from "../types";
+import type { ITableFilterTranslations } from "../types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TableFilterProps<T extends Record<string, any>> = {

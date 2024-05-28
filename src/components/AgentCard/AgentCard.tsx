@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
-import { AvatarProps } from "components/Avatar";
+import type { AvatarProps } from "components/Avatar";
 
 import { Timer } from "./Timer";
 

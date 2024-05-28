@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
-import { SizeTypeMinimal } from "utils";
+import type { SizeTypeMinimal } from "utils";
 
 import "./Shimmer_shim.css";
 

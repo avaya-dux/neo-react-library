@@ -2,7 +2,7 @@ import log from "loglevel";
 // eslint-disable-next-line no-use-before-define
 import { Component } from "react";
 
-import { InternalToast, InternalToastOptions } from "./InternalToast";
+import { InternalToast, type InternalToastOptions } from "./InternalToast";
 
 import type {
 	NotificationOptions,
@@ -25,7 +25,7 @@ const objectKeys = <T extends Dict>(obj: T) =>
 
 // HACK: TODO: fix this to use Dict (or whatever makes sense)
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Props {}
+type Props = {}
 
 export class PopupManager extends Component<Props, State> {
 	static counter = 0;

@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useEffect, useState } from "react";
 
 import { Form } from "components/Form";
@@ -13,7 +13,7 @@ import { Content } from "./Content";
 import { Header } from "./Header";
 import { text } from "./LoremText";
 import { Widget } from "./Widget";
-import { WidgetProps } from "./WidgetTypes";
+import type { WidgetProps } from "./WidgetTypes";
 
 export default {
 	title: "Components/Widget",

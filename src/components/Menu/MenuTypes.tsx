@@ -1,7 +1,7 @@
-import { Dispatch, ReactElement, SetStateAction } from "react";
+import type { Dispatch, ReactElement, SetStateAction } from "react";
 
-import { AvatarProps } from "components/Avatar";
-import { ButtonProps } from "components/Button";
+import type { AvatarProps } from "components/Avatar";
+import type { ButtonProps } from "components/Button";
 
 export type MenuSeparatorProps = React.HTMLAttributes<HTMLHRElement>;
 

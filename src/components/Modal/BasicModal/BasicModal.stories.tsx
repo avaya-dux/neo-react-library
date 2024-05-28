@@ -3,7 +3,7 @@ import type { Meta } from "@storybook/react";
 import { Button } from "components/Button";
 
 import useModal from "../useModal";
-import { BasicModal, BasicModalProps } from "./BasicModal";
+import { BasicModal, type BasicModalProps } from "./BasicModal";
 
 export default {
 	title: "Components/Modal",

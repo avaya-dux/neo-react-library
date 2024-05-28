@@ -1,7 +1,7 @@
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
-import { NotificationProps } from "components/Notification";
-import { IconNamesType } from "utils";
+import type { NotificationProps } from "components/Notification";
+import type { IconNamesType } from "utils";
 
 export type PopupPosition =
 	| "top"

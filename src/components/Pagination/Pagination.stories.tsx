@@ -1,10 +1,10 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useMemo, useState } from "react";
 
 import { Form, List, ListItem, Sheet, TextInput } from "components";
 import { genId } from "utils";
 
-import { Pagination, PaginationProps } from "./";
+import { Pagination, type PaginationProps } from "./";
 
 export default {
 	title: "Components/Pagination",

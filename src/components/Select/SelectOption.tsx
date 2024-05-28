@@ -1,4 +1,4 @@
-import { SelectOptionProps } from "./utils/SelectTypes";
+import type { SelectOptionProps } from "./utils/SelectTypes";
 
 /**
  * If no `value`, `children` is assigned as the value.

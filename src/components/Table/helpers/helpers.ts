@@ -1,4 +1,4 @@
-import { AriaAttributes } from "react";
+import type { AriaAttributes } from "react";
 
 /**
  * If the table is sorted, return the aria-sort value.

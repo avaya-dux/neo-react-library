@@ -1,7 +1,7 @@
 import log from "loglevel";
-import { Dispatch, MouseEvent, SetStateAction } from "react";
+import type { Dispatch, MouseEvent, SetStateAction } from "react";
 
-import { InternalTabProps } from "../InternalTabTypes";
+import type { InternalTabProps } from "../InternalTabTypes";
 
 import { activateAnotherTabAndPanel } from "./Helper";
 

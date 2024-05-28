@@ -1,10 +1,10 @@
 import log from "loglevel";
 import {
 	createRef,
-	CSSProperties,
-	MouseEvent,
-	MouseEventHandler,
-	RefObject,
+	type CSSProperties,
+	type MouseEvent,
+	type MouseEventHandler,
+	type RefObject,
 	useEffect,
 	useMemo,
 	useRef,
@@ -19,7 +19,7 @@ import {
 	handleRightCarouselMouseClickEvent,
 } from "./EventHandlers";
 import { enableLeftButton, enableRightButton } from "./EventHandlers/Helper";
-import { TabsProps } from "./TabTypes";
+import type { TabsProps } from "./TabTypes";
 import {
 	buildTabProps,
 	buildTabPropsNoPanel,

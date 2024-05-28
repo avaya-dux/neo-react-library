@@ -16,7 +16,7 @@ import {
 	TabPanels,
 } from "./TabComponents";
 import { Tabs } from "./Tabs";
-import { TabsProps } from "./TabTypes";
+import type { TabsProps } from "./TabTypes";
 
 tabMouseEventHandlerLogger.disableAll();
 tabKeyboardEventHandler.enableAll();

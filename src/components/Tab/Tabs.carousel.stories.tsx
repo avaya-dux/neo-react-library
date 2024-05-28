@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, Menu, MenuItem } from "components";
 
 import {
-	HorizontalTabsProps,
+	type HorizontalTabsProps,
 	Tab,
 	TabList,
 	TabPanel,

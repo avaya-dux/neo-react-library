@@ -1,7 +1,7 @@
 import log from "loglevel";
-import { Dispatch, RefObject, SetStateAction } from "react";
+import type { Dispatch, RefObject, SetStateAction } from "react";
 
-import { InternalTabProps } from "../InternalTabTypes";
+import type { InternalTabProps } from "../InternalTabTypes";
 import { activatePreviousTab, getNextTabIndex } from "./KeyboardHelper";
 import {
 	calculateLeftMoveAmount,

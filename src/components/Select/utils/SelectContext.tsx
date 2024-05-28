@@ -1,9 +1,9 @@
-import { UseComboboxReturnValue, UseSelectReturnValue } from "downshift";
+import type { UseComboboxReturnValue, UseSelectReturnValue } from "downshift";
 import { createContext } from "react";
 
-import { SizeTypeSelect } from "utils";
+import type { SizeTypeSelect } from "utils";
 
-import { SelectOptionProps } from "./SelectTypes";
+import type { SelectOptionProps } from "./SelectTypes";
 
 type ContextDownshiftProps =
 	| UseComboboxReturnValue<SelectOptionProps>

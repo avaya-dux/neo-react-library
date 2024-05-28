@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import { Button } from "components/Button";
 
-import { PaginationNavigationProps } from "../PaginationTypes";
+import type { PaginationNavigationProps } from "../PaginationTypes";
 
 /**
  * This component is used by the `PaginationNavigation` component and the

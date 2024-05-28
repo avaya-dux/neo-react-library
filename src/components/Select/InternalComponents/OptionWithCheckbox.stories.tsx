@@ -1,7 +1,7 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
-import { SelectContext, SelectContextProps } from "../utils/SelectContext";
-import { OptionProps, OptionWithCheckbox } from "./OptionWithCheckbox";
+import { SelectContext, type SelectContextProps } from "../utils/SelectContext";
+import { type OptionProps, OptionWithCheckbox } from "./OptionWithCheckbox";
 
 export default {
 	title: "Components/Select/OptionWithCheckbox",

@@ -2,7 +2,7 @@ import type { Meta } from "@storybook/react";
 
 import { Button, Switch } from "components";
 
-import { NeoThemeProvider, NeoThemeProviderProps, useNeoTheme } from "./";
+import { NeoThemeProvider, type NeoThemeProviderProps, useNeoTheme } from "./";
 
 export default {
 	title: "Components/Neo Theme Provider",

@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 
 import clsx from "clsx";
-import { DetailedHTMLProps, HTMLAttributes, ReactNode, useMemo } from "react";
+import { type DetailedHTMLProps, type HTMLAttributes, type ReactNode, useMemo } from "react";
 import { RovingTabIndexProvider } from "react-roving-tabindex";
 
 import { handleAccessbilityError } from "utils";

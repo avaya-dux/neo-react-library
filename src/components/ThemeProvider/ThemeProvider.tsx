@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { createContext, HTMLAttributes, useContext, useState } from "react";
+import { createContext, type HTMLAttributes, useContext, useState } from "react";
 
 // inject the neo css via `postcss` rollup plugin
 import "@avaya/neo/neo/dist/css/neo/neo.min.css";

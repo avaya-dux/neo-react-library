@@ -1,8 +1,8 @@
 import type { Meta } from "@storybook/react";
 import {
-	DetailedHTMLProps,
-	LabelHTMLAttributes,
-	ReactNode,
+	type DetailedHTMLProps,
+	type LabelHTMLAttributes,
+	type ReactNode,
 	useState,
 } from "react";
 
@@ -14,7 +14,7 @@ import { IconButton } from "components/IconButton";
 import { List, ListSection } from "components/List";
 import { Sheet } from "components/Sheet";
 
-import { Branch, Leaf, Tree, TreeProps } from ".";
+import { Branch, Leaf, Tree, type TreeProps } from ".";
 
 export default {
 	title: "Components/Tree",

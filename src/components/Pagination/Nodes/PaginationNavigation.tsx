@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { IconButton } from "components/IconButton";
 
-import { PaginationNavigationProps } from "../PaginationTypes";
+import type { PaginationNavigationProps } from "../PaginationTypes";
 import { buildNavItems, calculateMaxNavNodes } from "./helpers";
 
 /**

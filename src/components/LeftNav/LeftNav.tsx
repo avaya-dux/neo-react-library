@@ -1,10 +1,10 @@
-import { FC, useCallback, useId, useState } from "react";
+import { type FC, useCallback, useId, useState } from "react";
 import { RovingTabIndexProvider } from "react-roving-tabindex";
 
 import { handleAccessbilityError } from "utils";
 
 import { LeftNavContext } from "./LeftNavContext";
-import {
+import type {
 	LeftNavContextType,
 	LeftNavProps,
 	LeftNavSubComponents,
