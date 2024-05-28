@@ -15,17 +15,27 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"import": "./dist/avaya-neo-react.mjs",
-			"require": "./dist/avaya-neo-react.umd.js"
-		}
-	},
-	"files": ["dist", "README.md", "LICENSE.md", "LICENSE-3rd-party.html"],
-	"engines": {
-		"node": ">=16"
-	},
-	"browserslist": ["> 0.5%", "last 2 versions", "not dead", "not ie <= 11"],
-	"scripts": {
-		"dev": "vite build --mode dev --watch",
-		"storybook": "storybook dev -p 6006",
+      "require": "./dist/avaya-neo-react.umd.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.md",
+    "LICENSE-3rd-party.html"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ],
+  "scripts": {
+    "dev": "vite build --mode dev --watch",
+    "storybook": "storybook dev -p 6006",
 		"clean": "rm -rf coverage dist storybook-static cypress/screenshots cypress/videos package *.tgz",
     "format": "biome check --apply ./src",
 		"lint": "biome ci ./src",
