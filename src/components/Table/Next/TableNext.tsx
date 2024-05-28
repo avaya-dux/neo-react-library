@@ -2,17 +2,17 @@ import type { PaginationState } from "@tanstack/react-table";
 import {
 	flexRender,
 	getCoreRowModel,
-	getPaginationRowModel,
 	getFilteredRowModel,
+	getPaginationRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
+import { useEffect, useMemo, useState } from "react";
 
 import { translations as defaultTranslations } from "../helpers";
 
-import type { TableNextProps } from "./types";
 import { TablePagination, TableToolbar } from "./components";
+import type { TableNextProps } from "./types";
 
 import "../Table_shim.css";
 
@@ -68,7 +68,7 @@ export const TableNext = ({
 	translations: translationsProp,
 
 	...rest
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 }: TableNextProps<any>) => {
 	const [pagination, setPagination] = useState<PaginationState>({
 		pageIndex: initialStatePageIndex,

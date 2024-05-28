@@ -12,9 +12,9 @@ import {
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 import {
 	ConditionalWrapper,
+	type IconNamesType,
 	dispatchInputOnChangeEvent,
 	handleAccessbilityError,
-	type IconNamesType,
 } from "utils";
 
 import "./TextInput_shim.css";

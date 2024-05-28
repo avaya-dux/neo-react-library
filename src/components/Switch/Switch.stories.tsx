@@ -74,7 +74,7 @@ export const FormControl = () => {
 
 	return (
 		<Form
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 			onSubmit={(e: any) => {
 				e.preventDefault();
 				const tosValue = e.target.elements.ToS.value;

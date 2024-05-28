@@ -8,8 +8,8 @@ import { SubMenu } from "../SubMenu";
 import {
 	addIdToChildren,
 	buildMenuIndexes,
-	layoutChildren,
 	getContentCss,
+	layoutChildren,
 } from "./";
 
 const menuHelpersLogger = log.getLogger("menu-helpers");

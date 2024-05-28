@@ -1,11 +1,11 @@
 import type { ColumnDef } from "@tanstack/react-table";
 
-import type { RowHeight } from "../../types";
 import type { TooltipPosition } from "components/Tooltip";
+import type { RowHeight } from "../../types";
 import type { ITableNextTranslations } from "./TranslationTypes";
 
 export interface TableNextProps<T> {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 	columns: ColumnDef<T, any>[];
 	data: T[];
 

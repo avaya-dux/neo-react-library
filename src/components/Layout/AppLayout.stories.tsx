@@ -1,10 +1,10 @@
 import type { Meta } from "@storybook/react";
 import type { ReactNode } from "react";
 
-import { AppLayout, type AppLayoutProps } from "./";
+import { Icon } from "components/Icon";
 import { LeftNav } from "components/LeftNav";
 import { Widget } from "components/Widget";
-import { Icon } from "components/Icon";
+import { AppLayout, type AppLayoutProps } from "./";
 
 export default {
 	title: "Components/AppLayout",

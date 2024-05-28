@@ -1,4 +1,4 @@
-import { type ReactElement, useState, cloneElement, Children } from "react";
+import { Children, type ReactElement, cloneElement, useState } from "react";
 import type { AccordionProps } from "../Accordion";
 import "./AccordionGroup_shim.css";
 

@@ -1,10 +1,10 @@
-import { render, cleanup, screen } from "@testing-library/react";
-import { axe } from "jest-axe";
 import { composeStories } from "@storybook/testing-react";
+import { cleanup, render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import * as RadioGroupStories from "./RadioGroup.stories";
 
-import { RadioGroup } from "./RadioGroup";
 import { Radio } from "./Radio";
+import { RadioGroup } from "./RadioGroup";
 
 import userEvent from "@testing-library/user-event";
 

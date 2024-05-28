@@ -20,7 +20,7 @@ import { TableFilter } from "./TableFilter";
  *  translations={translations}
  * />
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 export const TableToolbar = <T extends Record<string, any>>({
 	customActionsNode,
 	handleCreate,
@@ -52,13 +52,12 @@ export const TableToolbar = <T extends Record<string, any>>({
 			setSearch(searchString);
 			setGlobalFilter(searchString);
 		},
-		[setSearch, setGlobalFilter],
+		[setGlobalFilter],
 	);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: handle data update (e.g. new/more data pulled from server)
 	useEffect(() => {
-		// handle data update (e.g. new/more data pulled from server)
 		setSearches(search);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, setSearches]);
 
 	const editDisabled = readonly || selectedRowIdsStringArray.length !== 1;

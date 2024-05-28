@@ -7,7 +7,7 @@ import type {
 	SetStateAction,
 } from "react";
 
-import { isAriaDisabled, Keys } from "utils";
+import { Keys, isAriaDisabled } from "utils";
 
 import type { InternalTabProps } from "../InternalTabTypes";
 import { activateAnotherTabAndPanel } from "./Helper";
@@ -44,7 +44,6 @@ export const handleFocusEvent = (
 		`tab ${id} is ${disabled} and is receiving focus from ${fromId}`,
 	);
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const nonNullId = id!;
 	if (!disabled) {
 		logger.debug(`focusing ${id}`);
@@ -68,7 +67,6 @@ export const handleBlurEvent = (
 	const toId = relatedTarget?.getAttribute("id") || null;
 	logger.debug(`tab ${id} is losing focus to ${toId}`);
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	blur(ref, id!);
 	setFocus(false);
 };

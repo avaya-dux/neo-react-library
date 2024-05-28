@@ -10,7 +10,6 @@ export default {
 
 const contextValue = {
 	downshiftProps: {
-		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		getItemProps: () => {},
 	},
 	optionProps: { selectedItemsValues: [] },

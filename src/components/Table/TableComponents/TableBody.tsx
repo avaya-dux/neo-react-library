@@ -15,7 +15,7 @@ import type { TableBodyProps } from "../types";
  *  selectableRows={selectableRows}
  * />
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 export const TableBody = <T extends Record<string, any>>({
 	handleRowToggled = () => null,
 	instance,

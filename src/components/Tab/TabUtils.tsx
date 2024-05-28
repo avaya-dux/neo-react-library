@@ -1,9 +1,6 @@
-// HACK: TODO: remove these `eslint-disable` comments and add proper typings
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import clsx from "clsx";
 import log from "loglevel";
 import type { Dispatch, ReactElement, RefObject, SetStateAction } from "react";
-import clsx from "clsx";
 import { genId } from "utils";
 
 import { InternalTab } from "./InternalTab";
@@ -15,6 +12,7 @@ const logger = log.getLogger("tab-utils-logger");
 logger.disableAll();
 
 export function debugTabs(
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
 	logger: any,
 	tabs: { id: string; disabled: boolean }[],
 ) {
@@ -49,9 +47,11 @@ function toArray(children: ReactElement[]) {
 export const buildTabProps = (
 	children: TabsProps["children"],
 ): InternalTabProps[] => {
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
 	const panelList = (children as any)[1];
 	const panels = toArray(panelList.props.children).filter(isValidPanelElement);
 
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
 	const tablist = (children as any)[0];
 	const tabs = toArray(tablist.props.children)
 		.filter(isValidTabElement)
@@ -77,6 +77,7 @@ export const buildTabPropsNoPanel = (
 	return tabs;
 };
 
+// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
 const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
 	const props = tab.props;
 	const { id, children, ...rest } = props;
@@ -99,7 +100,9 @@ const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
 };
 
 const buildSingleTabPropsHasAssociatedPanel = (
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
 	tab: any,
+	// biome-ignore lint/suspicious/noExplicitAny: HACK: TODO: remove these `eslint-disable` comments and add proper typings
 	panel: any,
 ): InternalTabProps => {
 	const props = tab.props;
@@ -143,8 +146,6 @@ export const createTab = (
 	const tabId = tabProps.id;
 	const active = index === activeTabIndex;
 
-	// HACK: TODO: remove this `eslint-disable` comment and use proper typings
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { className, id, name, disabled, closable, dir, onClose, ...rest } =
 		tabProps;
 

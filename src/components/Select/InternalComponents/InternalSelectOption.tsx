@@ -3,10 +3,10 @@ import { useContext, useMemo } from "react";
 
 import { genId } from "utils/accessibilityUtils";
 
+import clsx from "clsx";
 import { SelectContext } from "../utils/SelectContext";
 import type { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionWithCheckbox } from "./OptionWithCheckbox";
-import clsx from "clsx";
 
 export interface InternalSelectOptionProps extends SelectOptionProps {
 	index: number;

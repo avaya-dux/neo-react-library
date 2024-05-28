@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { TableNext } from "./";
 import { type ITableNextMockData, makeData } from "./mock-data";
-import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
 
 const columnHelper = createColumnHelper<ITableNextMockData>();
 const meta: Meta<typeof TableNext> = {
@@ -50,7 +50,7 @@ export const Basic: Story = {
 export const AlternateColumnDefs: Story = {
 	name: "Alternate style of defining columns",
 	render: ({ data, ...rest }) => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 		const columnsHardcoded: ColumnDef<ITableNextMockData, any>[] = [
 			{
 				accessorKey: "firstName",

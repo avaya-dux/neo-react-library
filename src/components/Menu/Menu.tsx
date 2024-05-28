@@ -1,15 +1,15 @@
 import clsx from "clsx";
 import log from "loglevel";
 import {
-	cloneElement,
 	type FocusEvent,
 	type FocusEventHandler,
-	forwardRef,
 	type KeyboardEvent,
 	type KeyboardEventHandler,
 	type MouseEvent,
 	type MouseEventHandler,
 	type Ref,
+	cloneElement,
+	forwardRef,
 	useCallback,
 	useEffect,
 	useMemo,
@@ -25,7 +25,6 @@ import {
 	handleMenuButtonClickEvent,
 	handleMouseMoveEvent,
 } from "./EventHandlers";
-import { addIdToChildren, buildMenuIndexes, layoutChildren } from "./helpers";
 import { MenuContext } from "./MenuContext";
 import type {
 	ActionType,
@@ -33,6 +32,7 @@ import type {
 	MenuIndexesType,
 	MenuProps,
 } from "./MenuTypes";
+import { addIdToChildren, buildMenuIndexes, layoutChildren } from "./helpers";
 
 const logger = log.getLogger("menu");
 logger.disableAll();
@@ -135,13 +135,14 @@ export const Menu = forwardRef(
 			}
 		}, [isOpen, positionToToggle, toggleRef]);
 
+		// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 		useEffect(() => {
 			if (isOpen === true && !userHasInteracted) {
 				setUserHasInteracted(true);
 			}
-			// eslint-disable-next-line react-hooks/exhaustive-deps
 		}, [isOpen]);
 
+		// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 		useEffect(() => {
 			logger.debug(`debugging menu useEffect when open = ${isOpen}`);
 
@@ -167,7 +168,6 @@ export const Menu = forwardRef(
 			window.addEventListener("resize", adjustPosition);
 
 			return () => window.removeEventListener("resize", adjustPosition);
-			// eslint-disable-next-line react-hooks/exhaustive-deps
 		}, [adjustPosition, isOpen, onMenuClose, toggleRef]);
 
 		// `didMount` must be placed _after_ any usage of it in a hook
@@ -286,7 +286,7 @@ export const Menu = forwardRef(
 		);
 		const closeMenu = useCallback(() => {
 			setOpen(false);
-		}, [setOpen]);
+		}, []);
 
 		return closeOnBlur ? (
 			<ClickAwayListener onClickAway={closeMenu}>{content}</ClickAwayListener>

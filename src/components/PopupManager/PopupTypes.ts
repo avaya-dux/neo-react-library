@@ -30,6 +30,5 @@ export interface NotificationOptions extends PopupOptions {
 }
 export type PopupState = {
 	zIndex: number;
-	// eslint-disable-next-line no-unused-vars
 	positions: { [K in PopupPosition]: PopupOptions[] };
 };

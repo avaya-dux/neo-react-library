@@ -1,12 +1,12 @@
+import type { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
-import type { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 import { useState } from "react";
 
 import { Button } from "components/Button";
 import { Icon } from "components/Icon/Icon";
-import { Note } from "components/Note";
 import { Menu, MenuItem } from "components/Menu";
+import { Note } from "components/Note";
 
 import { PanelTabs } from "./PanelTabs";
 

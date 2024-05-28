@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react";
+import { Sheet } from "components/Sheet";
 import { Accordion } from "../Accordion";
 import { AccordionGroup, type AccordionGroupProps } from "./AccordionGroup";
-import { Sheet } from "components/Sheet";
 
 export default {
 	title: "Components/Accordion",

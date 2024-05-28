@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import {
 	Children,
-	cloneElement,
 	type FunctionComponent,
 	type KeyboardEvent,
 	type KeyboardEventHandler,
 	type MouseEvent,
 	type MouseEventHandler,
+	cloneElement,
 	useContext,
 	useEffect,
 	useId,
@@ -16,7 +16,7 @@ import {
 } from "react";
 import { useFocusEffect, useRovingTabIndex } from "react-roving-tabindex";
 
-import { getIconClass, Keys } from "utils";
+import { Keys, getIconClass } from "utils";
 
 import { LeftNavContext } from "../LeftNavContext";
 import type { NavCategoryProps } from "../LeftNavTypes";

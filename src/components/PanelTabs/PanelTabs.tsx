@@ -1,8 +1,8 @@
 import type { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
 import clsx from "clsx";
 import {
-	createContext,
 	type ReactNode,
+	createContext,
 	useContext,
 	useMemo,
 	useState,

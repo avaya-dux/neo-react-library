@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { type ButtonHTMLAttributes, forwardRef, type Ref } from "react";
+import { type ButtonHTMLAttributes, type Ref, forwardRef } from "react";
 
 import { Button } from "components/Button";
 import { computeBadge, handleAccessbilityError } from "utils";

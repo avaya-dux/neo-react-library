@@ -5,8 +5,8 @@ import { IconNames } from "utils";
 
 import {
 	type EventNotificationProps,
-	notificationLogger as logger,
 	Notification,
+	notificationLogger as logger,
 } from ".";
 
 type WithoutType = Omit<EventNotificationProps, "type">;
@@ -62,7 +62,7 @@ export const EventCounterUp = () => {
 			limit="05:00"
 			onCallback={() => logger.debug("Finish")}
 			withLoop={true}
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 			render={({ formatted }: { [key: string]: any }) => {
 				return (
 					<Notification

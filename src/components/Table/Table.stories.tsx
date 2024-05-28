@@ -361,9 +361,9 @@ export const EditableData = () => {
 
 	const [logItems, setLogItems] = useState<string[]>([]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 	useEffect(() => {
 		setLogItems([`data modified, new length: ${data.length}`, ...logItems]);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 
 	return (

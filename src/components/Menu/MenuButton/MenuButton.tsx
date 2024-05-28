@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 import { Button, type ButtonProps } from "components/Button";
-import { forwardRef, type Ref } from "react";
+import { type Ref, forwardRef } from "react";
 
 /**
  * The MenuButton is meant to be used only for the Menu component prop `menuRootElement`.

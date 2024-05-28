@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
-import { getSizeClass, Spinner } from "./Spinner";
+import { Spinner, getSizeClass } from "./Spinner";
 
 describe("Spinner", () => {
 	it("fully renders without exploding", () => {

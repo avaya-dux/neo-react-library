@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Button } from "components";
 
 import {
-	tabMouseEventHandlerLogger,
 	tabKeyboardEventHandler,
+	tabMouseEventHandlerLogger,
 } from "./EventHandlers";
 import {
 	ClosableTab,
@@ -15,8 +15,8 @@ import {
 	TabPanel,
 	TabPanels,
 } from "./TabComponents";
-import { Tabs } from "./Tabs";
 import type { TabsProps } from "./TabTypes";
+import { Tabs } from "./Tabs";
 
 tabMouseEventHandlerLogger.disableAll();
 tabKeyboardEventHandler.enableAll();

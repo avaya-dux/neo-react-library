@@ -1,5 +1,5 @@
 import type { Meta, Story } from "@storybook/react";
-import { cloneElement, type FormEvent, useState } from "react";
+import { type FormEvent, cloneElement, useState } from "react";
 
 import {
 	AgentCard,
@@ -59,7 +59,6 @@ NavigationToggle.decorators = [
 
 		const args = { ...context.args };
 
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const navMenuToggleWithHandler = cloneElement(args.menuToggleBtn!, {
 			onClick: () => setDisplayLeftNav(!displayLeftNav),
 		});
@@ -128,7 +127,6 @@ SearchExample.decorators = [
 
 		const args = { ...context.args };
 
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const searchWithHandler = cloneElement(args.search!, {
 			onChange: captureSearchString,
 		});

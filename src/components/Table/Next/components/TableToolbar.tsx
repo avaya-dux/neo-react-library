@@ -1,8 +1,8 @@
 import type { Table } from "@tanstack/react-table";
 
-import type { IToolbarTranslations, RowHeight } from "components/Table/types";
 import { IconButton } from "components/IconButton";
 import { Menu, MenuItem } from "components/Menu";
+import type { IToolbarTranslations, RowHeight } from "components/Table/types";
 import { TextInput } from "components/TextInput";
 
 export const TableToolbar = ({
@@ -13,7 +13,7 @@ export const TableToolbar = ({
 	table,
 	translations,
 }: {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 	table: Table<any>;
 	translations: IToolbarTranslations;
 

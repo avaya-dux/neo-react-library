@@ -12,7 +12,7 @@ import type { IconProps } from "components/Icon";
 import { Tooltip, type TooltipPosition } from "components/Tooltip";
 
 export interface ListSectionProps {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 	actions?: ReactElement<any>[]; // TODO: fix this
 	avatar?: ReactElement<AvatarProps>;
 	children?: ReactNode;

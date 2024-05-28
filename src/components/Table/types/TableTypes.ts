@@ -2,13 +2,13 @@
 import type { ReactNode } from "react";
 import type { TableInstance, TableOptions } from "react-table";
 
+import type { TooltipPosition } from "components/Tooltip/TooltipTypes";
 import type {
 	IBodyTranslations,
 	ITableHeaderTranslations,
 	ITableTranslations,
 	IToolbarTranslations,
 } from ".";
-import type { TooltipPosition } from "components/Tooltip/TooltipTypes";
 
 interface ToolbarSharedProps<T extends Record<string, any>> {
 	readonly?: boolean;

@@ -1,9 +1,9 @@
 import { composeStories } from "@storybook/testing-react";
 import { cleanup, render, screen } from "@testing-library/react";
-import { axe } from "jest-axe";
-import { vi } from "vitest";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { UserEventKeys } from "utils";
+import { vi } from "vitest";
 
 import { Checkbox } from "./";
 import * as CheckboxStories from "./Checkbox.stories";

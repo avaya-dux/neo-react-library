@@ -159,7 +159,6 @@ describe("TopNav", () => {
 
 		describe("Icon Button Dropdown Example", () => {
 			it("passes basic axe compliance", async () => {
-				// eslint-disable-next-line @typescript-eslint/no-empty-function
 				window.getComputedStyle = () => {};
 				const { container } = render(<IconButtonDropdownExample />);
 				const results = await axe(container);

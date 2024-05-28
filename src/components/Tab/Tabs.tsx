@@ -1,10 +1,10 @@
 import log from "loglevel";
 import {
-	createRef,
 	type CSSProperties,
 	type MouseEvent,
 	type MouseEventHandler,
 	type RefObject,
+	createRef,
 	useEffect,
 	useMemo,
 	useRef,
@@ -75,7 +75,7 @@ export const Tabs = ({
 	const [focus, setFocus] = useState(initialFocus);
 
 	// HACK: TODO: add proper type
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 	const setActiveTabIndex = (newActiveTabIndex: any) => {
 		setUncontrolledActiveTabIndex(newActiveTabIndex);
 		setFocus(true);
@@ -146,21 +146,21 @@ export const Tabs = ({
 	const [rightCarouselButtonEnabled, setRightCarouselButtonEnabled] =
 		useState(false);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const updateCarouselButtonStatus = () => {
 		logger.debug("updating carousel buttons status");
 		setLeftCarouselButtonEnabled(enableLeftButton(scrollRef, refs));
 		setRightCarouselButtonEnabled(enableRightButton(scrollRef, refs));
 	};
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 	useEffect(() => {
 		logger.debug(
 			`useEffect: update carousel buttons disabled state on activeTab change ${activeTabIndex}`,
 		);
 		updateCarouselButtonStatus();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTabIndex]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 	useEffect(() => {
 		window.addEventListener("resize", updateCarouselButtonStatus);
 		logger.debug(
@@ -169,7 +169,6 @@ export const Tabs = ({
 		// updateCarouselButtonStatus();
 		return () =>
 			window.removeEventListener("resize", updateCarouselButtonStatus);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [scrollRef]);
 
 	logger.debug({ leftCarouselButtonEnabled, rightCarouselButtonEnabled });

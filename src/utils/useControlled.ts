@@ -12,16 +12,15 @@ export default function useControlled<T>({
 	default: T;
 	name: string;
 	state?: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 }): [T, (newValue: any) => void] {
 	// isControlled is ignored in the hook dependency lists as it should never change.
 	const { current: isControlled } = React.useRef(controlled !== undefined);
 	const [valueState, setValue] = React.useState<T>(defaultProp);
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const value = isControlled ? controlled! : valueState;
 
 	if (process.env.NODE_ENV !== "production") {
-		// eslint-disable-next-line react-hooks/rules-of-hooks
+		// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 		React.useEffect(() => {
 			if (isControlled !== (controlled !== undefined)) {
 				console.error(
@@ -40,10 +39,9 @@ export default function useControlled<T>({
 			}
 		}, [state, name, controlled, isControlled]);
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks
 		const { current: defaultValue } = React.useRef(defaultProp);
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks
+		// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 		React.useEffect(() => {
 			if (!isControlled && defaultValue !== defaultProp) {
 				console.error(
@@ -53,7 +51,6 @@ export default function useControlled<T>({
 					].join("\n"),
 				);
 			}
-			// eslint-disable-next-line react-hooks/exhaustive-deps
 		}, [JSON.stringify(defaultProp)]);
 	}
 
@@ -61,7 +58,6 @@ export default function useControlled<T>({
 		if (!isControlled) {
 			setValue(newValue);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return [value, setValueIfUncontrolled];

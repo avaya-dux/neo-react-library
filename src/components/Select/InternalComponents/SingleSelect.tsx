@@ -1,5 +1,5 @@
-import log from "loglevel";
 import clsx from "clsx";
+import log from "loglevel";
 import { useContext, useMemo } from "react";
 
 import { SelectContext } from "../utils/SelectContext";

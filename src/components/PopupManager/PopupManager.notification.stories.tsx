@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 
 import {
 	type EventNotificationProps,
-	notificationLogger as logger,
 	Notification,
+	notificationLogger as logger,
 } from "components/Notification";
 import {
 	type PopupId,

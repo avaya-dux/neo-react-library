@@ -8,7 +8,6 @@ import {
 	TabPanel,
 	TabPanels,
 } from "./TabComponents";
-import { Tabs } from "./Tabs";
 import {
 	buildTabProps,
 	buildTabPropsNoPanel,
@@ -18,6 +17,7 @@ import {
 	isValidPanelElement,
 	isValidTabElement,
 } from "./TabUtils";
+import { Tabs } from "./Tabs";
 
 describe("TabUtils", () => {
 	describe("isValidTabElement", () => {

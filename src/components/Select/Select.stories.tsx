@@ -5,8 +5,8 @@ import { Button, Form, Radio, RadioGroup, Sheet } from "components";
 
 import { Select } from "./Select";
 import { SelectOption } from "./SelectOption";
-import { fruitOptions } from "./utils/mockdata";
 import type { SelectProps } from "./utils/SelectTypes";
+import { fruitOptions } from "./utils/mockdata";
 
 import "./SelectStories.css";
 
@@ -85,12 +85,12 @@ export const Localized = () => {
 			: setCurrTranslations(spanishTrans);
 	};
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 	const options = useMemo(() => {
 		return [
 			{ label: currTranslations.apple, value: 1 },
 			{ label: currTranslations.pear, value: 2 },
 		];
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [lang]);
 
 	return (

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 
-import { getAriaDescribedBy, getTextAreaClassName, TextArea } from "./TextArea";
+import { TextArea, getAriaDescribedBy, getTextAreaClassName } from "./TextArea";
 
 const defaultTextAreaProps = {
 	label: "Example Text Area",

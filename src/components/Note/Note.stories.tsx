@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Note } from "./Note";
 import { Button } from "components/Button";
 import { Icon } from "components/Icon";
 import { Menu, MenuItem } from "components/Menu";
 import { useState } from "react";
+import { Note } from "./Note";
 
 type NoteAndSelf = React.ComponentProps<typeof Note> & {
 	self: boolean;

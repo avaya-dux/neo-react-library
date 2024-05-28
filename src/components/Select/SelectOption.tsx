@@ -18,7 +18,6 @@ import type { SelectOptionProps } from "./utils/SelectTypes";
  * @see https://design.avayacloud.com/components/web/select-web
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-select
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const SelectOption = (_: SelectOptionProps) => {
 	throw new Error(
 		"This shouldn't have been called, Internal Select should have been used.",

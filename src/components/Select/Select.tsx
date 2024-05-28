@@ -108,6 +108,7 @@ export const Select = (props: SelectProps) => {
 	}, [options]);
 
 	const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 	useEffect(() => {
 		if (isInitialRender && defaultValue) {
 			const userSelectedOptions = options.filter((option) =>
@@ -134,9 +135,9 @@ export const Select = (props: SelectProps) => {
 				setSelectedItems(userSelectedOptions);
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 	useEffect(() => {
 		if (!isInitialRender && onChange) {
 			if (multiple) {
@@ -151,7 +152,6 @@ export const Select = (props: SelectProps) => {
 				);
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(selectedItems)]);
 
 	const selectedItemsValues = useMemo(

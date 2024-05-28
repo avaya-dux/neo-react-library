@@ -12,12 +12,12 @@ import {
 import { Pagination } from "components/Pagination";
 
 import type { TableProps } from ".";
+import { TableBody, TableHeader, TableToolbar } from "./TableComponents";
 import {
+	FilterContext,
 	convertRowIdsArrayToObject,
 	translations as defaultTranslations,
-	FilterContext,
 } from "./helpers";
-import { TableBody, TableHeader, TableToolbar } from "./TableComponents";
 import type { IFilterContext, RowHeight } from "./types";
 
 import "./Table_shim.css";
@@ -57,7 +57,7 @@ import "./Table_shim.css";
  *
  * @see https://design.avayacloud.com/components/web/tables-web
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 export const Table = <T extends Record<string, any>>({
 	id,
 	data,
@@ -126,12 +126,12 @@ export const Table = <T extends Record<string, any>>({
 	const rowCount = rows.length;
 
 	// update shown page if necessary
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 	useEffect(() => {
 		const newPageCount = Math.ceil(rowCount / pageSize);
 		if (pageIndex >= newPageCount) {
 			setRootLevelPageIndex(newPageCount - 1);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [rowCount, pageSize]);
 
 	const tableCaptionId = useMemo(

@@ -10,14 +10,14 @@ import {
 	useState,
 } from "react";
 
-import { isString, Keys } from "utils";
+import { Keys, isString } from "utils";
 
+import type { TooltipProps } from "./TooltipTypes";
 import {
 	getIdealTooltipPosition,
 	getMultilineClassName,
 	translatePositionToCSSName,
 } from "./helpers";
-import type { TooltipProps } from "./TooltipTypes";
 
 /**
  * Wraps any text or element and shows a tooltip when that text/element is hovered.
@@ -67,7 +67,7 @@ export const Tooltip = ({
 					)
 				: translatePositionToCSSName(position),
 		);
-	}, [label, position, tooltipContainerRef]);
+	}, [label, position]);
 
 	const multilineClassName = useMemo(
 		() => getMultilineClassName(multiline),
@@ -85,18 +85,12 @@ export const Tooltip = ({
 	}, [children, tooltipId]);
 
 	const [allowTooltip, setAllowTooltip] = useState(true);
-	const setAllowTooltipTrue = useCallback(
-		() => setAllowTooltip(true),
-		[setAllowTooltip],
-	);
-	const onKeyUp = useCallback(
-		(e: { key: string }) => {
-			if (e.key === Keys.ESC) {
-				setAllowTooltip(false);
-			}
-		},
-		[setAllowTooltip],
-	);
+	const setAllowTooltipTrue = useCallback(() => setAllowTooltip(true), []);
+	const onKeyUp = useCallback((e: { key: string }) => {
+		if (e.key === Keys.ESC) {
+			setAllowTooltip(false);
+		}
+	}, []);
 
 	useEffect(() => {
 		document.addEventListener("keyup", onKeyUp, false);
@@ -119,7 +113,6 @@ export const Tooltip = ({
 	 * [4] https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/4abc751d87a8491219a9a3d2dacd80ea8adcb79b/docs/rules/no-static-element-interactions.md
 	 */
 	return (
-		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 		<div
 			{...rest}
 			ref={tooltipContainerRef}

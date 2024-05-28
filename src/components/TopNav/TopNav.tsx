@@ -1,5 +1,6 @@
 import clsx from "clsx";
 
+import type { TopNavProps } from "./TopNavTypes";
 import {
 	TopNavAvatar,
 	TopNavIconButton,
@@ -7,7 +8,6 @@ import {
 	TopNavSearch,
 	TopNavSkipNav,
 } from "./helpers";
-import type { TopNavProps } from "./TopNavTypes";
 
 import "./TopNav_shim.css";
 

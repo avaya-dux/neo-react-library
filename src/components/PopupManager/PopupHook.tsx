@@ -123,16 +123,12 @@ export const usePopup = (traceId?: string) => {
 		() => removeAllInit,
 	);
 	const callback = useCallback(() => {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		settoast(() => managerRef.current!.toast);
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		setnotify(() => managerRef.current!.notify);
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		setremove(() => managerRef.current!.remove);
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		setremoveAll(() => managerRef.current!.removeAll);
 		setMounted(true);
-	}, [settoast, setnotify, setremove, setremoveAll, setMounted]);
+	}, []);
 
 	useEffect(() => {
 		createContainer(callback);

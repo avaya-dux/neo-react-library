@@ -2,13 +2,13 @@ import { forwardRef, useMemo } from "react";
 
 import { Spinner } from "components";
 import {
+	type IconNamesType,
 	computeBadge,
 	getAnimationClass,
 	getBadgeClass,
 	getIconClass,
 	getSizeClass,
 	getVariantClasses,
-	type IconNamesType,
 	rootBtnClass,
 	showSpinner,
 } from "utils";

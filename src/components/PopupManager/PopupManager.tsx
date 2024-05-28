@@ -1,5 +1,4 @@
 import log from "loglevel";
-// eslint-disable-next-line no-use-before-define
 import { Component } from "react";
 
 import { InternalToast, type InternalToastOptions } from "./InternalToast";
@@ -18,13 +17,12 @@ const logger = log.getLogger("popup-manager-logger");
 logger.disableAll();
 export { logger as popupManagerLogger };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 type Dict<T = any> = Record<string, T>;
 const objectKeys = <T extends Dict>(obj: T) =>
 	Object.keys(obj) as unknown as (keyof T)[];
 
-// HACK: TODO: fix this to use Dict (or whatever makes sense)
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// biome-ignore lint/complexity/noBannedTypes: HACK: TODO: fix this to use Dict (or whatever makes sense)
 type Props = {};
 
 export class PopupManager extends Component<Props, State> {
@@ -132,8 +130,6 @@ export class PopupManager extends Component<Props, State> {
 		logger.debug("state before removing", this.state.positions[position]);
 		this.setState((prevPopups) => {
 			const filtered = prevPopups.positions[position].filter(
-				// id may be string or number
-				// eslint-disable-next-line eqeqeq
 				(popup) => popup.id !== id,
 			);
 			const ret = {

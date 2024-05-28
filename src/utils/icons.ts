@@ -1,6 +1,6 @@
 import { icons } from "@avaya/neo-icons/neo-icon-info.js";
-import type { IconCategory } from "@avaya/neo-icons/neo-icon-types";
 import type { IconNamesType } from "@avaya/neo-icons/neo-icon-names-type";
+import type { IconCategory } from "@avaya/neo-icons/neo-icon-types";
 
 // used by neo-react stories
 export const IconNames = icons.map((icon) => icon.name);

@@ -2,8 +2,8 @@ import type { Meta } from "@storybook/react";
 
 import { Checkbox, Form, Icon } from "components";
 
-import { TextInput, type TextInputProps } from "./TextInput";
 import { useCallback, useState } from "react";
+import { TextInput, type TextInputProps } from "./TextInput";
 
 export default {
 	title: "Components/Text Input",

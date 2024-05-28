@@ -4,13 +4,13 @@ import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import { Tooltip } from ".";
+import * as TooltipStories from "./Tooltip.stories";
 import {
+	MultilineClassName,
 	getIdealTooltipPosition,
 	getMultilineClassName,
-	MultilineClassName,
 	translatePositionToCSSName,
 } from "./helpers";
-import * as TooltipStories from "./Tooltip.stories";
 
 const { Default, Templated, MultipleChildren, AutoPosition } =
 	composeStories(TooltipStories);

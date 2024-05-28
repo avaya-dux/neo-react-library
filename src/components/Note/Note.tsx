@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import { useContext, useMemo, useState } from "react";
 
-import type { NoteProps, ContentProps, TitleProps } from "./NoteTypes";
-import type { INoteContext } from "./NoteContext";
-import { NoteContext } from "./NoteContext";
 import { TextArea } from "components/TextArea";
 import { genId } from "utils";
+import type { INoteContext } from "./NoteContext";
+import { NoteContext } from "./NoteContext";
+import type { ContentProps, NoteProps, TitleProps } from "./NoteTypes";
 
 export const Note = ({
 	children,

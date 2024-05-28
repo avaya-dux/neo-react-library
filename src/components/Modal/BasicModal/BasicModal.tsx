@@ -1,13 +1,13 @@
+import clsx from "clsx";
 import {
 	type ReactNode,
+	forwardRef,
 	useCallback,
 	useEffect,
-	forwardRef,
 	useId,
 } from "react";
 import ReactDOM from "react-dom";
 import FocusLock from "react-focus-lock";
-import clsx from "clsx";
 
 import { Button } from "components/Button";
 

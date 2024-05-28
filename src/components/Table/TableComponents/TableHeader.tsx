@@ -6,7 +6,7 @@ import { Menu, MenuButton, MenuItem } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
-import { calculateAriaSortValue, FilterContext } from "../helpers";
+import { FilterContext, calculateAriaSortValue } from "../helpers";
 import type { TableHeaderProps } from "../types";
 
 /**
@@ -23,7 +23,7 @@ import type { TableHeaderProps } from "../types";
  *  translations={translations}
  * />
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 export const TableHeader = <T extends Record<string, any>>({
 	handleRowToggled = () => null,
 	instance,

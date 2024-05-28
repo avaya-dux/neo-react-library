@@ -3,8 +3,8 @@ import {
 	type FC,
 	type HTMLProps,
 	type KeyboardEvent,
-	type MouseEvent,
 	type KeyboardEventHandler,
+	type MouseEvent,
 	type MouseEventHandler,
 	useCallback,
 } from "react";
