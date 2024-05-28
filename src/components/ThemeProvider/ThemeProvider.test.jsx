@@ -4,10 +4,10 @@ import userEvent from "@testing-library/user-event";
 import { NeoThemeProvider, useNeoTheme } from "./ThemeProvider";
 
 describe("NeoThemeProvider", () => {
-  it("fully renders without exploding", () => {
-    const view = render(<NeoThemeProvider>Testing</NeoThemeProvider>);
+	it("fully renders without exploding", () => {
+		const view = render(<NeoThemeProvider>Testing</NeoThemeProvider>);
 
-    expect(view.container).toMatchInlineSnapshot(`
+		expect(view.container).toMatchInlineSnapshot(`
       <div>
         <div
           class="neo-global-colors"
@@ -16,14 +16,14 @@ describe("NeoThemeProvider", () => {
         </div>
       </div>
     `);
-  });
+	});
 
-  it("renders with given initialMode as dark", () => {
-    const view = render(
-      <NeoThemeProvider initialMode="dark">Testing</NeoThemeProvider>,
-    );
+	it("renders with given initialMode as dark", () => {
+		const view = render(
+			<NeoThemeProvider initialMode="dark">Testing</NeoThemeProvider>,
+		);
 
-    expect(view.container).toMatchInlineSnapshot(`
+		expect(view.container).toMatchInlineSnapshot(`
       <div>
         <div
           class="neo-global-colors neo-dark"
@@ -32,14 +32,14 @@ describe("NeoThemeProvider", () => {
         </div>
       </div>
     `);
-  });
+	});
 
-  it("renders with given initialMode as dynamic", () => {
-    const view = render(
-      <NeoThemeProvider initialMode="dynamic">Testing</NeoThemeProvider>,
-    );
+	it("renders with given initialMode as dynamic", () => {
+		const view = render(
+			<NeoThemeProvider initialMode="dynamic">Testing</NeoThemeProvider>,
+		);
 
-    expect(view.container).toMatchInlineSnapshot(`
+		expect(view.container).toMatchInlineSnapshot(`
       <div>
         <div
           class="neo-global-colors neo-dynamic"
@@ -48,16 +48,16 @@ describe("NeoThemeProvider", () => {
         </div>
       </div>
     `);
-  });
+	});
 
-  it("context provider hook `useNeoTheme` allows changing mode", () => {
-    const view = render(
-      <NeoThemeProvider>
-        <ChildComponent />
-      </NeoThemeProvider>,
-    );
+	it("context provider hook `useNeoTheme` allows changing mode", () => {
+		const view = render(
+			<NeoThemeProvider>
+				<ChildComponent />
+			</NeoThemeProvider>,
+		);
 
-    expect(view.container).toMatchInlineSnapshot(`
+		expect(view.container).toMatchInlineSnapshot(`
       <div>
         <div
           class="neo-global-colors"
@@ -69,9 +69,9 @@ describe("NeoThemeProvider", () => {
       </div>
     `);
 
-    userEvent.click(view.getByText("Set Dark"));
+		userEvent.click(view.getByText("Set Dark"));
 
-    expect(view.container).toMatchInlineSnapshot(`
+		expect(view.container).toMatchInlineSnapshot(`
       <div>
         <div
           class="neo-global-colors"
@@ -82,15 +82,15 @@ describe("NeoThemeProvider", () => {
         </div>
       </div>
     `);
-  });
+	});
 });
 
 const ChildComponent = () => {
-  const { mode, setMode } = useNeoTheme();
+	const { mode, setMode } = useNeoTheme();
 
-  if (mode === "light") {
-    return <button onClick={() => setMode("dark")}>Set Dark</button>;
-  }
+	if (mode === "light") {
+		return <button onClick={() => setMode("dark")}>Set Dark</button>;
+	}
 
-  return <button onClick={() => setMode("light")}>Set Light</button>;
+	return <button onClick={() => setMode("light")}>Set Light</button>;
 };

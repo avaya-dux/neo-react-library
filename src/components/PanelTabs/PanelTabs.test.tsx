@@ -5,249 +5,249 @@ import { vi } from "vitest";
 import { PanelTabs } from "./";
 
 describe("Panel Tabs", () => {
-  const user = userEvent.setup();
+	const user = userEvent.setup();
 
-  const panel1Content = "email inbound";
-  const panel2Content = "email outbound";
-  const panel3Content = "add";
+	const panel1Content = "email inbound";
+	const panel2Content = "email outbound";
+	const panel3Content = "add";
 
-  const tab1AriaLabel = "Example One";
-  const tab2AriaLabel = "Example Two";
-  const tab3AriaLabel = "Example Three";
+	const tab1AriaLabel = "Example One";
+	const tab2AriaLabel = "Example Two";
+	const tab3AriaLabel = "Example Three";
 
-  const toggleButtonSelector = ".neo-paneltabs__tabs-expand";
+	const toggleButtonSelector = ".neo-paneltabs__tabs-expand";
 
-  describe("base visual tests", () => {
-    const standardContent = (
-      <>
-        <PanelTabs.Panel>
-          <PanelTabs.PanelContent>
-            <p>{panel1Content}</p>
-          </PanelTabs.PanelContent>
+	describe("base visual tests", () => {
+		const standardContent = (
+			<>
+				<PanelTabs.Panel>
+					<PanelTabs.PanelContent>
+						<p>{panel1Content}</p>
+					</PanelTabs.PanelContent>
 
-          <PanelTabs.PanelContent active>
-            <p>{panel2Content}</p>
-          </PanelTabs.PanelContent>
+					<PanelTabs.PanelContent active>
+						<p>{panel2Content}</p>
+					</PanelTabs.PanelContent>
 
-          <PanelTabs.PanelContent>
-            <p>{panel3Content}</p>
-          </PanelTabs.PanelContent>
-        </PanelTabs.Panel>
+					<PanelTabs.PanelContent>
+						<p>{panel3Content}</p>
+					</PanelTabs.PanelContent>
+				</PanelTabs.Panel>
 
-        <PanelTabs.TabsContainer>
-          <PanelTabs.TabItem aria-label={tab1AriaLabel} icon="email-inbound" />
+				<PanelTabs.TabsContainer>
+					<PanelTabs.TabItem aria-label={tab1AriaLabel} icon="email-inbound" />
 
-          <PanelTabs.TabItem
-            active
-            aria-label={tab2AriaLabel}
-            icon="email-outbound"
-          />
+					<PanelTabs.TabItem
+						active
+						aria-label={tab2AriaLabel}
+						icon="email-outbound"
+					/>
 
-          <PanelTabs.TabItem aria-label={tab3AriaLabel} icon="add" badge />
-        </PanelTabs.TabsContainer>
-      </>
-    );
+					<PanelTabs.TabItem aria-label={tab3AriaLabel} icon="add" badge />
+				</PanelTabs.TabsContainer>
+			</>
+		);
 
-    it("shows only the active panel", () => {
-      render(<PanelTabs>{standardContent}</PanelTabs>);
+		it("shows only the active panel", () => {
+			render(<PanelTabs>{standardContent}</PanelTabs>);
 
-      expect(screen.getByText(panel1Content)).not.toBeVisible();
-      expect(screen.queryByText(panel2Content)).toBeVisible();
-      expect(screen.queryByText(panel3Content)).not.toBeVisible();
-    });
+			expect(screen.getByText(panel1Content)).not.toBeVisible();
+			expect(screen.queryByText(panel2Content)).toBeVisible();
+			expect(screen.queryByText(panel3Content)).not.toBeVisible();
+		});
 
-    it("accepts translations", async () => {
-      const spanish = {
-        expand: "Expandir",
-        collapse: "Colapsar",
-      };
+		it("accepts translations", async () => {
+			const spanish = {
+				expand: "Expandir",
+				collapse: "Colapsar",
+			};
 
-      const { container } = render(
-        <PanelTabs>
-          <PanelTabs.Panel>
-            <PanelTabs.PanelContent>
-              <p>{panel1Content}</p>
-            </PanelTabs.PanelContent>
-          </PanelTabs.Panel>
+			const { container } = render(
+				<PanelTabs>
+					<PanelTabs.Panel>
+						<PanelTabs.PanelContent>
+							<p>{panel1Content}</p>
+						</PanelTabs.PanelContent>
+					</PanelTabs.Panel>
 
-          <PanelTabs.TabsContainer translations={spanish}>
-            <PanelTabs.TabItem
-              aria-label={tab1AriaLabel}
-              icon="email-inbound"
-            />
-          </PanelTabs.TabsContainer>
-        </PanelTabs>,
-      );
+					<PanelTabs.TabsContainer translations={spanish}>
+						<PanelTabs.TabItem
+							aria-label={tab1AriaLabel}
+							icon="email-inbound"
+						/>
+					</PanelTabs.TabsContainer>
+				</PanelTabs>,
+			);
 
-      const toggleButton = container.querySelector(toggleButtonSelector);
+			const toggleButton = container.querySelector(toggleButtonSelector);
 
-      expect(screen.getByLabelText(spanish.collapse)).toBeInTheDocument();
-      expect(toggleButton).toHaveAttribute("aria-label", spanish.collapse);
+			expect(screen.getByLabelText(spanish.collapse)).toBeInTheDocument();
+			expect(toggleButton).toHaveAttribute("aria-label", spanish.collapse);
 
-      await user.click(toggleButton as Element);
+			await user.click(toggleButton as Element);
 
-      expect(screen.getByLabelText(spanish.expand)).toBeInTheDocument();
-      expect(toggleButton).toHaveAttribute("aria-label", spanish.expand);
-    });
+			expect(screen.getByLabelText(spanish.expand)).toBeInTheDocument();
+			expect(toggleButton).toHaveAttribute("aria-label", spanish.expand);
+		});
 
-    it("defaults to expanded", () => {
-      const { container } = render(<PanelTabs>{standardContent}</PanelTabs>);
+		it("defaults to expanded", () => {
+			const { container } = render(<PanelTabs>{standardContent}</PanelTabs>);
 
-      const panelElement = container.querySelector(".neo-paneltabs__panel");
-      expect(panelElement).not.toHaveClass("neo-paneltabs__panel--collapsed");
-    });
+			const panelElement = container.querySelector(".neo-paneltabs__panel");
+			expect(panelElement).not.toHaveClass("neo-paneltabs__panel--collapsed");
+		});
 
-    it("can default to collapsed", () => {
-      const { container } = render(
-        <PanelTabs defaultExpanded={false}>{standardContent}</PanelTabs>,
-      );
+		it("can default to collapsed", () => {
+			const { container } = render(
+				<PanelTabs defaultExpanded={false}>{standardContent}</PanelTabs>,
+			);
 
-      const panelElement = container.querySelector(".neo-paneltabs__panel");
-      expect(panelElement).toHaveClass("neo-paneltabs__panel--collapsed");
-    });
-  });
+			const panelElement = container.querySelector(".neo-paneltabs__panel");
+			expect(panelElement).toHaveClass("neo-paneltabs__panel--collapsed");
+		});
+	});
 
-  describe("functionality tests", () => {
-    const collapsedClassName = "neo-paneltabs__tabs-expand--invert";
+	describe("functionality tests", () => {
+		const collapsedClassName = "neo-paneltabs__tabs-expand--invert";
 
-    it("respects the `onClick` events", async () => {
-      const mock = vi.fn();
+		it("respects the `onClick` events", async () => {
+			const mock = vi.fn();
 
-      render(
-        <PanelTabs defaultExpanded={false}>
-          <PanelTabs.Panel>
-            <PanelTabs.PanelContent>
-              <p>{panel1Content}</p>
-            </PanelTabs.PanelContent>
+			render(
+				<PanelTabs defaultExpanded={false}>
+					<PanelTabs.Panel>
+						<PanelTabs.PanelContent>
+							<p>{panel1Content}</p>
+						</PanelTabs.PanelContent>
 
-            <PanelTabs.PanelContent active>
-              <p>{panel2Content}</p>
-            </PanelTabs.PanelContent>
+						<PanelTabs.PanelContent active>
+							<p>{panel2Content}</p>
+						</PanelTabs.PanelContent>
 
-            <PanelTabs.PanelContent>
-              <p>{panel3Content}</p>
-            </PanelTabs.PanelContent>
-          </PanelTabs.Panel>
+						<PanelTabs.PanelContent>
+							<p>{panel3Content}</p>
+						</PanelTabs.PanelContent>
+					</PanelTabs.Panel>
 
-          <PanelTabs.TabsContainer>
-            <PanelTabs.TabItem
-              aria-label={tab1AriaLabel}
-              icon="email-inbound"
-              onClick={() => mock(0)}
-            />
+					<PanelTabs.TabsContainer>
+						<PanelTabs.TabItem
+							aria-label={tab1AriaLabel}
+							icon="email-inbound"
+							onClick={() => mock(0)}
+						/>
 
-            <PanelTabs.TabItem
-              active
-              aria-label={tab2AriaLabel}
-              icon="email-outbound"
-              onClick={() => mock(1)}
-            />
+						<PanelTabs.TabItem
+							active
+							aria-label={tab2AriaLabel}
+							icon="email-outbound"
+							onClick={() => mock(1)}
+						/>
 
-            <PanelTabs.TabItem
-              aria-label={tab3AriaLabel}
-              icon="add"
-              onClick={() => mock(2)}
-            />
-          </PanelTabs.TabsContainer>
-        </PanelTabs>,
-      );
+						<PanelTabs.TabItem
+							aria-label={tab3AriaLabel}
+							icon="add"
+							onClick={() => mock(2)}
+						/>
+					</PanelTabs.TabsContainer>
+				</PanelTabs>,
+			);
 
-      const tabOne = screen.getByLabelText(tab1AriaLabel);
-      await user.click(tabOne);
-      expect(mock).toHaveBeenCalledWith(0);
+			const tabOne = screen.getByLabelText(tab1AriaLabel);
+			await user.click(tabOne);
+			expect(mock).toHaveBeenCalledWith(0);
 
-      const tabTwo = screen.getByLabelText(tab2AriaLabel);
-      await user.click(tabTwo);
-      expect(mock).toHaveBeenCalledWith(1);
+			const tabTwo = screen.getByLabelText(tab2AriaLabel);
+			await user.click(tabTwo);
+			expect(mock).toHaveBeenCalledWith(1);
 
-      const tabThree = screen.getByLabelText(tab3AriaLabel);
-      await user.click(tabThree);
-      expect(mock).toHaveBeenCalledWith(2);
-    });
+			const tabThree = screen.getByLabelText(tab3AriaLabel);
+			await user.click(tabThree);
+			expect(mock).toHaveBeenCalledWith(2);
+		});
 
-    it("toggles between expanded and collapsed", async () => {
-      const { container } = render(
-        <PanelTabs>
-          <PanelTabs.Panel>
-            <PanelTabs.PanelContent active>
-              <p>{panel1Content}</p>
-            </PanelTabs.PanelContent>
-          </PanelTabs.Panel>
+		it("toggles between expanded and collapsed", async () => {
+			const { container } = render(
+				<PanelTabs>
+					<PanelTabs.Panel>
+						<PanelTabs.PanelContent active>
+							<p>{panel1Content}</p>
+						</PanelTabs.PanelContent>
+					</PanelTabs.Panel>
 
-          <PanelTabs.TabsContainer>
-            <PanelTabs.TabItem
-              aria-label={tab1AriaLabel}
-              icon="email-inbound"
-            />
-          </PanelTabs.TabsContainer>
-        </PanelTabs>,
-      );
+					<PanelTabs.TabsContainer>
+						<PanelTabs.TabItem
+							aria-label={tab1AriaLabel}
+							icon="email-inbound"
+						/>
+					</PanelTabs.TabsContainer>
+				</PanelTabs>,
+			);
 
-      const toggleButton = container.querySelector(toggleButtonSelector);
-      expect(toggleButton).toBeInTheDocument();
-      expect(toggleButton).not.toHaveClass(collapsedClassName);
+			const toggleButton = container.querySelector(toggleButtonSelector);
+			expect(toggleButton).toBeInTheDocument();
+			expect(toggleButton).not.toHaveClass(collapsedClassName);
 
-      await user.click(toggleButton as Element);
-      expect(toggleButton).toHaveClass(collapsedClassName);
+			await user.click(toggleButton as Element);
+			expect(toggleButton).toHaveClass(collapsedClassName);
 
-      await user.click(toggleButton as Element);
-      expect(toggleButton).not.toHaveClass(collapsedClassName);
-    });
+			await user.click(toggleButton as Element);
+			expect(toggleButton).not.toHaveClass(collapsedClassName);
+		});
 
-    it("expands on tab item click when collapsed", async () => {
-      render(
-        <PanelTabs defaultExpanded={false}>
-          <PanelTabs.Panel>
-            <PanelTabs.PanelContent active>
-              <p>{panel1Content}</p>
-            </PanelTabs.PanelContent>
-          </PanelTabs.Panel>
+		it("expands on tab item click when collapsed", async () => {
+			render(
+				<PanelTabs defaultExpanded={false}>
+					<PanelTabs.Panel>
+						<PanelTabs.PanelContent active>
+							<p>{panel1Content}</p>
+						</PanelTabs.PanelContent>
+					</PanelTabs.Panel>
 
-          <PanelTabs.TabsContainer>
-            <PanelTabs.TabItem
-              active
-              aria-label={tab1AriaLabel}
-              icon="email-inbound"
-            />
-          </PanelTabs.TabsContainer>
-        </PanelTabs>,
-      );
+					<PanelTabs.TabsContainer>
+						<PanelTabs.TabItem
+							active
+							aria-label={tab1AriaLabel}
+							icon="email-inbound"
+						/>
+					</PanelTabs.TabsContainer>
+				</PanelTabs>,
+			);
 
-      const panelOne = screen.getByText(panel1Content);
-      expect(panelOne).not.toBeVisible();
+			const panelOne = screen.getByText(panel1Content);
+			expect(panelOne).not.toBeVisible();
 
-      const tabOne = screen.getByLabelText(tab1AriaLabel);
-      await user.click(tabOne);
+			const tabOne = screen.getByLabelText(tab1AriaLabel);
+			await user.click(tabOne);
 
-      expect(panelOne).toBeVisible();
-    });
+			expect(panelOne).toBeVisible();
+		});
 
-    it("collapses on active tab item click when expanded", async () => {
-      render(
-        <PanelTabs>
-          <PanelTabs.Panel>
-            <PanelTabs.PanelContent active>
-              <p>{panel1Content}</p>
-            </PanelTabs.PanelContent>
-          </PanelTabs.Panel>
+		it("collapses on active tab item click when expanded", async () => {
+			render(
+				<PanelTabs>
+					<PanelTabs.Panel>
+						<PanelTabs.PanelContent active>
+							<p>{panel1Content}</p>
+						</PanelTabs.PanelContent>
+					</PanelTabs.Panel>
 
-          <PanelTabs.TabsContainer>
-            <PanelTabs.TabItem
-              active
-              aria-label={tab1AriaLabel}
-              icon="email-inbound"
-            />
-          </PanelTabs.TabsContainer>
-        </PanelTabs>,
-      );
+					<PanelTabs.TabsContainer>
+						<PanelTabs.TabItem
+							active
+							aria-label={tab1AriaLabel}
+							icon="email-inbound"
+						/>
+					</PanelTabs.TabsContainer>
+				</PanelTabs>,
+			);
 
-      const panelOne = screen.getByText(panel1Content);
-      expect(panelOne).toBeVisible();
+			const panelOne = screen.getByText(panel1Content);
+			expect(panelOne).toBeVisible();
 
-      const tabOne = screen.getByLabelText(tab1AriaLabel);
-      await user.click(tabOne);
+			const tabOne = screen.getByLabelText(tab1AriaLabel);
+			await user.click(tabOne);
 
-      expect(panelOne).not.toBeVisible();
-    });
-  });
+			expect(panelOne).not.toBeVisible();
+		});
+	});
 });

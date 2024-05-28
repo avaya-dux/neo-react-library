@@ -5,7 +5,7 @@ import { FunctionComponent, HTMLAttributes } from "react";
  * @prop {boolean} [inline] display form elements inline
  */
 export interface FormProps extends HTMLAttributes<HTMLFormElement> {
-  inline?: boolean;
+	inline?: boolean;
 }
 
 /**
@@ -22,16 +22,16 @@ export interface FormProps extends HTMLAttributes<HTMLFormElement> {
  * @see https://design.avayacloud.com/components/web/form-layout-web
  */
 export const Form: FunctionComponent<FormProps> = ({
-  className,
-  inline,
-  ...rest
+	className,
+	inline,
+	...rest
 }: FormProps) => {
-  return (
-    <form
-      className={clsx("neo-form", inline && "neo-form--inline", className)}
-      {...rest}
-    />
-  );
+	return (
+		<form
+			className={clsx("neo-form", inline && "neo-form--inline", className)}
+			{...rest}
+		/>
+	);
 };
 
 Form.displayName = "Form";

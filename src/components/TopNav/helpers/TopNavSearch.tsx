@@ -15,19 +15,19 @@ import { TextInput, TextInputProps } from "components/TextInput";
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-top-navigation--search-example
  */
 export const TopNavSearch = ({
-  "aria-label": ariaLabel = "Search",
-  clearable = true,
-  disabled = false,
-  startIcon = "search",
+	"aria-label": ariaLabel = "Search",
+	clearable = true,
+	disabled = false,
+	startIcon = "search",
 
-  ...rest
+	...rest
 }: TextInputProps) => (
-  <TextInput
-    aria-label={ariaLabel}
-    clearable={clearable}
-    disabled={disabled}
-    startIcon={startIcon}
-    type="search"
-    {...rest}
-  />
+	<TextInput
+		aria-label={ariaLabel}
+		clearable={clearable}
+		disabled={disabled}
+		startIcon={startIcon}
+		type="search"
+		{...rest}
+	/>
 );

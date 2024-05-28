@@ -6,197 +6,197 @@ import { Button } from "./Button";
 import * as ButtonStories from "./Button.stories";
 
 const {
-  AnimationPulse,
-  AnimationSpinner,
-  Badge,
-  BadgeLongText,
-  LeftIconExample,
-  RightIconExample,
-  WithMultipleChildren,
+	AnimationPulse,
+	AnimationSpinner,
+	Badge,
+	BadgeLongText,
+	LeftIconExample,
+	RightIconExample,
+	WithMultipleChildren,
 } = composeStories(ButtonStories);
 
 describe("Button", () => {
-  it("fully renders without exploding", () => {
-    const { getByTestId } = render(
-      <Button data-testid="neo-button">Test</Button>,
-    );
+	it("fully renders without exploding", () => {
+		const { getByTestId } = render(
+			<Button data-testid="neo-button">Test</Button>,
+		);
 
-    const rootElement = getByTestId("neo-button");
-    expect(rootElement).toBeTruthy();
-  });
+		const rootElement = getByTestId("neo-button");
+		expect(rootElement).toBeTruthy();
+	});
 
-  it("passes basic axe compliance", async () => {
-    const { container } = render(
-      <Button data-testid="neo-button" id="test-axe">
-        Button
-      </Button>,
-    );
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-  });
+	it("passes basic axe compliance", async () => {
+		const { container } = render(
+			<Button data-testid="neo-button" id="test-axe">
+				Button
+			</Button>,
+		);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
 
-  it("should respect the 'badge' prop", () => {
-    const badgeText = "100k";
-    const { getByTestId } = render(
-      <Button data-testid="neo-button" badge={badgeText}>
-        badge test
-      </Button>,
-    );
-    const rootElement = getByTestId("neo-button");
-    expect(rootElement).toHaveAttribute("data-badge", badgeText);
-  });
+	it("should respect the 'badge' prop", () => {
+		const badgeText = "100k";
+		const { getByTestId } = render(
+			<Button data-testid="neo-button" badge={badgeText}>
+				badge test
+			</Button>,
+		);
+		const rootElement = getByTestId("neo-button");
+		expect(rootElement).toHaveAttribute("data-badge", badgeText);
+	});
 
-  it("cuts off 'badge' text at 12 characters", () => {
-    const badgeText = "12345678901234567";
-    const { getByTestId } = render(
-      <Button data-testid="neo-button" badge={badgeText}>
-        test
-      </Button>,
-    );
-    const rootElement = getByTestId("neo-button");
+	it("cuts off 'badge' text at 12 characters", () => {
+		const badgeText = "12345678901234567";
+		const { getByTestId } = render(
+			<Button data-testid="neo-button" badge={badgeText}>
+				test
+			</Button>,
+		);
+		const rootElement = getByTestId("neo-button");
 
-    expect(badgeText.length).toBe(17);
-    expect(rootElement).toHaveAttribute("data-badge", badgeText.slice(0, 12));
-  });
+		expect(badgeText.length).toBe(17);
+		expect(rootElement).toHaveAttribute("data-badge", badgeText.slice(0, 12));
+	});
 
-  it("sets `dir='rtl'` when passed", () => {
-    render(<Button dir="rtl" />);
-    const btn = screen.getByRole("button");
-    expect(btn).toHaveAttribute("dir", "rtl");
-  });
+	it("sets `dir='rtl'` when passed", () => {
+		render(<Button dir="rtl" />);
+		const btn = screen.getByRole("button");
+		expect(btn).toHaveAttribute("dir", "rtl");
+	});
 
-  describe("storybook tests", () => {
-    describe("AnimationSpinner", () => {
-      let renderResult;
+	describe("storybook tests", () => {
+		describe("AnimationSpinner", () => {
+			let renderResult;
 
-      beforeEach(() => {
-        renderResult = render(<AnimationSpinner />);
-      });
+			beforeEach(() => {
+				renderResult = render(<AnimationSpinner />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("AnimationPulse", () => {
-      let renderResult;
+		describe("AnimationPulse", () => {
+			let renderResult;
 
-      beforeEach(() => {
-        renderResult = render(<AnimationPulse />);
-      });
+			beforeEach(() => {
+				renderResult = render(<AnimationPulse />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("Badge", () => {
-      let renderResult;
+		describe("Badge", () => {
+			let renderResult;
 
-      beforeEach(() => {
-        renderResult = render(<Badge />);
-      });
+			beforeEach(() => {
+				renderResult = render(<Badge />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("BadgeLongText", () => {
-      let renderResult;
+		describe("BadgeLongText", () => {
+			let renderResult;
 
-      beforeEach(() => {
-        renderResult = render(<BadgeLongText />);
-      });
+			beforeEach(() => {
+				renderResult = render(<BadgeLongText />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("LeftIconExample", () => {
-      let renderResult;
+		describe("LeftIconExample", () => {
+			let renderResult;
 
-      beforeEach(() => {
-        renderResult = render(<LeftIconExample />);
-      });
+			beforeEach(() => {
+				renderResult = render(<LeftIconExample />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("RightIconExample", () => {
-      let renderResult;
+		describe("RightIconExample", () => {
+			let renderResult;
 
-      beforeEach(() => {
-        renderResult = render(<RightIconExample />);
-      });
+			beforeEach(() => {
+				renderResult = render(<RightIconExample />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("WithMultipleChildren", () => {
-      let renderResult;
+		describe("WithMultipleChildren", () => {
+			let renderResult;
 
-      beforeEach(() => {
-        renderResult = render(<WithMultipleChildren />);
-      });
+			beforeEach(() => {
+				renderResult = render(<WithMultipleChildren />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
-  });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+	});
 });

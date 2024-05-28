@@ -33,11 +33,11 @@ import { TopNavAvatarProps } from "../TopNavTypes";
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-top-navigation--avatar-example
  */
 export const TopNavAvatar = ({ avatar, dropdown }: TopNavAvatarProps) => {
-  return dropdown
-    ? cloneElement(dropdown, {
-        menuRootElement: cloneElement(avatar, {
-          className: "neo-dropdown__link-header neo-avatar--medium",
-        }),
-      })
-    : avatar;
+	return dropdown
+		? cloneElement(dropdown, {
+				menuRootElement: cloneElement(avatar, {
+					className: "neo-dropdown__link-header neo-avatar--medium",
+				}),
+			})
+		: avatar;
 };

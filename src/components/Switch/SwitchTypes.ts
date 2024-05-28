@@ -1,23 +1,23 @@
 import {
-  ChangeEvent,
-  ChangeEventHandler,
-  DetailedHTMLProps,
-  InputHTMLAttributes,
-  ReactNode,
+	ChangeEvent,
+	ChangeEventHandler,
+	DetailedHTMLProps,
+	InputHTMLAttributes,
+	ReactNode,
 } from "react";
 
 export type SwitchChangeHandler = (
-  event: ChangeEvent<HTMLInputElement>,
-  checked: boolean,
+	event: ChangeEvent<HTMLInputElement>,
+	checked: boolean,
 ) => void;
 
 export interface SwitchProps
-  extends Omit<
-    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-    "onChange"
-  > {
-  error?: boolean;
-  multiline?: boolean;
-  onChange?: ChangeEventHandler<HTMLInputElement> | SwitchChangeHandler;
-  children?: ReactNode;
+	extends Omit<
+		DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+		"onChange"
+	> {
+	error?: boolean;
+	multiline?: boolean;
+	onChange?: ChangeEventHandler<HTMLInputElement> | SwitchChangeHandler;
+	children?: ReactNode;
 }

@@ -8,25 +8,25 @@ import { SizeType } from "utils/size";
  * @prop {SizeType} [size] - Size of the spinner.
  */
 export interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
-  size?: SizeType;
+	size?: SizeType;
 }
 
 export const getSizeClass = (size?: SizeType) => {
-  switch (size) {
-    case undefined:
-    case "xs":
-    case "sm":
-    case "md":
-      return undefined;
-    case "lg":
-      return "neo-spinner--large";
-    case "xl":
-      return "neo-spinner--x-large";
+	switch (size) {
+		case undefined:
+		case "xs":
+		case "sm":
+		case "md":
+			return undefined;
+		case "lg":
+			return "neo-spinner--large";
+		case "xl":
+			return "neo-spinner--x-large";
 
-    default:
-      console.warn(`Unknown size encountered: ${size}`);
-      return undefined;
-  }
+		default:
+			console.warn(`Unknown size encountered: ${size}`);
+			return undefined;
+	}
 };
 
 /**
@@ -42,9 +42,9 @@ export const getSizeClass = (size?: SizeType) => {
  * @see https://design.avayacloud.com/components/web/spinner-web
  */
 export const Spinner = ({ className, size, ...rest }: SpinnerProps) => (
-  <div
-    className={clsx("neo-spinner", getSizeClass(size), className)}
-    {...rest}
-  />
+	<div
+		className={clsx("neo-spinner", getSizeClass(size), className)}
+		{...rest}
+	/>
 );
 Spinner.displayName = "Spinner";

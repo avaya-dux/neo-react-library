@@ -11,87 +11,87 @@ import { ITableFilterTranslations } from "../types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TableFilterProps<T extends Record<string, any>> = {
-  translations: ITableFilterTranslations;
-  instance: TableInstance<T>;
+	translations: ITableFilterTranslations;
+	instance: TableInstance<T>;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const TableFilter = <T extends Record<string, any>>({
-  translations,
-  instance,
+	translations,
+	instance,
 }: TableFilterProps<T>) => {
-  // translations
-  const clear = translations.clear || defaultTranslations.toolbar.clear;
-  const close =
-    translations.close || defaultTranslations.toolbar.close || "Close";
-  const filterColumns =
-    translations.filterColumns ||
-    defaultTranslations.toolbar.filterColumns ||
-    "Filter Columns";
+	// translations
+	const clear = translations.clear || defaultTranslations.toolbar.clear;
+	const close =
+		translations.close || defaultTranslations.toolbar.close || "Close";
+	const filterColumns =
+		translations.filterColumns ||
+		defaultTranslations.toolbar.filterColumns ||
+		"Filter Columns";
 
-  const { allColumns, setHiddenColumns } = instance;
+	const { allColumns, setHiddenColumns } = instance;
 
-  const { filterSheetVisible, toggleFilterSheetVisible } =
-    useContext(FilterContext);
+	const { filterSheetVisible, toggleFilterSheetVisible } =
+		useContext(FilterContext);
 
-  const buttons = [
-    <IconButton
-      aria-label={close}
-      icon="close"
-      shape="circle"
-      style={{ color: "black" }}
-      variant="tertiary"
-      onClick={toggleFilterSheetVisible}
-      key="table-filter-close-icon-button"
-    />,
-  ];
+	const buttons = [
+		<IconButton
+			aria-label={close}
+			icon="close"
+			shape="circle"
+			style={{ color: "black" }}
+			variant="tertiary"
+			onClick={toggleFilterSheetVisible}
+			key="table-filter-close-icon-button"
+		/>,
+	];
 
-  return (
-    <>
-      <IconButton
-        aria-label={filterColumns}
-        icon="filter"
-        shape="square"
-        onClick={toggleFilterSheetVisible}
-      />
+	return (
+		<>
+			<IconButton
+				aria-label={filterColumns}
+				icon="filter"
+				shape="square"
+				onClick={toggleFilterSheetVisible}
+			/>
 
-      <Sheet
-        actions={buttons}
-        className="neo-table__filters--sheet"
-        open={filterSheetVisible}
-        slide={filterSheetVisible}
-        title={filterColumns}
-      >
-        <section>
-          {allColumns.map((column) => (
-            <Checkbox key={column.id} {...column.getToggleHiddenProps()}>
-              {column.Header}
-            </Checkbox>
-          ))}
-        </section>
+			<Sheet
+				actions={buttons}
+				className="neo-table__filters--sheet"
+				open={filterSheetVisible}
+				slide={filterSheetVisible}
+				title={filterColumns}
+			>
+				<section>
+					{allColumns.map((column) => (
+						<Checkbox key={column.id} {...column.getToggleHiddenProps()}>
+							{column.Header}
+						</Checkbox>
+					))}
+				</section>
 
-        <div
-          className="neo-table__filters--sheet__footer"
-          style={{ flexWrap: "wrap" }}
-        >
-          <Button
-            onClick={() => setHiddenColumns([])}
-            size="wide"
-            status="alert"
-            variant="tertiary"
-          >
-            {clear}
-          </Button>
+				<div
+					className="neo-table__filters--sheet__footer"
+					style={{ flexWrap: "wrap" }}
+				>
+					<Button
+						onClick={() => setHiddenColumns([])}
+						size="wide"
+						status="alert"
+						variant="tertiary"
+					>
+						{clear}
+					</Button>
 
-          <Button
-            onClick={toggleFilterSheetVisible}
-            size="wide"
-            variant="tertiary"
-          >
-            {close}
-          </Button>
-        </div>
-      </Sheet>
-    </>
-  );
+					<Button
+						onClick={toggleFilterSheetVisible}
+						size="wide"
+						variant="tertiary"
+					>
+						{close}
+					</Button>
+				</div>
+			</Sheet>
+		</>
+	);
 };

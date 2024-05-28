@@ -2,14 +2,14 @@ import { Composition } from "atomic-layout";
 import { ReactNode } from "react";
 
 export interface AppLayoutProps {
-  desktopAreas?: string;
-  footer?: ReactNode;
-  header?: ReactNode;
-  height?: string;
-  leftPanel?: ReactNode;
-  mainContent: ReactNode;
-  mobileAreas?: string;
-  rightPanel?: ReactNode;
+	desktopAreas?: string;
+	footer?: ReactNode;
+	header?: ReactNode;
+	height?: string;
+	leftPanel?: ReactNode;
+	mainContent: ReactNode;
+	mobileAreas?: string;
+	rightPanel?: ReactNode;
 }
 
 /**
@@ -28,61 +28,61 @@ export interface AppLayoutProps {
  */
 
 export const AppLayout = ({
-  desktopAreas,
-  footer,
-  header,
-  height = "100vh",
-  leftPanel,
-  mainContent,
-  mobileAreas,
-  rightPanel,
+	desktopAreas,
+	footer,
+	header,
+	height = "100vh",
+	leftPanel,
+	mainContent,
+	mobileAreas,
+	rightPanel,
 }: AppLayoutProps) => {
-  const defaultDesktopAreas = `
+	const defaultDesktopAreas = `
     topheader topheader
     leftpanel main
     footer footer
     `;
 
-  const defaultBigscreenAreas = `
+	const defaultBigscreenAreas = `
     topheader topheader topheader
     leftpanel main rightpanel
     footer footer footer
     `;
 
-  const defaultMobileAreas = `
+	const defaultMobileAreas = `
     topheader
     main
     footer
     `;
 
-  return (
-    <Composition
-      areas={mobileAreas || defaultMobileAreas}
-      areasMd={desktopAreas || defaultDesktopAreas}
-      areasLg={desktopAreas || defaultBigscreenAreas}
-      height={height}
-      templateRows="auto 1fr auto"
-      templateCols="1fr auto"
-      templateColsMd="auto 1fr auto"
-      gap={1}
-    >
-      {(Areas) => (
-        <>
-          {header && <Areas.Topheader>{header}</Areas.Topheader>}
-          {leftPanel && (
-            <Areas.Leftpanel area={"leftpanel"}>{leftPanel}</Areas.Leftpanel>
-          )}
-          <Areas.Main area={"main"}>{mainContent}</Areas.Main>
-          {rightPanel && (
-            <Areas.Rightpanel area={"rightpanel"}>
-              {rightPanel}
-            </Areas.Rightpanel>
-          )}
-          {footer && <Areas.Footer area={"footer"}>{footer}</Areas.Footer>}
-        </>
-      )}
-    </Composition>
-  );
+	return (
+		<Composition
+			areas={mobileAreas || defaultMobileAreas}
+			areasMd={desktopAreas || defaultDesktopAreas}
+			areasLg={desktopAreas || defaultBigscreenAreas}
+			height={height}
+			templateRows="auto 1fr auto"
+			templateCols="1fr auto"
+			templateColsMd="auto 1fr auto"
+			gap={1}
+		>
+			{(Areas) => (
+				<>
+					{header && <Areas.Topheader>{header}</Areas.Topheader>}
+					{leftPanel && (
+						<Areas.Leftpanel area={"leftpanel"}>{leftPanel}</Areas.Leftpanel>
+					)}
+					<Areas.Main area={"main"}>{mainContent}</Areas.Main>
+					{rightPanel && (
+						<Areas.Rightpanel area={"rightpanel"}>
+							{rightPanel}
+						</Areas.Rightpanel>
+					)}
+					{footer && <Areas.Footer area={"footer"}>{footer}</Areas.Footer>}
+				</>
+			)}
+		</Composition>
+	);
 };
 
 AppLayout.displayName = "AppLayout";

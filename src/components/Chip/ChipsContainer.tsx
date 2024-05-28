@@ -4,7 +4,7 @@ import { Children, cloneElement, HTMLAttributes, ReactElement } from "react";
 import { ChipProps } from "./Chip";
 
 export interface ChipsContainerProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactElement<ChipProps> | ReactElement<ChipProps>[];
+	children: ReactElement<ChipProps> | ReactElement<ChipProps>[];
 }
 
 /**
@@ -20,18 +20,18 @@ export interface ChipsContainerProps extends HTMLAttributes<HTMLDivElement> {
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-chips
  */
 export const ChipsContainer = ({
-  className,
-  children,
-  ...rest
+	className,
+	children,
+	...rest
 }: ChipsContainerProps) => (
-  <div className={clsx("neo-chips", className)} {...rest}>
-    {Children.map(children, (child, index) =>
-      cloneElement(child, {
-        key: index,
-        className: clsx(child.props.className, "neo-chips__item"),
-      }),
-    )}
-  </div>
+	<div className={clsx("neo-chips", className)} {...rest}>
+		{Children.map(children, (child, index) =>
+			cloneElement(child, {
+				key: index,
+				className: clsx(child.props.className, "neo-chips__item"),
+			}),
+		)}
+	</div>
 );
 
 ChipsContainer.displayName = "ChipsContainer";

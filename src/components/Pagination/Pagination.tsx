@@ -1,9 +1,9 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 import {
-  PaginationItemDisplay,
-  PaginationItemsPerPageSelection,
-  PaginationNavigation,
+	PaginationItemDisplay,
+	PaginationItemsPerPageSelection,
+	PaginationNavigation,
 } from "./Nodes/";
 import { PaginationProps } from "./PaginationTypes";
 
@@ -35,93 +35,93 @@ import "./Pagination.css";
  * @see https://design.avayacloud.com/components/web/tables-web
  */
 export const Pagination = ({
-  id,
+	id,
 
-  currentPageIndex,
-  itemCount,
-  itemsPerPage,
-  itemsPerPageLabel,
-  itemsPerPageOptions,
+	currentPageIndex,
+	itemCount,
+	itemsPerPage,
+	itemsPerPageLabel,
+	itemsPerPageOptions,
 
-  itemDisplayTooltipPosition,
-  itemsPerPageTooltipPosition,
+	itemDisplayTooltipPosition,
+	itemsPerPageTooltipPosition,
 
-  alwaysShowPagination,
-  itemDisplayType,
+	alwaysShowPagination,
+	itemDisplayType,
 
-  onPageChange,
-  onItemsPerPageChange,
+	onPageChange,
+	onItemsPerPageChange,
 
-  // translations
-  backIconButtonText,
-  nextIconButtonText,
-  tooltipForCurrentPage,
-  tooltipForShownPagesSelect,
+	// translations
+	backIconButtonText,
+	nextIconButtonText,
+	tooltipForCurrentPage,
+	tooltipForShownPagesSelect,
 
-  // default overrides
-  centerNode,
-  leftNode,
-  rightNode,
+	// default overrides
+	centerNode,
+	leftNode,
+	rightNode,
 }: PaginationProps) => {
-  const generatedId = `pagination-${useId()}`;
-  id = id || generatedId;
-  const rootRef = useRef<HTMLDivElement>(null);
-  const totalPages = Math.ceil(itemCount / itemsPerPage);
+	const generatedId = `pagination-${useId()}`;
+	id = id || generatedId;
+	const rootRef = useRef<HTMLDivElement>(null);
+	const totalPages = Math.ceil(itemCount / itemsPerPage);
 
-  const [rootWidth, setRootWidth] = useState(0);
-  useEffect(() => {
-    // TODO: could add a debounce/throttle here
-    // example: https://github.com/maslianok/react-resize-detector/blob/ccdb602d683e891386302e5436bf599645a16ba6/src/utils.ts#L16
-    const updateRootWidth = () => {
-      if (rootRef.current) {
-        setRootWidth(rootRef.current.offsetWidth);
-      }
-    };
+	const [rootWidth, setRootWidth] = useState(0);
+	useEffect(() => {
+		// TODO: could add a debounce/throttle here
+		// example: https://github.com/maslianok/react-resize-detector/blob/ccdb602d683e891386302e5436bf599645a16ba6/src/utils.ts#L16
+		const updateRootWidth = () => {
+			if (rootRef.current) {
+				setRootWidth(rootRef.current.offsetWidth);
+			}
+		};
 
-    // update root width on window resize
-    window.addEventListener("resize", updateRootWidth);
-    updateRootWidth();
-    return () => window.removeEventListener("resize", updateRootWidth);
-  }, [rootRef]);
+		// update root width on window resize
+		window.addEventListener("resize", updateRootWidth);
+		updateRootWidth();
+		return () => window.removeEventListener("resize", updateRootWidth);
+	}, [rootRef]);
 
-  return (
-    <div className="neo-pagination__row" id={id} ref={rootRef}>
-      {leftNode || (
-        <PaginationItemDisplay
-          tooltipForCurrentPage={tooltipForCurrentPage}
-          currentPageIndex={currentPageIndex}
-          itemCount={itemCount}
-          itemDisplayType={itemDisplayType}
-          itemDisplayTooltipPosition={itemDisplayTooltipPosition}
-          itemsPerPage={itemsPerPage}
-          totalPages={totalPages}
-        />
-      )}
+	return (
+		<div className="neo-pagination__row" id={id} ref={rootRef}>
+			{leftNode || (
+				<PaginationItemDisplay
+					tooltipForCurrentPage={tooltipForCurrentPage}
+					currentPageIndex={currentPageIndex}
+					itemCount={itemCount}
+					itemDisplayType={itemDisplayType}
+					itemDisplayTooltipPosition={itemDisplayTooltipPosition}
+					itemsPerPage={itemsPerPage}
+					totalPages={totalPages}
+				/>
+			)}
 
-      {centerNode || (
-        <PaginationNavigation
-          backIconButtonText={backIconButtonText}
-          nextIconButtonText={nextIconButtonText}
-          alwaysShowPagination={alwaysShowPagination}
-          currentPageIndex={currentPageIndex}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
-          paginationRootWidth={rootWidth}
-        />
-      )}
+			{centerNode || (
+				<PaginationNavigation
+					backIconButtonText={backIconButtonText}
+					nextIconButtonText={nextIconButtonText}
+					alwaysShowPagination={alwaysShowPagination}
+					currentPageIndex={currentPageIndex}
+					totalPages={totalPages}
+					onPageChange={onPageChange}
+					paginationRootWidth={rootWidth}
+				/>
+			)}
 
-      {rightNode || (
-        <PaginationItemsPerPageSelection
-          itemsPerPage={itemsPerPage}
-          itemsPerPageLabel={itemsPerPageLabel}
-          itemsPerPageOptions={itemsPerPageOptions}
-          itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
-          onItemsPerPageChange={onItemsPerPageChange}
-          tooltipForShownPagesSelect={tooltipForShownPagesSelect}
-        />
-      )}
-    </div>
-  );
+			{rightNode || (
+				<PaginationItemsPerPageSelection
+					itemsPerPage={itemsPerPage}
+					itemsPerPageLabel={itemsPerPageLabel}
+					itemsPerPageOptions={itemsPerPageOptions}
+					itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
+					onItemsPerPageChange={onItemsPerPageChange}
+					tooltipForShownPagesSelect={tooltipForShownPagesSelect}
+				/>
+			)}
+		</div>
+	);
 };
 
 Pagination.displayName = "Pagination";

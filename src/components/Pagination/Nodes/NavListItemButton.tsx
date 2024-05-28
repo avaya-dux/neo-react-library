@@ -18,31 +18,31 @@ import { PaginationNavigationProps } from "../PaginationTypes";
  * />
  */
 export const NavListItemButton = ({
-  isCurrentPage,
-  onPageChange,
-  pageToNavigateTo,
+	isCurrentPage,
+	onPageChange,
+	pageToNavigateTo,
 }: {
-  pageToNavigateTo: number;
-  isCurrentPage?: boolean;
+	pageToNavigateTo: number;
+	isCurrentPage?: boolean;
 } & Pick<PaginationNavigationProps, "onPageChange">) => {
-  const variant = isCurrentPage ? "secondary" : "tertiary";
+	const variant = isCurrentPage ? "secondary" : "tertiary";
 
-  return (
-    <li>
-      <Button
-        className={clsx(
-          "neo-btn-square",
-          `neo-btn-square-${variant} neo-btn-square-${variant}--info`,
-        )}
-        onClick={(e) => {
-          if (!isCurrentPage) {
-            onPageChange(e, pageToNavigateTo);
-          }
-        }}
-        variant={variant}
-      >
-        {pageToNavigateTo}
-      </Button>
-    </li>
-  );
+	return (
+		<li>
+			<Button
+				className={clsx(
+					"neo-btn-square",
+					`neo-btn-square-${variant} neo-btn-square-${variant}--info`,
+				)}
+				onClick={(e) => {
+					if (!isCurrentPage) {
+						onPageChange(e, pageToNavigateTo);
+					}
+				}}
+				variant={variant}
+			>
+				{pageToNavigateTo}
+			</Button>
+		</li>
+	);
 };

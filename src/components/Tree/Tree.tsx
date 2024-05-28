@@ -14,12 +14,12 @@ import { TreeContext } from "./TreeContext";
 import "./Tree_shim.css";
 
 export interface TreeProps
-  extends Omit<
-    DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    "dir"
-  > {
-  dir?: "ltr" | "rtl";
-  label?: ReactNode;
+	extends Omit<
+		DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+		"dir"
+	> {
+	dir?: "ltr" | "rtl";
+	label?: ReactNode;
 }
 
 /**
@@ -77,43 +77,43 @@ export interface TreeProps
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-tree
  */
 export const Tree = ({
-  "aria-describedby": describedby,
-  "aria-label": arialabel,
-  children,
-  className,
-  dir = "ltr",
-  label,
+	"aria-describedby": describedby,
+	"aria-label": arialabel,
+	children,
+	className,
+	dir = "ltr",
+	label,
 
-  ...rest
+	...rest
 }: TreeProps) => {
-  if (!label && !arialabel && !describedby) {
-    handleAccessbilityError(
-      "Tree requires a label, an aria-label, or an aria-describedby prop",
-    );
-  }
+	if (!label && !arialabel && !describedby) {
+		handleAccessbilityError(
+			"Tree requires a label, an aria-label, or an aria-describedby prop",
+		);
+	}
 
-  const treeId = useMemo(() => genId(), []);
+	const treeId = useMemo(() => genId(), []);
 
-  return (
-    <div className={clsx("neo-treeview", className)} {...rest}>
-      {label && <label htmlFor={treeId}>{label}</label>}
+	return (
+		<div className={clsx("neo-treeview", className)} {...rest}>
+			{label && <label htmlFor={treeId}>{label}</label>}
 
-      <RovingTabIndexProvider
-        options={{ direction: "vertical", focusOnClick: true }}
-      >
-        <TreeContext.Provider value={{ dir }}>
-          <ul
-            aria-describedby={describedby}
-            aria-label={arialabel}
-            id={treeId}
-            role="tree"
-          >
-            {children}
-          </ul>
-        </TreeContext.Provider>
-      </RovingTabIndexProvider>
-    </div>
-  );
+			<RovingTabIndexProvider
+				options={{ direction: "vertical", focusOnClick: true }}
+			>
+				<TreeContext.Provider value={{ dir }}>
+					<ul
+						aria-describedby={describedby}
+						aria-label={arialabel}
+						id={treeId}
+						role="tree"
+					>
+						{children}
+					</ul>
+				</TreeContext.Provider>
+			</RovingTabIndexProvider>
+		</div>
+	);
 };
 
 Tree.displayName = "Tree";

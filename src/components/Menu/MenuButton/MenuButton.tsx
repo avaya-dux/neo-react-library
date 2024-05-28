@@ -29,17 +29,17 @@ import { forwardRef, Ref } from "react";
     </Menu>
  */
 export const MenuButton = forwardRef(
-  (
-    { className, children, ...rest }: ButtonProps,
-    ref: Ref<HTMLButtonElement>,
-  ) => (
-    <Button
-      ref={ref}
-      className={clsx("neo-dropdown__link-header", className)}
-      {...rest}
-    >
-      {children || "Menu Button"}
-    </Button>
-  ),
+	(
+		{ className, children, ...rest }: ButtonProps,
+		ref: Ref<HTMLButtonElement>,
+	) => (
+		<Button
+			ref={ref}
+			className={clsx("neo-dropdown__link-header", className)}
+			{...rest}
+		>
+			{children || "Menu Button"}
+		</Button>
+	),
 );
 MenuButton.displayName = "MenuButton";

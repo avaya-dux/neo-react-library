@@ -1,11 +1,11 @@
 import { useId, useMemo } from "react";
 
 export interface RadioProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    "id" | "type" | "checked" | "defaultChecked"
-  > {
-  id?: string;
+	extends Omit<
+		React.InputHTMLAttributes<HTMLInputElement>,
+		"id" | "type" | "checked" | "defaultChecked"
+	> {
+	id?: string;
 }
 /**
  * A Radio is a control that allows the user to select one option from a set.
@@ -30,35 +30,35 @@ export interface RadioProps
  * @see https://design.avayacloud.com/components/web/radio-web
  */
 export const Radio: React.FC<RadioProps> = ({
-  children,
-  id,
-  ...rest
+	children,
+	id,
+	...rest
 }: RadioProps) => {
-  const generatedId = useId();
-  id = id || generatedId;
-  const { value, "aria-label": ariaLabel, disabled } = rest;
+	const generatedId = useId();
+	id = id || generatedId;
+	const { value, "aria-label": ariaLabel, disabled } = rest;
 
-  const idForLabel = useMemo(
-    () => `Radio-label-${value}-${generatedId}`,
-    [value, generatedId],
-  );
+	const idForLabel = useMemo(
+		() => `Radio-label-${value}-${generatedId}`,
+		[value, generatedId],
+	);
 
-  return (
-    <>
-      <input
-        {...rest}
-        className="neo-radio"
-        type="radio"
-        id={id}
-        disabled={disabled}
-        aria-labelledby={idForLabel}
-        aria-label={ariaLabel ? ariaLabel : value?.toString()}
-      />
-      <label id={idForLabel} htmlFor={id}>
-        {children}
-      </label>
-    </>
-  );
+	return (
+		<>
+			<input
+				{...rest}
+				className="neo-radio"
+				type="radio"
+				id={id}
+				disabled={disabled}
+				aria-labelledby={idForLabel}
+				aria-label={ariaLabel ? ariaLabel : value?.toString()}
+			/>
+			<label id={idForLabel} htmlFor={id}>
+				{children}
+			</label>
+		</>
+	);
 };
 
 Radio.displayName = "Radio";

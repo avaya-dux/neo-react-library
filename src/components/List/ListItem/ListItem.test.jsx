@@ -5,22 +5,22 @@ import { axe } from "jest-axe";
 import * as ListItemStories from "./ListItem.stories";
 
 describe("ListItem: ", () => {
-  describe("Render ListItems: Text Only", () => {
-    const { ListItemTextOnly } = composeStories(ListItemStories);
-    let renderResult;
+	describe("Render ListItems: Text Only", () => {
+		const { ListItemTextOnly } = composeStories(ListItemStories);
+		let renderResult;
 
-    beforeEach(() => {
-      renderResult = render(<ListItemTextOnly />);
-    });
+		beforeEach(() => {
+			renderResult = render(<ListItemTextOnly />);
+		});
 
-    it("renders ok", () => {
-      const { container } = renderResult;
-      expect(container).not.toBe(null);
-    });
+		it("renders ok", () => {
+			const { container } = renderResult;
+			expect(container).not.toBe(null);
+		});
 
-    it("should match snapshots", () => {
-      const { container } = renderResult;
-      expect(container).toMatchInlineSnapshot(`
+		it("should match snapshots", () => {
+			const { container } = renderResult;
+			expect(container).toMatchInlineSnapshot(`
         <div>
           <ul
             class="neo-group-list neo-group-list--hover"
@@ -58,41 +58,41 @@ describe("ListItem: ", () => {
           </ul>
         </div>
       `);
-    });
-  });
+		});
+	});
 
-  describe("Render ListItems: Tooltip and divider", () => {
-    const { ListItemTooltipAndDivider } = composeStories(ListItemStories);
-    let renderResult;
+	describe("Render ListItems: Tooltip and divider", () => {
+		const { ListItemTooltipAndDivider } = composeStories(ListItemStories);
+		let renderResult;
 
-    beforeEach(() => {
-      renderResult = render(<ListItemTooltipAndDivider />);
-    });
+		beforeEach(() => {
+			renderResult = render(<ListItemTooltipAndDivider />);
+		});
 
-    it("renders ok", () => {
-      const { container } = renderResult;
-      expect(container).not.toBe(null);
-    });
-  });
+		it("renders ok", () => {
+			const { container } = renderResult;
+			expect(container).not.toBe(null);
+		});
+	});
 });
 
 describe("ListSection: ", () => {
-  describe("Render ListSections: Text Only", () => {
-    const { ListSectionTextOnly } = composeStories(ListItemStories);
-    let renderResult;
+	describe("Render ListSections: Text Only", () => {
+		const { ListSectionTextOnly } = composeStories(ListItemStories);
+		let renderResult;
 
-    beforeEach(() => {
-      renderResult = render(<ListSectionTextOnly />);
-    });
+		beforeEach(() => {
+			renderResult = render(<ListSectionTextOnly />);
+		});
 
-    it("renders ok", () => {
-      const { container } = renderResult;
-      expect(container).not.toBe(null);
-    });
+		it("renders ok", () => {
+			const { container } = renderResult;
+			expect(container).not.toBe(null);
+		});
 
-    it("should match snapshots", () => {
-      const { container } = renderResult;
-      expect(container).toMatchInlineSnapshot(`
+		it("should match snapshots", () => {
+			const { container } = renderResult;
+			expect(container).toMatchInlineSnapshot(`
         <div>
           <ul
             class="neo-group-list--actions"
@@ -124,85 +124,85 @@ describe("ListSection: ", () => {
           </ul>
         </div>
       `);
-    });
+		});
 
-    it("passes basic axe compliance", async () => {
-      await axeTest(renderResult);
-    });
-  });
+		it("passes basic axe compliance", async () => {
+			await axeTest(renderResult);
+		});
+	});
 
-  describe("Render ListSections: Text with Hover", () => {
-    const { ListSectionTextOnlyWithHover } = composeStories(ListItemStories);
-    let renderResult;
+	describe("Render ListSections: Text with Hover", () => {
+		const { ListSectionTextOnlyWithHover } = composeStories(ListItemStories);
+		let renderResult;
 
-    beforeEach(() => {
-      renderResult = render(<ListSectionTextOnlyWithHover />);
-    });
+		beforeEach(() => {
+			renderResult = render(<ListSectionTextOnlyWithHover />);
+		});
 
-    it("renders ok", () => {
-      const { container } = renderResult;
-      expect(container).not.toBe(null);
-    });
+		it("renders ok", () => {
+			const { container } = renderResult;
+			expect(container).not.toBe(null);
+		});
 
-    it("passes basic axe compliance", async () => {
-      await axeTest(renderResult);
-    });
-  });
+		it("passes basic axe compliance", async () => {
+			await axeTest(renderResult);
+		});
+	});
 
-  describe("Render ListSections: Text with Icon and Hover", () => {
-    const { ListSectionTextWithIconAndHover } = composeStories(ListItemStories);
-    let renderResult;
+	describe("Render ListSections: Text with Icon and Hover", () => {
+		const { ListSectionTextWithIconAndHover } = composeStories(ListItemStories);
+		let renderResult;
 
-    beforeEach(() => {
-      renderResult = render(<ListSectionTextWithIconAndHover />);
-    });
+		beforeEach(() => {
+			renderResult = render(<ListSectionTextWithIconAndHover />);
+		});
 
-    it("renders ok", () => {
-      const { container } = renderResult;
-      expect(container).not.toBe(null);
-    });
+		it("renders ok", () => {
+			const { container } = renderResult;
+			expect(container).not.toBe(null);
+		});
 
-    it("passes basic axe compliance", async () => {
-      await axeTest(renderResult);
-    });
-  });
+		it("passes basic axe compliance", async () => {
+			await axeTest(renderResult);
+		});
+	});
 
-  describe("Render ListSections: Text with Icon and Hover and Switch", () => {
-    const { ListSectionTextWithIconAndHoverAndSwitch } =
-      composeStories(ListItemStories);
-    let renderResult;
+	describe("Render ListSections: Text with Icon and Hover and Switch", () => {
+		const { ListSectionTextWithIconAndHoverAndSwitch } =
+			composeStories(ListItemStories);
+		let renderResult;
 
-    beforeEach(() => {
-      renderResult = render(<ListSectionTextWithIconAndHoverAndSwitch />);
-    });
+		beforeEach(() => {
+			renderResult = render(<ListSectionTextWithIconAndHoverAndSwitch />);
+		});
 
-    it("renders ok", () => {
-      const { container } = renderResult;
-      expect(container).not.toBe(null);
-    });
+		it("renders ok", () => {
+			const { container } = renderResult;
+			expect(container).not.toBe(null);
+		});
 
-    it("passes basic axe compliance", async () => {
-      await axeTest(renderResult);
-    });
-  });
+		it("passes basic axe compliance", async () => {
+			await axeTest(renderResult);
+		});
+	});
 
-  describe("Render ListSections: Text with Icon and Hover and IconButton", () => {
-    const { ListSectionTextWithIconAndHoverAndIconButton } =
-      composeStories(ListItemStories);
-    let renderResult;
+	describe("Render ListSections: Text with Icon and Hover and IconButton", () => {
+		const { ListSectionTextWithIconAndHoverAndIconButton } =
+			composeStories(ListItemStories);
+		let renderResult;
 
-    beforeEach(() => {
-      renderResult = render(<ListSectionTextWithIconAndHoverAndIconButton />);
-    });
+		beforeEach(() => {
+			renderResult = render(<ListSectionTextWithIconAndHoverAndIconButton />);
+		});
 
-    it("renders ok", () => {
-      const { container } = renderResult;
-      expect(container).not.toBe(null);
-    });
+		it("renders ok", () => {
+			const { container } = renderResult;
+			expect(container).not.toBe(null);
+		});
 
-    it("should match snapshots", () => {
-      const { container } = renderResult;
-      expect(container).toMatchInlineSnapshot(`
+		it("should match snapshots", () => {
+			const { container } = renderResult;
+			expect(container).toMatchInlineSnapshot(`
         <div>
           <ul
             class="neo-group-list--actions"
@@ -260,16 +260,16 @@ describe("ListSection: ", () => {
           </ul>
         </div>
       `);
-    });
+		});
 
-    it("passes basic axe compliance", async () => {
-      await axeTest(renderResult);
-    });
-  });
+		it("passes basic axe compliance", async () => {
+			await axeTest(renderResult);
+		});
+	});
 });
 
 async function axeTest(renderResult) {
-  const { container } = renderResult;
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
+	const { container } = renderResult;
+	const results = await axe(container);
+	expect(results).toHaveNoViolations();
 }

@@ -20,9 +20,9 @@ import { SelectOptionProps } from "./utils/SelectTypes";
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const SelectOption = (_: SelectOptionProps) => {
-  throw new Error(
-    "This shouldn't have been called, Internal Select should have been used.",
-  );
+	throw new Error(
+		"This shouldn't have been called, Internal Select should have been used.",
+	);
 };
 
 SelectOption.displayName = "SelectOption";

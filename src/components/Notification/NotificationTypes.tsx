@@ -7,36 +7,36 @@ import { CounterActionProps } from "./Actions/CounterAction";
 import { INotificationTranslations } from "./Helpers";
 
 type ActionType = {
-  actions?: {
-    counter?: CounterActionProps;
-    actionButtons?: ButtonActionProps;
-    closable?: ClosableActionProps;
-  };
+	actions?: {
+		counter?: CounterActionProps;
+		actionButtons?: ButtonActionProps;
+		closable?: ClosableActionProps;
+	};
 };
 
 type AtLeastOneProps =
-  | { header: string; description?: string }
-  | { header?: string; description: string };
+	| { header: string; description?: string }
+	| { header?: string; description: string };
 
 type CommonProps = {
-  showTimestamp?: boolean;
-  isElevated?: boolean;
-  isInline?: boolean;
-  occurences?: number;
-  locale?: string;
-  translations?: INotificationTranslations;
+	showTimestamp?: boolean;
+	isElevated?: boolean;
+	isInline?: boolean;
+	occurences?: number;
+	locale?: string;
+	translations?: INotificationTranslations;
 } & AtLeastOneProps &
-  ActionType;
+	ActionType;
 
 export type NonEventNotificationProps = CommonProps & {
-  type: "success" | "warning" | "alert" | "info";
+	type: "success" | "warning" | "alert" | "info";
 };
 
 export type EventNotificationProps = CommonProps & {
-  type: "event";
-  icon: IconNamesType;
+	type: "event";
+	icon: IconNamesType;
 };
 
 export type NotificationProps =
-  | NonEventNotificationProps
-  | EventNotificationProps;
+	| NonEventNotificationProps
+	| EventNotificationProps;

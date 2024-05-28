@@ -27,55 +27,55 @@ import { SwitchProps } from "./SwitchTypes";
  * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement
  */
 export const Switch = ({
-  children,
-  error,
-  id,
-  multiline,
-  onChange,
-  dir,
-  ...rest
+	children,
+	error,
+	id,
+	multiline,
+	onChange,
+	dir,
+	...rest
 }: SwitchProps) => {
-  const generatedId = useId();
-  id = id || generatedId;
-  if (!children && !rest["aria-label"]) {
-    throw new Error("Switch must be passed children or an aria-label");
-  }
+	const generatedId = useId();
+	id = id || generatedId;
+	if (!children && !rest["aria-label"]) {
+		throw new Error("Switch must be passed children or an aria-label");
+	}
 
-  const { disabled, required } = rest;
+	const { disabled, required } = rest;
 
-  return (
-    <NeoInputWrapper
-      disabled={disabled}
-      error={error}
-      required={required}
-      dir={dir}
-    >
-      <label
-        className={clsx(
-          "neo-switch",
-          multiline && "neo-switch--multiline",
-          disabled && "neo-switch--disabled",
-        )}
-        htmlFor={id}
-      >
-        <input
-          {...rest}
-          id={id}
-          type="checkbox"
-          role="switch"
-          onChange={(event) => {
-            onChange?.(event, event.target.checked);
-          }}
-        />
-        <i className="neo-switch__icon" />
-        {multiline ? (
-          <span className="neo-switch-children">{children}</span>
-        ) : (
-          children
-        )}
-      </label>
-    </NeoInputWrapper>
-  );
+	return (
+		<NeoInputWrapper
+			disabled={disabled}
+			error={error}
+			required={required}
+			dir={dir}
+		>
+			<label
+				className={clsx(
+					"neo-switch",
+					multiline && "neo-switch--multiline",
+					disabled && "neo-switch--disabled",
+				)}
+				htmlFor={id}
+			>
+				<input
+					{...rest}
+					id={id}
+					type="checkbox"
+					role="switch"
+					onChange={(event) => {
+						onChange?.(event, event.target.checked);
+					}}
+				/>
+				<i className="neo-switch__icon" />
+				{multiline ? (
+					<span className="neo-switch-children">{children}</span>
+				) : (
+					children
+				)}
+			</label>
+		</NeoInputWrapper>
+	);
 };
 
 Switch.displayName = "Switch";

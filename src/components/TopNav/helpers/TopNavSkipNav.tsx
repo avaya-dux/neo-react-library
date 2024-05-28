@@ -14,19 +14,19 @@ import { TopNavSkipNavProps } from "../TopNavTypes";
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#accessibility
  */
 export const TopNavSkipNav = ({
-  children,
-  href,
-  ...rest
+	children,
+	href,
+	...rest
 }: TopNavSkipNavProps) => {
-  if (!children && !rest["aria-label"]) {
-    handleAccessbilityError(
-      "A Skip Navigation link must have descriptive text. Either as children or an aria-label.",
-    );
-  }
+	if (!children && !rest["aria-label"]) {
+		handleAccessbilityError(
+			"A Skip Navigation link must have descriptive text. Either as children or an aria-label.",
+		);
+	}
 
-  return (
-    <a className="neo-skipnav" href={href} {...rest}>
-      {children}
-    </a>
-  );
+	return (
+		<a className="neo-skipnav" href={href} {...rest}>
+			{children}
+		</a>
+	);
 };

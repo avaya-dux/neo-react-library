@@ -22,161 +22,161 @@ import { TableFilter } from "./TableFilter";
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const TableToolbar = <T extends Record<string, any>>({
-  customActionsNode,
-  handleCreate,
-  handleDelete,
-  handleEdit,
-  handleRefresh,
-  handleRowHeightChange,
-  showRowHeightMenu,
-  rowHeight,
-  instance,
-  readonly = false,
-  translations,
+	customActionsNode,
+	handleCreate,
+	handleDelete,
+	handleEdit,
+	handleRefresh,
+	handleRowHeightChange,
+	showRowHeightMenu,
+	rowHeight,
+	instance,
+	readonly = false,
+	translations,
 }: TableToolbarProps<T>) => {
-  const {
-    data,
-    setGlobalFilter,
-    rowsById,
-    state: { globalFilter, selectedRowIds },
-  } = instance;
+	const {
+		data,
+		setGlobalFilter,
+		rowsById,
+		state: { globalFilter, selectedRowIds },
+	} = instance;
 
-  const selectedRowIdsStringArray = useMemo(
-    () => Object.keys(selectedRowIds),
-    [selectedRowIds],
-  );
+	const selectedRowIdsStringArray = useMemo(
+		() => Object.keys(selectedRowIds),
+		[selectedRowIds],
+	);
 
-  const [search, setSearch] = useState<string>(globalFilter || "");
-  const setSearches = useCallback(
-    (searchString: string) => {
-      setSearch(searchString);
-      setGlobalFilter(searchString);
-    },
-    [setSearch, setGlobalFilter],
-  );
+	const [search, setSearch] = useState<string>(globalFilter || "");
+	const setSearches = useCallback(
+		(searchString: string) => {
+			setSearch(searchString);
+			setGlobalFilter(searchString);
+		},
+		[setSearch, setGlobalFilter],
+	);
 
-  useEffect(() => {
-    // handle data update (e.g. new/more data pulled from server)
-    setSearches(search);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, setSearches]);
+	useEffect(() => {
+		// handle data update (e.g. new/more data pulled from server)
+		setSearches(search);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data, setSearches]);
 
-  const editDisabled = readonly || selectedRowIdsStringArray.length !== 1;
-  const deleteDisabled = readonly || selectedRowIdsStringArray.length === 0;
+	const editDisabled = readonly || selectedRowIdsStringArray.length !== 1;
+	const deleteDisabled = readonly || selectedRowIdsStringArray.length === 0;
 
-  const { allowColumnFilter } = useContext(FilterContext);
+	const { allowColumnFilter } = useContext(FilterContext);
 
-  return (
-    <div className="neo-table__actions">
-      <div className="neo-table__actions--left neo-table__actions--links">
-        {handleCreate && (
-          <Button
-            disabled={readonly}
-            icon="add"
-            variant="primary"
-            onClick={handleCreate}
-          >
-            {translations.create}
-          </Button>
-        )}
+	return (
+		<div className="neo-table__actions">
+			<div className="neo-table__actions--left neo-table__actions--links">
+				{handleCreate && (
+					<Button
+						disabled={readonly}
+						icon="add"
+						variant="primary"
+						onClick={handleCreate}
+					>
+						{translations.create}
+					</Button>
+				)}
 
-        {customActionsNode}
+				{customActionsNode}
 
-        {handleEdit && editDisabled === false && (
-          <Button
-            icon="edit"
-            variant="tertiary"
-            onClick={() => {
-              const selectedRowId = selectedRowIdsStringArray[0];
-              const selectedRow = rowsById[selectedRowId].original;
-              handleEdit(selectedRow);
-            }}
-          >
-            {translations.edit}
-          </Button>
-        )}
+				{handleEdit && editDisabled === false && (
+					<Button
+						icon="edit"
+						variant="tertiary"
+						onClick={() => {
+							const selectedRowId = selectedRowIdsStringArray[0];
+							const selectedRow = rowsById[selectedRowId].original;
+							handleEdit(selectedRow);
+						}}
+					>
+						{translations.edit}
+					</Button>
+				)}
 
-        {handleDelete && deleteDisabled === false && (
-          <Button
-            icon="trash"
-            variant="tertiary"
-            status="alert"
-            onClick={() => {
-              handleDelete(selectedRowIdsStringArray);
-            }}
-          >
-            {translations.delete}
-          </Button>
-        )}
-      </div>
+				{handleDelete && deleteDisabled === false && (
+					<Button
+						icon="trash"
+						variant="tertiary"
+						status="alert"
+						onClick={() => {
+							handleDelete(selectedRowIdsStringArray);
+						}}
+					>
+						{translations.delete}
+					</Button>
+				)}
+			</div>
 
-      <div
-        className="neo-table__actions--right"
-        style={{ position: "relative" }}
-      >
-        <div className="neo-form">
-          <TextInput
-            aria-label={translations.searchInputPlaceholder}
-            placeholder={translations.searchInputPlaceholder}
-            startIcon="search"
-            value={search}
-            onChange={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setSearches(e.currentTarget.value);
-            }}
-          />
-        </div>
+			<div
+				className="neo-table__actions--right"
+				style={{ position: "relative" }}
+			>
+				<div className="neo-form">
+					<TextInput
+						aria-label={translations.searchInputPlaceholder}
+						placeholder={translations.searchInputPlaceholder}
+						startIcon="search"
+						value={search}
+						onChange={(e) => {
+							e.preventDefault();
+							e.stopPropagation();
+							setSearches(e.currentTarget.value);
+						}}
+					/>
+				</div>
 
-        {allowColumnFilter && (
-          <TableFilter translations={translations} instance={instance} />
-        )}
+				{allowColumnFilter && (
+					<TableFilter translations={translations} instance={instance} />
+				)}
 
-        {handleRefresh && (
-          <IconButton
-            aria-label={translations.refresh || "Refresh"}
-            icon="refresh"
-            onClick={handleRefresh}
-            shape="square"
-            variant="tertiary"
-          />
-        )}
+				{handleRefresh && (
+					<IconButton
+						aria-label={translations.refresh || "Refresh"}
+						icon="refresh"
+						onClick={handleRefresh}
+						shape="square"
+						variant="tertiary"
+					/>
+				)}
 
-        {showRowHeightMenu && (
-          <Menu
-            itemAlignment="right"
-            menuRootElement={
-              <IconButton
-                icon="preferences"
-                aria-label={translations.selectRowHeight || "Select row height"}
-                variant="tertiary"
-                shape="square"
-              />
-            }
-          >
-            <MenuItem
-              isActive={rowHeight === "large"}
-              onClick={() => {
-                handleRowHeightChange("large");
-              }}
-            >
-              {translations.large || "Large"}
-            </MenuItem>
-            <MenuItem
-              isActive={rowHeight === "medium"}
-              onClick={() => handleRowHeightChange("medium")}
-            >
-              {translations.medium || "Medium"}
-            </MenuItem>
-            <MenuItem
-              isActive={rowHeight === "compact"}
-              onClick={() => handleRowHeightChange("compact")}
-            >
-              {translations.small || "Small"}
-            </MenuItem>
-          </Menu>
-        )}
-      </div>
-    </div>
-  );
+				{showRowHeightMenu && (
+					<Menu
+						itemAlignment="right"
+						menuRootElement={
+							<IconButton
+								icon="preferences"
+								aria-label={translations.selectRowHeight || "Select row height"}
+								variant="tertiary"
+								shape="square"
+							/>
+						}
+					>
+						<MenuItem
+							isActive={rowHeight === "large"}
+							onClick={() => {
+								handleRowHeightChange("large");
+							}}
+						>
+							{translations.large || "Large"}
+						</MenuItem>
+						<MenuItem
+							isActive={rowHeight === "medium"}
+							onClick={() => handleRowHeightChange("medium")}
+						>
+							{translations.medium || "Medium"}
+						</MenuItem>
+						<MenuItem
+							isActive={rowHeight === "compact"}
+							onClick={() => handleRowHeightChange("compact")}
+						>
+							{translations.small || "Small"}
+						</MenuItem>
+					</Menu>
+				)}
+			</div>
+		</div>
+	);
 };

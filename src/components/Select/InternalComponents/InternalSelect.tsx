@@ -4,19 +4,19 @@ import { SingleSelect } from "./SingleSelect";
 import { SingleSelectSearchable } from "./SingleSelectSearchable";
 
 export const InternalSelect = ({
-  searchable,
-  multiple,
+	searchable,
+	multiple,
 }: {
-  searchable?: boolean;
-  multiple?: boolean;
+	searchable?: boolean;
+	multiple?: boolean;
 }) => {
-  if (searchable && multiple) {
-    return <MultiSelectSearchable />;
-  } else if (searchable) {
-    return <SingleSelectSearchable />;
-  } else if (multiple) {
-    return <MultiSelect />;
-  }
+	if (searchable && multiple) {
+		return <MultiSelectSearchable />;
+	} else if (searchable) {
+		return <SingleSelectSearchable />;
+	} else if (multiple) {
+		return <MultiSelect />;
+	}
 
-  return <SingleSelect />;
+	return <SingleSelect />;
 };
