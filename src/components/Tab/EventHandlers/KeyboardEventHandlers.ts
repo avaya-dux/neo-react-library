@@ -175,8 +175,7 @@ function activateNextTab(
 	if (nextTabIndex > activeTabIndex) {
 		setActiveTabIndex(nextTabIndex);
 		return true;
-	} else {
-		logger.debug(`no next tab index found.`);
-		return false;
 	}
+	logger.debug("no next tab index found.");
+	return false;
 }

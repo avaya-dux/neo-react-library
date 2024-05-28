@@ -19,7 +19,7 @@ export const handleCloseElementMouseClickEvent = (
 	e.stopPropagation();
 	logger.debug("hanlding mouse click event on tab close element");
 	if (tabIndex > activeTabIndex) {
-		logger.debug(`do nothing`);
+		logger.debug("do nothing");
 	} else if (tabIndex < activeTabIndex) {
 		const newActiveIndex = activeTabIndex - 1;
 		setActiveTabIndex(newActiveIndex);

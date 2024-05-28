@@ -1,5 +1,10 @@
 import clsx from "clsx";
-import { Children, cloneElement, type HTMLAttributes, type ReactElement } from "react";
+import {
+	Children,
+	cloneElement,
+	type HTMLAttributes,
+	type ReactElement,
+} from "react";
 
 import type { ChipProps } from "./Chip";
 

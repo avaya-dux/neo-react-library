@@ -46,7 +46,7 @@ export const Shimmer = ({
 				className,
 			)}
 			{...rest}
-		></div>
+		/>
 	);
 };
 

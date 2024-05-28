@@ -26,7 +26,7 @@ describe("TabUtils", () => {
 			expect(isValidTabElement(element)).toBeFalsy();
 		});
 		it("when element is html element, return false", () => {
-			const element = <div></div>;
+			const element = <div />;
 			expect(isValidTabElement(element)).toBeFalsy();
 		});
 		it("when element is tab element, return true", () => {
@@ -45,7 +45,7 @@ describe("TabUtils", () => {
 			expect(isValidPanelElement(element)).toBeFalsy();
 		});
 		it("when element is html element, return false", () => {
-			const element = <div></div>;
+			const element = <div />;
 			expect(isValidPanelElement(element)).toBeFalsy();
 		});
 		it("when element is tab element, return false", () => {
@@ -187,7 +187,7 @@ describe("TabUtils", () => {
 						<Tab id="tab1" dir="ltr" onClose={() => null}>
 							tab1
 						</Tab>
-						<></>
+
 						<Tab id="tab2" disabled>
 							tab2
 						</Tab>

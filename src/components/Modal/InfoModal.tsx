@@ -34,7 +34,7 @@ export const InfoModal = forwardRef(
 	) => {
 		const generatedId = useId();
 		id = id || generatedId;
-		const titleId = id + "-title";
+		const titleId = `${id}-title`;
 		if (!onClose) {
 			console.error("onClose prop is required.");
 		}
@@ -50,7 +50,7 @@ export const InfoModal = forwardRef(
 				className={clsx("neo-modal--active", className)}
 				ref={ref}
 			>
-				<div className="neo-modal__background"></div>
+				<div className="neo-modal__background" />
 				<div
 					className="neo-modal__content"
 					aria-labelledby={titleId}

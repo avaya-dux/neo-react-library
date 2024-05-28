@@ -164,7 +164,7 @@ export const Tabs = ({
 	useEffect(() => {
 		window.addEventListener("resize", updateCarouselButtonStatus);
 		logger.debug(
-			`updateCarouselButtonStatus: update carousel buttons disabled status on window resize`,
+			"updateCarouselButtonStatus: update carousel buttons disabled status on window resize",
 		);
 		// updateCarouselButtonStatus();
 		return () =>
@@ -184,7 +184,7 @@ export const Tabs = ({
 						icon="chevron-left"
 						disabled={!leftCarouselButtonEnabled}
 						onClick={carouselLeftButtonClickEventHandler}
-					></Button>
+					/>
 					<div className="neo-tabs__carousel--scroll" ref={scrollRef}>
 						{tabsNav}
 					</div>
@@ -195,7 +195,7 @@ export const Tabs = ({
 						icon="chevron-right"
 						disabled={!rightCarouselButtonEnabled}
 						onClick={carouselRightButtonClickEventHandler}
-					></Button>
+					/>
 					<div className="neo-tabs__carousel--more">{dropDown}</div>
 				</>
 			) : (

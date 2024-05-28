@@ -100,7 +100,7 @@ export const AgentNotesExample: Story = {
 					<button
 						aria-label="menu actions"
 						className="neo-btn-square neo-btn-square--compact neo-btn-square-tertiary neo-btn-square-tertiary--info neo-icon-ellipses-horizontal"
-					></button>
+					/>
 				}
 			>
 				<MenuItem onClick={() => alert("edit not implemented for this story")}>

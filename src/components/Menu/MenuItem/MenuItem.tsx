@@ -1,6 +1,13 @@
 import clsx from "clsx";
 import log from "loglevel";
-import { type Ref, type RefObject, forwardRef, useEffect, useId, useRef } from "react";
+import {
+	type Ref,
+	type RefObject,
+	forwardRef,
+	useEffect,
+	useId,
+	useRef,
+} from "react";
 
 import type { MenuItemProps } from "../MenuTypes";
 

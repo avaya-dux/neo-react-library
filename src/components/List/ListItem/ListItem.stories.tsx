@@ -3,7 +3,12 @@ import type { Meta, Story } from "@storybook/react";
 import { Avatar, Icon, IconButton, Switch } from "components";
 import { List } from "components/List";
 
-import { ListItem, type ListItemProps, ListSection, type ListSectionProps } from ".";
+import {
+	ListItem,
+	type ListItemProps,
+	ListSection,
+	type ListSectionProps,
+} from ".";
 
 export default {
 	title: "Components/List Item",
@@ -57,7 +62,7 @@ const timeAndBadge = (
 	<div className="vertical">
 		<p className="neo-body-small">6:02 PM</p>
 		<div>
-			<span className="neo-badge" data-badge="9"></span>
+			<span className="neo-badge" data-badge="9" />
 		</div>
 	</div>
 );

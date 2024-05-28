@@ -32,7 +32,9 @@ describe("MENU Mouse event handlers", () => {
 	});
 
 	describe("handleMouseMoveEvent", () => {
-		let setCursor, setCursorAction, setEnterCounter;
+		let setCursor;
+		let setCursorAction;
+		let setEnterCounter;
 		beforeEach(() => {
 			setCursor = vi.fn();
 			setCursorAction = vi.fn();

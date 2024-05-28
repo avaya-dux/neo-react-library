@@ -100,119 +100,118 @@ describe("Pagination", () => {
 			<Pagination {...defaultProps} id="pagination-test" />,
 		);
 		expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="neo-pagination__row"
-          id="pagination-test"
-        >
-          <div
-            class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
-            id="pagination-item-display-Item count"
-          >
-            <bdi
-              aria-describedby=":rc:"
-            >
-              1
-              -
-              1
-               / 
-              10
-            </bdi>
-            <div
-              class="neo-tooltip__content neo-tooltip__content--multiline"
-              id=":rc:"
-              role="tooltip"
-            >
-              <div
-                class="neo-arrow"
-              />
-              Item count
-            </div>
-          </div>
-          <nav
-            aria-label="pagination"
-            class="neo-pagination"
-            role="navigation"
-          >
-            <button
-              aria-label="previous"
-              class="neo-btn neo-btn-square neo-btn--default neo-btn-tertiary neo-btn-tertiary--default neo-btn-square-tertiary--default"
-              data-badge=""
-              disabled=""
-              style="color: gray;"
-            >
-              <span
-                class="neo-icon-arrow-left"
-              />
-            </button>
-            <ul
-              class="neo-pagination__list"
-            >
-              <li>
-                <button
-                  class="neo-btn neo-btn--default neo-btn-secondary neo-btn-secondary--default neo-btn-square neo-btn-square-secondary neo-btn-square-secondary--info"
-                  data-badge=""
-                >
-                  1
-                </button>
-              </li>
-            </ul>
-            <button
-              aria-label="next"
-              class="neo-btn neo-btn-square neo-btn--default neo-btn-tertiary neo-btn-tertiary--default neo-btn-square-tertiary--default"
-              data-badge=""
-              style="color: black;"
-            >
-              <span
-                class="neo-icon-arrow-right"
-              />
-            </button>
-          </nav>
-          <div
-            class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
-            id="pagination-items-per-page-selection-items per page"
-          >
-            <div
-              aria-describedby=":rd:"
-            >
-              <label>
-                Show: 
-              </label>
-              <select
-                aria-label="items per page"
-              >
-                <option
-                  selected=""
-                  value="1"
-                >
-                  1
-                </option>
-                <option
-                  value="5"
-                >
-                  5
-                </option>
-                <option
-                  value="10"
-                >
-                  10
-                </option>
-              </select>
-            </div>
-            <div
-              class="neo-tooltip__content neo-tooltip__content--multiline"
-              id=":rd:"
-              role="tooltip"
-            >
-              <div
-                class="neo-arrow"
-              />
-              items per page
-            </div>
-          </div>
-        </div>
-      </div>
-    `);
+			<div>
+			  <div
+			    class="neo-pagination__row"
+			    id="pagination-test"
+			  >
+			    <div
+			      class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
+			      id="pagination-item-display-Item count"
+			    >
+			      <bdi
+			        aria-describedby=":rc:"
+			      >
+			        1
+			        -
+			        1
+			         / 
+			        10
+			      </bdi>
+			      <div
+			        class="neo-tooltip__content neo-tooltip__content--multiline"
+			        id=":rc:"
+			        role="tooltip"
+			      >
+			        <div
+			          class="neo-arrow"
+			        />
+			        Item count
+			      </div>
+			    </div>
+			    <nav
+			      aria-label="pagination"
+			      class="neo-pagination"
+			    >
+			      <button
+			        aria-label="previous"
+			        class="neo-btn neo-btn-square neo-btn--default neo-btn-tertiary neo-btn-tertiary--default neo-btn-square-tertiary--default"
+			        data-badge=""
+			        disabled=""
+			        style="color: gray;"
+			      >
+			        <span
+			          class="neo-icon-arrow-left"
+			        />
+			      </button>
+			      <ul
+			        class="neo-pagination__list"
+			      >
+			        <li>
+			          <button
+			            class="neo-btn neo-btn--default neo-btn-secondary neo-btn-secondary--default neo-btn-square neo-btn-square-secondary neo-btn-square-secondary--info"
+			            data-badge=""
+			          >
+			            1
+			          </button>
+			        </li>
+			      </ul>
+			      <button
+			        aria-label="next"
+			        class="neo-btn neo-btn-square neo-btn--default neo-btn-tertiary neo-btn-tertiary--default neo-btn-square-tertiary--default"
+			        data-badge=""
+			        style="color: black;"
+			      >
+			        <span
+			          class="neo-icon-arrow-right"
+			        />
+			      </button>
+			    </nav>
+			    <div
+			      class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
+			      id="pagination-items-per-page-selection-items per page"
+			    >
+			      <div
+			        aria-describedby=":rd:"
+			      >
+			        <label>
+			          Show: 
+			        </label>
+			        <select
+			          aria-label="items per page"
+			        >
+			          <option
+			            selected=""
+			            value="1"
+			          >
+			            1
+			          </option>
+			          <option
+			            value="5"
+			          >
+			            5
+			          </option>
+			          <option
+			            value="10"
+			          >
+			            10
+			          </option>
+			        </select>
+			      </div>
+			      <div
+			        class="neo-tooltip__content neo-tooltip__content--multiline"
+			        id=":rd:"
+			        role="tooltip"
+			      >
+			        <div
+			          class="neo-arrow"
+			        />
+			        items per page
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		`);
 	});
 
 	it("passes basic axe compliance", async () => {
@@ -343,7 +342,7 @@ describe("Pagination", () => {
 
 					expect(navArray).toHaveLength(maxNodes);
 
-					const { queryAllByRole, unmount } = render(<>{navArray}</>);
+					const { queryAllByRole, unmount } = render(navArray);
 					const navItems = queryAllByRole("button");
 					expect(navItems).toHaveLength(maxNodes - 1); // minus the "..." span element
 
@@ -397,7 +396,7 @@ describe("Pagination", () => {
 
 						expect(navArray).toHaveLength(maxNodes);
 
-						const { queryAllByRole, unmount } = render(<>{navArray}</>);
+						const { queryAllByRole, unmount } = render(navArray);
 						const navItems = queryAllByRole("button");
 						expect(navItems).toHaveLength(maxNodes - 2); // minus the two "..." span element
 
@@ -461,7 +460,7 @@ describe("Pagination", () => {
 
 						expect(navArray).toHaveLength(maxNodes);
 
-						const { queryAllByRole, unmount } = render(<>{navArray}</>);
+						const { queryAllByRole, unmount } = render(navArray);
 						const navItems = queryAllByRole("button");
 						expect(navItems).toHaveLength(maxNodes - 2); // minus the two "..." span element
 
@@ -483,7 +482,7 @@ describe("Pagination", () => {
 
 					expect(navArray).toHaveLength(1);
 
-					const { queryAllByRole, unmount } = render(<>{navArray}</>);
+					const { queryAllByRole, unmount } = render(navArray);
 					const navItems = queryAllByRole("button");
 					expect(navItems).toHaveLength(1);
 

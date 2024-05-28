@@ -31,7 +31,7 @@ export const InternalToast = ({
 	useTimeout(hide, duration);
 	const seconds = useMemo(() => {
 		const number = Math.round(duration / 1000);
-		return number + " " + (number > 1 ? "seconds" : "second");
+		return `${number} ${number > 1 ? "seconds" : "second"}`;
 	}, [duration]);
 	return (
 		<BasicToast
@@ -59,9 +59,7 @@ const BasicToast = ({
 			aria-live="polite"
 			aria-label={ariaLabel}
 		>
-			{icon && (
-				<span className={clsx("neo-toast__icon", `neo-icon-${icon}`)}></span>
-			)}
+			{icon && <span className={clsx("neo-toast__icon", `neo-icon-${icon}`)} />}
 			{message && <div className="neo-toast__message">{message}</div>}
 		</div>
 	);

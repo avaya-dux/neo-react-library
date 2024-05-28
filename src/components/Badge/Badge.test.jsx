@@ -6,7 +6,7 @@ import { Badge } from ".";
 describe("Badge", () => {
 	const props = {
 		data: "99",
-		"aria-label": `Badge representing 99`,
+		"aria-label": "Badge representing 99",
 	};
 	it("renders correctly", () => {
 		const { getByRole } = render(<Badge {...props} />);
@@ -36,7 +36,7 @@ describe("Badge", () => {
 	it("shows correct character when data prop is empty", () => {
 		const emptyBadgeProps = {
 			data: "",
-			"aria-label": `Badge with no data`,
+			"aria-label": "Badge with no data",
 		};
 		const { getByRole } = render(<Badge {...emptyBadgeProps} />);
 		const rootElement = getByRole("status");
@@ -45,7 +45,7 @@ describe("Badge", () => {
 	it("cuts off 'badge' text at 12 characters", () => {
 		const longBadgeProps = {
 			data: "12345678901234567",
-			"aria-label": `Badge with extra long data`,
+			"aria-label": "Badge with extra long data",
 		};
 		const { getByRole } = render(<Badge {...longBadgeProps} />);
 		const rootElement = getByRole("status");

@@ -68,7 +68,7 @@ export const LinkItem = ({
 			e.preventDefault(); // Override anchor default behavior if a custom event handler is provided
 		}
 		handleClick();
-		ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
+		ctx?.onSelectedLink?.(id as string, href);
 	};
 
 	const handleKeyDown: KeyboardEventHandler = (
@@ -86,7 +86,7 @@ export const LinkItem = ({
 		switch (event.key) {
 			case Keys.SPACE:
 			case Keys.ENTER:
-				ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
+				ctx?.onSelectedLink?.(id as string, href);
 				break;
 		}
 	};

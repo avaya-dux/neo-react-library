@@ -49,10 +49,9 @@ export function activatePreviousTab(
 			setActivePanelIndex(previousIndex);
 		}
 		return true;
-	} else {
-		logger.debug(`did not find previous tab index to activate`);
-		return false;
 	}
+	logger.debug("did not find previous tab index to activate");
+	return false;
 }
 
 export const isTabLink = (

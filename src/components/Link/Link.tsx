@@ -59,13 +59,13 @@ export const Link: FC<LinkProps> = ({
 
 	// remove custom property before passing rest to anchor
 	if (inline) {
-		delete rest.inline;
+		rest.inline = undefined;
 	}
 	if (icon) {
-		delete rest.icon;
+		rest.icon = undefined;
 	}
 	if (placement) {
-		delete rest.placement;
+		rest.placement = undefined;
 	}
 	return (
 		<a

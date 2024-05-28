@@ -1,5 +1,10 @@
 import log from "loglevel";
-import type { Dispatch, FocusEvent, KeyboardEvent, SetStateAction } from "react";
+import type {
+	Dispatch,
+	FocusEvent,
+	KeyboardEvent,
+	SetStateAction,
+} from "react";
 
 import { Keys } from "utils";
 

@@ -23,7 +23,7 @@ const DirectionTemplate: Story<DirectionTemplateProps> = ({
 
 	return (
 		<section style={{ width: 200 }} dir={dir}>
-			<Switch onChange={(_e, checked) => alert("Checked -> " + checked)}>
+			<Switch onChange={(_e, checked) => alert(`Checked -> ${checked}`)}>
 				Alert on toggle
 			</Switch>
 

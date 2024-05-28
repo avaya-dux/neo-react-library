@@ -72,7 +72,7 @@ export const Chip = ({
 					disabled={disabled}
 					onClick={(e) => {
 						setClosed(true);
-						onClose && onClose(e);
+						onClose?.(e);
 					}}
 				/>
 			)}

@@ -197,7 +197,7 @@ export const Menu = forwardRef(
 		const handleMenuBlur: FocusEventHandler = (
 			e: FocusEvent<HTMLDivElement>,
 		) => {
-			logger.debug(`handling menu blur event`);
+			logger.debug("handling menu blur event");
 			e.stopPropagation();
 			return handleBlurEvent(e, closeOnBlur, setOpen);
 		};

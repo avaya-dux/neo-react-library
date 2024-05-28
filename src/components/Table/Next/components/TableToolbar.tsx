@@ -27,7 +27,7 @@ export const TableToolbar = ({
 
 	return (
 		<div className="neo-table__actions">
-			<div className="neo-table__actions--left"></div>
+			<div className="neo-table__actions--left" />
 
 			<div className="neo-table__actions--right">
 				{showSearch && (

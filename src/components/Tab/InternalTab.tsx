@@ -102,7 +102,7 @@ export const InternalTab = ({
 	useEffect(() => {
 		if (focus && active && !disabled) {
 			logger.debug(`focus tab ${id}`);
-			ref.current && ref.current.focus();
+			ref.current?.focus();
 		}
 	}, [focus, active, disabled, id]);
 
@@ -141,7 +141,7 @@ export const InternalTab = ({
 					/>
 				)}
 
-				{closable && <span id={closableId} className="neo-icon-end"></span>}
+				{closable && <span id={closableId} className="neo-icon-end" />}
 			</a>
 		</>
 	);

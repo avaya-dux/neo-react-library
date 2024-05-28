@@ -55,7 +55,7 @@ export const handleMouseMoveEvent = (
 			}
 		}
 	} else {
-		logger.debug(`target has no id attribute`);
+		logger.debug("target has no id attribute");
 	}
 };
 

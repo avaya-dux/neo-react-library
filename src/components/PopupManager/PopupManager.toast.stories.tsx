@@ -96,8 +96,7 @@ export const ToastsPositioning = () => {
 				<div style={{ display: "grid", gridTemplateColumns: "repeat(3, 33%)" }}>
 					<button
 						onClick={() =>
-							managerRef.current &&
-							managerRef.current.toast({
+							managerRef.current?.toast({
 								message: "Top-left Toast",
 								duration,
 								position: "top-left",
@@ -108,8 +107,7 @@ export const ToastsPositioning = () => {
 					</button>
 					<button
 						onClick={() =>
-							managerRef.current &&
-							managerRef.current.toast({
+							managerRef.current?.toast({
 								message: "Top Toast",
 								duration,
 								position: "top",
@@ -121,8 +119,7 @@ export const ToastsPositioning = () => {
 					</button>
 					<button
 						onClick={() =>
-							managerRef.current &&
-							managerRef.current.toast({
+							managerRef.current?.toast({
 								message: "Top-right Toast",
 								duration,
 								position: "top-right",
@@ -133,8 +130,7 @@ export const ToastsPositioning = () => {
 					</button>
 					<button
 						onClick={() =>
-							managerRef.current &&
-							managerRef.current.toast({
+							managerRef.current?.toast({
 								message: "Bottom-left Toast",
 								duration,
 								position: "bottom-left",
@@ -145,8 +141,7 @@ export const ToastsPositioning = () => {
 					</button>
 					<button
 						onClick={() =>
-							managerRef.current &&
-							managerRef.current.toast({
+							managerRef.current?.toast({
 								message: "Bottom Toast",
 								duration,
 								position: "bottom",
@@ -158,8 +153,7 @@ export const ToastsPositioning = () => {
 					</button>
 					<button
 						onClick={() =>
-							managerRef.current &&
-							managerRef.current.toast({
+							managerRef.current?.toast({
 								message: "Bottom-right Toast",
 								duration,
 								position: "bottom-right",

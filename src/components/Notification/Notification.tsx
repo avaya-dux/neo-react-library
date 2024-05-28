@@ -141,7 +141,7 @@ export const Notification = ({
 			setWidth,
 		);
 
-		if (typeof window != "undefined") {
+		if (typeof window !== "undefined") {
 			window.addEventListener("resize", () =>
 				handleNotificationTextTruncation(
 					notificationRef,
@@ -210,7 +210,7 @@ export const Notification = ({
 							icon="chevron-down"
 							aria-label={notificationTranslations.textTruncation}
 							onClick={() => setIsTruncated(!isTruncated)}
-						></IconButton>
+						/>
 					)}
 				</div>
 
@@ -339,13 +339,13 @@ function handleNotificationTextTruncation(
 	let leftoverHeaderText = 0;
 	let leftoverDescriptionText = 0;
 
-	if (descriptionRef && descriptionRef.current) {
+	if (descriptionRef?.current) {
 		descriptionOffsetWidth = descriptionRef.current.offsetWidth;
 
 		leftoverDescriptionText = descriptionSize - descriptionOffsetWidth;
 	}
 
-	if (headerRef && headerRef.current) {
+	if (headerRef?.current) {
 		headerOffsetWidth = headerRef.current.offsetWidth;
 
 		leftoverHeaderText = headerSize - headerOffsetWidth;

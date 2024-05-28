@@ -55,7 +55,7 @@ export const UsageExample = () => {
 						icon="settings"
 						variant="tertiary"
 						aria-label="Settings"
-					></IconButton>
+					/>
 				</Action>
 			</Widget>
 			<Widget>
@@ -143,11 +143,7 @@ const InteractiveWidgetTemplate: Story<WidgetProps> = ({
 					<p>Header of widget window</p>
 				</Header>
 				<Action>
-					<IconButton
-						icon="check"
-						variant="tertiary"
-						aria-label="more"
-					></IconButton>
+					<IconButton icon="check" variant="tertiary" aria-label="more" />
 				</Action>
 				<Content>
 					Adipisicing in consequat incididunt occaecat sit eu
@@ -187,7 +183,7 @@ export const LoadingEmptyWidget = () => {
 					<Icon icon="chat" aria-label="chat" />
 					<p>Header of widget window</p>
 				</Header>
-				<Action></Action>
+				<Action />
 				<Content>
 					Adipisicing in consequat incididunt occaecat sit eu
 					<strong>enim ex pariatur</strong>. Ad eiusmod duis incididunt
@@ -205,7 +201,7 @@ export const ScrollableWidget = () => {
 				<Icon icon="chat" aria-label="chat" />
 				<p>Header of widget window</p>
 			</Header>
-			<Action></Action>
+			<Action />
 			<Content asText={false}>
 				<div style={{ width: 2000, marginBottom: 40 }}>
 					<h3>Item 1</h3>

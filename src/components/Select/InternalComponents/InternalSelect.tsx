@@ -12,9 +12,11 @@ export const InternalSelect = ({
 }) => {
 	if (searchable && multiple) {
 		return <MultiSelectSearchable />;
-	} else if (searchable) {
+	}
+	if (searchable) {
 		return <SingleSelectSearchable />;
-	} else if (multiple) {
+	}
+	if (multiple) {
 		return <MultiSelect />;
 	}
 

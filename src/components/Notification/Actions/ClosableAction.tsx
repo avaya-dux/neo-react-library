@@ -13,7 +13,7 @@ export const ClosableAction = ({
 				aria-label={ariaLabel}
 				className={clsx("neo-icon-end", className)}
 				{...rest}
-			></button>
+			/>
 		</div>
 	);
 };

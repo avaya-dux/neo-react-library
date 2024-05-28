@@ -60,7 +60,7 @@ export const TopLinkItem = ({
 		if (ctx.hasCustomOnNavigate) {
 			e.preventDefault(); // Override anchor default behavior if a custom event handler is provided
 		}
-		ctx?.onSelectedLink && ctx.onSelectedLink(id as string, href);
+		ctx?.onSelectedLink?.(id as string, href);
 	};
 
 	return (

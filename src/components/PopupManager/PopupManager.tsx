@@ -25,7 +25,7 @@ const objectKeys = <T extends Dict>(obj: T) =>
 
 // HACK: TODO: fix this to use Dict (or whatever makes sense)
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-type Props = {}
+type Props = {};
 
 export class PopupManager extends Component<Props, State> {
 	static counter = 0;
@@ -59,7 +59,7 @@ export class PopupManager extends Component<Props, State> {
 				positions: { ...prevState.positions },
 				zIndex,
 			};
-			logger.debug(`setZIndex: state after`, ret);
+			logger.debug("setZIndex: state after", ret);
 			return ret;
 		});
 	};
@@ -134,7 +134,7 @@ export class PopupManager extends Component<Props, State> {
 			const filtered = prevPopups.positions[position].filter(
 				// id may be string or number
 				// eslint-disable-next-line eqeqeq
-				(popup) => popup.id != id,
+				(popup) => popup.id !== id,
 			);
 			const ret = {
 				zIndex: prevPopups.zIndex,

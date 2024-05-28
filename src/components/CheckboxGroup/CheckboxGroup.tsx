@@ -20,11 +20,11 @@ export interface CheckboxGroupDefaultProps {
 
 type EnforcedAccessibleLabel =
 	| {
-			["aria-labelledby"]: string;
+			"aria-labelledby": string;
 			label?: string;
 	  }
 	| {
-			["aria-labelledby"]?: string;
+			"aria-labelledby"?: string;
 			label: string;
 	  };
 
@@ -63,7 +63,7 @@ export type CheckboxGroupProps = CheckboxGroupDefaultProps &
 export const CheckboxGroup = ({
 	children,
 	groupName,
-	["aria-labelledby"]: ariaLabelledBy,
+	"aria-labelledby": ariaLabelledBy,
 	label,
 	inline,
 	helperText,

@@ -9,7 +9,7 @@ export const reactNodeToString = (reactNode: React.ReactNode): string => {
 		string = reactNode;
 	} else if (typeof reactNode === "number") {
 		string = reactNode.toString();
-	} else if (reactNode instanceof Array) {
+	} else if (Array.isArray(reactNode)) {
 		reactNode.forEach((child) => {
 			string += reactNodeToString(child);
 		});

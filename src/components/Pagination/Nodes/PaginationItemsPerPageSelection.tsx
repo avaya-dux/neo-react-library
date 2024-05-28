@@ -35,12 +35,10 @@ export const PaginationItemsPerPageSelection = ({
 				aria-label={tooltipForShownPagesSelect}
 				defaultValue={itemsPerPage}
 				onBlur={(e) => {
-					onItemsPerPageChange &&
-						onItemsPerPageChange(e, Number.parseInt(e.target.value, 10));
+					onItemsPerPageChange?.(e, Number.parseInt(e.target.value, 10));
 				}}
 				onChange={(e) => {
-					onItemsPerPageChange &&
-						onItemsPerPageChange(e, Number.parseInt(e.target.value, 10));
+					onItemsPerPageChange?.(e, Number.parseInt(e.target.value, 10));
 				}}
 			>
 				{itemsPerPageOptions.map((option, i) => (

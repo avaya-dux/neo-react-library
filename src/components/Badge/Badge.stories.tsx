@@ -32,7 +32,7 @@ BadgeWithString.args = {
 
 const WithIcon: Story<BadgeProps> = (props: BadgeProps) => (
 	<Badge {...props}>
-		<span className="neo-icon-customer"></span>
+		<span className="neo-icon-customer" />
 	</Badge>
 );
 

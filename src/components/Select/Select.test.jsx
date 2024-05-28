@@ -273,7 +273,7 @@ describe("Select", () => {
 						label={label}
 						loading={true}
 						placeholder={placeholder}
-					></Select>,
+					/>,
 				);
 
 				const defaultSelectHeader = getAllByRole("button")[0];

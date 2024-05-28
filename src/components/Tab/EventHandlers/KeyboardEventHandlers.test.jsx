@@ -66,7 +66,9 @@ describe("Tab Keyboard event handlers", () => {
 	});
 
 	describe("handleKeyDownEvent", () => {
-		let setActiveTabIndex, setActivePanelIndex, ref;
+		let setActiveTabIndex;
+		let setActivePanelIndex;
+		let ref;
 
 		beforeEach(() => {
 			setActiveTabIndex = vi.fn();
@@ -313,7 +315,9 @@ describe("Tab Keyboard event handlers", () => {
 	});
 
 	describe("handleCloseElementKeyDownEvent", () => {
-		let setActiveTabIndex, setActivePanelIndex, onClose;
+		let setActiveTabIndex;
+		let setActivePanelIndex;
+		let onClose;
 
 		beforeEach(() => {
 			setActiveTabIndex = vi.fn();

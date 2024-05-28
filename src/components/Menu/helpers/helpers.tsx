@@ -35,7 +35,8 @@ export const addIdToChildren = (children: MenuProps["children"]) => {
 
 		if (childType === MenuItem) {
 			return cloneElement(child, { id: child.props.id || genId() });
-		} else if (childType === SubMenu) {
+		}
+		if (childType === SubMenu) {
 			const buttonElement = (child.props as SubMenuProps).menuRootElement;
 			const buttonElementId = buttonElement.props.id || genId();
 			const cloneButton = cloneElement(buttonElement, {
@@ -44,9 +45,8 @@ export const addIdToChildren = (children: MenuProps["children"]) => {
 			return cloneElement(child as ReactElement<SubMenuProps>, {
 				menuRootElement: cloneButton,
 			});
-		} else {
-			return child;
 		}
+		return child;
 	});
 };
 
@@ -105,7 +105,7 @@ export const layoutChildren = (
 				if (menuIndexes[cursor]?.index === index) {
 					let activeChild;
 					if (childType === MenuItem) {
-						logger.debug(`active child `);
+						logger.debug("active child ");
 						activeChild = cloneElement(child, {
 							isActive: true,
 							hasFocus: true,
@@ -126,39 +126,31 @@ export const layoutChildren = (
 						});
 					}
 					return <Fragment key={index}>{activeChild}</Fragment>;
-				} else {
-					if (isValidElement(child)) {
-						let inactiveChild;
-						if (childType === MenuItem) {
-							inactiveChild = cloneElement(
-								child as ReactElement<MenuItemProps>,
-								{
-									isActive: false,
-									hasFocus: false,
-									tabIndex: -1,
-								},
-							);
-						} else if (childType === SubMenu) {
-							const buttonElement = (child.props as SubMenuProps)
-								.menuRootElement;
-							const cloneButton = cloneElement(buttonElement, {
-								isActive: false,
-								hasFocus: false,
-								tabIndex: -1,
-							});
-							inactiveChild = cloneElement(
-								child as ReactElement<SubMenuProps>,
-								{
-									menuRootElement: cloneButton,
-								},
-							);
-						}
-						if (inactiveChild) {
-							return <Fragment key={index}>{inactiveChild}</Fragment>;
-						}
-					}
-					return <Fragment key={index}>{child}</Fragment>;
 				}
+				if (isValidElement(child)) {
+					let inactiveChild;
+					if (childType === MenuItem) {
+						inactiveChild = cloneElement(child as ReactElement<MenuItemProps>, {
+							isActive: false,
+							hasFocus: false,
+							tabIndex: -1,
+						});
+					} else if (childType === SubMenu) {
+						const buttonElement = (child.props as SubMenuProps).menuRootElement;
+						const cloneButton = cloneElement(buttonElement, {
+							isActive: false,
+							hasFocus: false,
+							tabIndex: -1,
+						});
+						inactiveChild = cloneElement(child as ReactElement<SubMenuProps>, {
+							menuRootElement: cloneButton,
+						});
+					}
+					if (inactiveChild) {
+						return <Fragment key={index}>{inactiveChild}</Fragment>;
+					}
+				}
+				return <Fragment key={index}>{child}</Fragment>;
 			})}
 		</div>
 	);
@@ -174,7 +166,8 @@ export const buildMenuIndexes = (children: MenuProps["children"]) => {
 			logger.debug({ childType });
 			if (childType === MenuItem) {
 				return { index, id: child.props.id };
-			} else if (childType === SubMenu) {
+			}
+			if (childType === SubMenu) {
 				const props = child.props as SubMenuProps;
 				return {
 					index,
@@ -182,9 +175,8 @@ export const buildMenuIndexes = (children: MenuProps["children"]) => {
 					id: props.menuRootElement.props.id,
 					length: props.children.length as number,
 				};
-			} else {
-				return null;
 			}
+			return null;
 		}).filter((obj) => !!obj) || [];
 
 	logger.debug(JSON.stringify(result));

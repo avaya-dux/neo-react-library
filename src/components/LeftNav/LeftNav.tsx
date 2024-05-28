@@ -42,7 +42,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
 	currentUrl = "",
 	onNavigate,
 	isActiveOverride,
-	["aria-label"]: ariaLabel = "Left Navigation",
+	"aria-label": ariaLabel = "Left Navigation",
 	...rest
 }: LeftNavProps) => {
 	// NOTE: this is for non-TS users
@@ -71,7 +71,7 @@ export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
 		currentUrl: curUrl,
 		onSelectedLink: handleSelectedLink,
 		isActiveOverride,
-		hasCustomOnNavigate: onNavigate ? true : false,
+		hasCustomOnNavigate: !!onNavigate,
 	};
 
 	return (

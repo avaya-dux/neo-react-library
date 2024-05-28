@@ -49,7 +49,8 @@ export const PaginationItemDisplay = ({
 					{startingItemIndex}-{endingItemIndex} / {itemCount}
 				</bdi>
 			);
-		} else if (itemDisplayType === "page") {
+		}
+		if (itemDisplayType === "page") {
 			return (
 				<bdi>
 					{currentPageIndex} / {totalPages}

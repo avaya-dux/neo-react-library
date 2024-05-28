@@ -100,16 +100,15 @@ export const RadioGroup = ({
 					const radioWithProps = cloneElement(radio, childprops);
 
 					return cloneElement(child, child.props, radioWithProps);
-				} else {
-					const childprops = {
-						...child.props,
-						...propsToPass,
-						disabled: disabled ? disabled : child.props.disabled,
-						checked: child.props.value === selected,
-					};
-
-					return cloneElement(child, childprops);
 				}
+				const childprops = {
+					...child.props,
+					...propsToPass,
+					disabled: disabled ? disabled : child.props.disabled,
+					checked: child.props.value === selected,
+				};
+
+				return cloneElement(child, childprops);
 			}),
 		[children, selected, groupName, helperText, onChangeHandler, disabled],
 	);

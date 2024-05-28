@@ -36,7 +36,7 @@ export function activateAnotherTabAndPanel(
 			setActiveTabIndex(nextTab - 1);
 			setActivePanelIndex(nextTab - 1);
 		} else {
-			logger.debug(`do nothing as no next tab could be activated.`);
+			logger.debug("do nothing as no next tab could be activated.");
 		}
 	}
 }
@@ -111,7 +111,7 @@ export function moveNextTabToLeftAmount(
 	tabWidths: number[],
 ) {
 	if (!canMoveNextTabToLeft(leftOffset, containerWidth, viewPortWidth)) {
-		logger.debug(`can not move next tab to left, returining`);
+		logger.debug("can not move next tab to left, returining");
 		return 0;
 	}
 	const [index, overshoot] = getNextTabToMoveLeft(

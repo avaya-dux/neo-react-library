@@ -36,13 +36,12 @@ export function calculateRightMoveAmount(
 ) {
 	if (index === -1) {
 		return 0;
-	} else {
-		const tabWidth = tabWidths[index];
-		if (overshoot > tabWidth / 2 && index + 1 < tabWidths.length) {
-			return tabWidth - overshoot + tabWidths[index + 1];
-		}
-		return tabWidth - overshoot;
 	}
+	const tabWidth = tabWidths[index];
+	if (overshoot > tabWidth / 2 && index + 1 < tabWidths.length) {
+		return tabWidth - overshoot + tabWidths[index + 1];
+	}
+	return tabWidth - overshoot;
 }
 export function getPreviousTabToMoveRight(
 	leftOffset: number,
@@ -97,11 +96,10 @@ export function calculateLeftMoveAmount(
 	);
 	if (index === tabWidths.length - 1 && overshoot <= 0) {
 		return 0;
-	} else {
-		const tabWidth = tabWidths[index];
-		if (overshoot > tabWidth / 2 && index - 1 >= 0) {
-			return tabWidth - overshoot + tabWidths[index - 1];
-		}
-		return tabWidth - overshoot;
 	}
+	const tabWidth = tabWidths[index];
+	if (overshoot > tabWidth / 2 && index - 1 >= 0) {
+		return tabWidth - overshoot + tabWidths[index - 1];
+	}
+	return tabWidth - overshoot;
 }

@@ -125,7 +125,7 @@ const timeAndBadge = (
 	<div className="vertical">
 		<p className="neo-body-small">6:02 PM</p>
 		<div>
-			<span className="neo-badge" data-badge="9"></span>
+			<span className="neo-badge" data-badge="9" />
 		</div>
 	</div>
 );

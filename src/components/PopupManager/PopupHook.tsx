@@ -46,7 +46,7 @@ export const [createContainer, removePopupManagerContainer, getReady] = (() => {
 		const CallbackWrapper = ({ callback }: { callback: () => void }) => {
 			return (
 				<div ref={callback}>
-					<PopupManager ref={managerRef}></PopupManager>
+					<PopupManager ref={managerRef} />
 				</div>
 			);
 		};

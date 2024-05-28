@@ -76,7 +76,7 @@ describe("getTextAreaProps function", () => {
 			locked: true,
 		});
 		expect(returnedProps).toEqual({
-			className: `neo-input neo-input-textarea--locked`,
+			className: "neo-input neo-input-textarea--locked",
 		});
 	});
 });

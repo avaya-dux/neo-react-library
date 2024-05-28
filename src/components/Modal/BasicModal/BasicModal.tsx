@@ -1,4 +1,10 @@
-import { type ReactNode, useCallback, useEffect, forwardRef, useId } from "react";
+import {
+	type ReactNode,
+	useCallback,
+	useEffect,
+	forwardRef,
+	useId,
+} from "react";
 import ReactDOM from "react-dom";
 import FocusLock from "react-focus-lock";
 import clsx from "clsx";
@@ -56,7 +62,7 @@ export const BasicModal = forwardRef(
 		const modal = (
 			<FocusLock>
 				<div ref={ref} id={id} className={clsx("neo-modal--active", className)}>
-					<div className="neo-modal__background"></div>
+					<div className="neo-modal__background" />
 					<div
 						className="neo-modal__content"
 						aria-modal="true"

@@ -45,7 +45,7 @@ export const PaginationNavigation = ({
 	const rightArrowDisabled = currentPageIndex >= totalPages;
 
 	return totalPages <= 1 && !alwaysShowPagination ? null : (
-		<nav className="neo-pagination" role="navigation" aria-label="pagination">
+		<nav className="neo-pagination" aria-label="pagination">
 			<IconButton
 				aria-label={backIconButtonText}
 				disabled={leftArrowDisabled}

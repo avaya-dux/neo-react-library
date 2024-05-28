@@ -80,11 +80,11 @@ export const buildTabPropsNoPanel = (
 const buildSingleTabPropsWithNoPanel = (tab: any): InternalTabProps => {
 	const props = tab.props;
 	const { id, children, ...rest } = props;
-	const disabled = !!props!.disabled;
+	const disabled = !!props?.disabled;
 	logger.debug(`${id} disabled = ${disabled}`);
-	const icon = "icon" in props ? props!.icon : undefined;
+	const icon = "icon" in props ? props?.icon : undefined;
 	const closable = isClosableTab(tab);
-	const onClose = "onClose" in props ? props!.onClose : undefined;
+	const onClose = "onClose" in props ? props?.onClose : undefined;
 
 	return {
 		...rest,
@@ -104,11 +104,11 @@ const buildSingleTabPropsHasAssociatedPanel = (
 ): InternalTabProps => {
 	const props = tab.props;
 	const { id, children, ...rest } = props;
-	const disabled = !!props!.disabled;
+	const disabled = !!props?.disabled;
 	logger.debug(`${id} disabled = ${disabled}`);
-	const icon = "icon" in props ? props!.icon : undefined;
+	const icon = "icon" in props ? props?.icon : undefined;
 	const closable = isClosableTab(tab);
-	const onClose = "onClose" in props ? props!.onClose : undefined;
+	const onClose = "onClose" in props ? props?.onClose : undefined;
 
 	const content = {
 		...panel.props,

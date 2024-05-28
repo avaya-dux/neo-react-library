@@ -4,7 +4,10 @@ import { type ButtonHTMLAttributes, forwardRef, type Ref } from "react";
 import { Button } from "components/Button";
 import { computeBadge, handleAccessbilityError } from "utils";
 
-import type { TopNavIconButtonProps, TopNavLinkButtonProps } from "../TopNavTypes";
+import type {
+	TopNavIconButtonProps,
+	TopNavLinkButtonProps,
+} from "../TopNavTypes";
 
 /**
  * Is meant to be used as a button that is nested under a `TopNav`.
@@ -53,7 +56,7 @@ export const TopNavIconButton = forwardRef(
 					disabled={disabled}
 					ref={ref}
 					{...rest}
-				></button>
+				/>
 
 				{badge && (
 					<span className="neo-badge__icon" data-badge={computeBadge(badge)} />

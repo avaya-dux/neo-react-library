@@ -362,7 +362,7 @@ export const EditableData = () => {
 	const [logItems, setLogItems] = useState<string[]>([]);
 
 	useEffect(() => {
-		setLogItems(["data modified, new length: " + data.length, ...logItems]);
+		setLogItems([`data modified, new length: ${data.length}`, ...logItems]);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 
@@ -376,7 +376,7 @@ export const EditableData = () => {
 				selectableRows="multiple"
 				handleCreate={() => {
 					const newRow: IDataTableMockData = {
-						id: "new-row-" + Math.random(),
+						id: `new-row-${Math.random()}`,
 						name: "The new guy",
 						label: "New Row",
 						other: "Lorem Ipsum",
@@ -553,7 +553,7 @@ export const SecondPage = (props: object) => {
 				initialStatePageIndex={1}
 				handleCreate={() => {
 					const newRow: IDataTableMockData = {
-						id: "new-row-" + Math.random(),
+						id: `new-row-${Math.random()}`,
 						name: "The new guy",
 						label: "New Row",
 						other: "Lorem Ipsum",

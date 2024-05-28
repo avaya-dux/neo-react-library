@@ -496,7 +496,8 @@ describe("MENU Keyboard event handlers", () => {
 	});
 
 	describe("handleButtonKeyDownEvent", () => {
-		let setCursor, setOpen;
+		let setCursor;
+		let setOpen;
 		beforeEach(() => {
 			setCursor = vi.fn();
 			setOpen = vi.fn();

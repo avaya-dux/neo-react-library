@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import log from "loglevel";
 import type React from "react";
-import { forwardRef, type ReactNode, useCallback, useId } from "react"
+import { forwardRef, type ReactNode, useCallback, useId } from "react";
 
 import { handleAccessbilityError } from "utils";
 import useControlled from "utils/useControlled";

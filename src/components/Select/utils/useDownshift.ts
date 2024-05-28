@@ -367,7 +367,8 @@ export const useDownshift = (
 			creatable,
 			createMessage,
 		);
-	} else if (searchable) {
+	}
+	if (searchable) {
 		return DownshiftWithComboboxProps(
 			options,
 			selectId,
@@ -380,7 +381,8 @@ export const useDownshift = (
 			creatable,
 			createMessage,
 		);
-	} else if (multiple) {
+	}
+	if (multiple) {
 		return DownshiftWithMultipleSelectProps(
 			options,
 			selectId,

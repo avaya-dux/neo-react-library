@@ -6,7 +6,11 @@ import {
 	notificationLogger as logger,
 	Notification,
 } from "components/Notification";
-import { type PopupId, PopupManager, type PopupPosition } from "components/PopupManager";
+import {
+	type PopupId,
+	PopupManager,
+	type PopupPosition,
+} from "components/PopupManager";
 
 logger.disableAll();
 type WithoutType = Omit<EventNotificationProps, "type">;

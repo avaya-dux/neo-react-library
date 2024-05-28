@@ -37,7 +37,7 @@ describe("RadioGroup", () => {
 	});
 
 	it("has an id value that matches the 'for' attribute on label", () => {
-		const radio = screen.getByLabelText(`Radio 1`);
+		const radio = screen.getByLabelText("Radio 1");
 		const radioId = radio.getAttribute("id");
 		const radioLabel = screen.getByText("Radio 1");
 		expect(radioLabel).toHaveAttribute("for", radioId);
@@ -71,7 +71,7 @@ describe("Storybook tests", () => {
 		});
 
 		it("renders as disabled", () => {
-			const disabledRadioButton = screen.getByLabelText(`Radio 2`);
+			const disabledRadioButton = screen.getByLabelText("Radio 2");
 			expect(disabledRadioButton).toHaveAttribute("disabled");
 		});
 
