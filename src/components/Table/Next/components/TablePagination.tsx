@@ -2,10 +2,10 @@ import { Table } from "@tanstack/react-table";
 import { useMemo } from "react";
 
 import { Pagination } from "components/Pagination";
+import { PaginationTranslations } from "components/Pagination/PaginationTypes";
 import { TooltipPosition } from "components/Tooltip";
 
-import { translations as defaultTranslations } from "../helpers";
-import { ITableNextTranslations } from "./types/TranslationTypes";
+import { translations as defaultTranslations } from "../../helpers";
 
 export const TablePagination = ({
   table,
@@ -21,12 +21,12 @@ export const TablePagination = ({
   itemDisplayTooltipPosition?: TooltipPosition;
   itemsPerPageTooltipPosition?: TooltipPosition;
 
-  translations?: ITableNextTranslations;
+  translations?: PaginationTranslations;
 }) => {
   const paginationTranslations = useMemo(() => {
     return {
       ...defaultTranslations.pagination,
-      ...translations?.pagination,
+      ...translations,
     };
   }, [translations]);
 

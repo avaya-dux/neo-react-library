@@ -42,14 +42,14 @@ type Story = StoryObj<typeof TableNext>;
 
 export const Basic: Story = {
   name: "Basic usage, simple column definitions",
-  render: ({ data, columns }) => {
-    return <TableNext data={data} columns={columns} />;
+  render: ({ data, columns, ...rest }) => {
+    return <TableNext data={data} columns={columns} {...rest} />;
   },
 };
 
 export const AlternateColumnDefs: Story = {
   name: "Alternate style of defining columns",
-  render: ({ data }) => {
+  render: ({ data, ...rest }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columnsHardcoded: ColumnDef<ITableNextMockData, any>[] = [
       {
@@ -87,6 +87,6 @@ export const AlternateColumnDefs: Story = {
       },
     ];
 
-    return <TableNext data={data} columns={columnsHardcoded} />;
+    return <TableNext data={data} {...rest} columns={columnsHardcoded} />;
   },
 };
