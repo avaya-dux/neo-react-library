@@ -3,16 +3,18 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 
+import { translations as defaultTranslations } from "../helpers";
+
 import type { TableNextProps } from "./types";
+import { TablePagination, TableToolbar } from "./components";
 
 import "../Table_shim.css";
-
-import { TablePagination } from "./TablePagination";
 
 /**
  * The `TableNext` component is a WIP replacement for the `Table` component.
@@ -53,7 +55,9 @@ export const TableNext = ({
   // visual options
   pushPaginationDown = false,
   rowHeight = "large",
+  showRowHeightMenu = true,
   showRowSeparator = false,
+  showSearch = true,
 
   // pagination options
   itemsPerPageOptions = [10, 25, 50, 100],
@@ -61,7 +65,7 @@ export const TableNext = ({
   itemDisplayTooltipPosition = "auto",
   itemsPerPageTooltipPosition = "auto",
 
-  translations,
+  translations: translationsProp,
 
   ...rest
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -71,18 +75,36 @@ export const TableNext = ({
     pageSize: itemsPerPageOptions?.[0] || 10,
   });
 
+  const translations = useMemo(() => {
+    return {
+      ...defaultTranslations,
+      ...translationsProp,
+    };
+  }, [translationsProp]);
+  const [globalFilter, setGlobalFilter] = useState("");
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
     state: {
       pagination,
+      globalFilter,
     },
+
+    onGlobalFilterChange: setGlobalFilter,
+    getFilteredRowModel: getFilteredRowModel(), // TODO: allow custom filter functions to be passed in
 
     ...rest,
   });
+
+  const [rowHeightValue, setRowHeightValue] = useState(rowHeight);
+  useEffect(() => {
+    setRowHeightValue(rowHeight);
+  }, [rowHeight]);
 
   return (
     <div
@@ -91,11 +113,20 @@ export const TableNext = ({
         pushPaginationDown && "neo-table--push-pagination-down",
       )}
     >
+      <TableToolbar
+        handleRowHeightChange={setRowHeightValue}
+        rowHeight={rowHeightValue}
+        showRowHeightMenu={showRowHeightMenu}
+        showSearch={showSearch}
+        table={table}
+        translations={translations.toolbar}
+      />
+
       <table
         className={clsx(
           "neo-table",
-          rowHeight === "compact" && "neo-table--compact",
-          rowHeight === "medium" && "neo-table--medium",
+          rowHeightValue === "compact" && "neo-table--compact",
+          rowHeightValue === "medium" && "neo-table--medium",
           showRowSeparator && "neo-table-separator",
         )}
       >
@@ -132,7 +163,7 @@ export const TableNext = ({
       <TablePagination
         table={table}
         itemsPerPageOptions={itemsPerPageOptions}
-        translations={translations}
+        translations={translations.pagination}
         itemDisplayTooltipPosition={itemDisplayTooltipPosition}
         itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
       />

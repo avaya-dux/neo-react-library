@@ -12,7 +12,9 @@ export interface TableNextProps<T> {
   // visual options
   containerClassName?: string;
   rowHeight?: RowHeight;
+  showRowHeightMenu?: boolean;
   showRowSeparator?: boolean;
+  showSearch?: boolean;
 
   // pagination options
   itemsPerPageOptions?: number[];
