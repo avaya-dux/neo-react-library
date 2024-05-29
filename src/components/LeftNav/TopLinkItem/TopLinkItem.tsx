@@ -47,7 +47,7 @@ export const TopLinkItem = ({
 		!ctx.isActiveOverride
 			? setIsActive(href === ctx.currentUrl)
 			: setIsActive(false);
-	}, [ctx.currentUrl, ctx.isActiveOverride, isActive, href]);
+	}, [ctx.currentUrl, ctx.isActiveOverride, href]);
 
 	// Ensure the link is visible in the viewport when it matches the current URL
 	useEffect(() => {

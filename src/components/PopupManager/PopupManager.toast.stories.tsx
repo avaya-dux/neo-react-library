@@ -25,7 +25,7 @@ const PopupManagerToastTemplate: Story<ToastOptions> = (
 				current.removeAll();
 			}
 		};
-	}, [managerRef, props]);
+	}, [props]);
 	return <PopupManager ref={managerRef} />;
 };
 

@@ -81,7 +81,7 @@ export const NavCategory = ({
 		const active = childIsActive;
 		const itemStyle = getItemClassNames(isExpanded, active, disabled);
 		setNavItemClass(itemStyle);
-	}, [isExpanded, isActive, disabled, childIsActive]);
+	}, [isExpanded, disabled, childIsActive]);
 
 	useEffect(() => {
 		const iconStyles = getIconClass(icon);

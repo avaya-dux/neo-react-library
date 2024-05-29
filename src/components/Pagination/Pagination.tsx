@@ -82,7 +82,7 @@ export const Pagination = ({
 		window.addEventListener("resize", updateRootWidth);
 		updateRootWidth();
 		return () => window.removeEventListener("resize", updateRootWidth);
-	}, [rootRef]);
+	}, []);
 
 	return (
 		<div className="neo-pagination__row" id={id} ref={rootRef}>

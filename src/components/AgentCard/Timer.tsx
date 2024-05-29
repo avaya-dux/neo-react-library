@@ -14,7 +14,7 @@ export const Timer = ({ agentStatus }: TimerProps) => {
 	useEffect(() => {
 		startTimer();
 		return () => clearInterval(timerIdRef.current);
-	}, [agentStatus]);
+	}, []);
 
 	const startTimer = () => {
 		setCount(0);

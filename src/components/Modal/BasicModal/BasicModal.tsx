@@ -57,7 +57,7 @@ export const BasicModal = forwardRef(
 			return () => {
 				document.removeEventListener("keyup", onKeyDown, false);
 			};
-		}, [open, onKeyDown]);
+		}, [onKeyDown]);
 
 		const modal = (
 			<FocusLock>
