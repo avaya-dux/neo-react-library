@@ -9,6 +9,6 @@
   rangeStrategy: "pin",
   reviewers: ["joe-s-avaya", "enrique-prado"],
   schedule: ["on monday before 5am"],
-  ignoreDeps: ["node", "downshift", "jest-axe", "@types/react", "eslint"],
+  ignoreDeps: ["node", "downshift", "jest-axe", "@types/react"],
   ignorePaths: ["~/.nvmrc"],
 }
