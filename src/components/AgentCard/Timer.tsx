@@ -11,10 +11,11 @@ export const Timer = ({ agentStatus }: TimerProps) => {
 	const minute: number = Math.floor((count - hour * 3600) / 60);
 	const seconds: number = count - (hour * 3600 + minute * 60);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: must reset timer when agentStatus changes
 	useEffect(() => {
 		startTimer();
 		return () => clearInterval(timerIdRef.current);
-	}, []);
+	}, [agentStatus]);
 
 	const startTimer = () => {
 		setCount(0);
