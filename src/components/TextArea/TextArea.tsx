@@ -59,7 +59,7 @@ export const TextArea = ({
 		} else {
 			setMaxLengthExceeded(false);
 		}
-	}, [characterCount, maxLength, setMaxLengthExceeded]);
+	}, [characterCount, maxLength]);
 
 	return (
 		<NeoInputWrapper

@@ -25,6 +25,8 @@ describe("TopNavIconButton", () => {
 
 	it("explodes if an accessibility error is found", () => {
 		const spy = vi.spyOn(console, "error").mockImplementation(() => null);
+
+		// biome-ignore lint/a11y/useValidAriaValues: we are purposefully testing an invalid value
 		expect(() => render(<TopNavIconButton aria-label="" />)).toThrow();
 		expect(spy).toHaveBeenCalled();
 	});

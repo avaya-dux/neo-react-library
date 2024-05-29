@@ -59,13 +59,14 @@ export const Switch = ({
 				htmlFor={id}
 			>
 				<input
-					{...rest}
 					id={id}
 					type="checkbox"
 					role="switch"
+					aria-checked={rest.checked}
 					onChange={(event) => {
 						onChange?.(event, event.target.checked);
 					}}
+					{...rest}
 				/>
 				<i className="neo-switch__icon" />
 				{multiline ? (

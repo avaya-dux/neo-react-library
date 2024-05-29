@@ -95,6 +95,7 @@ export const ToastsPositioning = () => {
 			>
 				<div style={{ display: "grid", gridTemplateColumns: "repeat(3, 33%)" }}>
 					<button
+						type="button"
 						onClick={() =>
 							managerRef.current?.toast({
 								message: "Top-left Toast",
@@ -106,6 +107,7 @@ export const ToastsPositioning = () => {
 						Open a Top Left Toast
 					</button>
 					<button
+						type="button"
 						onClick={() =>
 							managerRef.current?.toast({
 								message: "Top Toast",
@@ -118,6 +120,7 @@ export const ToastsPositioning = () => {
 						Open a Top Center Toast
 					</button>
 					<button
+						type="button"
 						onClick={() =>
 							managerRef.current?.toast({
 								message: "Top-right Toast",
@@ -129,6 +132,7 @@ export const ToastsPositioning = () => {
 						Open a Top Right Toast
 					</button>
 					<button
+						type="button"
 						onClick={() =>
 							managerRef.current?.toast({
 								message: "Bottom-left Toast",
@@ -140,6 +144,7 @@ export const ToastsPositioning = () => {
 						Open a Bottom Left Toast
 					</button>
 					<button
+						type="button"
 						onClick={() =>
 							managerRef.current?.toast({
 								message: "Bottom Toast",
@@ -152,6 +157,7 @@ export const ToastsPositioning = () => {
 						Open a Bottom Center Toast
 					</button>
 					<button
+						type="button"
 						onClick={() =>
 							managerRef.current?.toast({
 								message: "Bottom-right Toast",

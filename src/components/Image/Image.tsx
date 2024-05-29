@@ -55,6 +55,7 @@ export const Image = ({
 		[fallback, isLoading, hasError],
 	);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: trigger a change in state when src changes
 	useEffect(() => {
 		setIsLoading(true);
 		setHasError(false);
@@ -62,6 +63,7 @@ export const Image = ({
 
 	const fallbackComponent =
 		typeof fallback === "string" ? (
+			// biome-ignore lint/a11y/useAltText: this is handled via the `handleAccessbilityError` check above
 			<img alt={alt} src={fallback} style={style} {...rest} />
 		) : (
 			fallback
@@ -69,6 +71,7 @@ export const Image = ({
 
 	return (
 		<>
+			{/* biome-ignore lint/a11y/useAltText: this is handled via the `handleAccessbilityError` check above */}
 			<img
 				alt={alt}
 				className={clsx(

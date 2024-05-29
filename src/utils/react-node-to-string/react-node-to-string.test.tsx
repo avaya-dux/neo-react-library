@@ -15,7 +15,7 @@ describe("react-node-to-string", () => {
 			[void 0, ""],
 			[["lorem", "ipsum"], "loremipsum"],
 			[["lorem", "ipsum"], "loremipsum"],
-			[<></>, ""],
+			[<span key="example" />, ""],
 			["lorem ipsum", "lorem ipsum"],
 			[
 				<p key="p-tag">

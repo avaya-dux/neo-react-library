@@ -85,13 +85,11 @@ export const layoutChildren = (
 	up?: boolean,
 ) => {
 	logger.debug(`cursor = ${cursor}; menuIndexes = ${menuIndexes}`);
-	if (positionToToggle === undefined) {
-		positionToToggle = "below";
-	}
+
 	return (
 		<div
 			ref={ref}
-			className={getContentCss(positionToToggle, up)}
+			className={getContentCss(positionToToggle || "below", up)}
 			role="menu"
 			tabIndex={-1}
 			onKeyDown={handleMenuKeyDown}
@@ -103,7 +101,8 @@ export const layoutChildren = (
 				const childType = child.type;
 
 				if (menuIndexes[cursor]?.index === index) {
-					let activeChild;
+					let activeChild: ReactElement<MenuItemProps | SubMenuProps> | null =
+						null;
 					if (childType === MenuItem) {
 						logger.debug("active child ");
 						activeChild = cloneElement(child, {
@@ -128,7 +127,8 @@ export const layoutChildren = (
 					return <Fragment key={index}>{activeChild}</Fragment>;
 				}
 				if (isValidElement(child)) {
-					let inactiveChild;
+					let inactiveChild: ReactElement<MenuItemProps | SubMenuProps> | null =
+						null;
 					if (childType === MenuItem) {
 						inactiveChild = cloneElement(child as ReactElement<MenuItemProps>, {
 							isActive: false,

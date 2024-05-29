@@ -88,13 +88,19 @@ export const PopCounterEvent = () => {
 		<>
 			<PopupManager ref={managerRef} />
 			<div>
-				<button onClick={() => setOpen((prev) => !prev)}>Toggle</button>
+				<button type="button" onClick={() => setOpen((prev) => !prev)}>
+					Toggle
+				</button>
 			</div>
 			<div>
-				<button onClick={removeAll}>Remove All</button>
+				<button type="button" onClick={removeAll}>
+					Remove All
+				</button>
 			</div>
 			<div>
-				<button onClick={setZIndex}>Change Z Index</button>
+				<button type="button" onClick={setZIndex}>
+					Change Z Index
+				</button>
 			</div>
 		</>
 	);
@@ -155,13 +161,15 @@ export const PopClosableEvent = () => {
 				current.removeAll();
 			}
 		};
-	}, [managerRef]);
+	}, []);
 
 	return (
 		<>
 			<PopupManager ref={managerRef} />
 			<div>
-				<button onClick={() => setOpen((prev) => !prev)}>Toggle</button>
+				<button type="button" onClick={() => setOpen((prev) => !prev)}>
+					Toggle
+				</button>
 			</div>
 		</>
 	);

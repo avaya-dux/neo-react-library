@@ -78,6 +78,7 @@ export const Accordion = ({
 					aria-level={ariaLevel}
 				>
 					<button
+						type="button"
 						className="neo-accordion__header-text"
 						aria-expanded={isActive ? "true" : "false"}
 						aria-controls={bodyId}

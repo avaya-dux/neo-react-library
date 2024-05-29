@@ -89,8 +89,16 @@ const ChildComponent = () => {
 	const { mode, setMode } = useNeoTheme();
 
 	if (mode === "light") {
-		return <button onClick={() => setMode("dark")}>Set Dark</button>;
+		return (
+			<button type="button" onClick={() => setMode("dark")}>
+				Set Dark
+			</button>
+		);
 	}
 
-	return <button onClick={() => setMode("light")}>Set Light</button>;
+	return (
+		<button type="button" onClick={() => setMode("light")}>
+			Set Light
+		</button>
+	);
 };

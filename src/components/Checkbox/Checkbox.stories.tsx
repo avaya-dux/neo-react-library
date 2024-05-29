@@ -45,7 +45,7 @@ const ControlledTemplate: Story<CheckboxProps> = ({
 		} else {
 			setChecked((prev) => !prev);
 		}
-	}, [checked, setChecked]);
+	}, [checked]);
 	const allProps = { ...rest, onChange, checked };
 	return <Checkbox ref={ref} {...allProps} />;
 };

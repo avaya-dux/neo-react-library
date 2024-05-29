@@ -75,7 +75,7 @@ export const RadioGroup = ({
 	const radios = useMemo(
 		() =>
 			Children.map(children, (child) => {
-				let radio;
+				let radio: ReactElement;
 
 				const propsToPass = {
 					name: groupName,

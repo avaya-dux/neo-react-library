@@ -59,7 +59,7 @@ const DefaultTemplate: Story<CheckboxGroupProps> = (
 				}
 			}
 		},
-		[checked4, checked5, setChecked4, setChecked5],
+		[checked4, checked5],
 	);
 	const [checkedValues, setCheckedValues] = useState("");
 	const [ariaCheckedValues, setAriaCheckedValues] = useState("");

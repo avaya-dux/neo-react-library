@@ -53,6 +53,7 @@ describe("LeftNav", () => {
 			vi.spyOn(console, "error").mockImplementation(() => null);
 
 			expect(() =>
+				// biome-ignore lint/a11y/useValidAriaValues: we are purposefully testing an invalid value
 				render(<LeftNav aria-label="">{examplechildren}</LeftNav>),
 			).toThrowError();
 		});

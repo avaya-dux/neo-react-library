@@ -59,6 +59,7 @@ export const InfoModal = forwardRef(
 				>
 					<div className="neo-modal__info-close">
 						<button
+							type="button"
 							aria-label="close" // TODO: Localize this field.
 							className="neo-close"
 							onClick={onClose}

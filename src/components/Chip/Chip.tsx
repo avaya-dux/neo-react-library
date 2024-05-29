@@ -65,6 +65,7 @@ export const Chip = ({
 			{children}
 			{closable && (
 				<button
+					type="button"
 					className="neo-close neo-close--clear"
 					aria-label={closeButtonAriaLabel}
 					// TO-DO: NEO-1549: Add the below styling rule in the CSS library
