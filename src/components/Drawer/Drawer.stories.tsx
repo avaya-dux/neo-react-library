@@ -1,9 +1,9 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 import { useState } from "react";
 
 import { Button } from "components/Button";
 
-import { Drawer, DrawerProps } from "./";
+import { Drawer, type DrawerProps } from "./";
 
 export default {
 	title: "Components/Drawer",
