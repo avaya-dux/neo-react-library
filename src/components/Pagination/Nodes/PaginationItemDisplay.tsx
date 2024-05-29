@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { Tooltip } from "components/Tooltip";
 
-import { PaginationProps } from "..";
+import type { PaginationProps } from "..";
 
 /**
  * Displays the currently selected item(s) out of the total number of items.
@@ -20,53 +20,54 @@ import { PaginationProps } from "..";
  * />
  */
 export const PaginationItemDisplay = ({
-  currentPageIndex,
-  itemCount,
-  itemDisplayTooltipPosition = "auto",
-  itemDisplayType = "count",
-  itemsPerPage,
-  tooltipForCurrentPage = "Item count",
-  totalPages,
+	currentPageIndex,
+	itemCount,
+	itemDisplayTooltipPosition = "auto",
+	itemDisplayType = "count",
+	itemsPerPage,
+	tooltipForCurrentPage = "Item count",
+	totalPages,
 }: { totalPages: number } & Pick<
-  PaginationProps,
-  | "currentPageIndex"
-  | "itemCount"
-  | "itemDisplayTooltipPosition"
-  | "itemDisplayType"
-  | "itemsPerPage"
-  | "tooltipForCurrentPage"
+	PaginationProps,
+	| "currentPageIndex"
+	| "itemCount"
+	| "itemDisplayTooltipPosition"
+	| "itemDisplayType"
+	| "itemsPerPage"
+	| "tooltipForCurrentPage"
 >) => {
-  const display = useMemo(() => {
-    if (itemDisplayType === "count") {
-      const startingItemIndex = (currentPageIndex - 1) * itemsPerPage + 1;
-      const endingItemIndex = Math.min(
-        startingItemIndex + itemsPerPage - 1,
-        itemCount,
-      );
+	const display = useMemo(() => {
+		if (itemDisplayType === "count") {
+			const startingItemIndex = (currentPageIndex - 1) * itemsPerPage + 1;
+			const endingItemIndex = Math.min(
+				startingItemIndex + itemsPerPage - 1,
+				itemCount,
+			);
 
-      return (
-        <bdi>
-          {startingItemIndex}-{endingItemIndex} / {itemCount}
-        </bdi>
-      );
-    } else if (itemDisplayType === "page") {
-      return (
-        <bdi>
-          {currentPageIndex} / {totalPages}
-        </bdi>
-      );
-    }
+			return (
+				<bdi>
+					{startingItemIndex}-{endingItemIndex} / {itemCount}
+				</bdi>
+			);
+		}
+		if (itemDisplayType === "page") {
+			return (
+				<bdi>
+					{currentPageIndex} / {totalPages}
+				</bdi>
+			);
+		}
 
-    return <></>;
-  }, [currentPageIndex, itemCount, itemDisplayType, itemsPerPage, totalPages]);
+		return <></>;
+	}, [currentPageIndex, itemCount, itemDisplayType, itemsPerPage, totalPages]);
 
-  return (
-    <Tooltip
-      id={`pagination-item-display-${tooltipForCurrentPage}`}
-      label={tooltipForCurrentPage}
-      position={itemDisplayTooltipPosition}
-    >
-      {display}
-    </Tooltip>
-  );
+	return (
+		<Tooltip
+			id={`pagination-item-display-${tooltipForCurrentPage}`}
+			label={tooltipForCurrentPage}
+			position={itemDisplayTooltipPosition}
+		>
+			{display}
+		</Tooltip>
+	);
 };

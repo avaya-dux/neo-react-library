@@ -1,8 +1,15 @@
 import clsx from "clsx";
 import log from "loglevel";
-import { Ref, RefObject, forwardRef, useEffect, useId, useRef } from "react";
+import {
+	type Ref,
+	type RefObject,
+	forwardRef,
+	useEffect,
+	useId,
+	useRef,
+} from "react";
 
-import { MenuItemProps } from "../MenuTypes";
+import type { MenuItemProps } from "../MenuTypes";
 
 const logger = log.getLogger("menu-item");
 logger.disableAll();
@@ -33,59 +40,59 @@ logger.disableAll();
     </Menu>
  */
 export const MenuItem = forwardRef(
-  (
-    {
-      children,
-      className,
-      counter,
-      disabled = false,
-      hasFocus = false,
-      id,
-      isActive = false,
-      tabIndex = 0,
-      ...rest
-    }: MenuItemProps,
-    ref: Ref<HTMLDivElement>,
-  ) => {
-    const generatedId = useId();
-    id = id || generatedId;
-    const _ref = useRef(null);
-    ref = ref || _ref;
+	(
+		{
+			children,
+			className,
+			counter,
+			disabled = false,
+			hasFocus = false,
+			id,
+			isActive = false,
+			tabIndex = 0,
+			...rest
+		}: MenuItemProps,
+		ref: Ref<HTMLDivElement>,
+	) => {
+		const generatedId = useId();
+		id = id || generatedId;
+		const _ref = useRef(null);
+		const localRef = ref || _ref;
 
-    logger.debug(
-      `debug menuitem hasFocus = ${hasFocus}, isActive=${isActive}, counter=${counter}`,
-    );
+		logger.debug(
+			`debug menuitem hasFocus = ${hasFocus}, isActive=${isActive}, counter=${counter}`,
+		);
 
-    // run it in every render
-    useEffect(() => {
-      logger.debug(`trigger focus ${counter}`);
-      focus(hasFocus, ref as RefObject<HTMLDivElement>);
-    });
+		// run it in every render
+		useEffect(() => {
+			logger.debug(`trigger focus ${counter}`);
+			focus(hasFocus, localRef as RefObject<HTMLDivElement>);
+		});
 
-    return (
-      <div
-        {...rest}
-        className={clsx(
-          "neo-dropdown__link",
-          isActive && "neo-dropdown__link-active",
-          disabled && "neo-dropdown--disabled",
-          className,
-        )}
-        id={id}
-        ref={ref}
-        role="menuitem"
-        tabIndex={tabIndex}
-      >
-        {children}
-      </div>
-    );
-  },
+		return (
+			<div
+				{...rest}
+				className={clsx(
+					"neo-dropdown__link",
+					isActive && "neo-dropdown__link-active",
+					disabled && "neo-dropdown--disabled",
+					className,
+				)}
+				id={id}
+				ref={localRef}
+				role="menuitem"
+				tabIndex={tabIndex}
+			>
+				{children}
+			</div>
+		);
+	},
 );
 MenuItem.displayName = "MenuItem";
 
 export const focus = (hasFocus: boolean, ref: RefObject<HTMLDivElement>) => {
-  if (hasFocus) {
-    logger.debug("focusing menu item");
-    ref.current?.focus();
-  }
+	if (hasFocus) {
+		logger.debug("focusing menu item");
+		ref.current?.focus();
+	}
 };

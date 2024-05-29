@@ -1,8 +1,8 @@
 export type {
-  MenuProps,
-  SubMenuProps,
-  MenuItemProps,
-  MenuSeparatorProps,
+	MenuProps,
+	SubMenuProps,
+	MenuItemProps,
+	MenuSeparatorProps,
 } from "./MenuTypes";
 export { Menu } from "./Menu";
 export { MenuItem } from "./MenuItem";

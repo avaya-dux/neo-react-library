@@ -1,16 +1,16 @@
-import { Meta, Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
-import { Shimmer, ShimmerProps } from "./";
+import { Shimmer, type ShimmerProps } from "./";
 
 export default {
-  title: "Components/Shimmer",
-  component: Shimmer,
+	title: "Components/Shimmer",
+	component: Shimmer,
 } as Meta<ShimmerProps>;
 
 export const Default = () => <Shimmer />;
 
 const Template: Story<ShimmerProps> = (props: ShimmerProps) => (
-  <Shimmer {...props} />
+	<Shimmer {...props} />
 );
 
 export const Templated = Template.bind({});

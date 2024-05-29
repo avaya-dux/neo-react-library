@@ -1,10 +1,10 @@
 import {
-  Children,
-  cloneElement,
-  ReactElement,
-  useCallback,
-  useId,
-  useMemo,
+	Children,
+	type ReactElement,
+	cloneElement,
+	useCallback,
+	useId,
+	useMemo,
 } from "react";
 
 import { NeoInputWrapper, Tooltip } from "components";
@@ -12,17 +12,17 @@ import { NeoInputWrapper, Tooltip } from "components";
 import "./RadioGroup_shim.css";
 
 export interface RadioGroupProps {
-  children: ReactElement | ReactElement[];
-  groupName: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  id?: string;
-  disabled?: boolean;
-  selected?: string;
-  label?: boolean;
-  inline?: boolean;
-  helperText?: string;
-  error?: boolean;
-  required?: boolean;
+	children: ReactElement | ReactElement[];
+	groupName: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	id?: string;
+	disabled?: boolean;
+	selected?: string;
+	label?: boolean;
+	inline?: boolean;
+	helperText?: string;
+	error?: boolean;
+	required?: boolean;
 }
 
 /**
@@ -47,102 +47,101 @@ export interface RadioGroupProps {
  * @see https://design.avayacloud.com/components/web/radio-web
  */
 export const RadioGroup = ({
-  children,
-  groupName,
-  onChange,
-  id,
-  disabled,
-  selected,
-  label,
-  inline,
-  helperText,
-  error,
-  required,
+	children,
+	groupName,
+	onChange,
+	id,
+	disabled,
+	selected,
+	label,
+	inline,
+	helperText,
+	error,
+	required,
 }: RadioGroupProps) => {
-  const generatedId = useId();
-  id = id || generatedId;
-  const helperTextId = `${id}-helper-text`;
+	const generatedId = useId();
+	id = id || generatedId;
+	const helperTextId = `${id}-helper-text`;
 
-  const onChangeHandler = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (onChange) {
-        onChange(e);
-      }
-    },
-    [onChange],
-  );
+	const onChangeHandler = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			if (onChange) {
+				onChange(e);
+			}
+		},
+		[onChange],
+	);
 
-  const radios = useMemo(
-    () =>
-      Children.map(children, (child) => {
-        let radio;
+	const radios = useMemo(
+		() =>
+			Children.map(children, (child) => {
+				let radio: ReactElement;
 
-        const propsToPass = {
-          name: groupName,
-          "aria-describedby": helperText ? helperText : "",
-          onChange: onChangeHandler,
-          disabled,
-        };
+				const propsToPass = {
+					name: groupName,
+					"aria-describedby": helperText ? helperText : "",
+					onChange: onChangeHandler,
+					disabled,
+				};
 
-        // NOTE: The below seems kind of hacky, but I was unable to find a better way to make sure
-        // that the correct props are passed to child Radios even when wrapped in a Tooltip
+				// NOTE: The below seems kind of hacky, but I was unable to find a better way to make sure
+				// that the correct props are passed to child Radios even when wrapped in a Tooltip
 
-        if (child.type === Tooltip) {
-          radio = child.props.children as ReactElement;
+				if (child.type === Tooltip) {
+					radio = child.props.children as ReactElement;
 
-          const childprops = {
-            ...radio.props,
-            ...propsToPass,
-            disabled: disabled ? disabled : radio.props.disabled,
-            checked: radio.props.value === selected,
-          };
+					const childprops = {
+						...radio.props,
+						...propsToPass,
+						disabled: disabled ? disabled : radio.props.disabled,
+						checked: radio.props.value === selected,
+					};
 
-          const radioWithProps = cloneElement(radio, childprops);
+					const radioWithProps = cloneElement(radio, childprops);
 
-          return cloneElement(child, child.props, radioWithProps);
-        } else {
-          const childprops = {
-            ...child.props,
-            ...propsToPass,
-            disabled: disabled ? disabled : child.props.disabled,
-            checked: child.props.value === selected,
-          };
+					return cloneElement(child, child.props, radioWithProps);
+				}
+				const childprops = {
+					...child.props,
+					...propsToPass,
+					disabled: disabled ? disabled : child.props.disabled,
+					checked: child.props.value === selected,
+				};
 
-          return cloneElement(child, childprops);
-        }
-      }),
-    [children, selected, groupName, helperText, onChangeHandler, disabled],
-  );
+				return cloneElement(child, childprops);
+			}),
+		[children, selected, groupName, helperText, onChangeHandler, disabled],
+	);
 
-  return (
-    <NeoInputWrapper
-      data-testid="RadioGroup-root"
-      required={required}
-      error={error}
-    >
-      {label && (
-        <label id={id} htmlFor={groupName}>
-          {groupName}
-        </label>
-      )}
+	return (
+		<NeoInputWrapper
+			data-testid="RadioGroup-root"
+			required={required}
+			error={error}
+		>
+			{label && (
+				<label id={id} htmlFor={groupName}>
+					{groupName}
+				</label>
+			)}
 
-      <div
-        className={inline ? "neo-input-group--inline" : "neo-radio-group"}
-        role="radiogroup"
-        aria-labelledby={label ? id : ""}
-        aria-label={!label ? groupName : ""}
-        aria-describedby={helperText ? helperTextId : ""}
-      >
-        {radios}
-      </div>
+			<div
+				className={inline ? "neo-input-group--inline" : "neo-radio-group"}
+				role="radiogroup"
+				aria-labelledby={label ? id : ""}
+				aria-label={!label ? groupName : ""}
+				aria-describedby={helperText ? helperTextId : ""}
+			>
+				{radios}
+			</div>
 
-      {helperText && (
-        <div className="neo-input-hint" id={helperTextId}>
-          {helperText}
-        </div>
-      )}
-    </NeoInputWrapper>
-  );
+			{helperText && (
+				<div className="neo-input-hint" id={helperTextId}>
+					{helperText}
+				</div>
+			)}
+		</NeoInputWrapper>
+	);
 };
 
 RadioGroup.displayName = "RadioGroup";

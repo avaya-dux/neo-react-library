@@ -6,7 +6,7 @@ import { useIsInitialRender } from "utils/hooks/useIsInitialRender";
 
 import { InternalSelect } from "./InternalComponents";
 import { SelectContext } from "./utils/SelectContext";
-import { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
+import type { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
 
 import log from "loglevel";
@@ -50,181 +50,181 @@ import "./Select_shim.css";
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-select
  */
 export const Select = (props: SelectProps) => {
-  const {
-    "aria-label": ariaLabel,
-    className,
-    createMessage = "Create:",
-    children = [],
-    creatable = false,
-    defaultValue,
-    disabled = false,
-    errorList = [],
-    helperText = "",
-    label = "",
-    loading = false,
-    multiple = false,
-    noOptionsMessage = "No options available",
-    onChange,
-    placeholder = "",
-    required,
-    searchable = false,
-    value,
-    size = "md",
-    style,
-  } = props;
+	const {
+		"aria-label": ariaLabel,
+		className,
+		createMessage = "Create:",
+		children = [],
+		creatable = false,
+		defaultValue,
+		disabled = false,
+		errorList = [],
+		helperText = "",
+		label = "",
+		loading = false,
+		multiple = false,
+		noOptionsMessage = "No options available",
+		onChange,
+		placeholder = "",
+		required,
+		searchable = false,
+		value,
+		size = "md",
+		style,
+	} = props;
 
-  const generatedId = useId();
-  const id = props.id || generatedId;
+	const generatedId = useId();
+	const id = props.id || generatedId;
 
-  if (!(label || ariaLabel)) {
-    handleAccessbilityError("Select requires a label prop or aria-label");
-  }
+	if (!(label || ariaLabel)) {
+		handleAccessbilityError("Select requires a label prop or aria-label");
+	}
 
-  if (!searchable && placeholder) {
-    console.warn(
-      `For Select with id ${id}, the placeholder prop is ignored when component is not searchable`,
-    );
-  }
+	if (!searchable && placeholder) {
+		console.warn(
+			`For Select with id ${id}, the placeholder prop is ignored when component is not searchable`,
+		);
+	}
 
-  const helperId = useMemo(() => `helper-text-${id}`, [id]);
-  const isInitialRender = useIsInitialRender();
+	const helperId = useMemo(() => `helper-text-${id}`, [id]);
+	const isInitialRender = useIsInitialRender();
 
-  // if the `value` is not set, use `children` as `value`
-  const options = useMemo(
-    () =>
-      Children.map(children, (child) => {
-        const childprops = { ...child.props };
-        if (!childprops.value) {
-          childprops.value = childprops.children;
-        }
+	// if the `value` is not set, use `children` as `value`
+	const options = useMemo(
+		() =>
+			Children.map(children, (child) => {
+				const childprops = { ...child.props };
+				if (!childprops.value) {
+					childprops.value = childprops.children;
+				}
 
-        return childprops;
-      }),
-    [children],
-  );
-  const [filteredOptions, setFilteredOptions] = useState(options);
-  useEffect(() => {
-    setFilteredOptions(options);
-  }, [options]);
+				return childprops;
+			}),
+		[children],
+	);
+	const [filteredOptions, setFilteredOptions] = useState(options);
+	useEffect(() => {
+		setFilteredOptions(options);
+	}, [options]);
 
-  const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);
-  useEffect(() => {
-    if (isInitialRender && defaultValue) {
-      const userSelectedOptions = options.filter((option) =>
-        multiple
-          ? defaultValue.includes(option.value as string)
-          : defaultValue === option.value,
-      );
-      setSelectedItems(userSelectedOptions);
-    } else if (isInitialRender && options.some((o) => o.selected)) {
-      setSelectedItems(options.filter((option) => option.selected));
-    } else if (!isInitialRender || value) {
-      const selectionHasChanged = multiple
-        ? selectedItems.length !== value?.length ||
-          !selectedItems.every((item) => value.includes(item.value as string))
-        : selectedItems[0]?.value !== value;
+	const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
+	useEffect(() => {
+		if (isInitialRender && defaultValue) {
+			const userSelectedOptions = options.filter((option) =>
+				multiple
+					? defaultValue.includes(option.value as string)
+					: defaultValue === option.value,
+			);
+			setSelectedItems(userSelectedOptions);
+		} else if (isInitialRender && options.some((o) => o.selected)) {
+			setSelectedItems(options.filter((option) => option.selected));
+		} else if (!isInitialRender || value) {
+			const selectionHasChanged = multiple
+				? selectedItems.length !== value?.length ||
+					!selectedItems.every((item) => value.includes(item.value as string))
+				: selectedItems[0]?.value !== value;
 
-      if (selectionHasChanged) {
-        const userSelectedOptions = options.filter((option) =>
-          multiple
-            ? value?.includes(option.value as string)
-            : value === option.value,
-        );
+			if (selectionHasChanged) {
+				const userSelectedOptions = options.filter((option) =>
+					multiple
+						? value?.includes(option.value as string)
+						: value === option.value,
+				);
 
-        setSelectedItems(userSelectedOptions);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+				setSelectedItems(userSelectedOptions);
+			}
+		}
+	}, [value]);
 
-  useEffect(() => {
-    if (!isInitialRender && onChange) {
-      if (multiple) {
-        const newlySelectedValues = selectedItems.map(
-          (item) => item.value as string,
-        );
-        logger.debug({ selectedItems });
-        onChange(newlySelectedValues);
-      } else {
-        onChange(
-          selectedItems.length ? (selectedItems[0].value as string) : null,
-        );
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(selectedItems)]);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
+	useEffect(() => {
+		if (!isInitialRender && onChange) {
+			if (multiple) {
+				const newlySelectedValues = selectedItems.map(
+					(item) => item.value as string,
+				);
+				logger.debug({ selectedItems });
+				onChange(newlySelectedValues);
+			} else {
+				onChange(
+					selectedItems.length ? (selectedItems[0].value as string) : null,
+				);
+			}
+		}
+	}, [JSON.stringify(selectedItems)]);
 
-  const selectedItemsValues = useMemo(
-    () => selectedItems.map((item) => item.value),
-    [selectedItems],
-  );
+	const selectedItemsValues = useMemo(
+		() => selectedItems.map((item) => item.value),
+		[selectedItems],
+	);
 
-  const downshiftProps = useDownshift(
-    creatable,
-    createMessage,
-    disabled,
-    id,
-    loading,
-    multiple,
-    searchable,
-    options,
-    filteredOptions,
-    setFilteredOptions,
-    selectedItems,
-    setSelectedItems,
-  );
+	const downshiftProps = useDownshift(
+		creatable,
+		createMessage,
+		disabled,
+		id,
+		loading,
+		multiple,
+		searchable,
+		options,
+		filteredOptions,
+		setFilteredOptions,
+		selectedItems,
+		setSelectedItems,
+	);
 
-  const { getLabelProps } = downshiftProps;
+	const { getLabelProps } = downshiftProps;
 
-  const contextValue = {
-    downshiftProps,
-    selectProps: {
-      ariaLabel,
-      disabled,
-      filteredOptions,
-      helperId,
-      helperText,
-      loading,
-      placeholder,
-      size,
-    },
-    optionProps: {
-      multiple,
-      noOptionsMessage,
-      options,
-      selectedItems,
-      selectedItemsValues,
-      setSelectedItems,
-    },
-  };
+	const contextValue = {
+		downshiftProps,
+		selectProps: {
+			ariaLabel,
+			disabled,
+			filteredOptions,
+			helperId,
+			helperText,
+			loading,
+			placeholder,
+			size,
+		},
+		optionProps: {
+			multiple,
+			noOptionsMessage,
+			options,
+			selectedItems,
+			selectedItemsValues,
+			setSelectedItems,
+		},
+	};
 
-  return (
-    <NeoInputWrapper
-      wrapperClassName={className}
-      disabled={disabled || loading}
-      error={errorList.length > 0}
-      required={required}
-      style={style}
-    >
-      {label && <label {...getLabelProps()}>{label}</label>}
+	return (
+		<NeoInputWrapper
+			wrapperClassName={className}
+			disabled={disabled || loading}
+			error={errorList.length > 0}
+			required={required}
+			style={style}
+		>
+			{label && <label {...getLabelProps()}>{label}</label>}
 
-      <SelectContext.Provider value={contextValue}>
-        <InternalSelect searchable={searchable} multiple={multiple} />
-      </SelectContext.Provider>
+			<SelectContext.Provider value={contextValue}>
+				<InternalSelect searchable={searchable} multiple={multiple} />
+			</SelectContext.Provider>
 
-      {helperText && (
-        <div className="neo-input-hint" id={helperId}>
-          {helperText}
-        </div>
-      )}
-      {errorList.length > 0 &&
-        errorList?.map((text, index) => (
-          <div className="neo-input-hint" key={`error-text-${index}`}>
-            {text}
-          </div>
-        ))}
-    </NeoInputWrapper>
-  );
+			{helperText && (
+				<div className="neo-input-hint" id={helperId}>
+					{helperText}
+				</div>
+			)}
+			{errorList.length > 0 &&
+				errorList?.map((text, index) => (
+					<div className="neo-input-hint" key={`error-text-${index}`}>
+						{text}
+					</div>
+				))}
+		</NeoInputWrapper>
+	);
 };
 
 Select.displayName = "Select";

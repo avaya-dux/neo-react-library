@@ -1,24 +1,24 @@
 import clsx from "clsx";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  useFilters,
-  useGlobalFilter,
-  usePagination,
-  useRowSelect,
-  useSortBy,
-  useTable,
+	useFilters,
+	useGlobalFilter,
+	usePagination,
+	useRowSelect,
+	useSortBy,
+	useTable,
 } from "react-table";
 
 import { Pagination } from "components/Pagination";
 
-import { TableProps } from ".";
-import {
-  convertRowIdsArrayToObject,
-  translations as defaultTranslations,
-  FilterContext,
-} from "./helpers";
+import type { TableProps } from ".";
 import { TableBody, TableHeader, TableToolbar } from "./TableComponents";
-import { IFilterContext, RowHeight } from "./types";
+import {
+	FilterContext,
+	convertRowIdsArrayToObject,
+	translations as defaultTranslations,
+} from "./helpers";
+import type { IFilterContext, RowHeight } from "./types";
 
 import "./Table_shim.css";
 
@@ -57,237 +57,237 @@ import "./Table_shim.css";
  *
  * @see https://design.avayacloud.com/components/web/tables-web
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 export const Table = <T extends Record<string, any>>({
-  id,
-  data,
-  columns,
-  caption,
-  summary,
-  itemsPerPageOptions,
-  defaultSelectedRowIds,
-  initialStatePageIndex = 0,
+	id,
+	data,
+	columns,
+	caption,
+	summary,
+	itemsPerPageOptions,
+	defaultSelectedRowIds,
+	initialStatePageIndex = 0,
 
-  allowColumnFilter = false,
-  containerClassName = "",
-  customActionsNode,
-  handleCreate,
-  handleDelete,
-  handleEdit,
-  handleRefresh,
-  handleRowToggled,
-  readonly = false,
-  rowHeight = "large",
-  selectableRows = "none",
-  showPagination = true,
-  pushPaginationDown = false,
-  showRowSeparator = false,
-  showRowHeightMenu = true,
-  itemDisplayTooltipPosition = "auto",
-  itemsPerPageTooltipPosition = "auto",
-  translations,
+	allowColumnFilter = false,
+	containerClassName = "",
+	customActionsNode,
+	handleCreate,
+	handleDelete,
+	handleEdit,
+	handleRefresh,
+	handleRowToggled,
+	readonly = false,
+	rowHeight = "large",
+	selectableRows = "none",
+	showPagination = true,
+	pushPaginationDown = false,
+	showRowSeparator = false,
+	showRowHeightMenu = true,
+	itemDisplayTooltipPosition = "auto",
+	itemsPerPageTooltipPosition = "auto",
+	translations,
 
-  ...rest
+	...rest
 }: TableProps<T>) => {
-  const [rootLevelPageIndex, setRootLevelPageIndex] = useState(
-    initialStatePageIndex,
-  );
-  const instance = useTable<T>(
-    {
-      columns,
-      data,
-      defaultColumn: {
-        maxWidth: 300,
-        minWidth: 30,
-        width: "auto",
-      },
-      getRowId: (row: T) => row.id, // set the row id to be the passed data's id
-      initialState: {
-        pageSize: itemsPerPageOptions?.[0] || 10,
-        selectedRowIds: convertRowIdsArrayToObject(defaultSelectedRowIds || []),
-        pageIndex: rootLevelPageIndex,
-      },
-      ...rest,
-    },
-    useFilters,
-    useGlobalFilter,
-    useSortBy,
-    usePagination,
-    useRowSelect,
-  );
+	const [rootLevelPageIndex, setRootLevelPageIndex] = useState(
+		initialStatePageIndex,
+	);
+	const instance = useTable<T>(
+		{
+			columns,
+			data,
+			defaultColumn: {
+				maxWidth: 300,
+				minWidth: 30,
+				width: "auto",
+			},
+			getRowId: (row: T) => row.id, // set the row id to be the passed data's id
+			initialState: {
+				pageSize: itemsPerPageOptions?.[0] || 10,
+				selectedRowIds: convertRowIdsArrayToObject(defaultSelectedRowIds || []),
+				pageIndex: rootLevelPageIndex,
+			},
+			...rest,
+		},
+		useFilters,
+		useGlobalFilter,
+		useSortBy,
+		usePagination,
+		useRowSelect,
+	);
 
-  const {
-    rows,
-    getTableProps,
-    state: { pageIndex, pageSize },
-    gotoPage,
-    setPageSize,
-  } = instance;
-  const rowCount = rows.length;
+	const {
+		rows,
+		getTableProps,
+		state: { pageIndex, pageSize },
+		gotoPage,
+		setPageSize,
+	} = instance;
+	const rowCount = rows.length;
 
-  // update shown page if necessary
-  useEffect(() => {
-    const newPageCount = Math.ceil(rowCount / pageSize);
-    if (pageIndex >= newPageCount) {
-      setRootLevelPageIndex(newPageCount - 1);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rowCount, pageSize]);
+	// update shown page if necessary
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
+	useEffect(() => {
+		const newPageCount = Math.ceil(rowCount / pageSize);
+		if (pageIndex >= newPageCount) {
+			setRootLevelPageIndex(newPageCount - 1);
+		}
+	}, [rowCount, pageSize]);
 
-  const tableCaptionId = useMemo(
-    () => `table-caption-${caption || "caption"}`,
-    [caption],
-  );
-  const tableSummaryId = useMemo(
-    () => `table-summary-${caption || "summary"}`,
-    [caption],
-  );
+	const tableCaptionId = useMemo(
+		() => `table-caption-${caption || "caption"}`,
+		[caption],
+	);
+	const tableSummaryId = useMemo(
+		() => `table-summary-${caption || "summary"}`,
+		[caption],
+	);
 
-  const toolbarTranslations = useMemo(() => {
-    return {
-      ...defaultTranslations.toolbar,
-      ...translations?.toolbar,
-    };
-  }, [translations]);
+	const toolbarTranslations = useMemo(() => {
+		return {
+			...defaultTranslations.toolbar,
+			...translations?.toolbar,
+		};
+	}, [translations]);
 
-  const headerTranslations = useMemo(() => {
-    return {
-      ...defaultTranslations.header,
-      ...translations?.header,
-    };
-  }, [translations]);
+	const headerTranslations = useMemo(() => {
+		return {
+			...defaultTranslations.header,
+			...translations?.header,
+		};
+	}, [translations]);
 
-  const bodyTranslations = useMemo(() => {
-    return {
-      ...defaultTranslations.body,
-      ...translations?.body,
-    };
-  }, [translations]);
+	const bodyTranslations = useMemo(() => {
+		return {
+			...defaultTranslations.body,
+			...translations?.body,
+		};
+	}, [translations]);
 
-  const paginationTranslations = useMemo(() => {
-    return {
-      ...defaultTranslations.pagination,
-      ...translations?.pagination,
-    };
-  }, [translations]);
+	const paginationTranslations = useMemo(() => {
+		return {
+			...defaultTranslations.pagination,
+			...translations?.pagination,
+		};
+	}, [translations]);
 
-  const [filterSheetVisible, setFilterSheetVisible] = useState(false);
-  const toggleFilterSheetVisible = () => setFilterSheetVisible((v) => !v);
-  const [rowHeightValue, setRowHeightValue] = useState(rowHeight);
+	const [filterSheetVisible, setFilterSheetVisible] = useState(false);
+	const toggleFilterSheetVisible = () => setFilterSheetVisible((v) => !v);
+	const [rowHeightValue, setRowHeightValue] = useState(rowHeight);
 
-  useEffect(() => {
-    setRowHeightValue(rowHeight);
-  }, [rowHeight]);
+	useEffect(() => {
+		setRowHeightValue(rowHeight);
+	}, [rowHeight]);
 
-  const onRowHeightChangeHandler = useCallback((newHeight: RowHeight) => {
-    setRowHeightValue(newHeight);
-  }, []);
+	const onRowHeightChangeHandler = useCallback((newHeight: RowHeight) => {
+		setRowHeightValue(newHeight);
+	}, []);
 
-  const filterContext: IFilterContext = {
-    allowColumnFilter,
-    filterSheetVisible,
-    setFilterSheetVisible,
-    toggleFilterSheetVisible,
-  };
+	const filterContext: IFilterContext = {
+		allowColumnFilter,
+		filterSheetVisible,
+		setFilterSheetVisible,
+		toggleFilterSheetVisible,
+	};
 
-  return (
-    <FilterContext.Provider value={filterContext}>
-      <div
-        id={id}
-        data-testid={id}
-        className={clsx(
-          containerClassName,
-          pushPaginationDown && "neo-table--push-pagination-down",
-        )}
-      >
-        {(caption || summary) && (
-          <>
-            {caption && <h4 id={tableCaptionId}>{caption}</h4>}
-            {summary && <p id={tableSummaryId}>{summary}</p>}
-          </>
-        )}
+	return (
+		<FilterContext.Provider value={filterContext}>
+			<div
+				id={id}
+				data-testid={id}
+				className={clsx(
+					containerClassName,
+					pushPaginationDown && "neo-table--push-pagination-down",
+				)}
+			>
+				{(caption || summary) && (
+					<>
+						{caption && <h4 id={tableCaptionId}>{caption}</h4>}
+						{summary && <p id={tableSummaryId}>{summary}</p>}
+					</>
+				)}
 
-        {readonly === false && (
-          <TableToolbar
-            customActionsNode={customActionsNode}
-            handleCreate={handleCreate}
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
-            handleRefresh={handleRefresh}
-            handleRowHeightChange={onRowHeightChangeHandler}
-            rowHeight={rowHeightValue}
-            showRowHeightMenu={showRowHeightMenu}
-            instance={instance}
-            readonly={readonly}
-            translations={toolbarTranslations}
-          />
-        )}
+				{readonly === false && (
+					<TableToolbar
+						customActionsNode={customActionsNode}
+						handleCreate={handleCreate}
+						handleDelete={handleDelete}
+						handleEdit={handleEdit}
+						handleRefresh={handleRefresh}
+						handleRowHeightChange={onRowHeightChangeHandler}
+						rowHeight={rowHeightValue}
+						showRowHeightMenu={showRowHeightMenu}
+						instance={instance}
+						readonly={readonly}
+						translations={toolbarTranslations}
+					/>
+				)}
 
-        <table
-          {...getTableProps()}
-          className={clsx(
-            "neo-table",
-            rowHeightValue === "compact" && "neo-table--compact",
-            rowHeightValue === "medium" && "neo-table--medium",
-            showRowSeparator && "neo-table-separator",
-          )}
-          aria-labelledby={
-            caption && tableCaptionId ? tableCaptionId : undefined
-          }
-          aria-describedby={
-            summary && tableSummaryId ? tableSummaryId : undefined
-          }
-        >
-          <TableHeader
-            handleRowToggled={handleRowToggled}
-            instance={instance}
-            selectableRows={selectableRows}
-            translations={headerTranslations}
-          />
+				<table
+					{...getTableProps()}
+					className={clsx(
+						"neo-table",
+						rowHeightValue === "compact" && "neo-table--compact",
+						rowHeightValue === "medium" && "neo-table--medium",
+						showRowSeparator && "neo-table-separator",
+					)}
+					aria-labelledby={
+						caption && tableCaptionId ? tableCaptionId : undefined
+					}
+					aria-describedby={
+						summary && tableSummaryId ? tableSummaryId : undefined
+					}
+				>
+					<TableHeader
+						handleRowToggled={handleRowToggled}
+						instance={instance}
+						selectableRows={selectableRows}
+						translations={headerTranslations}
+					/>
 
-          <TableBody
-            handleRowToggled={handleRowToggled}
-            instance={instance}
-            selectableRows={selectableRows}
-            translations={bodyTranslations}
-          />
-        </table>
+					<TableBody
+						handleRowToggled={handleRowToggled}
+						instance={instance}
+						selectableRows={selectableRows}
+						translations={bodyTranslations}
+					/>
+				</table>
 
-        {rows.length > 0 && showPagination && (
-          <Pagination
-            currentPageIndex={pageIndex + 1}
-            itemCount={rowCount}
-            itemsPerPage={pageSize}
-            itemsPerPageOptions={itemsPerPageOptions}
-            onPageChange={(e, newIndex) => {
-              e?.preventDefault();
-              gotoPage(newIndex - 1);
-              setRootLevelPageIndex(newIndex - 1);
-            }}
-            onItemsPerPageChange={(e, newItemsPerPage) => {
-              e?.preventDefault();
-              setPageSize(newItemsPerPage);
+				{rows.length > 0 && showPagination && (
+					<Pagination
+						currentPageIndex={pageIndex + 1}
+						itemCount={rowCount}
+						itemsPerPage={pageSize}
+						itemsPerPageOptions={itemsPerPageOptions}
+						onPageChange={(e, newIndex) => {
+							e?.preventDefault();
+							gotoPage(newIndex - 1);
+							setRootLevelPageIndex(newIndex - 1);
+						}}
+						onItemsPerPageChange={(e, newItemsPerPage) => {
+							e?.preventDefault();
+							setPageSize(newItemsPerPage);
 
-              // when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page
-              const maxPageIndex = Math.ceil(rowCount / newItemsPerPage);
-              if (pageIndex > maxPageIndex) {
-                gotoPage(maxPageIndex - 1);
-              }
-            }}
-            backIconButtonText={paginationTranslations.backIconButtonText}
-            itemsPerPageLabel={paginationTranslations.itemsPerPageLabel}
-            nextIconButtonText={paginationTranslations.nextIconButtonText}
-            tooltipForCurrentPage={paginationTranslations.tooltipForCurrentPage}
-            tooltipForShownPagesSelect={
-              paginationTranslations.tooltipForShownPagesSelect
-            }
-            itemDisplayTooltipPosition={itemDisplayTooltipPosition}
-            itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
-          />
-        )}
-      </div>
-    </FilterContext.Provider>
-  );
+							// when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page
+							const maxPageIndex = Math.ceil(rowCount / newItemsPerPage);
+							if (pageIndex > maxPageIndex) {
+								gotoPage(maxPageIndex - 1);
+							}
+						}}
+						backIconButtonText={paginationTranslations.backIconButtonText}
+						itemsPerPageLabel={paginationTranslations.itemsPerPageLabel}
+						nextIconButtonText={paginationTranslations.nextIconButtonText}
+						tooltipForCurrentPage={paginationTranslations.tooltipForCurrentPage}
+						tooltipForShownPagesSelect={
+							paginationTranslations.tooltipForShownPagesSelect
+						}
+						itemDisplayTooltipPosition={itemDisplayTooltipPosition}
+						itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
+					/>
+				)}
+			</div>
+		</FilterContext.Provider>
+	);
 };
 
 Table.displayName = "Table";

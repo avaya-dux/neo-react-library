@@ -3,13 +3,13 @@ import { useContext, useMemo } from "react";
 
 import { genId } from "utils/accessibilityUtils";
 
-import { SelectContext } from "../utils/SelectContext";
-import { SelectOptionProps } from "../utils/SelectTypes";
-import { OptionWithCheckbox } from "./OptionWithCheckbox";
 import clsx from "clsx";
+import { SelectContext } from "../utils/SelectContext";
+import type { SelectOptionProps } from "../utils/SelectTypes";
+import { OptionWithCheckbox } from "./OptionWithCheckbox";
 
 export interface InternalSelectOptionProps extends SelectOptionProps {
-  index: number;
+	index: number;
 }
 
 const logger = log.getLogger("internal-select-option");
@@ -22,67 +22,67 @@ https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
  to present a list of interactive elements, such as links, buttons, or checkboxes.
 */
 export const InternalSelectOption = ({
-  children,
-  disabled,
-  helperText,
-  index,
+	children,
+	disabled,
+	helperText,
+	index,
 }: InternalSelectOptionProps) => {
-  const {
-    downshiftProps: { getItemProps, highlightedIndex },
+	const {
+		downshiftProps: { getItemProps, highlightedIndex },
 
-    optionProps: { multiple },
+		optionProps: { multiple },
 
-    selectProps: { filteredOptions },
-  } = useContext(SelectContext);
+		selectProps: { filteredOptions },
+	} = useContext(SelectContext);
 
-  /*
+	/*
     NOTE: these `id`s will never change for non-searchable selects,
     so the use of `useMemo` here is awesome. But these values _will_
     change for searchable selects, and the use of `useMemo` for that
     use-case is bad. Thus, the use `useMemo` for these `id`s is debatable.
   */
-  const helperId = useMemo(
-    () => `helper-text-${genId()}-${children}`,
-    [children],
-  );
+	const helperId = useMemo(
+		() => `helper-text-${genId()}-${children}`,
+		[children],
+	);
 
-  const optionSelf = filteredOptions[index] || {};
-  const itemProps = getItemProps({
-    item: optionSelf,
-    index,
-    disabled,
-  });
+	const optionSelf = filteredOptions[index] || {};
+	const itemProps = getItemProps({
+		item: optionSelf,
+		index,
+		disabled,
+	});
 
-  logger.debug(itemProps);
+	logger.debug(itemProps);
 
-  return multiple ? (
-    <>
-      <OptionWithCheckbox
-        index={index}
-        disabled={disabled}
-        helperText={helperText}
-        helperId={helperId}
-      >
-        {children}
-      </OptionWithCheckbox>
+	return multiple ? (
+		<>
+			<OptionWithCheckbox
+				index={index}
+				disabled={disabled}
+				helperText={helperText}
+				helperId={helperId}
+			>
+				{children}
+			</OptionWithCheckbox>
 
-      {helperText && (
-        <p className="neo-input-hint" id={helperId}>
-          {helperText}
-        </p>
-      )}
-    </>
-  ) : (
-    <li
-      className={clsx(
-        "neo-option-plain",
-        index === highlightedIndex && "neo-option-plain--focused",
-      )}
-      {...itemProps}
-    >
-      {children}
+			{helperText && (
+				<p className="neo-input-hint" id={helperId}>
+					{helperText}
+				</p>
+			)}
+		</>
+	) : (
+		<li
+			className={clsx(
+				"neo-option-plain",
+				index === highlightedIndex && "neo-option-plain--focused",
+			)}
+			{...itemProps}
+		>
+			{children}
 
-      {helperText && <p className="neo-input-hint">{helperText}</p>}
-    </li>
-  );
+			{helperText && <p className="neo-input-hint">{helperText}</p>}
+		</li>
+	);
 };

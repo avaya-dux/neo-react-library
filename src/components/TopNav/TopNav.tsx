@@ -1,13 +1,13 @@
 import clsx from "clsx";
 
+import type { TopNavProps } from "./TopNavTypes";
 import {
-  TopNavAvatar,
-  TopNavIconButton,
-  TopNavLinkButton,
-  TopNavSearch,
-  TopNavSkipNav,
+	TopNavAvatar,
+	TopNavIconButton,
+	TopNavLinkButton,
+	TopNavSearch,
+	TopNavSkipNav,
 } from "./helpers";
-import { TopNavProps } from "./TopNavTypes";
 
 import "./TopNav_shim.css";
 
@@ -35,31 +35,31 @@ import "./TopNav_shim.css";
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-top-navigation
  */
 export const TopNav = ({
-  children,
-  logo,
-  menuToggleBtn,
-  search,
-  skipNav,
-  sticky,
-  title,
+	children,
+	logo,
+	menuToggleBtn,
+	search,
+	skipNav,
+	sticky,
+	title,
 }: TopNavProps) => {
-  return (
-    <nav className={clsx("neo-navbar", sticky && "neo-navbar--sticky")}>
-      <div className="neo-nav--left">
-        {skipNav}
+	return (
+		<nav className={clsx("neo-navbar", sticky && "neo-navbar--sticky")}>
+			<div className="neo-nav--left">
+				{skipNav}
 
-        {menuToggleBtn}
+				{menuToggleBtn}
 
-        {logo}
+				{logo}
 
-        {title && <h1 className="neo-nav-title">{title}</h1>}
-      </div>
+				{title && <h1 className="neo-nav-title">{title}</h1>}
+			</div>
 
-      <div className="neo-nav">{children}</div>
+			<div className="neo-nav">{children}</div>
 
-      <div className="neo-nav--right">{search}</div>
-    </nav>
-  );
+			<div className="neo-nav--right">{search}</div>
+		</nav>
+	);
 };
 TopNav.displayName = "TopNav";
 TopNav.Avatar = TopNavAvatar;

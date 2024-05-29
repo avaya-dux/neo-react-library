@@ -1,30 +1,29 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  ClosableTabProps,
-  TabLinkProps,
-  TabListProps,
-  TabPanelProps,
-  TabPanelsProps,
-  TabProps,
+import type {
+	ClosableTabProps,
+	TabLinkProps,
+	TabListProps,
+	TabPanelProps,
+	TabPanelsProps,
+	TabProps,
 } from "./TabTypes";
 
 export const Tab = (_props: TabProps) => {
-  return null;
+	return null;
 };
 export const TabLink = (_props: TabLinkProps) => {
-  return null;
+	return null;
 };
 export const ClosableTab = (_props: ClosableTabProps) => {
-  return null;
+	return null;
 };
 export const TabList = (_props: TabListProps) => {
-  return null;
+	return null;
 };
 export const TabPanel = (_props: TabPanelProps) => {
-  return null;
+	return null;
 };
 export const TabPanels = (_props: TabPanelsProps) => {
-  return null;
+	return null;
 };
 
 Tab.displayName = "Tab";

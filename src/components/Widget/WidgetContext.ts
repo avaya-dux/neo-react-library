@@ -1,9 +1,9 @@
 import { createContext } from "react";
 
-import { ContextProps } from "./WidgetTypes";
+import type { ContextProps } from "./WidgetTypes";
 
 export const WidgetContext = createContext<ContextProps>({
-  loading: false,
-  empty: false,
-  disabled: false,
+	loading: false,
+	empty: false,
+	disabled: false,
 });

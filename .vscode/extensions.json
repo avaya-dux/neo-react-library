@@ -4,7 +4,6 @@
     "alfnielsen.vsc-organize-imports",
     "deque-systems.vscode-axe-linter",
     "eamodio.gitlens",
-    "esbenp.prettier-vscode",
     "formulahendry.auto-rename-tag",
     "henriiik.vscode-sort",
     "ms-vscode.vscode-typescript-next",
@@ -13,6 +12,7 @@
     "vscode-icons-team.vscode-icons",
     "wayou.vscode-todo-highlight",
     "vitest.explorer",
-    "unifiedjs.vscode-mdx"
+    "unifiedjs.vscode-mdx",
+    "biomejs.biome"
   ]
 }
