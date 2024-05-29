@@ -58,30 +58,34 @@ describe("NeoThemeProvider", () => {
 		);
 
 		expect(view.container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="neo-global-colors"
-        >
-          <button>
-            Set Dark
-          </button>
-        </div>
-      </div>
-    `);
+			<div>
+			  <div
+			    class="neo-global-colors"
+			  >
+			    <button
+			      type="button"
+			    >
+			      Set Dark
+			    </button>
+			  </div>
+			</div>
+		`);
 
 		userEvent.click(view.getByText("Set Dark"));
 
 		expect(view.container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="neo-global-colors"
-        >
-          <button>
-            Set Dark
-          </button>
-        </div>
-      </div>
-    `);
+			<div>
+			  <div
+			    class="neo-global-colors"
+			  >
+			    <button
+			      type="button"
+			    >
+			      Set Dark
+			    </button>
+			  </div>
+			</div>
+		`);
 	});
 });
 
