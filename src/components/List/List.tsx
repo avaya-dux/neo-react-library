@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export interface ListProps {
-  children?: ReactNode;
-  id?: string;
-  itemType?: "ListItem" | "ListSection";
+	children?: ReactNode;
+	id?: string;
+	itemType?: "ListItem" | "ListSection";
 }
 
 /**
@@ -26,15 +26,15 @@ export interface ListProps {
  * @see https://design.avayacloud.com/components/web/list-web
  */
 export const List = ({ children, id, itemType = "ListItem" }: ListProps) => {
-  const ItemClass =
-    itemType === "ListItem"
-      ? "neo-group-list neo-group-list--hover"
-      : "neo-group-list--actions";
+	const ItemClass =
+		itemType === "ListItem"
+			? "neo-group-list neo-group-list--hover"
+			: "neo-group-list--actions";
 
-  return (
-    <ul className={ItemClass} id={id}>
-      {children}
-    </ul>
-  );
+	return (
+		<ul className={ItemClass} id={id}>
+			{children}
+		</ul>
+	);
 };
 List.displayName = "List";

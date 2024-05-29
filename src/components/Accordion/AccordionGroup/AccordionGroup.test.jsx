@@ -11,128 +11,128 @@ import * as Stories from "./AccordionGroup.stories";
 const { Group } = composeStories(Stories);
 
 describe("Group Accordion Component", () => {
-  const user = userEvent.setup();
-  const groupHeaderText = "Accordion group heading";
-  const bodyText = "Some body data";
+	const user = userEvent.setup();
+	const groupHeaderText = "Accordion group heading";
+	const bodyText = "Some body data";
 
-  it("render without erros", () => {
-    render(
-      <AccordionGroup header={groupHeaderText}>
-        <Accordion header="Accordion 1">{bodyText}</Accordion>
-        <Accordion header="Accordion 2">{bodyText}</Accordion>
-        <Accordion header="Accordion 2">{bodyText}</Accordion>
-      </AccordionGroup>,
-    );
-    const GroupAccordionElement = screen.getByText(groupHeaderText);
-    expect(GroupAccordionElement).toBeInTheDocument();
-  });
-  it("passes basic axe compliance", async () => {
-    const { container } = render(
-      <AccordionGroup header={groupHeaderText}>
-        <Accordion header="Accordion 1">{bodyText}</Accordion>
-        <Accordion header="Accordion 2">{bodyText}</Accordion>
-        <Accordion header="Accordion 2">{bodyText}</Accordion>
-      </AccordionGroup>,
-    );
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-  });
-  it("Check button click functionality and assigns appropriate aria-expanded value", async () => {
-    render(
-      <AccordionGroup header={groupHeaderText}>
-        <Accordion header="heading 1" defaultExpanded>
-          {bodyText}
-        </Accordion>
-        <Accordion header="heading 2">{bodyText}</Accordion>
-        <Accordion header="heading 3">{bodyText}</Accordion>
-      </AccordionGroup>,
-    );
-    const AccordionElements = screen.getAllByRole("button");
-    expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
-    await user.click(AccordionElements[0]);
-    expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "false");
-  });
-  it("does not override an `Accordion`s `onClick` functionality", async () => {
-    const spy = vi.fn();
-    const spyHeader = "Spy Header";
+	it("render without erros", () => {
+		render(
+			<AccordionGroup header={groupHeaderText}>
+				<Accordion header="Accordion 1">{bodyText}</Accordion>
+				<Accordion header="Accordion 2">{bodyText}</Accordion>
+				<Accordion header="Accordion 2">{bodyText}</Accordion>
+			</AccordionGroup>,
+		);
+		const GroupAccordionElement = screen.getByText(groupHeaderText);
+		expect(GroupAccordionElement).toBeInTheDocument();
+	});
+	it("passes basic axe compliance", async () => {
+		const { container } = render(
+			<AccordionGroup header={groupHeaderText}>
+				<Accordion header="Accordion 1">{bodyText}</Accordion>
+				<Accordion header="Accordion 2">{bodyText}</Accordion>
+				<Accordion header="Accordion 2">{bodyText}</Accordion>
+			</AccordionGroup>,
+		);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+	it("Check button click functionality and assigns appropriate aria-expanded value", async () => {
+		render(
+			<AccordionGroup header={groupHeaderText}>
+				<Accordion header="heading 1" defaultExpanded>
+					{bodyText}
+				</Accordion>
+				<Accordion header="heading 2">{bodyText}</Accordion>
+				<Accordion header="heading 3">{bodyText}</Accordion>
+			</AccordionGroup>,
+		);
+		const AccordionElements = screen.getAllByRole("button");
+		expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
+		await user.click(AccordionElements[0]);
+		expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "false");
+	});
+	it("does not override an `Accordion`s `onClick` functionality", async () => {
+		const spy = vi.fn();
+		const spyHeader = "Spy Header";
 
-    render(
-      <AccordionGroup header={groupHeaderText}>
-        <Accordion header="heading 1">{bodyText}</Accordion>
-        <Accordion header={spyHeader} onClick={spy}>
-          {bodyText}
-        </Accordion>
-        <Accordion header="heading 3">{bodyText}</Accordion>
-      </AccordionGroup>,
-    );
+		render(
+			<AccordionGroup header={groupHeaderText}>
+				<Accordion header="heading 1">{bodyText}</Accordion>
+				<Accordion header={spyHeader} onClick={spy}>
+					{bodyText}
+				</Accordion>
+				<Accordion header="heading 3">{bodyText}</Accordion>
+			</AccordionGroup>,
+		);
 
-    expect(spy).not.toHaveBeenCalled();
+		expect(spy).not.toHaveBeenCalled();
 
-    await user.click(screen.getByText(spyHeader));
+		await user.click(screen.getByText(spyHeader));
 
-    expect(spy).toHaveBeenCalled();
-  });
-  it("Check group accordion render properly by having a default open, when `allowOnlyOne` prop is passed", async () => {
-    render(
-      <AccordionGroup header={groupHeaderText} allowOnlyOne>
-        <Accordion header="heading 1">{bodyText}</Accordion>
-        <Accordion header="heading 2">{bodyText}</Accordion>
-        <Accordion header="heading 3">{bodyText}</Accordion>
-      </AccordionGroup>,
-    );
-    const AccordionElements = screen.getAllByRole("button");
-    // by default it opens first accordion
-    expect(AccordionElements[0]).toHaveTextContent("heading 1");
-    expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
-    await user.click(AccordionElements[0]);
-    // remains open/true untill clicked on other accordion
-    expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
-  });
-  it("Check group accordion `defaultOpenAccordingIndex` prop, when using along with `allowOnlyOne` prop", () => {
-    render(
-      <AccordionGroup
-        header={groupHeaderText}
-        allowOnlyOne
-        defaultOpenAccordingIndex={2}
-      >
-        <Accordion header="heading 1">{bodyText}</Accordion>
-        <Accordion header="heading 2">{bodyText}</Accordion>
-        <Accordion header="heading 3">{bodyText}</Accordion>
-      </AccordionGroup>,
-    );
-    const AccordionElements = screen.getAllByRole("button")[2];
-    // by default index = 1 is open but as we passed defaultOpenAccordionIndex prop we are seeing index = 2 open
-    expect(AccordionElements).toHaveTextContent("heading 3");
-    expect(AccordionElements).toHaveAttribute("aria-expanded", "true");
-  });
-  it("Check group accordion render properly when disable prop is passed ", () => {
-    render(
-      <AccordionGroup header={groupHeaderText} allowOnlyOne>
-        <Accordion header="heading 1">{bodyText}</Accordion>
-        <Accordion header="heading 2">{bodyText}</Accordion>
-        <Accordion header="heading 3" disabled>
-          {bodyText}
-        </Accordion>
-      </AccordionGroup>,
-    );
-    const AccordionElements = screen.getAllByRole("button");
-    expect(AccordionElements[2]).toHaveAttribute("disabled");
-  });
-  describe("storybook test", () => {
-    describe("Accordion group", () => {
-      let renderResult;
-      beforeEach(() => {
-        renderResult = render(<Group />);
-      });
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
-  });
+		expect(spy).toHaveBeenCalled();
+	});
+	it("Check group accordion render properly by having a default open, when `allowOnlyOne` prop is passed", async () => {
+		render(
+			<AccordionGroup header={groupHeaderText} allowOnlyOne>
+				<Accordion header="heading 1">{bodyText}</Accordion>
+				<Accordion header="heading 2">{bodyText}</Accordion>
+				<Accordion header="heading 3">{bodyText}</Accordion>
+			</AccordionGroup>,
+		);
+		const AccordionElements = screen.getAllByRole("button");
+		// by default it opens first accordion
+		expect(AccordionElements[0]).toHaveTextContent("heading 1");
+		expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
+		await user.click(AccordionElements[0]);
+		// remains open/true untill clicked on other accordion
+		expect(AccordionElements[0]).toHaveAttribute("aria-expanded", "true");
+	});
+	it("Check group accordion `defaultOpenAccordingIndex` prop, when using along with `allowOnlyOne` prop", () => {
+		render(
+			<AccordionGroup
+				header={groupHeaderText}
+				allowOnlyOne
+				defaultOpenAccordingIndex={2}
+			>
+				<Accordion header="heading 1">{bodyText}</Accordion>
+				<Accordion header="heading 2">{bodyText}</Accordion>
+				<Accordion header="heading 3">{bodyText}</Accordion>
+			</AccordionGroup>,
+		);
+		const AccordionElements = screen.getAllByRole("button")[2];
+		// by default index = 1 is open but as we passed defaultOpenAccordionIndex prop we are seeing index = 2 open
+		expect(AccordionElements).toHaveTextContent("heading 3");
+		expect(AccordionElements).toHaveAttribute("aria-expanded", "true");
+	});
+	it("Check group accordion render properly when disable prop is passed ", () => {
+		render(
+			<AccordionGroup header={groupHeaderText} allowOnlyOne>
+				<Accordion header="heading 1">{bodyText}</Accordion>
+				<Accordion header="heading 2">{bodyText}</Accordion>
+				<Accordion header="heading 3" disabled>
+					{bodyText}
+				</Accordion>
+			</AccordionGroup>,
+		);
+		const AccordionElements = screen.getAllByRole("button");
+		expect(AccordionElements[2]).toHaveAttribute("disabled");
+	});
+	describe("storybook test", () => {
+		describe("Accordion group", () => {
+			let renderResult;
+			beforeEach(() => {
+				renderResult = render(<Group />);
+			});
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+	});
 });

@@ -9,60 +9,60 @@ import * as AccordionStories from "./Accordion.stories";
 const { Single } = composeStories(AccordionStories);
 
 describe("Accordion Component", () => {
-  const user = userEvent.setup();
-  const headerText = "Accordion Header";
-  const bodyText = "This is a body content";
+	const user = userEvent.setup();
+	const headerText = "Accordion Header";
+	const bodyText = "This is a body content";
 
-  it("render without errors", () => {
-    render(<Accordion header={headerText}>{bodyText}</Accordion>);
-    const AccordionElement = screen.getByText(headerText);
-    expect(AccordionElement).toBeInTheDocument();
-  });
+	it("render without errors", () => {
+		render(<Accordion header={headerText}>{bodyText}</Accordion>);
+		const AccordionElement = screen.getByText(headerText);
+		expect(AccordionElement).toBeInTheDocument();
+	});
 
-  it("passes basic axe compliance", async () => {
-    const { container } = render(
-      <Accordion header={headerText} body={bodyText} />,
-    );
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-  });
+	it("passes basic axe compliance", async () => {
+		const { container } = render(
+			<Accordion header={headerText} body={bodyText} />,
+		);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
 
-  it("button click functionality works as expected and assigns appropriate aria-expanded value", async () => {
-    render(<Accordion header={headerText}>{bodyText}</Accordion>);
-    const AccordionElement = screen.getByRole("button");
-    expect(AccordionElement).toHaveAttribute("aria-expanded", "false");
-    await user.click(AccordionElement);
-    const AccordionAfterClick = screen.getByRole("button");
-    expect(AccordionAfterClick).toHaveAttribute("aria-expanded", "true");
-  });
+	it("button click functionality works as expected and assigns appropriate aria-expanded value", async () => {
+		render(<Accordion header={headerText}>{bodyText}</Accordion>);
+		const AccordionElement = screen.getByRole("button");
+		expect(AccordionElement).toHaveAttribute("aria-expanded", "false");
+		await user.click(AccordionElement);
+		const AccordionAfterClick = screen.getByRole("button");
+		expect(AccordionAfterClick).toHaveAttribute("aria-expanded", "true");
+	});
 
-  it("check for disabled accordion when `isDisabled` prop is true", () => {
-    render(
-      <Accordion header={headerText} disabled>
-        {bodyText}
-      </Accordion>,
-    );
-    const AccordionElement = screen.getByRole("button");
-    expect(AccordionElement).toHaveAttribute("disabled");
-  });
+	it("check for disabled accordion when `isDisabled` prop is true", () => {
+		render(
+			<Accordion header={headerText} disabled>
+				{bodyText}
+			</Accordion>,
+		);
+		const AccordionElement = screen.getByRole("button");
+		expect(AccordionElement).toHaveAttribute("disabled");
+	});
 
-  describe("storybook test", () => {
-    describe("Accordion", () => {
-      let renderResult;
-      beforeEach(() => {
-        renderResult = render(<Single />);
-      });
+	describe("storybook test", () => {
+		describe("Accordion", () => {
+			let renderResult;
+			beforeEach(() => {
+				renderResult = render(<Single />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
-  });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+	});
 });

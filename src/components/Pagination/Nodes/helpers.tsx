@@ -1,4 +1,4 @@
-import { PaginationProps } from "../PaginationTypes";
+import type { PaginationProps } from "../PaginationTypes";
 import { NavListItemButton } from "./NavListItemButton";
 
 /**
@@ -7,16 +7,16 @@ import { NavListItemButton } from "./NavListItemButton";
  * @returns a number that represents how many nodes can fit on the screen
  */
 export const calculateMaxNavNodes = (paginationRootWidth: number) => {
-  const leftNodeWidth = 40;
-  const rightNodeWidth = 40;
-  const arrowWidth = 40;
-  const navItemWidth = 60;
+	const leftNodeWidth = 40;
+	const rightNodeWidth = 40;
+	const arrowWidth = 40;
+	const navItemWidth = 60;
 
-  const unavailableWidth = leftNodeWidth + rightNodeWidth + arrowWidth * 2;
-  const availableWidth = paginationRootWidth - unavailableWidth;
-  const availableNodes = Math.floor(availableWidth / navItemWidth);
+	const unavailableWidth = leftNodeWidth + rightNodeWidth + arrowWidth * 2;
+	const availableWidth = paginationRootWidth - unavailableWidth;
+	const availableNodes = Math.floor(availableWidth / navItemWidth);
 
-  return Math.max(availableNodes, 0);
+	return Math.max(availableNodes, 0);
 };
 
 /**
@@ -27,24 +27,24 @@ export const calculateMaxNavNodes = (paginationRootWidth: number) => {
  * @returns an array of nav nodes (no seperators)
  */
 export const buildAllNavItems = (
-  currentPageIndex: number,
-  onPageChange: PaginationProps["onPageChange"],
-  totalPages: number,
+	currentPageIndex: number,
+	onPageChange: PaginationProps["onPageChange"],
+	totalPages: number,
 ) => {
-  const result = [];
+	const result = [];
 
-  for (let i = 1; i <= totalPages; i++) {
-    result.push(
-      <NavListItemButton
-        isCurrentPage={i === currentPageIndex}
-        key={i}
-        onPageChange={onPageChange}
-        pageToNavigateTo={i}
-      />,
-    );
-  }
+	for (let i = 1; i <= totalPages; i++) {
+		result.push(
+			<NavListItemButton
+				isCurrentPage={i === currentPageIndex}
+				key={i}
+				onPageChange={onPageChange}
+				pageToNavigateTo={i}
+			/>,
+		);
+	}
 
-  return result;
+	return result;
 };
 
 /**
@@ -61,220 +61,220 @@ export const buildAllNavItems = (
  * @returns an array of nav nodes
  */
 export const buildNavItemsWithSeparators = (
-  currentPageIndex: number,
-  maxNavNodes: number,
-  onPageChange: PaginationProps["onPageChange"],
-  totalPages: number,
+	currentPageIndex: number,
+	maxNavNodes: number,
+	onPageChange: PaginationProps["onPageChange"],
+	totalPages: number,
 ) => {
-  const result = [];
+	const result = [];
 
-  const isCurrentIndexWithinThreeOfEnd = totalPages - 3 < currentPageIndex;
-  const isCurrentIndexWithinThreeOfStart = currentPageIndex <= 3;
+	const isCurrentIndexWithinThreeOfEnd = totalPages - 3 < currentPageIndex;
+	const isCurrentIndexWithinThreeOfStart = currentPageIndex <= 3;
 
-  // NOTE: these are complicated, see tests for implemenation details
-  if (isCurrentIndexWithinThreeOfStart && maxNavNodes >= 7) {
-    for (let i = 1; i <= 4; i++) {
-      result.push(
-        <NavListItemButton
-          isCurrentPage={i === currentPageIndex}
-          key={i}
-          onPageChange={onPageChange}
-          pageToNavigateTo={i}
-        />,
-      );
-    }
+	// NOTE: these are complicated, see tests for implemenation details
+	if (isCurrentIndexWithinThreeOfStart && maxNavNodes >= 7) {
+		for (let i = 1; i <= 4; i++) {
+			result.push(
+				<NavListItemButton
+					isCurrentPage={i === currentPageIndex}
+					key={i}
+					onPageChange={onPageChange}
+					pageToNavigateTo={i}
+				/>,
+			);
+		}
 
-    result.push(
-      <li key="nav-dots-center">
-        <span className="neo-pagination__dots">&hellip;</span>
-      </li>,
-    );
+		result.push(
+			<li key="nav-dots-center">
+				<span className="neo-pagination__dots">&hellip;</span>
+			</li>,
+		);
 
-    for (let i = totalPages - 1; i <= totalPages; i++) {
-      result.push(
-        <NavListItemButton
-          key={i}
-          onPageChange={onPageChange}
-          pageToNavigateTo={i}
-        />,
-      );
-    }
-  } else if (isCurrentIndexWithinThreeOfEnd && maxNavNodes >= 7) {
-    for (let i = 1; i <= 2; i++) {
-      result.push(
-        <NavListItemButton
-          key={i}
-          onPageChange={onPageChange}
-          pageToNavigateTo={i}
-        />,
-      );
-    }
+		for (let i = totalPages - 1; i <= totalPages; i++) {
+			result.push(
+				<NavListItemButton
+					key={i}
+					onPageChange={onPageChange}
+					pageToNavigateTo={i}
+				/>,
+			);
+		}
+	} else if (isCurrentIndexWithinThreeOfEnd && maxNavNodes >= 7) {
+		for (let i = 1; i <= 2; i++) {
+			result.push(
+				<NavListItemButton
+					key={i}
+					onPageChange={onPageChange}
+					pageToNavigateTo={i}
+				/>,
+			);
+		}
 
-    result.push(
-      <li key="nav-dots-center">
-        <span className="neo-pagination__dots">&hellip;</span>
-      </li>,
-    );
+		result.push(
+			<li key="nav-dots-center">
+				<span className="neo-pagination__dots">&hellip;</span>
+			</li>,
+		);
 
-    for (let i = totalPages - 3; i <= totalPages; i++) {
-      result.push(
-        <NavListItemButton
-          isCurrentPage={i === currentPageIndex}
-          key={i}
-          onPageChange={onPageChange}
-          pageToNavigateTo={i}
-        />,
-      );
-    }
-  } else if (maxNavNodes >= 7) {
-    result.push(
-      <NavListItemButton
-        key={1}
-        onPageChange={onPageChange}
-        pageToNavigateTo={1}
-      />,
-    );
+		for (let i = totalPages - 3; i <= totalPages; i++) {
+			result.push(
+				<NavListItemButton
+					isCurrentPage={i === currentPageIndex}
+					key={i}
+					onPageChange={onPageChange}
+					pageToNavigateTo={i}
+				/>,
+			);
+		}
+	} else if (maxNavNodes >= 7) {
+		result.push(
+			<NavListItemButton
+				key={1}
+				onPageChange={onPageChange}
+				pageToNavigateTo={1}
+			/>,
+		);
 
-    result.push(
-      <li key="nav-dots-left">
-        <span className="neo-pagination__dots">&hellip;</span>
-      </li>,
-    );
+		result.push(
+			<li key="nav-dots-left">
+				<span className="neo-pagination__dots">&hellip;</span>
+			</li>,
+		);
 
-    for (let i = currentPageIndex - 1; i <= currentPageIndex + 1; i++) {
-      result.push(
-        <NavListItemButton
-          isCurrentPage={i === currentPageIndex}
-          key={i}
-          onPageChange={onPageChange}
-          pageToNavigateTo={i}
-        />,
-      );
-    }
+		for (let i = currentPageIndex - 1; i <= currentPageIndex + 1; i++) {
+			result.push(
+				<NavListItemButton
+					isCurrentPage={i === currentPageIndex}
+					key={i}
+					onPageChange={onPageChange}
+					pageToNavigateTo={i}
+				/>,
+			);
+		}
 
-    result.push(
-      <li key="nav-dots-right">
-        <span className="neo-pagination__dots">&hellip;</span>
-      </li>,
-    );
+		result.push(
+			<li key="nav-dots-right">
+				<span className="neo-pagination__dots">&hellip;</span>
+			</li>,
+		);
 
-    result.push(
-      <NavListItemButton
-        key={totalPages}
-        onPageChange={onPageChange}
-        pageToNavigateTo={totalPages}
-      />,
-    );
-  } else if (isCurrentIndexWithinThreeOfStart && maxNavNodes >= 5) {
-    for (let i = 1; i <= 3; i++) {
-      result.push(
-        <NavListItemButton
-          isCurrentPage={i === currentPageIndex}
-          key={i}
-          onPageChange={onPageChange}
-          pageToNavigateTo={i}
-        />,
-      );
-    }
+		result.push(
+			<NavListItemButton
+				key={totalPages}
+				onPageChange={onPageChange}
+				pageToNavigateTo={totalPages}
+			/>,
+		);
+	} else if (isCurrentIndexWithinThreeOfStart && maxNavNodes >= 5) {
+		for (let i = 1; i <= 3; i++) {
+			result.push(
+				<NavListItemButton
+					isCurrentPage={i === currentPageIndex}
+					key={i}
+					onPageChange={onPageChange}
+					pageToNavigateTo={i}
+				/>,
+			);
+		}
 
-    result.push(
-      <li key="nav-dots-center">
-        <span className="neo-pagination__dots">&hellip;</span>
-      </li>,
-    );
+		result.push(
+			<li key="nav-dots-center">
+				<span className="neo-pagination__dots">&hellip;</span>
+			</li>,
+		);
 
-    result.push(
-      <NavListItemButton
-        key={totalPages}
-        onPageChange={onPageChange}
-        pageToNavigateTo={totalPages}
-      />,
-    );
-  } else if (isCurrentIndexWithinThreeOfEnd && maxNavNodes >= 5) {
-    result.push(
-      <NavListItemButton
-        key={1}
-        onPageChange={onPageChange}
-        pageToNavigateTo={1}
-      />,
-    );
+		result.push(
+			<NavListItemButton
+				key={totalPages}
+				onPageChange={onPageChange}
+				pageToNavigateTo={totalPages}
+			/>,
+		);
+	} else if (isCurrentIndexWithinThreeOfEnd && maxNavNodes >= 5) {
+		result.push(
+			<NavListItemButton
+				key={1}
+				onPageChange={onPageChange}
+				pageToNavigateTo={1}
+			/>,
+		);
 
-    result.push(
-      <li key="nav-dots-center">
-        <span className="neo-pagination__dots">&hellip;</span>
-      </li>,
-    );
+		result.push(
+			<li key="nav-dots-center">
+				<span className="neo-pagination__dots">&hellip;</span>
+			</li>,
+		);
 
-    for (let i = totalPages - 2; i <= totalPages; i++) {
-      result.push(
-        <NavListItemButton
-          isCurrentPage={i === currentPageIndex}
-          key={i}
-          onPageChange={onPageChange}
-          pageToNavigateTo={i}
-        />,
-      );
-    }
-  } else if (maxNavNodes >= 5) {
-    result.push(
-      <NavListItemButton
-        key={1}
-        onPageChange={onPageChange}
-        pageToNavigateTo={1}
-      />,
-    );
+		for (let i = totalPages - 2; i <= totalPages; i++) {
+			result.push(
+				<NavListItemButton
+					isCurrentPage={i === currentPageIndex}
+					key={i}
+					onPageChange={onPageChange}
+					pageToNavigateTo={i}
+				/>,
+			);
+		}
+	} else if (maxNavNodes >= 5) {
+		result.push(
+			<NavListItemButton
+				key={1}
+				onPageChange={onPageChange}
+				pageToNavigateTo={1}
+			/>,
+		);
 
-    result.push(
-      <li key="nav-dots-left">
-        <span className="neo-pagination__dots">&hellip;</span>
-      </li>,
-    );
+		result.push(
+			<li key="nav-dots-left">
+				<span className="neo-pagination__dots">&hellip;</span>
+			</li>,
+		);
 
-    result.push(
-      <NavListItemButton
-        isCurrentPage
-        key={currentPageIndex}
-        onPageChange={onPageChange}
-        pageToNavigateTo={currentPageIndex}
-      />,
-    );
+		result.push(
+			<NavListItemButton
+				isCurrentPage
+				key={currentPageIndex}
+				onPageChange={onPageChange}
+				pageToNavigateTo={currentPageIndex}
+			/>,
+		);
 
-    result.push(
-      <li key="nav-dots-right">
-        <span className="neo-pagination__dots">&hellip;</span>
-      </li>,
-    );
+		result.push(
+			<li key="nav-dots-right">
+				<span className="neo-pagination__dots">&hellip;</span>
+			</li>,
+		);
 
-    result.push(
-      <NavListItemButton
-        key={totalPages}
-        onPageChange={onPageChange}
-        pageToNavigateTo={totalPages}
-      />,
-    );
-  } else {
-    result.push(
-      <NavListItemButton
-        isCurrentPage
-        key={currentPageIndex}
-        onPageChange={onPageChange}
-        pageToNavigateTo={currentPageIndex}
-      />,
-    );
+		result.push(
+			<NavListItemButton
+				key={totalPages}
+				onPageChange={onPageChange}
+				pageToNavigateTo={totalPages}
+			/>,
+		);
+	} else {
+		result.push(
+			<NavListItemButton
+				isCurrentPage
+				key={currentPageIndex}
+				onPageChange={onPageChange}
+				pageToNavigateTo={currentPageIndex}
+			/>,
+		);
 
-    /**
-     * Zero is a valid state, it signifies that the page is still being rendered.
-     * However, if `maxNavNodes` is any other number at this point in the if-else,
-     * then something is wrong.
-     */
-    if (maxNavNodes !== 0) {
-      console.error(
-        `\`buildNavItemsWithSeparators\` hit unexexpected use-case: \`maxNavNodes < 5\` \nmaxNavNodes=${maxNavNodes}`,
-      );
-    }
-  }
+		/**
+		 * Zero is a valid state, it signifies that the page is still being rendered.
+		 * However, if `maxNavNodes` is any other number at this point in the if-else,
+		 * then something is wrong.
+		 */
+		if (maxNavNodes !== 0) {
+			console.error(
+				`\`buildNavItemsWithSeparators\` hit unexexpected use-case: \`maxNavNodes < 5\` \nmaxNavNodes=${maxNavNodes}`,
+			);
+		}
+	}
 
-  return result;
+	return result;
 };
 
 /**
@@ -291,29 +291,29 @@ export const buildNavItemsWithSeparators = (
  * @returns an array of nav nodes
  */
 export const buildNavItems = (
-  currentPageIndex: number,
-  maxNavNodes: number,
-  onPageChange: PaginationProps["onPageChange"],
-  totalPages: number,
-  buildAllNavItemsOverride?: () => React.ReactNode[], // for testing
-  buildNavItemsWithSeparatorsOverride?: () => React.ReactNode[], // for testing
+	currentPageIndex: number,
+	maxNavNodes: number,
+	onPageChange: PaginationProps["onPageChange"],
+	totalPages: number,
+	buildAllNavItemsOverride?: () => React.ReactNode[], // for testing
+	buildNavItemsWithSeparatorsOverride?: () => React.ReactNode[], // for testing
 ) => {
-  let result = [];
+	let result = [];
 
-  if (totalPages < 5 || maxNavNodes >= totalPages) {
-    result = buildAllNavItemsOverride
-      ? buildAllNavItemsOverride()
-      : buildAllNavItems(currentPageIndex, onPageChange, totalPages);
-  } else {
-    result = buildNavItemsWithSeparatorsOverride
-      ? buildNavItemsWithSeparatorsOverride()
-      : buildNavItemsWithSeparators(
-          currentPageIndex,
-          maxNavNodes,
-          onPageChange,
-          totalPages,
-        );
-  }
+	if (totalPages < 5 || maxNavNodes >= totalPages) {
+		result = buildAllNavItemsOverride
+			? buildAllNavItemsOverride()
+			: buildAllNavItems(currentPageIndex, onPageChange, totalPages);
+	} else {
+		result = buildNavItemsWithSeparatorsOverride
+			? buildNavItemsWithSeparatorsOverride()
+			: buildNavItemsWithSeparators(
+					currentPageIndex,
+					maxNavNodes,
+					onPageChange,
+					totalPages,
+				);
+	}
 
-  return result;
+	return result;
 };

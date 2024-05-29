@@ -12,156 +12,156 @@ import * as SheetStories from "./Sheet.stories";
 const { Default, Templated } = composeStories(SheetStories);
 
 describe("Sheet", () => {
-  const user = userEvent.setup();
+	const user = userEvent.setup();
 
-  it("fully renders without exploding", () => {
-    render(<Sheet aria-label="example sheet">content</Sheet>);
+	it("fully renders without exploding", () => {
+		render(<Sheet aria-label="example sheet">content</Sheet>);
 
-    const rootElement = screen.getByRole("dialog");
-    expect(rootElement).toBeInTheDocument();
-  });
+		const rootElement = screen.getByRole("dialog");
+		expect(rootElement).toBeInTheDocument();
+	});
 
-  it("fully renders with a title without exploding", () => {
-    const { getByRole } = render(<Sheet title="example title" />);
+	it("fully renders with a title without exploding", () => {
+		const { getByRole } = render(<Sheet title="example title" />);
 
-    const rootElement = getByRole("dialog");
-    expect(rootElement).toBeTruthy();
-  });
+		const rootElement = getByRole("dialog");
+		expect(rootElement).toBeTruthy();
+	});
 
-  it("fully renders with a JSX title without exploding", () => {
-    const { getByRole } = render(
-      <Sheet title={<span>example JSX title</span>} />,
-    );
+	it("fully renders with a JSX title without exploding", () => {
+		const { getByRole } = render(
+			<Sheet title={<span>example JSX title</span>} />,
+		);
 
-    const rootElement = getByRole("dialog");
-    expect(rootElement).toBeTruthy();
-  });
+		const rootElement = getByRole("dialog");
+		expect(rootElement).toBeTruthy();
+	});
 
-  it("fully renders with a title and buttons without exploding", () => {
-    const { getByRole } = render(
-      <Sheet
-        title="example title"
-        actions={[<Button key="example1">example</Button>]}
-      />,
-    );
+	it("fully renders with a title and buttons without exploding", () => {
+		const { getByRole } = render(
+			<Sheet
+				title="example title"
+				actions={[<Button key="example1">example</Button>]}
+			/>,
+		);
 
-    const rootElement = getByRole("dialog");
-    expect(rootElement).toBeTruthy();
-  });
+		const rootElement = getByRole("dialog");
+		expect(rootElement).toBeTruthy();
+	});
 
-  it("allows the passing of `<div>` props", () => {
-    render(<Sheet aria-label="basic sheet example" style={{ width: 100 }} />);
-    render(<Sheet title="full sheet" style={{ width: 100 }} />);
+	it("allows the passing of `<div>` props", () => {
+		render(<Sheet aria-label="basic sheet example" style={{ width: 100 }} />);
+		render(<Sheet title="full sheet" style={{ width: 100 }} />);
 
-    const [basicSheetRootElement, sheetRootElement] =
-      screen.getAllByRole("dialog");
+		const [basicSheetRootElement, sheetRootElement] =
+			screen.getAllByRole("dialog");
 
-    expect(basicSheetRootElement).toHaveStyle("width: 100px");
-    expect(sheetRootElement).toHaveStyle("width: 100px");
-  });
+		expect(basicSheetRootElement).toHaveStyle("width: 100px");
+		expect(sheetRootElement).toHaveStyle("width: 100px");
+	});
 
-  it("throws error if buttons are passed without a title", () => {
-    const spy = vi.spyOn(console, "error").mockImplementation(() => null);
-    expect(() =>
-      render(
-        <Sheet
-          aria-label="innapropriate aria label, need to use `title` prop"
-          actions={[<Button key="example1">example</Button>]}
-        />,
-      ),
-    ).toThrow();
-    expect(spy).toHaveBeenCalled();
-  });
+	it("throws error if buttons are passed without a title", () => {
+		const spy = vi.spyOn(console, "error").mockImplementation(() => null);
+		expect(() =>
+			render(
+				<Sheet
+					aria-label="innapropriate aria label, need to use `title` prop"
+					actions={[<Button key="example1">example</Button>]}
+				/>,
+			),
+		).toThrow();
+		expect(spy).toHaveBeenCalled();
+	});
 
-  it("throws error if there is no `aria-label` or `title` passed", () => {
-    const spy = vi.spyOn(console, "error").mockImplementation(() => null);
-    expect(() => render(<Sheet />)).toThrow();
-    expect(spy).toHaveBeenCalled();
-  });
+	it("throws error if there is no `aria-label` or `title` passed", () => {
+		const spy = vi.spyOn(console, "error").mockImplementation(() => null);
+		expect(() => render(<Sheet />)).toThrow();
+		expect(spy).toHaveBeenCalled();
+	});
 
-  it("passes basic axe compliance", async () => {
-    const { container } = render(<Sheet title="sheet title" />);
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-  });
+	it("passes basic axe compliance", async () => {
+		const { container } = render(<Sheet title="sheet title" />);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
 
-  describe("`open` functionality", () => {
-    it("when `open={true}`, a Sheet's contents _are_ visible and tab-able", async () => {
-      const btnSpy = vi.fn();
-      const buttons = [
-        <Button onClick={btnSpy} key="example-btn">
-          example
-        </Button>,
-      ];
-      render(<Sheet open={true} title="sheet title" actions={buttons} />);
+	describe("`open` functionality", () => {
+		it("when `open={true}`, a Sheet's contents _are_ visible and tab-able", async () => {
+			const btnSpy = vi.fn();
+			const buttons = [
+				<Button onClick={btnSpy} key="example-btn">
+					example
+				</Button>,
+			];
+			render(<Sheet open={true} title="sheet title" actions={buttons} />);
 
-      const sheet = screen.getByRole("dialog");
-      expect(sheet).not.toHaveClass("neo-display-none");
+			const sheet = screen.getByRole("dialog");
+			expect(sheet).not.toHaveClass("neo-display-none");
 
-      const button = screen.getByRole("button");
+			const button = screen.getByRole("button");
 
-      expect(button).not.toHaveFocus();
-      await user.tab();
-      expect(button).toHaveFocus();
-      await user.click(button);
-      expect(btnSpy).toHaveBeenCalledTimes(1);
-    });
+			expect(button).not.toHaveFocus();
+			await user.tab();
+			expect(button).toHaveFocus();
+			await user.click(button);
+			expect(btnSpy).toHaveBeenCalledTimes(1);
+		});
 
-    it("when `open={false}`, a Sheet's contents are _not_ visible", () => {
-      render(<Sheet open={false} title="sheet title" />);
+		it("when `open={false}`, a Sheet's contents are _not_ visible", () => {
+			render(<Sheet open={false} title="sheet title" />);
 
-      const sheet = screen.getByRole("dialog");
-      expect(sheet).toHaveClass("neo-display-none");
-    });
+			const sheet = screen.getByRole("dialog");
+			expect(sheet).toHaveClass("neo-display-none");
+		});
 
-    it("when `open={false}`, a BasicSheet's contents are _not_ visible", () => {
-      render(<Sheet aria-label="basic sheet display none" open={false} />);
+		it("when `open={false}`, a BasicSheet's contents are _not_ visible", () => {
+			render(<Sheet aria-label="basic sheet display none" open={false} />);
 
-      const sheet = screen.getByRole("dialog");
-      expect(sheet).toHaveClass("neo-slide");
-      expect(sheet).toHaveClass("neo-display-none");
-      expect(sheet).not.toHaveClass("sheet-horizontal-slide-in-shim");
-      expect(sheet).toHaveClass("sheet-horizontal-slide-out-shim");
-    });
-  });
+			const sheet = screen.getByRole("dialog");
+			expect(sheet).toHaveClass("neo-slide");
+			expect(sheet).toHaveClass("neo-display-none");
+			expect(sheet).not.toHaveClass("sheet-horizontal-slide-in-shim");
+			expect(sheet).toHaveClass("sheet-horizontal-slide-out-shim");
+		});
+	});
 
-  describe("storybook tests", () => {
-    describe("Default", () => {
-      let renderResult;
+	describe("storybook tests", () => {
+		describe("Default", () => {
+			let renderResult;
 
-      beforeEach(() => {
-        renderResult = render(<Default />);
-      });
+			beforeEach(() => {
+				renderResult = render(<Default />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("Templated", () => {
-      let renderResult;
+		describe("Templated", () => {
+			let renderResult;
 
-      beforeEach(() => {
-        renderResult = render(<Templated />);
-      });
+			beforeEach(() => {
+				renderResult = render(<Templated />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).not.toBe(null);
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
-  });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+	});
 });

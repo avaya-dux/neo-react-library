@@ -13,83 +13,83 @@ popupHookLogger.disableAll();
 toastLogger.disableAll();
 
 const { Default, InteractiveToasts, IconBottomCenter, TwoToasts } =
-  composeStories(ToastStories);
+	composeStories(ToastStories);
 
 describe("Toast", () => {
-  describe("Storybook", () => {
-    // NOTE: ignore react17 warnings (from storybook build). Should remove this line once storybook is updated to react18.
-    vi.spyOn(console, "error").mockImplementation(() => null);
+	describe("Storybook", () => {
+		// NOTE: ignore react17 warnings (from storybook build). Should remove this line once storybook is updated to react18.
+		vi.spyOn(console, "error").mockImplementation(() => null);
 
-    describe("Default", () => {
-      let renderResult;
-      beforeEach(() => {
-        renderResult = render(<Default duration={100} />);
-      });
+		describe("Default", () => {
+			let renderResult;
+			beforeEach(() => {
+				renderResult = render(<Default duration={100} />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).toBeDefined();
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).toBeDefined();
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("InteractiveToasts", () => {
-      let renderResult;
-      beforeEach(() => {
-        renderResult = render(<InteractiveToasts />);
-      });
+		describe("InteractiveToasts", () => {
+			let renderResult;
+			beforeEach(() => {
+				renderResult = render(<InteractiveToasts />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).toBeDefined();
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).toBeDefined();
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("IconBottomCenter", () => {
-      let renderResult;
-      beforeEach(() => {
-        renderResult = render(<IconBottomCenter />);
-      });
+		describe("IconBottomCenter", () => {
+			let renderResult;
+			beforeEach(() => {
+				renderResult = render(<IconBottomCenter />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).toBeDefined();
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).toBeDefined();
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
 
-    describe("TwoToasts", () => {
-      let renderResult;
-      beforeEach(() => {
-        renderResult = render(<TwoToasts />);
-      });
+		describe("TwoToasts", () => {
+			let renderResult;
+			beforeEach(() => {
+				renderResult = render(<TwoToasts />);
+			});
 
-      it("should render ok", () => {
-        const { container } = renderResult;
-        expect(container).toBeDefined();
-      });
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).toBeDefined();
+			});
 
-      it("passes basic axe compliance", async () => {
-        const { container } = renderResult;
-        const results = await axe(container);
-        expect(results).toHaveNoViolations();
-      });
-    });
-  });
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+	});
 });

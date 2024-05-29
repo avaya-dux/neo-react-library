@@ -1,42 +1,42 @@
-import { IconNamesType } from "utils";
+import type { IconNamesType } from "utils";
 
-import { ButtonActionProps } from "./Actions/ButtonAction";
-import { ClosableActionProps } from "./Actions/ClosableAction";
-import { CounterActionProps } from "./Actions/CounterAction";
+import type { ButtonActionProps } from "./Actions/ButtonAction";
+import type { ClosableActionProps } from "./Actions/ClosableAction";
+import type { CounterActionProps } from "./Actions/CounterAction";
 
-import { INotificationTranslations } from "./Helpers";
+import type { INotificationTranslations } from "./Helpers";
 
 type ActionType = {
-  actions?: {
-    counter?: CounterActionProps;
-    actionButtons?: ButtonActionProps;
-    closable?: ClosableActionProps;
-  };
+	actions?: {
+		counter?: CounterActionProps;
+		actionButtons?: ButtonActionProps;
+		closable?: ClosableActionProps;
+	};
 };
 
 type AtLeastOneProps =
-  | { header: string; description?: string }
-  | { header?: string; description: string };
+	| { header: string; description?: string }
+	| { header?: string; description: string };
 
 type CommonProps = {
-  showTimestamp?: boolean;
-  isElevated?: boolean;
-  isInline?: boolean;
-  occurences?: number;
-  locale?: string;
-  translations?: INotificationTranslations;
+	showTimestamp?: boolean;
+	isElevated?: boolean;
+	isInline?: boolean;
+	occurences?: number;
+	locale?: string;
+	translations?: INotificationTranslations;
 } & AtLeastOneProps &
-  ActionType;
+	ActionType;
 
 export type NonEventNotificationProps = CommonProps & {
-  type: "success" | "warning" | "alert" | "info";
+	type: "success" | "warning" | "alert" | "info";
 };
 
 export type EventNotificationProps = CommonProps & {
-  type: "event";
-  icon: IconNamesType;
+	type: "event";
+	icon: IconNamesType;
 };
 
 export type NotificationProps =
-  | NonEventNotificationProps
-  | EventNotificationProps;
+	| NonEventNotificationProps
+	| EventNotificationProps;

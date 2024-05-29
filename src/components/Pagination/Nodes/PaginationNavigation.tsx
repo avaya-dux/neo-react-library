@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { IconButton } from "components/IconButton";
 
-import { PaginationNavigationProps } from "../PaginationTypes";
+import type { PaginationNavigationProps } from "../PaginationTypes";
 import { buildNavItems, calculateMaxNavNodes } from "./helpers";
 
 /**
@@ -22,51 +22,51 @@ import { buildNavItems, calculateMaxNavNodes } from "./helpers";
  * />
  */
 export const PaginationNavigation = ({
-  backIconButtonText = "previous",
-  nextIconButtonText = "next",
-  alwaysShowPagination,
-  currentPageIndex,
-  totalPages,
-  onPageChange,
-  paginationRootWidth,
+	backIconButtonText = "previous",
+	nextIconButtonText = "next",
+	alwaysShowPagination,
+	currentPageIndex,
+	totalPages,
+	onPageChange,
+	paginationRootWidth,
 }: PaginationNavigationProps) => {
-  const navListItems = useMemo(() => {
-    const maxNavNodes = calculateMaxNavNodes(paginationRootWidth);
+	const navListItems = useMemo(() => {
+		const maxNavNodes = calculateMaxNavNodes(paginationRootWidth);
 
-    return buildNavItems(
-      currentPageIndex,
-      maxNavNodes,
-      onPageChange,
-      totalPages,
-    );
-  }, [currentPageIndex, totalPages, paginationRootWidth, onPageChange]);
+		return buildNavItems(
+			currentPageIndex,
+			maxNavNodes,
+			onPageChange,
+			totalPages,
+		);
+	}, [currentPageIndex, totalPages, paginationRootWidth, onPageChange]);
 
-  const leftArrowDisabled = currentPageIndex <= 1;
-  const rightArrowDisabled = currentPageIndex >= totalPages;
+	const leftArrowDisabled = currentPageIndex <= 1;
+	const rightArrowDisabled = currentPageIndex >= totalPages;
 
-  return totalPages <= 1 && !alwaysShowPagination ? null : (
-    <nav className="neo-pagination" role="navigation" aria-label="pagination">
-      <IconButton
-        aria-label={backIconButtonText}
-        disabled={leftArrowDisabled}
-        icon="arrow-left"
-        shape="square"
-        variant="tertiary"
-        style={{ color: leftArrowDisabled ? "gray" : "black" }}
-        onClick={(e) => onPageChange(e, currentPageIndex - 1)}
-      />
+	return totalPages <= 1 && !alwaysShowPagination ? null : (
+		<nav className="neo-pagination" aria-label="pagination">
+			<IconButton
+				aria-label={backIconButtonText}
+				disabled={leftArrowDisabled}
+				icon="arrow-left"
+				shape="square"
+				variant="tertiary"
+				style={{ color: leftArrowDisabled ? "gray" : "black" }}
+				onClick={(e) => onPageChange(e, currentPageIndex - 1)}
+			/>
 
-      <ul className="neo-pagination__list">{navListItems}</ul>
+			<ul className="neo-pagination__list">{navListItems}</ul>
 
-      <IconButton
-        aria-label={nextIconButtonText}
-        disabled={rightArrowDisabled}
-        icon="arrow-right"
-        shape="square"
-        variant="tertiary"
-        style={{ color: rightArrowDisabled ? "gray" : "black" }}
-        onClick={(e) => onPageChange(e, currentPageIndex + 1)}
-      />
-    </nav>
-  );
+			<IconButton
+				aria-label={nextIconButtonText}
+				disabled={rightArrowDisabled}
+				icon="arrow-right"
+				shape="square"
+				variant="tertiary"
+				style={{ color: rightArrowDisabled ? "gray" : "black" }}
+				onClick={(e) => onPageChange(e, currentPageIndex + 1)}
+			/>
+		</nav>
+	);
 };

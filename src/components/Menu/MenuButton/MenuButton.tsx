@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
-import { Button, ButtonProps } from "components/Button";
-import { forwardRef, Ref } from "react";
+import { Button, type ButtonProps } from "components/Button";
+import { type Ref, forwardRef } from "react";
 
 /**
  * The MenuButton is meant to be used only for the Menu component prop `menuRootElement`.
@@ -29,17 +29,17 @@ import { forwardRef, Ref } from "react";
     </Menu>
  */
 export const MenuButton = forwardRef(
-  (
-    { className, children, ...rest }: ButtonProps,
-    ref: Ref<HTMLButtonElement>,
-  ) => (
-    <Button
-      ref={ref}
-      className={clsx("neo-dropdown__link-header", className)}
-      {...rest}
-    >
-      {children || "Menu Button"}
-    </Button>
-  ),
+	(
+		{ className, children, ...rest }: ButtonProps,
+		ref: Ref<HTMLButtonElement>,
+	) => (
+		<Button
+			ref={ref}
+			className={clsx("neo-dropdown__link-header", className)}
+			{...rest}
+		>
+			{children || "Menu Button"}
+		</Button>
+	),
 );
 MenuButton.displayName = "MenuButton";

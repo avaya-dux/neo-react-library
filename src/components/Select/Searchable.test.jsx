@@ -8,272 +8,272 @@ import { Select } from "./Select";
 import { fruitOptions } from "./utils/mockdata";
 
 describe("Select", () => {
-  const user = userEvent.setup();
-  const label = "Searchable Select";
+	const user = userEvent.setup();
+	const label = "Searchable Select";
 
-  describe("Searchable Single Select", () => {
-    let renderResult;
+	describe("Searchable Single Select", () => {
+		let renderResult;
 
-    beforeEach(() => {
-      renderResult = render(
-        <Select label={label} searchable>
-          {fruitOptions}
-        </Select>,
-      );
-    });
+		beforeEach(() => {
+			renderResult = render(
+				<Select label={label} searchable>
+					{fruitOptions}
+				</Select>,
+			);
+		});
 
-    it("renders without exploding", () => {
-      const { container } = renderResult;
-      expect(container).not.toBe(null);
-    });
+		it("renders without exploding", () => {
+			const { container } = renderResult;
+			expect(container).not.toBe(null);
+		});
 
-    it("passes the correct props to label element", () => {
-      const { getByText } = renderResult;
-      const labelElement = getByText(label);
-      const expectedAttributes = ["id", "for"];
-      expectedAttributes.forEach((attribute) =>
-        expect(labelElement).toHaveAttribute(attribute),
-      );
-    });
+		it("passes the correct props to label element", () => {
+			const { getByText } = renderResult;
+			const labelElement = getByText(label);
+			const expectedAttributes = ["id", "for"];
+			expectedAttributes.forEach((attribute) =>
+				expect(labelElement).toHaveAttribute(attribute),
+			);
+		});
 
-    it("passes the correct props to searchable element", () => {
-      const { getByRole } = renderResult;
-      const searchableElement = getByRole("combobox");
-      const expectedAttributes = [
-        "aria-autocomplete",
-        "aria-controls",
-        "aria-expanded",
-      ];
-      expectedAttributes.forEach((attribute) =>
-        expect(searchableElement).toHaveAttribute(attribute),
-      );
-    });
+		it("passes the correct props to searchable element", () => {
+			const { getByRole } = renderResult;
+			const searchableElement = getByRole("combobox");
+			const expectedAttributes = [
+				"aria-autocomplete",
+				"aria-controls",
+				"aria-expanded",
+			];
+			expectedAttributes.forEach((attribute) =>
+				expect(searchableElement).toHaveAttribute(attribute),
+			);
+		});
 
-    it("toggles aria-expanded prop on click", () => {
-      const { container, getByRole } = renderResult;
-      const toggleButton = container.querySelector(
-        "span.neo-multiselect-combo__header",
-      );
-      const searchableElement = getByRole("combobox");
-      expect(searchableElement).toHaveAttribute("aria-expanded", "false");
-      fireEvent.click(toggleButton);
-      expect(searchableElement).toHaveAttribute("aria-expanded", "true");
-      fireEvent.click(toggleButton);
-      expect(searchableElement).toHaveAttribute("aria-expanded", "false");
-    });
+		it("toggles aria-expanded prop on click", () => {
+			const { container, getByRole } = renderResult;
+			const toggleButton = container.querySelector(
+				"span.neo-multiselect-combo__header",
+			);
+			const searchableElement = getByRole("combobox");
+			expect(searchableElement).toHaveAttribute("aria-expanded", "false");
+			fireEvent.click(toggleButton);
+			expect(searchableElement).toHaveAttribute("aria-expanded", "true");
+			fireEvent.click(toggleButton);
+			expect(searchableElement).toHaveAttribute("aria-expanded", "false");
+		});
 
-    it("passes basic axe compliance", async () => {
-      const { container } = renderResult;
-      const results = await axe(container);
-      expect(results).toHaveNoViolations();
-    });
-  });
+		it("passes basic axe compliance", async () => {
+			const { container } = renderResult;
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
+	});
 
-  describe("Searchable Multi Select", () => {
-    it("toggles clicked elements", async () => {
-      render(
-        <Select label={label} multiple searchable>
-          {fruitOptions}
-        </Select>,
-      );
+	describe("Searchable Multi Select", () => {
+		it("toggles clicked elements", async () => {
+			render(
+				<Select label={label} multiple searchable>
+					{fruitOptions}
+				</Select>,
+			);
 
-      expect(screen.queryAllByRole("button")).toHaveLength(1);
-      const combobox = screen.getByRole("combobox");
-      const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
-      expect(combobox).toHaveAttribute("aria-expanded", "false");
-      await user.click(comboboxBtn);
-      expect(combobox).toHaveAttribute("aria-expanded", "true");
+			expect(screen.queryAllByRole("button")).toHaveLength(1);
+			const combobox = screen.getByRole("combobox");
+			const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
+			expect(combobox).toHaveAttribute("aria-expanded", "false");
+			await user.click(comboboxBtn);
+			expect(combobox).toHaveAttribute("aria-expanded", "true");
 
-      const options = screen.getAllByRole("option");
-      fireEvent.click(options[0]);
+			const options = screen.getAllByRole("option");
+			fireEvent.click(options[0]);
 
-      expect(screen.getAllByRole("button")).toHaveLength(2); // has one chip
+			expect(screen.getAllByRole("button")).toHaveLength(2); // has one chip
 
-      fireEvent.click(options[0]);
+			fireEvent.click(options[0]);
 
-      expect(screen.queryAllByRole("button")).toHaveLength(1); // chip removed
-    });
+			expect(screen.queryAllByRole("button")).toHaveLength(1); // chip removed
+		});
 
-    it("can select and remove items via the keyboard", async () => {
-      render(
-        <Select label={label} multiple searchable>
-          {fruitOptions}
-        </Select>,
-      );
-      const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
-      await user.click(comboboxBtn);
+		it("can select and remove items via the keyboard", async () => {
+			render(
+				<Select label={label} multiple searchable>
+					{fruitOptions}
+				</Select>,
+			);
+			const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
+			await user.click(comboboxBtn);
 
-      await user.keyboard(fruitOptions[0].props.children);
-      await user.keyboard(UserEventKeys.ENTER);
+			await user.keyboard(fruitOptions[0].props.children);
+			await user.keyboard(UserEventKeys.ENTER);
 
-      expect(screen.getAllByRole("button")).toHaveLength(2); // has one chip
+			expect(screen.getAllByRole("button")).toHaveLength(2); // has one chip
 
-      await user.keyboard(UserEventKeys.BACKSPACE);
+			await user.keyboard(UserEventKeys.BACKSPACE);
 
-      expect(screen.queryAllByRole("button")).toHaveLength(1); // chip removed
-    });
+			expect(screen.queryAllByRole("button")).toHaveLength(1); // chip removed
+		});
 
-    it("clears the selection when the clear button is clicked", () => {
-      const { container } = render(
-        <Select multiple searchable label="not important">
-          {fruitOptions}
-        </Select>,
-      );
+		it("clears the selection when the clear button is clicked", () => {
+			const { container } = render(
+				<Select multiple searchable label="not important">
+					{fruitOptions}
+				</Select>,
+			);
 
-      const toggleElement = screen.getByRole("combobox");
-      const clearButton = screen.getByRole("button");
+			const toggleElement = screen.getByRole("combobox");
+			const clearButton = screen.getByRole("button");
 
-      // open menu
-      toggleElement.focus();
-      fireEvent.click(toggleElement);
+			// open menu
+			toggleElement.focus();
+			fireEvent.click(toggleElement);
 
-      // select first
-      fireEvent.click(container.querySelector("li"));
+			// select first
+			fireEvent.click(container.querySelector("li"));
 
-      // assert there is one chip
-      expect(container.querySelectorAll("div.neo-chip--close").length).toEqual(
-        1,
-      );
+			// assert there is one chip
+			expect(container.querySelectorAll("div.neo-chip--close").length).toEqual(
+				1,
+			);
 
-      // click clear button
-      fireEvent.click(clearButton);
+			// click clear button
+			fireEvent.click(clearButton);
 
-      // assert there are no chips
-      expect(container.querySelectorAll("div.neo-chip--close").length).toEqual(
-        0,
-      );
-    });
-  });
+			// assert there are no chips
+			expect(container.querySelectorAll("div.neo-chip--close").length).toEqual(
+				0,
+			);
+		});
+	});
 
-  describe("'creatable' functionality", () => {
-    it("`SingleSelectSearchable` allows a user to create and remove custom options if `creatable` prop is set", async () => {
-      const newOptionText = "New Option";
-      render(
-        <Select label={label} searchable creatable>
-          {fruitOptions}
-        </Select>,
-      );
+	describe("'creatable' functionality", () => {
+		it("`SingleSelectSearchable` allows a user to create and remove custom options if `creatable` prop is set", async () => {
+			const newOptionText = "New Option";
+			render(
+				<Select label={label} searchable creatable>
+					{fruitOptions}
+				</Select>,
+			);
 
-      const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
-      await act(async () => await user.click(comboboxBtn));
+			const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
+			await act(async () => await user.click(comboboxBtn));
 
-      // pre search+add we have all options in the list
-      expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
+			// pre search+add we have all options in the list
+			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
-      await act(async () => await user.keyboard(newOptionText));
-      expect(screen.getAllByRole("option")).toHaveLength(1);
-      expect(screen.getByRole("option")).toHaveTextContent(newOptionText);
+			await act(async () => await user.keyboard(newOptionText));
+			expect(screen.getAllByRole("option")).toHaveLength(1);
+			expect(screen.getByRole("option")).toHaveTextContent(newOptionText);
 
-      await act(async () => await user.keyboard(UserEventKeys.DOWN));
-      await act(async () => await user.keyboard(UserEventKeys.ENTER));
+			await act(async () => await user.keyboard(UserEventKeys.DOWN));
+			await act(async () => await user.keyboard(UserEventKeys.ENTER));
 
-      // now that we've added the new option, we can now see the full list, excluding
-      // the new option as we do not show that in the list
-      expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
+			// now that we've added the new option, we can now see the full list, excluding
+			// the new option as we do not show that in the list
+			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
-      // newly created text has been added
-      expect(screen.queryByText(newOptionText)).toBeInTheDocument();
+			// newly created text has been added
+			expect(screen.queryByText(newOptionText)).toBeInTheDocument();
 
-      await act(async () => await user.keyboard(UserEventKeys.BACKSPACE));
-      expect(screen.queryByText(newOptionText)).not.toBeInTheDocument(); // text removed
-    });
+			await act(async () => await user.keyboard(UserEventKeys.BACKSPACE));
+			expect(screen.queryByText(newOptionText)).not.toBeInTheDocument(); // text removed
+		});
 
-    it("`SingleSelectSearchable` allows a user to create exactly one custom option", async () => {
-      const firstOptionText = "first custom option";
-      const secondOptionText = "second custom option";
-      render(
-        <Select label={label} searchable creatable>
-          {fruitOptions}
-        </Select>,
-      );
+		it("`SingleSelectSearchable` allows a user to create exactly one custom option", async () => {
+			const firstOptionText = "first custom option";
+			const secondOptionText = "second custom option";
+			render(
+				<Select label={label} searchable creatable>
+					{fruitOptions}
+				</Select>,
+			);
 
-      const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
-      await user.click(comboboxBtn);
+			const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
+			await user.click(comboboxBtn);
 
-      // add first option
-      await user.keyboard(firstOptionText);
-      await user.keyboard(UserEventKeys.DOWN);
-      await user.keyboard(UserEventKeys.ENTER);
+			// add first option
+			await user.keyboard(firstOptionText);
+			await user.keyboard(UserEventKeys.DOWN);
+			await user.keyboard(UserEventKeys.ENTER);
 
-      // first option text has been created
-      expect(screen.queryByText(firstOptionText)).toBeInTheDocument();
+			// first option text has been created
+			expect(screen.queryByText(firstOptionText)).toBeInTheDocument();
 
-      // add second option
-      await user.keyboard(secondOptionText);
-      await user.keyboard(UserEventKeys.DOWN);
-      await user.keyboard(UserEventKeys.ENTER);
+			// add second option
+			await user.keyboard(secondOptionText);
+			await user.keyboard(UserEventKeys.DOWN);
+			await user.keyboard(UserEventKeys.ENTER);
 
-      // first option text has been removed in place of second option text
-      expect(screen.queryByText(firstOptionText)).not.toBeInTheDocument();
-      expect(screen.getByText(secondOptionText)).toBeInTheDocument();
-    });
+			// first option text has been removed in place of second option text
+			expect(screen.queryByText(firstOptionText)).not.toBeInTheDocument();
+			expect(screen.getByText(secondOptionText)).toBeInTheDocument();
+		});
 
-    it("`MultiSelectSearchable` allows a user to create and remove custom options if `creatable` prop is set", async () => {
-      const newOptionText = "New Option";
-      render(
-        <Select label={label} multiple searchable creatable>
-          {fruitOptions}
-        </Select>,
-      );
+		it("`MultiSelectSearchable` allows a user to create and remove custom options if `creatable` prop is set", async () => {
+			const newOptionText = "New Option";
+			render(
+				<Select label={label} multiple searchable creatable>
+					{fruitOptions}
+				</Select>,
+			);
 
-      const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
-      await act(async () => {
-        await user.click(comboboxBtn);
-      });
+			const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
+			await act(async () => {
+				await user.click(comboboxBtn);
+			});
 
-      // pre search+add we have all options in the list
-      expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
+			// pre search+add we have all options in the list
+			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
-      await act(async () => await user.keyboard(newOptionText));
-      expect(screen.getAllByRole("option")).toHaveLength(1);
-      expect(screen.getByRole("option")).toHaveTextContent(newOptionText);
+			await act(async () => await user.keyboard(newOptionText));
+			expect(screen.getAllByRole("option")).toHaveLength(1);
+			expect(screen.getByRole("option")).toHaveTextContent(newOptionText);
 
-      await act(async () => await user.keyboard(UserEventKeys.DOWN));
-      await act(async () => await user.keyboard(UserEventKeys.ENTER));
+			await act(async () => await user.keyboard(UserEventKeys.DOWN));
+			await act(async () => await user.keyboard(UserEventKeys.ENTER));
 
-      // now that we've added the new option, we can now see the full list, excluding
-      // the new option as we do not show that in the list
-      expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
+			// now that we've added the new option, we can now see the full list, excluding
+			// the new option as we do not show that in the list
+			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
-      // newly created chip has been added
-      expect(screen.getAllByRole("button")).toHaveLength(2);
-      expect(screen.getByText(newOptionText)).toBeInTheDocument();
+			// newly created chip has been added
+			expect(screen.getAllByRole("button")).toHaveLength(2);
+			expect(screen.getByText(newOptionText)).toBeInTheDocument();
 
-      await act(async () => {
-        await user.keyboard(UserEventKeys.BACKSPACE);
-      });
-      expect(screen.queryAllByRole("button")).toHaveLength(1); // chip removed
-    });
+			await act(async () => {
+				await user.keyboard(UserEventKeys.BACKSPACE);
+			});
+			expect(screen.queryAllByRole("button")).toHaveLength(1); // chip removed
+		});
 
-    it("`MultiSelectSearchable` allows a user to create multiple custom options", async () => {
-      const firstOptionText = "first custom option";
-      const secondOptionText = "second custom option";
-      render(
-        <Select label={label} multiple searchable creatable>
-          {fruitOptions}
-        </Select>,
-      );
+		it("`MultiSelectSearchable` allows a user to create multiple custom options", async () => {
+			const firstOptionText = "first custom option";
+			const secondOptionText = "second custom option";
+			render(
+				<Select label={label} multiple searchable creatable>
+					{fruitOptions}
+				</Select>,
+			);
 
-      const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
-      await user.click(comboboxBtn);
+			const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
+			await user.click(comboboxBtn);
 
-      // add first option
-      await user.keyboard(firstOptionText);
-      await user.keyboard(UserEventKeys.DOWN);
-      await user.keyboard(UserEventKeys.ENTER);
+			// add first option
+			await user.keyboard(firstOptionText);
+			await user.keyboard(UserEventKeys.DOWN);
+			await user.keyboard(UserEventKeys.ENTER);
 
-      // first option chip has been created
-      expect(screen.getAllByRole("button")).toHaveLength(2);
-      expect(screen.getByText(firstOptionText)).toBeInTheDocument();
+			// first option chip has been created
+			expect(screen.getAllByRole("button")).toHaveLength(2);
+			expect(screen.getByText(firstOptionText)).toBeInTheDocument();
 
-      // add second option
-      await user.keyboard(secondOptionText);
-      await user.keyboard(UserEventKeys.DOWN);
-      await user.keyboard(UserEventKeys.ENTER);
+			// add second option
+			await user.keyboard(secondOptionText);
+			await user.keyboard(UserEventKeys.DOWN);
+			await user.keyboard(UserEventKeys.ENTER);
 
-      // both chips have been created
-      expect(screen.getAllByRole("button")).toHaveLength(3);
-      expect(screen.getByText(secondOptionText)).toBeInTheDocument();
-    });
-  });
+			// both chips have been created
+			expect(screen.getAllByRole("button")).toHaveLength(3);
+			expect(screen.getByText(secondOptionText)).toBeInTheDocument();
+		});
+	});
 });
