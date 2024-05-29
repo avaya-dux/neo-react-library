@@ -47,7 +47,6 @@ export const Button = forwardRef(
 			size = "default",
 			status = "default",
 			variant = "primary",
-			type = "button",
 			...rest
 		}: ButtonProps,
 		ref: React.Ref<HTMLButtonElement>,
@@ -86,7 +85,6 @@ export const Button = forwardRef(
 			<button
 				className={buttonClasses}
 				data-badge={computeBadge(badge)}
-				type={type}
 				ref={ref}
 				{...rest}
 			>
