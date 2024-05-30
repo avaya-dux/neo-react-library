@@ -1,3 +1,5 @@
+// NOTE: these are placeholders due to us not being able to properly fix these issues.
+// We should fix these issues and remove this file completely ASAP.
 {
 	"linter": {
 		"rules": {
