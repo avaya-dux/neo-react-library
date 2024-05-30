@@ -169,7 +169,7 @@ export const Notification = ({
 		};
 	}, [header, description]);
 
-	const notification = closed ? null : (
+	return closed ? null : (
 		<div
 			className={clsx(
 				"neo-notification",
@@ -254,8 +254,6 @@ export const Notification = ({
 			</div>
 		</div>
 	);
-
-	return notification;
 };
 
 const createClickHandler = (
