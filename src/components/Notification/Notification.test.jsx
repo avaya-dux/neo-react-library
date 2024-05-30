@@ -8,9 +8,9 @@ import { popupManagerLogger } from "components/PopupManager";
 
 import { createActions, notificationLogger } from "./Notification";
 import { Notification } from "./Notification.tsx";
-import * as EventStories from "./stories/EventNotification.stories.tsx";
-import * as NonEventStories from "./stories/NonEventNotification.stories.tsx";
-import * as ToggleEventStories from "./stories/ToggleNotification.stories.tsx";
+import * as EventStories from "./stories/Notification-2Events.stories.tsx";
+import * as NonEventStories from "./stories/Notification-3NonEvent.stories.tsx";
+import * as ToggleEventStories from "./stories/Notification-4Toggle.stories.tsx";
 
 notificationLogger.disableAll();
 popupManagerLogger.disableAll();
