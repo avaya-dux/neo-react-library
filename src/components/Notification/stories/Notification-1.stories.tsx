@@ -40,14 +40,14 @@ export const ContentVariants: Story = {
 
 					<Notification
 						type="info"
-						header=""
-						description="Description of what you need to do."
+						header="Short message"
+						description=""
 					/>
 
 					<Notification
 						type="info"
-						header="Short message informating user"
-						description=""
+						header=""
+						description="Description of what you need to do."
 					/>
 				</fieldset>
 
@@ -64,13 +64,13 @@ export const ContentVariants: Story = {
 					<Notification
 						type="info"
 						showTimestamp={false}
-						description="Description of what you need to do."
+						header="Short message"
 					/>
 
 					<Notification
 						type="info"
 						showTimestamp={false}
-						header="Short message informating user"
+						description="Description of what you need to do."
 					/>
 				</fieldset>
 			</section>

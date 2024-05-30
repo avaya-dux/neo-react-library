@@ -213,8 +213,11 @@ div.neo-notification__description {
   margin-bottom: 1rem;
 }
 
-.neo-notification__message__wrapper {
+.neo-notification .neo-notification__message__wrapper {
   display: flex;
-  align-items: center;
-  margin-bottom: 8px;
+	align-items: center;
+}
+
+.neo-notification .neo-notification__message {
+	justify-content: unset;
 }
