@@ -6,11 +6,11 @@ import { vi } from "vitest";
 
 import { popupManagerLogger } from "components/PopupManager";
 
-import * as EventStories from "./EventNotification.stories";
-import * as NonEventStories from "./NonEventNotification.stories";
 import { createActions, notificationLogger } from "./Notification";
 import { Notification } from "./Notification.tsx";
-import * as ToggleEventStories from "./ToggleNotification.stories";
+import * as EventStories from "./stories/EventNotification.stories.tsx";
+import * as NonEventStories from "./stories/NonEventNotification.stories.tsx";
+import * as ToggleEventStories from "./stories/ToggleNotification.stories.tsx";
 
 notificationLogger.disableAll();
 popupManagerLogger.disableAll();

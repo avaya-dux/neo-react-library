@@ -3,10 +3,10 @@ import { useState } from "react";
 
 import { Button } from "components/Button";
 
-import { type NonEventNotificationProps, Notification } from ".";
+import { type NonEventNotificationProps, Notification } from "../..";
 
 export default {
-	title: "Components/Notification",
+	title: "Components/Notification/Toggle Events",
 } as Meta<NonEventNotificationProps>;
 
 export const AlertShow = () => {

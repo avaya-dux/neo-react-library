@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Notification } from "./";
+import { Notification } from "../..";
 
 const meta: Meta<typeof Notification> = {
-	title: "Components/Notification",
+	title: "Components/Notification/Non Events",
 	component: Notification,
 	argTypes: {
 		type: {

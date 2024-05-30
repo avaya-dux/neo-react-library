@@ -7,7 +7,7 @@ import {
 	type EventNotificationProps,
 	Notification,
 	notificationLogger as logger,
-} from ".";
+} from "../..";
 
 type WithoutType = Omit<EventNotificationProps, "type">;
 const EventTemplate: Story<WithoutType> = ({ ...rest }: WithoutType) => {
@@ -95,7 +95,7 @@ EventButtons.args = {
 };
 
 export default {
-	title: "Components/Notification",
+	title: "Components/Notification/Events",
 	component: EventTemplate,
 	argTypes: {
 		icon: {
