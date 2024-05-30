@@ -38,11 +38,7 @@ export const ContentVariants: Story = {
 						description="This is a slightly longer example of a why this notificatin is being shown and what YOU need to do about it... with urgency!"
 					/>
 
-					<Notification
-						type="info"
-						header="Short message"
-						description=""
-					/>
+					<Notification type="info" header="Short message" description="" />
 
 					<Notification
 						type="info"
