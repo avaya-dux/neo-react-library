@@ -217,7 +217,3 @@ div.neo-notification__description {
   display: flex;
 	align-items: center;
 }
-
-.neo-notification .neo-notification__message {
-	justify-content: unset;
-}
