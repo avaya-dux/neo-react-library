@@ -185,34 +185,34 @@ export const Notification = ({
 				aria-label={clsx(notificationTranslations.icon, icon && icon)}
 			/>
 			<div className="neo-notification__message" ref={notificationRef}>
-				<div className="neo-notification__message__wrapper">
-					{showTimestamp && (
+				{showTimestamp && (
+					<div className="neo-notification__message__wrapper">
 						<p className="neo-notification__timestamp neo-body-small neo-semibold">
 							{timestamp}
 						</p>
-					)}
 
-					{occurences > 1 && (
-						<Tooltip label={clsx(notificationTranslations.badge, occurences)}>
-							<Badge
-								data={occurences.toString()}
-								aria-label={clsx(notificationTranslations.badge, occurences)}
+						{occurences > 1 && (
+							<Tooltip label={clsx(notificationTranslations.badge, occurences)}>
+								<Badge
+									data={occurences.toString()}
+									aria-label={clsx(notificationTranslations.badge, occurences)}
+								/>
+							</Tooltip>
+						)}
+						{!isInline && needsTruncation && (
+							<IconButton
+								className={clsx(
+									"neo-notification__button",
+									!isTruncated && "neo-notification__button--pressed",
+								)}
+								variant="tertiary"
+								icon="chevron-down"
+								aria-label={notificationTranslations.textTruncation}
+								onClick={() => setIsTruncated(!isTruncated)}
 							/>
-						</Tooltip>
-					)}
-					{!isInline && needsTruncation && (
-						<IconButton
-							className={clsx(
-								"neo-notification__button",
-								!isTruncated && "neo-notification__button--pressed",
-							)}
-							variant="tertiary"
-							icon="chevron-down"
-							aria-label={notificationTranslations.textTruncation}
-							onClick={() => setIsTruncated(!isTruncated)}
-						/>
-					)}
-				</div>
+						)}
+					</div>
+				)}
 
 				{header && (
 					<div
@@ -227,6 +227,7 @@ export const Notification = ({
 						{header}
 					</div>
 				)}
+
 				{description && (
 					<div
 						className={clsx(
@@ -240,6 +241,7 @@ export const Notification = ({
 						{description}
 					</div>
 				)}
+
 				{!isInline && (
 					<div className="neo-notification__actions--multiline">
 						{internalActions.counterAction}
@@ -247,6 +249,7 @@ export const Notification = ({
 					</div>
 				)}
 			</div>
+
 			<div className="neo-notification__actions">
 				{isInline && internalActions.counterAction}
 				{isInline && internalActions.buttonAction}
