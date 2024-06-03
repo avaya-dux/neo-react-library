@@ -103,6 +103,7 @@ export const Select = (props: SelectProps) => {
 		[children],
 	);
 	const [filteredOptions, setFilteredOptions] = useState(options);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: filteredOptions should not be in dep array
 	useEffect(() => {
 		// Checking if array of options changed before updating to prevent a recursive event loop
 		console.log({ options });
