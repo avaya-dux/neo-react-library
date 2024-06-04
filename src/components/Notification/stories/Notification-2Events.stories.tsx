@@ -7,7 +7,7 @@ import {
 	type EventNotificationProps,
 	Notification,
 	notificationLogger as logger,
-} from ".";
+} from "../..";
 
 type WithoutType = Omit<EventNotificationProps, "type">;
 const EventTemplate: Story<WithoutType> = ({ ...rest }: WithoutType) => {
@@ -18,6 +18,7 @@ const EventTemplate: Story<WithoutType> = ({ ...rest }: WithoutType) => {
 export const Event = EventTemplate.bind({});
 Event.args = {
 	icon: "copy",
+	showTimestamp: true,
 	header: "Event",
 	description: "This is an event.",
 	isElevated: true,
@@ -33,6 +34,7 @@ Event.args = {
 export const EventCloseAlert = EventTemplate.bind({});
 EventCloseAlert.args = {
 	icon: "copy",
+	showTimestamp: true,
 	header: "Event",
 	description: "This is an event.",
 	isElevated: true,
@@ -47,6 +49,7 @@ EventCloseAlert.args = {
 export const EventCounter = EventTemplate.bind({});
 EventCounter.args = {
 	icon: "copy",
+	showTimestamp: true,
 	header: "Event",
 	description: "This is an event.",
 	isElevated: true,
@@ -81,6 +84,7 @@ export const EventCounterUp = () => {
 export const EventButtons = EventTemplate.bind({});
 EventButtons.args = {
 	icon: "copy",
+	showTimestamp: true,
 	header: "Event",
 	description: "This is an event.",
 	isElevated: true,
@@ -95,7 +99,7 @@ EventButtons.args = {
 };
 
 export default {
-	title: "Components/Notification",
+	title: "Components/Notification/Events",
 	component: EventTemplate,
 	argTypes: {
 		icon: {
