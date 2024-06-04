@@ -8,6 +8,7 @@ import { InternalSelect } from "./InternalComponents";
 import { SelectContext } from "./utils/SelectContext";
 import type { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
+import isEqual from "react-fast-compare";
 
 import log from "loglevel";
 const logger = log.getLogger("select-logger");
@@ -103,22 +104,15 @@ export const Select = (props: SelectProps) => {
 		[children],
 	);
 	const [filteredOptions, setFilteredOptions] = useState(options);
+
 	// biome-ignore lint/correctness/useExhaustiveDependencies: filteredOptions should not be in dep array
 	useEffect(() => {
 		// Checking if array of options changed before updating to prevent a recursive event loop
-		console.log({ options });
-		console.log({ filteredOptions });
-		// const valuesChanged = options.some(
-		//  (option, index) => { option.value !== filteredOptions[index].value && option.children !== filteredOptions[index].children }
-		// );
-		// console.log({ valuesChanged });
-		// const optionsHaveChanged =
-		//   options.length !== filteredOptions.length || valuesChanged;
-		// if (optionsHaveChanged) {
-		//   setFilteredOptions(options);
-		// }
-		setFilteredOptions(options);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		const optionsHaveChanged = isEqual([...options], filteredOptions);
+
+		if (!optionsHaveChanged) {
+		  setFilteredOptions(options);
+		}
 	}, [options]);
 
 	const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);
