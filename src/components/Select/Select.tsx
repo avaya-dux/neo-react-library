@@ -4,11 +4,11 @@ import { NeoInputWrapper } from "components/NeoInputWrapper";
 import { handleAccessbilityError } from "utils/accessibilityUtils";
 import { useIsInitialRender } from "utils/hooks/useIsInitialRender";
 
+import isEqual from "react-fast-compare";
 import { InternalSelect } from "./InternalComponents";
 import { SelectContext } from "./utils/SelectContext";
 import type { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
-import isEqual from "react-fast-compare";
 
 import log from "loglevel";
 const logger = log.getLogger("select-logger");
@@ -111,7 +111,7 @@ export const Select = (props: SelectProps) => {
 		const optionsHaveChanged = !isEqual([...options], filteredOptions);
 
 		if (optionsHaveChanged) {
-		  setFilteredOptions(options);
+			setFilteredOptions(options);
 		}
 	}, [options]);
 
