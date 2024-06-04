@@ -23,8 +23,8 @@ const spanishTrans = {
 	apple: "manzana",
 	pear: "pera",
 	helper: "Por favor, seleccione una",
-	labelMulti: "Seleccione una o mas comidas",
 	label: "Seleccione una comida favorita",
+	labelMulti: "Seleccione una o mas comidas",
 	fave: "Comida favorita",
 	none: "Ninguna seleccionada",
 };
