@@ -108,9 +108,9 @@ export const Select = (props: SelectProps) => {
 	// biome-ignore lint/correctness/useExhaustiveDependencies: filteredOptions should not be in dep array
 	useEffect(() => {
 		// Checking if array of options changed before updating to prevent a recursive event loop
-		const optionsHaveChanged = isEqual([...options], filteredOptions);
+		const optionsHaveChanged = !isEqual([...options], filteredOptions);
 
-		if (!optionsHaveChanged) {
+		if (optionsHaveChanged) {
 		  setFilteredOptions(options);
 		}
 	}, [options]);
