@@ -4,6 +4,7 @@ import { NeoInputWrapper } from "components/NeoInputWrapper";
 import { handleAccessbilityError } from "utils/accessibilityUtils";
 import { useIsInitialRender } from "utils/hooks/useIsInitialRender";
 
+import isEqual from "react-fast-compare";
 import { InternalSelect } from "./InternalComponents";
 import { SelectContext } from "./utils/SelectContext";
 import type { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
@@ -103,8 +104,15 @@ export const Select = (props: SelectProps) => {
 		[children],
 	);
 	const [filteredOptions, setFilteredOptions] = useState(options);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: filteredOptions should not be in dep array
 	useEffect(() => {
-		setFilteredOptions(options);
+		// Checking if array of options changed before updating to prevent a recursive event loop
+		const optionsHaveChanged = !isEqual([...options], filteredOptions);
+
+		if (optionsHaveChanged) {
+			setFilteredOptions(options);
+		}
 	}, [options]);
 
 	const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);

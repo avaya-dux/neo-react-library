@@ -123,8 +123,7 @@ describe("Select", () => {
 			expect(toggleButton).toHaveAttribute("aria-expanded", "false");
 		});
 
-		// BUG: causes infinite loop
-		it.skip("sets and clears error text appropriately", () => {
+		it("sets and clears error text appropriately", () => {
 			const errorText = "Error Text";
 			const { getByText, rerender } = renderResult;
 			expect(() => getByText(errorText)).toThrow();
@@ -181,8 +180,7 @@ describe("Select", () => {
 				expect(toggleElement).toHaveAttribute("aria-expanded", "true");
 			});
 
-			// BUG: causes infinite loop
-			it.skip("sets and clears error text appropriately", () => {
+			it("sets and clears error text appropriately", () => {
 				const errorText = "Error Text";
 				const { getByText, rerender } = renderResult;
 				expect(() => getByText(errorText)).toThrow();
@@ -264,8 +262,7 @@ describe("Select", () => {
 				);
 			});
 
-			// BUG: causes infinite loop
-			it.skip("does open content area on click after content is loaded", () => {
+			it("does open content area on click after content is loaded", () => {
 				const placeholder = "please select one";
 				const { getAllByRole, rerender } = render(
 					<Select
