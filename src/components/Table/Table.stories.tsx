@@ -544,8 +544,8 @@ export const SecondPage = (props: object) => {
 					</li>
 
 					<li>
-						If you need to keep track of the current page index, you can use the{" "}
-						<code>onPageChange</code> method.
+						If you need to keep track of the current page index and/or page
+						size, you can use the <code>onPageChange</code> method.
 						<div style={{ backgroundColor: "yellow" }}>
 							The currently selected page index is: <code>{pageIndex}</code>
 						</div>
@@ -564,7 +564,7 @@ export const SecondPage = (props: object) => {
 				selectableRows="multiple"
 				itemsPerPageOptions={[2, 5]}
 				initialStatePageIndex={initialPageIndex}
-				pageChange={(newPageIndex, newPageSize) => {
+				handlePageChange={(newPageIndex, newPageSize) => {
 					setPageIndex(newPageIndex);
 					setPageSize(newPageSize);
 				}}
