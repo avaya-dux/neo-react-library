@@ -1,5 +1,5 @@
 import type { Meta, Story } from "@storybook/react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Column, ColumnInstance } from "react-table";
 
 import {
