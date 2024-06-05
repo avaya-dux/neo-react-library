@@ -547,10 +547,10 @@ export const SecondPage = (props: object) => {
 					<li>
 						If you need to keep track of the current page index and/or page
 						size, you can use the <code>onPageChange</code> method.
-						<div style={{ backgroundColor: "yellow" }}>
+						<div style={{ backgroundColor: "cyan" }}>
 							The currently selected page index is: <code>{pageIndex}</code>
 						</div>
-						<div style={{ backgroundColor: "yellow" }}>
+						<div style={{ backgroundColor: "cyan" }}>
 							The current page size is: <code>{pageSize}</code>
 						</div>
 					</li>
