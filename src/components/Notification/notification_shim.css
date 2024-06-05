@@ -69,7 +69,7 @@
   margin-top: 2px;
   font-size: 0.875rem;
   align-self: flex-start;
-  color: var(--neo-color-base-900);
+  color: var(--global-font-color);
 }
 
 .neo-notification__options {
@@ -183,7 +183,7 @@ div.neo-notification__title {
   font-size: 14px;
   line-height: 20px;
   font-weight: 600;
-  color: var(--neo-color-base-900);
+  color: var(--global-font-color);
   word-break: break-all;
 }
 
@@ -195,7 +195,7 @@ div.neo-notification__title {
 }
 
 div.neo-notification__description {
-  color: var(--neo-color-base-900);
+  color: var(--global-font-color);
 }
 
 .neo-notification__description--truncated {
