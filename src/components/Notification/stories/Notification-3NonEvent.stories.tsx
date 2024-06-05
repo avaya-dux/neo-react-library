@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Notification } from "./";
+import { Notification } from "../..";
 
 const meta: Meta<typeof Notification> = {
-	title: "Components/Notification",
+	title: "Components/Notification/Non Events",
 	component: Notification,
 	argTypes: {
 		type: {
@@ -21,6 +21,7 @@ export const Info: Story = {
 		type: "info",
 		header: "Info",
 		description: "This is some info.",
+		showTimestamp: true,
 		isElevated: false,
 		isInline: true,
 	},
@@ -42,6 +43,7 @@ export const Success: Story = {
 		type: "success",
 		header: "Success",
 		description: "You are successful.",
+		showTimestamp: true,
 		isElevated: true,
 		isInline: true,
 	},
@@ -52,6 +54,7 @@ export const Warning: Story = {
 		type: "warning",
 		header: "Warning",
 		description: "This is a warning.",
+		showTimestamp: true,
 		isElevated: true,
 		isInline: true,
 	},
@@ -62,6 +65,7 @@ export const Alert: Story = {
 		type: "alert",
 		header: "Alert",
 		description: "This is an alert.",
+		showTimestamp: true,
 		isElevated: false,
 		isInline: true,
 	},
@@ -72,6 +76,7 @@ export const AlertCloseAlert: Story = {
 		type: "alert",
 		header: "Alert",
 		description: "This is an alert.",
+		showTimestamp: true,
 		isInline: true,
 		actions: {
 			closable: {
@@ -89,6 +94,7 @@ export const AlertCounter: Story = {
 			"Placeholder text for the main header. By default the header text will be two lines of copy before it is truncated. Placeholder text for the main header. By default the header text will be two lines of copy before it is truncated.",
 		description:
 			"Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated. Body copy placeholder, single line of text before it is truncated.",
+		showTimestamp: true,
 		isElevated: false,
 		occurences: 4,
 		actions: {
@@ -112,6 +118,7 @@ export const AlertButtonsCounter: Story = {
 		type: "alert",
 		header: "Alert",
 		description: "This is an alert.",
+		showTimestamp: true,
 		isElevated: false,
 		actions: {
 			actionButtons: {
@@ -130,6 +137,7 @@ export const AlertButtonsCounterClosable: Story = {
 		type: "alert",
 		header: "Alert",
 		description: "This is an alert.",
+		showTimestamp: true,
 		isElevated: false,
 		actions: {
 			closable: {
