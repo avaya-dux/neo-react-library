@@ -516,19 +516,6 @@ export const SecondPage = (props: object) => {
 	const [pageIndex, setPageIndex] = useState(initialPageIndex);
 	const [pageSize, setPageSize] = useState(2);
 
-	const onPageChange = useCallback(
-		(newPageIndex: number, newPageSize: number) => {
-			console.log(
-				"`onPageChange` called from 'Second Page' story",
-				newPageIndex,
-				newPageSize,
-			);
-			setPageIndex(newPageIndex);
-			setPageSize(newPageSize);
-		},
-		[],
-	);
-
 	return (
 		<section>
 			<div style={{ marginBottom: "3rem", maxWidth: "31rem" }}>
@@ -577,7 +564,10 @@ export const SecondPage = (props: object) => {
 				selectableRows="multiple"
 				itemsPerPageOptions={[2, 5]}
 				initialStatePageIndex={initialPageIndex}
-				onPageChange={onPageChange}
+				onPageChange={(newPageIndex: number, newPageSize: number) => {
+					setPageIndex(newPageIndex);
+					setPageSize(newPageSize);
+				}}
 				handleCreate={() => {
 					const newRow: IDataTableMockData = {
 						id: `new-row-${Math.random()}`,
