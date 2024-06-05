@@ -191,6 +191,22 @@ export const Table = <T extends Record<string, any>>({
 		toggleFilterSheetVisible,
 	};
 
+	const handleOnPageChange = useCallback(
+		(i: number, currentPageSize: number) => {
+			console.log("handleOnPageChange called");
+			console.log(
+				"is onPageChange of type `function`",
+				typeof onPageChange === "function",
+			);
+
+			if (onPageChange) {
+				console.log("onPageChange", { i, currentPageSize });
+				onPageChange(i, currentPageSize);
+			}
+		},
+		[onPageChange],
+	);
+
 	return (
 		<FilterContext.Provider value={filterContext}>
 			<div
@@ -262,9 +278,10 @@ export const Table = <T extends Record<string, any>>({
 						itemsPerPageOptions={itemsPerPageOptions}
 						onPageChange={(e, newIndex) => {
 							e?.preventDefault();
-							gotoPage(newIndex - 1);
-							setRootLevelPageIndex(newIndex - 1);
-							onPageChange?.(newIndex);
+							const nextIndex = newIndex - 1;
+							gotoPage(nextIndex);
+							setRootLevelPageIndex(nextIndex);
+							handleOnPageChange(nextIndex, pageSize);
 						}}
 						onItemsPerPageChange={(e, newItemsPerPage) => {
 							e?.preventDefault();
@@ -275,7 +292,7 @@ export const Table = <T extends Record<string, any>>({
 							if (pageIndex > maxPageIndex) {
 								const newIndex = maxPageIndex - 1;
 								gotoPage(newIndex);
-								onPageChange?.(newIndex);
+								handleOnPageChange(newIndex, newItemsPerPage);
 							}
 						}}
 						backIconButtonText={paginationTranslations.backIconButtonText}

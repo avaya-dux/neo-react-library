@@ -1,5 +1,5 @@
 import type { Meta, Story } from "@storybook/react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Column, ColumnInstance } from "react-table";
 
 import {
@@ -510,10 +510,24 @@ export const PreSelectedRows = () => {
 
 // NOTE: passing `props` here to make a "toolbar functionality" test easier
 export const SecondPage = (props: object) => {
-	const initialPageIndex = 1;
+	const initialPageIndex = 2;
 	const [data, setData] = useState(FilledFields.data);
 	const [readonly, setReadonly] = useState(false);
 	const [pageIndex, setPageIndex] = useState(initialPageIndex);
+	const [pageSize, setPageSize] = useState(2);
+
+	const onPageChange = useCallback(
+		(newPageIndex: number, newPageSize: number) => {
+			console.log(
+				"`onPageChange` called from 'Second Page' story",
+				newPageIndex,
+				newPageSize,
+			);
+			setPageIndex(newPageIndex);
+			setPageSize(newPageSize);
+		},
+		[],
+	);
 
 	return (
 		<section>
@@ -544,8 +558,13 @@ export const SecondPage = (props: object) => {
 
 					<li>
 						If you need to keep track of the current page index, you can use the{" "}
-						<code>onPageChange</code> method. The currently selected page index
-						is: <code>{pageIndex}</code>
+						<code>onPageChange</code> method.
+						<div style={{ backgroundColor: "yellow" }}>
+							The currently selected page index is: <code>{pageIndex}</code>
+						</div>
+						<div style={{ backgroundColor: "yellow" }}>
+							The current page size is: <code>{pageSize}</code>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -558,9 +577,7 @@ export const SecondPage = (props: object) => {
 				selectableRows="multiple"
 				itemsPerPageOptions={[2, 5]}
 				initialStatePageIndex={initialPageIndex}
-				onPageChange={(newIndex) => {
-					setPageIndex(newIndex);
-				}}
+				onPageChange={onPageChange}
 				handleCreate={() => {
 					const newRow: IDataTableMockData = {
 						id: `new-row-${Math.random()}`,
