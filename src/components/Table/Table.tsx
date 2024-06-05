@@ -76,6 +76,7 @@ export const Table = <T extends Record<string, any>>({
 	handleEdit,
 	handleRefresh,
 	handleRowToggled,
+	onPageChange,
 	readonly = false,
 	rowHeight = "large",
 	selectableRows = "none",
@@ -263,6 +264,7 @@ export const Table = <T extends Record<string, any>>({
 							e?.preventDefault();
 							gotoPage(newIndex - 1);
 							setRootLevelPageIndex(newIndex - 1);
+							onPageChange?.(newIndex);
 						}}
 						onItemsPerPageChange={(e, newItemsPerPage) => {
 							e?.preventDefault();
@@ -271,7 +273,9 @@ export const Table = <T extends Record<string, any>>({
 							// when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page
 							const maxPageIndex = Math.ceil(rowCount / newItemsPerPage);
 							if (pageIndex > maxPageIndex) {
-								gotoPage(maxPageIndex - 1);
+								const newIndex = maxPageIndex - 1;
+								gotoPage(newIndex);
+								onPageChange?.(newIndex);
 							}
 						}}
 						backIconButtonText={paginationTranslations.backIconButtonText}

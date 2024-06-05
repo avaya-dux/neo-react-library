@@ -510,8 +510,10 @@ export const PreSelectedRows = () => {
 
 // NOTE: passing `props` here to make a "toolbar functionality" test easier
 export const SecondPage = (props: object) => {
+	const initialPageIndex = 1;
 	const [data, setData] = useState(FilledFields.data);
 	const [readonly, setReadonly] = useState(false);
+	const [pageIndex, setPageIndex] = useState(initialPageIndex);
 
 	return (
 		<section>
@@ -520,7 +522,7 @@ export const SecondPage = (props: object) => {
 
 				<p>
 					This table shows the functionality related to defaulting to the second
-					page.
+					page and keeping track of the current page index (zero based).
 				</p>
 
 				<ul style={{ marginLeft: "2rem" }}>
@@ -539,6 +541,12 @@ export const SecondPage = (props: object) => {
 						the number of rows shown per page, the table will jump to the "new"
 						final page.
 					</li>
+
+					<li>
+						If you need to keep track of the current page index, you can use the{" "}
+						<code>onPageChange</code> method. The currently selected page index
+						is: <code>{pageIndex}</code>
+					</li>
 				</ul>
 			</div>
 
@@ -549,7 +557,10 @@ export const SecondPage = (props: object) => {
 				readonly={readonly}
 				selectableRows="multiple"
 				itemsPerPageOptions={[2, 5]}
-				initialStatePageIndex={1}
+				initialStatePageIndex={initialPageIndex}
+				onPageChange={(newIndex) => {
+					setPageIndex(newIndex);
+				}}
 				handleCreate={() => {
 					const newRow: IDataTableMockData = {
 						id: `new-row-${Math.random()}`,
