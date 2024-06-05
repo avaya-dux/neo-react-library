@@ -564,7 +564,7 @@ export const SecondPage = (props: object) => {
 				selectableRows="multiple"
 				itemsPerPageOptions={[2, 5]}
 				initialStatePageIndex={initialPageIndex}
-				onPageChange={(newPageIndex: number, newPageSize: number) => {
+				pageChange={(newPageIndex, newPageSize) => {
 					setPageIndex(newPageIndex);
 					setPageSize(newPageSize);
 				}}

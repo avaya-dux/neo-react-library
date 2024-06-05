@@ -76,7 +76,7 @@ export const Table = <T extends Record<string, any>>({
 	handleEdit,
 	handleRefresh,
 	handleRowToggled,
-	onPageChange = () => null,
+	pageChange = () => null,
 	readonly = false,
 	rowHeight = "large",
 	selectableRows = "none",
@@ -265,7 +265,7 @@ export const Table = <T extends Record<string, any>>({
 							const nextIndex = newIndex - 1;
 							gotoPage(nextIndex);
 							setRootLevelPageIndex(nextIndex);
-							onPageChange(nextIndex, pageSize);
+							pageChange(nextIndex, pageSize);
 						}}
 						onItemsPerPageChange={(e, newItemsPerPage) => {
 							e?.preventDefault();
@@ -276,7 +276,7 @@ export const Table = <T extends Record<string, any>>({
 							if (pageIndex > maxPageIndex) {
 								const newIndex = maxPageIndex - 1;
 								gotoPage(newIndex);
-								onPageChange(newIndex, newItemsPerPage);
+								pageChange(newIndex, newItemsPerPage);
 							}
 						}}
 						backIconButtonText={paginationTranslations.backIconButtonText}

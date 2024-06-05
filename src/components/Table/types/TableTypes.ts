@@ -58,7 +58,7 @@ export type TableProps<T extends AnyRecord> = {
 	id?: string;
 	showPagination?: boolean;
 	pushPaginationDown?: boolean;
-	onPageChange?: (pageIndex: number, pageSize: number) => void;
+	pageChange?: (pageIndex: number, pageSize: number) => void;
 	itemDisplayTooltipPosition?: TooltipPosition;
 	itemsPerPageTooltipPosition?: TooltipPosition;
 	itemsPerPageOptions?: number[];
