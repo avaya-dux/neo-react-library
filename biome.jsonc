@@ -3,6 +3,10 @@
 {
 	"linter": {
 		"rules": {
+			"correctness": {
+				"noUnusedVariables": "error",
+				"noUnusedImports": "error"
+			},
 			"complexity": {
 				"noForEach": "off"
 			},
