@@ -135,15 +135,10 @@ describe("Pagination", () => {
 			    >
 			      <button
 			        aria-label="previous"
-			        class="neo-btn neo-btn-square neo-btn--default neo-btn-tertiary neo-btn-tertiary--default neo-btn-square-tertiary--default"
-			        data-badge=""
+			        class="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-left"
 			        disabled=""
-			        style="color: gray;"
-			      >
-			        <span
-			          class="neo-icon-arrow-left"
-			        />
-			      </button>
+			        type="button"
+			      />
 			      <ul
 			        class="neo-pagination__list"
 			      >
@@ -158,14 +153,9 @@ describe("Pagination", () => {
 			      </ul>
 			      <button
 			        aria-label="next"
-			        class="neo-btn neo-btn-square neo-btn--default neo-btn-tertiary neo-btn-tertiary--default neo-btn-square-tertiary--default"
-			        data-badge=""
-			        style="color: black;"
-			      >
-			        <span
-			          class="neo-icon-arrow-right"
-			        />
-			      </button>
+			        class="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-right"
+			        type="button"
+			      />
 			    </nav>
 			    <div
 			      class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
