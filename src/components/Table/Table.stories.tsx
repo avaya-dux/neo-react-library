@@ -511,10 +511,11 @@ export const PreSelectedRows = () => {
 // NOTE: passing `props` here to make a "toolbar functionality" test easier
 export const SecondPage = (props: object) => {
 	const initialPageIndex = 2;
+	const pageSizes = [2, 5];
 	const [data, setData] = useState(FilledFields.data);
 	const [readonly, setReadonly] = useState(false);
 	const [pageIndex, setPageIndex] = useState(initialPageIndex);
-	const [pageSize, setPageSize] = useState(2);
+	const [pageSize, setPageSize] = useState(pageSizes[0]);
 
 	return (
 		<section>
@@ -562,7 +563,7 @@ export const SecondPage = (props: object) => {
 				data={data}
 				readonly={readonly}
 				selectableRows="multiple"
-				itemsPerPageOptions={[2, 5]}
+				itemsPerPageOptions={pageSizes}
 				initialStatePageIndex={initialPageIndex}
 				handlePageChange={(newPageIndex, newPageSize) => {
 					setPageIndex(newPageIndex);
