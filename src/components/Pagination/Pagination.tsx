@@ -7,8 +7,6 @@ import {
 } from "./Nodes/";
 import type { PaginationProps } from "./PaginationTypes";
 
-import "./Pagination.css";
-
 /**
  * This component is used to render pagination.
  * It can be used as a standalone component.
