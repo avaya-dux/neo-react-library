@@ -38,15 +38,11 @@ export const Default = () => {
 
 			<Drawer
 				open={DrawerOneOpen}
-				title="Drawer one"
-				actions={[
-					<Button key="btn1">Custom Action 1</Button>,
-					<Button key="btn2">Custom Action 2</Button>,
-				]}
+				onClose={() => setDrawerOneOpen(false)}
+				title="Drawer with no actions"
 			>
 				<p>
-					This Drawer should have two buttons with custom actions as a part of
-					the header
+					This Drawer should only have the x close button
 				</p>
 			</Drawer>
 		</main>

@@ -1,23 +1,89 @@
+.neo-drawer {
+	/* @include NeoLinkStyles; */
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	width: 100%;
+	max-height: 100vh;
+	max-width: 20rem;
+
+	padding: 24px;
+	/* need to confirm this is correct transition property */
+	transition-property: position;
+	transition-duration: .4s;
+	transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+	display: flex;
+	flex-direction: column;
+	/* z-index: map-get($indexes-map, "sheet"); */
+	box-shadow: 0px 8px 16px var(--sheet-shadow);
+	/* background-color: var(--sheet-background); */
+
+	/* @include sheet-header; */
+}
+
+.neo-drawer__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.neo-drawer__header .neo-drawer__header--left {
+	font-size: 19px;
+	line-height: 28px;
+}
+
+.neo-drawer__header .neo-drawer__header--right button:not(:last-child) {
+	margin-right: 8px;
+	margin-left: auto;
+}
+
+.neo-sheet__header--left>.neo-sheet-icon-chevron-left {
+	color: var(--neo-color-base-800);
+	background-color: transparent;
+	font-size: 21px;
+	margin-right: 8px;
+}
+
+.neo-sheet__header--right>.neo-sheet-icon-close {
+	color: var(--neo-color-base-800);
+	background-color: transparent;
+	font-size: 21px;
+}
+
+.drawer-horizontal-slide-in-shim {
+	animation-name: slideInRightShim;
+	animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.drawer-horizontal-slide-out-shim {
+	animation-name: slideOutRightShim;
+	animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
 @keyframes slideInRightShim {
-  0% {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  100% {
-    opacity: 1;
-  }
+	0% {
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+
+	100% {
+		opacity: 1;
+	}
 }
 
 @keyframes slideOutRightShim {
-  0% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
+	0% {
+		opacity: 1;
+	}
+
+	90% {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+
+	100% {
+		opacity: 0;
+		visibility: hidden;
+	}
 }

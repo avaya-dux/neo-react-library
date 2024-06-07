@@ -97,21 +97,21 @@ export const Drawer = ({
 			aria-labelledby={id}
 			role="dialog"
 			className={clsx(
-				"neo-Drawer",
+				"neo-drawer",
 				slide && "neo-slide",
-				slide && open && "Drawer-horizontal-slide-in-shim",
-				slide && !open && "Drawer-horizontal-slide-out-shim",
+				slide && open && "drawer-horizontal-slide-in-shim",
+				slide && !open && "drawer-horizontal-slide-out-shim",
 				!open && (initialRender || !slide) && "neo-display-none",
 				className,
 			)}
 			{...rest}
 		>
-			<div className="neo-Drawer__header">
-				<div className="neo-Drawer__header--left" id={id}>
+			<div className="neo-drawer__header">
+				<div className="neo-drawer__header--left" id={id}>
 					{title}
 				</div>
 
-				<div className="neo-Drawer__header--right">{buttons}</div>
+				<div className="neo-drawer__header--right">{buttons}</div>
 			</div>
 
 			{children}
@@ -146,17 +146,17 @@ const BasicDrawer = ({
 			role="dialog"
 			aria-labelledby={id}
 			className={clsx(
-				"neo-Drawer",
+				"neo-drawer",
 				slide && "neo-slide",
-				slide && open && "Drawer-horizontal-slide-in-shim",
-				slide && !open && "Drawer-horizontal-slide-out-shim",
+				slide && open && "drawer-horizontal-slide-in-shim",
+				slide && !open && "drawer-horizontal-slide-out-shim",
 				!open && (initialRender || !slide) && "neo-display-none",
 				className,
 			)}
 			{...rest}
 		>
-			<div className="neo-Drawer__header">
-				<div className="neo-Drawer__header--left">
+			<div className="neo-drawer__header">
+				<div className="neo-drawer__header--left">
 					{onBack !== undefined && (
 						<IconButton
 							onClick={onBack}
@@ -164,13 +164,13 @@ const BasicDrawer = ({
 							shape="square"
 							aria-label="back" // TODO: localize this aria-label
 							icon="chevron-left"
-							className="neo-Drawer-icon-chevron-left"
+							className="neo-drawer-icon-chevron-left"
 						/>
 					)}
 					<div id={id}>{title}</div>
 				</div>
 
-				<div className="neo-Drawer__header--right">
+				<div className="neo-drawer__header--right">
 					{onClose !== undefined && (
 						<IconButton
 							onClick={onClose}
@@ -178,7 +178,7 @@ const BasicDrawer = ({
 							shape="square"
 							aria-label="close" // TODO: localize this aria-label
 							icon="close"
-							className="neo-Drawer-icon-close"
+							className="neo-drawer-icon-close"
 						/>
 					)}
 				</div>
