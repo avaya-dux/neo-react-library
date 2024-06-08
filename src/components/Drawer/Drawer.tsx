@@ -25,7 +25,7 @@ type EnforcedAccessibleLabel =
 	  };
 
 interface BaseDrawerProps
-	extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+	extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
 	children?: React.ReactNode;
 	id?: string;
 	onBack?: () => void;
@@ -91,32 +91,6 @@ export const Drawer = ({
 			</BasicDrawer>
 		);
 	}
-
-	return (
-		<div
-			aria-labelledby={id}
-			role="dialog"
-			className={clsx(
-				"neo-drawer",
-				slide && "neo-slide",
-				slide && open && "drawer-horizontal-slide-in-shim",
-				slide && !open && "drawer-horizontal-slide-out-shim",
-				!open && (initialRender || !slide) && "neo-display-none",
-				className,
-			)}
-			{...rest}
-		>
-			<div className="neo-drawer__header">
-				<div className="neo-drawer__header--left" id={id}>
-					{title}
-				</div>
-
-				<div className="neo-drawer__header--right">{buttons}</div>
-			</div>
-
-			{children}
-		</div>
-	);
 };
 
 const BasicDrawer = ({
@@ -142,8 +116,7 @@ const BasicDrawer = ({
 	title?: string | JSX.Element;
 }) => {
 	return (
-		<div
-			role="dialog"
+		<dialog
 			aria-labelledby={id}
 			className={clsx(
 				"neo-drawer",
@@ -184,7 +157,7 @@ const BasicDrawer = ({
 				</div>
 			</div>
 			{children}
-		</div>
+		</dialog>
 	);
 };
 
