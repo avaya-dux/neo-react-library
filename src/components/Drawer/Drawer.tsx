@@ -116,7 +116,7 @@ const BasicDrawer = ({
 	title?: string | JSX.Element;
 }) => {
 	return (
-		<dialog
+		<div
 			aria-labelledby={id}
 			className={clsx(
 				"neo-drawer",
@@ -157,7 +157,7 @@ const BasicDrawer = ({
 				</div>
 			</div>
 			{children}
-		</dialog>
+		</div>
 	);
 };
 
