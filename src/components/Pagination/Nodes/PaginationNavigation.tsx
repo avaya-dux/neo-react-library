@@ -1,7 +1,5 @@
 import { useMemo } from "react";
 
-import { IconButton } from "components/IconButton";
-
 import type { PaginationNavigationProps } from "../PaginationTypes";
 import { buildNavItems, calculateMaxNavNodes } from "./helpers";
 
@@ -46,26 +44,22 @@ export const PaginationNavigation = ({
 
 	return totalPages <= 1 && !alwaysShowPagination ? null : (
 		<nav className="neo-pagination" aria-label="pagination">
-			<IconButton
-				aria-label={backIconButtonText}
+			<button
+				type="button"
 				disabled={leftArrowDisabled}
-				icon="arrow-left"
-				shape="square"
-				variant="tertiary"
-				style={{ color: leftArrowDisabled ? "gray" : "black" }}
+				aria-label={backIconButtonText}
 				onClick={(e) => onPageChange(e, currentPageIndex - 1)}
+				className="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-left"
 			/>
 
 			<ul className="neo-pagination__list">{navListItems}</ul>
 
-			<IconButton
-				aria-label={nextIconButtonText}
+			<button
+				type="button"
 				disabled={rightArrowDisabled}
-				icon="arrow-right"
-				shape="square"
-				variant="tertiary"
-				style={{ color: rightArrowDisabled ? "gray" : "black" }}
+				aria-label={nextIconButtonText}
 				onClick={(e) => onPageChange(e, currentPageIndex + 1)}
+				className="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-right"
 			/>
 		</nav>
 	);
