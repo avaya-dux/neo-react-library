@@ -16,6 +16,7 @@ export const Toast = (props: ToastProps) => {
 			...rest,
 			message: children,
 		};
+		// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	}, [children, rest]);
 
 	const { mounted, toast, remove } = usePopup(options.message);

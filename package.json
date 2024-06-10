@@ -39,7 +39,7 @@
 		"clean": "rm -rf coverage dist storybook-static cypress/screenshots cypress/videos package *.tgz",
 		"format": "biome format --write ./src",
 		"lint": "biome ci ./src",
-		"style-check": "biome check --apply ./src",
+		"style-check": "biome check --write ./src",
 		"build": "tsc && vite build",
 		"build:storybook": "storybook build",
 		"build:release": "yarn && mkdir -p dist && yarn build && yarn pack",
