@@ -63,6 +63,7 @@ export type TableProps<T extends AnyRecord> = {
 	itemsPerPageTooltipPosition?: TooltipPosition;
 	itemsPerPageOptions?: number[];
 	initialStatePageIndex?: number;
+	initialStatePageSize?: number;
 	defaultSelectedRowIds?: string[];
 	showRowSeparator?: boolean;
 	summary?: string;

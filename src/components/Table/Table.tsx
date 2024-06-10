@@ -67,6 +67,7 @@ export const Table = <T extends Record<string, any>>({
 	itemsPerPageOptions,
 	defaultSelectedRowIds,
 	initialStatePageIndex = 0,
+	initialStatePageSize,
 
 	allowColumnFilter = false,
 	containerClassName = "",
@@ -104,7 +105,7 @@ export const Table = <T extends Record<string, any>>({
 			},
 			getRowId: (row: T) => row.id, // set the row id to be the passed data's id
 			initialState: {
-				pageSize: itemsPerPageOptions?.[0] || 10,
+				pageSize: initialStatePageSize || itemsPerPageOptions?.[0] || 10,
 				selectedRowIds: convertRowIdsArrayToObject(defaultSelectedRowIds || []),
 				pageIndex: rootLevelPageIndex,
 			},
