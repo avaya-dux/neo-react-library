@@ -43,5 +43,5 @@
 }
 .neo-table--push-pagination-down div.neo-pagination__row {
   flex-grow: 1;
-  align-items: end;
+  align-items: flex-end;
 }
