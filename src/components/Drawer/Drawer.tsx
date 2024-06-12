@@ -161,7 +161,7 @@ const BasicDrawer = ({
 					{children}
 				</div>
 			</FocusLock>
-			{/* {open && <div className="neo-modal__background" />} */}
+			{open && <div className="neo-drawer__scrim" />}
 		</div>
 	);
 };
