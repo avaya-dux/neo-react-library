@@ -20,7 +20,6 @@ If you need to manually publish (to test functionality for example), you can do 
 
 From the root of the directory:
 
-- `npm login`: to ensure that you are properly logged in to the NPM network
 - `yarn all`: this will clean out all build artifacts, rebuild everything, run all tests, and "pack" the tarball if everything was successful
 - `yarn publish`: publishes the generated tarball to our registry
 - - note: At "new version" prompt, type in current version.
