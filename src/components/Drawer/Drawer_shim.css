@@ -10,16 +10,33 @@
 
 	padding: 24px;
 	/* need to confirm this is correct transition property */
-	transition-property: position;
-	transition-duration: .4s;
-	transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+	transition: all 0.3s ease-in-out;
+	transform: translate(20rem);
 	display: flex;
 	flex-direction: column;
-	/* z-index: map-get($indexes-map, "sheet"); */
+	z-index: 1000;
 	box-shadow: 0px 8px 16px var(--sheet-shadow);
 	/* background-color: var(--sheet-background); */
 
 	/* @include sheet-header; */
+}
+
+.neo-drawer--isOpen {
+	transform: translate(0);
+}
+
+.neo-modal__background {
+	animation: show-element .4s;
+	/* animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1); */
+	background-color: var(--modal-scrim-color);
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	position:fixed;
+	left: 0px;
+	right: auto;
+	top: 0px;
+	bottom: auto;
 }
 
 .neo-drawer__header {
@@ -38,14 +55,14 @@
 	margin-left: auto;
 }
 
-.neo-sheet__header--left>.neo-sheet-icon-chevron-left {
+.neo-drawer__header--left>.neo-drawer-icon-chevron-left {
 	color: var(--neo-color-base-800);
 	background-color: transparent;
 	font-size: 21px;
 	margin-right: 8px;
 }
 
-.neo-sheet__header--right>.neo-sheet-icon-close {
+.neo-drawer__header--right>.neo-drawer-icon-close {
 	color: var(--neo-color-base-800);
 	background-color: transparent;
 	font-size: 21px;
@@ -63,8 +80,8 @@
 
 @keyframes slideInRightShim {
 	0% {
-		opacity: 0;
-		transform: translateX(-30px);
+		opacity: 1;
+		transform: translateX(150px);
 	}
 
 	100% {
@@ -78,12 +95,12 @@
 	}
 
 	90% {
-		opacity: 0;
-		transform: translateX(30px);
+		opacity: 1;
+		transform: translateX(-150px);
 	}
 
 	100% {
-		opacity: 0;
+		opacity: 1;
 		visibility: hidden;
 	}
 }

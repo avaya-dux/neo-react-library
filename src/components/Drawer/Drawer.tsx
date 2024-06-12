@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useId } from "react";
 
 import { handleAccessbilityError, useIsInitialRender } from "utils";
+import FocusLock from "react-focus-lock";
 
 import "./Drawer_shim.css";
 import { IconButton } from "components/IconButton";
@@ -116,47 +117,51 @@ const BasicDrawer = ({
 	title?: string | JSX.Element;
 }) => {
 	return (
-		<div
-			aria-labelledby={id}
-			className={clsx(
-				"neo-drawer",
-				slide && "neo-slide",
-				slide && open && "drawer-horizontal-slide-in-shim",
-				slide && !open && "drawer-horizontal-slide-out-shim",
-				!open && (initialRender || !slide) && "neo-display-none",
-				className,
-			)}
-			{...rest}
-		>
-			<div className="neo-drawer__header">
-				<div className="neo-drawer__header--left">
-					{onBack !== undefined && (
-						<IconButton
-							onClick={onBack}
-							variant="tertiary"
-							shape="square"
-							aria-label="back" // TODO: localize this aria-label
-							icon="chevron-left"
-							className="neo-drawer-icon-chevron-left"
-						/>
+		<div>
+			<FocusLock>
+				<div
+					aria-labelledby={id}
+					className={clsx(
+						"neo-drawer",
+						slide && "neo-slide",
+						open && "neo-drawer--isOpen",
+						!open && initialRender && "neo-display-none",
+						className,
 					)}
-					<div id={id}>{title}</div>
-				</div>
+					{...rest}
+				>
+					<div className="neo-drawer__header">
+						<div className="neo-drawer__header--left">
+							{onBack !== undefined && (
+								<IconButton
+									onClick={onBack}
+									variant="tertiary"
+									shape="square"
+									aria-label="back" // TODO: localize this aria-label
+									icon="chevron-left"
+									className="neo-drawer-icon-chevron-left"
+								/>
+							)}
+							<div id={id}>{title}</div>
+						</div>
 
-				<div className="neo-drawer__header--right">
-					{onClose !== undefined && (
-						<IconButton
-							onClick={onClose}
-							variant="tertiary"
-							shape="square"
-							aria-label="close" // TODO: localize this aria-label
-							icon="close"
-							className="neo-drawer-icon-close"
-						/>
-					)}
+						<div className="neo-drawer__header--right">
+							{onClose !== undefined && (
+								<IconButton
+									onClick={onClose}
+									variant="tertiary"
+									shape="square"
+									aria-label="close" // TODO: localize this aria-label
+									icon="close"
+									className="neo-drawer-icon-close"
+								/>
+							)}
+						</div>
+					</div>
+					{children}
 				</div>
-			</div>
-			{children}
+			</FocusLock>
+			{/* {open && <div className="neo-modal__background" />} */}
 		</div>
 	);
 };
