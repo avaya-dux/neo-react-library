@@ -123,7 +123,7 @@ const BasicDrawer = ({
 
 	return (
 		<div>
-			<FocusLock>
+			<FocusLock disabled={!open}>
 				<div
 					aria-labelledby={id}
 					className={clsx(
