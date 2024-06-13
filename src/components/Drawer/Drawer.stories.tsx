@@ -64,21 +64,8 @@ export const Default = () => {
 	);
 };
 
-export const withFormComponents = () => {
-	const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
-	const [noDismissDrawerOpen, setNoDismissDrawerOpen] = useState(false);
-
-	const toggleDrawerByName = (drawerName: string) => {
-		console.log("drawerName: ", drawerName);
-		switch (drawerName) {
-			case "default":
-				setDefaultDrawerOpen(!defaultDrawerOpen);
-				break;
-			case "no-dismiss":
-				setNoDismissDrawerOpen(!noDismissDrawerOpen);
-				break;
-		}
-	};
+export const withForm = () => {
+	const [formDrawerOpen, setFormDrawerOpen] = useState(false);
 
 	return (
 		<main>
@@ -89,15 +76,15 @@ export const withFormComponents = () => {
 					marginBottom: "1rem",
 				}}
 			>
-				<Button onClick={() => toggleDrawerByName("default")}>
+				<Button onClick={() => setFormDrawerOpen(!formDrawerOpen)}>
 					Toggle Drawer Open
 				</Button>
 			</section>
 
 			<Drawer
-				open={defaultDrawerOpen}
-				onClose={() => toggleDrawerByName("default")}
-				title="Drawer with Form and components"
+				open={formDrawerOpen}
+				onClose={() => setFormDrawerOpen(false)}
+				title="Submission Form"
 				closeOnBackgroundClick={false}
 			>
 				<Form
