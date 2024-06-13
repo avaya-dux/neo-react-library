@@ -1,7 +1,7 @@
 import type { Meta, Story } from "@storybook/react";
 import { useState } from "react";
 
-import { Button, Form, Note, Switch } from "components";
+import { Button, Form, Note, Switch, TextArea } from "components";
 
 import { Drawer, type DrawerProps } from "./";
 
@@ -42,6 +42,17 @@ export const Default = () => {
 				<Button onClick={() => toggleDrawerByName("no-dismiss")}>
 					Toggle Drawer dismiss on click disabled Open
 				</Button>
+			</section>
+			<section>
+				<TextArea
+					helperText="Try typing here while scrim is on."
+					maxLength={10}
+					placeholder="Placeholder"
+					translations={{
+						over: "over",
+						remaining: "remaining",
+					}}
+				/>
 			</section>
 
 			<Drawer
