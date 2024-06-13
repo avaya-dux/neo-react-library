@@ -1,7 +1,7 @@
 import type { Meta, Story } from "@storybook/react";
 import { useState } from "react";
 
-import { Button, Form, Switch, Toast } from "components";
+import { Button, Form, Note, Switch } from "components";
 
 import { Drawer, type DrawerProps } from "./";
 
@@ -112,6 +112,45 @@ export const withForm = () => {
 						<Button type="submit">Submit</Button>
 					</section>
 				</Form>
+			</Drawer>
+		</main>
+	);
+};
+
+export const withNote = () => {
+	const [noteDrawerOpen, setNoteDrawerOpen] = useState(false);
+
+	return (
+		<main>
+			<section
+				style={{
+					display: "flex",
+					justifyContent: "space-between",
+					marginBottom: "1rem",
+				}}
+			>
+				<Button onClick={() => setNoteDrawerOpen(!noteDrawerOpen)}>
+					Toggle Notes Drawer Open
+				</Button>
+			</section>
+
+			<Drawer
+				open={noteDrawerOpen}
+				onClose={() => setNoteDrawerOpen(false)}
+				title="Submission Form"
+				closeOnBackgroundClick={false}
+			>
+				<Note>
+					<Note.Title>Meeting notes</Note.Title>
+					<Note.Content author="Kathy" self={true}>
+						Hi, can we sync?
+					</Note.Content>
+				</Note>
+				<Note>
+					<Note.Content author="Cleo" self={false}>
+						Sure, give me 10 minutes.
+					</Note.Content>
+				</Note>
 			</Drawer>
 		</main>
 	);
