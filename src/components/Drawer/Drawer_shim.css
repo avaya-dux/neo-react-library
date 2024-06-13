@@ -1,5 +1,4 @@
 .neo-drawer {
-	/* @include NeoLinkStyles; */
 	position: fixed;
 	right: 0px;
 	top: 0px;
@@ -9,15 +8,12 @@
 	max-width: 20rem;
 
 	padding: 24px;
-	/* need to confirm this is correct transition property */
 	transition: all 0.3s ease-in-out;
 	transform: translate(20rem);
 	display: flex;
 	flex-direction: column;
 	z-index: 1000;
 	background-color: var(--sheet-background);
-
-	/* @include sheet-header; */
 }
 
 .neo-drawer--isOpen {
@@ -33,12 +29,9 @@
 	bottom: 0;
 	overflow: hidden;
 	background-color: var(--modal-scrim-color);
-	/* animation: show-element .4s; */
-	/* animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1); */
 	height: 100%;
 	width: 100%;
 	z-index: 999;
-	/* opacity: 0.5; */
 	visibility:visible;
 	transition: opacity 0.3s ease, visibility 0.3s ease;
 }

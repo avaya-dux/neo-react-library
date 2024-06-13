@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { type KeyboardEvent, type KeyboardEventHandler, useId } from "react";
 
-import { handleAccessbilityError, useIsInitialRender } from "utils";
+import { handleAccessbilityError } from "utils";
 import FocusLock from "react-focus-lock";
 
 import "./Drawer_shim.css";
@@ -34,7 +34,6 @@ interface BaseDrawerProps
 	onClose?: () => void;
 	closeOnBackgroundClick?: boolean;
 	open?: boolean;
-	slide?: boolean;
 }
 
 export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
@@ -43,7 +42,7 @@ export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
  * This component is used as a container of components that are dismisable.
  *
  * @example
- * <Drawer open={isOpen} slide={true} title="Mini Form">
+ * <Drawer open={isOpen} title="Mini Form">
  *  <Form>
  *   <TextInput />
  *   <TextInput />
@@ -57,7 +56,6 @@ export const Drawer = ({
 	className,
 	id,
 	open = true,
-	slide = true,
 	title,
 	onBack,
 	onClose,
@@ -67,7 +65,6 @@ export const Drawer = ({
 }: DrawerProps) => {
 	const generatedId = useId();
 	id = id || generatedId;
-	const initialRender = useIsInitialRender();
 	const buttons = "actions" in rest ? rest.actions : null;
 
 	if (!(title || rest["aria-label"] || rest["aria-labelledby"])) {
@@ -87,8 +84,6 @@ export const Drawer = ({
 				closeOnBackgroundClick={closeOnBackgroundClick}
 				open={open}
 				id={id}
-				initialRender={initialRender}
-				slide={slide}
 				title={title}
 				{...rest}
 			>
@@ -102,24 +97,20 @@ const BasicDrawer = ({
 	children,
 	className,
 	id,
-	initialRender,
 	onBack,
 	onClose,
 	closeOnBackgroundClick,
 	open,
-	slide,
 	title,
 	...rest
 }: {
 	children?: React.ReactNode;
 	className?: string;
 	id?: string;
-	initialRender: boolean;
 	onBack?: () => void;
 	onClose?: () => void;
 	closeOnBackgroundClick: boolean;
 	open: boolean;
-	slide: boolean;
 	title?: string | JSX.Element;
 }) => {
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
@@ -137,9 +128,7 @@ const BasicDrawer = ({
 					aria-labelledby={id}
 					className={clsx(
 						"neo-drawer",
-						slide && "neo-slide",
 						open && "neo-drawer--isOpen",
-						!open && initialRender && "neo-display-none",
 						className,
 					)}
 					{...rest}
