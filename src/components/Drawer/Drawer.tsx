@@ -1,11 +1,12 @@
 import clsx from "clsx";
-import { useId } from "react";
+import { type KeyboardEvent, type KeyboardEventHandler, useId } from "react";
 
 import { handleAccessbilityError, useIsInitialRender } from "utils";
 import FocusLock from "react-focus-lock";
 
 import "./Drawer_shim.css";
 import { IconButton } from "components/IconButton";
+import { Keys } from "utils";
 
 type EnforcedAccessibleLabel =
 	| {
@@ -116,6 +117,14 @@ const BasicDrawer = ({
 	slide: boolean;
 	title?: string | JSX.Element;
 }) => {
+	const onKeyDownScrimHandler: KeyboardEventHandler = (
+		e: KeyboardEvent<HTMLButtonElement>,
+	) => {
+		if (onClose && e.key !== Keys.ESC) {
+			onClose();
+		}
+	};
+
 	return (
 		<div>
 			<FocusLock>
@@ -161,7 +170,13 @@ const BasicDrawer = ({
 					{children}
 				</div>
 			</FocusLock>
-			{open && <div className="neo-drawer__scrim" />}
+			{open && (
+				<div
+					onKeyDown={onKeyDownScrimHandler}
+					onClick={onClose}
+					className="neo-drawer__scrim"
+				/>
+			)}
 		</div>
 	);
 };

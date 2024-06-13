@@ -15,7 +15,6 @@
 	display: flex;
 	flex-direction: column;
 	z-index: 1000;
-	box-shadow: 0px 8px 16px var(--sheet-shadow);
 	background-color: var(--sheet-background);
 
 	/* @include sheet-header; */
@@ -23,6 +22,7 @@
 
 .neo-drawer--isOpen {
 	transform: translate(0);
+	box-shadow: 0px 8px 16px var(--sheet-shadow);
 }
 
 .neo-drawer__scrim {
