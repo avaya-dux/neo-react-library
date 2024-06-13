@@ -11,13 +11,17 @@ export default {
 } as Meta<DrawerProps>;
 
 export const Default = () => {
-	const [DefaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
+	const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
+	const [noDismissDrawerOpen, setNoDismissDrawerOpen] = useState(false);
 
-	const toggleDrawerByName = (DrawerName: string) => {
-		console.log("toggleDrawerByName CALLED");
-		switch (DrawerName) {
+	const toggleDrawerByName = (drawerName: string) => {
+		console.log("drawerName: ", drawerName);
+		switch (drawerName) {
 			case "default":
-				setDefaultDrawerOpen(!DefaultDrawerOpen);
+				setDefaultDrawerOpen(!defaultDrawerOpen);
+				break;
+			case "no-dismiss":
+				setNoDismissDrawerOpen(!noDismissDrawerOpen);
 				break;
 		}
 	};
@@ -34,14 +38,27 @@ export const Default = () => {
 				<Button onClick={() => toggleDrawerByName("default")}>
 					Toggle Default Drawer Open
 				</Button>
+
+				<Button onClick={() => toggleDrawerByName("no-dismiss")}>
+					Toggle Drawer dismiss on click disabled Open
+				</Button>
 			</section>
 
 			<Drawer
-				open={DefaultDrawerOpen}
+				open={defaultDrawerOpen}
 				onClose={() => toggleDrawerByName("default")}
 				title="Drawer with default behavior"
 			>
 				<p>This Drawer should only have the x close button</p>
+			</Drawer>
+
+			<Drawer
+				open={noDismissDrawerOpen}
+				onClose={() => toggleDrawerByName("no-dismiss")}
+				title="Drawer with dimiss on scrim click disabled"
+				closeOnBackgroundClick={false}
+			>
+				<p>This Drawer will not close if you click on the scrim background</p>
 			</Drawer>
 		</main>
 	);
