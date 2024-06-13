@@ -11,12 +11,13 @@ export default {
 } as Meta<DrawerProps>;
 
 export const Default = () => {
-	const [DrawerOneOpen, setDrawerOneOpen] = useState(false);
+	const [DefaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
 
-	const closeDrawerByNumber = (DrawerNumber: number) => {
-		switch (DrawerNumber) {
-			case 1:
-				setDrawerOneOpen(false);
+	const toggleDrawerByName = (DrawerName: string) => {
+		console.log("toggleDrawerByName CALLED");
+		switch (DrawerName) {
+			case "default":
+				setDefaultDrawerOpen(!DefaultDrawerOpen);
 				break;
 		}
 	};
@@ -27,23 +28,20 @@ export const Default = () => {
 				style={{
 					display: "flex",
 					justifyContent: "space-between",
-
 					marginBottom: "1rem",
 				}}
 			>
-				<Button onClick={() => setDrawerOneOpen(!DrawerOneOpen)}>
-					Toggle Drawer 1 Open
+				<Button onClick={() => toggleDrawerByName("default")}>
+					Toggle Default Drawer Open
 				</Button>
 			</section>
 
 			<Drawer
-				open={DrawerOneOpen}
-				onClose={() => setDrawerOneOpen(false)}
-				title="Drawer with no actions"
+				open={DefaultDrawerOpen}
+				onClose={() => toggleDrawerByName("default")}
+				title="Drawer with default behavior"
 			>
-				<p>
-					This Drawer should only have the x close button
-				</p>
+				<p>This Drawer should only have the x close button</p>
 			</Drawer>
 		</main>
 	);
