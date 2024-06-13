@@ -32,6 +32,7 @@ interface BaseDrawerProps
 	id?: string;
 	onBack?: () => void;
 	onClose?: () => void;
+	closeOnBackgroundClick?: boolean;
 	open?: boolean;
 	slide?: boolean;
 }
@@ -60,6 +61,7 @@ export const Drawer = ({
 	title,
 	onBack,
 	onClose,
+	closeOnBackgroundClick = true,
 
 	...rest
 }: DrawerProps) => {
@@ -82,6 +84,7 @@ export const Drawer = ({
 				className={className}
 				onBack={onBack}
 				onClose={onClose}
+				closeOnBackgroundClick={closeOnBackgroundClick}
 				open={open}
 				id={id}
 				initialRender={initialRender}
@@ -102,6 +105,7 @@ const BasicDrawer = ({
 	initialRender,
 	onBack,
 	onClose,
+	closeOnBackgroundClick,
 	open,
 	slide,
 	title,
@@ -113,6 +117,7 @@ const BasicDrawer = ({
 	initialRender: boolean;
 	onBack?: () => void;
 	onClose?: () => void;
+	closeOnBackgroundClick: boolean;
 	open: boolean;
 	slide: boolean;
 	title?: string | JSX.Element;
@@ -173,7 +178,7 @@ const BasicDrawer = ({
 			{open && (
 				<div
 					onKeyDown={onKeyDownScrimHandler}
-					onClick={onClose}
+					onClick={closeOnBackgroundClick ? onClose : undefined}
 					className="neo-drawer__scrim"
 				/>
 			)}
