@@ -53,6 +53,7 @@ export const Default = () => {
 			<section>
 				<TextArea
 					helperText="Try typing here while scrim is on."
+					label="Test focus by typing here"
 					maxLength={10}
 					placeholder="Placeholder"
 					translations={{
@@ -227,6 +228,7 @@ export const customWidth = () => {
 			<section>
 				<TextArea
 					helperText="Try typing here while scrim is on."
+					label="Test focus by typing here"
 					maxLength={10}
 					placeholder="Placeholder"
 					translations={{

@@ -148,6 +148,7 @@ const BasicDrawer = ({
 		<div>
 			<FocusLock disabled={!open}>
 				<div
+					role="dialog"
 					style={style}
 					aria-labelledby={id}
 					className={clsx(
