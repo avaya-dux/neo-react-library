@@ -7,8 +7,8 @@ import {
 	useState,
 } from "react";
 
-import { handleAccessbilityError } from "utils";
 import FocusLock from "react-focus-lock";
+import { handleAccessbilityError } from "utils";
 
 import "./Drawer_shim.css";
 import { IconButton } from "components/IconButton";
