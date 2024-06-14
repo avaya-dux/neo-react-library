@@ -1,12 +1,26 @@
 import clsx from "clsx";
-import { useContext, useMemo } from "react";
+import {
+	useCallback,
+	useContext,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 
 import { Chip } from "components/Chip";
 
 import { SelectContext } from "../utils/SelectContext";
+import { calculateWidthsUntilExceed } from "../utils/multiSelectHelper";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
 import "./MultiSelect.css";
+import { Tooltip } from "components/Tooltip";
+
+import log from "loglevel";
+import { reactNodeToString } from "utils";
+const logger = log.getLogger("multiselect-logger");
+logger.enableAll();
 
 export const MultiSelect = () => {
 	const {
@@ -16,7 +30,7 @@ export const MultiSelect = () => {
 			isOpen,
 			selectItem: toggleItem, // NOTE: I've adjusted the hook for this case (multi-select) such that the "select" is actually a "toggle" now
 		},
-		optionProps: { selectedItems, setSelectedItems },
+		optionProps: { selectedItems, setSelectedItems, collapse },
 		selectProps: {
 			filteredOptions,
 			ariaLabel,
@@ -28,12 +42,28 @@ export const MultiSelect = () => {
 		},
 	} = useContext(SelectContext);
 
-	const selectedItemsAsChips = useMemo(
-		() =>
-			selectedItems.length
-				? selectedItems.map((item, index) => (
+	logger.debug("1. start");
+
+	const chipContainerRef = useRef<HTMLSpanElement>(null); // Ref for the container of chips
+	const chipRefs = useRef<HTMLDivElement[]>([]); // Array to hold refs for each chip
+
+	const setChipRef = useCallback((el: HTMLDivElement | null, index: number) => {
+		if (el) {
+			logger.debug(`2.1 setting ref for chip ${index}`);
+			chipRefs.current[index] = el;
+		}
+	}, []);
+
+	const selectedItemsAsChips = useMemo(() => {
+		logger.debug("2. calculating selected items as chips");
+		chipRefs.current = []; // Reset chipRefs for each computation
+
+		return selectedItems.length
+			? selectedItems.map((item, index) => {
+					return (
 						<Chip
 							key={`${item.children}-${index}`}
+							ref={(el) => setChipRef(el, index)}
 							closable
 							disabled={disabled}
 							closeButtonAriaLabel={`Remove ${item.children}`}
@@ -41,10 +71,61 @@ export const MultiSelect = () => {
 						>
 							{item.children}
 						</Chip>
-					))
-				: null,
-		[selectedItems, disabled, toggleItem],
+					);
+				})
+			: null;
+	}, [selectedItems, disabled, toggleItem, setChipRef]);
+
+	const [chipsToDisplay, setChipsToDisplay] = useState<React.ReactNode | null>(
+		selectedItemsAsChips,
 	);
+
+	useEffect(() => {
+		logger.debug("3. copy selectedItemsAsChips to display");
+		setChipsToDisplay(selectedItemsAsChips);
+	}, [selectedItemsAsChips]);
+
+	useEffect(() => {
+		logger.debug("4. calculating chips to display");
+		if (!collapse) {
+			logger.debug("4.1 collapse is false, no need to do anything.");
+			return;
+		}
+		const containerWidth = chipContainerRef.current?.offsetWidth || 0;
+		const widths = chipRefs.current.map((ref) => ref.offsetWidth || 0);
+		const chipContents: string[] = chipRefs.current.map(
+			(ref) => ref.textContent || "",
+		);
+		// 120px is the room reserved for the badge chip, the 2 buttons and some padding
+		const reservedSpace = 120;
+		const result = calculateWidthsUntilExceed(
+			containerWidth,
+			widths,
+			reservedSpace,
+		);
+		logger.debug(
+			`4.2 result ${JSON.stringify({ result, widths, containerWidth, chipContents })}`,
+		);
+		if (result.hiddenCount === 0 || selectedItemsAsChips === null) {
+			logger.debug(
+				`4.3 no chips to hide, hiddenCount=${result.hiddenCount}, selectedItemAsChips=${reactNodeToString(selectedItemsAsChips)}`,
+			);
+			return;
+		}
+		const shortenChips = selectedItemsAsChips.slice(0, result.index + 1);
+		const label = chipContents.slice(result.index + 1).join(", ");
+		const badgeChip = (
+			<Tooltip key="badge-chip-tooltip" label={label}>
+				<Chip>{`+${result.hiddenCount}`}</Chip>
+			</Tooltip>
+		);
+		shortenChips.push(badgeChip);
+		logger.debug(
+			`4.4 setting shortened chips to display ${reactNodeToString(shortenChips)}`,
+		);
+		setChipsToDisplay(shortenChips);
+	}, [collapse, selectedItemsAsChips]);
+
 	const {
 		role,
 		"aria-activedescendant": ariaActiveDescendant,
@@ -68,7 +149,10 @@ export const MultiSelect = () => {
 		}
 		return { "aria-labelledby": ariaLabelledby };
 	}, [selectedItems, ariaLabel, ariaLabelledby, filteredOptions]);
-
+	const textContent = chipsToDisplay
+		? reactNodeToString(chipsToDisplay)
+		: "null";
+	logger.debug(`5. rendering ${textContent}`);
 	return (
 		<div
 			aria-describedby={helperText && helperId}
@@ -81,7 +165,11 @@ export const MultiSelect = () => {
 			)}
 		>
 			<span className="neo-multiselect-combo__header neo-multiselect-combo__header--no-after">
-				<span className="neo-multiselect__padded-container">
+				<span
+					ref={chipContainerRef}
+					key="multiselect-chip-container"
+					className="neo-multiselect__padded-container"
+				>
 					<div className="neo-multiselect-combo__buttons-container">
 						<button
 							{...restToggleProps}
@@ -105,7 +193,7 @@ export const MultiSelect = () => {
 						/>
 					</div>
 
-					{selectedItemsAsChips}
+					{chipsToDisplay}
 				</span>
 			</span>
 

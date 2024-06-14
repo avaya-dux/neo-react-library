@@ -4,7 +4,7 @@ import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import { Chip } from "./";
-import { Closable, Default, Templated } from "./Chip.stories";
+import { Closable, Default, Templated, WithRef, WithRefArray } from "./Chip.stories";
 
 describe("Chip", () => {
 	const user = userEvent.setup();
@@ -113,6 +113,44 @@ describe("Chip", () => {
 
 			beforeEach(() => {
 				renderResult = render(<Templated>test</Templated>);
+			});
+
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
+
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+
+		describe("WithRef", () => {
+			let renderResult: RenderResult;
+
+			beforeEach(() => {
+				renderResult = render(<WithRef />);
+			});
+
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
+
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+
+		describe("WithRefArray", () => {
+			let renderResult: RenderResult;
+
+			beforeEach(() => {
+				renderResult = render(<WithRefArray />);
 			});
 
 			it("should render ok", () => {

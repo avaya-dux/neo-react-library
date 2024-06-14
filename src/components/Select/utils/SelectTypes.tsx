@@ -34,6 +34,7 @@ export type SelectProps = {
 	placeholder?: string;
 	required?: boolean;
 	searchable?: boolean;
+	collapse?: boolean;
 	value?: string | string[];
 	size?: SizeTypeSelect;
 	style?: React.CSSProperties;

@@ -74,6 +74,33 @@ export const BasicSelects = () => {
 	);
 };
 
+export const CollapsedMultiSelect = () => {
+	const [foods, setFoods] = useState<string[]>([]);
+
+	return (
+		<Sheet title="Multi Select that collapses chips" style={{ width: 400 }}>
+			<Select
+				helperText="Please select one or more"
+				label="Select a few nice foods"
+				multiple
+				collapse
+				onChange={(value) => setFoods(value as string[])}
+			>
+				{fruitOptions}
+			</Select>
+			<div>
+				<p>Nice Foods Selection: {foods.length === 0 && "None Selected"}</p>
+
+				<ul>
+					{foods.map((food) => (
+						<li key={food}>{food}</li>
+					))}
+				</ul>
+			</div>
+		</Sheet>
+	);
+};
+
 export const Localized = () => {
 	const [lang, setLang] = useState("English");
 	const [currTranslations, setCurrTranslations] = useState(englishTrans);

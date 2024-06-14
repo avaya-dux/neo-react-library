@@ -69,6 +69,7 @@ export const Select = (props: SelectProps) => {
 		placeholder = "",
 		required,
 		searchable = false,
+		collapse = false,
 		value,
 		size = "md",
 		style,
@@ -198,6 +199,7 @@ export const Select = (props: SelectProps) => {
 		},
 		optionProps: {
 			multiple,
+			collapse,
 			noOptionsMessage,
 			options,
 			selectedItems,

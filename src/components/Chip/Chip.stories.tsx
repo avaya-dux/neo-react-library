@@ -1,5 +1,6 @@
 import type { Meta, Story } from "@storybook/react";
 
+import { useEffect, useRef, useState } from "react";
 import { Chip, type ChipProps, ChipsContainer } from "./";
 
 export default {
@@ -20,6 +21,49 @@ export const Closable = () => (
 		</Chip>
 	</ChipsContainer>
 );
+
+export const WithRef = () => {
+	const chipRef = useRef<HTMLDivElement>(null);
+
+	const [chipWidth, setChipWidth] = useState(0);
+
+	useEffect(() => {
+		if (chipRef.current) {
+			setChipWidth(chipRef.current.offsetWidth);
+		}
+	}, []);
+
+	return (
+		<ChipsContainer>
+			<Chip ref={chipRef}>With Ref</Chip>
+			<div>Chip Width: {chipWidth}px</div>
+		</ChipsContainer>
+	);
+};
+
+export const WithRefArray = () => {
+	const chipRefs = useRef<HTMLDivElement[]>([]);
+	const [chipWidth, setChipWidth] = useState(0);
+
+	useEffect(() => {
+		if (chipRefs.current[0]) {
+			setChipWidth(chipRefs.current[0].offsetWidth);
+		}
+	}, []);
+
+	const setChipRef = (el: HTMLDivElement | null, index: number) => {
+		if (el) {
+			chipRefs.current[index] = el;
+		}
+	};
+
+	return (
+		<ChipsContainer>
+			<Chip ref={(el) => setChipRef(el, 0)}>With Ref Array</Chip>
+			<div>Chip Width: {chipWidth}px</div>
+		</ChipsContainer>
+	);
+};
 
 export const ChipsContainerExamples = () => (
 	<div>
