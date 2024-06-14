@@ -84,31 +84,30 @@ export const Drawer = ({
 			"If you add buttons, you must also provide a title",
 		);
 	} else if (!buttons) {
+		const [widthStyle, setWidthStyle] = useState<object | undefined>({});
 
-	const [widthStyle, setWidthStyle] = useState<object | undefined>({});
+		useEffect(() => {
+			const drawerClosedStyle = { width, transform: `translate(${width})` };
+			const drawerOpenStyle = { width };
 
-	useEffect(() => {
-		const drawerClosedStyle = {  width, transform: `translate(${width})` };
-		const drawerOpenStyle = { width };
+			open ? setWidthStyle(drawerOpenStyle) : setWidthStyle(drawerClosedStyle);
+		}, [open, width]);
 
-		open ? setWidthStyle(drawerOpenStyle) : setWidthStyle(drawerClosedStyle);
-	}, [open, width]);
-
-	return (
-		<BasicDrawer
-			className={className}
-			onBack={onBack}
-			onClose={onClose}
-			closeOnBackgroundClick={closeOnBackgroundClick}
-			open={open}
-			id={id}
-			title={title}
-			style={widthStyle}
-			{...rest}
-		>
-			{children}
-		</BasicDrawer>
-	);
+		return (
+			<BasicDrawer
+				className={className}
+				onBack={onBack}
+				onClose={onClose}
+				closeOnBackgroundClick={closeOnBackgroundClick}
+				open={open}
+				id={id}
+				title={title}
+				style={widthStyle}
+				{...rest}
+			>
+				{children}
+			</BasicDrawer>
+		);
 	}
 };
 
@@ -134,7 +133,6 @@ const BasicDrawer = ({
 	title?: string | JSX.Element;
 	style?: object | undefined;
 }) => {
-
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
 	) => {
@@ -142,7 +140,6 @@ const BasicDrawer = ({
 			onClose();
 		}
 	};
-
 
 	return (
 		<div>

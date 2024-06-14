@@ -142,19 +142,18 @@ export const ListSectionTextWithIconAndHover: Story<ListSectionProps> = (
 	</List>
 );
 
-export const ListSectionTextWithIconAndHoverAndSwitch: Story<
-	ListSectionProps
-> = (props: ListSectionProps) => (
-	<List itemType="ListSection">
-		<ListSection icon={iconChat} actions={[basicSwitch]} hover {...props}>
-			First item with chat icon and switch
-		</ListSection>
+export const ListSectionTextWithIconAndHoverAndSwitch: Story<ListSectionProps> =
+	(props: ListSectionProps) => (
+		<List itemType="ListSection">
+			<ListSection icon={iconChat} actions={[basicSwitch]} hover {...props}>
+				First item with chat icon and switch
+			</ListSection>
 
-		<ListSection icon={iconStar} hover {...props}>
-			Second item with star icon
-		</ListSection>
-	</List>
-);
+			<ListSection icon={iconStar} hover {...props}>
+				Second item with star icon
+			</ListSection>
+		</List>
+	);
 
 export const ListSectionTextWithIconAndHoverAndIconButton: Story<
 	ListSectionProps

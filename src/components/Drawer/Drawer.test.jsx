@@ -9,7 +9,6 @@ import * as DrawerStories from "./Drawer.stories";
 const { Default, Templated } = composeStories(DrawerStories);
 
 describe("Drawer", () => {
-
 	it("fully renders without exploding", () => {
 		render(<Drawer aria-label="example drawer">content</Drawer>);
 
@@ -44,8 +43,6 @@ describe("Drawer", () => {
 		expect(sheetRootElement).toHaveStyle("width: 100px");
 	});
 
-
-
 	it("throws error if there is no `aria-label` or `title` passed", () => {
 		const spy = vi.spyOn(console, "error").mockImplementation(() => null);
 		expect(() => render(<Drawer />)).toThrow();
@@ -60,7 +57,7 @@ describe("Drawer", () => {
 
 	describe("`open` functionality", () => {
 		it("when `open={true}`, a Drawer's contents _are_ visible", async () => {
-			render(<Drawer open={true} title="drawer title"/>);
+			render(<Drawer open={true} title="drawer title" />);
 
 			const drawer = screen.getByRole("dialog");
 			expect(drawer).toHaveClass("neo-drawer--isOpen");
@@ -72,7 +69,6 @@ describe("Drawer", () => {
 			const drawer = screen.getByRole("dialog");
 			expect(drawer).not.toHaveClass("neo-drawer--isOpen");
 		});
-
 	});
 
 	describe("storybook tests", () => {

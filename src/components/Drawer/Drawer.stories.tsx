@@ -83,7 +83,9 @@ export const Default = () => {
 			<Drawer
 				open={hasBackButtonDrawerOpen}
 				onClose={() => toggleDrawerByName("back-button")}
-				onBack={() => {alert("Back button pressed")}}
+				onBack={() => {
+					alert("Back button pressed");
+				}}
 				title="With back button"
 			>
 				<p>This Drawer both a Back button and the x close button</p>
