@@ -1,5 +1,11 @@
 import clsx from "clsx";
-import { type KeyboardEvent, type KeyboardEventHandler, useId } from "react";
+import {
+	type KeyboardEvent,
+	type KeyboardEventHandler,
+	useEffect,
+	useId,
+	useState,
+} from "react";
 
 import { handleAccessbilityError } from "utils";
 import FocusLock from "react-focus-lock";
@@ -34,6 +40,7 @@ interface BaseDrawerProps
 	onClose?: () => void;
 	closeOnBackgroundClick?: boolean;
 	open?: boolean;
+	width?: string;
 }
 
 export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
@@ -60,12 +67,15 @@ export const Drawer = ({
 	onBack,
 	onClose,
 	closeOnBackgroundClick = true,
+	width,
 
 	...rest
 }: DrawerProps) => {
 	const generatedId = useId();
 	id = id || generatedId;
 	const buttons = "actions" in rest ? rest.actions : null;
+
+	console.log("outer width prop: ", width);
 
 	if (!(title || rest["aria-label"] || rest["aria-labelledby"])) {
 		handleAccessbilityError(
@@ -76,20 +86,31 @@ export const Drawer = ({
 			"If you add buttons, you must also provide a title",
 		);
 	} else if (!buttons) {
-		return (
-			<BasicDrawer
-				className={className}
-				onBack={onBack}
-				onClose={onClose}
-				closeOnBackgroundClick={closeOnBackgroundClick}
-				open={open}
-				id={id}
-				title={title}
-				{...rest}
-			>
-				{children}
-			</BasicDrawer>
-		);
+
+	const [widthStyle, setWidthStyle] = useState<object | undefined>({});
+
+	useEffect(() => {
+		const drawerClosedStyle = {  width, transform: `translate(${width})` };
+		const drawerOpenStyle = { width };
+
+		open ? setWidthStyle(drawerOpenStyle) : setWidthStyle(drawerClosedStyle);
+	}, [open, width]);
+
+	return (
+		<BasicDrawer
+			className={className}
+			onBack={onBack}
+			onClose={onClose}
+			closeOnBackgroundClick={closeOnBackgroundClick}
+			open={open}
+			id={id}
+			title={title}
+			style={widthStyle}
+			{...rest}
+		>
+			{children}
+		</BasicDrawer>
+	);
 	}
 };
 
@@ -102,6 +123,7 @@ const BasicDrawer = ({
 	closeOnBackgroundClick,
 	open,
 	title,
+	style,
 	...rest
 }: {
 	children?: React.ReactNode;
@@ -112,7 +134,9 @@ const BasicDrawer = ({
 	closeOnBackgroundClick: boolean;
 	open: boolean;
 	title?: string | JSX.Element;
+	style?: object | undefined;
 }) => {
+
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
 	) => {
@@ -121,10 +145,12 @@ const BasicDrawer = ({
 		}
 	};
 
+
 	return (
 		<div>
 			<FocusLock disabled={!open}>
 				<div
+					style={style}
 					aria-labelledby={id}
 					className={clsx(
 						"neo-drawer",

@@ -13,6 +13,7 @@ export default {
 export const Default = () => {
 	const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
 	const [noDismissDrawerOpen, setNoDismissDrawerOpen] = useState(false);
+	const [hasBackButtonDrawerOpen, sethasBackButtonDrawerOpen] = useState(false);
 
 	const toggleDrawerByName = (drawerName: string) => {
 		console.log("drawerName: ", drawerName);
@@ -22,6 +23,9 @@ export const Default = () => {
 				break;
 			case "no-dismiss":
 				setNoDismissDrawerOpen(!noDismissDrawerOpen);
+				break;
+			case "back-button":
+				sethasBackButtonDrawerOpen(!hasBackButtonDrawerOpen);
 				break;
 		}
 	};
@@ -36,11 +40,15 @@ export const Default = () => {
 				}}
 			>
 				<Button onClick={() => toggleDrawerByName("default")}>
-					Toggle Default Drawer Open
+					Open Default Drawer
 				</Button>
 
 				<Button onClick={() => toggleDrawerByName("no-dismiss")}>
-					Toggle Drawer dismiss on click disabled Open
+					Open Drawer dismiss disabled
+				</Button>
+
+				<Button onClick={() => toggleDrawerByName("back-button")}>
+					Open Drawer with Back button
 				</Button>
 			</section>
 			<section>
@@ -70,6 +78,15 @@ export const Default = () => {
 				closeOnBackgroundClick={false}
 			>
 				<p>This Drawer will not close if you click on the scrim background</p>
+			</Drawer>
+
+			<Drawer
+				open={hasBackButtonDrawerOpen}
+				onClose={() => toggleDrawerByName("back-button")}
+				onBack={() => {alert("Back button pressed")}}
+				title="Drawer with back button"
+			>
+				<p>This Drawer both a Back button and the x close button</p>
 			</Drawer>
 		</main>
 	);
@@ -149,7 +166,8 @@ export const withNote = () => {
 				open={noteDrawerOpen}
 				onClose={() => setNoteDrawerOpen(false)}
 				title="Submission Form"
-				closeOnBackgroundClick={false}
+				closeOnBackgroundClick={true}
+				width="30rem"
 			>
 				<Note>
 					<Note.Title>Meeting notes</Note.Title>

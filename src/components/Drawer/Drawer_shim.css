@@ -3,9 +3,9 @@
 	right: 0px;
 	top: 0px;
 	bottom: 0px;
-	width: 100%;
+	width: 20rem;
 	max-height: 100vh;
-	max-width: 20rem;
+	max-width: 40rem;
 
 	padding: 24px;
 	transition: all 0.3s ease-in-out;
