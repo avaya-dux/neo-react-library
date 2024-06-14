@@ -16,7 +16,6 @@ export const Default = () => {
 	const [hasBackButtonDrawerOpen, sethasBackButtonDrawerOpen] = useState(false);
 
 	const toggleDrawerByName = (drawerName: string) => {
-		console.log("drawerName: ", drawerName);
 		switch (drawerName) {
 			case "default":
 				setDefaultDrawerOpen(!defaultDrawerOpen);
@@ -191,7 +190,6 @@ export const customWidth = () => {
 	const [widthPixelDrawerOpen, setWidthPixelDrawerOpen] = useState(false);
 
 	const toggleDrawerByName = (drawerName: string) => {
-		console.log("drawerName: ", drawerName);
 		switch (drawerName) {
 			case "default":
 				setDefaultDrawerOpen(!defaultDrawerOpen);
@@ -304,11 +302,6 @@ export const Templated = Template.bind({});
 Templated.args = {
 	id: "example",
 	title: "Drawer title",
-	slide: true,
 	open: true,
-	actions: [
-		<Button key="btn1">button 1</Button>,
-		<Button key="btn2">second btn</Button>,
-	],
 	children: <p>Drawer content</p>,
 };

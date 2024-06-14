@@ -75,8 +75,6 @@ export const Drawer = ({
 	id = id || generatedId;
 	const buttons = "actions" in rest ? rest.actions : null;
 
-	console.log("outer width prop: ", width);
-
 	if (!(title || rest["aria-label"] || rest["aria-labelledby"])) {
 		handleAccessbilityError(
 			"Drawer must have an have an accessible name. Please add a `title`, `aria-label`, or `aria-labelledby` prop.",
