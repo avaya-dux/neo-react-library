@@ -165,9 +165,121 @@ export const withNote = () => {
 			<Drawer
 				open={noteDrawerOpen}
 				onClose={() => setNoteDrawerOpen(false)}
-				title="Submission Form"
+				title="General Notes"
 				closeOnBackgroundClick={true}
 				width="30rem"
+			>
+				<Note>
+					<Note.Title>Meeting notes</Note.Title>
+					<Note.Content author="Kathy" self={true}>
+						Hi, can we sync?
+					</Note.Content>
+				</Note>
+				<Note>
+					<Note.Content author="Cleo" self={false}>
+						Sure, give me 10 minutes.
+					</Note.Content>
+				</Note>
+			</Drawer>
+		</main>
+	);
+};
+
+export const customWidth = () => {
+	const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
+	const [widthRemDrawerOpen, setWidthRemDrawerOpen] = useState(false);
+	const [widthPixelDrawerOpen, setWidthPixelDrawerOpen] = useState(false);
+
+	const toggleDrawerByName = (drawerName: string) => {
+		console.log("drawerName: ", drawerName);
+		switch (drawerName) {
+			case "default":
+				setDefaultDrawerOpen(!defaultDrawerOpen);
+				break;
+			case "rem-units":
+				setWidthRemDrawerOpen(!widthRemDrawerOpen);
+				break;
+			case "pixel-units":
+				setWidthPixelDrawerOpen(!widthPixelDrawerOpen);
+				break;
+		}
+	};
+
+	return (
+		<main>
+			<section
+				style={{
+					display: "flex",
+					justifyContent: "space-between",
+					marginBottom: "1rem",
+				}}
+			>
+				<Button onClick={() => toggleDrawerByName("default")}>
+					Open Default Width Drawer (20rem)
+				</Button>
+
+				<Button onClick={() => toggleDrawerByName("rem-units")}>
+					Open Drawer with 30rem width
+				</Button>
+
+				<Button onClick={() => toggleDrawerByName("pixel-units")}>
+					Open Drawer with 150px width
+				</Button>
+			</section>
+			<section>
+				<TextArea
+					helperText="Try typing here while scrim is on."
+					maxLength={10}
+					placeholder="Placeholder"
+					translations={{
+						over: "over",
+						remaining: "remaining",
+					}}
+				/>
+			</section>
+
+			<Drawer
+				open={defaultDrawerOpen}
+				onClose={() => toggleDrawerByName("default")}
+				title="Drawer with default width"
+			>
+				<Note>
+					<Note.Title>Meeting notes</Note.Title>
+					<Note.Content author="Kathy" self={true}>
+						Hi, can we sync?
+					</Note.Content>
+				</Note>
+				<Note>
+					<Note.Content author="Cleo" self={false}>
+						Sure, give me 10 minutes.
+					</Note.Content>
+				</Note>
+			</Drawer>
+
+			<Drawer
+				open={widthRemDrawerOpen}
+				onClose={() => toggleDrawerByName("rem-units")}
+				title="Drawer width = 30rem"
+				width="30rem"
+			>
+				<Note>
+					<Note.Title>Meeting notes</Note.Title>
+					<Note.Content author="Kathy" self={true}>
+						Hi, can we sync?
+					</Note.Content>
+				</Note>
+				<Note>
+					<Note.Content author="Cleo" self={false}>
+						Sure, give me 10 minutes.
+					</Note.Content>
+				</Note>
+			</Drawer>
+
+			<Drawer
+				open={widthPixelDrawerOpen}
+				onClose={() => toggleDrawerByName("pixel-units")}
+				title="Drawer width = 150px"
+				width="150px"
 			>
 				<Note>
 					<Note.Title>Meeting notes</Note.Title>
