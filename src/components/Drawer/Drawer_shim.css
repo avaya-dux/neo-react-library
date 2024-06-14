@@ -43,6 +43,10 @@
 }
 
 .neo-drawer__header .neo-drawer__header--left {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
 	font-size: 19px;
 	line-height: 28px;
 }
