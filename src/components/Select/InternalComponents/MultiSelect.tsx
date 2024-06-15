@@ -96,13 +96,8 @@ export const MultiSelect = () => {
 		const chipContents: string[] = chipRefs.current.map(
 			(ref) => ref.textContent || "",
 		);
-		// 120px is the room reserved for the badge chip, the 2 buttons and some padding
-		const reservedSpace = 120;
-		const result = calculateWidthsUntilExceed(
-			containerWidth,
-			widths,
-			reservedSpace,
-		);
+
+		const result = calculateWidthsUntilExceed(containerWidth, widths);
 		logger.debug(
 			`4.2 result ${JSON.stringify({ result, widths, containerWidth, chipContents })}`,
 		);

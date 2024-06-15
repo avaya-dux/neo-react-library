@@ -4,7 +4,13 @@ import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import { Chip } from "./";
-import { Closable, Default, Templated, WithRef, WithRefArray } from "./Chip.stories";
+import {
+	Closable,
+	Default,
+	Templated,
+	WithRef,
+	WithRefArray,
+} from "./Chip.stories";
 
 describe("Chip", () => {
 	const user = userEvent.setup();

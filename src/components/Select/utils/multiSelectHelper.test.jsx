@@ -5,7 +5,7 @@ describe("calculateWidthsUntilExceed", () => {
 		const containerWidth = 100;
 		const widths = [];
 		const expected = { totalWidth: 0, index: -1, hiddenCount: 0 };
-		expect(calculateWidthsUntilExceed(containerWidth, widths)).toEqual(
+		expect(calculateWidthsUntilExceed(containerWidth, widths, 50)).toEqual(
 			expected,
 		);
 	});

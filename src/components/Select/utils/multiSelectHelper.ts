@@ -2,7 +2,8 @@ import log from "loglevel";
 const logger = log.getLogger("multiselect-helper-logger");
 logger.disableAll();
 
-const MIN_CHIP_WIDTH = 50; // Minimum width of a chip
+// 120px is the room reserved for the badge chip, the 2 buttons and some padding
+const MIN_CHIP_WIDTH = 120;
 export function calculateWidthsUntilExceed(
 	containerWidth: number,
 	widths: number[],
@@ -22,8 +23,8 @@ export function calculateWidthsUntilExceed(
 			break;
 		}
 
-		totalWidth += width; // Update total width
-		index = i; // Update index
+		totalWidth += width;
+		index = i;
 		logger.debug(`not exceeding: {totalWidth: ${totalWidth}, index: ${index}}`);
 	}
 
