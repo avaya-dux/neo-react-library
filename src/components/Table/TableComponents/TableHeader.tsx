@@ -74,14 +74,34 @@ export const TableHeader = <T extends Record<string, any>>({
 		<thead>
 			<tr>
 				{shouldHaveCheckboxColumn && (
-					<th style={{ padding: "0 0 0 5px", width: 30 }}>
+					<th className="neo-table-checkbox-th">
 						{shouldHaveCheckbox && (
-							<Checkbox
-								checked={checkboxCheckedValue}
-								aria-label={translations.selectAll}
-								onChange={handleRowToggledInternal}
-								value="all"
-							/>
+							<div className="table-selection-menu">
+								<Checkbox
+									checked={checkboxCheckedValue}
+									aria-label={translations.selectAll}
+									onChange={handleRowToggledInternal}
+									value="all"
+								/>
+
+								<Menu
+									menuRootElement={
+										<button
+											type="button"
+											className="neo-table-th-select-all-btn neo-btn-tertiary neo-dropdown__link-header"
+											aria-label="table selection menu"
+										/>
+									}
+								>
+									<MenuItem>
+										{translations.selectAll} items on the page
+									</MenuItem>
+
+									<MenuItem>
+										{translations.selectAll} items in the table
+									</MenuItem>
+								</Menu>
+							</div>
 						)}
 					</th>
 				)}

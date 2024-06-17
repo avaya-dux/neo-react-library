@@ -1,47 +1,83 @@
 .neo-table th button {
-  color: black;
-  display: flex;
-  font-weight: 600;
-  padding-left: 0px;
-  padding-right: 0px;
-  margin-left: -12px;
+	color: black;
+	display: flex;
+	font-weight: 600;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: -4px;
 }
+
 @media (prefers-color-scheme: light) {
-  :root .neo-dynamic .neo-table th button {
-    color: black;
-  }
+	:root .neo-dynamic .neo-table th button {
+		color: black;
+	}
 }
+
 @media (prefers-color-scheme: dark) {
-  :root .neo-dynamic .neo-table th button,
-  :root .neo-dark .neo-table th button {
-    color: white;
-  }
+
+	:root .neo-dynamic .neo-table th button,
+	:root .neo-dark .neo-table th button {
+		color: white;
+	}
 }
 
 .neo-table th button span {
-  height: auto;
+	height: auto;
 }
 
 .neo-table th button span:first-of-type {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .neo-table th button.neo-dropdown__link-header::after {
-  padding: 0 12px 0 0;
+	padding: 0 12px 0 0;
 }
 
 .neo-table-separator td {
-  border-bottom: 1px solid #f1f1f1;
+	border-bottom: 1px solid #f1f1f1;
 }
 
 .neo-table--push-pagination-down {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 20px);
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 20px);
 }
+
 .neo-table--push-pagination-down div.neo-pagination__row {
   flex-grow: 1;
   align-items: flex-end;
+}
+
+
+.neo-table th.neo-table-checkbox-th {
+	padding: 0;
+	width: 60px;
+
+	&:hover,
+	&:focus {
+		color: var(--button-hover-color-default-info);
+		background-color: var(--button-tertiary-hover-background-color);
+		background-position: 0 100%;
+		transition: background-position .4s, background-color .4s .15s, color .4s;
+	}
+
+	.table-selection-menu {
+		display: flex;
+		align-items: center;
+		padding-left: 5px;
+
+		button.neo-table-th-select-all-btn {
+			margin-left: 4px;
+			background-color: transparent;
+			cursor: pointer;
+		}
+
+		.neo-dropdown__content {
+			font-weight: 400;
+			min-width: 300px;
+			left: -30px;
+		}
+	}
 }
