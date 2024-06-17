@@ -38,7 +38,7 @@ interface BaseDrawerProps
 	id?: string;
 	onBack?: () => void;
 	onClose?: () => void;
-	closeOnBackgroundClick?: boolean;
+	closeOnScrimClick?: boolean;
 	open?: boolean;
 	width?: string;
 }
@@ -46,7 +46,7 @@ interface BaseDrawerProps
 export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
 
 /**
- * This component is used as a container of components that are dismisable.
+ * The Drawer component is a panel that slides out from the edge of the screen.
  *
  * @example
  * <Drawer open={isOpen} title="Mini Form">
@@ -66,13 +66,12 @@ export const Drawer = ({
 	title,
 	onBack,
 	onClose,
-	closeOnBackgroundClick = true,
+	closeOnScrimClick = true,
 	width,
 
 	...rest
 }: DrawerProps) => {
-	const generatedId = useId();
-	id = id || generatedId;
+	id = id || useId();
 	const buttons = "actions" in rest ? rest.actions : null;
 
 	if (!(title || rest["aria-label"] || rest["aria-labelledby"])) {
@@ -98,7 +97,7 @@ export const Drawer = ({
 				className={className}
 				onBack={onBack}
 				onClose={onClose}
-				closeOnBackgroundClick={closeOnBackgroundClick}
+				closeOnScrimClick={closeOnScrimClick}
 				open={open}
 				id={id}
 				title={title}
@@ -117,7 +116,7 @@ const BasicDrawer = ({
 	id,
 	onBack,
 	onClose,
-	closeOnBackgroundClick,
+	closeOnScrimClick,
 	open,
 	title,
 	style,
@@ -128,7 +127,7 @@ const BasicDrawer = ({
 	id?: string;
 	onBack?: () => void;
 	onClose?: () => void;
-	closeOnBackgroundClick: boolean;
+	closeOnScrimClick: boolean;
 	open: boolean;
 	title?: string | JSX.Element;
 	style?: object | undefined;
@@ -189,7 +188,7 @@ const BasicDrawer = ({
 			{open && (
 				<div
 					onKeyDown={onKeyDownScrimHandler}
-					onClick={closeOnBackgroundClick ? onClose : undefined}
+					onClick={closeOnScrimClick ? onClose : undefined}
 					className="neo-drawer__scrim"
 				/>
 			)}

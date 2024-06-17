@@ -1,5 +1,5 @@
 import type { Meta, Story } from "@storybook/react";
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 
 import { Button, Form, Note, Switch, TextArea } from "components";
 
@@ -75,7 +75,7 @@ export const Default = () => {
 				open={noDismissDrawerOpen}
 				onClose={() => toggleDrawerByName("no-dismiss")}
 				title="Drawer with dimiss on scrim click disabled"
-				closeOnBackgroundClick={false}
+				closeOnScrimClick={false}
 			>
 				<p>This Drawer will not close if you click on the scrim background</p>
 			</Drawer>
@@ -115,11 +115,10 @@ export const withForm = () => {
 				open={formDrawerOpen}
 				onClose={() => setFormDrawerOpen(false)}
 				title="Submission Form"
-				closeOnBackgroundClick={false}
+				closeOnScrimClick={false}
 			>
 				<Form
-					// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
-					onSubmit={(e: any) => {
+					onSubmit={(e: FormEvent<HTMLFormElement>) => {
 						e.preventDefault();
 						alert("you successfully submitted");
 					}}
@@ -168,7 +167,6 @@ export const withNote = () => {
 				open={noteDrawerOpen}
 				onClose={() => setNoteDrawerOpen(false)}
 				title="General Notes"
-				closeOnBackgroundClick={true}
 				width="30rem"
 			>
 				<Note>
@@ -178,7 +176,7 @@ export const withNote = () => {
 					</Note.Content>
 				</Note>
 				<Note>
-					<Note.Content author="Cleo" self={false}>
+					<Note.Content author="Cleo">
 						Sure, give me 10 minutes.
 					</Note.Content>
 				</Note>
@@ -252,7 +250,7 @@ export const customWidth = () => {
 					</Note.Content>
 				</Note>
 				<Note>
-					<Note.Content author="Cleo" self={false}>
+					<Note.Content author="Cleo">
 						Sure, give me 10 minutes.
 					</Note.Content>
 				</Note>
@@ -271,7 +269,7 @@ export const customWidth = () => {
 					</Note.Content>
 				</Note>
 				<Note>
-					<Note.Content author="Cleo" self={false}>
+					<Note.Content author="Cleo">
 						Sure, give me 10 minutes.
 					</Note.Content>
 				</Note>
@@ -290,7 +288,7 @@ export const customWidth = () => {
 					</Note.Content>
 				</Note>
 				<Note>
-					<Note.Content author="Cleo" self={false}>
+					<Note.Content author="Cleo">
 						Sure, give me 10 minutes.
 					</Note.Content>
 				</Note>
