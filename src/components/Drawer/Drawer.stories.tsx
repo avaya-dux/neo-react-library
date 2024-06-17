@@ -12,14 +12,39 @@ export default {
 
 export const Default = () => {
 	const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
+
+	return (
+		<main>
+			<section
+				style={{
+					display: "flex",
+					justifyContent: "space-between",
+					marginBottom: "1rem",
+				}}
+			>
+				<Button onClick={() => setDefaultDrawerOpen(!defaultDrawerOpen)}>
+					Open Default Drawer
+				</Button>
+			</section>
+
+			<Drawer
+				open={defaultDrawerOpen}
+				onClose={() => setDefaultDrawerOpen(false)}
+				title="Drawer with default behavior"
+			>
+				<p>This Drawer should only have the x close button</p>
+				<p>Drawer can be dismissed by clicking on background scrim</p>
+			</Drawer>
+		</main>
+	);
+};
+
+export const backButtonAndScrimOptions = () => {
 	const [noDismissDrawerOpen, setNoDismissDrawerOpen] = useState(false);
 	const [hasBackButtonDrawerOpen, sethasBackButtonDrawerOpen] = useState(false);
 
 	const toggleDrawerByName = (drawerName: string) => {
 		switch (drawerName) {
-			case "default":
-				setDefaultDrawerOpen(!defaultDrawerOpen);
-				break;
 			case "no-dismiss":
 				setNoDismissDrawerOpen(!noDismissDrawerOpen);
 				break;
@@ -38,10 +63,6 @@ export const Default = () => {
 					marginBottom: "1rem",
 				}}
 			>
-				<Button onClick={() => toggleDrawerByName("default")}>
-					Open Default Drawer
-				</Button>
-
 				<Button onClick={() => toggleDrawerByName("no-dismiss")}>
 					Open Drawer dismiss disabled
 				</Button>
@@ -62,14 +83,6 @@ export const Default = () => {
 					}}
 				/>
 			</section>
-
-			<Drawer
-				open={defaultDrawerOpen}
-				onClose={() => toggleDrawerByName("default")}
-				title="Drawer with default behavior"
-			>
-				<p>This Drawer should only have the x close button</p>
-			</Drawer>
 
 			<Drawer
 				open={noDismissDrawerOpen}
