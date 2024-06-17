@@ -20,7 +20,7 @@ import { Tooltip } from "components/Tooltip";
 import log from "loglevel";
 import { reactNodeToString } from "utils";
 const logger = log.getLogger("multiselect-logger");
-logger.enableAll();
+logger.disableAll();
 
 export const MultiSelect = () => {
 	const {

@@ -12,7 +12,7 @@ describe("calculateWidthsUntilExceed", () => {
 
 	it("should calculate totalWidth and index correctly without exceeding containerWidth", () => {
 		const containerWidth = 150;
-		const widths = [50, 50, 50]; // Total = 150, exactly the container width
+		const widths = [50, 50, 50]; // exactly the container width
 		const expected = { totalWidth: 150, index: 2, hiddenCount: 0 };
 		expect(calculateWidthsUntilExceed(containerWidth, widths, 0)).toEqual(
 			expected,
@@ -21,8 +21,8 @@ describe("calculateWidthsUntilExceed", () => {
 
 	it("should stop adding widths when exceeding containerWidth and count hidden elements", () => {
 		const containerWidth = 100;
-		const widths = [30, 30, 30, 30]; // Exceeds at the last element
-		const expected = { totalWidth: 60, index: 1, hiddenCount: 2 }; // Last one is hidden
+		const widths = [30, 30, 30, 30];
+		const expected = { totalWidth: 60, index: 1, hiddenCount: 2 };
 		expect(calculateWidthsUntilExceed(containerWidth, widths, 30)).toEqual(
 			expected,
 		);
@@ -39,7 +39,7 @@ describe("calculateWidthsUntilExceed", () => {
 
 	it("should return all widths as visible if total does not exceed containerWidth", () => {
 		const containerWidth = 200;
-		const widths = [40, 40, 40, 40]; // Total = 160, under the container width
+		const widths = [40, 40, 40, 40]; // Total = 160, less than containerWidth
 		const expected = { totalWidth: 160, index: 3, hiddenCount: 0 }; // All visible
 		expect(calculateWidthsUntilExceed(containerWidth, widths, 20)).toEqual(
 			expected,

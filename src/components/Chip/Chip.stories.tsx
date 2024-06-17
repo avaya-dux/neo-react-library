@@ -35,7 +35,9 @@ export const WithRef = () => {
 
 	return (
 		<ChipsContainer>
-			<Chip ref={chipRef}>With Ref</Chip>
+			<Chip ref={chipRef} onClick={() => console.log("clicked")}>
+				With Ref
+			</Chip>
 			<div>Chip Width: {chipWidth}px</div>
 		</ChipsContainer>
 	);

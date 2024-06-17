@@ -17,6 +17,7 @@ logger.disableAll();
 
 const {
 	BasicSelects,
+	CollapsedMultiSelect,
 	Searchable,
 	Disabled,
 	DefaultValues,
@@ -348,6 +349,19 @@ describe("Select", () => {
 				disabledListItems.forEach((disabledListItem) => {
 					expect(disabledListItem).toHaveAttribute("disabled");
 				});
+			});
+
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+
+		describe("Collapsed Multi Select", () => {
+			let renderResult;
+			beforeEach(() => {
+				renderResult = render(<CollapsedMultiSelect />);
 			});
 
 			it("passes basic axe compliance", async () => {
