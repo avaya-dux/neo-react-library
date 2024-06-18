@@ -7,9 +7,9 @@ import { Chip } from "./";
 import {
 	Closable,
 	Default,
+	GetWidth,
+	GetWidths,
 	Templated,
-	WithRef,
-	WithRefArray,
 } from "./Chip.stories";
 
 describe("Chip", () => {
@@ -133,11 +133,11 @@ describe("Chip", () => {
 			});
 		});
 
-		describe("WithRef", () => {
+		describe("GetWidth", () => {
 			let renderResult: RenderResult;
 
 			beforeEach(() => {
-				renderResult = render(<WithRef />);
+				renderResult = render(<GetWidth />);
 			});
 
 			it("should render ok", () => {
@@ -152,11 +152,11 @@ describe("Chip", () => {
 			});
 		});
 
-		describe("WithRefArray", () => {
+		describe("GetWidths", () => {
 			let renderResult: RenderResult;
 
 			beforeEach(() => {
-				renderResult = render(<WithRefArray />);
+				renderResult = render(<GetWidths />);
 			});
 
 			it("should render ok", () => {
