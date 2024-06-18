@@ -1,42 +1,51 @@
-import type { Meta, Story } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { type FormEvent, useState } from "react";
 
 import { Button, Form, Note, Switch, TextArea } from "components";
 
 import { Drawer, type DrawerProps } from "./";
 
-export default {
-	title: "Components/Drawer",
+type PlainDrawer = React.ComponentProps<typeof Drawer> & {
+	title: string | JSX.Element;
+};
+
+type Story = StoryObj<PlainDrawer>;
+
+const meta: Meta<typeof Drawer> = {
 	component: Drawer,
-} as Meta<DrawerProps>;
+	title: "Components/Drawer",
+};
+export default meta;
 
-export const Default = () => {
-	const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
+export const BasicDrawer: Story = {
+	render: () => {
+		const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
 
-	return (
-		<main>
-			<section
-				style={{
-					display: "flex",
-					justifyContent: "space-between",
-					marginBottom: "1rem",
-				}}
-			>
-				<Button onClick={() => setDefaultDrawerOpen(!defaultDrawerOpen)}>
-					Open Default Drawer
-				</Button>
-			</section>
+		return (
+			<main>
+				<section
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						marginBottom: "1rem",
+					}}
+				>
+					<Button onClick={() => setDefaultDrawerOpen(!defaultDrawerOpen)}>
+						Open Default Drawer
+					</Button>
+				</section>
 
-			<Drawer
-				open={defaultDrawerOpen}
-				onClose={() => setDefaultDrawerOpen(false)}
-				title="Drawer with default behavior"
-			>
-				<p>This Drawer should only have the x close button</p>
-				<p>Drawer can be dismissed by clicking on background scrim</p>
-			</Drawer>
-		</main>
-	);
+				<Drawer
+					open={defaultDrawerOpen}
+					onClose={() => setDefaultDrawerOpen(false)}
+					title="Drawer with default behavior"
+				>
+					<p>This Drawer should only have the x close button</p>
+					<p>Drawer can be dismissed by clicking on background scrim</p>
+				</Drawer>
+			</main>
+		);
+	},
 };
 
 export const backButtonAndScrimOptions = () => {
@@ -189,9 +198,7 @@ export const withNote = () => {
 					</Note.Content>
 				</Note>
 				<Note>
-					<Note.Content author="Cleo">
-						Sure, give me 10 minutes.
-					</Note.Content>
+					<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
 				</Note>
 			</Drawer>
 		</main>
@@ -263,9 +270,7 @@ export const customWidth = () => {
 					</Note.Content>
 				</Note>
 				<Note>
-					<Note.Content author="Cleo">
-						Sure, give me 10 minutes.
-					</Note.Content>
+					<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
 				</Note>
 			</Drawer>
 
@@ -282,9 +287,7 @@ export const customWidth = () => {
 					</Note.Content>
 				</Note>
 				<Note>
-					<Note.Content author="Cleo">
-						Sure, give me 10 minutes.
-					</Note.Content>
+					<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
 				</Note>
 			</Drawer>
 
@@ -301,9 +304,7 @@ export const customWidth = () => {
 					</Note.Content>
 				</Note>
 				<Note>
-					<Note.Content author="Cleo">
-						Sure, give me 10 minutes.
-					</Note.Content>
+					<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
 				</Note>
 			</Drawer>
 		</main>
