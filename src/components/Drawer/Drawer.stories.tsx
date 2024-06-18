@@ -119,57 +119,60 @@ export const BackButtonAndScrimOptions: Story = {
 	},
 };
 
+export const WithForm: Story = {
+	render: () => {
+		const [formDrawerOpen, setFormDrawerOpen] = useState(false);
 
-export const withForm = () => {
-	const [formDrawerOpen, setFormDrawerOpen] = useState(false);
-
-	return (
-		<main>
-			<section
-				style={{
-					display: "flex",
-					justifyContent: "space-between",
-					marginBottom: "1rem",
-				}}
-			>
-				<Button onClick={() => setFormDrawerOpen(!formDrawerOpen)}>
-					Toggle Drawer Open
-				</Button>
-			</section>
-
-			<Drawer
-				open={formDrawerOpen}
-				onClose={() => setFormDrawerOpen(false)}
-				title="Submission Form"
-				closeOnScrimClick={false}
-			>
-				<Form
-					onSubmit={(e: FormEvent<HTMLFormElement>) => {
-						e.preventDefault();
-						alert("you successfully submitted");
+		return (
+			<main>
+				<section
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						marginBottom: "1rem",
 					}}
-					style={{ width: 300 }}
 				>
-					<p style={{ paddingBottom: 20 }}>
-						Terms of Service Example. User must accept ToS before being allowed
-						to proceed.
-					</p>
+					<Button onClick={() => setFormDrawerOpen(!formDrawerOpen)}>
+						Toggle Drawer Open
+					</Button>
+				</section>
 
-					<Switch required name="ToS" value="accepted">
-						Do you accept the Terms of Service?
-					</Switch>
+				<Drawer
+					open={formDrawerOpen}
+					onClose={() => setFormDrawerOpen(false)}
+					title="Submission Form"
+					closeOnScrimClick={false}
+				>
+					<Form
+						onSubmit={(e: FormEvent<HTMLFormElement>) => {
+							e.preventDefault();
+							alert("you successfully submitted");
+						}}
+						style={{ width: 300 }}
+					>
+						<p style={{ paddingBottom: 20 }}>
+							Terms of Service Example. User must accept ToS before being
+							allowed to proceed.
+						</p>
 
-					<section style={{ display: "flex", justifyContent: "space-between" }}>
-						<Button type="reset" variant="secondary">
-							Reset
-						</Button>
+						<Switch required name="ToS" value="accepted">
+							Do you accept the Terms of Service?
+						</Switch>
 
-						<Button type="submit">Submit</Button>
-					</section>
-				</Form>
-			</Drawer>
-		</main>
-	);
+						<section
+							style={{ display: "flex", justifyContent: "space-between" }}
+						>
+							<Button type="reset" variant="secondary">
+								Reset
+							</Button>
+
+							<Button type="submit">Submit</Button>
+						</section>
+					</Form>
+				</Drawer>
+			</main>
+		);
+	},
 };
 
 export const withNote = () => {
