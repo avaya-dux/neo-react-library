@@ -3,41 +3,48 @@ const logger = log.getLogger("multiselect-helper-logger");
 logger.disableAll();
 
 // 120px is the space reserved for the badge chip, the 2 buttons and some padding
-const MIN_CHIP_WIDTH = 120;
-export function calculateWidthsUntilExceed(
+const MIN_RESERVED_SPACE = 120;
+/**
+ * Calculate the number of chips that can be displayed in the container
+ * @param {number} containerWidth - The width of the container.
+ * @param {number[]} chipWidths - Array containing the widths of chips of selected items.
+ * @param {number} [reservedSpace=MIN_RESERVED_SPACE] - Space reserved for the badge chip that shows the number of collapsed items.
+ * @returns {{totalVisibleWidth: number, lastVisibleIndex: number, collapsedCount: number}} An object containing the total width of visible chips, the index of the last visible chip, and the count of collapsed chips.
+ */
+export function calculateVisibleChips(
 	containerWidth: number,
-	widths: number[],
-	minChipWidth: number = MIN_CHIP_WIDTH,
+	chipWidths: number[],
+	reservedSpace: number = MIN_RESERVED_SPACE,
 ) {
-	let totalWidth = 0;
+	let totalVisibleWidth = 0;
 	let index = -1;
 	logger.debug(
-		`calculateWidthsUntilExceed 1: {containerWidth: ${containerWidth}, widths: ${JSON.stringify(widths)}, minChipWidth: ${minChipWidth}}`,
+		`calculateVisibleChips 1: {containerWidth: ${containerWidth}, chipWidths: ${JSON.stringify(chipWidths)}, reservedSpace: ${reservedSpace}}`,
 	);
-	for (let i = 0; i < widths.length; i++) {
-		const width = widths[i];
-		const exceeds = totalWidth + width > containerWidth - minChipWidth;
+	for (let i = 0; i < chipWidths.length; i++) {
+		const width = chipWidths[i];
+		const exceeds = totalVisibleWidth + width > containerWidth - reservedSpace;
 		logger.debug(
-			`calculateWidthsUntilExceed 2: {totalWidth: ${totalWidth}, index: ${index}, i=${i}, width=${width}, exceeds=${exceeds}`,
+			`calculateVisibleChips 2: {totalVisibleWidth: ${totalVisibleWidth}, index: ${index}, i=${i}, width=${width}, exceeds=${exceeds}`,
 		);
 
 		if (exceeds) {
 			break;
 		}
 
-		totalWidth += width;
+		totalVisibleWidth += width;
 		index = i;
 		logger.debug(
-			`calculateWidthsUntilExceed 2.1: not exceeding: {totalWidth: ${totalWidth}, index: ${index}}`,
+			`calculateVisibleChips 2.1: not exceeding: {totalVisibleWidth: ${totalVisibleWidth}, index: ${index}}`,
 		);
 	}
 
 	const result = {
-		totalWidth,
-		index,
-		hiddenCount: widths.length - index - 1,
+		totalVisibleWidth,
+		lastVisibleIndex: index,
+		collapsedCount: chipWidths.length - index - 1,
 	};
 
-	logger.debug(`calculateWidthsUntilExceed 3: ${JSON.stringify(result)}`);
+	logger.debug(`calculateVisibleChips 3: ${JSON.stringify(result)}`);
 	return result;
 }

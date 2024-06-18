@@ -11,7 +11,7 @@ import {
 import { Chip } from "components/Chip";
 
 import { SelectContext } from "../utils/SelectContext";
-import { calculateWidthsUntilExceed } from "../utils/multiSelectHelper";
+import { calculateVisibleChips } from "../utils/multiSelectHelper";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
 import "./MultiSelect.css";
@@ -44,8 +44,8 @@ export const MultiSelect = () => {
 
 	logger.debug("1. start");
 
-	const chipContainerRef = useRef<HTMLSpanElement>(null); // Ref for the container of chips
-	const chipRefs = useRef<HTMLDivElement[]>([]); // Array to hold refs for each chip
+	const chipContainerRef = useRef<HTMLSpanElement>(null);
+	const chipRefs = useRef<HTMLDivElement[]>([]);
 
 	// make sure chips are rendered before calculating their widths in second useEffect
 	const [renderCount, setRenderCount] = useState(0);
@@ -82,12 +82,14 @@ export const MultiSelect = () => {
 		selectedItemsAsChips,
 	);
 
+	// render ALL chips when selectedItemsAsChips changes
 	useEffect(() => {
 		logger.debug("3. copy selectedItemsAsChips to display");
 		setChipsToDisplay(selectedItemsAsChips);
 		setRenderCount(0);
 	}, [selectedItemsAsChips]);
 
+	// calculate what chips can be collapsed; this depends on all chips are displayed first
 	useEffect(() => {
 		logger.debug("4. calculating chips to display");
 		if (!collapse) {
@@ -98,11 +100,14 @@ export const MultiSelect = () => {
 			renderCount,
 			chipsCount: selectedItemsAsChips?.length || -1,
 		});
+		// Waiting for all chips to be displayed first. Only when displayed, can we get the widths of the chips.
 		if (
 			selectedItemsAsChips === null ||
 			renderCount < selectedItemsAsChips?.length
 		) {
-			logger.debug("4.2 wait for rerendering of chips.");
+			logger.debug(
+				"4.2 wait for rerendering of all chips before calculating what chips can be collapsed.",
+			);
 			return;
 		}
 
@@ -112,29 +117,33 @@ export const MultiSelect = () => {
 			(ref) => ref.textContent || "",
 		);
 
-		const result = calculateWidthsUntilExceed(containerWidth, widths);
+		const result = calculateVisibleChips(containerWidth, widths);
 		logger.debug(
 			`4.3 result ${JSON.stringify({ result, widths, containerWidth, chipContents })}`,
 		);
 
-		if (result.hiddenCount === 0 || selectedItemsAsChips === null) {
+		if (result.collapsedCount === 0 || selectedItemsAsChips === null) {
 			logger.debug(
-				`4.4 no chips to hide, hiddenCount=${result.hiddenCount}, selectedItemAsChips=${reactNodeToString(selectedItemsAsChips)}`,
+				`4.4 no chips to hide, hiddenCount=${result.collapsedCount}, selectedItemAsChips=${reactNodeToString(selectedItemsAsChips)}`,
 			);
 			return;
 		}
-		const shortenChips = selectedItemsAsChips.slice(0, result.index + 1);
-		const label = chipContents.slice(result.index + 1).join(", ");
+		// visible chips = all chips - collapsed chips
+		const shortedVisibleChips = selectedItemsAsChips.slice(
+			0,
+			result.lastVisibleIndex + 1,
+		);
+		const label = chipContents.slice(result.lastVisibleIndex + 1).join(", ");
 		const badgeChip = (
 			<Tooltip key="badge-chip-tooltip" label={label}>
-				<Chip>{`+${result.hiddenCount}`}</Chip>
+				<Chip>{`+${result.collapsedCount}`}</Chip>
 			</Tooltip>
 		);
-		shortenChips.push(badgeChip);
+		shortedVisibleChips.push(badgeChip);
 		logger.debug(
-			`4.5 setting shortened chips to display ${reactNodeToString(shortenChips)}`,
+			`4.5 setting shortened chips to display ${reactNodeToString(shortedVisibleChips)}`,
 		);
-		setChipsToDisplay(shortenChips);
+		setChipsToDisplay(shortedVisibleChips);
 	}, [collapse, selectedItemsAsChips, renderCount]);
 
 	const {
