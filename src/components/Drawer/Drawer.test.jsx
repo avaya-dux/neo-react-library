@@ -6,7 +6,7 @@ import { vi } from "vitest";
 import { Drawer } from ".";
 import * as DrawerStories from "./Drawer.stories";
 
-const { Default, Templated } = composeStories(DrawerStories);
+const { BasicDrawer, WithNote } = composeStories(DrawerStories);
 
 describe("Drawer", () => {
 	it("fully renders without exploding", () => {
@@ -72,11 +72,11 @@ describe("Drawer", () => {
 	});
 
 	describe("storybook tests", () => {
-		describe("Default", () => {
+		describe("BasicDrawer", () => {
 			let renderResult;
 
 			beforeEach(() => {
-				renderResult = render(<Default />);
+				renderResult = render(<BasicDrawer />);
 			});
 
 			it("should render ok", () => {
@@ -91,11 +91,11 @@ describe("Drawer", () => {
 			});
 		});
 
-		describe("Templated", () => {
+		describe("WithNote", () => {
 			let renderResult;
 
 			beforeEach(() => {
-				renderResult = render(<Templated />);
+				renderResult = render(<WithNote />);
 			});
 
 			it("should render ok", () => {
