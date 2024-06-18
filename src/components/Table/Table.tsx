@@ -67,6 +67,7 @@ export const Table = <T extends Record<string, any>>({
 	itemsPerPageOptions,
 	defaultSelectedRowIds,
 	initialStatePageIndex = 0,
+	initialStatePageSize,
 
 	allowColumnFilter = false,
 	containerClassName = "",
@@ -104,7 +105,7 @@ export const Table = <T extends Record<string, any>>({
 			},
 			getRowId: (row: T) => row.id, // set the row id to be the passed data's id
 			initialState: {
-				pageSize: itemsPerPageOptions?.[0] || 10,
+				pageSize: initialStatePageSize || itemsPerPageOptions?.[0] || 10,
 				selectedRowIds: convertRowIdsArrayToObject(defaultSelectedRowIds || []),
 				pageIndex: rootLevelPageIndex,
 			},
@@ -123,17 +124,25 @@ export const Table = <T extends Record<string, any>>({
 		state: { pageIndex, pageSize },
 		gotoPage,
 		setPageSize,
+		pageCount,
 	} = instance;
 	const rowCount = rows.length;
-
 	// update shown page if necessary
-	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 	useEffect(() => {
-		const newPageCount = Math.ceil(rowCount / pageSize);
-		if (pageIndex >= newPageCount) {
-			setRootLevelPageIndex(newPageCount - 1);
+		const currentPage = pageIndex + 1;
+
+		if (currentPage > pageCount) {
+			const finalPageIndex = pageCount - 1; // index is 0-based
+
+			gotoPage(finalPageIndex);
+			setRootLevelPageIndex(finalPageIndex);
+			handlePageChange(finalPageIndex, pageSize);
+		} else if (pageCount > 0 && currentPage === 0) {
+			gotoPage(0);
+			setRootLevelPageIndex(0);
+			handlePageChange(0, pageSize);
 		}
-	}, [rowCount, pageSize]);
+	}, [pageSize, pageCount, pageIndex, gotoPage, handlePageChange]);
 
 	const tableCaptionId = useMemo(
 		() => `table-caption-${caption || "caption"}`,

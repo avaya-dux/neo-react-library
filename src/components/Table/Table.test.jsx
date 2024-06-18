@@ -421,6 +421,50 @@ describe("Table", () => {
 			expect(filteredtrs.length).toBeGreaterThan(0);
 			expect(filteredtrs.length).toBeLessThan(alltrs.length);
 		});
+
+		it("search will update current page index appropriately", async () => {
+			render(<Table {...FilledFields} />);
+
+			// there are 10 pages
+			expect(screen.queryByText("1-1 / 10")).toBeTruthy();
+
+			// go to last page
+			const nextButton = screen.getByLabelText("next");
+			expect(nextButton).not.toBeDisabled();
+			for (let i = 0; i < 9; i++) {
+				await user.click(nextButton);
+			}
+			expect(screen.queryByText("10-10 / 10")).toBeTruthy();
+			expect(nextButton).toBeDisabled();
+
+			// reduce data set
+			const searchInput = screen.getByLabelText(
+				FilledFields.translations.toolbar.searchInputPlaceholder,
+			);
+			await user.click(searchInput);
+			await user.keyboard("a");
+
+			// confirm that there are now 9 pages
+			expect(screen.queryByText("9-9 / 9")).toBeTruthy();
+
+			// reduce data set
+			await user.keyboard("s");
+
+			// confirm that there is not a single page
+			expect(screen.queryByText("1-1 / 1")).toBeTruthy();
+
+			// reduce data set to zero
+			await user.keyboard("ddddddddd");
+
+			// confirm that there is no data
+			expect("no data available").toBeTruthy();
+
+			// clear search
+			await user.click(screen.getByLabelText("clear input"));
+
+			// confirm that there are 10 pages again and that we are on the initial page
+			expect(screen.queryByText("1-1 / 10")).toBeTruthy();
+		});
 	});
 
 	describe("sort and filter functionality", () => {
