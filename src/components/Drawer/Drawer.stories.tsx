@@ -48,73 +48,77 @@ export const BasicDrawer: Story = {
 	},
 };
 
-export const backButtonAndScrimOptions = () => {
-	const [noDismissDrawerOpen, setNoDismissDrawerOpen] = useState(false);
-	const [hasBackButtonDrawerOpen, sethasBackButtonDrawerOpen] = useState(false);
+export const BackButtonAndScrimOptions: Story = {
+	render: () => {
+		const [noDismissDrawerOpen, setNoDismissDrawerOpen] = useState(false);
+		const [hasBackButtonDrawerOpen, sethasBackButtonDrawerOpen] =
+			useState(false);
 
-	const toggleDrawerByName = (drawerName: string) => {
-		switch (drawerName) {
-			case "no-dismiss":
-				setNoDismissDrawerOpen(!noDismissDrawerOpen);
-				break;
-			case "back-button":
-				sethasBackButtonDrawerOpen(!hasBackButtonDrawerOpen);
-				break;
-		}
-	};
+		const toggleDrawerByName = (drawerName: string) => {
+			switch (drawerName) {
+				case "no-dismiss":
+					setNoDismissDrawerOpen(!noDismissDrawerOpen);
+					break;
+				case "back-button":
+					sethasBackButtonDrawerOpen(!hasBackButtonDrawerOpen);
+					break;
+			}
+		};
 
-	return (
-		<main>
-			<section
-				style={{
-					display: "flex",
-					justifyContent: "space-between",
-					marginBottom: "1rem",
-				}}
-			>
-				<Button onClick={() => toggleDrawerByName("no-dismiss")}>
-					Open Drawer dismiss disabled
-				</Button>
-
-				<Button onClick={() => toggleDrawerByName("back-button")}>
-					Open Drawer with Back button
-				</Button>
-			</section>
-			<section>
-				<TextArea
-					helperText="Try typing here while scrim is on."
-					label="Test focus by typing here"
-					maxLength={10}
-					placeholder="Placeholder"
-					translations={{
-						over: "over",
-						remaining: "remaining",
+		return (
+			<main>
+				<section
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						marginBottom: "1rem",
 					}}
-				/>
-			</section>
+				>
+					<Button onClick={() => toggleDrawerByName("no-dismiss")}>
+						Open Drawer dismiss disabled
+					</Button>
 
-			<Drawer
-				open={noDismissDrawerOpen}
-				onClose={() => toggleDrawerByName("no-dismiss")}
-				title="Drawer with dimiss on scrim click disabled"
-				closeOnScrimClick={false}
-			>
-				<p>This Drawer will not close if you click on the scrim background</p>
-			</Drawer>
+					<Button onClick={() => toggleDrawerByName("back-button")}>
+						Open Drawer with Back button
+					</Button>
+				</section>
+				<section>
+					<TextArea
+						helperText="Try typing here while scrim is on."
+						label="Test focus by typing here"
+						maxLength={10}
+						placeholder="Placeholder"
+						translations={{
+							over: "over",
+							remaining: "remaining",
+						}}
+					/>
+				</section>
 
-			<Drawer
-				open={hasBackButtonDrawerOpen}
-				onClose={() => toggleDrawerByName("back-button")}
-				onBack={() => {
-					alert("Back button pressed");
-				}}
-				title="With back button"
-			>
-				<p>This Drawer both a Back button and the x close button</p>
-			</Drawer>
-		</main>
-	);
+				<Drawer
+					open={noDismissDrawerOpen}
+					onClose={() => toggleDrawerByName("no-dismiss")}
+					title="Drawer with dimiss on scrim click disabled"
+					closeOnScrimClick={false}
+				>
+					<p>This Drawer will not close if you click on the scrim background</p>
+				</Drawer>
+
+				<Drawer
+					open={hasBackButtonDrawerOpen}
+					onClose={() => toggleDrawerByName("back-button")}
+					onBack={() => {
+						alert("Back button pressed");
+					}}
+					title="With back button"
+				>
+					<p>This Drawer both a Back button and the x close button</p>
+				</Drawer>
+			</main>
+		);
+	},
 };
+
 
 export const withForm = () => {
 	const [formDrawerOpen, setFormDrawerOpen] = useState(false);
