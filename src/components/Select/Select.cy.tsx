@@ -9,7 +9,7 @@ describe("Single Select Chevron tests", () => {
 		cy.mount(<BasicSelects />);
 
 		cy.get("span button")
-			.first()	// open the select
+			.first() // open the select
 			.then(($element) => {
 				const width = $element.width();
 				const height = $element.height();

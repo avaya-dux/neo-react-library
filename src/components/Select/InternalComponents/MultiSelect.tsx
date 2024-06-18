@@ -47,17 +47,19 @@ export const MultiSelect = () => {
 	const chipContainerRef = useRef<HTMLSpanElement>(null); // Ref for the container of chips
 	const chipRefs = useRef<HTMLDivElement[]>([]); // Array to hold refs for each chip
 
+	// make sure chips are rendered before calculating their widths in second useEffect
+	const [renderCount, setRenderCount] = useState(0);
 	const setChipRef = useCallback((el: HTMLDivElement | null, index: number) => {
 		if (el) {
 			logger.debug(`2.1 setting ref for chip ${index}`);
 			chipRefs.current[index] = el;
+			setRenderCount((prev) => prev + 1);
 		}
 	}, []);
 
 	const selectedItemsAsChips = useMemo(() => {
 		logger.debug("2. calculating selected items as chips");
-		chipRefs.current = []; // Reset chipRefs for each computation
-
+		chipRefs.current = [];
 		return selectedItems.length
 			? selectedItems.map((item, index) => {
 					return (
@@ -83,6 +85,7 @@ export const MultiSelect = () => {
 	useEffect(() => {
 		logger.debug("3. copy selectedItemsAsChips to display");
 		setChipsToDisplay(selectedItemsAsChips);
+		setRenderCount(0);
 	}, [selectedItemsAsChips]);
 
 	useEffect(() => {
@@ -91,6 +94,18 @@ export const MultiSelect = () => {
 			logger.debug("4.1 collapse is false, no need to do anything.");
 			return;
 		}
+		logger.debug({
+			renderCount,
+			chipsCount: selectedItemsAsChips?.length || -1,
+		});
+		if (
+			selectedItemsAsChips === null ||
+			renderCount < selectedItemsAsChips?.length
+		) {
+			logger.debug("4.2 wait for rerendering of chips.");
+			return;
+		}
+
 		const containerWidth = chipContainerRef.current?.offsetWidth || 0;
 		const widths = chipRefs.current.map((ref) => ref.offsetWidth || 0);
 		const chipContents: string[] = chipRefs.current.map(
@@ -99,11 +114,12 @@ export const MultiSelect = () => {
 
 		const result = calculateWidthsUntilExceed(containerWidth, widths);
 		logger.debug(
-			`4.2 result ${JSON.stringify({ result, widths, containerWidth, chipContents })}`,
+			`4.3 result ${JSON.stringify({ result, widths, containerWidth, chipContents })}`,
 		);
+
 		if (result.hiddenCount === 0 || selectedItemsAsChips === null) {
 			logger.debug(
-				`4.3 no chips to hide, hiddenCount=${result.hiddenCount}, selectedItemAsChips=${reactNodeToString(selectedItemsAsChips)}`,
+				`4.4 no chips to hide, hiddenCount=${result.hiddenCount}, selectedItemAsChips=${reactNodeToString(selectedItemsAsChips)}`,
 			);
 			return;
 		}
@@ -116,10 +132,10 @@ export const MultiSelect = () => {
 		);
 		shortenChips.push(badgeChip);
 		logger.debug(
-			`4.4 setting shortened chips to display ${reactNodeToString(shortenChips)}`,
+			`4.5 setting shortened chips to display ${reactNodeToString(shortenChips)}`,
 		);
 		setChipsToDisplay(shortenChips);
-	}, [collapse, selectedItemsAsChips]);
+	}, [collapse, selectedItemsAsChips, renderCount]);
 
 	const {
 		role,
