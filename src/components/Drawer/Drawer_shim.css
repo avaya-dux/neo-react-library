@@ -1,0 +1,107 @@
+.neo-drawer {
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	width: 20rem;
+	max-height: 100vh;
+	max-width: 40rem;
+
+	padding: 24px;
+	transition: all 0.3s ease-in-out;
+	transform: translate(20rem);
+	display: flex;
+	flex-direction: column;
+	z-index: 1000;
+	background-color: var(--sheet-background);
+}
+
+.neo-drawer--isOpen {
+	transform: translate(0);
+	box-shadow: 0px 8px 16px var(--sheet-shadow);
+}
+
+.neo-drawer__scrim {
+	position:fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	overflow: hidden;
+	background-color: var(--modal-scrim-color);
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	visibility:visible;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.neo-drawer__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.neo-drawer__header .neo-drawer__header--left {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	font-size: 19px;
+	line-height: 28px;
+}
+
+.neo-drawer__header .neo-drawer__header--right button:not(:last-child) {
+	margin-right: 8px;
+	margin-left: auto;
+}
+
+.neo-drawer__header--left>.neo-drawer-icon-chevron-left {
+	color: var(--neo-color-base-800);
+	background-color: transparent;
+	font-size: 21px;
+	margin-right: 8px;
+}
+
+.neo-drawer__header--right>.neo-drawer-icon-close {
+	color: var(--neo-color-base-800);
+	background-color: transparent;
+	font-size: 21px;
+}
+
+.drawer-horizontal-slide-in-shim {
+	animation-name: slideInRightShim;
+	animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.drawer-horizontal-slide-out-shim {
+	animation-name: slideOutRightShim;
+	animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+@keyframes slideInRightShim {
+	0% {
+		opacity: 1;
+		transform: translateX(150px);
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes slideOutRightShim {
+	0% {
+		opacity: 1;
+	}
+
+	90% {
+		opacity: 1;
+		transform: translateX(-150px);
+	}
+
+	100% {
+		opacity: 1;
+		visibility: hidden;
+	}
+}
