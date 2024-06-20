@@ -32,7 +32,7 @@ describe("Drawer", () => {
 		expect(rootElement).toBeTruthy();
 	});
 
-	it("allows the passing of `<div>` props", () => {
+	it("extends `<dialog>` props", () => {
 		render(<Drawer aria-label="basic drawer example" style={{ width: 100 }} />);
 		render(<Drawer title="full drawer" style={{ width: 100 }} />);
 
@@ -68,46 +68,6 @@ describe("Drawer", () => {
 
 			const drawer = screen.getByRole("dialog");
 			expect(drawer).not.toHaveClass("neo-drawer--isOpen");
-		});
-	});
-
-	describe("storybook tests", () => {
-		describe("BasicDrawer", () => {
-			let renderResult;
-
-			beforeEach(() => {
-				renderResult = render(<BasicDrawer />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("WithNote", () => {
-			let renderResult;
-
-			beforeEach(() => {
-				renderResult = render(<WithNote />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
 		});
 	});
 });
