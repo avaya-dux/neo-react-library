@@ -32,6 +32,27 @@ type EnforcedAccessibleLabel =
 			"aria-labelledby": string;
 	  };
 
+const propsAreAccessible = (
+	title: string | JSX.Element | undefined,
+	buttons: JSX.Element[] | null | undefined,
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	rest: any,
+): boolean => {
+	if (!(title || rest["aria-label"] || rest["aria-labelledby"])) {
+		handleAccessbilityError(
+			"Drawer must have an have an accessible name. Please add a `title`, `aria-label`, or `aria-labelledby` prop.",
+		);
+		return false;
+	}
+	if (!title && buttons) {
+		handleAccessbilityError(
+			"If you add buttons, you must also provide a title",
+		);
+		return false;
+	}
+	return true;
+}
+
 interface BaseDrawerProps
 	extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
 	children?: React.ReactNode;
@@ -74,15 +95,7 @@ export const Drawer = ({
 	id = id || useId();
 	const buttons = "actions" in rest ? rest.actions : null;
 
-	if (!(title || rest["aria-label"] || rest["aria-labelledby"])) {
-		handleAccessbilityError(
-			"Drawer must have an have an accessible name. Please add a `title`, `aria-label`, or `aria-labelledby` prop.",
-		);
-	} else if (!title && buttons) {
-		handleAccessbilityError(
-			"If you add buttons, you must also provide a title",
-		);
-	} else if (!buttons) {
+	if (propsAreAccessible(title, buttons, rest) && !buttons) {
 		const [widthStyle, setWidthStyle] = useState<object | undefined>({});
 
 		useEffect(() => {
