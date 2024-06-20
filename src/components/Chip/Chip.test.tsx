@@ -4,7 +4,13 @@ import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import { Chip } from "./";
-import { Closable, Default, Templated } from "./Chip.stories";
+import {
+	Closable,
+	Default,
+	GetWidth,
+	GetWidths,
+	Templated,
+} from "./Chip.stories";
 
 describe("Chip", () => {
 	const user = userEvent.setup();
@@ -113,6 +119,44 @@ describe("Chip", () => {
 
 			beforeEach(() => {
 				renderResult = render(<Templated>test</Templated>);
+			});
+
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
+
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+
+		describe("GetWidth", () => {
+			let renderResult: RenderResult;
+
+			beforeEach(() => {
+				renderResult = render(<GetWidth />);
+			});
+
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
+
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+
+		describe("GetWidths", () => {
+			let renderResult: RenderResult;
+
+			beforeEach(() => {
+				renderResult = render(<GetWidths />);
 			});
 
 			it("should render ok", () => {
