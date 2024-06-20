@@ -1,5 +1,10 @@
 import clsx from "clsx";
-import { type HTMLAttributes, type MouseEventHandler, useState } from "react";
+import {
+	type HTMLAttributes,
+	type MouseEventHandler,
+	forwardRef,
+	useState,
+} from "react";
 
 import { Avatar } from "components/Avatar";
 import type { IconNamesType } from "utils";
@@ -28,57 +33,63 @@ export interface ChipProps
  * @see https://design.avayacloud.com/components/web/chip-web
  * @see https://neo-react-library-storybook.netlify.app/?path=/story/components-chips
  */
-export const Chip = ({
-	avatarInitials,
-	children,
-	className,
-	closable = false,
-	closeButtonAriaLabel = "Close",
-	disabled = false,
-	icon,
-	onClose,
-	variant = "default",
-	...rest
-}: ChipProps) => {
-	const [closed, setClosed] = useState(false);
+export const Chip = forwardRef<HTMLDivElement, ChipProps>(
+	(
+		{
+			avatarInitials,
+			children,
+			className,
+			closable = false,
+			closeButtonAriaLabel = "Close",
+			disabled = false,
+			icon,
+			onClose,
+			variant = "default",
+			...rest
+		},
+		ref,
+	) => {
+		const [closed, setClosed] = useState(false);
 
-	if (avatarInitials && icon) {
-		throw new Error(
-			"Chip cannot have both an Avatar and an Icon, it must have one or the other.",
+		if (avatarInitials && icon) {
+			throw new Error(
+				"Chip cannot have both an Avatar and an Icon, it must have one or the other.",
+			);
+		}
+
+		return closed ? (
+			<></>
+		) : (
+			<div
+				ref={ref}
+				className={clsx(
+					`neo-chip neo-chip--${variant}`,
+					disabled && `neo-chip--${variant}--disabled`,
+					icon && `neo-icon-${icon}`,
+					closable && `neo-chip--close neo-chip--close--${variant}`,
+					className,
+				)}
+				{...rest}
+			>
+				{avatarInitials && <Avatar initials={avatarInitials} size="sm" />}
+				{children}
+				{closable && (
+					<button
+						type="button"
+						className="neo-close neo-close--clear"
+						aria-label={closeButtonAriaLabel}
+						// TO-DO: NEO-1549: Add the below styling rule in the CSS library
+						style={{ pointerEvents: disabled ? "none" : "initial" }}
+						disabled={disabled}
+						onClick={(e) => {
+							setClosed(true);
+							onClose?.(e);
+						}}
+					/>
+				)}
+			</div>
 		);
-	}
-
-	return closed ? (
-		<></>
-	) : (
-		<div
-			className={clsx(
-				`neo-chip neo-chip--${variant}`,
-				disabled && `neo-chip--${variant}--disabled`,
-				icon && `neo-icon-${icon}`,
-				closable && `neo-chip--close neo-chip--close--${variant}`,
-				className,
-			)}
-			{...rest}
-		>
-			{avatarInitials && <Avatar initials={avatarInitials} size="sm" />}
-			{children}
-			{closable && (
-				<button
-					type="button"
-					className="neo-close neo-close--clear"
-					aria-label={closeButtonAriaLabel}
-					// TO-DO: NEO-1549: Add the below styling rule in the CSS library
-					style={{ pointerEvents: disabled ? "none" : "initial" }}
-					disabled={disabled}
-					onClick={(e) => {
-						setClosed(true);
-						onClose?.(e);
-					}}
-				/>
-			)}
-		</div>
-	);
-};
+	},
+);
 
 Chip.displayName = "Chip";

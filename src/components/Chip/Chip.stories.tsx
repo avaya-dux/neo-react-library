@@ -1,5 +1,6 @@
 import type { Meta, Story } from "@storybook/react";
 
+import { useEffect, useRef, useState } from "react";
 import { Chip, type ChipProps, ChipsContainer } from "./";
 
 export default {
@@ -20,6 +21,59 @@ export const Closable = () => (
 		</Chip>
 	</ChipsContainer>
 );
+
+export const GetWidth = () => {
+	const chipRef = useRef<HTMLDivElement>(null);
+
+	const [chipWidth, setChipWidth] = useState(0);
+
+	useEffect(() => {
+		if (chipRef.current) {
+			setChipWidth(chipRef.current.offsetWidth);
+		}
+	}, []);
+
+	return (
+		<section>
+			<p>This example shows how to get width of a Chip using a ref.</p>
+			<ChipsContainer>
+				<Chip ref={chipRef} onClick={() => console.log("clicked")}>
+					Chip to measure
+				</Chip>
+				<div>Width in px: {chipWidth}</div>
+			</ChipsContainer>
+		</section>
+	);
+};
+
+export const GetWidths = () => {
+	const chipRefs = useRef<HTMLDivElement[]>([]);
+	const [chipWidths, setChipWidths] = useState<number[]>([]);
+
+	useEffect(() => {
+		const widths = chipRefs.current.map((chip) => chip.offsetWidth);
+		setChipWidths(widths);
+	}, []);
+
+	const setChipRef = (el: HTMLDivElement | null, index: number) => {
+		if (el) {
+			chipRefs.current[index] = el;
+		}
+	};
+
+	return (
+		<section>
+			<p>
+				This example shows how to get width of Chips using an array of refs.
+			</p>
+			<ChipsContainer>
+				<Chip ref={(el) => setChipRef(el, 0)}>Chip 1</Chip>
+				<Chip ref={(el) => setChipRef(el, 1)}>Chip 2</Chip>
+				<div>Widths in px: {JSON.stringify(chipWidths)}</div>
+			</ChipsContainer>
+		</section>
+	);
+};
 
 export const ChipsContainerExamples = () => (
 	<div>
