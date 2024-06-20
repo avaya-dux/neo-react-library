@@ -1,12 +1,8 @@
-import { composeStories } from "@storybook/testing-react";
 import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import { Drawer } from ".";
-import * as DrawerStories from "./Drawer.stories";
-
-const { BasicDrawer, WithNote } = composeStories(DrawerStories);
 
 describe("Drawer", () => {
 	it("fully renders without exploding", () => {
