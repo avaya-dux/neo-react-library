@@ -51,7 +51,7 @@ const propsAreAccessible = (
 		return false;
 	}
 	return true;
-}
+};
 
 interface BaseDrawerProps
 	extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
