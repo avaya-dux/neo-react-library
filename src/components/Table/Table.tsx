@@ -129,7 +129,7 @@ export const Table = <T extends Record<string, any>>({
 	const rowCount = rows.length;
 	// update shown page if necessary
 	useEffect(() => {
-		if (pageCount === 0) return;
+		if (pageCount === 0) return; // no data, no need to update
 
 		const currentPage = pageIndex + 1;
 
@@ -139,7 +139,7 @@ export const Table = <T extends Record<string, any>>({
 			gotoPage(finalPageIndex);
 			setRootLevelPageIndex(finalPageIndex);
 			handlePageChange(finalPageIndex, pageSize);
-		} else if (pageCount > 0 && currentPage === 0) {
+		} else if (currentPage === 0) {
 			gotoPage(0);
 			setRootLevelPageIndex(0);
 			handlePageChange(0, pageSize);
