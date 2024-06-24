@@ -129,6 +129,8 @@ export const Table = <T extends Record<string, any>>({
 	const rowCount = rows.length;
 	// update shown page if necessary
 	useEffect(() => {
+		if (pageCount === 0) return;
+
 		const currentPage = pageIndex + 1;
 
 		if (currentPage > pageCount) {
