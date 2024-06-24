@@ -119,6 +119,7 @@ export const BackButtonAndScrimOptions: Story = {
 	},
 };
 
+// This story showcases how Action buttons can work within Form content.
 export const WithForm: Story = {
 	render: () => {
 		const [formDrawerOpen, setFormDrawerOpen] = useState(false);
@@ -142,6 +143,7 @@ export const WithForm: Story = {
 					onClose={() => setFormDrawerOpen(false)}
 					title="Submission Form"
 					closeOnScrimClick={false}
+					// Set form attribute to the corresponding Form id
 					actions={[
 						<Button form="the-form" key={1} type="reset" variant="secondary">
 							Reset
