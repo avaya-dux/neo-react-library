@@ -2,9 +2,9 @@ import type { Meta } from "@storybook/react";
 
 import { Button } from "components/Button";
 
+import catImg from "components/Image/200by300image.jpeg";
 import useModal from "../useModal";
 import { BasicModal, type BasicModalProps } from "./BasicModal";
-import catImg from "components/Image/200by300image.jpeg";
 
 export default {
 	title: "Components/Modal",
