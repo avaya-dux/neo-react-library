@@ -2,6 +2,7 @@ import type { Meta } from "@storybook/react";
 
 import { Button } from "components/Button";
 
+import catImg from "components/Image/200by300image.jpeg";
 import useModal from "../useModal";
 import { BasicModal, type BasicModalProps } from "./BasicModal";
 
@@ -84,7 +85,7 @@ export const BasicModalExampleWithDiffContent = () => {
 					longer text to see how it <strong>wraps</strong> and aligns
 				</p>
 				<br />
-				<img src="https://placekitten.com/g/200/300" alt="A cat" />
+				<img src={catImg} alt="A cat" />
 			</BasicModal>
 		</>
 	);
