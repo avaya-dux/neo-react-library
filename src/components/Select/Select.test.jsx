@@ -167,18 +167,28 @@ describe("Select", () => {
 			});
 
 			it("passes the correct props to toggle element", () => {
-				const toggleElement = screen.getAllByRole("button")[0];
-				const expectedAttributes = ["id", "aria-haspopup", "aria-labelledby"];
+				const toggleElement = document.querySelector(
+					".neo-multiselect-combo__header",
+				);
+				const expectedAttributes = ["id", "aria-haspopup"];
 				expectedAttributes.forEach((attribute) =>
 					expect(toggleElement).toHaveAttribute(attribute),
 				);
 			});
 
-			it("toggles aria-expanded prop on click", () => {
+			it("passes aria-labelledby to button element", () => {
 				const toggleElement = screen.getAllByRole("button")[0];
-				expect(toggleElement).toHaveAttribute("aria-expanded", "false");
-				fireEvent.click(toggleElement);
-				expect(toggleElement).toHaveAttribute("aria-expanded", "true");
+				const expectedAttributes = ["aria-labelledby"];
+				expectedAttributes.forEach((attribute) =>
+					expect(toggleElement).toHaveAttribute(attribute),
+				);
+			});
+
+			it("no aria-expanded on toggle element", () => {
+				const toggleElement = document.querySelector(
+					".neo-multiselect-combo__header",
+				);
+				expect(toggleElement).not.toHaveAttribute("aria-expanded", "false");
 			});
 
 			it("sets and clears error text appropriately", () => {

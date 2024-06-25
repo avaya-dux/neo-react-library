@@ -80,7 +80,7 @@ describe("Single Select Searchable Scrolling Tests", () => {
 });
 
 describe("Multi Select Scrolling Tests", () => {
-	it("Select apple, broccoli, pear, banana and the chip should show +2 on it", () => {
+	it("Select apple, broccoli, pear, banana and the chip should show +1 on it", () => {
 		cy.mount(<CollapsedMultiSelect />);
 
 		// open the select
@@ -98,9 +98,9 @@ describe("Multi Select Scrolling Tests", () => {
 		// select option banana
 		cy.get("[role='listbox']").first().contains("li", "Banana").first().click();
 		// select chips and assert there are 3 chips
-		cy.get(".neo-chip.neo-chip--default").should("have.length", 3);
+		cy.get(".neo-chip.neo-chip--default").should("have.length", 4);
 		// select the collapsed chip
-		const collapsedChip = cy.get(".neo-chip.neo-chip--default").contains("+2");
+		const collapsedChip = cy.get(".neo-chip.neo-chip--default").contains("+1");
 		// assert collapsedChip is visible
 		collapsedChip.should("be.visible");
 		// assert collapsedChip has aria-describedby attribute with non-empty value

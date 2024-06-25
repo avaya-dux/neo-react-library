@@ -20,7 +20,7 @@ import { Tooltip } from "components/Tooltip";
 import log from "loglevel";
 import { reactNodeToString } from "utils";
 const logger = log.getLogger("multiselect-logger");
-logger.disableAll();
+logger.enableAll();
 
 export const MultiSelect = () => {
 	const {
@@ -28,7 +28,7 @@ export const MultiSelect = () => {
 			getMenuProps,
 			getToggleButtonProps,
 			isOpen,
-			selectItem: toggleItem, // NOTE: I've adjusted the hook for this case (multi-select) such that the "select" is actually a "toggle" now
+			selectItem: toggleItem, // NOTE: I've adjusted the hook for this case (multi-select) such that the "select" is actually a "toggle" now,
 		},
 		optionProps: { selectedItems, setSelectedItems, collapse },
 		selectProps: {
@@ -69,7 +69,11 @@ export const MultiSelect = () => {
 							closable
 							disabled={disabled}
 							closeButtonAriaLabel={`Remove ${item.children}`}
-							onClose={() => toggleItem(item)}
+							onClose={() => {
+								logger.debug(JSON.stringify(item));
+								logger.debug(toggleItem);
+								toggleItem(item);
+							}}
 						>
 							{item.children}
 						</Chip>
@@ -150,8 +154,37 @@ export const MultiSelect = () => {
 		role,
 		"aria-activedescendant": ariaActiveDescendant,
 		"aria-labelledby": ariaLabelledby,
+		"aria-expanded": ariaExpanded,
 		...restToggleProps
-	} = getToggleButtonProps();
+	} = getToggleButtonProps({
+		onKeyDown: (event) => {
+			if (event.key === "Enter") {
+				if (event.target instanceof HTMLElement) {
+					logger.debug(
+						`Enter key pressed on button with aria-label: ${event.target.getAttribute("aria-label")}`,
+					);
+				}
+				// hacky way to avoid clicking on the aria labelled button
+				if (
+					event.target instanceof HTMLElement &&
+					event.target.getAttribute("aria-label") === null
+				) {
+					logger.debug("aria-label is null, returning");
+					return;
+				}
+				try {
+					// For some reason, the click event is not being dispatched by Downshift on Enter key press. Let us do it manually.
+					const clickEvent = new MouseEvent("click", {
+						bubbles: true, // Make the event bubble up
+						cancelable: true, // Make the event cancellable
+					});
+					event.target.dispatchEvent(clickEvent);
+				} catch (error) {
+					logger.error("Error dispatching click event:", error);
+				}
+			}
+		},
+	});
 
 	const computedAriaProperty = useMemo(() => {
 		if (selectedItems && selectedItems.length > 0) {
@@ -184,7 +217,7 @@ export const MultiSelect = () => {
 				isOpen && "neo-multiselect--active",
 			)}
 		>
-			<span className="neo-multiselect-combo__header neo-multiselect-combo__header--no-after">
+			<span {...restToggleProps} className="neo-multiselect-combo__header">
 				<span
 					ref={chipContainerRef}
 					key="multiselect-chip-container"
@@ -192,29 +225,28 @@ export const MultiSelect = () => {
 				>
 					<div className="neo-multiselect-combo__buttons-container">
 						<button
-							{...restToggleProps}
 							{...computedAriaProperty}
-							className="neo-multiselect__header"
+							aria-expanded={ariaExpanded}
+							className="neo-multiselect__header neo-multiselect__header--no-after"
 							type="button"
 						>
 							&nbsp;
 						</button>
-
-						<button
-							aria-label="clear selections"
-							className={clsx(
-								"neo-input-edit__icon neo-icon-end",
-								"neo-multiselect-clear-icon-button",
-								selectedItems.length === 0 && "neo-display-none",
-							)}
-							type="button"
-							disabled={selectedItems.length === 0}
-							onClick={() => setSelectedItems([])}
-						/>
 					</div>
 
 					{chipsToDisplay}
 				</span>
+				<button
+					aria-label="clear selections"
+					className={clsx(
+						"neo-input-edit__icon neo-icon-end",
+						"neo-multiselect-clear-icon-button",
+						selectedItems.length === 0 && "neo-display-none",
+					)}
+					type="button"
+					disabled={selectedItems.length === 0}
+					onClick={() => setSelectedItems([])}
+				/>
 			</span>
 
 			<div

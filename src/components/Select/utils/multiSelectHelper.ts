@@ -3,7 +3,7 @@ const logger = log.getLogger("multiselect-helper-logger");
 logger.disableAll();
 
 // 120px is the space reserved for the badge chip, the 2 buttons and some padding
-const MIN_RESERVED_SPACE = 120;
+const MIN_RESERVED_SPACE = 60;
 /**
  * Calculate the number of chips that can be displayed in the container
  * @param {number} containerWidth - The width of the container.

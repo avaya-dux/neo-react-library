@@ -6,7 +6,8 @@
   background-color: var(--input-background-color);
   color: var(--input-font-color);
   border: none;
-
+  flex-shrink: 0;
+  
   &:hover {
     cursor: pointer;
   }

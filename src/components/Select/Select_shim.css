@@ -6,8 +6,14 @@
 }
 
 .neo-multiselect
-  span.neo-multiselect-combo__header.neo-multiselect-combo__header--no-after:after {
+  span.neo-multiselect-combo__header.neo-multiselect-combo__header--no-after:after,
+.neo-multiselect
+  span.neo-multiselect-combo__header .neo-multiselect__padded-container button.neo-multiselect__header.neo-multiselect__header--no-after::after {
   display: none;
+}
+
+body .neo-multiselect .neo-multiselect-combo__header {
+  flex-wrap: nowrap;
 }
 
 body .neo-multiselect__content.neo-set-keyboard-focus,
@@ -67,6 +73,7 @@ div.neo-multiselect
   input.neo-input {
   border: 0;
   display: inline-block;
+  width: 12ch;
 }
 
 div.neo-multiselect:not(.neo-multiselect--small)

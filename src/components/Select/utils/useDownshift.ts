@@ -5,7 +5,7 @@ import { type Dispatch, type SetStateAction, useState } from "react";
 import type { SelectOptionProps } from "./SelectTypes";
 
 const logger = log.getLogger("use-downshfit");
-logger.disableAll();
+logger.enableAll();
 
 const createOptionValue = "neo-select-create-option";
 
@@ -256,13 +256,13 @@ const DownshiftWithMultipleSelectProps = (
 		stateReducer: (state, actionAndChanges) => {
 			const { changes, type } = actionAndChanges;
 			const isOpen = changes.isOpen ? !(disabled || loading) : false;
-			logger.debug({ isOpen, type, changes });
 			const { selectedItem } = changes;
 
 			const selectedItemsValues = selectedItems.map((item) => item.value);
 			const shouldRemoveItem = selectedItemsValues.includes(
 				selectedItem?.value,
 			);
+			logger.debug(JSON.stringify({ isOpen, type, changes, shouldRemoveItem }));
 
 			switch (type) {
 				case useSelect.stateChangeTypes.ToggleButtonClick:
@@ -291,6 +291,7 @@ const DownshiftWithMultipleSelectProps = (
 					};
 
 				case useSelect.stateChangeTypes.FunctionSelectItem:
+					logger.debug("FunctionSelectItem case: ", changes);
 					// `onSelectedItemChange` handles most use-cases, but this reducer step
 					// is needed to support removing items via `Chip` click and input `backspace`
 					if (selectedItem && selectedItems.includes(selectedItem)) {
