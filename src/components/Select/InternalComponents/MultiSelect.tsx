@@ -18,7 +18,8 @@ import "./MultiSelect.css";
 import { Tooltip } from "components/Tooltip";
 
 import log from "loglevel";
-import { reactNodeToString } from "utils";
+import { Keys, reactNodeToString } from "utils";
+import { ar } from "@faker-js/faker";
 const logger = log.getLogger("multiselect-logger");
 logger.enableAll();
 
@@ -158,29 +159,30 @@ export const MultiSelect = () => {
 		...restToggleProps
 	} = getToggleButtonProps({
 		onKeyDown: (event) => {
-			if (event.key === "Enter") {
-				if (event.target instanceof HTMLElement) {
+			// Handle Enter key OR SPACE key press on the button
+			if (event.key === Keys.ENTER || event.key === Keys.SPACE) {
+				if (event.target instanceof HTMLButtonElement) {
+					const ariaLabel = event.target.getAttribute("aria-label");
+
 					logger.debug(
-						`Enter key pressed on button with aria-label: ${event.target.getAttribute("aria-label")}`,
+						`Enter key pressed on button with aria-label: ${ariaLabel}`,
 					);
-				}
-				// hacky way to avoid clicking on the aria labelled button
-				if (
-					event.target instanceof HTMLElement &&
-					event.target.getAttribute("aria-label") === null
-				) {
-					logger.debug("aria-label is null, returning");
-					return;
-				}
-				try {
-					// For some reason, the click event is not being dispatched by Downshift on Enter key press. Let us do it manually.
-					const clickEvent = new MouseEvent("click", {
-						bubbles: true, // Make the event bubble up
-						cancelable: true, // Make the event cancellable
-					});
-					event.target.dispatchEvent(clickEvent);
-				} catch (error) {
-					logger.error("Error dispatching click event:", error);
+
+					if (
+						ariaLabel?.toLowerCase().startsWith("remove") ||
+						ariaLabel?.toLowerCase().startsWith("clear")
+					) {
+						try {
+							// For some reason, the click event is not being dispatched by Downshift on Enter key press. Let us do it manually.
+							const clickEvent = new MouseEvent("click", {
+								bubbles: true, // Make the event bubble up
+								cancelable: true, // Make the event cancellable
+							});
+							event.target.dispatchEvent(clickEvent);
+						} catch (error) {
+							logger.error("Error dispatching click event:", error);
+						}
+					}
 				}
 			}
 		},
