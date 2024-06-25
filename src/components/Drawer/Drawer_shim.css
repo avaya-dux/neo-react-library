@@ -79,6 +79,14 @@
 	animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
+.neo-drawer__actions {
+	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
+	gap: 1rem;
+	align-items: center;
+}
+
 @keyframes slideInRightShim {
 	0% {
 		opacity: 1;

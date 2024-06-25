@@ -119,6 +119,7 @@ export const BackButtonAndScrimOptions: Story = {
 	},
 };
 
+// This story showcases how Action buttons can work within Form content.
 export const WithForm: Story = {
 	render: () => {
 		const [formDrawerOpen, setFormDrawerOpen] = useState(false);
@@ -142,8 +143,22 @@ export const WithForm: Story = {
 					onClose={() => setFormDrawerOpen(false)}
 					title="Submission Form"
 					closeOnScrimClick={false}
+					// Set form attribute to the corresponding Form id
+					actions={[
+						<Button form="the-form" key={1} type="reset" variant="secondary">
+							Reset
+						</Button>,
+						<Button form="the-form" key={2} type="submit">
+							Submit
+						</Button>,
+						<Button key={3} variant="secondary">
+							This is a very long button
+						</Button>,
+						<Button key={4}>Does Nothing</Button>,
+					]}
 				>
 					<Form
+						id="the-form"
 						onSubmit={(e: FormEvent<HTMLFormElement>) => {
 							e.preventDefault();
 							alert("you successfully submitted");
@@ -158,16 +173,6 @@ export const WithForm: Story = {
 						<Switch required name="ToS" value="accepted">
 							Do you accept the Terms of Service?
 						</Switch>
-
-						<section
-							style={{ display: "flex", justifyContent: "space-between" }}
-						>
-							<Button type="reset" variant="secondary">
-								Reset
-							</Button>
-
-							<Button type="submit">Submit</Button>
-						</section>
 					</Form>
 				</Drawer>
 			</main>
