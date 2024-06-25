@@ -154,9 +154,7 @@ export const WithForm: Story = {
 						<Button key={3} variant="secondary">
 							This is a very long button
 						</Button>,
-						<Button key={4}>
-							Does Nothing
-						</Button>,
+						<Button key={4}>Does Nothing</Button>,
 					]}
 				>
 					<Form
