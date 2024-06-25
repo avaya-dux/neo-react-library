@@ -32,7 +32,7 @@ export const BasicModal = forwardRef(
 			children,
 			closeButtonLabel = "Close",
 			onClose,
-			open,
+			open = false,
 			title,
 			id,
 			...rest
@@ -42,6 +42,10 @@ export const BasicModal = forwardRef(
 		const generatedId = useId();
 		id = id || generatedId;
 		const buttons = "actions" in rest ? rest.actions : null;
+
+		if (!onClose) {
+			console.error("onClose prop is required.");
+		}
 
 		const onKeyDown = useCallback(
 			(e: KeyboardEvent) => {
