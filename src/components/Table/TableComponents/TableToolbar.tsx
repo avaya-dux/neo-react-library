@@ -116,18 +116,18 @@ export const TableToolbar = <T extends Record<string, any>>({
 			>
 				<div className="neo-form">
 					{showSearch && (
-				<TextInput
-					aria-label={translations.searchInputPlaceholder}
-					placeholder={translations.searchInputPlaceholder}
-					startIcon="search"
-					value={search}
-					onChange={(e) => {
-						e.preventDefault();
-						e.stopPropagation();
-						setSearches(e.currentTarget.value);
-					}}
-				/>
-			)}
+						<TextInput
+							aria-label={translations.searchInputPlaceholder}
+							placeholder={translations.searchInputPlaceholder}
+							startIcon="search"
+							value={search}
+							onChange={(e) => {
+								e.preventDefault();
+								e.stopPropagation();
+								setSearches(e.currentTarget.value);
+							}}
+						/>
+					)}
 				</div>
 
 				{allowColumnFilter && (
