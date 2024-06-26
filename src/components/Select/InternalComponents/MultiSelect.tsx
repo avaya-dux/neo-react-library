@@ -159,7 +159,7 @@ export const MultiSelect = () => {
 	} = getToggleButtonProps({
 		onKeyDown: (event) => {
 			// For some reason, the click event is not being dispatched by Downshift on Enter key press.
-			// Let us do it manually on behalf of Chip Close buttons.
+			// Let us do it manually on behalf of Chip Close and Clear All buttons.
 			if (event.key === Keys.ENTER || event.key === Keys.SPACE) {
 				if (event.target instanceof HTMLButtonElement) {
 					const ariaLabel = event.target.getAttribute("aria-label");
