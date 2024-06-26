@@ -34,6 +34,8 @@ import type {
 } from "./MenuTypes";
 import { addIdToChildren, buildMenuIndexes, layoutChildren } from "./helpers";
 
+import "./Menu_shim.css";
+
 const logger = log.getLogger("menu");
 logger.disableAll();
 

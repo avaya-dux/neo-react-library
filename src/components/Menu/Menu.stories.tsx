@@ -4,6 +4,7 @@ import {
 	Menu,
 	MenuButton,
 	MenuItem,
+	MenuItemButton,
 	type MenuProps,
 	MenuSeparator,
 	SubMenu,
@@ -249,6 +250,8 @@ SimpleMenuRightAlignedTemplated.args = {
 export const FunctionalMenu = () => (
 	<section>
 		<Menu
+			defaultIsOpen
+			closeOnBlur={false}
 			onMenuClose={() => console.log("Functional Menu closed")}
 			menuRootElement={
 				<MenuButton onClick={() => console.log("Functional Menu opened")}>
@@ -269,6 +272,9 @@ export const FunctionalMenu = () => (
 					Go to Portal
 				</a>
 			</MenuItem>
+			<MenuItemButton onClick={() => console.log("JOE: button clicked")}>
+				Button Click
+			</MenuItemButton>
 		</Menu>
 	</section>
 );

@@ -9,3 +9,4 @@ export { MenuItem } from "./MenuItem";
 export { MenuSeparator } from "./MenuSeparator";
 export { SubMenu } from "./SubMenu";
 export { MenuButton } from "./MenuButton";
+export { MenuItemButton } from "./MenuItemButton";
