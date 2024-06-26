@@ -36,14 +36,25 @@ export const TableHeader = <T extends Record<string, any>>({
 		rows,
 		rowsById,
 		state: { selectedRowIds },
+		toggleRowSelected,
 		toggleAllRowsSelected,
 		toggleSortBy,
 	} = instance;
 
-	const visibleRows = page.map((row) => row.original);
-	const allVisibleRowsAreSelected = visibleRows.every(
-		(row) => selectedRowIds[row.id],
-	);
+	const [visibleRows, allVisibleRowsAreSelected]: [Array<T>, boolean] =
+		useMemo(() => {
+			const shownRows = page.map((row) => row.original);
+			const visibleRowsSelected = shownRows.every(
+				(row) => selectedRowIds[row.id],
+			);
+
+			return [shownRows, visibleRowsSelected];
+		}, [page, selectedRowIds]);
+
+	const selectVisibleRows = useCallback(() => {
+		const visibleRowIds = visibleRows.map((row) => row.id);
+		visibleRowIds.forEach((id) => toggleRowSelected(id));
+	}, [visibleRows, toggleRowSelected]);
 
 	const { allowColumnFilter, toggleFilterSheetVisible } =
 		useContext(FilterContext);
@@ -99,14 +110,11 @@ export const TableHeader = <T extends Record<string, any>>({
 										/>
 									}
 								>
-									<MenuItemButton
-										disabled={allVisibleRowsAreSelected}
-										onClick={() => {
-											console.log("select all visible items");
-											// TODO: add visible items to already selected items
-										}}
-									>
-										{translations.selectAllVisibleItems}
+									<MenuItemButton onClick={() => selectVisibleRows()}>
+										{allVisibleRowsAreSelected
+											? translations.clearAllVisibleItems
+											: translations.selectAllVisibleItems}{" "}
+										({visibleRows.length})
 									</MenuItemButton>
 
 									<MenuItemButton
