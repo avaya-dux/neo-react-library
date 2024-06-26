@@ -224,7 +224,13 @@ export const MultiSelect = () => {
 				isOpen && "neo-multiselect--active",
 			)}
 		>
-			<span {...restToggleProps} className="neo-multiselect-combo__header">
+			<span
+				{...restToggleProps}
+				className={clsx(
+					"neo-multiselect-combo__header",
+					"neo-multiselect-combo__header--focus-visible",
+				)}
+			>
 				{/* put button before span so that it gets tab order first */}
 				<button
 					aria-label="clear selections"

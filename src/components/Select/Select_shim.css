@@ -16,6 +16,10 @@ body .neo-multiselect .neo-multiselect-combo__header {
   flex-wrap: nowrap;
 }
 
+body .neo-multiselect .neo-multiselect-combo__header.neo-multiselect-combo__header--focus-visible:focus-visible {
+  outline: 0;
+}
+
 body .neo-multiselect__content.neo-set-keyboard-focus,
 body .neo-multiselect__content:focus-visible {
   outline-offset: 1px;
