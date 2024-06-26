@@ -20,7 +20,9 @@ export const translations: ITableTranslations = {
 	header: {
 		clearSort: "Clear Sort",
 		filterColumn: "Filter Column",
-		selectAll: "select all",
+		clearSelection: "Clear all selections",
+		selectAll: "Select all items",
+		selectAllVisibleItems: "Select all items on page",
 		sortAscending: "A - Z",
 		sortDescending: "Z - A",
 		toggleSortBy: "Toggle SortBy",
