@@ -28,7 +28,7 @@ export const MultiSelect = () => {
 			getMenuProps,
 			getToggleButtonProps,
 			isOpen,
-			selectItem: toggleItem, // NOTE: I've adjusted the hook for this case (multi-select) such that the "select" is actually a "toggle" now,
+			selectItem: toggleItem, // NOTE: I've adjusted the hook for this case (multi-select) such that the "select" is actually a "toggle" now
 		},
 		optionProps: { selectedItems, setSelectedItems, collapse },
 		selectProps: {
@@ -158,7 +158,8 @@ export const MultiSelect = () => {
 		...restToggleProps
 	} = getToggleButtonProps({
 		onKeyDown: (event) => {
-			// Handle Enter key OR SPACE key press on the button
+			// For some reason, the click event is not being dispatched by Downshift on Enter key press.
+			// Let us do it manually on behalf of Chip Close buttons.
 			if (event.key === Keys.ENTER || event.key === Keys.SPACE) {
 				if (event.target instanceof HTMLButtonElement) {
 					const ariaLabel = event.target.getAttribute("aria-label");
@@ -172,7 +173,6 @@ export const MultiSelect = () => {
 						ariaLabel?.toLowerCase().startsWith("clear")
 					) {
 						try {
-							// For some reason, the click event is not being dispatched by Downshift on Enter key press. Let us do it manually.
 							const clickEvent = new MouseEvent("click", {
 								bubbles: true, // Make the event bubble up
 								cancelable: true, // Make the event cancellable
