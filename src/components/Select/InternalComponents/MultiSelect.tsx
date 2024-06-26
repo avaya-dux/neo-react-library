@@ -235,10 +235,7 @@ export const MultiSelect = () => {
 							&nbsp;
 						</button>
 					</div>
-
-					{chipsToDisplay}
-				</span>
-				<button
+					<button
 					aria-label="clear selections"
 					className={clsx(
 						"neo-input-edit__icon neo-icon-end",
@@ -249,6 +246,9 @@ export const MultiSelect = () => {
 					disabled={selectedItems.length === 0}
 					onClick={() => setSelectedItems([])}
 				/>
+					{chipsToDisplay}
+				</span>
+
 			</span>
 
 			<div
