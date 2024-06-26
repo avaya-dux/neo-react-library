@@ -265,14 +265,16 @@ describe("Table", () => {
 		it("deselects the header checkbox when all rows are deleted", async () => {
 			render(<SecondPage />);
 
-			await user.click(screen.getByLabelText("select all"));
+			const selectAllCheckboxLabel = "Select all items";
+
+			await user.click(screen.getByLabelText(selectAllCheckboxLabel));
 
 			const deleteButton = screen.getByText("Delete");
 			await user.click(deleteButton);
 
 			expect(screen.getByText("no data available")).toBeVisible();
 
-			expect(screen.getByLabelText("select all").checked).toBeFalsy();
+			expect(screen.getByLabelText(selectAllCheckboxLabel).checked).toBeFalsy();
 		});
 	});
 

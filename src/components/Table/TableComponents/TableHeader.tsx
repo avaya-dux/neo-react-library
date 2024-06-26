@@ -113,7 +113,11 @@ export const TableHeader = <T extends Record<string, any>>({
 										/>
 									}
 								>
-									<MenuItemButton onClick={() => selectVisibleRows(!allVisibleRowsAreSelected)}>
+									<MenuItemButton
+										onClick={() =>
+											selectVisibleRows(!allVisibleRowsAreSelected)
+										}
+									>
 										{allVisibleRowsAreSelected
 											? translations.clearAllVisibleItems
 											: translations.selectAllVisibleItems}{" "}
