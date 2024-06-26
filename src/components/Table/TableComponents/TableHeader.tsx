@@ -2,7 +2,7 @@ import { type KeyboardEvent, useCallback, useContext, useMemo } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
-import { Menu, MenuButton, MenuItem } from "components/Menu";
+import { Menu, MenuButton, MenuItem, MenuItemButton } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
@@ -32,12 +32,18 @@ export const TableHeader = <T extends Record<string, any>>({
 }: TableHeaderProps<T>) => {
 	const {
 		headers,
+		page,
 		rows,
 		rowsById,
 		state: { selectedRowIds },
 		toggleAllRowsSelected,
 		toggleSortBy,
 	} = instance;
+
+	const visibleRows = page.map((row) => row.original);
+	const allVisibleRowsAreSelected = visibleRows.every(
+		(row) => selectedRowIds[row.id],
+	);
 
 	const { allowColumnFilter, toggleFilterSheetVisible } =
 		useContext(FilterContext);
@@ -93,13 +99,30 @@ export const TableHeader = <T extends Record<string, any>>({
 										/>
 									}
 								>
-									<MenuItem>
-										{translations.selectAll} items on the page
-									</MenuItem>
+									<MenuItemButton
+										disabled={allVisibleRowsAreSelected}
+										onClick={() => {
+											console.log("select all visible items");
+											// TODO: add visible items to already selected items
+										}}
+									>
+										{translations.selectAllVisibleItems}
+									</MenuItemButton>
 
-									<MenuItem>
-										{translations.selectAll} items in the table
-									</MenuItem>
+									<MenuItemButton
+										onClick={() => {
+											console.log("select all");
+											handleRowToggledInternal();
+										}}
+									>
+										{allRowsAreSelected ? (
+											translations.clearSelection
+										) : (
+											<>
+												{translations.selectAll} ({rows.length})
+											</>
+										)}
+									</MenuItemButton>
 								</Menu>
 							</div>
 						)}
