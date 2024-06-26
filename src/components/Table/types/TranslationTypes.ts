@@ -34,6 +34,7 @@ export interface ITableHeaderTranslations {
 	filterColumn?: string;
 	clearSelection: string;
 	selectAll: string;
+	clearAllVisibleItems: string;
 	selectAllVisibleItems: string;
 	sortAscending?: string;
 	sortDescending?: string;

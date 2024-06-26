@@ -22,6 +22,7 @@ export const translations: ITableTranslations = {
 		filterColumn: "Filter Column",
 		clearSelection: "Clear all selections",
 		selectAll: "Select all items",
+		clearAllVisibleItems: "Clear all items on page",
 		selectAllVisibleItems: "Select all items on page",
 		sortAscending: "A - Z",
 		sortDescending: "Z - A",
