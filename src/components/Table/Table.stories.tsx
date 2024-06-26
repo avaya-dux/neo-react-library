@@ -442,7 +442,7 @@ export const PaginationPushedDown = () => (
 );
 
 export const BareBones = () => (
-	<Table columns={FilledFields.columns} data={[...FilledFields.data]} />
+	<Table columns={FilledFields.columns} showSearch={false} data={[...FilledFields.data]} />
 );
 
 export const WithRowSeparator = () => (
