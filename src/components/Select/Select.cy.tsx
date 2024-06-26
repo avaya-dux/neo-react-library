@@ -83,8 +83,9 @@ describe("Multi Select Scrolling Tests", () => {
 	it("Select apple, broccoli, pear, banana and the chip should show +1 on it", () => {
 		cy.mount(<CollapsedMultiSelect />);
 
-		// open the select
-		cy.get("span button").first().click();
+		// open the select by clicking on the toggle button
+		cy.get("span button").eq(1).click();
+
 		// select option apple
 		cy.get("[role='listbox']").first().contains("li", "Apple").first().click();
 		// select option broccoli

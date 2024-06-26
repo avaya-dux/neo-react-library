@@ -57,10 +57,10 @@ describe("Select", () => {
 			const buttons = screen.getAllByRole("button");
 			expect(buttons).toHaveLength(2);
 
-			const toggleButton = buttons[0];
+			const toggleButton = buttons[1];
 			expect(toggleButton).toHaveClass("neo-multiselect__header");
 
-			const clearButton = buttons[1];
+			const clearButton = buttons[0];
 			expect(clearButton).toHaveClass("neo-multiselect-clear-icon-button");
 			expect(clearButton).toBeDisabled();
 		});
@@ -177,7 +177,7 @@ describe("Select", () => {
 			});
 
 			it("passes aria-labelledby to button element", () => {
-				const buttonElement = screen.getAllByRole("button")[0];
+				const buttonElement = screen.getAllByRole("button")[1];
 				const expectedAttributes = ["aria-labelledby"];
 				expectedAttributes.forEach((attribute) =>
 					expect(buttonElement).toHaveAttribute(attribute),
@@ -251,7 +251,7 @@ describe("Select", () => {
 						<SelectOption>Option 4</SelectOption>
 					</Select>,
 				);
-				const toggleElement = screen.getAllByRole("button")[0];
+				const toggleElement = screen.getAllByRole("button")[1];
 				toggleElement.focus();
 				// open menu
 				await user.keyboard(UserEventKeys.ENTER);
@@ -284,7 +284,7 @@ describe("Select", () => {
 					/>,
 				);
 
-				const defaultSelectHeader = getAllByRole("button")[0];
+				const defaultSelectHeader = getAllByRole("button")[1];
 				expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
 				fireEvent.click(defaultSelectHeader);
 				expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
@@ -310,9 +310,8 @@ describe("Select", () => {
 				);
 
 				const buttons = screen.getAllByRole("button");
-				const toggleButton = buttons[0];
-
-				const clearButton = buttons[1];
+				const clearButton = buttons[0];
+				const toggleButton = buttons[1];
 
 				// open menu
 				toggleButton.focus();
@@ -464,7 +463,7 @@ describe("Select", () => {
 
 			it("does not open content area on click when loading", () => {
 				const { getAllByRole } = renderResult;
-				const defaultSelectHeader = getAllByRole("button")[0];
+				const defaultSelectHeader = getAllByRole("button")[1];
 				expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
 				fireEvent.click(defaultSelectHeader);
 				expect(defaultSelectHeader).toHaveAttribute("aria-expanded", "false");
