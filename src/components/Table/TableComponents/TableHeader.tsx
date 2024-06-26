@@ -51,10 +51,13 @@ export const TableHeader = <T extends Record<string, any>>({
 			return [shownRows, visibleRowsSelected];
 		}, [page, selectedRowIds]);
 
-	const selectVisibleRows = useCallback(() => {
-		const visibleRowIds = visibleRows.map((row) => row.id);
-		visibleRowIds.forEach((id) => toggleRowSelected(id));
-	}, [visibleRows, toggleRowSelected]);
+	const selectVisibleRows = useCallback(
+		(set: boolean) => {
+			const visibleRowIds = visibleRows.map((row) => row.id);
+			visibleRowIds.forEach((id) => toggleRowSelected(id, set));
+		},
+		[visibleRows, toggleRowSelected],
+	);
 
 	const { allowColumnFilter, toggleFilterSheetVisible } =
 		useContext(FilterContext);
@@ -110,7 +113,7 @@ export const TableHeader = <T extends Record<string, any>>({
 										/>
 									}
 								>
-									<MenuItemButton onClick={() => selectVisibleRows()}>
+									<MenuItemButton onClick={() => selectVisibleRows(!allVisibleRowsAreSelected)}>
 										{allVisibleRowsAreSelected
 											? translations.clearAllVisibleItems
 											: translations.selectAllVisibleItems}{" "}
