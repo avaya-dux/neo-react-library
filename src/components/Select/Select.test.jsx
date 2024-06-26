@@ -177,10 +177,10 @@ describe("Select", () => {
 			});
 
 			it("passes aria-labelledby to button element", () => {
-				const toggleElement = screen.getAllByRole("button")[0];
+				const buttonElement = screen.getAllByRole("button")[0];
 				const expectedAttributes = ["aria-labelledby"];
 				expectedAttributes.forEach((attribute) =>
-					expect(toggleElement).toHaveAttribute(attribute),
+					expect(buttonElement).toHaveAttribute(attribute),
 				);
 			});
 
