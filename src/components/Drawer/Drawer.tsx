@@ -17,7 +17,7 @@ import { Keys } from "utils";
 type EnforcedAccessibleLabel =
 	| {
 			title: string | JSX.Element;
-			actions?: JSX.Element[];
+			actions?: React.ReactNode[];
 			"aria-label"?: string;
 			"aria-labelledby"?: string;
 	  }
@@ -34,7 +34,7 @@ type EnforcedAccessibleLabel =
 
 const propsAreAccessible = (
 	title: string | JSX.Element | undefined,
-	buttons: JSX.Element[] | null | undefined,
+	actionNodes: React.ReactNode[] | undefined,
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	rest: any,
 ): boolean => {
@@ -44,9 +44,9 @@ const propsAreAccessible = (
 		);
 		return false;
 	}
-	if (!title && buttons) {
+	if (!title && actionNodes) {
 		handleAccessbilityError(
-			"If you add buttons, you must also provide a title",
+			"If you add actions, you must also provide a title",
 		);
 		return false;
 	}
@@ -62,6 +62,7 @@ interface BaseDrawerProps
 	closeOnScrimClick?: boolean;
 	open?: boolean;
 	width?: string;
+	actions?: React.ReactNode[];
 }
 
 export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
@@ -89,13 +90,13 @@ export const Drawer = ({
 	onClose,
 	closeOnScrimClick = true,
 	width,
+	actions,
 
 	...rest
 }: DrawerProps) => {
 	id = id || useId();
-	const buttons = "actions" in rest ? rest.actions : null;
 
-	if (propsAreAccessible(title, buttons, rest) && !buttons) {
+	if (propsAreAccessible(title, actions, rest)) {
 		const [widthStyle, setWidthStyle] = useState<object | undefined>({});
 
 		useEffect(() => {
@@ -115,6 +116,7 @@ export const Drawer = ({
 				id={id}
 				title={title}
 				style={widthStyle}
+				actions={actions}
 				{...rest}
 			>
 				{children}
@@ -133,6 +135,7 @@ const BasicDrawer = ({
 	open,
 	title,
 	style,
+	actions,
 	...rest
 }: {
 	children?: React.ReactNode;
@@ -144,6 +147,7 @@ const BasicDrawer = ({
 	open: boolean;
 	title?: string | JSX.Element;
 	style?: object | undefined;
+	actions?: React.ReactNode[];
 }) => {
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
@@ -195,7 +199,8 @@ const BasicDrawer = ({
 							)}
 						</div>
 					</div>
-					{children}
+					<div className="neo-drawer__content">{children}</div>
+					<div className="neo-drawer__actions">{actions}</div>
 				</div>
 			</FocusLock>
 			{open && (
