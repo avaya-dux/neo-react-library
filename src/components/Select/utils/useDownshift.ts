@@ -5,7 +5,7 @@ import { type Dispatch, type SetStateAction, useState } from "react";
 import type { SelectOptionProps } from "./SelectTypes";
 
 const logger = log.getLogger("use-downshfit");
-logger.enableAll();
+logger.disableAll();
 
 const createOptionValue = "neo-select-create-option";
 

@@ -19,9 +19,8 @@ import { Tooltip } from "components/Tooltip";
 
 import log from "loglevel";
 import { Keys, reactNodeToString } from "utils";
-import { ar } from "@faker-js/faker";
 const logger = log.getLogger("multiselect-logger");
-logger.enableAll();
+logger.disableAll();
 
 export const MultiSelect = () => {
 	const {
@@ -236,19 +235,18 @@ export const MultiSelect = () => {
 						</button>
 					</div>
 					<button
-					aria-label="clear selections"
-					className={clsx(
-						"neo-input-edit__icon neo-icon-end",
-						"neo-multiselect-clear-icon-button",
-						selectedItems.length === 0 && "neo-display-none",
-					)}
-					type="button"
-					disabled={selectedItems.length === 0}
-					onClick={() => setSelectedItems([])}
-				/>
+						aria-label="clear selections"
+						className={clsx(
+							"neo-input-edit__icon neo-icon-end",
+							"neo-multiselect-clear-icon-button",
+							selectedItems.length === 0 && "neo-display-none",
+						)}
+						type="button"
+						disabled={selectedItems.length === 0}
+						onClick={() => setSelectedItems([])}
+					/>
 					{chipsToDisplay}
 				</span>
-
 			</span>
 
 			<div
