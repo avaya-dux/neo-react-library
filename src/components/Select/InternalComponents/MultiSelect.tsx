@@ -18,7 +18,7 @@ import "./MultiSelect.css";
 import { Tooltip } from "components/Tooltip";
 
 import log from "loglevel";
-import { Keys, reactNodeToString } from "utils";
+import { Keys, genId, reactNodeToString } from "utils";
 const logger = log.getLogger("multiselect-logger");
 logger.disableAll();
 
@@ -57,6 +57,11 @@ export const MultiSelect = () => {
 		}
 	}, []);
 
+	// Can not pass id to the close button inside a chip. But we can pass id to the chip itself.
+	const parentIdPrefix = useMemo(() => {
+		return `prefix-${genId().split("-").pop()}`;
+	}, []);
+
 	const selectedItemsAsChips = useMemo(() => {
 		logger.debug("2. calculating selected items as chips");
 		chipRefs.current = [];
@@ -65,13 +70,13 @@ export const MultiSelect = () => {
 					return (
 						<Chip
 							key={`${item.children}-${index}`}
+							id={`${parentIdPrefix}-chip-${index}`}
 							ref={(el) => setChipRef(el, index)}
 							closable
 							disabled={disabled}
 							closeButtonAriaLabel={`Remove ${item.children}`}
 							onClose={() => {
 								logger.debug(JSON.stringify(item));
-								logger.debug(toggleItem);
 								toggleItem(item);
 							}}
 						>
@@ -80,7 +85,7 @@ export const MultiSelect = () => {
 					);
 				})
 			: null;
-	}, [selectedItems, disabled, toggleItem, setChipRef]);
+	}, [selectedItems, disabled, toggleItem, setChipRef, parentIdPrefix]);
 
 	const [chipsToDisplay, setChipsToDisplay] = useState<React.ReactNode | null>(
 		selectedItemsAsChips,
@@ -157,30 +162,31 @@ export const MultiSelect = () => {
 		"aria-expanded": ariaExpanded,
 		...restToggleProps
 	} = getToggleButtonProps({
+		id: `${parentIdPrefix}-toggle-button`,
 		onKeyDown: (event) => {
 			// For some reason, the click event is not being dispatched by Downshift on Enter key press.
 			// Let us do it manually on behalf of Chip Close and Clear All buttons.
-			if (event.key === Keys.ENTER || event.key === Keys.SPACE) {
-				if (event.target instanceof HTMLButtonElement) {
-					const ariaLabel = event.target.getAttribute("aria-label");
+			if (event.key !== Keys.ENTER && event.key !== Keys.SPACE) {
+				return;
+			}
 
-					logger.debug(
-						`Enter key pressed on button with aria-label: ${ariaLabel}`,
-					);
+			if (
+				event.target instanceof HTMLButtonElement &&
+				event.target.parentElement
+			) {
+				const parentId = event.target.parentElement.getAttribute("id");
 
-					if (
-						ariaLabel?.toLowerCase().startsWith("remove") ||
-						ariaLabel?.toLowerCase().startsWith("clear")
-					) {
-						try {
-							const clickEvent = new MouseEvent("click", {
-								bubbles: true, // Make the event bubble up
-								cancelable: true, // Make the event cancellable
-							});
-							event.target.dispatchEvent(clickEvent);
-						} catch (error) {
-							logger.error("Error dispatching click event:", error);
-						}
+				logger.debug(`Enter key pressed on button within id: ${parentId}`);
+
+				if (parentId?.startsWith(parentIdPrefix)) {
+					try {
+						const clickEvent = new MouseEvent("click", {
+							bubbles: true,
+							cancelable: true,
+						});
+						event.target.dispatchEvent(clickEvent);
+					} catch (error) {
+						logger.error("Error dispatching click event:", error);
 					}
 				}
 			}
