@@ -373,6 +373,13 @@ export const EditableData = () => {
 				data={data}
 				readonly={readonly}
 				selectableRows="multiple"
+				initialStatePageSize={5}
+				handlePageChange={(newPageIndex, newPageSize) => {
+					setLogItems([
+						`page change - index:${newPageIndex} | size:${newPageSize}`,
+						...logItems,
+					]);
+				}}
 				handleCreate={() => {
 					const newRow: IDataTableMockData = {
 						id: `new-row-${Math.random()}`,
@@ -442,7 +449,11 @@ export const PaginationPushedDown = () => (
 );
 
 export const BareBones = () => (
-	<Table columns={FilledFields.columns} data={[...FilledFields.data]} />
+	<Table
+		columns={FilledFields.columns}
+		showSearch={false}
+		data={[...FilledFields.data]}
+	/>
 );
 
 export const WithRowSeparator = () => (

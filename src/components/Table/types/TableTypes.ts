@@ -21,6 +21,7 @@ interface ToolbarSharedProps<T extends AnyRecord> {
 	handleEdit?: (selectedRow: T) => Promise<void> | void;
 	handleRefresh?: () => Promise<void> | void;
 	showRowHeightMenu?: boolean;
+	showSearch?: boolean;
 	rowHeight?: RowHeight;
 }
 export type TableToolbarProps<T extends AnyRecord> = {

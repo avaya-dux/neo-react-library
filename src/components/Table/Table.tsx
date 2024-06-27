@@ -85,6 +85,7 @@ export const Table = <T extends Record<string, any>>({
 	pushPaginationDown = false,
 	showRowSeparator = false,
 	showRowHeightMenu = true,
+	showSearch = true,
 	itemDisplayTooltipPosition = "auto",
 	itemsPerPageTooltipPosition = "auto",
 	translations,
@@ -127,20 +128,19 @@ export const Table = <T extends Record<string, any>>({
 		pageCount,
 	} = instance;
 	const rowCount = rows.length;
-	// update shown page if necessary
-	useEffect(() => {
-		const currentPage = pageIndex + 1;
 
+	// this `useEffect` handles the edge cases of page change logic
+	useEffect(() => {
+		if (pageCount === 0) return; // no table data, ignore (effectively memoizing `pageIndex`)
+
+		// use-case: user deletes all rows on the last page while on the last page
+		const currentPage = pageIndex + 1;
 		if (currentPage > pageCount) {
-			const finalPageIndex = pageCount - 1; // index is 0-based
+			const finalPageIndex = Math.max(0, pageCount - 1); // index is 0-based
 
 			gotoPage(finalPageIndex);
 			setRootLevelPageIndex(finalPageIndex);
 			handlePageChange(finalPageIndex, pageSize);
-		} else if (pageCount > 0 && currentPage === 0) {
-			gotoPage(0);
-			setRootLevelPageIndex(0);
-			handlePageChange(0, pageSize);
 		}
 	}, [pageSize, pageCount, pageIndex, gotoPage, handlePageChange]);
 
@@ -227,6 +227,7 @@ export const Table = <T extends Record<string, any>>({
 						handleRowHeightChange={onRowHeightChangeHandler}
 						rowHeight={rowHeightValue}
 						showRowHeightMenu={showRowHeightMenu}
+						showSearch={showSearch}
 						instance={instance}
 						readonly={readonly}
 						translations={toolbarTranslations}
@@ -271,7 +272,7 @@ export const Table = <T extends Record<string, any>>({
 						itemsPerPageOptions={itemsPerPageOptions}
 						onPageChange={(e, newIndex) => {
 							e?.preventDefault();
-							const nextIndex = newIndex - 1;
+							const nextIndex = Math.max(0, newIndex - 1);
 							gotoPage(nextIndex);
 							setRootLevelPageIndex(nextIndex);
 							handlePageChange(nextIndex, pageSize);
@@ -283,7 +284,7 @@ export const Table = <T extends Record<string, any>>({
 							// when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page
 							const maxPageIndex = Math.ceil(rowCount / newItemsPerPage);
 							if (pageIndex > maxPageIndex) {
-								const newIndex = maxPageIndex - 1;
+								const newIndex = Math.max(0, maxPageIndex - 1);
 								gotoPage(newIndex);
 								handlePageChange(newIndex, newItemsPerPage);
 							} else {
