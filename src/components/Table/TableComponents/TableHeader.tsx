@@ -131,7 +131,9 @@ export const TableHeader = <T extends Record<string, any>>({
 										}}
 									>
 										{allRowsAreSelected ? (
-											translations.clearSelection
+											<>
+												{translations.clearSelection} ({rows.length})
+											</>
 										) : (
 											<>
 												{translations.selectAll} ({rows.length})
