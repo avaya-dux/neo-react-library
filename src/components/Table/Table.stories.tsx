@@ -373,6 +373,13 @@ export const EditableData = () => {
 				data={data}
 				readonly={readonly}
 				selectableRows="multiple"
+				initialStatePageSize={5}
+				handlePageChange={(newPageIndex, newPageSize) => {
+					setLogItems([
+						`page change - index:${newPageIndex} | size:${newPageSize}`,
+						...logItems,
+					]);
+				}}
 				handleCreate={() => {
 					const newRow: IDataTableMockData = {
 						id: `new-row-${Math.random()}`,

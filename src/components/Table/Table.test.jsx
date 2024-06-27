@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
@@ -126,6 +126,58 @@ describe("Table", () => {
 			const page2Button = page2Buttons[0];
 			expect(page2Button).toHaveClass(selectedPageClass);
 			expect(page5Button).not.toBeVisible();
+		});
+
+		it("does not update `pageIndex` when all data is removed (refreshed)", async () => {
+			render(<EditableData />);
+
+			const refreshButton = screen.getByLabelText("Refresh");
+
+			expect(screen.getByText("1")).toHaveClass(selectedPageClass);
+
+			// refresh data, removing all data and then adding default data back in
+			await user.click(refreshButton);
+			expect(screen.getByText("no data available")).toBeVisible();
+			await waitFor(() => {
+				expect(screen.getByText("1")).toBeVisible();
+				expect(screen.getByText("1")).toHaveClass(selectedPageClass);
+			});
+		});
+
+		it("updates `pageIndex` if data is removed, re-added, and new data set has fewer pages", async () => {
+			render(<EditableData />);
+
+			const refreshButton = screen.getByLabelText("Refresh");
+			const createButton = screen.getByText("Create");
+			const nextButton = screen.getByLabelText("next");
+
+			const pagination2Button = screen.getByText("2");
+			expect(pagination2Button).not.toHaveClass(selectedPageClass);
+
+			// move from page 1 to page 2
+			expect(nextButton).not.toBeDisabled();
+			await user.click(nextButton);
+			expect(nextButton).toBeDisabled();
+			expect(pagination2Button).toHaveClass(selectedPageClass);
+
+			// create a new row, adding a third page
+			await user.click(createButton);
+			const pagination3Button = screen.getByText("3");
+			expect(pagination3Button).not.toHaveClass(selectedPageClass);
+			expect(nextButton).not.toBeDisabled();
+
+			// move to third page
+			await user.click(nextButton);
+			expect(nextButton).toBeDisabled();
+			expect(pagination2Button).not.toHaveClass(selectedPageClass);
+			expect(pagination3Button).toHaveClass(selectedPageClass);
+
+			// refresh data, removing the third page and moving user to the second page (last page)
+			await user.click(refreshButton);
+			await waitFor(() => {
+				expect(screen.getByText("2")).toBeVisible();
+			});
+			expect(screen.getByText("2")).toHaveClass(selectedPageClass);
 		});
 	});
 
