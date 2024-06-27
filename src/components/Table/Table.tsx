@@ -85,6 +85,7 @@ export const Table = <T extends Record<string, any>>({
 	pushPaginationDown = false,
 	showRowSeparator = false,
 	showRowHeightMenu = true,
+	showSearch = true,
 	itemDisplayTooltipPosition = "auto",
 	itemsPerPageTooltipPosition = "auto",
 	translations,
@@ -226,6 +227,7 @@ export const Table = <T extends Record<string, any>>({
 						handleRowHeightChange={onRowHeightChangeHandler}
 						rowHeight={rowHeightValue}
 						showRowHeightMenu={showRowHeightMenu}
+						showSearch={showSearch}
 						instance={instance}
 						readonly={readonly}
 						translations={toolbarTranslations}
