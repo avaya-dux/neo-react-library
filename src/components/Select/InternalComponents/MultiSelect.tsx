@@ -18,7 +18,7 @@ import "./MultiSelect.css";
 import { Tooltip } from "components/Tooltip";
 
 import log from "loglevel";
-import { reactNodeToString } from "utils";
+import { Keys, genId, reactNodeToString } from "utils";
 const logger = log.getLogger("multiselect-logger");
 logger.disableAll();
 
@@ -57,6 +57,11 @@ export const MultiSelect = () => {
 		}
 	}, []);
 
+	// Can not pass id to the close button inside a chip. But we can pass id to the chip itself.
+	const parentIdPrefix = useMemo(() => {
+		return `prefix-${genId().split("-").pop()}`;
+	}, []);
+
 	const selectedItemsAsChips = useMemo(() => {
 		logger.debug("2. calculating selected items as chips");
 		chipRefs.current = [];
@@ -65,18 +70,22 @@ export const MultiSelect = () => {
 					return (
 						<Chip
 							key={`${item.children}-${index}`}
+							id={`${parentIdPrefix}-chip-${index}`}
 							ref={(el) => setChipRef(el, index)}
 							closable
 							disabled={disabled}
 							closeButtonAriaLabel={`Remove ${item.children}`}
-							onClose={() => toggleItem(item)}
+							onClose={() => {
+								logger.debug(JSON.stringify(item));
+								toggleItem(item);
+							}}
 						>
 							{item.children}
 						</Chip>
 					);
 				})
 			: null;
-	}, [selectedItems, disabled, toggleItem, setChipRef]);
+	}, [selectedItems, disabled, toggleItem, setChipRef, parentIdPrefix]);
 
 	const [chipsToDisplay, setChipsToDisplay] = useState<React.ReactNode | null>(
 		selectedItemsAsChips,
@@ -150,8 +159,39 @@ export const MultiSelect = () => {
 		role,
 		"aria-activedescendant": ariaActiveDescendant,
 		"aria-labelledby": ariaLabelledby,
+		"aria-expanded": ariaExpanded,
 		...restToggleProps
-	} = getToggleButtonProps();
+	} = getToggleButtonProps({
+		id: `${parentIdPrefix}-toggle-button`,
+		onKeyDown: (event) => {
+			// For some reason, the click event is not being dispatched by Downshift on Enter key press.
+			// Let us do it manually on behalf of Chip Close and Clear All buttons.
+			if (event.key !== Keys.ENTER && event.key !== Keys.SPACE) {
+				return;
+			}
+
+			if (
+				event.target instanceof HTMLButtonElement &&
+				event.target.parentElement
+			) {
+				const parentId = event.target.parentElement.getAttribute("id");
+
+				logger.debug(`Enter key pressed on button within id: ${parentId}`);
+
+				if (parentId?.startsWith(parentIdPrefix)) {
+					try {
+						const clickEvent = new MouseEvent("click", {
+							bubbles: true,
+							cancelable: true,
+						});
+						event.target.dispatchEvent(clickEvent);
+					} catch (error) {
+						logger.error("Error dispatching click event:", error);
+					}
+				}
+			}
+		},
+	});
 
 	const computedAriaProperty = useMemo(() => {
 		if (selectedItems && selectedItems.length > 0) {
@@ -184,7 +224,25 @@ export const MultiSelect = () => {
 				isOpen && "neo-multiselect--active",
 			)}
 		>
-			<span className="neo-multiselect-combo__header neo-multiselect-combo__header--no-after">
+			<span
+				{...restToggleProps}
+				className={clsx(
+					"neo-multiselect-combo__header",
+					"neo-multiselect-combo__header--focus-visible",
+				)}
+			>
+				{/* put button before span so that it gets tab order first */}
+				<button
+					aria-label="clear selections"
+					className={clsx(
+						"neo-input-edit__icon neo-icon-end",
+						"neo-multiselect-clear-icon-button",
+						selectedItems.length === 0 && "neo-display-none",
+					)}
+					type="button"
+					disabled={selectedItems.length === 0}
+					onClick={() => setSelectedItems([])}
+				/>
 				<span
 					ref={chipContainerRef}
 					key="multiselect-chip-container"
@@ -192,27 +250,14 @@ export const MultiSelect = () => {
 				>
 					<div className="neo-multiselect-combo__buttons-container">
 						<button
-							{...restToggleProps}
 							{...computedAriaProperty}
-							className="neo-multiselect__header"
+							aria-expanded={ariaExpanded}
+							className="neo-multiselect__header neo-multiselect__header--no-after"
 							type="button"
 						>
 							&nbsp;
 						</button>
-
-						<button
-							aria-label="clear selections"
-							className={clsx(
-								"neo-input-edit__icon neo-icon-end",
-								"neo-multiselect-clear-icon-button",
-								selectedItems.length === 0 && "neo-display-none",
-							)}
-							type="button"
-							disabled={selectedItems.length === 0}
-							onClick={() => setSelectedItems([])}
-						/>
 					</div>
-
 					{chipsToDisplay}
 				</span>
 			</span>

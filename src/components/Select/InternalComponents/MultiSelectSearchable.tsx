@@ -93,6 +93,7 @@ export const MultiSelectSearchable = () => {
 							disabled={disabled}
 							placeholder={placeholder}
 							onKeyDown={(e) => {
+								logger.debug({ onKeyDownCalled: e.key });
 								if (
 									e.key === Keys.ENTER &&
 									filteredOptions.length === 1 &&
@@ -113,23 +114,21 @@ export const MultiSelectSearchable = () => {
 								setInputValue(e.target.value);
 							}}
 						/>
-
-						<button
-							aria-label="clear selections"
-							className={clsx(
-								"neo-input-edit__icon neo-icon-end",
-								"neo-multiselect-clear-icon-button",
-								selectedItems.length === 0 && "neo-display-none",
-							)}
-							type="button"
-							disabled={selectedItems.length === 0}
-							onClick={() => setSelectedItems([])}
-						/>
 					</div>
 
 					{selectedItemsAsChips}
 				</span>
-
+				<button
+					aria-label="clear selections"
+					className={clsx(
+						"neo-input-edit__icon neo-icon-end",
+						"neo-multiselect-clear-icon-button",
+						selectedItems.length === 0 && "neo-display-none",
+					)}
+					type="button"
+					disabled={selectedItems.length === 0}
+					onClick={() => setSelectedItems([])}
+				/>
 				<input
 					className="neo-display-none"
 					id={id}
