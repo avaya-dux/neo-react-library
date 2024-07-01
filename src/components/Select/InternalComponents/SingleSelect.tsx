@@ -49,7 +49,10 @@ export const SingleSelect = () => {
 				<button
 					{...restToggleProps}
 					{...computedAriaProperty}
-					className="neo-multiselect__header"
+					className={clsx(
+						"neo-multiselect__header",
+						isOpen && "neo-multiselect__header--expanded",
+					)}
 					type="button"
 				>
 					{selectedItems[0]?.children}

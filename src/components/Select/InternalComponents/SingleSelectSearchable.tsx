@@ -64,7 +64,13 @@ export const SingleSelectSearchable = () => {
 				isOpen && "neo-multiselect--active",
 			)}
 		>
-			<span {...restToggleProps} className="neo-multiselect-combo__header">
+			<span
+				{...restToggleProps}
+				className={clsx(
+					"neo-multiselect-combo__header",
+					isOpen && "neo-multiselect-combo__header--expanded",
+				)}
+			>
 				<span className="neo-multiselect__padded-container">
 					<input
 						{...restInputProps}
