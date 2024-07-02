@@ -60,7 +60,7 @@
 		"react-table": "7.8.0"
 	},
 	"devDependencies": {
-		"@avaya/neo": "3.81.8",
+		"@avaya/neo": "3.81.9",
 		"@avaya/neo-icons": "1.8.12",
 		"@biomejs/biome": "1.8.2",
 		"@faker-js/faker": "8.4.1",
