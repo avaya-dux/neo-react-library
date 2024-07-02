@@ -39,7 +39,6 @@
 .neo-drawer__header {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 }
 
 .neo-drawer__header .neo-drawer__header--left {
@@ -51,8 +50,11 @@
 	line-height: 28px;
 }
 
-.neo-drawer__header .neo-drawer__header--right button:not(:last-child) {
-	margin-right: 8px;
+.neo-drawer__header .neo-drawer__header--left button:first-child {
+	padding-left: 0;
+}
+
+.neo-drawer__header .neo-drawer__header--right button:last-child {
 	margin-left: auto;
 }
 

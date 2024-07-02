@@ -38,7 +38,7 @@ export const BasicDrawer: Story = {
 				<Drawer
 					open={defaultDrawerOpen}
 					onClose={() => setDefaultDrawerOpen(false)}
-					title="Drawer with default behavior"
+					title="Default Drawer"
 				>
 					<p>This Drawer should only have the x close button</p>
 					<p>Drawer can be dismissed by clicking on background scrim</p>
