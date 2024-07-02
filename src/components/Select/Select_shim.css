@@ -276,3 +276,9 @@ div.neo-multiselect
 .neo-option-plain.neo-option-plain--focused {
   background-color: #f1f1f1;
 }
+
+.neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
+  justify-content: start;
+  box-sizing: content-box;
+  min-height: 34px;
+}
