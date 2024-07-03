@@ -85,7 +85,8 @@ div.neo-multiselect:not(.neo-multiselect--small)
   span.neo-multiselect__padded-container
   div
   input.neo-input {
-  height: 36px;
+  height: 34px;
+  min-height: 34px;
 }
 
 /* no left padding while loading */
