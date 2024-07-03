@@ -283,3 +283,10 @@ div.neo-multiselect
   box-sizing: content-box;
   min-height: 34px;
 }
+.neo-input-group .neo-multiselect .neo-multiselect-combo__header:after,
+.neo-input-group .neo-multiselect .neo-multiselect__header:after {
+  width: 16px;
+  height: 16px;
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
