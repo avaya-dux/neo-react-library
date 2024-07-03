@@ -85,7 +85,8 @@ div.neo-multiselect:not(.neo-multiselect--small)
   span.neo-multiselect__padded-container
   div
   input.neo-input {
-  height: 36px;
+  height: 34px;
+  min-height: 34px;
 }
 
 /* no left padding while loading */
@@ -275,4 +276,17 @@ div.neo-multiselect
 
 .neo-option-plain.neo-option-plain--focused {
   background-color: #f1f1f1;
+}
+
+.neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
+  justify-content: start;
+  box-sizing: content-box;
+  min-height: 34px;
+}
+.neo-input-group .neo-multiselect .neo-multiselect-combo__header:after,
+.neo-input-group .neo-multiselect .neo-multiselect__header:after {
+  width: 16px;
+  height: 16px;
+  margin-top: 0px;
+  margin-bottom: 4px;
 }
