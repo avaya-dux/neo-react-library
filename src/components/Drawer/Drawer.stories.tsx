@@ -4,6 +4,7 @@ import { type FormEvent, useState } from "react";
 import { Button, Form, Note, Switch, TextArea } from "components";
 
 import { Drawer } from "./";
+import "./Drawer.stories.css";
 
 type PlainDrawer = React.ComponentProps<typeof Drawer> & {
 	title: string | JSX.Element;
@@ -150,20 +151,16 @@ export const WithForm: Story = {
 						</Button>,
 						<Button form="the-form" key={2} type="submit">
 							Submit
-						</Button>,
-						<Button key={3} variant="secondary">
-							This is a very long button
-						</Button>,
-						<Button key={4}>Does Nothing</Button>,
+						</Button>
 					]}
 				>
 					<Form
 						id="the-form"
+						className="form-drawer"
 						onSubmit={(e: FormEvent<HTMLFormElement>) => {
 							e.preventDefault();
 							alert("you successfully submitted");
 						}}
-						style={{ width: 300 }}
 					>
 						<p style={{ paddingBottom: 20 }}>
 							Terms of Service Example. User must accept ToS before being
@@ -321,6 +318,37 @@ export const CustomWidth: Story = {
 					<Note>
 						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
 					</Note>
+				</Drawer>
+			</main>
+		);
+	},
+};
+
+export const OtherContent: Story = {
+	render: () => {
+		const [contentDrawerOpen, setContentDrawerOpen] = useState(false);
+
+		return (
+			<main>
+				<section
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						marginBottom: "1rem",
+					}}
+				>
+					<Button onClick={() => setContentDrawerOpen(!contentDrawerOpen)}>
+						Open Default Drawer
+					</Button>
+				</section>
+
+				<Drawer
+					open={contentDrawerOpen}
+					onClose={() => setContentDrawerOpen(false)}
+					title="Content wrapping"
+				>
+					what happens with this plain text? just make it very loong to see how it wraps and where this stuff
+					gets rendered
 				</Drawer>
 			</main>
 		);
