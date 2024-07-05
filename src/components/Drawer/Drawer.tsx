@@ -200,7 +200,7 @@ const BasicDrawer = ({
 						</div>
 					</div>
 					<div className="neo-drawer__content">{children}</div>
-					<div className="neo-drawer__actions">{actions}</div>
+					{actions && <div className="neo-drawer__actions">{actions}</div>}
 				</div>
 			</FocusLock>
 			{open && (
