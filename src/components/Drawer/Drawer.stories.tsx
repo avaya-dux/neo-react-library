@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { type FormEvent, useState } from "react";
 
-import { Button, Form, Note, Switch, TextArea } from "components";
+import { Button, Form, IconButton, Note, Switch, TextInput, TextArea } from "components";
 
 import { Drawer } from "./";
 import "./Drawer.stories.css";
@@ -199,7 +199,10 @@ export const WithNote: Story = {
 					open={noteDrawerOpen}
 					onClose={() => setNoteDrawerOpen(false)}
 					title="General Notes"
-					width="30rem"
+					actions={[
+						<TextInput aria-label="Enter note" key={1}/>,
+						<IconButton aria-label="send note" icon="send" key={2}/>,
+					]}
 				>
 					<Note>
 						<Note.Title>Meeting notes</Note.Title>
@@ -324,9 +327,9 @@ export const CustomWidth: Story = {
 	},
 };
 
-export const OtherContent: Story = {
+export const WithScrollbar: Story = {
 	render: () => {
-		const [contentDrawerOpen, setContentDrawerOpen] = useState(false);
+		const [scrollbarDrawerOpen, setScrollbarDrawerOpen] = useState(false);
 
 		return (
 			<main>
@@ -337,20 +340,95 @@ export const OtherContent: Story = {
 						marginBottom: "1rem",
 					}}
 				>
-					<Button onClick={() => setContentDrawerOpen(!contentDrawerOpen)}>
-						Open Default Drawer
+					<Button onClick={() => setScrollbarDrawerOpen(!scrollbarDrawerOpen)}>
+						Toggle Notes Drawer Open
 					</Button>
 				</section>
 
 				<Drawer
-					open={contentDrawerOpen}
-					onClose={() => setContentDrawerOpen(false)}
-					title="Content wrapping"
+					open={scrollbarDrawerOpen}
+					onClose={() => setScrollbarDrawerOpen(false)}
+					title="Vertical scroll bar"
+					actions={[
+						<TextInput placeholder="Type note" aria-label="Enter note" key={1} />,
+						<IconButton aria-label="send note" icon="send" key={2} />,
+					]}
 				>
-					what happens with this plain text? just make it very loong to see how it wraps and where this stuff
-					gets rendered
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
 				</Drawer>
 			</main>
 		);
 	},
 };
+
