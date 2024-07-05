@@ -1,7 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { type FormEvent, useState } from "react";
 
-import { Button, Form, IconButton, Note, Switch, TextInput, TextArea } from "components";
+import {
+	Button,
+	Form,
+	IconButton,
+	Note,
+	Switch,
+	TextArea,
+	TextInput,
+} from "components";
 
 import { Drawer } from "./";
 import "./Drawer.stories.css";
@@ -41,9 +49,7 @@ export const BasicDrawer: Story = {
 					onClose={() => setDefaultDrawerOpen(false)}
 					title="Default Drawer"
 				>
-					<div
-						style={{ height: "100%", width: "100%", border: "1px dashed" }}
-					>
+					<div style={{ height: "100%", width: "100%", border: "1px dashed" }}>
 						<p>This Drawer should only have the x close button</p>
 						<br />
 
@@ -163,7 +169,7 @@ export const WithForm: Story = {
 						</Button>,
 						<Button form="the-form" key={2} type="submit">
 							Submit
-						</Button>
+						</Button>,
 					]}
 				>
 					<Form
@@ -212,8 +218,8 @@ export const WithNote: Story = {
 					onClose={() => setNoteDrawerOpen(false)}
 					title="General Notes"
 					actions={[
-						<TextInput aria-label="Enter note" key={1}/>,
-						<IconButton aria-label="send note" icon="send" key={2}/>,
+						<TextInput aria-label="Enter note" key={1} />,
+						<IconButton aria-label="send note" icon="send" key={2} />,
 					]}
 				>
 					<Note>
@@ -362,7 +368,11 @@ export const WithScrollbar: Story = {
 					onClose={() => setScrollbarDrawerOpen(false)}
 					title="Vertical scroll bar"
 					actions={[
-						<TextInput placeholder="Type note" aria-label="Enter note" key={1} />,
+						<TextInput
+							placeholder="Type note"
+							aria-label="Enter note"
+							key={1}
+						/>,
 						<IconButton aria-label="send note" icon="send" key={2} />,
 					]}
 				>
@@ -443,4 +453,3 @@ export const WithScrollbar: Story = {
 		);
 	},
 };
-
