@@ -41,8 +41,20 @@ export const BasicDrawer: Story = {
 					onClose={() => setDefaultDrawerOpen(false)}
 					title="Default Drawer"
 				>
-					<p>This Drawer should only have the x close button</p>
-					<p>Drawer can be dismissed by clicking on background scrim</p>
+					<div
+						style={{ height: "100%", width: "100%", border: "1px dashed" }}
+					>
+						<p>This Drawer should only have the x close button</p>
+						<br />
+
+						<p>Drawer can be dismissed by clicking on background scrim</p>
+						<br />
+
+						<p>
+							24px padding enforced so content cannot be rendered outside of
+							dashed line.
+						</p>
+					</div>
 				</Drawer>
 			</main>
 		);
