@@ -97,7 +97,10 @@
 .neo-drawer__actions {
 	display: flex;
 	border-top: 1px solid #c9c9c9;
-	padding: 1rem 0rem;
+	padding-inline-start: 1.5rem;
+	padding-inline-end: 1.5rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
 	justify-content: flex-end;
 	flex-wrap: wrap;
 	gap: 0.5rem;
