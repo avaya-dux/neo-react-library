@@ -44,9 +44,8 @@ export const TableHeader = <T extends Record<string, any>>({
 	const [visibleRows, allVisibleRowsAreSelected, allVisibleRowsDeselected] =
 		useMemo(() => {
 			const shownRows = page.map((row) => row.original);
-			const visibleRowsSelected = shownRows.every(
-				(row) => selectedRowIds[row.id],
-			);
+			const visibleRowsSelected =
+				shownRows.length && shownRows.every((row) => selectedRowIds[row.id]);
 			const visibleRowsNotSelected = shownRows.every(
 				(row) => !selectedRowIds[row.id],
 			);
