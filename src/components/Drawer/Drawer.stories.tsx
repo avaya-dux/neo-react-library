@@ -49,7 +49,7 @@ export const BasicDrawer: Story = {
 					onClose={() => setDefaultDrawerOpen(false)}
 					title="Default Drawer"
 				>
-					<div style={{ height: "100%", width: "100%", border: "1px dashed" }}>
+					<div style={{ height: "100%", width: "100%" }}>
 						<p>This Drawer should only have the x close button</p>
 						<br />
 
