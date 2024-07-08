@@ -249,10 +249,7 @@ describe("Table", () => {
 					{...FilledFields}
 					selectableRows="multiple"
 					itemsPerPageOptions={[2]}
-					defaultSelectedRowIds={[
-						FilledFields.data[0].id,
-						FilledFields.data[1].id,
-					]}
+					defaultSelectedRowIds={[FilledFields.data[1].id]}
 				/>,
 			);
 
@@ -315,14 +312,17 @@ describe("Table", () => {
 		});
 
 		it("deselects the header checkbox when all rows are deleted", async () => {
-			render(<SecondPage />);
+			render(<EditableData />);
 
 			const selectAllCheckboxLabel = "Select all items";
 
+			// delete first page
 			await user.click(screen.getByLabelText(selectAllCheckboxLabel));
+			await user.click(screen.getByText("Delete"));
 
-			const deleteButton = screen.getByText("Delete");
-			await user.click(deleteButton);
+			// delete second (final) page
+			await user.click(screen.getByLabelText(selectAllCheckboxLabel));
+			await user.click(screen.getByText("Delete"));
 
 			expect(screen.getByText("no data available")).toBeVisible();
 
