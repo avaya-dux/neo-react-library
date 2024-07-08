@@ -229,6 +229,7 @@ export const MultiSelect = () => {
 				className={clsx(
 					"neo-multiselect-combo__header",
 					"neo-multiselect-combo__header--focus-visible",
+					isOpen && "neo-multiselect-combo__header--expanded",
 				)}
 			>
 				{/* put button before span so that it gets tab order first */}
