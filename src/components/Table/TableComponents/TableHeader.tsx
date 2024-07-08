@@ -41,14 +41,17 @@ export const TableHeader = <T extends Record<string, any>>({
 		toggleSortBy,
 	} = instance;
 
-	const [visibleRows, allVisibleRowsAreSelected]: [Array<T>, boolean] =
+	const [visibleRows, allVisibleRowsAreSelected, allVisibleRowsDeselected] =
 		useMemo(() => {
 			const shownRows = page.map((row) => row.original);
 			const visibleRowsSelected = shownRows.every(
 				(row) => selectedRowIds[row.id],
 			);
+			const visibleRowsNotSelected = shownRows.every(
+				(row) => !selectedRowIds[row.id],
+			);
 
-			return [shownRows, visibleRowsSelected];
+			return [shownRows, visibleRowsSelected, visibleRowsNotSelected];
 		}, [page, selectedRowIds]);
 
 	const selectVisibleRows = useCallback(
@@ -68,13 +71,13 @@ export const TableHeader = <T extends Record<string, any>>({
 	const shouldHaveCheckboxColumn = selectableRows !== "none";
 	const shouldHaveCheckbox = selectableRows === "multiple";
 	const checkboxCheckedValue = useMemo(() => {
-		return allRowsAreSelected
+		return allVisibleRowsAreSelected
 			? true
-			: selectedRows.length === 0
+			: allVisibleRowsDeselected
 				? false
 				: "mixed";
-	}, [allRowsAreSelected, selectedRows]);
-	const handleRowToggledInternal = useCallback(() => {
+	}, [allVisibleRowsAreSelected, allVisibleRowsDeselected]);
+	const toggleAllRows = useCallback(() => {
 		toggleAllRowsSelected(!allRowsAreSelected);
 
 		if (handleRowToggled) {
@@ -89,6 +92,21 @@ export const TableHeader = <T extends Record<string, any>>({
 		checkboxCheckedValue,
 		rowsById,
 	]);
+	const toggleAllVisibleRows = useCallback(() => {
+		selectVisibleRows(!allVisibleRowsAreSelected);
+
+		if (handleRowToggled) {
+			const shouldSelectAll = [false, "mixed"].includes(checkboxCheckedValue);
+
+			handleRowToggled(shouldSelectAll ? visibleRows.map((row) => row.id) : []);
+		}
+	}, [
+		selectVisibleRows,
+		allVisibleRowsAreSelected,
+		handleRowToggled,
+		checkboxCheckedValue,
+		visibleRows,
+	]);
 
 	return (
 		<thead>
@@ -100,7 +118,7 @@ export const TableHeader = <T extends Record<string, any>>({
 								<Checkbox
 									checked={checkboxCheckedValue}
 									aria-label={translations.selectAll}
-									onChange={handleRowToggledInternal}
+									onChange={toggleAllVisibleRows}
 									value="all"
 								/>
 
@@ -126,8 +144,7 @@ export const TableHeader = <T extends Record<string, any>>({
 
 									<MenuItemButton
 										onClick={() => {
-											console.log("select all");
-											handleRowToggledInternal();
+											toggleAllRows();
 										}}
 									>
 										{allRowsAreSelected ? (
