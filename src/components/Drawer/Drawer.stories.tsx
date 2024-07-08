@@ -57,8 +57,7 @@ export const BasicDrawer: Story = {
 						<br />
 
 						<p>
-							24px padding enforced so content cannot be rendered outside of
-							dashed line.
+							24px padding enforced.
 						</p>
 					</div>
 				</Drawer>
