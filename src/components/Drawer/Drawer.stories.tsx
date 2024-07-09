@@ -56,9 +56,7 @@ export const BasicDrawer: Story = {
 						<p>Drawer can be dismissed by clicking on background scrim</p>
 						<br />
 
-						<p>
-							24px padding enforced.
-						</p>
+						<p>24px padding enforced.</p>
 					</div>
 				</Drawer>
 			</main>
