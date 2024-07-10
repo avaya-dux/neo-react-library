@@ -4,7 +4,6 @@ import {
 	Menu,
 	MenuButton,
 	MenuItem,
-	MenuItemButton,
 	type MenuProps,
 	MenuSeparator,
 	SubMenu,
@@ -272,9 +271,6 @@ export const FunctionalMenu = () => (
 					Go to Portal
 				</a>
 			</MenuItem>
-			<MenuItemButton onClick={() => console.log("JOE: button clicked")}>
-				Button Click
-			</MenuItemButton>
 		</Menu>
 	</section>
 );

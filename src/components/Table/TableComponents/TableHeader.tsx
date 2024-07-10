@@ -2,7 +2,7 @@ import { type KeyboardEvent, useCallback, useContext, useMemo } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
-import { Menu, MenuButton, MenuItem, MenuItemButton } from "components/Menu";
+import { Menu, MenuButton, MenuItem } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
@@ -130,7 +130,7 @@ export const TableHeader = <T extends Record<string, any>>({
 										/>
 									}
 								>
-									<MenuItemButton
+									<MenuItem
 										onClick={() =>
 											selectVisibleRows(!allVisibleRowsAreSelected)
 										}
@@ -139,9 +139,9 @@ export const TableHeader = <T extends Record<string, any>>({
 											? translations.clearAllVisibleItems
 											: translations.selectAllVisibleItems}{" "}
 										({visibleRows.length})
-									</MenuItemButton>
+									</MenuItem>
 
-									<MenuItemButton
+									<MenuItem
 										onClick={() => {
 											toggleAllRows();
 										}}
@@ -155,7 +155,7 @@ export const TableHeader = <T extends Record<string, any>>({
 												{translations.selectAll} ({rows.length})
 											</>
 										)}
-									</MenuItemButton>
+									</MenuItem>
 								</Menu>
 							</div>
 						)}
