@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import log from "loglevel";
 import {
+	type KeyboardEvent,
+	type KeyboardEventHandler,
 	type Ref,
 	type RefObject,
 	forwardRef,
@@ -9,6 +11,7 @@ import {
 	useRef,
 } from "react";
 
+import { Keys } from "utils";
 import type { MenuItemProps } from "../MenuTypes";
 
 const logger = log.getLogger("menu-item");
@@ -50,6 +53,8 @@ export const MenuItem = forwardRef(
 			id,
 			isActive = false,
 			tabIndex = 0,
+			onClick,
+			onKeyDown,
 			...rest
 		}: MenuItemProps,
 		ref: Ref<HTMLDivElement>,
@@ -62,6 +67,30 @@ export const MenuItem = forwardRef(
 		logger.debug(
 			`debug menuitem hasFocus = ${hasFocus}, isActive=${isActive}, counter=${counter}`,
 		);
+
+		const handleMenuItemKeyDown: KeyboardEventHandler = (
+			e: KeyboardEvent<HTMLDivElement>,
+		) => {
+			logger.debug("MenuItem handling keydown event ...");
+			if (onKeyDown) {
+				onKeyDown(e);
+				return;
+			}
+
+			switch (e.key) {
+				case Keys.ENTER:
+				case Keys.SPACE:
+					logger.debug("trigger onclick ...");
+					if (onClick && e.target === e.currentTarget) {
+						const clickEvent = new MouseEvent("click", {
+							bubbles: true,
+							cancelable: true,
+						});
+						e.target.dispatchEvent(clickEvent);
+					}
+					break;
+			}
+		};
 
 		// run it in every render
 		useEffect(() => {
@@ -82,6 +111,8 @@ export const MenuItem = forwardRef(
 				ref={localRef}
 				role="menuitem"
 				tabIndex={tabIndex}
+				onKeyDown={handleMenuItemKeyDown}
+				onClick={onClick}
 			>
 				{children}
 			</div>
