@@ -40,8 +40,8 @@
 	justify-content: space-between;
 	padding-inline-start: 1.5rem;
 	padding-inline-end: 1.5rem;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
 }
 
 .neo-drawer__header .neo-drawer__header--left {
@@ -98,8 +98,8 @@
 	border-top: 1px solid #c9c9c9;
 	padding-inline-start: 1.5rem;
 	padding-inline-end: 1.5rem;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
 	justify-content: flex-end;
 	flex-wrap: wrap;
 	gap: 0.5rem;
