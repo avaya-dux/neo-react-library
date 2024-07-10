@@ -152,7 +152,7 @@ const BasicDrawer = ({
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
 	) => {
-		if (onClose && e.key !== Keys.ESC) {
+		if (onClose && e.key === Keys.ESC) {
 			onClose();
 		}
 	};
@@ -161,6 +161,7 @@ const BasicDrawer = ({
 		<div>
 			<FocusLock disabled={!open}>
 				<div
+					onKeyDown={onKeyDownScrimHandler}
 					role="dialog"
 					style={style}
 					aria-labelledby={id}
@@ -200,7 +201,7 @@ const BasicDrawer = ({
 						</div>
 					</div>
 					<div className="neo-drawer__content">{children}</div>
-					<div className="neo-drawer__actions">{actions}</div>
+					{actions && <div className="neo-drawer__actions">{actions}</div>}
 				</div>
 			</FocusLock>
 			{open && (
