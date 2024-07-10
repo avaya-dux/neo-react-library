@@ -1,10 +1,10 @@
 import { composeStories } from "@storybook/testing-react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import log from "loglevel";
 import { vi } from "vitest";
-import * as MenuItemStories from "./MenuItem.stories";
 import { MenuItem } from "./MenuItem";
+import * as MenuItemStories from "./MenuItem.stories";
 
 log.disableAll();
 
@@ -54,7 +54,7 @@ describe("Menu Item Storybook tests", () => {
 			const onKeyDown = vi.fn();
 			const onClick = vi.fn();
 			const renderResult = render(
-				<MenuItem onKeyDown={onKeyDown} onClick={on}>
+				<MenuItem onKeyDown={onKeyDown} onClick={onClick}>
 					Click Me
 				</MenuItem>,
 			);
