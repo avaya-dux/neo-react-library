@@ -152,7 +152,7 @@ const BasicDrawer = ({
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
 	) => {
-		if (onClose && e.key !== Keys.ESC) {
+		if (onClose && e.key === Keys.ESC) {
 			onClose();
 		}
 	};
@@ -161,6 +161,7 @@ const BasicDrawer = ({
 		<div>
 			<FocusLock disabled={!open}>
 				<div
+					onKeyDown={onKeyDownScrimHandler}
 					role="dialog"
 					style={style}
 					aria-labelledby={id}
