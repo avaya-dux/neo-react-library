@@ -41,24 +41,24 @@ export const TableHeader = <T extends Record<string, any>>({
 		toggleSortBy,
 	} = instance;
 
-	const [visibleRows, allVisibleRowsAreSelected, allVisibleRowsDeselected] =
-		useMemo(() => {
-			const shownRows = page.map((row) => row.original);
-			const visibleRowsSelected =
-				shownRows.length && shownRows.every((row) => selectedRowIds[row.id]);
-			const visibleRowsNotSelected = shownRows.every(
-				(row) => !selectedRowIds[row.id],
-			);
+	const [pageRows, allPageRowsSelected, allPageRowsDeselected] = useMemo(() => {
+		const pageRowsMemo = page.map((row) => row.original);
+		const allPageRowsSelectedMemo =
+			pageRowsMemo.length &&
+			pageRowsMemo.every((row) => selectedRowIds[row.id]);
+		const allPageRowsDeselectedMemo = pageRowsMemo.every(
+			(row) => !selectedRowIds[row.id],
+		);
 
-			return [shownRows, visibleRowsSelected, visibleRowsNotSelected];
-		}, [page, selectedRowIds]);
+		return [pageRowsMemo, allPageRowsSelectedMemo, allPageRowsDeselectedMemo];
+	}, [page, selectedRowIds]);
 
-	const selectVisibleRows = useCallback(
-		(set: boolean) => {
-			const visibleRowIds = visibleRows.map((row) => row.id);
-			visibleRowIds.forEach((id) => toggleRowSelected(id, set));
+	const selectPageRows = useCallback(
+		(selected: boolean) => {
+			const visibleRowIds = pageRows.map((row) => row.id);
+			visibleRowIds.forEach((id) => toggleRowSelected(id, selected));
 		},
-		[visibleRows, toggleRowSelected],
+		[pageRows, toggleRowSelected],
 	);
 
 	const { allowColumnFilter, toggleFilterSheetVisible } =
@@ -70,12 +70,8 @@ export const TableHeader = <T extends Record<string, any>>({
 	const shouldHaveCheckboxColumn = selectableRows !== "none";
 	const shouldHaveCheckbox = selectableRows === "multiple";
 	const checkboxCheckedValue = useMemo(() => {
-		return allVisibleRowsAreSelected
-			? true
-			: allVisibleRowsDeselected
-				? false
-				: "mixed";
-	}, [allVisibleRowsAreSelected, allVisibleRowsDeselected]);
+		return allPageRowsSelected ? true : allPageRowsDeselected ? false : "mixed";
+	}, [allPageRowsSelected, allPageRowsDeselected]);
 	const toggleAllRows = useCallback(() => {
 		toggleAllRowsSelected(!allRowsAreSelected);
 
@@ -91,20 +87,20 @@ export const TableHeader = <T extends Record<string, any>>({
 		checkboxCheckedValue,
 		rowsById,
 	]);
-	const toggleAllVisibleRows = useCallback(() => {
-		selectVisibleRows(!allVisibleRowsAreSelected);
+	const togglePageRows = useCallback(() => {
+		selectPageRows(!allPageRowsSelected);
 
 		if (handleRowToggled) {
 			const shouldSelectAll = [false, "mixed"].includes(checkboxCheckedValue);
 
-			handleRowToggled(shouldSelectAll ? visibleRows.map((row) => row.id) : []);
+			handleRowToggled(shouldSelectAll ? pageRows.map((row) => row.id) : []);
 		}
 	}, [
-		selectVisibleRows,
-		allVisibleRowsAreSelected,
+		selectPageRows,
+		allPageRowsSelected,
 		handleRowToggled,
 		checkboxCheckedValue,
-		visibleRows,
+		pageRows,
 	]);
 
 	return (
@@ -117,7 +113,7 @@ export const TableHeader = <T extends Record<string, any>>({
 								<Checkbox
 									checked={checkboxCheckedValue}
 									aria-label={translations.selectAll}
-									onChange={toggleAllVisibleRows}
+									onChange={togglePageRows}
 									value="all"
 								/>
 
@@ -131,14 +127,12 @@ export const TableHeader = <T extends Record<string, any>>({
 									}
 								>
 									<MenuItem
-										onClick={() =>
-											selectVisibleRows(!allVisibleRowsAreSelected)
-										}
+										onClick={() => selectPageRows(!allPageRowsSelected)}
 									>
-										{allVisibleRowsAreSelected
+										{allPageRowsSelected
 											? translations.clearAllVisibleItems
 											: translations.selectAllVisibleItems}{" "}
-										({visibleRows.length})
+										({pageRows.length})
 									</MenuItem>
 
 									<MenuItem
