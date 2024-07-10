@@ -1,9 +1,0 @@
-.neo-dropdown .neo-dropdown__content button.neo-dropdown__link {
-	font-family: noto-sans, sans-serif;
-	text-align: left;
-	width: 100%;
-
-	/* HACK: for table header */
-	font-weight: 400;
-	margin-left: 0;
-}
