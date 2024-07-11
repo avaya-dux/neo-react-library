@@ -18,7 +18,7 @@ export interface IToolbarTranslations extends ITableFilterTranslations {
 }
 
 export interface IBodyTranslations {
-	someItemsSelected?: string; // TODO: remove
+	someItemsSelected?: string;
 	pageSelected?: string;
 	allSelected?: string;
 	clearSelection?: string;
