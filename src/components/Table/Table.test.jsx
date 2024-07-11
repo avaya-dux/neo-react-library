@@ -314,7 +314,7 @@ describe("Table", () => {
 		it("deselects the header checkbox when all rows are deleted", async () => {
 			render(<EditableData />);
 
-			const selectAllCheckboxLabel = "Select all items";
+			const selectAllCheckboxLabel = FilledFields.translations.header.selectAll;
 
 			// delete first page
 			await user.click(screen.getByLabelText(selectAllCheckboxLabel));
