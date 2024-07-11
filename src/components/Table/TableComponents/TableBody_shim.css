@@ -1,4 +1,8 @@
-.neo-table tr.clear-row {
+.neo-table tr.clear-row td {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
 .neo-table tr.clear-row,
 .neo-table tr.clear-row:hover {
 	background-color: var(--neo-color-blue-100);
@@ -13,6 +17,7 @@
 }
 
 .neo-table tr.clear-row button.neo-table-link-btn {
+	padding: 0 0 0 6px;
 	transition: none;
 	background-color: transparent;
 	background-image: none;
