@@ -1,9 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { type FormEvent, useState } from "react";
 
-import { Button, Form, Note, Switch, TextArea } from "components";
+import {
+	Button,
+	Form,
+	IconButton,
+	Note,
+	Switch,
+	TextArea,
+	TextInput,
+} from "components";
 
 import { Drawer } from "./";
+import "./Drawer.stories.css";
 
 type PlainDrawer = React.ComponentProps<typeof Drawer> & {
 	title: string | JSX.Element;
@@ -38,10 +47,17 @@ export const BasicDrawer: Story = {
 				<Drawer
 					open={defaultDrawerOpen}
 					onClose={() => setDefaultDrawerOpen(false)}
-					title="Drawer with default behavior"
+					title="Default Drawer"
 				>
-					<p>This Drawer should only have the x close button</p>
-					<p>Drawer can be dismissed by clicking on background scrim</p>
+					<div style={{ height: "100%", width: "100%" }}>
+						<p>This Drawer should only have the x close button</p>
+						<br />
+
+						<p>Drawer can be dismissed by clicking on background scrim</p>
+						<br />
+
+						<p>24px padding enforced.</p>
+					</div>
 				</Drawer>
 			</main>
 		);
@@ -151,19 +167,15 @@ export const WithForm: Story = {
 						<Button form="the-form" key={2} type="submit">
 							Submit
 						</Button>,
-						<Button key={3} variant="secondary">
-							This is a very long button
-						</Button>,
-						<Button key={4}>Does Nothing</Button>,
 					]}
 				>
 					<Form
 						id="the-form"
+						className="form-drawer"
 						onSubmit={(e: FormEvent<HTMLFormElement>) => {
 							e.preventDefault();
 							alert("you successfully submitted");
 						}}
-						style={{ width: 300 }}
 					>
 						<p style={{ paddingBottom: 20 }}>
 							Terms of Service Example. User must accept ToS before being
@@ -202,7 +214,10 @@ export const WithNote: Story = {
 					open={noteDrawerOpen}
 					onClose={() => setNoteDrawerOpen(false)}
 					title="General Notes"
-					width="30rem"
+					actions={[
+						<TextInput aria-label="Enter note" key={1} />,
+						<IconButton aria-label="send note" icon="send" key={2} />,
+					]}
 				>
 					<Note>
 						<Note.Title>Meeting notes</Note.Title>
@@ -312,6 +327,115 @@ export const CustomWidth: Story = {
 					title="Drawer width = 150px"
 					width="150px"
 				>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+				</Drawer>
+			</main>
+		);
+	},
+};
+
+export const WithScrollbar: Story = {
+	render: () => {
+		const [scrollbarDrawerOpen, setScrollbarDrawerOpen] = useState(false);
+
+		return (
+			<main>
+				<section
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						marginBottom: "1rem",
+					}}
+				>
+					<Button onClick={() => setScrollbarDrawerOpen(!scrollbarDrawerOpen)}>
+						Toggle Notes Drawer Open
+					</Button>
+				</section>
+
+				<Drawer
+					open={scrollbarDrawerOpen}
+					onClose={() => setScrollbarDrawerOpen(false)}
+					title="Vertical scroll bar"
+					actions={[
+						<TextInput
+							placeholder="Type note"
+							aria-label="Enter note"
+							key={1}
+						/>,
+						<IconButton aria-label="send note" icon="send" key={2} />,
+					]}
+				>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
+					<Note>
+						<Note.Title>Meeting notes</Note.Title>
+						<Note.Content author="Kathy" self={true}>
+							Hi, can we sync?
+						</Note.Content>
+					</Note>
+					<Note>
+						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+					</Note>
 					<Note>
 						<Note.Title>Meeting notes</Note.Title>
 						<Note.Content author="Kathy" self={true}>
