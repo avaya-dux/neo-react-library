@@ -73,9 +73,11 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	const shouldShowCheckbox = selectableRows !== "none";
 	const columnsLength = headers.length + (shouldShowCheckbox ? 1 : 0);
 	const selectedRowCount = Object.keys(selectedRowIds).length;
+
+	// if no rows are selected, return early
 	if (selectedRowCount === 0) return undefined;
 
-	const allVisibleRowsAreSelected = useMemo(() => {
+	const allPageRowsAreSelected = useMemo(() => {
 		const shownRows = page.map((row) => row.original);
 		const visibleRowsSelected = shownRows.every(
 			(row) => selectedRowIds[row.id],
@@ -85,12 +87,10 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	}, [page, selectedRowIds]);
 
 	const selectionButton = useMemo(() => {
-		// TODO: update to _only_ show when selection is made from the header dropdown
-
-		const allRowsAreSelected =
+		const allTableRowsAreSelected =
 			rows.length === 0 ? false : selectedRowCount === rows.length;
 
-		if (allRowsAreSelected) {
+		if (allTableRowsAreSelected) {
 			return (
 				<>
 					<span>
@@ -103,7 +103,7 @@ const ClearSelectionRow: TableBodyComponentType = ({
 			);
 		}
 
-		if (!allRowsAreSelected && allVisibleRowsAreSelected) {
+		if (!allTableRowsAreSelected && allPageRowsAreSelected) {
 			return (
 				<>
 					<span>
@@ -130,7 +130,7 @@ const ClearSelectionRow: TableBodyComponentType = ({
 		translations,
 		rows,
 		selectedRowCount,
-		allVisibleRowsAreSelected,
+		allPageRowsAreSelected,
 		toggleAllRowsSelected,
 	]);
 
