@@ -216,6 +216,7 @@ const TableDataRows: TableBodyComponentType = ({
 				)}
 
 				{row.cells.map((cell, i) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: acceptable risk
 					<td {...cell.getCellProps()} key={`td-${i}`}>
 						{cell.render("Cell")}
 					</td>
