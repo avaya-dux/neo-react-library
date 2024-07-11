@@ -130,8 +130,8 @@ export const TableHeader = <T extends Record<string, any>>({
 										onClick={() => selectPageRows(!allPageRowsSelected)}
 									>
 										{allPageRowsSelected
-											? translations.clearAllVisibleItems
-											: translations.selectAllVisibleItems}{" "}
+											? translations.clearPage
+											: translations.selectPage}{" "}
 										({pageRows.length})
 									</MenuItem>
 
@@ -142,7 +142,7 @@ export const TableHeader = <T extends Record<string, any>>({
 									>
 										{allRowsAreSelected ? (
 											<>
-												{translations.clearSelection} ({rows.length})
+												{translations.clearAll} ({rows.length})
 											</>
 										) : (
 											<>

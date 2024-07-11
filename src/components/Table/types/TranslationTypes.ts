@@ -32,10 +32,10 @@ export interface IPaginationTranslations {
 export interface ITableHeaderTranslations {
 	clearSort?: string;
 	filterColumn?: string;
-	clearSelection: string;
+	clearAll: string;
 	selectAll: string;
-	clearAllVisibleItems: string;
-	selectAllVisibleItems: string;
+	clearPage: string;
+	selectPage: string;
 	sortAscending?: string;
 	sortDescending?: string;
 	toggleSortBy?: string;
