@@ -1,0 +1,9 @@
+.neo-table tr.clear-row {
+	background-color: var(--neo-color-blue-100);
+}
+
+.neo-table tr.clear-row button.neo-table-link-btn {
+	transition: none;
+	background-color: transparent;
+	background-image: none;
+}
