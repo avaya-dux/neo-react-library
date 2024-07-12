@@ -27,6 +27,7 @@ const {
 	PreSelectedRows,
 	Templated,
 	SecondPage,
+	DisabledRows,
 } = composeStories(TableStories);
 
 describe("Table", () => {
@@ -781,6 +782,29 @@ describe("Table", () => {
 			await user.click(nameCheckbox);
 			expect(nameCheckbox).not.toBeChecked();
 			expect(firstColumnSortButton).not.toBeVisible();
+		});
+	});
+
+	describe("disabled row functionality", () => {
+		it("properly disables a row", async () => {
+			render(<DisabledRows />);
+
+			const tableRows = screen.getAllByRole("row");
+			const disabledTableRows = tableRows.filter((row) =>
+				row.classList.contains("disabled"),
+			);
+			expect(disabledTableRows).toHaveLength(2);
+		});
+
+		it("does not allow the user to manually select a disabled row", async () => {
+			render(<DisabledRows />);
+
+			const tableRows = screen.getAllByRole("row");
+			const disabledTableRows = tableRows.filter((row) =>
+				row.classList.contains("disabled"),
+			);
+			const disabledCheckbox = disabledTableRows[0].querySelector("input");
+			expect(disabledCheckbox).toBeDisabled();
 		});
 	});
 
