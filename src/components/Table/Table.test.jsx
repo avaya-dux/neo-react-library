@@ -218,7 +218,7 @@ describe("Table", () => {
 			);
 
 			const headerCheckbox = getByLabelText(
-				FilledFields.translations.header.selectAll,
+				FilledFields.translations.header.selectPage,
 			);
 			const headerCheckboxLabel = container.querySelector("tr th label");
 			const checkbox2 = getByLabelText(FilledFields.data[2].label);
@@ -254,7 +254,7 @@ describe("Table", () => {
 			);
 
 			const headerCheckbox = screen.getByLabelText(
-				FilledFields.translations.header.selectAll,
+				FilledFields.translations.header.selectPage,
 			);
 			const headerCheckboxLabel = container.querySelector("tr th label");
 			const checkbox2 = screen.getByLabelText(FilledFields.data[1].label);
@@ -314,19 +314,22 @@ describe("Table", () => {
 		it("deselects the header checkbox when all rows are deleted", async () => {
 			render(<EditableData />);
 
-			const selectAllCheckboxLabel = FilledFields.translations.header.selectAll;
+			const selectPageCheckboxLabel =
+				FilledFields.translations.header.selectPage;
 
 			// delete first page
-			await user.click(screen.getByLabelText(selectAllCheckboxLabel));
+			await user.click(screen.getByLabelText(selectPageCheckboxLabel));
 			await user.click(screen.getByText("Delete"));
 
 			// delete second (final) page
-			await user.click(screen.getByLabelText(selectAllCheckboxLabel));
+			await user.click(screen.getByLabelText(selectPageCheckboxLabel));
 			await user.click(screen.getByText("Delete"));
 
 			expect(screen.getByText("no data available")).toBeVisible();
 
-			expect(screen.getByLabelText(selectAllCheckboxLabel).checked).toBeFalsy();
+			expect(
+				screen.getByLabelText(selectPageCheckboxLabel).checked,
+			).toBeFalsy();
 		});
 	});
 

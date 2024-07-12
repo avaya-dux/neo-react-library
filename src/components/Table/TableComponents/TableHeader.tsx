@@ -112,7 +112,7 @@ export const TableHeader = <T extends Record<string, any>>({
 							<div className="table-selection-menu">
 								<Checkbox
 									checked={checkboxCheckedValue}
-									aria-label={translations.selectAll}
+									aria-label={translations.selectPage}
 									onChange={togglePageRows}
 									value="all"
 								/>
