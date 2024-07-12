@@ -7,12 +7,14 @@ import { vi } from "vitest";
 import { UserEventKeys } from "utils";
 
 import { Table } from ".";
-import * as TableStories from "./Table.stories";
 import {
-	FilledFields,
 	calculateAriaSortValue,
 	convertRowIdsArrayToObject,
+	FilledFields,
+	toggleEnabledPageRows,
+	toggleEnabledTableRows,
 } from "./helpers";
+import * as TableStories from "./Table.stories";
 
 const {
 	AdvancedFilteringAndSorting,
@@ -835,6 +837,90 @@ describe("Table", () => {
 				const idArr3 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 				const idObj3 = convertRowIdsArrayToObject(idArr3);
 				expect(Object.values(idObj3)).toEqual(Array(idArr3.length).fill(true));
+			});
+		});
+
+		describe("toggle row methos", () => {
+			it("`toggleEnabledTableRows` toggles the enabled state of all rows that are not disabled", () => {
+				const mocktoggleRowSelected = vi.fn();
+				const mockInstance = {
+					rows: [
+						{
+							id: 1,
+							original: {
+								disabled: false,
+							},
+						},
+						{
+							id: 2,
+							original: {
+								disabled: true,
+							},
+						},
+						{
+							id: 3,
+							original: {
+								disabled: false,
+							},
+						},
+					],
+					toggleRowSelected: mocktoggleRowSelected,
+				};
+
+				const falsyTest = toggleEnabledTableRows(mockInstance, false);
+
+				expect(mocktoggleRowSelected).toHaveBeenCalledTimes(2);
+				expect(mocktoggleRowSelected).toHaveBeenCalledWith(1, false);
+				expect(mocktoggleRowSelected).toHaveBeenCalledWith(3, false);
+				expect(falsyTest).toHaveLength(2);
+
+				mocktoggleRowSelected.mockClear();
+				const truthyTest = toggleEnabledTableRows(mockInstance, true);
+				expect(mocktoggleRowSelected).toHaveBeenCalledTimes(2);
+				expect(mocktoggleRowSelected).toHaveBeenCalledWith(1, true);
+				expect(mocktoggleRowSelected).toHaveBeenCalledWith(3, true);
+				expect(truthyTest).toHaveLength(2);
+			});
+
+			it("`toggleEnabledPageRows` toggles the enabled state of all page rows that are not disabled", () => {
+				const mocktoggleRowSelected = vi.fn();
+				const mockInstance = {
+					page: [
+						{
+							id: 1,
+							original: {
+								disabled: false,
+							},
+						},
+						{
+							id: 2,
+							original: {
+								disabled: true,
+							},
+						},
+						{
+							id: 3,
+							original: {
+								disabled: false,
+							},
+						},
+					],
+					toggleRowSelected: mocktoggleRowSelected,
+				};
+
+				const falsyTest = toggleEnabledPageRows(mockInstance, false);
+
+				expect(mocktoggleRowSelected).toHaveBeenCalledTimes(2);
+				expect(mocktoggleRowSelected).toHaveBeenCalledWith(1, false);
+				expect(mocktoggleRowSelected).toHaveBeenCalledWith(3, false);
+				expect(falsyTest).toHaveLength(2);
+
+				mocktoggleRowSelected.mockClear();
+				const truthyTest = toggleEnabledPageRows(mockInstance, true);
+				expect(mocktoggleRowSelected).toHaveBeenCalledTimes(2);
+				expect(mocktoggleRowSelected).toHaveBeenCalledWith(1, true);
+				expect(mocktoggleRowSelected).toHaveBeenCalledWith(3, true);
+				expect(truthyTest).toHaveLength(2);
 			});
 		});
 	});
