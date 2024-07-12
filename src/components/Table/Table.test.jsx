@@ -412,21 +412,25 @@ describe("Table", () => {
 				getByText(FilledFields.translations.toolbar.delete),
 			).toThrow();
 
+			// select first row
 			const firstRowCheckboxLabel =
 				queryAllByRole("row")[1].querySelector("label");
 			await user.click(firstRowCheckboxLabel);
 
 			// callable when one row is selected
-			const deleteButton = getByText(FilledFields.translations.toolbar.delete);
-			await user.click(deleteButton);
+			await user.click(getByText(FilledFields.translations.toolbar.delete));
 			expect(mock).toHaveBeenCalledTimes(1);
 
+			// select second and third rows
 			const secondRowCheckboxLabel =
 				queryAllByRole("row")[2].querySelector("label");
 			await user.click(secondRowCheckboxLabel);
+			const thirdRowCheckboxLabel =
+				queryAllByRole("row")[3].querySelector("label");
+			await user.click(thirdRowCheckboxLabel);
 
 			// callable when multiple rows are selected
-			await user.click(deleteButton);
+			await user.click(getByText(FilledFields.translations.toolbar.delete));
 			expect(mock).toHaveBeenCalledTimes(2);
 		});
 
