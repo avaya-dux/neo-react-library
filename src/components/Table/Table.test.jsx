@@ -31,6 +31,8 @@ describe("Table", () => {
 	const user = userEvent.setup();
 	vi.spyOn(console, "warn").mockImplementation(() => null); // ignore tooltip warnings
 
+	const clearRowClassName = "clear-row";
+
 	const selectedPageClass = "neo-btn-secondary";
 
 	it("fully renders without exploding", () => {
@@ -330,6 +332,96 @@ describe("Table", () => {
 			expect(
 				screen.getByLabelText(selectPageCheckboxLabel).checked,
 			).toBeFalsy();
+		});
+
+		it("does not show 'clear-row' when no rows are selected", async () => {
+			const { container } = render(<EditableData />);
+
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				0,
+			);
+		});
+
+		it("shows 'clear-row' when any rows are selected", async () => {
+			const { container } = render(<EditableData />);
+
+			const selectPageCheckboxLabel =
+				FilledFields.translations.header.selectPage;
+			await user.click(screen.getByLabelText(selectPageCheckboxLabel));
+
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				1,
+			);
+		});
+
+		it("when some but not all are selected, clicking the 'clear-row' button selects all rows", async () => {
+			const { container } = render(<EditableData />);
+
+			// confirm that the 'clear-row' button is NOT visible initially
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				0,
+			);
+
+			// select page rows
+			const selectPageCheckboxLabel =
+				FilledFields.translations.header.selectPage;
+			await user.click(screen.getByLabelText(selectPageCheckboxLabel));
+
+			// confirm that the 'clear-row' button is now visible
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				1,
+			);
+
+			// confirm that the correct text is displayed
+			expect(
+				screen.getByText(FilledFields.translations.body.selectAll),
+			).toBeVisible();
+
+			// click the 'clear-row' button
+			await user.click(
+				screen.getByText(FilledFields.translations.body.selectAll),
+			);
+
+			// confirm that the 'clear-row' button is visible and has different text
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				1,
+			);
+			expect(
+				screen.getByText(FilledFields.translations.body.clearSelection),
+			).toBeVisible();
+		});
+
+		it("when all rows are selected, clicking the 'clear-row' button de-selects all rows", async () => {
+			const { container } = render(<EditableData />);
+
+			// open dropdown, select all rows
+			const dropdown = screen.getByLabelText(
+				FilledFields.translations.header.tableSelectionDropdown,
+			);
+			await user.click(dropdown);
+			const selectAllRows = screen.getByText(
+				`${FilledFields.translations.header.selectAll} (10)`,
+			);
+			await user.click(selectAllRows);
+
+			// confirm that the 'clear-row' button is visible
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				1,
+			);
+			expect(
+				screen.getByText(FilledFields.translations.body.clearSelection),
+			).toBeVisible();
+
+			// click the 'clear-row' button
+			const clearRowButton = screen.getByText(
+				FilledFields.translations.body.clearSelection,
+			);
+			await user.click(clearRowButton);
+
+			// confirm that the 'clear-row' is NOT visible
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				0,
+			);
 		});
 	});
 
