@@ -41,6 +41,7 @@ export interface ITableHeaderTranslations {
 	selectAll: string;
 	clearPage: string;
 	selectPage: string;
+	tableSelectionDropdown: string;
 	sortAscending?: string;
 	sortDescending?: string;
 	toggleSortBy?: string;

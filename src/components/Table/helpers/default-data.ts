@@ -24,6 +24,7 @@ export const translations: ITableTranslations = {
 		selectAll: "Select all items in the table",
 		clearPage: "Clear all items on page",
 		selectPage: "Select all items on page",
+		tableSelectionDropdown: "Table Selection Dropdown",
 		sortAscending: "A - Z",
 		sortDescending: "Z - A",
 		toggleSortBy: "Toggle SortBy",

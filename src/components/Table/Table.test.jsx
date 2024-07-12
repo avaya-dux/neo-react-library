@@ -434,30 +434,36 @@ describe("Table", () => {
 			expect(mock).toHaveBeenCalledTimes(2);
 		});
 
-		it("properly handles `delete` when the last row of a page is deleted", async () => {
+		it("properly handles `delete` when the all rows in the final page are deleted", async () => {
 			render(<SecondPage initialStatePageIndex={4} />);
 
+			// move to final page
+			expect(screen.getAllByRole("listitem")).toHaveLength(5);
 			await user.click(screen.getAllByText("5")[0]);
+
+			// confirm final page is selected
 			expect(screen.getAllByText("5")).toHaveLength(2);
 			expect(screen.getAllByText("5")[0]).toHaveClass(selectedPageClass);
-			expect(screen.queryAllByText("4")).toHaveLength(0);
+			expect(screen.getAllByRole("listitem")).toHaveLength(5);
 
-			const firstRowCheckboxLabel = screen
-				.queryAllByRole("row")[1]
-				.querySelector("label");
-			await user.click(firstRowCheckboxLabel);
-			const secondRowCheckboxLabel = screen
-				.queryAllByRole("row")[2]
-				.querySelector("label");
-			await user.click(secondRowCheckboxLabel);
+			// open dropdown, select page rows, delete
+			const dropdown = screen.getByLabelText(
+				FilledFields.translations.header.tableSelectionDropdown,
+			);
+			await user.click(dropdown);
+
+			const selectPageRows = screen.getByText(
+				`${FilledFields.translations.header.selectPage} (2)`,
+			);
+			await user.click(selectPageRows);
 
 			const deleteButton = screen.getByText(
 				FilledFields.translations.toolbar.delete,
 			);
 			await user.click(deleteButton);
 
-			expect(screen.getAllByText("5")).toHaveLength(1);
-			expect(screen.getAllByText("4")).toHaveLength(1);
+			// confirm that the final page is removed
+			expect(screen.getAllByRole("listitem")).toHaveLength(8);
 			expect(screen.getByText("4")).toHaveClass(selectedPageClass);
 		});
 
