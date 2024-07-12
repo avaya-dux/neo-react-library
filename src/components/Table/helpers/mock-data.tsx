@@ -6,6 +6,7 @@ import { translations } from "./default-data";
 export interface IDataTableMockData {
 	id: string;
 	label: string;
+	disabled?: boolean;
 	name: string | JSX.Element;
 	other: string;
 	date?: Date;
@@ -50,6 +51,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "10",
 		label: "Fred",
+		disabled: true,
 		name: "Sir Fred",
 		other: "Lorem Ipsum",
 		date: new Date(2001, 1, 1),
@@ -63,6 +65,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "30",
 		label: "Tif",
+		disabled: true,
 		name: "Madam Tif",
 		other: "Asdf Fded",
 		date: new Date(2010, 2, 12),

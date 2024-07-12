@@ -202,13 +202,18 @@ const TableDataRows: TableBodyComponentType = ({
 				role={preparedRowProps.role}
 				style={preparedRowProps.style}
 				key={preparedRowProps.key || `table-row-${row.id}`}
-				className={clsx(row.isSelected && "active", preparedRowProps.className)}
+				className={clsx(
+					row.isSelected && "active",
+					row.original.disabled && "disabled",
+					preparedRowProps.className,
+				)}
 			>
 				{shouldShowCheckbox && (
 					<td style={{ padding: "0 0 0 5px" }}>
 						<Checkbox
 							checked={row.isSelected}
 							aria-label={checkboxLabel}
+							disabled={row.original.disabled}
 							onChange={() => handleRowToggledInternal(row)}
 							value={row.id}
 						/>
