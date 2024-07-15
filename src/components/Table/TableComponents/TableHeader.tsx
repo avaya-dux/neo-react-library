@@ -107,9 +107,9 @@ export const TableHeader = <T extends Record<string, any>>({
 		<thead>
 			<tr>
 				{canDrag && (
-					<th className="neo-table__dnd-th">
+					<td className="neo-table__dnd-th">
 						<div>&nbsp;</div>
-					</th>
+					</td>
 				)}
 				{shouldHaveCheckboxColumn && (
 					<th className="neo-table-checkbox-th">

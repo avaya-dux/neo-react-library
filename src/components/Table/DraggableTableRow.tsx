@@ -1,9 +1,9 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { DragHandle } from "./DragHandle";
-import styled from "styled-components";
-import type { Row } from "react-table";
 import clsx from "clsx";
+import type { Row } from "react-table";
+import styled from "styled-components";
+import { DragHandle } from "./DragHandle";
 
 import log from "loglevel";
 export const logger = log.getLogger("TableComponents/DraggableTableRow");

@@ -1,3 +1,18 @@
+import {
+	DndContext,
+	type DragEndEvent,
+	DragOverlay,
+	type DragStartEvent,
+	KeyboardSensor,
+	MouseSensor,
+	TouchSensor,
+	type UniqueIdentifier,
+	closestCenter,
+	useSensor,
+	useSensors,
+} from "@dnd-kit/core";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import { arrayMove } from "@dnd-kit/sortable";
 import clsx from "clsx";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
@@ -9,21 +24,6 @@ import {
 	useSortBy,
 	useTable,
 } from "react-table";
-import {
-	closestCenter,
-	DndContext,
-	type DragEndEvent,
-	DragOverlay,
-	type DragStartEvent,
-	KeyboardSensor,
-	MouseSensor,
-	TouchSensor,
-	type UniqueIdentifier,
-	useSensor,
-	useSensors,
-} from "@dnd-kit/core";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import { arrayMove } from "@dnd-kit/sortable";
 import { StaticTableRow } from "./StaticTableRow";
 
 import { Pagination } from "components/Pagination";

@@ -1,15 +1,15 @@
-import type { Row } from "react-table";
-import { DraggableTableRow } from "../DraggableTableRow";
-import type { TableBodyProps } from "../types";
-import { Checkbox } from "components";
 import {
 	SortableContext,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { Checkbox } from "components";
 import log from "loglevel";
 import { useContext } from "react";
-import { FilterContext } from "../helpers";
+import type { Row } from "react-table";
+import { DraggableTableRow } from "../DraggableTableRow";
 import { StaticTableRow } from "../StaticTableRow";
+import { FilterContext } from "../helpers";
+import type { TableBodyProps } from "../types";
 export const logger = log.getLogger("TableComponents/TableBody");
 logger.enableAll();
 /**

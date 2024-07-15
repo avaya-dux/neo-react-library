@@ -1,6 +1,6 @@
+import clsx from "clsx";
 import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
-import clsx from "clsx";
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const StaticTableRow = <T extends Record<string, any>>({
