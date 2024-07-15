@@ -1,10 +1,18 @@
-import clsx from "clsx";
 import type { Row } from "react-table";
-
-import { Checkbox } from "components/Checkbox";
-
+import { DraggableTableRow } from "../DraggableTableRow";
 import type { TableBodyProps } from "../types";
-
+import { Checkbox } from "components";
+import {
+	SortableContext,
+	verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import log from "loglevel";
+import { useContext, useMemo } from "react";
+import { FilterContext } from "../helpers";
+import { StaticTableRow } from "../StaticTableRow";
+import { data } from "cypress/types/jquery";
+export const logger = log.getLogger("TableComponents/TableBody");
+logger.enableAll();
 /**
  * TableBody is used by the Table component to render the table body (<tr>s and <td>s)
  *
@@ -25,12 +33,16 @@ export const TableBody = <T extends Record<string, any>>({
 	const {
 		getTableBodyProps,
 		headers,
+		rows: items,
 		page,
 		prepareRow,
 		toggleRowSelected,
 		toggleAllRowsSelected,
 		state: { selectedRowIds },
 	} = instance;
+
+	const { canDrag } = useContext(FilterContext);
+	logger.debug("selectedRowIds", selectedRowIds);
 
 	const handleRowToggledInternal = (row: Row<T>) => {
 		const previouslySelectedRows = Object.keys(selectedRowIds);
@@ -54,48 +66,42 @@ export const TableBody = <T extends Record<string, any>>({
 
 	const shouldShowCheckbox = selectableRows !== "none";
 
+	const createCheckboxTd = (row: Row<T>) => {
+		const checkboxLabel = row.original.label || row.id;
+		return shouldShowCheckbox ? (
+			<Checkbox
+				checked={row.isSelected}
+				aria-label={checkboxLabel}
+				onChange={() => handleRowToggledInternal(row)}
+				value={row.id}
+			/>
+		) : null;
+	};
 	return (
 		<tbody {...getTableBodyProps()}>
-			{page.length === 0 ? (
-				<tr>
-					<td colSpan={headers.length}>{translations.noDataAvailable}</td>
-				</tr>
-			) : (
-				page.map((row) => {
-					prepareRow(row);
-					const preparedRowProps = row.getRowProps();
-					const checkboxLabel = row.original.label || row.id;
-
-					return (
-						<tr
-							role={preparedRowProps.role}
-							style={preparedRowProps.style}
-							key={preparedRowProps.key || `table-row-${row.id}`}
-							className={clsx(
-								row.isSelected && "active",
-								preparedRowProps.className,
-							)}
-						>
-							{shouldShowCheckbox && (
-								<td style={{ padding: "0 0 0 5px" }}>
-									<Checkbox
-										checked={row.isSelected}
-										aria-label={checkboxLabel}
-										onChange={() => handleRowToggledInternal(row)}
-										value={row.id}
-									/>
-								</td>
-							)}
-
-							{row.cells.map((cell, i) => (
-								<td {...cell.getCellProps()} key={`td-${i}`}>
-									{cell.render("Cell")}
-								</td>
-							))}
-						</tr>
-					);
-				})
-			)}
+			<SortableContext items={items} strategy={verticalListSortingStrategy}>
+				{page.length === 0 ? (
+					<tr>
+						<td colSpan={headers.length}>{translations.noDataAvailable}</td>
+					</tr>
+				) : (
+					page.map((row) => {
+						prepareRow(row);
+						const checkboxTd = createCheckboxTd(row);
+						const key = row.original.id;
+						return canDrag ? (
+							<DraggableTableRow key={key} row={row} checkboxTd={checkboxTd} />
+						) : (
+							<StaticTableRow
+								key={key}
+								row={row}
+								checkboxTd={checkboxTd}
+								showDragHandle={false}
+							/>
+						);
+					})
+				)}
+			</SortableContext>
 		</tbody>
 	);
 };

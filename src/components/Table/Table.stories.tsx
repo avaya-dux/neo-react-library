@@ -10,6 +10,7 @@ import {
 	Menu,
 	MenuItem,
 	SelectNative,
+	Switch,
 	Tab,
 	TabList,
 	TabPanel,
@@ -329,35 +330,50 @@ export const TableInTabs = () => (
 	</section>
 );
 
-export const CustomActions = () => (
-	<Table
-		{...FilledFields}
-		caption="Two Custom Actions and Create"
-		handleCreate={() => alert("create")}
-		customActionsNode={
-			<section>
-				<Button
-					onClick={() => alert("custom action number one")}
-					variant="tertiary"
-				>
-					Example One
-				</Button>
+export const CustomActions = () => {
+	const [checked, setChecked] = useState(false);
+	const [multiple, setMultiple] = useState(false);
 
-				<Button
-					onClick={() => alert("custom action number two")}
-					variant="tertiary"
-				>
-					Example Two
-				</Button>
-			</section>
-		}
-	/>
-);
-
+	return (
+		<Table
+			{...FilledFields}
+			canDrag={checked}
+			selectableRows={multiple ? "multiple" : "none"}
+			caption="Custom Actions"
+			customActionsNode={
+				<section>
+					<Button
+						onClick={() => alert("custom action number one")}
+						variant="tertiary"
+					>
+						Example One
+					</Button>
+					<Button
+						onClick={() => alert("custom action number two")}
+						variant="tertiary"
+					>
+						Example Two
+					</Button>
+					<Switch
+						checked={checked}
+						onChange={(_e, updatedChecked) => setChecked(updatedChecked)}
+					>
+						Draggable Switch
+					</Switch>
+					<Switch
+						checked={multiple}
+						onChange={(_e, updatedChecked) => setMultiple(updatedChecked)}
+					>
+						Multiple Switch
+					</Switch>
+				</section>
+			}
+		/>
+	);
+};
 export const EditableData = () => {
 	const [data, setData] = useState(FilledFields.data);
 	const [readonly, setReadonly] = useState(false);
-
 	const [logItems, setLogItems] = useState<string[]>([]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
@@ -374,6 +390,7 @@ export const EditableData = () => {
 				readonly={readonly}
 				selectableRows="multiple"
 				initialStatePageSize={5}
+				canDrag
 				handlePageChange={(newPageIndex, newPageSize) => {
 					setLogItems([
 						`page change - index:${newPageIndex} | size:${newPageSize}`,

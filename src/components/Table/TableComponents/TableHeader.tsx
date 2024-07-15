@@ -61,13 +61,13 @@ export const TableHeader = <T extends Record<string, any>>({
 		[pageRows, toggleRowSelected],
 	);
 
-	const { allowColumnFilter, toggleFilterSheetVisible } =
+	const { allowColumnFilter, toggleFilterSheetVisible, canDrag } =
 		useContext(FilterContext);
 
 	const selectedRows = Object.keys(selectedRowIds);
 	const allRowsAreSelected =
 		rows.length === 0 ? false : selectedRows.length === rows.length;
-	const shouldHaveCheckboxColumn = selectableRows !== "none";
+	const shouldHaveCheckboxColumn = selectableRows !== "none" || canDrag;
 	const shouldHaveCheckbox = selectableRows === "multiple";
 	const checkboxCheckedValue = useMemo(() => {
 		return allPageRowsSelected ? true : allPageRowsDeselected ? false : "mixed";
