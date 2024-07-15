@@ -7,14 +7,14 @@ import { vi } from "vitest";
 import { UserEventKeys } from "utils";
 
 import { Table } from ".";
+import * as TableStories from "./Table.stories";
 import {
+	FilledFields,
 	calculateAriaSortValue,
 	convertRowIdsArrayToObject,
-	FilledFields,
 	toggleEnabledPageRows,
 	toggleEnabledTableRows,
 } from "./helpers";
-import * as TableStories from "./Table.stories";
 
 const {
 	AdvancedFilteringAndSorting,

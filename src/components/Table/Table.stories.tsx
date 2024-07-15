@@ -660,10 +660,14 @@ export const DisabledRows = () => {
 					setData([...data, newRow]);
 				}}
 				handleDelete={(rowIds: string[]) => {
-					setData(data.filter((row) => !rowIds.includes(row.id)));
+					setData(
+						data.filter((row: IDataTableMockData) => !rowIds.includes(row.id)),
+					);
 				}}
 				handleEdit={(row: IDataTableMockData) => {
-					const rowToEditIndex = data.findIndex((r) => r.id === row.id);
+					const rowToEditIndex = data.findIndex(
+						(r: IDataTableMockData) => r.id === row.id,
+					);
 					const dataCopy = [...data];
 					dataCopy[rowToEditIndex].name =
 						`${dataCopy[rowToEditIndex]?.name} (edited)`;
