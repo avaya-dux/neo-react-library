@@ -8,6 +8,7 @@ import { Checkbox } from "components/Checkbox";
 import type { TableBodyProps } from "../types";
 
 import "./TableBody_shim.css";
+import { toggleEnabledTableRows } from "../helpers";
 
 // biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 type TableBodyComponentType = <T extends Record<string, any>>(
@@ -67,7 +68,6 @@ const ClearSelectionRow: TableBodyComponentType = ({
 		headers,
 		page,
 		rows,
-		toggleAllRowsSelected,
 		state: { selectedRowIds },
 	} = instance;
 	const shouldShowCheckbox = selectableRows !== "none";
@@ -77,25 +77,33 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	// if no rows are selected, return early
 	if (selectedRowCount === 0) return undefined;
 
-	const allPageRowsAreSelected = useMemo(() => {
-		const shownRows = page.map((row) => row.original);
-		const visibleRowsSelected = shownRows.every(
-			(row) => selectedRowIds[row.id],
-		);
+	const [allPageEnabledRowsSelected, allTableEnabledRowsAreSelected] =
+		useMemo(() => {
+			const enabledPageRows = page
+				.filter((row) => !row.original.disabled)
+				.map((row) => row.original);
+			const allPageEnabledRowsSelectedMemo =
+				enabledPageRows.length &&
+				enabledPageRows.every((row) => selectedRowIds[row.id]);
 
-		return visibleRowsSelected;
-	}, [page, selectedRowIds]);
+			const enabledTableRows = rows.filter((row) => !row.original.disabled);
+			const enabledTableRowCount = enabledTableRows.length;
+			const enabledTableRowsSelected =
+				enabledTableRowCount &&
+				enabledTableRows.every((row) => selectedRowIds[row.id]);
+
+			return [allPageEnabledRowsSelectedMemo, enabledTableRowsSelected];
+		}, [page, rows, selectedRowIds]);
 
 	const selectionButton = useMemo(() => {
-		const allTableRowsAreSelected =
-			rows.length === 0 ? false : selectedRowCount === rows.length;
-
-		if (allTableRowsAreSelected) {
+		if (allTableEnabledRowsAreSelected) {
 			return (
 				<>
 					<span>
 						{translations.allSelected} ({selectedRowCount})
-						<ClearButton onClick={() => toggleAllRowsSelected(false)}>
+						<ClearButton
+							onClick={() => toggleEnabledTableRows(instance, false)}
+						>
 							{translations.clearSelection}
 						</ClearButton>
 					</span>
@@ -103,12 +111,12 @@ const ClearSelectionRow: TableBodyComponentType = ({
 			);
 		}
 
-		if (!allTableRowsAreSelected && allPageRowsAreSelected) {
+		if (!allTableEnabledRowsAreSelected && allPageEnabledRowsSelected) {
 			return (
 				<>
 					<span>
 						{translations.pageSelected} ({selectedRowCount})
-						<ClearButton onClick={() => toggleAllRowsSelected(true)}>
+						<ClearButton onClick={() => toggleEnabledTableRows(instance, true)}>
 							{translations.selectAll}
 						</ClearButton>
 					</span>
@@ -120,18 +128,18 @@ const ClearSelectionRow: TableBodyComponentType = ({
 			<>
 				<span>
 					{translations.someItemsSelected} ({selectedRowCount})
-					<ClearButton onClick={() => toggleAllRowsSelected(true)}>
+					<ClearButton onClick={() => toggleEnabledTableRows(instance, true)}>
 						{translations.selectAll}
 					</ClearButton>
 				</span>
 			</>
 		);
 	}, [
+		instance,
 		translations,
-		rows,
 		selectedRowCount,
-		allPageRowsAreSelected,
-		toggleAllRowsSelected,
+		allTableEnabledRowsAreSelected,
+		allPageEnabledRowsSelected,
 	]);
 
 	return (
@@ -202,13 +210,18 @@ const TableDataRows: TableBodyComponentType = ({
 				role={preparedRowProps.role}
 				style={preparedRowProps.style}
 				key={preparedRowProps.key || `table-row-${row.id}`}
-				className={clsx(row.isSelected && "active", preparedRowProps.className)}
+				className={clsx(
+					row.isSelected && "active",
+					row.original.disabled && "disabled",
+					preparedRowProps.className,
+				)}
 			>
 				{shouldShowCheckbox && (
 					<td style={{ padding: "0 0 0 5px" }}>
 						<Checkbox
 							checked={row.isSelected}
 							aria-label={checkboxLabel}
+							disabled={row.original.disabled}
 							onChange={() => handleRowToggledInternal(row)}
 							value={row.id}
 						/>
