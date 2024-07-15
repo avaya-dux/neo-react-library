@@ -31,6 +31,8 @@ describe("Table", () => {
 	const user = userEvent.setup();
 	vi.spyOn(console, "warn").mockImplementation(() => null); // ignore tooltip warnings
 
+	const clearRowClassName = "clear-row";
+
 	const selectedPageClass = "neo-btn-secondary";
 
 	it("fully renders without exploding", () => {
@@ -218,7 +220,7 @@ describe("Table", () => {
 			);
 
 			const headerCheckbox = getByLabelText(
-				FilledFields.translations.header.selectAll,
+				FilledFields.translations.header.selectPage,
 			);
 			const headerCheckboxLabel = container.querySelector("tr th label");
 			const checkbox2 = getByLabelText(FilledFields.data[2].label);
@@ -254,7 +256,7 @@ describe("Table", () => {
 			);
 
 			const headerCheckbox = screen.getByLabelText(
-				FilledFields.translations.header.selectAll,
+				FilledFields.translations.header.selectPage,
 			);
 			const headerCheckboxLabel = container.querySelector("tr th label");
 			const checkbox2 = screen.getByLabelText(FilledFields.data[1].label);
@@ -314,19 +316,112 @@ describe("Table", () => {
 		it("deselects the header checkbox when all rows are deleted", async () => {
 			render(<EditableData />);
 
-			const selectAllCheckboxLabel = FilledFields.translations.header.selectAll;
+			const selectPageCheckboxLabel =
+				FilledFields.translations.header.selectPage;
 
 			// delete first page
-			await user.click(screen.getByLabelText(selectAllCheckboxLabel));
+			await user.click(screen.getByLabelText(selectPageCheckboxLabel));
 			await user.click(screen.getByText("Delete"));
 
 			// delete second (final) page
-			await user.click(screen.getByLabelText(selectAllCheckboxLabel));
+			await user.click(screen.getByLabelText(selectPageCheckboxLabel));
 			await user.click(screen.getByText("Delete"));
 
 			expect(screen.getByText("no data available")).toBeVisible();
 
-			expect(screen.getByLabelText(selectAllCheckboxLabel).checked).toBeFalsy();
+			expect(
+				screen.getByLabelText(selectPageCheckboxLabel).checked,
+			).toBeFalsy();
+		});
+
+		it("does not show 'clear-row' when no rows are selected", async () => {
+			const { container } = render(<EditableData />);
+
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				0,
+			);
+		});
+
+		it("shows 'clear-row' when any rows are selected", async () => {
+			const { container } = render(<EditableData />);
+
+			const selectPageCheckboxLabel =
+				FilledFields.translations.header.selectPage;
+			await user.click(screen.getByLabelText(selectPageCheckboxLabel));
+
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				1,
+			);
+		});
+
+		it("when some but not all are selected, clicking the 'clear-row' button selects all rows", async () => {
+			const { container } = render(<EditableData />);
+
+			// confirm that the 'clear-row' button is NOT visible initially
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				0,
+			);
+
+			// select page rows
+			const selectPageCheckboxLabel =
+				FilledFields.translations.header.selectPage;
+			await user.click(screen.getByLabelText(selectPageCheckboxLabel));
+
+			// confirm that the 'clear-row' button is now visible
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				1,
+			);
+
+			// confirm that the correct text is displayed
+			expect(
+				screen.getByText(FilledFields.translations.body.selectAll),
+			).toBeVisible();
+
+			// click the 'clear-row' button
+			await user.click(
+				screen.getByText(FilledFields.translations.body.selectAll),
+			);
+
+			// confirm that the 'clear-row' button is visible and has different text
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				1,
+			);
+			expect(
+				screen.getByText(FilledFields.translations.body.clearSelection),
+			).toBeVisible();
+		});
+
+		it("when all rows are selected, clicking the 'clear-row' button de-selects all rows", async () => {
+			const { container } = render(<EditableData />);
+
+			// open dropdown, select all rows
+			const dropdown = screen.getByLabelText(
+				FilledFields.translations.header.tableSelectionDropdown,
+			);
+			await user.click(dropdown);
+			const selectAllRows = screen.getByText(
+				`${FilledFields.translations.header.selectAll} (10)`,
+			);
+			await user.click(selectAllRows);
+
+			// confirm that the 'clear-row' button is visible
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				1,
+			);
+			expect(
+				screen.getByText(FilledFields.translations.body.clearSelection),
+			).toBeVisible();
+
+			// click the 'clear-row' button
+			const clearRowButton = screen.getByText(
+				FilledFields.translations.body.clearSelection,
+			);
+			await user.click(clearRowButton);
+
+			// confirm that the 'clear-row' is NOT visible
+			expect(container.getElementsByClassName(clearRowClassName)).toHaveLength(
+				0,
+			);
 		});
 	});
 
@@ -412,48 +507,58 @@ describe("Table", () => {
 				getByText(FilledFields.translations.toolbar.delete),
 			).toThrow();
 
+			// select first row
 			const firstRowCheckboxLabel =
 				queryAllByRole("row")[1].querySelector("label");
 			await user.click(firstRowCheckboxLabel);
 
 			// callable when one row is selected
-			const deleteButton = getByText(FilledFields.translations.toolbar.delete);
-			await user.click(deleteButton);
+			await user.click(getByText(FilledFields.translations.toolbar.delete));
 			expect(mock).toHaveBeenCalledTimes(1);
 
+			// select second and third rows
 			const secondRowCheckboxLabel =
 				queryAllByRole("row")[2].querySelector("label");
 			await user.click(secondRowCheckboxLabel);
+			const thirdRowCheckboxLabel =
+				queryAllByRole("row")[3].querySelector("label");
+			await user.click(thirdRowCheckboxLabel);
 
 			// callable when multiple rows are selected
-			await user.click(deleteButton);
+			await user.click(getByText(FilledFields.translations.toolbar.delete));
 			expect(mock).toHaveBeenCalledTimes(2);
 		});
 
-		it("properly handles `delete` when the last row of a page is deleted", async () => {
+		it("properly handles `delete` when the all rows in the final page are deleted", async () => {
 			render(<SecondPage initialStatePageIndex={4} />);
 
+			// move to final page
+			expect(screen.getAllByRole("listitem")).toHaveLength(5);
 			await user.click(screen.getAllByText("5")[0]);
+
+			// confirm final page is selected
 			expect(screen.getAllByText("5")).toHaveLength(2);
 			expect(screen.getAllByText("5")[0]).toHaveClass(selectedPageClass);
-			expect(screen.queryAllByText("4")).toHaveLength(0);
+			expect(screen.getAllByRole("listitem")).toHaveLength(5);
 
-			const firstRowCheckboxLabel = screen
-				.queryAllByRole("row")[1]
-				.querySelector("label");
-			await user.click(firstRowCheckboxLabel);
-			const secondRowCheckboxLabel = screen
-				.queryAllByRole("row")[2]
-				.querySelector("label");
-			await user.click(secondRowCheckboxLabel);
+			// open dropdown, select page rows, delete
+			const dropdown = screen.getByLabelText(
+				FilledFields.translations.header.tableSelectionDropdown,
+			);
+			await user.click(dropdown);
+
+			const selectPageRows = screen.getByText(
+				`${FilledFields.translations.header.selectPage} (2)`,
+			);
+			await user.click(selectPageRows);
 
 			const deleteButton = screen.getByText(
 				FilledFields.translations.toolbar.delete,
 			);
 			await user.click(deleteButton);
 
-			expect(screen.getAllByText("5")).toHaveLength(1);
-			expect(screen.getAllByText("4")).toHaveLength(1);
+			// confirm that the final page is removed
+			expect(screen.getAllByRole("listitem")).toHaveLength(8);
 			expect(screen.getByText("4")).toHaveClass(selectedPageClass);
 		});
 

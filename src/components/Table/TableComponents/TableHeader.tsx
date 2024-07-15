@@ -112,7 +112,7 @@ export const TableHeader = <T extends Record<string, any>>({
 							<div className="table-selection-menu">
 								<Checkbox
 									checked={checkboxCheckedValue}
-									aria-label={translations.selectAll}
+									aria-label={translations.selectPage}
 									onChange={togglePageRows}
 									value="all"
 								/>
@@ -122,7 +122,7 @@ export const TableHeader = <T extends Record<string, any>>({
 										<button
 											type="button"
 											className="neo-table-th-select-all-btn neo-btn-tertiary neo-dropdown__link-header"
-											aria-label="table selection menu"
+											aria-label={translations.tableSelectionDropdown}
 										/>
 									}
 								>

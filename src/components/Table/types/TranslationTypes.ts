@@ -18,6 +18,11 @@ export interface IToolbarTranslations extends ITableFilterTranslations {
 }
 
 export interface IBodyTranslations {
+	someItemsSelected?: string;
+	pageSelected?: string;
+	allSelected?: string;
+	clearSelection?: string;
+	selectAll?: string;
 	noDataAvailable?: string;
 }
 
@@ -36,6 +41,7 @@ export interface ITableHeaderTranslations {
 	selectAll: string;
 	clearPage: string;
 	selectPage: string;
+	tableSelectionDropdown: string;
 	sortAscending?: string;
 	sortDescending?: string;
 	toggleSortBy?: string;
