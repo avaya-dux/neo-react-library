@@ -1,4 +1,5 @@
 import type { AriaAttributes } from "react";
+import type { TableInstance } from "react-table";
 
 /**
  * If the table is sorted, return the aria-sort value.
@@ -35,4 +36,44 @@ export const convertRowIdsArrayToObject = (rowIds: string[]) => {
 	});
 
 	return result;
+};
+
+/**
+ * Sets all table rows to selected or unselected based on the `selected` parameter and return toggled row ids.
+ * @param instance - TableInstance
+ * @param selected - boolean, whether to select or unselect the rows.
+ * @returns string[], the ids of the toggled rows.
+ */
+export const toggleEnabledTableRows = <T extends Record<string, unknown>>(
+	instance: TableInstance<T>,
+	selected: boolean,
+) => {
+	const { rows, toggleRowSelected } = instance;
+
+	const enabledTableRowsIds = rows
+		.filter((row) => !row.original.disabled)
+		.map((row) => row.id);
+	enabledTableRowsIds.forEach((id) => toggleRowSelected(id, selected));
+
+	return enabledTableRowsIds;
+};
+
+/**
+ * Sets all page rows to selected or unselected based on the `selected` parameter and return toggled row ids.
+ * @param instance - TableInstance
+ * @param selected - boolean, whether to select or unselect the rows.
+ * @returns string[], the ids of the toggled rows.
+ */
+export const toggleEnabledPageRows = <T extends Record<string, unknown>>(
+	instance: TableInstance<T>,
+	selected: boolean,
+) => {
+	const { page, toggleRowSelected } = instance;
+
+	const enabledPageRowsIds = page
+		.filter((row) => !row.original.disabled)
+		.map((row) => row.id);
+	enabledPageRowsIds.forEach((id) => toggleRowSelected(id, selected));
+
+	return enabledPageRowsIds;
 };

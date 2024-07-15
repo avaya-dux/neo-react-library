@@ -619,6 +619,80 @@ export const SecondPage = (props: object) => {
 	);
 };
 
+export const DisabledRows = () => {
+	const [data, setData] = useState(FilledFields.dataWithDisabledRows);
+	const [readonly, setReadonly] = useState(false);
+
+	const [logItems, setLogItems] = useState<string[]>([]);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
+	useEffect(() => {
+		setLogItems([`data modified, new length: ${data.length}`, ...logItems]);
+	}, [data]);
+
+	return (
+		<section>
+			<Table
+				caption="Table with Disabled Rows"
+				columns={FilledFields.columns}
+				data={data}
+				readonly={readonly}
+				selectableRows="multiple"
+				initialStatePageSize={5}
+				handlePageChange={(newPageIndex, newPageSize) => {
+					setLogItems([
+						`page change - index:${newPageIndex} | size:${newPageSize}`,
+						...logItems,
+					]);
+				}}
+				handleCreate={() => {
+					const newRow: IDataTableMockData = {
+						id: `new-row-${Math.random()}`,
+						name: "The new guy",
+						label: "New Row",
+						other: "Lorem Ipsum",
+						date: new Date(),
+						status: "inactive",
+						hexValue: "003300",
+						level: "high",
+						hasOnCallBeeper: false,
+					};
+					setData([...data, newRow]);
+				}}
+				handleDelete={(rowIds: string[]) => {
+					setData(data.filter((row) => !rowIds.includes(row.id)));
+				}}
+				handleEdit={(row: IDataTableMockData) => {
+					const rowToEditIndex = data.findIndex((r) => r.id === row.id);
+					const dataCopy = [...data];
+					dataCopy[rowToEditIndex].name =
+						`${dataCopy[rowToEditIndex]?.name} (edited)`;
+
+					setData(dataCopy);
+				}}
+				handleRefresh={() => {
+					setReadonly(true);
+					setData([]);
+					setTimeout(() => {
+						setData(FilledFields.data);
+						setReadonly(false);
+					}, 1000);
+				}}
+			/>
+
+			<section style={{ paddingTop: 20 }}>
+				<h3>data modifications:</h3>
+
+				<List>
+					{logItems.map((item, index) => (
+						<ListItem key={`${item}-${index}`}>{item}</ListItem>
+					))}
+				</List>
+			</section>
+		</section>
+	);
+};
+
 const Template: Story<TableProps<IDataTableMockData>> = (
 	props: TableProps<IDataTableMockData>,
 ) => <Table {...props} />;
