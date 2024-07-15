@@ -398,7 +398,13 @@ export const Table = <T extends Record<string, any>>({
 			</FilterContext.Provider>
 			<DragOverlay>
 				{activeId && selectedRow && (
-					<table style={{ width: "100%" }}>
+					<table
+						className={clsx(
+							"neo-table",
+							rowHeightValue === "compact" && "neo-table--compact",
+							rowHeightValue === "medium" && "neo-table--medium",
+						)}
+					>
 						<tbody>
 							<StaticTableRow
 								key={selectedRow.original.id}

@@ -7,10 +7,9 @@ import {
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import log from "loglevel";
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 import { FilterContext } from "../helpers";
 import { StaticTableRow } from "../StaticTableRow";
-import { data } from "cypress/types/jquery";
 export const logger = log.getLogger("TableComponents/TableBody");
 logger.enableAll();
 /**

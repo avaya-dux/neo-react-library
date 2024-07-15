@@ -1,3 +1,6 @@
+.neo-table {
+	table-layout: fixed;
+}
 .neo-table th button {
 	color: black;
 	display: flex;
@@ -48,6 +51,34 @@
 .neo-table--push-pagination-down div.neo-pagination__row {
 	flex-grow: 1;
 	align-items: flex-end;
+}
+
+.neo-table tr th.neo-table__dnd-th,
+.neo-table tr td.neo-table__dnd-td {
+	width: 16px;
+	display: table-cell;
+	vertical-align: middle;
+	padding: 6px 0px 0px 0px;
+}
+
+.neo-table tr th.neo-table__dnd-th>div,
+.neo-table tr td.neo-table__dnd-td>div {
+	width: 16px;
+	height: 16px;
+}
+
+.neo-table tr td.neo-table__dnd-td>div {
+	display: none;
+	/* Hide by default */
+}
+
+.neo-table tr:hover td.neo-table__dnd-td>div,
+.neo-table tr:focus td.neo-table__dnd-td>div {
+	display: inline-block;
+}
+
+.neo-table tr td.neo-table__dnd-td div span[class*=neo-icon-]:before{
+	font-size: 16px;
 }
 
 

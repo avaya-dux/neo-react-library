@@ -9,22 +9,10 @@ import log from "loglevel";
 export const logger = log.getLogger("TableComponents/DraggableTableRow");
 logger.enableAll();
 
-const DraggingRow = styled.td`
+const EmptyRow = styled.td`
   background: rgba(127, 207, 250, 0.3);
 `;
 
-const TableData = styled.td`
-
-`;
-
-const FirstTd = styled.td`
-  &:first-of-type {
-    min-width: 20ch;
-    display: flex;
-    width: 2rem;
-    align-items: center;
-  }
-`;
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const DraggableTableRow = <T extends Record<string, any>>({
 	row,
@@ -36,6 +24,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 		transform,
 		transition,
 		setNodeRef,
+		setActivatorNodeRef,
 		isDragging,
 	} = useSortable({
 		id: row.original.id,
@@ -49,8 +38,8 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 	const preparedRowProps = row.getRowProps();
 	logger.debug("row.isSelected", row.isSelected);
 
-	// add 1 if draggable or checkbox is present
-	const cellCount = row.cells.length + 1;
+	// + handle and checkbox columns
+	const cellCount = row.cells.length + 1 + (checkboxTd ? 1 : 0);
 
 	return (
 		<tr
@@ -61,20 +50,25 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 			className={clsx(row.isSelected && "active", preparedRowProps.className)}
 		>
 			{isDragging ? (
-				<DraggingRow colSpan={cellCount}>&nbsp;</DraggingRow>
+				<EmptyRow colSpan={cellCount}>&nbsp;</EmptyRow>
 			) : (
 				<>
-					<FirstTd>
-						<DragHandle {...attributes} {...listeners} />
-						{checkboxTd}
-					</FirstTd>
-
+					<td className="neo-table__dnd-td">
+						<DragHandle
+							ref={setActivatorNodeRef}
+							{...attributes}
+							{...listeners}
+						/>
+					</td>
+					{checkboxTd && (
+						<td style={{ padding: "0px 0px 0px 5px" }}>{checkboxTd}</td>
+					)}
 					{row.cells.map((cell) => {
 						const { key, ...restCellProps } = cell.getCellProps();
 						return (
-							<TableData {...restCellProps} key={key}>
+							<td {...restCellProps} key={key}>
 								{cell.render("Cell")}
-							</TableData>
+							</td>
 						);
 					})}
 				</>

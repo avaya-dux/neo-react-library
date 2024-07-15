@@ -67,7 +67,7 @@ export const TableHeader = <T extends Record<string, any>>({
 	const selectedRows = Object.keys(selectedRowIds);
 	const allRowsAreSelected =
 		rows.length === 0 ? false : selectedRows.length === rows.length;
-	const shouldHaveCheckboxColumn = selectableRows !== "none" || canDrag;
+	const shouldHaveCheckboxColumn = selectableRows !== "none";
 	const shouldHaveCheckbox = selectableRows === "multiple";
 	const checkboxCheckedValue = useMemo(() => {
 		return allPageRowsSelected ? true : allPageRowsDeselected ? false : "mixed";
@@ -106,6 +106,11 @@ export const TableHeader = <T extends Record<string, any>>({
 	return (
 		<thead>
 			<tr>
+				{canDrag && (
+					<th className="neo-table__dnd-th">
+						<div>&nbsp;</div>
+					</th>
+				)}
 				{shouldHaveCheckboxColumn && (
 					<th className="neo-table-checkbox-th">
 						{shouldHaveCheckbox && (
