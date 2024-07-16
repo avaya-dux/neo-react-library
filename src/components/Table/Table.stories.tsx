@@ -347,7 +347,7 @@ export const CustomActions = () => {
 	return (
 		<Table
 			{...FilledFields}
-			canDrag={checked}
+			draggableRows={checked}
 			selectableRows={multiple ? "multiple" : "none"}
 			caption="Custom Actions"
 			customActionsNode={
@@ -401,7 +401,7 @@ export const EditableData = () => {
 				readonly={readonly}
 				selectableRows="multiple"
 				initialStatePageSize={5}
-				canDrag
+				draggableRows
 				handlePageChange={(newPageIndex, newPageSize) => {
 					setLogItems([
 						`page change - index:${newPageIndex} | size:${newPageSize}`,
@@ -667,7 +667,7 @@ export const DisabledRows = () => {
 				readonly={readonly}
 				selectableRows="multiple"
 				initialStatePageSize={5}
-				canDrag
+				draggableRows
 				handlePageChange={(newPageIndex, newPageSize) => {
 					setLogItems([
 						`page change - index:${newPageIndex} | size:${newPageSize}`,

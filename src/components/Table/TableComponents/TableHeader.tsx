@@ -81,7 +81,7 @@ export const TableHeader = <T extends Record<string, any>>({
 		return [enabledRowCount, rowsSelectedMemo];
 	}, [rows, selectedRowIds]);
 
-	const { allowColumnFilter, toggleFilterSheetVisible, canDrag } =
+	const { allowColumnFilter, toggleFilterSheetVisible, draggableRows } =
 		useContext(FilterContext);
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none";
@@ -136,7 +136,7 @@ export const TableHeader = <T extends Record<string, any>>({
 	return (
 		<thead>
 			<tr>
-				{canDrag && (
+				{draggableRows && (
 					<th
 						className={clsx(
 							"neo-table__dnd-th",
