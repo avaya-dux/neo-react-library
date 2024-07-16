@@ -74,15 +74,24 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	selectableRows,
 	translations,
 }) => {
+	const { canDrag } = useContext(FilterContext);
+
 	const {
 		headers,
 		page,
 		rows,
 		state: { selectedRowIds },
 	} = instance;
+
 	const shouldShowCheckbox = selectableRows !== "none";
-	const columnsLength = headers.length + (shouldShowCheckbox ? 1 : 0);
 	const selectedRowCount = Object.keys(selectedRowIds).length;
+
+	const columnsLength = useMemo(() => {
+		const checkboxColumns = shouldShowCheckbox ? 1 : 0;
+		const dragColumn = canDrag ? 1 : 0;
+
+		return headers.length + checkboxColumns + dragColumn;
+	}, [canDrag, headers.length, shouldShowCheckbox]);
 
 	// if no rows are selected, return early
 	if (selectedRowCount === 0) return undefined;
