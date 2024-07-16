@@ -152,7 +152,7 @@ export const TableHeader = <T extends Record<string, any>>({
 					<th
 						className="neo-table-checkbox-th"
 						onMouseOver={() => setCheckBoxOver(true)}
-						onFocus={() => setCheckBoxOver(false)}
+						onFocus={() => setCheckBoxOver(true)}
 						onBlur={() => setCheckBoxOver(false)}
 						onMouseOut={() => setCheckBoxOver(false)}
 					>
