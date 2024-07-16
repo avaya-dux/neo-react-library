@@ -40,6 +40,7 @@ export const TableBody: TableBodyComponentType = ({
 	handleRowToggled = () => null,
 	instance,
 	selectableRows,
+	showRowSelectionHelper,
 	translations,
 }) => {
 	const { getTableBodyProps, headers, page, rows } = instance;
@@ -53,11 +54,13 @@ export const TableBody: TableBodyComponentType = ({
 					</tr>
 				) : (
 					<>
-						<ClearSelectionRow
-							instance={instance}
-							selectableRows={selectableRows}
-							translations={translations}
-						/>
+						{showRowSelectionHelper && (
+							<ClearSelectionRow
+								instance={instance}
+								selectableRows={selectableRows}
+								translations={translations}
+							/>
+						)}
 
 						<TableDataRows
 							handleRowToggled={handleRowToggled}
