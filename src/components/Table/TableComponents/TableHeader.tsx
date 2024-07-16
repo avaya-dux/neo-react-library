@@ -128,9 +128,14 @@ export const TableHeader = <T extends Record<string, any>>({
 		<thead>
 			<tr>
 				{canDrag && (
-					<td className="neo-table__dnd-th">
-						<div>&nbsp;</div>
-					</td>
+					<th className="neo-table__dnd-th">
+						<div
+							role="button"
+							aria-label={translations.dragHandle || "Drag handle"}
+						>
+							&nbsp;
+						</div>
+					</th>
 				)}
 				{shouldHaveCheckboxColumn && (
 					<th className="neo-table-checkbox-th">
