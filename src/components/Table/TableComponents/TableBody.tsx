@@ -80,7 +80,7 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	selectableRows,
 	translations,
 }) => {
-	const { canDrag } = useContext(FilterContext);
+	const { draggableRows } = useContext(FilterContext);
 
 	const {
 		headers,
@@ -94,10 +94,10 @@ const ClearSelectionRow: TableBodyComponentType = ({
 
 	const columnsLength = useMemo(() => {
 		const checkboxColumns = shouldShowCheckbox ? 1 : 0;
-		const dragColumn = canDrag ? 1 : 0;
+		const dragColumn = draggableRows ? 1 : 0;
 
 		return headers.length + checkboxColumns + dragColumn;
-	}, [canDrag, headers.length, shouldShowCheckbox]);
+	}, [draggableRows, headers.length, shouldShowCheckbox]);
 
 	const [allPageEnabledRowsSelected, allTableEnabledRowsAreSelected] =
 		useMemo(() => {
@@ -202,7 +202,7 @@ const TableDataRows: TableBodyComponentType = ({
 		state: { selectedRowIds },
 	} = instance;
 
-	const { canDrag } = useContext(FilterContext);
+	const { draggableRows } = useContext(FilterContext);
 	logger.debug("selectedRowIds", selectedRowIds);
 
 	// biome-ignore lint/suspicious/noExplicitAny: I (Joe) don't know how to get the `T` type to work here
@@ -248,7 +248,7 @@ const TableDataRows: TableBodyComponentType = ({
 		const checkboxTd = createCheckboxTd(row);
 		const key = row.original.id;
 
-		return canDrag ? (
+		return draggableRows ? (
 			<DraggableTableRow key={key} row={row} checkboxTd={checkboxTd} />
 		) : (
 			<StaticTableRow
