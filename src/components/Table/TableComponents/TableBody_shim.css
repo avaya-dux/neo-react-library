@@ -9,7 +9,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
 	:root .neo-dynamic .neo-table tr.clear-row,
 	:root .neo-dynamic .neo-table tr.clear-row:hover {
 		background-color: var(--neo-color-blue-800);
