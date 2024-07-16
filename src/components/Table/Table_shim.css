@@ -79,8 +79,7 @@
 }
 
 .neo-table tr td.neo-table__dnd-td,
-.neo-table tr.disabled td.neo-table__dnd-td {
-	/* BUG: disabled row is not showing correctly */
+.neo-table tr.disabled:hover:has(td.neo-table__dnd-td) * {
 	cursor: grab;
 }
 
