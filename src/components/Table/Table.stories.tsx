@@ -33,6 +33,16 @@ export const Default = () => (
 	<Table {...FilledFields} caption="Storybook Default Table Example" />
 );
 
+export const MultiSelectWithoutHelper = () => (
+	<Table
+		{...FilledFields}
+		caption="Multi select without helper"
+		initialStatePageSize={5}
+		selectableRows="multiple"
+		showRowSelectionHelper={false}
+	/>
+);
+
 export const TooltipPositioning = () => (
 	<Table
 		{...FilledFields}
@@ -371,6 +381,7 @@ export const CustomActions = () => {
 		/>
 	);
 };
+
 export const EditableData = () => {
 	const [data, setData] = useState(FilledFields.data);
 	const [readonly, setReadonly] = useState(false);
