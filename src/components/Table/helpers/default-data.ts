@@ -28,6 +28,7 @@ export const translations: ITableTranslations = {
 		sortAscending: "A - Z",
 		sortDescending: "Z - A",
 		toggleSortBy: "Toggle SortBy",
+		dragHandle: "Drag Handle",
 	},
 	body: {
 		someItemsSelected: "Some items are selected.",

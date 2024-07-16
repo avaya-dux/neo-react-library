@@ -15,7 +15,7 @@ import { StaticTableRow } from "../StaticTableRow";
 import { FilterContext } from "../helpers";
 import type { TableBodyProps } from "../types";
 export const logger = log.getLogger("TableComponents/TableBody");
-logger.enableAll();
+logger.disableAll();
 
 import { toggleEnabledTableRows } from "../helpers";
 

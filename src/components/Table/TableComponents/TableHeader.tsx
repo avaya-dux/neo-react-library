@@ -129,10 +129,7 @@ export const TableHeader = <T extends Record<string, any>>({
 			<tr>
 				{canDrag && (
 					<th className="neo-table__dnd-th">
-						<div
-							role="button"
-							aria-label={translations.dragHandle || "Drag handle"}
-						>
+						<div role="button" aria-label={translations.dragHandle}>
 							&nbsp;
 						</div>
 					</th>
@@ -165,10 +162,15 @@ export const TableHeader = <T extends Record<string, any>>({
 											)
 										}
 									>
-										{allPageEnabledRowsSelected
-											? translations.clearPage
-											: translations.selectPage}{" "}
-										({pageEnabledRowCount})
+										{allPageEnabledRowsSelected ? (
+											<>
+												{translations.clearPage} ({pageEnabledRowCount})
+											</>
+										) : (
+											<>
+												{translations.selectPage} ({pageEnabledRowCount})
+											</>
+										)}
 									</MenuItem>
 
 									<MenuItem

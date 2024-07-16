@@ -7,7 +7,7 @@ import { DragHandle } from "./DragHandle";
 
 import log from "loglevel";
 export const logger = log.getLogger("TableComponents/DraggableTableRow");
-logger.enableAll();
+logger.disableAll();
 
 const EmptyRow = styled.td`
   background: rgba(127, 207, 250, 0.3);
