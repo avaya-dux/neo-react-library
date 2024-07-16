@@ -46,7 +46,7 @@ export type TableBodyProps<T extends AnyRecord> = {
 
 export interface IFilterContext {
 	allowColumnFilter: boolean;
-
+	canDrag: boolean;
 	filterSheetVisible: boolean;
 	setFilterSheetVisible: (visible: boolean) => void;
 	toggleFilterSheetVisible: () => void;
@@ -59,6 +59,7 @@ export type TableProps<T extends AnyRecord> = {
 	id?: string;
 	showPagination?: boolean;
 	pushPaginationDown?: boolean;
+	canDrag?: boolean;
 	handlePageChange?: (pageIndex: number, pageSize: number) => void;
 	itemDisplayTooltipPosition?: TooltipPosition;
 	itemsPerPageTooltipPosition?: TooltipPosition;
