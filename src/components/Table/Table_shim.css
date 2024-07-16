@@ -89,10 +89,7 @@
 	font-size: 16px;
 }
 
-.neo-table tr:hover th.neo-table__dnd-th,
-.neo-table tr:hover th.neo-table__dnd-th,
-.neo-table tr:hover th.neo-table-checkbox-th,
-.neo-table tr:hover th.neo-table-checkbox-th {
+.neo-table th.neo-table__dnd-th__hover {
 	background-color: inherit;
 }
 
@@ -104,8 +101,6 @@
 	&:focus {
 		color: var(--button-hover-color-default-info);
 		background-color: var(--button-tertiary-hover-background-color);
-		background-position: 0 100%;
-		transition: background-position .4s, background-color .4s .15s, color .4s;
 	}
 
 	.table-selection-menu {

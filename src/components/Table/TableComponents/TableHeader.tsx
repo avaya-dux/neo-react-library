@@ -1,4 +1,10 @@
-import { type KeyboardEvent, useCallback, useContext, useMemo } from "react";
+import {
+	type KeyboardEvent,
+	useCallback,
+	useContext,
+	useMemo,
+	useState,
+} from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
@@ -6,6 +12,7 @@ import { Menu, MenuButton, MenuItem } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
+import clsx from "clsx";
 import {
 	FilterContext,
 	calculateAriaSortValue,
@@ -124,18 +131,31 @@ export const TableHeader = <T extends Record<string, any>>({
 		checkboxCheckedValue,
 	]);
 
+	const [checkBoxOver, setCheckBoxOver] = useState(false);
+
 	return (
 		<thead>
 			<tr>
 				{canDrag && (
-					<th className="neo-table__dnd-th">
+					<th
+						className={clsx(
+							"neo-table__dnd-th",
+							checkBoxOver && "neo-table__dnd-th__hover",
+						)}
+					>
 						<div role="button" aria-label={translations.dragHandle}>
 							&nbsp;
 						</div>
 					</th>
 				)}
 				{shouldHaveCheckboxColumn && (
-					<th className="neo-table-checkbox-th">
+					<th
+						className="neo-table-checkbox-th"
+						onMouseOver={() => setCheckBoxOver(true)}
+						onFocus={() => setCheckBoxOver(false)}
+						onBlur={() => setCheckBoxOver(false)}
+						onMouseOut={() => setCheckBoxOver(false)}
+					>
 						{shouldHaveCheckbox && (
 							<div className="table-selection-menu">
 								<Checkbox
