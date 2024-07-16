@@ -6,7 +6,12 @@ import { Menu, MenuButton, MenuItem } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
-import { FilterContext, calculateAriaSortValue } from "../helpers";
+import {
+	FilterContext,
+	calculateAriaSortValue,
+	toggleEnabledPageRows,
+	toggleEnabledTableRows,
+} from "../helpers";
 import type { TableHeaderProps } from "../types";
 
 /**
@@ -34,73 +39,89 @@ export const TableHeader = <T extends Record<string, any>>({
 		headers,
 		page,
 		rows,
-		rowsById,
 		state: { selectedRowIds },
-		toggleRowSelected,
-		toggleAllRowsSelected,
 		toggleSortBy,
 	} = instance;
 
-	const [pageRows, allPageRowsSelected, allPageRowsDeselected] = useMemo(() => {
-		const pageRowsMemo = page.map((row) => row.original);
+	const [
+		pageEnabledRowCount,
+		allPageEnabledRowsSelected,
+		allPageRowsDeselected,
+	] = useMemo(() => {
+		const enabledPageRows = page
+			.filter((row) => !row.original.disabled)
+			.map((row) => row.original);
 		const allPageRowsSelectedMemo =
-			pageRowsMemo.length &&
-			pageRowsMemo.every((row) => selectedRowIds[row.id]);
-		const allPageRowsDeselectedMemo = pageRowsMemo.every(
+			enabledPageRows.length &&
+			enabledPageRows.every((row) => selectedRowIds[row.id]);
+		const allPageRowsDeselectedMemo = enabledPageRows.every(
 			(row) => !selectedRowIds[row.id],
 		);
 
-		return [pageRowsMemo, allPageRowsSelectedMemo, allPageRowsDeselectedMemo];
+		return [
+			enabledPageRows.length,
+			allPageRowsSelectedMemo,
+			allPageRowsDeselectedMemo,
+		];
 	}, [page, selectedRowIds]);
 
-	const selectPageRows = useCallback(
-		(selected: boolean) => {
-			const visibleRowIds = pageRows.map((row) => row.id);
-			visibleRowIds.forEach((id) => toggleRowSelected(id, selected));
-		},
-		[pageRows, toggleRowSelected],
-	);
+	const [tableEnabledRowCount, allTableEnabledRowsAreSelected] = useMemo(() => {
+		const enabledRows = rows.filter((row) => !row.original.disabled);
+		const enabledRowCount = enabledRows.length;
+		const rowsSelectedMemo =
+			enabledRowCount && enabledRows.every((row) => selectedRowIds[row.id]);
+
+		return [enabledRowCount, rowsSelectedMemo];
+	}, [rows, selectedRowIds]);
 
 	const { allowColumnFilter, toggleFilterSheetVisible } =
 		useContext(FilterContext);
 
-	const selectedRows = Object.keys(selectedRowIds);
-	const allRowsAreSelected =
-		rows.length === 0 ? false : selectedRows.length === rows.length;
 	const shouldHaveCheckboxColumn = selectableRows !== "none";
 	const shouldHaveCheckbox = selectableRows === "multiple";
+
 	const checkboxCheckedValue = useMemo(() => {
-		return allPageRowsSelected ? true : allPageRowsDeselected ? false : "mixed";
-	}, [allPageRowsSelected, allPageRowsDeselected]);
+		return allPageEnabledRowsSelected
+			? true
+			: allPageRowsDeselected
+				? false
+				: "mixed";
+	}, [allPageEnabledRowsSelected, allPageRowsDeselected]);
+
 	const toggleAllRows = useCallback(() => {
-		toggleAllRowsSelected(!allRowsAreSelected);
+		const toggledIds = toggleEnabledTableRows(
+			instance,
+			!allTableEnabledRowsAreSelected,
+		);
 
 		if (handleRowToggled) {
 			const shouldSelectAll = [false, "mixed"].includes(checkboxCheckedValue);
 
-			handleRowToggled(shouldSelectAll ? Object.keys(rowsById) : []);
+			handleRowToggled(shouldSelectAll ? toggledIds : []);
 		}
 	}, [
-		toggleAllRowsSelected,
-		allRowsAreSelected,
+		instance,
+		allTableEnabledRowsAreSelected,
 		handleRowToggled,
 		checkboxCheckedValue,
-		rowsById,
 	]);
+
 	const togglePageRows = useCallback(() => {
-		selectPageRows(!allPageRowsSelected);
+		const toggledIds = toggleEnabledPageRows(
+			instance,
+			!allPageEnabledRowsSelected,
+		);
 
 		if (handleRowToggled) {
 			const shouldSelectAll = [false, "mixed"].includes(checkboxCheckedValue);
 
-			handleRowToggled(shouldSelectAll ? pageRows.map((row) => row.id) : []);
+			handleRowToggled(shouldSelectAll ? toggledIds : []);
 		}
 	}, [
-		selectPageRows,
-		allPageRowsSelected,
+		instance,
+		allPageEnabledRowsSelected,
 		handleRowToggled,
 		checkboxCheckedValue,
-		pageRows,
 	]);
 
 	return (
@@ -112,7 +133,7 @@ export const TableHeader = <T extends Record<string, any>>({
 							<div className="table-selection-menu">
 								<Checkbox
 									checked={checkboxCheckedValue}
-									aria-label={translations.selectAll}
+									aria-label={translations.selectPage}
 									onChange={togglePageRows}
 									value="all"
 								/>
@@ -122,17 +143,22 @@ export const TableHeader = <T extends Record<string, any>>({
 										<button
 											type="button"
 											className="neo-table-th-select-all-btn neo-btn-tertiary neo-dropdown__link-header"
-											aria-label="table selection menu"
+											aria-label={translations.tableSelectionDropdown}
 										/>
 									}
 								>
 									<MenuItem
-										onClick={() => selectPageRows(!allPageRowsSelected)}
+										onClick={() =>
+											toggleEnabledPageRows(
+												instance,
+												!allPageEnabledRowsSelected,
+											)
+										}
 									>
-										{allPageRowsSelected
+										{allPageEnabledRowsSelected
 											? translations.clearPage
 											: translations.selectPage}{" "}
-										({pageRows.length})
+										({pageEnabledRowCount})
 									</MenuItem>
 
 									<MenuItem
@@ -140,13 +166,13 @@ export const TableHeader = <T extends Record<string, any>>({
 											toggleAllRows();
 										}}
 									>
-										{allRowsAreSelected ? (
+										{allTableEnabledRowsAreSelected ? (
 											<>
-												{translations.clearAll} ({rows.length})
+												{translations.clearAll} ({tableEnabledRowCount})
 											</>
 										) : (
 											<>
-												{translations.selectAll} ({rows.length})
+												{translations.selectAll} ({tableEnabledRowCount})
 											</>
 										)}
 									</MenuItem>

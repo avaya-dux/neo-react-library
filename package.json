@@ -52,7 +52,7 @@
 		"styled-components": "6.1.11"
 	},
 	"peerDependencies": {
-		"@tanstack/react-table": "8.19.2",
+		"@tanstack/react-table": "8.19.3",
 		"downshift": "7.6.2",
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
@@ -79,7 +79,7 @@
 		"@storybook/testing-library": "0.2.2",
 		"@storybook/testing-react": "2.0.1",
 		"@storybook/theming": "7.6.20",
-		"@tanstack/react-table": "8.19.2",
+		"@tanstack/react-table": "8.19.3",
 		"@testing-library/jest-dom": "6.4.6",
 		"@testing-library/react": "16.0.0",
 		"@testing-library/user-event": "14.5.2",
@@ -90,8 +90,8 @@
 		"@types/react-input-autosize": "2.2.4",
 		"@types/react-table": "7.7.20",
 		"@vitejs/plugin-react": "4.3.1",
-		"@vitest/coverage-v8": "1.6.0",
-		"@vitest/ui": "1.6.0",
+		"@vitest/coverage-v8": "2.0.3",
+		"@vitest/ui": "2.0.3",
 		"clsx": "2.1.1",
 		"cypress": "13.13.0",
 		"cypress-real-events": "1.13.0",
@@ -109,7 +109,7 @@
 		"typescript": "5.5.3",
 		"vite": "5.3.3",
 		"vite-plugin-dts": "3.9.1",
-		"vitest": "1.6.0"
+		"vitest": "2.0.3"
 	},
 	"resolutions": {
 		"unset-value": "2.0.1",
