@@ -79,7 +79,7 @@
 }
 
 .neo-table tr td.neo-table__dnd-td,
-.neo-table tr.disabled:hover:has(td.neo-table__dnd-td) * {
+.neo-table tr.disabled td.neo-table__dnd-td * {
 	cursor: grab;
 }
 
