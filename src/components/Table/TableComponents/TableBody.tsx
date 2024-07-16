@@ -88,9 +88,6 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	const shouldShowCheckbox = selectableRows !== "none";
 	const selectedRowCount = Object.keys(selectedRowIds).length;
 
-	// if no rows are selected, return early
-	if (selectedRowCount === 0) return undefined;
-
 	const columnsLength = useMemo(() => {
 		const checkboxColumns = shouldShowCheckbox ? 1 : 0;
 		const dragColumn = canDrag ? 1 : 0;
@@ -162,6 +159,9 @@ const ClearSelectionRow: TableBodyComponentType = ({
 		allTableEnabledRowsAreSelected,
 		allPageEnabledRowsSelected,
 	]);
+
+	// if no rows are selected, return
+	if (selectedRowCount === 0) return undefined;
 
 	return (
 		<tr className="clear-row">
