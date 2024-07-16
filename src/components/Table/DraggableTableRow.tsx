@@ -52,6 +52,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 				preparedRowProps.className,
 				row.original.disabled && "disabled",
 			)}
+			tabIndex={0}
 		>
 			{isDragging ? (
 				<EmptyRow colSpan={cellCount}>&nbsp;</EmptyRow>

@@ -79,6 +79,8 @@
 }
 
 .neo-table tbody tr:hover td.neo-table__dnd-td>div,
+.neo-table tbody tr:focus-within td.neo-table__dnd-td>div,
+.neo-table tbody tr.neo-set-keyboard-focus td.neo-table__dnd-td>div,
 .neo-table tbody tr:focus td.neo-table__dnd-td>div {
 	display: inline-block;
 }
