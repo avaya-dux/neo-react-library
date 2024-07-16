@@ -2,9 +2,11 @@ import {
 	SortableContext,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Checkbox } from "components";
 import log from "loglevel";
 import { useContext } from "react";
+
+import { Checkbox } from "components";
+
 import type { FC, ReactNode } from "react";
 import { useMemo } from "react";
 import type { Row } from "react-table";
@@ -15,10 +17,9 @@ import type { TableBodyProps } from "../types";
 export const logger = log.getLogger("TableComponents/TableBody");
 logger.enableAll();
 
-import "./TableBody_shim.css";
+import { toggleEnabledTableRows } from "../helpers";
 
 import "./TableBody_shim.css";
-import { toggleEnabledTableRows } from "../helpers";
 
 // biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 type TableBodyComponentType = <T extends Record<string, any>>(
@@ -87,9 +88,6 @@ const ClearSelectionRow: TableBodyComponentType = ({
 
 	const shouldShowCheckbox = selectableRows !== "none";
 	const selectedRowCount = Object.keys(selectedRowIds).length;
-
-	// if no rows are selected, return early
-	if (selectedRowCount === 0) return undefined;
 
 	const columnsLength = useMemo(() => {
 		const checkboxColumns = shouldShowCheckbox ? 1 : 0;
@@ -162,6 +160,9 @@ const ClearSelectionRow: TableBodyComponentType = ({
 		allTableEnabledRowsAreSelected,
 		allPageEnabledRowsSelected,
 	]);
+
+	// if no rows are selected, return
+	if (selectedRowCount === 0) return undefined;
 
 	return (
 		<tr className="clear-row">
