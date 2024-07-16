@@ -13,6 +13,7 @@ import {
 	rootBtnClass,
 	showSpinner,
 } from "utils";
+import "./IconButton_shim.css";
 
 export interface IconButtonProps
 	extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "aria-label"> {
