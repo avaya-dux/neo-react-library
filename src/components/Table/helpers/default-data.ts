@@ -24,12 +24,18 @@ export const translations: ITableTranslations = {
 		selectAll: "Select all items in the table",
 		clearPage: "Clear all items on page",
 		selectPage: "Select all items on page",
+		tableSelectionDropdown: "Table Selection Dropdown",
 		sortAscending: "A - Z",
 		sortDescending: "Z - A",
 		toggleSortBy: "Toggle SortBy",
 	},
 	body: {
+		someItemsSelected: "Some items are selected.",
+		pageSelected: "All items on this page are selected.",
+		allSelected: "All items are selected.",
+		clearSelection: "Clear all items in the table.",
 		noDataAvailable: "no data available",
+		selectAll: "Select all items in the table.",
 	},
 	pagination: {
 		backIconButtonText: "back",

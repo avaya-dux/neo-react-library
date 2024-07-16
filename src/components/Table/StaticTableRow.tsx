@@ -15,7 +15,10 @@ export const StaticTableRow = <T extends Record<string, any>>({
 	return (
 		<tr
 			{...row.getRowProps()}
-			className={clsx(showDragHandle && "neo-set-keyboard-focus")}
+			className={clsx(
+				showDragHandle && "neo-set-keyboard-focus",
+				row.original.disabled && "disabled",
+			)}
 		>
 			{showDragHandle && (
 				<td className="neo-table__dnd-td">

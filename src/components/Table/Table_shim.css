@@ -76,6 +76,11 @@
 	display: table-cell;
 	vertical-align: middle;
 	padding: 6px 0px 0px 0px;
+}
+
+.neo-table tr td.neo-table__dnd-td,
+.neo-table tr.disabled td.neo-table__dnd-td {
+	/* BUG: disabled row is not showing correctly */
 	cursor: grab;
 }
 
