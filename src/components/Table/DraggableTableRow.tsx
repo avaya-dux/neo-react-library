@@ -47,7 +47,11 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 			role={preparedRowProps.role}
 			style={{ ...style, ...preparedRowProps.style }}
 			key={preparedRowProps.key || `table-row-${row.id}`}
-			className={clsx(row.isSelected && "active", preparedRowProps.className)}
+			className={clsx(
+				row.isSelected && "active",
+				preparedRowProps.className,
+				row.original.disabled && "disabled",
+			)}
 		>
 			{isDragging ? (
 				<EmptyRow colSpan={cellCount}>&nbsp;</EmptyRow>

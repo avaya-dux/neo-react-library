@@ -5,7 +5,6 @@ import {
 import { Checkbox } from "components";
 import log from "loglevel";
 import { useContext } from "react";
-import clsx from "clsx";
 import type { FC, ReactNode } from "react";
 import { useMemo } from "react";
 import type { Row } from "react-table";
@@ -40,30 +39,32 @@ export const TableBody: TableBodyComponentType = ({
 	selectableRows,
 	translations,
 }) => {
-	const { getTableBodyProps, headers, page } = instance;
+	const { getTableBodyProps, headers, page, rows } = instance;
 
 	return (
 		<tbody {...getTableBodyProps()}>
-			{page.length === 0 ? (
-				<tr>
-					<td colSpan={headers.length}>{translations.noDataAvailable}</td>
-				</tr>
-			) : (
-				<>
-					<ClearSelectionRow
-						instance={instance}
-						selectableRows={selectableRows}
-						translations={translations}
-					/>
+			<SortableContext items={rows} strategy={verticalListSortingStrategy}>
+				{page.length === 0 ? (
+					<tr>
+						<td colSpan={headers.length}>{translations.noDataAvailable}</td>
+					</tr>
+				) : (
+					<>
+						<ClearSelectionRow
+							instance={instance}
+							selectableRows={selectableRows}
+							translations={translations}
+						/>
 
-					<TableDataRows
-						handleRowToggled={handleRowToggled}
-						instance={instance}
-						selectableRows={selectableRows}
-						translations={translations}
-					/>
-				</>
-			)}
+						<TableDataRows
+							handleRowToggled={handleRowToggled}
+							instance={instance}
+							selectableRows={selectableRows}
+							translations={translations}
+						/>
+					</>
+				)}
+			</SortableContext>
 		</tbody>
 	);
 };
@@ -75,7 +76,6 @@ const ClearSelectionRow: TableBodyComponentType = ({
 }) => {
 	const {
 		headers,
-		rows: items,
 		page,
 		rows,
 		state: { selectedRowIds },
@@ -213,42 +213,35 @@ const TableDataRows: TableBodyComponentType = ({
 
 	const shouldShowCheckbox = selectableRows !== "none";
 
-	const createCheckboxTd = (row: Row<T>) => {
+	// biome-ignore lint/suspicious/noExplicitAny: quick fix, TODO: set `any` to `T`
+	const createCheckboxTd = (row: Row<any>) => {
 		const checkboxLabel = row.original.label || row.id;
+
 		return shouldShowCheckbox ? (
 			<Checkbox
 				checked={row.isSelected}
 				aria-label={checkboxLabel}
+				disabled={row.original.disabled}
 				onChange={() => handleRowToggledInternal(row)}
 				value={row.id}
 			/>
 		) : null;
 	};
-	return (
-		<tbody {...getTableBodyProps()}>
-			<SortableContext items={items} strategy={verticalListSortingStrategy}>
-				{page.length === 0 ? (
-					<tr>
-						<td colSpan={headers.length}>{translations.noDataAvailable}</td>
-					</tr>
-				) : (
-					page.map((row) => {
-						prepareRow(row);
-						const checkboxTd = createCheckboxTd(row);
-						const key = row.original.id;
-						return canDrag ? (
-							<DraggableTableRow key={key} row={row} checkboxTd={checkboxTd} />
-						) : (
-							<StaticTableRow
-								key={key}
-								row={row}
-								checkboxTd={checkboxTd}
-								showDragHandle={false}
-							/>
-						);
-					})
-				)}
-			</SortableContext>
-		</tbody>
-	);
+
+	return page.map((row) => {
+		prepareRow(row);
+		const checkboxTd = createCheckboxTd(row);
+		const key = row.original.id;
+
+		return canDrag ? (
+			<DraggableTableRow key={key} row={row} checkboxTd={checkboxTd} />
+		) : (
+			<StaticTableRow
+				key={key}
+				row={row}
+				checkboxTd={checkboxTd}
+				showDragHandle={false}
+			/>
+		);
+	});
 };

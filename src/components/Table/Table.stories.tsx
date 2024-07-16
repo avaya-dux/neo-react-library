@@ -656,6 +656,7 @@ export const DisabledRows = () => {
 				readonly={readonly}
 				selectableRows="multiple"
 				initialStatePageSize={5}
+				canDrag
 				handlePageChange={(newPageIndex, newPageSize) => {
 					setLogItems([
 						`page change - index:${newPageIndex} | size:${newPageSize}`,
