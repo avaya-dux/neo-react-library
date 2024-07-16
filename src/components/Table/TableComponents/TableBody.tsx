@@ -16,12 +16,6 @@ export const logger = log.getLogger("TableComponents/TableBody");
 logger.enableAll();
 
 import "./TableBody_shim.css";
-import { toggleEnabledTableRows } from "../helpers";
-
-// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
-type TableBodyComponentType = <T extends Record<string, any>>(
-	props: TableBodyProps<T>,
-) => JSX.Element | JSX.Element[] | undefined;
 
 import "./TableBody_shim.css";
 import { toggleEnabledTableRows } from "../helpers";
