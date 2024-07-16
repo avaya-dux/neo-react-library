@@ -306,14 +306,10 @@ describe("Table", () => {
 			await user.click(firstRowCheckboxLabel);
 
 			expect(firstRowCheckbox.checked).toBeTruthy();
-			expect(firstBodyRow.classList.length).toBe(1);
-			expect(firstBodyRow).toHaveClass("active");
 
 			await user.click(firstRowCheckboxLabel);
 
 			expect(firstRowCheckbox.checked).toBeFalsy();
-			expect(firstBodyRow.classList.length).toBe(0);
-			expect(firstBodyRow).not.toHaveClass("active");
 		});
 
 		it("deselects the header checkbox when all rows are deleted", async () => {

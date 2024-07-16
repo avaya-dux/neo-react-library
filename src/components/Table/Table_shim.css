@@ -1,3 +1,7 @@
+.neo-table {
+	table-layout: fixed;
+}
+
 .neo-table th button {
 	color: black;
 	display: flex;
@@ -48,6 +52,56 @@
 .neo-table--push-pagination-down div.neo-pagination__row {
 	flex-grow: 1;
 	align-items: flex-end;
+}
+
+/* had to use a td to avoid empty th a11y error */
+.neo-table thead td {
+	text-align: left;
+	color: var(--global-font-color);
+	vertical-align: middle;
+	background-color: var(--table-background-color);
+	letter-spacing: 0;
+	border-bottom: 1px solid var(--table-header-cell-border-color);
+	border-top: 1px solid var(--table-header-cell-border-color);
+	min-height: 44px;
+	padding: 12px 16px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+}
+
+.neo-table tr td.neo-table__dnd-th,
+.neo-table tr td.neo-table__dnd-td {
+	width: 16px;
+	display: table-cell;
+	vertical-align: middle;
+	padding: 6px 0px 0px 0px;
+}
+
+.neo-table tr td.neo-table__dnd-td,
+.neo-table tr.disabled td.neo-table__dnd-td {
+	/* BUG: disabled row is not showing correctly */
+	cursor: grab;
+}
+
+.neo-table tr td.neo-table__dnd-th>div,
+.neo-table tr td.neo-table__dnd-td>div {
+	width: 16px;
+	height: 16px;
+}
+
+.neo-table tr td.neo-table__dnd-td>div {
+	display: none;
+	/* Hide by default */
+}
+
+.neo-table tbody tr:hover td.neo-table__dnd-td>div,
+.neo-table tbody tr:focus td.neo-table__dnd-td>div {
+	display: inline-block;
+}
+
+.neo-table tr td.neo-table__dnd-td div span[class*=neo-icon-]:before {
+	font-size: 16px;
 }
 
 
