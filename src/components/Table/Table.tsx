@@ -100,7 +100,7 @@ export const Table = <T extends Record<string, any>>({
 	rowHeight = "large",
 	selectableRows = "none",
 	showPagination = true,
-	canDrag = false,
+	draggableRows = false,
 	pushPaginationDown = false,
 	showRowSeparator = false,
 	showRowHeightMenu = true,
@@ -227,7 +227,7 @@ export const Table = <T extends Record<string, any>>({
 
 	const filterContext: IFilterContext = {
 		allowColumnFilter,
-		canDrag,
+		draggableRows,
 		filterSheetVisible,
 		setFilterSheetVisible,
 		toggleFilterSheetVisible,
