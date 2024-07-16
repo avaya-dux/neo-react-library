@@ -104,6 +104,7 @@ export const Table = <T extends Record<string, any>>({
 	pushPaginationDown = false,
 	showRowSeparator = false,
 	showRowHeightMenu = true,
+	showRowSelectionHelper = true,
 	showSearch = true,
 	itemDisplayTooltipPosition = "auto",
 	itemsPerPageTooltipPosition = "auto",
@@ -350,6 +351,7 @@ export const Table = <T extends Record<string, any>>({
 							handleRowToggled={handleRowToggled}
 							instance={instance}
 							selectableRows={selectableRows}
+							showRowSelectionHelper={showRowSelectionHelper}
 							translations={bodyTranslations}
 						/>
 					</table>
@@ -396,6 +398,7 @@ export const Table = <T extends Record<string, any>>({
 					)}
 				</div>
 			</FilterContext.Provider>
+
 			<DragOverlay>
 				{activeId && selectedRow && (
 					<table

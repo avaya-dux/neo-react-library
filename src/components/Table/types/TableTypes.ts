@@ -41,6 +41,7 @@ export type TableHeaderProps<T extends AnyRecord> = {
 } & TableHeaderBodySharedProps<T>;
 
 export type TableBodyProps<T extends AnyRecord> = {
+	showRowSelectionHelper?: boolean;
 	translations: IBodyTranslations;
 } & TableHeaderBodySharedProps<T>;
 
@@ -68,6 +69,7 @@ export type TableProps<T extends AnyRecord> = {
 	initialStatePageSize?: number;
 	defaultSelectedRowIds?: string[];
 	showRowSeparator?: boolean;
+	showRowSelectionHelper?: boolean;
 	summary?: string;
 	containerClassName?: string;
 	translations?: ITableTranslations;

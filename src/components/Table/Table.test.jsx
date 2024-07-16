@@ -801,6 +801,61 @@ describe("Table", () => {
 			);
 			const disabledCheckbox = disabledTableRows[0].querySelector("input");
 			expect(disabledCheckbox).toBeDisabled();
+			expect(disabledCheckbox).not.toBeChecked();
+
+			// click on the disabled row and confirm that it is still not checked
+			await user.click(disabledCheckbox);
+			expect(disabledCheckbox).not.toBeChecked();
+		});
+
+		it("does not select disabled rows when selecting all", async () => {
+			render(<DisabledRows />);
+
+			// open dropdown, select all rows
+			const dropdown = screen.getByLabelText(
+				FilledFields.translations.header.tableSelectionDropdown,
+			);
+			await user.click(dropdown);
+			const selectAllRows = screen.getByText(
+				`${FilledFields.translations.header.selectAll} (8)`,
+			);
+			await user.click(selectAllRows);
+
+			// confirm that the first body row (skipping over "clear row") is not disabled and is selected
+			const tableRows = screen.getAllByRole("row");
+			const firstBodyRow = tableRows[2];
+			expect(firstBodyRow).not.toHaveClass("disabled");
+			expect(firstBodyRow.querySelector("input")).toBeChecked();
+
+			// confirm that the second row is disabled and is not selected
+			const secondBodyRow = tableRows[3];
+			expect(secondBodyRow).toHaveClass("disabled");
+			expect(secondBodyRow.querySelector("input")).not.toBeChecked();
+		});
+
+		it("does not select disabled rows when selecting all on a page", async () => {
+			render(<DisabledRows />);
+
+			// open dropdown, select all rows
+			const dropdown = screen.getByLabelText(
+				FilledFields.translations.header.tableSelectionDropdown,
+			);
+			await user.click(dropdown);
+			const selectAllRows = screen.getByText(
+				`${FilledFields.translations.header.selectPage} (3)`,
+			);
+			await user.click(selectAllRows);
+
+			// confirm that the first body row (skipping over "clear row") is not disabled and is selected
+			const tableRows = screen.getAllByRole("row");
+			const firstBodyRow = tableRows[2];
+			expect(firstBodyRow).not.toHaveClass("disabled");
+			expect(firstBodyRow.querySelector("input")).toBeChecked();
+
+			// confirm that the second row is disabled and is not selected
+			const secondBodyRow = tableRows[3];
+			expect(secondBodyRow).toHaveClass("disabled");
+			expect(secondBodyRow.querySelector("input")).not.toBeChecked();
 		});
 	});
 
