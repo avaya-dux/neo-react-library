@@ -42,11 +42,13 @@ export const convertRowIdsArrayToObject = (rowIds: string[]) => {
  * Sets all table rows to selected or unselected based on the `selected` parameter and return toggled row ids.
  * @param instance - TableInstance
  * @param selected - boolean, whether to select or unselect the rows.
- * @returns string[], the ids of the toggled rows.
+ * @param handleRowToggled - (rowIds: string[]) => void, the user-defined callback
+ * @returns void
  */
-export const toggleEnabledTableRows = <T extends Record<string, unknown>>(
+export const setTableRowsSelected = <T extends Record<string, unknown>>(
 	instance: TableInstance<T>,
 	selected: boolean,
+	handleRowToggled?: (rowIds: string[]) => void,
 ) => {
 	const { rows, toggleRowSelected } = instance;
 
@@ -55,18 +57,22 @@ export const toggleEnabledTableRows = <T extends Record<string, unknown>>(
 		.map((row) => row.id);
 	enabledTableRowsIds.forEach((id) => toggleRowSelected(id, selected));
 
-	return enabledTableRowsIds;
+	if (handleRowToggled) {
+		handleRowToggled(selected ? enabledTableRowsIds : []);
+	}
 };
 
 /**
  * Sets all page rows to selected or unselected based on the `selected` parameter and return toggled row ids.
  * @param instance - TableInstance
  * @param selected - boolean, whether to select or unselect the rows.
- * @returns string[], the ids of the toggled rows.
+ * @param handleRowToggled - (rowIds: string[]) => void, the user-defined callback
+ * @returns void
  */
-export const toggleEnabledPageRows = <T extends Record<string, unknown>>(
+export const setPageRowsSelected = <T extends Record<string, unknown>>(
 	instance: TableInstance<T>,
 	selected: boolean,
+	handleRowToggled: (rowIds: string[]) => void,
 ) => {
 	const { page, toggleRowSelected } = instance;
 
@@ -75,5 +81,7 @@ export const toggleEnabledPageRows = <T extends Record<string, unknown>>(
 		.map((row) => row.id);
 	enabledPageRowsIds.forEach((id) => toggleRowSelected(id, selected));
 
-	return enabledPageRowsIds;
+	if (handleRowToggled) {
+		handleRowToggled(selected ? enabledPageRowsIds : []);
+	}
 };

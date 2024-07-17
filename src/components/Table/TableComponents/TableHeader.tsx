@@ -1,4 +1,4 @@
-import { type KeyboardEvent, useCallback, useContext, useMemo } from "react";
+import { type KeyboardEvent, useContext, useMemo } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
@@ -9,8 +9,8 @@ import { type IconNamesType, Keys } from "utils";
 import {
 	FilterContext,
 	calculateAriaSortValue,
-	toggleEnabledPageRows,
-	toggleEnabledTableRows,
+	setPageRowsSelected,
+	setTableRowsSelected,
 } from "../helpers";
 import type { TableHeaderProps } from "../types";
 
@@ -68,8 +68,9 @@ export const TableHeader = <T extends Record<string, any>>({
 	const [tableEnabledRowCount, allTableEnabledRowsAreSelected] = useMemo(() => {
 		const enabledRows = rows.filter((row) => !row.original.disabled);
 		const enabledRowCount = enabledRows.length;
-		const rowsSelectedMemo =
-			enabledRowCount && enabledRows.every((row) => selectedRowIds[row.id]);
+		const rowsSelectedMemo = !!(
+			enabledRowCount && enabledRows.every((row) => selectedRowIds[row.id])
+		);
 
 		return [enabledRowCount, rowsSelectedMemo];
 	}, [rows, selectedRowIds]);
@@ -88,42 +89,6 @@ export const TableHeader = <T extends Record<string, any>>({
 				: "mixed";
 	}, [allPageEnabledRowsSelected, allPageRowsDeselected]);
 
-	const toggleAllRows = useCallback(() => {
-		const toggledIds = toggleEnabledTableRows(
-			instance,
-			!allTableEnabledRowsAreSelected,
-		);
-
-		if (handleRowToggled) {
-			const shouldSelectAll = [false, "mixed"].includes(checkboxCheckedValue);
-
-			handleRowToggled(shouldSelectAll ? toggledIds : []);
-		}
-	}, [
-		instance,
-		allTableEnabledRowsAreSelected,
-		handleRowToggled,
-		checkboxCheckedValue,
-	]);
-
-	const togglePageRows = useCallback(() => {
-		const toggledIds = toggleEnabledPageRows(
-			instance,
-			!allPageEnabledRowsSelected,
-		);
-
-		if (handleRowToggled) {
-			const shouldSelectAll = [false, "mixed"].includes(checkboxCheckedValue);
-
-			handleRowToggled(shouldSelectAll ? toggledIds : []);
-		}
-	}, [
-		instance,
-		allPageEnabledRowsSelected,
-		handleRowToggled,
-		checkboxCheckedValue,
-	]);
-
 	return (
 		<thead>
 			<tr>
@@ -141,7 +106,13 @@ export const TableHeader = <T extends Record<string, any>>({
 								<Checkbox
 									checked={checkboxCheckedValue}
 									aria-label={translations.selectPage}
-									onChange={togglePageRows}
+									onChange={() =>
+										setPageRowsSelected(
+											instance,
+											!allPageEnabledRowsSelected,
+											handleRowToggled,
+										)
+									}
 									value="all"
 								/>
 
@@ -156,9 +127,10 @@ export const TableHeader = <T extends Record<string, any>>({
 								>
 									<MenuItem
 										onClick={() =>
-											toggleEnabledPageRows(
+											setPageRowsSelected(
 												instance,
 												!allPageEnabledRowsSelected,
+												handleRowToggled,
 											)
 										}
 									>
@@ -175,7 +147,11 @@ export const TableHeader = <T extends Record<string, any>>({
 
 									<MenuItem
 										onClick={() => {
-											toggleAllRows();
+											setTableRowsSelected(
+												instance,
+												!allTableEnabledRowsAreSelected,
+												handleRowToggled,
+											);
 										}}
 									>
 										{allTableEnabledRowsAreSelected ? (
