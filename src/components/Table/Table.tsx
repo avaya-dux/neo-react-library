@@ -163,12 +163,11 @@ export const Table = <T extends Record<string, any>>({
 	} = instance;
 	const rowCount = rows.length;
 
-	// update data when rows change
 	const memoizedRows = useMemo(
 		() => rows.map(({ original }) => original),
 		[rows],
 	);
-	// go through all tableColumns and if there is at least one column sorted, return true
+	// if there is at least one column sorted, return true
 	const isSorted = tableColumns.some(({ isSorted }) => isSorted);
 	// log isSorted to help debug
 	logger.debug("Table: isSorted", isSorted);
@@ -182,7 +181,6 @@ export const Table = <T extends Record<string, any>>({
 		) {
 			if (isSorted) {
 				logger.debug("Table: data changed, updating...");
-
 				setData(memoizedRows);
 			}
 		}
