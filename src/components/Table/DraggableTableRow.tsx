@@ -10,7 +10,7 @@ export const logger = log.getLogger("TableComponents/DraggableTableRow");
 logger.disableAll();
 
 const EmptyRow = styled.td`
-  background: rgba(127, 207, 250, 0.3);
+  background: var(--neo-color-blue-500);
 `;
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>

@@ -2,8 +2,7 @@ import clsx from "clsx";
 import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const StaticTableRow = <T extends Record<string, any>>({
+export const StaticTableRow = <T extends Record<string, unknown>>({
 	row,
 	checkboxTd,
 	showDragHandle,
@@ -12,12 +11,13 @@ export const StaticTableRow = <T extends Record<string, any>>({
 	checkboxTd: JSX.Element | null;
 	showDragHandle: boolean;
 }) => {
+	const { key: _, ...restProps } = row.getRowProps();
 	return (
 		<tr
-			{...row.getRowProps()}
+			{...restProps}
 			className={clsx(
 				showDragHandle && "neo-set-keyboard-focus",
-				row.original.disabled && "disabled",
+				row.original.disabled ? "disabled" : undefined,
 			)}
 		>
 			{showDragHandle && (
@@ -26,7 +26,9 @@ export const StaticTableRow = <T extends Record<string, any>>({
 				</td>
 			)}
 			{checkboxTd && (
-				<td style={{ padding: "0px 0px 0px 5px" }}>{checkboxTd}</td>
+				<td style={{ padding: "0px 0px 0px 5px", width: "60px" }}>
+					{checkboxTd}
+				</td>
 			)}
 			{row.cells.map((cell) => {
 				const { key, ...restCellProps } = cell.getCellProps();

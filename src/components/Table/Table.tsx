@@ -39,7 +39,9 @@ import type { IFilterContext, RowHeight } from "./types";
 
 import "./Table_shim.css";
 import { Checkbox } from "components/Checkbox";
-
+import log from "loglevel";
+export const logger = log.getLogger("Table");
+logger.disableAll();
 /**
  * The Table is used to organize and display data within rows and columns.
  * It comes with built in pagination. The `id` column in data is required.
@@ -118,12 +120,11 @@ export const Table = <T extends Record<string, any>>({
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
 	const [data, setData] = useState(originalData);
+	const items = useMemo(() => data?.map(({ id }) => id), [data]);
 
 	useEffect(() => {
 		setData(originalData);
 	}, [originalData]);
-
-	const items = useMemo(() => data?.map(({ id }) => id), [data]);
 
 	const instance = useTable<T>(
 		{
@@ -152,6 +153,7 @@ export const Table = <T extends Record<string, any>>({
 
 	const {
 		rows,
+		columns: tableColumns,
 		getTableProps,
 		state: { pageIndex, pageSize },
 		gotoPage,
@@ -160,6 +162,31 @@ export const Table = <T extends Record<string, any>>({
 		pageCount,
 	} = instance;
 	const rowCount = rows.length;
+
+	// update data when rows change
+	const memoizedRows = useMemo(
+		() => rows.map(({ original }) => original),
+		[rows],
+	);
+	// go through all tableColumns and if there is at least one column sorted, return true
+	const isSorted = tableColumns.some(({ isSorted }) => isSorted);
+	// log isSorted to help debug
+	logger.debug("Table: isSorted", isSorted);
+
+	useEffect(() => {
+		if (!draggableRows) return;
+		// compare data and memoizedRows by id field
+		if (
+			data?.length !== memoizedRows?.length ||
+			!data?.every((row, i) => row.id === memoizedRows[i].id)
+		) {
+			if (isSorted) {
+				logger.debug("Table: data changed, updating...");
+
+				setData(memoizedRows);
+			}
+		}
+	}, [data, memoizedRows, draggableRows, isSorted]);
 
 	// this `useEffect` handles the edge cases of page change logic
 	useEffect(() => {
@@ -241,11 +268,13 @@ export const Table = <T extends Record<string, any>>({
 
 	function handleDragStart(event: DragStartEvent) {
 		const { active } = event;
+		logger.debug("Table: handleDragStart", active.id);
 		setActiveId(active.id);
 	}
 
 	function handleDragEnd(event: DragEndEvent) {
 		const { active, over } = event;
+		logger.debug("Table: handleDragEnd", active.id, over?.id);
 		if (active.id !== over?.id) {
 			setData((data) => {
 				const oldIndex = items.indexOf(active.id);
@@ -278,7 +307,6 @@ export const Table = <T extends Record<string, any>>({
 			<Checkbox
 				checked={row.isSelected}
 				aria-label={checkboxLabel}
-				readOnly
 				value={row.id}
 			/>
 		) : null;

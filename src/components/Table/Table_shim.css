@@ -57,10 +57,10 @@
 
 .neo-table tr th.neo-table__dnd-th,
 .neo-table tr td.neo-table__dnd-td {
-	width: 16px;
+	width: 24px;
 	display: table-cell;
 	vertical-align: middle;
-	padding: 6px 0px 0px 0px;
+	padding: 6px 4px 0px 4px;
 }
 
 .neo-table tr th.neo-table__dnd-td,
@@ -71,7 +71,7 @@
 .neo-table tr th.neo-table__dnd-th>div,
 .neo-table tr td.neo-table__dnd-td>div {
 	width: 16px;
-	height: 16px;
+	min-height: 16px;
 }
 
 .neo-table tr td.neo-table__dnd-td>div {
