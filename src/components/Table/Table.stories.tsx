@@ -5,6 +5,7 @@ import type { Column, ColumnInstance } from "react-table";
 import {
 	Chip,
 	Icon,
+	IconButton,
 	List,
 	ListItem,
 	Menu,
@@ -94,6 +95,29 @@ export const MoreActionsMenu = () => (
 							</MenuItem>
 						</Menu>
 					</Tooltip>
+				),
+			},
+		]}
+		data={[...FilledFields.data]}
+	/>
+);
+
+export const WithIconButton = () => (
+	<Table
+		caption="Last column has an IconButton."
+		columns={[
+			...FilledFields.columns,
+			{
+				Header: "Add Note",
+				Cell: () => (
+					<IconButton
+						shape="square"
+						icon="posts"
+						iconSize="lg"
+						variant="tertiary"
+						badge="7"
+						aria-label="Icon button"
+					/>
 				),
 			},
 		]}
