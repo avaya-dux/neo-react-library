@@ -57,9 +57,7 @@ export const setTableRowsSelected = <T extends Record<string, unknown>>(
 		.map((row) => row.id);
 	enabledTableRowsIds.forEach((id) => toggleRowSelected(id, selected));
 
-	if (handleRowToggled) {
-		handleRowToggled(selected ? enabledTableRowsIds : []);
-	}
+	handleRowToggled?.(selected ? enabledTableRowsIds : []);
 };
 
 /**
@@ -81,7 +79,5 @@ export const setPageRowsSelected = <T extends Record<string, unknown>>(
 		.map((row) => row.id);
 	enabledPageRowsIds.forEach((id) => toggleRowSelected(id, selected));
 
-	if (handleRowToggled) {
-		handleRowToggled(selected ? enabledPageRowsIds : []);
-	}
+	handleRowToggled?.(selected ? enabledPageRowsIds : []);
 };
