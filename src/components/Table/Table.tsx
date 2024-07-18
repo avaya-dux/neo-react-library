@@ -154,7 +154,6 @@ export const Table = <T extends Record<string, any>>({
 
 	const {
 		rows,
-		columns: tableColumns,
 		getTableProps,
 		state: { pageIndex, pageSize },
 		gotoPage,
@@ -168,10 +167,6 @@ export const Table = <T extends Record<string, any>>({
 		() => rows.map(({ original }) => original),
 		[rows],
 	);
-	// if there is at least one column sorted, return true
-	const isSorted = tableColumns.some(({ isSorted }) => isSorted);
-	// log isSorted to help debug
-	logger.debug("Table: isSorted", isSorted);
 
 	const [allowDataSync, setAllowDataSync] = useState(false);
 	useEffect(() => {
