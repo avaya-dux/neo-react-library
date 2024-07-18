@@ -12,8 +12,8 @@ import {
 	FilledFields,
 	calculateAriaSortValue,
 	convertRowIdsArrayToObject,
-	toggleEnabledPageRows,
-	toggleEnabledTableRows,
+	setPageRowsSelected,
+	setTableRowsSelected,
 } from "./helpers";
 
 const {
@@ -915,9 +915,10 @@ describe("Table", () => {
 			});
 		});
 
-		describe("toggle row methos", () => {
-			it("`toggleEnabledTableRows` toggles the enabled state of all rows that are not disabled", () => {
+		describe("toggle row methods", () => {
+			it("`setTableRowsSelected` toggles the enabled state of all rows that are not disabled", () => {
 				const mocktoggleRowSelected = vi.fn();
+				const mockHandleRowToggled = vi.fn();
 				const mockInstance = {
 					rows: [
 						{
@@ -942,23 +943,27 @@ describe("Table", () => {
 					toggleRowSelected: mocktoggleRowSelected,
 				};
 
-				const falsyTest = toggleEnabledTableRows(mockInstance, false);
+				setTableRowsSelected(mockInstance, false, mockHandleRowToggled);
 
 				expect(mocktoggleRowSelected).toHaveBeenCalledTimes(2);
 				expect(mocktoggleRowSelected).toHaveBeenCalledWith(1, false);
 				expect(mocktoggleRowSelected).toHaveBeenCalledWith(3, false);
-				expect(falsyTest).toHaveLength(2);
+				expect(mockHandleRowToggled).toHaveBeenCalledTimes(1);
+				expect(mockHandleRowToggled).toHaveBeenCalledWith([]);
 
 				mocktoggleRowSelected.mockClear();
-				const truthyTest = toggleEnabledTableRows(mockInstance, true);
+				mockHandleRowToggled.mockClear();
+				setTableRowsSelected(mockInstance, true, mockHandleRowToggled);
 				expect(mocktoggleRowSelected).toHaveBeenCalledTimes(2);
 				expect(mocktoggleRowSelected).toHaveBeenCalledWith(1, true);
 				expect(mocktoggleRowSelected).toHaveBeenCalledWith(3, true);
-				expect(truthyTest).toHaveLength(2);
+				expect(mockHandleRowToggled).toHaveBeenCalledTimes(1);
+				expect(mockHandleRowToggled).toHaveBeenCalledWith([1, 3]);
 			});
 
-			it("`toggleEnabledPageRows` toggles the enabled state of all page rows that are not disabled", () => {
+			it("`setPageRowsSelected` toggles the enabled state of all page rows that are not disabled", () => {
 				const mocktoggleRowSelected = vi.fn();
+				const mockHandleRowToggled = vi.fn(); // TODO: use
 				const mockInstance = {
 					page: [
 						{
@@ -983,19 +988,22 @@ describe("Table", () => {
 					toggleRowSelected: mocktoggleRowSelected,
 				};
 
-				const falsyTest = toggleEnabledPageRows(mockInstance, false);
+				setPageRowsSelected(mockInstance, false, mockHandleRowToggled);
 
 				expect(mocktoggleRowSelected).toHaveBeenCalledTimes(2);
 				expect(mocktoggleRowSelected).toHaveBeenCalledWith(1, false);
 				expect(mocktoggleRowSelected).toHaveBeenCalledWith(3, false);
-				expect(falsyTest).toHaveLength(2);
+				expect(mockHandleRowToggled).toHaveBeenCalledTimes(1);
+				expect(mockHandleRowToggled).toHaveBeenCalledWith([]);
 
 				mocktoggleRowSelected.mockClear();
-				const truthyTest = toggleEnabledPageRows(mockInstance, true);
+				mockHandleRowToggled.mockClear();
+				setPageRowsSelected(mockInstance, true, mockHandleRowToggled);
 				expect(mocktoggleRowSelected).toHaveBeenCalledTimes(2);
 				expect(mocktoggleRowSelected).toHaveBeenCalledWith(1, true);
 				expect(mocktoggleRowSelected).toHaveBeenCalledWith(3, true);
-				expect(truthyTest).toHaveLength(2);
+				expect(mockHandleRowToggled).toHaveBeenCalledTimes(1);
+				expect(mockHandleRowToggled).toHaveBeenCalledWith([1, 3]);
 			});
 		});
 	});
