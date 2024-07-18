@@ -85,8 +85,8 @@ export const TableHeader = <T extends Record<string, any>>({
 		allowColumnFilter,
 		toggleFilterSheetVisible,
 		draggableRows,
-		setAllowDataSync,
-		clearSortByFunc,
+		setDataSyncOption,
+		clearSortByFuncRef,
 	} = useContext(FilterContext);
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none";
@@ -250,15 +250,22 @@ export const TableHeader = <T extends Record<string, any>>({
 						const sortIcon: IconNamesType =
 							ariasort === "descending" ? "arrow-up" : "arrow-down";
 
+						const handleClearSort = () => {
+							console.log("handleClearSort called");
+							clearSortBy();
+							setDataSyncOption("clear");
+							clearSortByFuncRef.current = clearSortBy;
+						};
+
 						const handleAscSort = () => {
 							toggleSortBy(column.id, false, false);
-							setAllowDataSync(true);
-							clearSortByFunc.current = clearSortBy;
+							setDataSyncOption("asc");
+							clearSortByFuncRef.current = clearSortBy;
 						};
 						const handleDescSort = () => {
 							toggleSortBy(column.id, true, false);
-							setAllowDataSync(true);
-							clearSortByFunc.current = clearSortBy;
+							setDataSyncOption("desc");
+							clearSortByFuncRef.current = clearSortBy;
 						};
 						const onSpaceOrEnter = (
 							e: KeyboardEvent<HTMLDivElement>,
@@ -312,8 +319,8 @@ export const TableHeader = <T extends Record<string, any>>({
 								{...thDivProps}
 							>
 								<MenuItem
-									onClick={clearSortBy}
-									onKeyDown={(e) => onSpaceOrEnter(e, clearSortBy)}
+									onClick={handleClearSort}
+									onKeyDown={(e) => onSpaceOrEnter(e, handleClearSort)}
 									disabled={!isSorted}
 								>
 									{translations.clearSort || "Clear Sort"}

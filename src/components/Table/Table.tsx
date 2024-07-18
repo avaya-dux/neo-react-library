@@ -35,7 +35,7 @@ import {
 	convertRowIdsArrayToObject,
 	translations as defaultTranslations,
 } from "./helpers";
-import type { IFilterContext, RowHeight } from "./types";
+import type { DataSyncOptionType, IFilterContext, RowHeight } from "./types";
 
 import "./Table_shim.css";
 import { Checkbox } from "components/Checkbox";
@@ -163,34 +163,44 @@ export const Table = <T extends Record<string, any>>({
 	} = instance;
 	const rowCount = rows.length;
 
+	const [dataSyncOption, setDataSyncOption] =
+		useState<DataSyncOptionType>("no");
+
 	const memoizedRows = useMemo(
-		() => rows.map(({ original }) => original),
-		[rows],
+		() =>
+			dataSyncOption === "clear"
+				? originalData
+				: rows.map(({ original }) => original),
+		[rows, originalData, dataSyncOption],
 	);
 
-	const [allowDataSync, setAllowDataSync] = useState(false);
+	logger.debug(
+		"Table: originalData",
+		originalData.map((row) => row.id),
+	);
+	logger.debug(
+		"Table: data",
+		data.map((row) => row.id),
+	);
+	logger.debug(
+		"Table: memoizedRows",
+		memoizedRows.map((row) => row.id),
+	);
 	useEffect(() => {
 		if (!draggableRows) return;
+
 		// compare data and memoizedRows by id field
 		if (
 			data?.length !== memoizedRows?.length ||
 			!data?.every((row, i) => row.id === memoizedRows[i].id)
 		) {
-			if (allowDataSync) {
-				logger.debug("Table: data changed, updating...");
-				logger.debug(
-					"Table: data",
-					data.map((row) => row.id),
-				);
-				logger.debug(
-					"Table: memoizedRows",
-					memoizedRows.map((row) => row.id),
-				);
+			if (dataSyncOption !== "no") {
+				logger.debug("Table: data changed, updating...", dataSyncOption);
 				setData(memoizedRows);
-				setAllowDataSync(false);
+				setDataSyncOption("no");
 			}
 		}
-	}, [data, memoizedRows, draggableRows, allowDataSync]);
+	}, [data, memoizedRows, draggableRows, dataSyncOption]);
 
 	// this `useEffect` handles the edge cases of page change logic
 	useEffect(() => {
@@ -256,7 +266,7 @@ export const Table = <T extends Record<string, any>>({
 		setRowHeightValue(newHeight);
 	}, []);
 
-	const clearSortByFunc = useRef<(() => void) | null>(null);
+	const clearSortByFuncRef = useRef<(() => void) | null>(null);
 
 	const filterContext: IFilterContext = {
 		allowColumnFilter,
@@ -264,9 +274,9 @@ export const Table = <T extends Record<string, any>>({
 		filterSheetVisible,
 		setFilterSheetVisible,
 		toggleFilterSheetVisible,
-		allowDataSync,
-		setAllowDataSync,
-		clearSortByFunc,
+		dataSyncOption,
+		setDataSyncOption,
+		clearSortByFuncRef,
 	};
 
 	const sensors = useSensors(
@@ -276,14 +286,14 @@ export const Table = <T extends Record<string, any>>({
 	);
 
 	function handleDragStart(event: DragStartEvent) {
-		if (clearSortByFunc.current) {
-			clearSortByFunc.current();
+		if (clearSortByFuncRef.current) {
+			clearSortByFuncRef.current();
 		}
 		const { active } = event;
 		logger.debug("Table: handleDragStart", active.id);
 		setActiveId(active.id);
-		setAllowDataSync(false);
-		clearSortByFunc.current = null;
+		setDataSyncOption("no");
+		clearSortByFuncRef.current = null;
 	}
 
 	function handleDragEnd(event: DragEndEvent) {

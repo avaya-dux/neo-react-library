@@ -45,15 +45,16 @@ export type TableBodyProps<T extends AnyRecord> = {
 	translations: IBodyTranslations;
 } & TableHeaderBodySharedProps<T>;
 
+export type DataSyncOptionType = "no" | "clear" | "asc" | "desc";
 export interface IFilterContext {
 	allowColumnFilter: boolean;
 	draggableRows: boolean;
 	filterSheetVisible: boolean;
 	setFilterSheetVisible: (visible: boolean) => void;
 	toggleFilterSheetVisible: () => void;
-	allowDataSync: boolean;
-	setAllowDataSync: (allowDataSync: boolean) => void;
-	clearSortByFunc: React.MutableRefObject<(() => void) | null>;
+	dataSyncOption: DataSyncOptionType;
+	setDataSyncOption: (dataSyncOption: DataSyncOptionType) => void;
+	clearSortByFuncRef: React.MutableRefObject<(() => void) | null>;
 }
 
 export type RowHeight = "compact" | "medium" | "large";

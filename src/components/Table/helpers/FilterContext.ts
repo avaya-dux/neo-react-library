@@ -8,7 +8,7 @@ export const FilterContext = createContext<IFilterContext>({
 	draggableRows: false,
 	setFilterSheetVisible: () => null,
 	toggleFilterSheetVisible: () => null,
-	allowDataSync: false,
-	setAllowDataSync: () => null,
-	clearSortByFunc: null as unknown as MutableRefObject<(() => void) | null>,
+	dataSyncOption: "no",
+	setDataSyncOption: () => null,
+	clearSortByFuncRef: null as unknown as MutableRefObject<(() => void) | null>,
 });
