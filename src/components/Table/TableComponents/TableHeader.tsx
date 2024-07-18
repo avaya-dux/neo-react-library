@@ -81,8 +81,13 @@ export const TableHeader = <T extends Record<string, any>>({
 		return [enabledRowCount, rowsSelectedMemo];
 	}, [rows, selectedRowIds]);
 
-	const { allowColumnFilter, toggleFilterSheetVisible, draggableRows } =
-		useContext(FilterContext);
+	const {
+		allowColumnFilter,
+		toggleFilterSheetVisible,
+		draggableRows,
+		setAllowDataSync,
+		clearSortByFunc,
+	} = useContext(FilterContext);
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none";
 	const shouldHaveCheckbox = selectableRows === "multiple";
@@ -245,8 +250,16 @@ export const TableHeader = <T extends Record<string, any>>({
 						const sortIcon: IconNamesType =
 							ariasort === "descending" ? "arrow-up" : "arrow-down";
 
-						const handleAscSort = () => toggleSortBy(column.id, false, false);
-						const handleDescSort = () => toggleSortBy(column.id, true, false);
+						const handleAscSort = () => {
+							toggleSortBy(column.id, false, false);
+							setAllowDataSync(true);
+							clearSortByFunc.current = clearSortBy;
+						};
+						const handleDescSort = () => {
+							toggleSortBy(column.id, true, false);
+							setAllowDataSync(true);
+							clearSortByFunc.current = clearSortBy;
+						};
 						const onSpaceOrEnter = (
 							e: KeyboardEvent<HTMLDivElement>,
 							method: () => void,

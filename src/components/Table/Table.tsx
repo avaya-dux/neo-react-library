@@ -14,7 +14,7 @@ import {
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { arrayMove } from "@dnd-kit/sortable";
 import clsx from "clsx";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	type Row,
 	useFilters,
@@ -142,6 +142,7 @@ export const Table = <T extends Record<string, any>>({
 				pageIndex: rootLevelPageIndex,
 			},
 			autoResetSelectedRows: false,
+			autoResetSortBy: false,
 			...rest,
 		},
 		useFilters,
@@ -172,6 +173,7 @@ export const Table = <T extends Record<string, any>>({
 	// log isSorted to help debug
 	logger.debug("Table: isSorted", isSorted);
 
+	const [allowDataSync, setAllowDataSync] = useState(false);
 	useEffect(() => {
 		if (!draggableRows) return;
 		// compare data and memoizedRows by id field
@@ -179,12 +181,21 @@ export const Table = <T extends Record<string, any>>({
 			data?.length !== memoizedRows?.length ||
 			!data?.every((row, i) => row.id === memoizedRows[i].id)
 		) {
-			if (isSorted) {
+			if (allowDataSync) {
 				logger.debug("Table: data changed, updating...");
+				logger.debug(
+					"Table: data",
+					data.map((row) => row.id),
+				);
+				logger.debug(
+					"Table: memoizedRows",
+					memoizedRows.map((row) => row.id),
+				);
 				setData(memoizedRows);
+				setAllowDataSync(false);
 			}
 		}
-	}, [data, memoizedRows, draggableRows, isSorted]);
+	}, [data, memoizedRows, draggableRows, allowDataSync]);
 
 	// this `useEffect` handles the edge cases of page change logic
 	useEffect(() => {
@@ -250,12 +261,17 @@ export const Table = <T extends Record<string, any>>({
 		setRowHeightValue(newHeight);
 	}, []);
 
+	const clearSortByFunc = useRef<(() => void) | null>(null);
+
 	const filterContext: IFilterContext = {
 		allowColumnFilter,
 		draggableRows,
 		filterSheetVisible,
 		setFilterSheetVisible,
 		toggleFilterSheetVisible,
+		allowDataSync,
+		setAllowDataSync,
+		clearSortByFunc,
 	};
 
 	const sensors = useSensors(
@@ -265,9 +281,14 @@ export const Table = <T extends Record<string, any>>({
 	);
 
 	function handleDragStart(event: DragStartEvent) {
+		if (clearSortByFunc.current) {
+			clearSortByFunc.current();
+		}
 		const { active } = event;
 		logger.debug("Table: handleDragStart", active.id);
 		setActiveId(active.id);
+		setAllowDataSync(false);
+		clearSortByFunc.current = null;
 	}
 
 	function handleDragEnd(event: DragEndEvent) {

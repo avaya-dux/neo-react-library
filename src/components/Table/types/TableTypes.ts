@@ -51,6 +51,9 @@ export interface IFilterContext {
 	filterSheetVisible: boolean;
 	setFilterSheetVisible: (visible: boolean) => void;
 	toggleFilterSheetVisible: () => void;
+	allowDataSync: boolean;
+	setAllowDataSync: (allowDataSync: boolean) => void;
+	clearSortByFunc: React.MutableRefObject<(() => void) | null>;
 }
 
 export type RowHeight = "compact" | "medium" | "large";
