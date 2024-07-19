@@ -399,7 +399,7 @@ describe("Table", () => {
 			);
 			await user.click(dropdown);
 			const selectAllRows = screen.getByText(
-				`${FilledFields.translations.header.selectAll} (10)`,
+				`${FilledFields.translations.header.selectAll} (10 ${FilledFields.translations.header.items})`,
 			);
 			await user.click(selectAllRows);
 
@@ -547,7 +547,7 @@ describe("Table", () => {
 			await user.click(dropdown);
 
 			const selectPageRows = screen.getByText(
-				`${FilledFields.translations.header.selectPage} (2)`,
+				`${FilledFields.translations.header.selectPage} (2 ${FilledFields.translations.header.items})`,
 			);
 			await user.click(selectPageRows);
 
@@ -817,7 +817,7 @@ describe("Table", () => {
 			);
 			await user.click(dropdown);
 			const selectAllRows = screen.getByText(
-				`${FilledFields.translations.header.selectAll} (8)`,
+				`${FilledFields.translations.header.selectAll} (8 ${FilledFields.translations.header.items})`,
 			);
 			await user.click(selectAllRows);
 
@@ -842,7 +842,7 @@ describe("Table", () => {
 			);
 			await user.click(dropdown);
 			const selectAllRows = screen.getByText(
-				`${FilledFields.translations.header.selectPage} (3)`,
+				`${FilledFields.translations.header.selectPage} (3 ${FilledFields.translations.header.items})`,
 			);
 			await user.click(selectAllRows);
 
