@@ -221,7 +221,6 @@ export const TableHeader = <T extends Record<string, any>>({
 							ariasort === "descending" ? "arrow-up" : "arrow-down";
 
 						const handleClearSort = () => {
-							console.log("handleClearSort called");
 							clearSortBy();
 							setDataSyncOption("clear");
 							clearSortByFuncRef.current = clearSortBy;
