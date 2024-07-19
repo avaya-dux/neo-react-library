@@ -10,7 +10,7 @@ export const logger = log.getLogger("TableComponents/DraggableTableRow");
 logger.disableAll();
 
 const EmptyRow = styled.td`
-  background: rgba(127, 207, 250, 0.3);
+  background: var(--neo-color-blue-500);
 `;
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -52,6 +52,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 				preparedRowProps.className,
 				row.original.disabled && "disabled",
 			)}
+			tabIndex={0}
 		>
 			{isDragging ? (
 				<EmptyRow colSpan={cellCount}>&nbsp;</EmptyRow>

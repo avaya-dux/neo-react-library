@@ -1,4 +1,4 @@
-import { type KeyboardEvent, useContext, useMemo } from "react";
+import { type KeyboardEvent, useContext, useMemo, useState } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
@@ -6,6 +6,7 @@ import { Menu, MenuButton, MenuItem } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
+import clsx from "clsx";
 import {
 	FilterContext,
 	calculateAriaSortValue,
@@ -75,8 +76,13 @@ export const TableHeader = <T extends Record<string, any>>({
 		return [enabledRowCount, rowsSelectedMemo];
 	}, [rows, selectedRowIds]);
 
-	const { allowColumnFilter, toggleFilterSheetVisible, draggableRows } =
-		useContext(FilterContext);
+	const {
+		allowColumnFilter,
+		toggleFilterSheetVisible,
+		draggableRows,
+		setDataSyncOption,
+		clearSortByFuncRef,
+	} = useContext(FilterContext);
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none";
 	const shouldHaveCheckbox = selectableRows === "multiple";
@@ -89,18 +95,31 @@ export const TableHeader = <T extends Record<string, any>>({
 				: "mixed";
 	}, [allPageEnabledRowsSelected, allPageRowsDeselected]);
 
+	const [checkBoxOver, setCheckBoxOver] = useState(false);
+
 	return (
 		<thead>
 			<tr>
 				{draggableRows && (
-					<th className="neo-table__dnd-th">
+					<th
+						className={clsx(
+							"neo-table__dnd-th",
+							checkBoxOver && "neo-table__dnd-th__hover",
+						)}
+					>
 						<div role="button" aria-label={translations.dragHandle}>
 							&nbsp;
 						</div>
 					</th>
 				)}
 				{shouldHaveCheckboxColumn && (
-					<th className="neo-table-checkbox-th">
+					<th
+						className="neo-table-checkbox-th"
+						onMouseOver={() => setCheckBoxOver(true)}
+						onFocus={() => setCheckBoxOver(true)}
+						onBlur={() => setCheckBoxOver(false)}
+						onMouseOut={() => setCheckBoxOver(false)}
+					>
 						{shouldHaveCheckbox && (
 							<div className="table-selection-menu">
 								<Checkbox
@@ -201,8 +220,23 @@ export const TableHeader = <T extends Record<string, any>>({
 						const sortIcon: IconNamesType =
 							ariasort === "descending" ? "arrow-up" : "arrow-down";
 
-						const handleAscSort = () => toggleSortBy(column.id, false, false);
-						const handleDescSort = () => toggleSortBy(column.id, true, false);
+						const handleClearSort = () => {
+							console.log("handleClearSort called");
+							clearSortBy();
+							setDataSyncOption("clear");
+							clearSortByFuncRef.current = clearSortBy;
+						};
+
+						const handleAscSort = () => {
+							toggleSortBy(column.id, false, false);
+							setDataSyncOption("asc");
+							clearSortByFuncRef.current = clearSortBy;
+						};
+						const handleDescSort = () => {
+							toggleSortBy(column.id, true, false);
+							setDataSyncOption("desc");
+							clearSortByFuncRef.current = clearSortBy;
+						};
 						const onSpaceOrEnter = (
 							e: KeyboardEvent<HTMLDivElement>,
 							method: () => void,
@@ -255,8 +289,8 @@ export const TableHeader = <T extends Record<string, any>>({
 								{...thDivProps}
 							>
 								<MenuItem
-									onClick={clearSortBy}
-									onKeyDown={(e) => onSpaceOrEnter(e, clearSortBy)}
+									onClick={handleClearSort}
+									onKeyDown={(e) => onSpaceOrEnter(e, handleClearSort)}
 									disabled={!isSorted}
 								>
 									{translations.clearSort || "Clear Sort"}
