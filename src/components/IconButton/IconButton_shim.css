@@ -1,19 +1,19 @@
-.neo-btn.neo-badge::after {
+.neo-btn.neo-icon-btn.neo-badge::after {
 	right: 5px;
 	top: 5px;
 }
 
-.neo-table td .neo-btn.neo-btn-square,
-.neo-table tr:focus-within:not([class*="disabled"]) td .neo-btn.neo-btn-square,
-.neo-table tr:hover:not([class*="disabled"]) td .neo-btn.neo-btn-square {
+.neo-table td .neo-btn.neo-btn-square.neo-icon-btn,
+.neo-table tr:focus-within:not([class*="disabled"]) td .neo-btn.neo-btn-square.neo-icon-btn,
+.neo-table tr:hover:not([class*="disabled"]) td .neo-btn.neo-btn-square.neo-icon-btn {
 	display: flex;
 }
 
-.neo-table td span[class*=neo-icon-state--large]::before {
+.neo-table td .neo-icon-btn span[class*=neo-icon-state--large]::before {
 	font-size: 32px;
 }
 
-.neo-table td .neo-btn.neo-badge::after {
+.neo-table td .neo-btn.neo-icon-btn.neo-badge::after {
 	right: 6px;
 	top: 11px;
 }
