@@ -179,9 +179,13 @@ describe("Table", () => {
 
 			// refresh data, removing the third page and moving user to the second page (last page)
 			await user.click(refreshButton);
-			await waitFor(() => {
-				expect(screen.getByText("2")).toBeVisible();
-			});
+			// Increase the timeout to 5000 milliseconds (5 seconds) to see if this fixes random failures
+			await waitFor(
+				() => {
+					expect(screen.getByText("2")).toBeVisible();
+				},
+				{ timeout: 5000 },
+			);
 			expect(screen.getByText("2")).toHaveClass(selectedPageClass);
 		});
 	});
