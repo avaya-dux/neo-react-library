@@ -1,9 +1,4 @@
-import {
-	type KeyboardEvent,
-	useContext,
-	useMemo,
-	useState,
-} from "react";
+import { type KeyboardEvent, useContext, useMemo, useState } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
