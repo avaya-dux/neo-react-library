@@ -43,6 +43,13 @@ export const TableHeader = <T extends Record<string, any>>({
 		toggleSortBy,
 	} = instance;
 
+	const selectedRowsCount = useMemo(
+		() => Object.keys(selectedRowIds).length,
+		[selectedRowIds],
+	);
+
+	const isSinglePage = useMemo(() => page.length === rows.length, [page, rows]);
+
 	const [
 		pageEnabledRowCount,
 		allPageEnabledRowsSelected,
@@ -125,44 +132,50 @@ export const TableHeader = <T extends Record<string, any>>({
 										/>
 									}
 								>
+									{isSinglePage ? (
+										<></>
+									) : (
+										<MenuItem
+											onClick={() =>
+												setPageRowsSelected(
+													instance,
+													!allPageEnabledRowsSelected,
+													handleRowToggled,
+												)
+											}
+										>
+											{allPageEnabledRowsSelected ? (
+												<>
+													{translations.clearPage} ({pageEnabledRowCount}{" "}
+													{translations.items})
+												</>
+											) : (
+												<>
+													{translations.selectPage} ({pageEnabledRowCount}{" "}
+													{translations.items})
+												</>
+											)}
+										</MenuItem>
+									)}
+
 									<MenuItem
-										onClick={() =>
-											setPageRowsSelected(
-												instance,
-												!allPageEnabledRowsSelected,
-												handleRowToggled,
-											)
-										}
+										disabled={allTableEnabledRowsAreSelected}
+										onClick={() => {
+											setTableRowsSelected(instance, true, handleRowToggled);
+										}}
 									>
-										{allPageEnabledRowsSelected ? (
-											<>
-												{translations.clearPage} ({pageEnabledRowCount})
-											</>
-										) : (
-											<>
-												{translations.selectPage} ({pageEnabledRowCount})
-											</>
-										)}
+										{translations.selectAll} ({tableEnabledRowCount}{" "}
+										{translations.items})
 									</MenuItem>
 
 									<MenuItem
+										disabled={selectedRowsCount === 0}
 										onClick={() => {
-											setTableRowsSelected(
-												instance,
-												!allTableEnabledRowsAreSelected,
-												handleRowToggled,
-											);
+											setTableRowsSelected(instance, false, handleRowToggled);
 										}}
 									>
-										{allTableEnabledRowsAreSelected ? (
-											<>
-												{translations.clearAll} ({tableEnabledRowCount})
-											</>
-										) : (
-											<>
-												{translations.selectAll} ({tableEnabledRowCount})
-											</>
-										)}
+										{translations.clearAll} ({tableEnabledRowCount}{" "}
+										{translations.items})
 									</MenuItem>
 								</Menu>
 							</div>
