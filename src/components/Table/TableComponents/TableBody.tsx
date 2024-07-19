@@ -17,7 +17,7 @@ import type { TableBodyProps } from "../types";
 export const logger = log.getLogger("TableComponents/TableBody");
 logger.disableAll();
 
-import { toggleEnabledTableRows } from "../helpers";
+import { setTableRowsSelected } from "../helpers";
 
 import "./TableBody_shim.css";
 
@@ -76,6 +76,7 @@ export const TableBody: TableBodyComponentType = ({
 };
 
 const ClearSelectionRow: TableBodyComponentType = ({
+	handleRowToggled,
 	instance,
 	selectableRows,
 	translations,
@@ -124,7 +125,9 @@ const ClearSelectionRow: TableBodyComponentType = ({
 					<span>
 						{translations.allSelected} ({selectedRowCount})
 						<ClearButton
-							onClick={() => toggleEnabledTableRows(instance, false)}
+							onClick={() =>
+								setTableRowsSelected(instance, false, handleRowToggled)
+							}
 						>
 							{translations.clearSelection}
 						</ClearButton>
@@ -138,7 +141,11 @@ const ClearSelectionRow: TableBodyComponentType = ({
 				<>
 					<span>
 						{translations.pageSelected} ({selectedRowCount})
-						<ClearButton onClick={() => toggleEnabledTableRows(instance, true)}>
+						<ClearButton
+							onClick={() =>
+								setTableRowsSelected(instance, true, handleRowToggled)
+							}
+						>
 							{translations.selectAll}
 						</ClearButton>
 					</span>
@@ -150,7 +157,11 @@ const ClearSelectionRow: TableBodyComponentType = ({
 			<>
 				<span>
 					{translations.someItemsSelected} ({selectedRowCount})
-					<ClearButton onClick={() => toggleEnabledTableRows(instance, true)}>
+					<ClearButton
+						onClick={() =>
+							setTableRowsSelected(instance, true, handleRowToggled)
+						}
+					>
 						{translations.selectAll}
 					</ClearButton>
 				</span>
@@ -162,6 +173,7 @@ const ClearSelectionRow: TableBodyComponentType = ({
 		selectedRowCount,
 		allTableEnabledRowsAreSelected,
 		allPageEnabledRowsSelected,
+		handleRowToggled,
 	]);
 
 	// if no rows are selected, return
