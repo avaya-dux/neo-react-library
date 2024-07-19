@@ -425,6 +425,7 @@ export const EditableData = () => {
 				readonly={readonly}
 				selectableRows="multiple"
 				initialStatePageSize={5}
+				itemsPerPageOptions={[5, 10, 50]}
 				draggableRows
 				handlePageChange={(newPageIndex, newPageSize) => {
 					setLogItems([
