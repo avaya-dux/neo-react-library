@@ -203,63 +203,63 @@ describe("ListSection: ", () => {
 		it("should match snapshots", () => {
 			const { container } = renderResult;
 			expect(container).toMatchInlineSnapshot(`
-        <div>
-          <ul
-            class="neo-group-list--actions"
-          >
-            <li
-              class="neo-group-list--actions__item neo-group-list--actions__item--clickable"
-            >
-              <div
-                class="neo-group-list__actions--left"
-              >
-                <span
-                  aria-label="chat icon"
-                  class="neo-icon-chat neo-icon--small"
-                  data-testid="neo-icon-chat"
-                  id="icon-chat"
-                  role="img"
-                />
-                First item with chat icon and transfer call button
-              </div>
-              <div
-                class="neo-group-list__actions--right"
-              >
-                <button
-                  aria-label="transfer call"
-                  class="neo-btn neo-btn-circle neo-btn--default neo-btn-tertiary neo-btn-tertiary--default neo-btn-circle-tertiary--default"
-                  data-badge=""
-                  data-testid="neo-button-transfer"
-                  id="btn-transfer-call"
-                >
-                  <span
-                    class="neo-icon-call-transfer"
-                  />
-                </button>
-              </div>
-            </li>
-            <li
-              class="neo-group-list--actions__item neo-group-list--actions__item--clickable"
-            >
-              <div
-                class="neo-group-list__actions--left"
-              >
-                <span
-                  aria-label="star icon"
-                  class="neo-icon-star neo-icon--small"
-                  data-testid="neo-icon-star"
-                  id="icon-star"
-                  role="img"
-                />
-                Second item with star icon
-              </div>
-              <div
-                class="neo-group-list__actions--right"
-              />
-            </li>
-          </ul>
-        </div>
-      `);
+				<div>
+				  <ul
+				    class="neo-group-list--actions"
+				  >
+				    <li
+				      class="neo-group-list--actions__item neo-group-list--actions__item--clickable"
+				    >
+				      <div
+				        class="neo-group-list__actions--left"
+				      >
+				        <span
+				          aria-label="chat icon"
+				          class="neo-icon-chat neo-icon--small"
+				          data-testid="neo-icon-chat"
+				          id="icon-chat"
+				          role="img"
+				        />
+				        First item with chat icon and transfer call button
+				      </div>
+				      <div
+				        class="neo-group-list__actions--right"
+				      >
+				        <button
+				          aria-label="transfer call"
+				          class="neo-btn neo-icon-btn neo-btn-circle neo-btn--default neo-btn-tertiary neo-btn-tertiary--default neo-btn-circle-tertiary--default"
+				          data-badge=""
+				          data-testid="neo-button-transfer"
+				          id="btn-transfer-call"
+				        >
+				          <span
+				            class="neo-icon-call-transfer"
+				          />
+				        </button>
+				      </div>
+				    </li>
+				    <li
+				      class="neo-group-list--actions__item neo-group-list--actions__item--clickable"
+				    >
+				      <div
+				        class="neo-group-list__actions--left"
+				      >
+				        <span
+				          aria-label="star icon"
+				          class="neo-icon-star neo-icon--small"
+				          data-testid="neo-icon-star"
+				          id="icon-star"
+				          role="img"
+				        />
+				        Second item with star icon
+				      </div>
+				      <div
+				        class="neo-group-list__actions--right"
+				      />
+				    </li>
+				  </ul>
+				</div>
+			`);
 		});
 
 		it("passes basic axe compliance", async () => {
