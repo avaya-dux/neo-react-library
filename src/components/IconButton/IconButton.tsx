@@ -62,6 +62,8 @@ export const IconButton = forwardRef(
 			);
 		}
 
+		const iconBtnClass = "neo-icon-btn";
+
 		const displaySpinner = useMemo(() => showSpinner(animation), [animation]);
 
 		const buttonClasses = useMemo(() => {
@@ -72,6 +74,7 @@ export const IconButton = forwardRef(
 
 			const result = [
 				rootBtnClass,
+				iconBtnClass,
 				sizeOrShapeClass,
 				getSizeClass(size),
 				...getVariantClasses(shape, variant, status),
