@@ -1,5 +1,7 @@
 import clsx from "clsx";
 import { Icon } from "components";
+import type React from "react";
+import { forwardRef } from "react";
 import styled from "styled-components";
 
 interface HandleWrapperProps {
@@ -17,23 +19,25 @@ const HandleWrapper = styled.div<HandleWrapperProps>`
 
 interface DragHandleProps {
 	isDragging?: boolean;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	[key: string]: any; // To allow spreading other props
+	[key: string]: unknown;
 }
 
-export const DragHandle: React.FC<DragHandleProps> = (props) => {
-	const { isDragging } = props;
-	return (
-		<HandleWrapper
-			{...props}
-			className={clsx(isDragging && "neo-set-keyboard-focus")}
-		>
-			<Icon
-				icon="drag"
-				size="sm"
-				aria-label="drag"
-				style={{ display: "flex", height: 14, alignItems: "center" }}
-			/>
-		</HandleWrapper>
-	);
-};
+export const DragHandle = forwardRef(
+	(props: DragHandleProps, ref: React.Ref<HTMLDivElement>) => {
+		const { isDragging } = props;
+		return (
+			<HandleWrapper
+				ref={ref}
+				{...props}
+				className={clsx(isDragging && "neo-set-keyboard-focus")}
+			>
+				<Icon
+					icon="drag"
+					size="sm"
+					aria-label="drag"
+					style={{ display: "flex", height: 14, alignItems: "center" }}
+				/>
+			</HandleWrapper>
+		);
+	},
+);

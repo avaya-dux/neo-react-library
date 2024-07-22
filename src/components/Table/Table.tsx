@@ -14,7 +14,7 @@ import {
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { arrayMove } from "@dnd-kit/sortable";
 import clsx from "clsx";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	type Row,
 	useFilters,
@@ -35,11 +35,13 @@ import {
 	convertRowIdsArrayToObject,
 	translations as defaultTranslations,
 } from "./helpers";
-import type { IFilterContext, RowHeight } from "./types";
+import type { DataSyncOptionType, IFilterContext, RowHeight } from "./types";
 
 import "./Table_shim.css";
 import { Checkbox } from "components/Checkbox";
-
+import log from "loglevel";
+export const logger = log.getLogger("Table");
+logger.disableAll();
 /**
  * The Table is used to organize and display data within rows and columns.
  * It comes with built in pagination. The `id` column in data is required.
@@ -118,12 +120,11 @@ export const Table = <T extends Record<string, any>>({
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
 	const [data, setData] = useState(originalData);
+	const items = useMemo(() => data?.map(({ id }) => id), [data]);
 
 	useEffect(() => {
 		setData(originalData);
 	}, [originalData]);
-
-	const items = useMemo(() => data?.map(({ id }) => id), [data]);
 
 	const instance = useTable<T>(
 		{
@@ -141,6 +142,7 @@ export const Table = <T extends Record<string, any>>({
 				pageIndex: rootLevelPageIndex,
 			},
 			autoResetSelectedRows: false,
+			autoResetSortBy: false,
 			...rest,
 		},
 		useFilters,
@@ -160,6 +162,45 @@ export const Table = <T extends Record<string, any>>({
 		pageCount,
 	} = instance;
 	const rowCount = rows.length;
+
+	const [dataSyncOption, setDataSyncOption] =
+		useState<DataSyncOptionType>("no");
+
+	const memoizedRows = useMemo(
+		() =>
+			dataSyncOption === "clear"
+				? originalData
+				: rows.map(({ original }) => original),
+		[rows, originalData, dataSyncOption],
+	);
+
+	logger.debug(
+		"Table: originalData",
+		originalData.map((row) => row.id),
+	);
+	logger.debug(
+		"Table: data",
+		data.map((row) => row.id),
+	);
+	logger.debug(
+		"Table: memoizedRows",
+		memoizedRows.map((row) => row.id),
+	);
+	useEffect(() => {
+		if (!draggableRows) return;
+
+		// compare data and memoizedRows by id field
+		if (
+			data?.length !== memoizedRows?.length ||
+			!data?.every((row, i) => row.id === memoizedRows[i].id)
+		) {
+			if (dataSyncOption !== "no") {
+				logger.debug("Table: data changed, updating...", dataSyncOption);
+				setData(memoizedRows);
+				setDataSyncOption("no");
+			}
+		}
+	}, [data, memoizedRows, draggableRows, dataSyncOption]);
 
 	// this `useEffect` handles the edge cases of page change logic
 	useEffect(() => {
@@ -225,12 +266,17 @@ export const Table = <T extends Record<string, any>>({
 		setRowHeightValue(newHeight);
 	}, []);
 
+	const clearSortByFuncRef = useRef<(() => void) | null>(null);
+
 	const filterContext: IFilterContext = {
 		allowColumnFilter,
 		draggableRows,
 		filterSheetVisible,
 		setFilterSheetVisible,
 		toggleFilterSheetVisible,
+		dataSyncOption,
+		setDataSyncOption,
+		clearSortByFuncRef,
 	};
 
 	const sensors = useSensors(
@@ -240,12 +286,19 @@ export const Table = <T extends Record<string, any>>({
 	);
 
 	function handleDragStart(event: DragStartEvent) {
+		if (clearSortByFuncRef.current) {
+			clearSortByFuncRef.current();
+		}
 		const { active } = event;
+		logger.debug("Table: handleDragStart", active.id);
 		setActiveId(active.id);
+		setDataSyncOption("no");
+		clearSortByFuncRef.current = null;
 	}
 
 	function handleDragEnd(event: DragEndEvent) {
 		const { active, over } = event;
+		logger.debug("Table: handleDragEnd", active.id, over?.id);
 		if (active.id !== over?.id) {
 			setData((data) => {
 				const oldIndex = items.indexOf(active.id);
@@ -278,7 +331,6 @@ export const Table = <T extends Record<string, any>>({
 			<Checkbox
 				checked={row.isSelected}
 				aria-label={checkboxLabel}
-				readOnly
 				value={row.id}
 			/>
 		) : null;
