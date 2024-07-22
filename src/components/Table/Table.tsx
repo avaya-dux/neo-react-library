@@ -12,7 +12,7 @@ import {
 	useSensors,
 } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import { arrayMove } from "@dnd-kit/sortable";
+import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import clsx from "clsx";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -282,7 +282,9 @@ export const Table = <T extends Record<string, any>>({
 	const sensors = useSensors(
 		useSensor(MouseSensor, {}),
 		useSensor(TouchSensor, {}),
-		useSensor(KeyboardSensor, {}),
+		useSensor(KeyboardSensor, {
+			coordinateGetter: sortableKeyboardCoordinates,
+		}),
 	);
 
 	function handleDragStart(event: DragStartEvent) {
