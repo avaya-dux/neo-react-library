@@ -242,7 +242,7 @@ export const MultiSelect = () => {
 							selectedItems.length === 0 && "neo-display-none",
 						)}
 						type="button"
-						disabled={disabled || selectedItems.length === 0}
+						disabled={selectedItems.length === 0}
 						onClick={() => setSelectedItems([])}
 					/>
 				)}
