@@ -1,0 +1,34 @@
+.button-group {
+    display: flex;
+  }
+  
+  .button {
+    padding: 10px;
+    margin: 0; /* Remove default margin */
+    background-color: white;
+    position: relative; /* Needed for z-index to work */
+    border: 2px solid #1B77AF; /* Transparent border to maintain layout */
+    outline: 0px solid red; /* Simulate red border using box-shadow */
+    cursor: pointer;
+    box-sizing: content-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  .right {
+    border-radius: 0px 2px 2px 0px;  
+  }
+  
+  .left {
+    border-radius: 2px 0px 0px 2px;
+  }
+  
+  /* Adjust margin to create the illusion of a shared border */
+  .button + .button {
+    margin-left: -2px;
+  }
+  
+  /* On hover, change border color to green and adjust z-index */
+  .button:hover {
+    border-color: #242424; /* Change border color on hover */
+    z-index: 1; /* Ensures the hovered button's border appears on top */
+    box-shadow: none; /* Remove box-shadow to prevent red shadow */
+  }
