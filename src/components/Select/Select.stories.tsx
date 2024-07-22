@@ -331,11 +331,13 @@ export const Creatable = () => {
 };
 
 export const Disabled = () => (
-	<Select label="I am disabled" disabled>
-		<SelectOption>Option 1</SelectOption>
-		<SelectOption disabled>Option 2</SelectOption>
-		<SelectOption>Option 3</SelectOption>
-		<SelectOption>Option 4</SelectOption>
+	<Select label="I am disabled" disabled multiple value={["3", "4"]}>
+		<SelectOption value="1">Option 1</SelectOption>
+		<SelectOption value="2" disabled>
+			Option 2
+		</SelectOption>
+		<SelectOption value="3">Option 3</SelectOption>
+		<SelectOption value="4">Option 4</SelectOption>
 	</Select>
 );
 

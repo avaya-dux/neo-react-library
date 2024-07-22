@@ -232,18 +232,20 @@ export const MultiSelect = () => {
 					isOpen && "neo-multiselect-combo__header--expanded",
 				)}
 			>
-				{/* put button before span so that it gets tab order first */}
-				<button
-					aria-label="clear selections"
-					className={clsx(
-						"neo-input-edit__icon neo-icon-end",
-						"neo-multiselect-clear-icon-button",
-						selectedItems.length === 0 && "neo-display-none",
-					)}
-					type="button"
-					disabled={selectedItems.length === 0}
-					onClick={() => setSelectedItems([])}
-				/>
+				{!disabled && (
+					// put button before span so that it gets tab order first
+					<button
+						aria-label="clear selections"
+						className={clsx(
+							"neo-input-edit__icon neo-icon-end",
+							"neo-multiselect-clear-icon-button",
+							selectedItems.length === 0 && "neo-display-none",
+						)}
+						type="button"
+						disabled={disabled || selectedItems.length === 0}
+						onClick={() => setSelectedItems([])}
+					/>
+				)}
 				<span
 					ref={chipContainerRef}
 					key="multiselect-chip-container"
