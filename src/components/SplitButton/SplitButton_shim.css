@@ -17,12 +17,14 @@
   border-radius: 2px 0px 0px 2px;
 }
 
+[dir="rtl"] .neo-splitbutton .neo-splitbutton__button {
+  border-radius: 0px 2px 2px 0px;
+}
+
 .neo-splitbutton .neo-splitbutton__menu {
-  margin-left: 1px;
   border-radius: 0px 2px 2px 0px;
 
-  .neo-btn-primary--default,
-  .neo-btn-secondary--default {
+  .neo-btn {
     border-radius: 0px 2px 2px 0px;
     width: 32px;
     display: flex;
@@ -34,15 +36,25 @@
   }
 
   .neo-btn-secondary--default {
-    padding: 6px 16px;
+    padding: 6px 14px;
     border-width: 0px;
     border: 2px solid #1B77AF;
-
   }
 }
 
+[dir="rtl"] .neo-splitbutton .neo-splitbutton__menu {
+  border-radius: 2px 0px 0px 2px;
+  .neo-btn {
+    border-radius: 2px 0px 0px 2px;
+  }
+}
+
+.neo-splitbutton .neo-splitbutton__menu {
+  margin-inline-start: 1px;
+}
+
 .neo-splitbutton.neo-splitbutton--secondary .neo-splitbutton__menu {
-  margin-left: -2px;
+  margin-inline-start: -2px;
 }
 
 .neo-splitbutton--secondary .neo-splitbutton__button:hover,
@@ -56,5 +68,9 @@
 }
 
 .neo-splitbutton--small-height {
+  height: 24px;
+}
+
+.neo-splitbutton.neo-splitbutton--small-height .neo-splitbutton__menu .neo-btn {
   height: 24px;
 }

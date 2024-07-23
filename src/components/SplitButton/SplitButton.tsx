@@ -63,8 +63,12 @@ export const SplitButton = ({
 				{buttonText}
 			</Button>
 			<Menu
-                menuRootElement={<MenuButton variant={variant}><span/></MenuButton>}
-                {...menuProps}
+				menuRootElement={
+					<MenuButton variant={variant}>
+						<span />
+					</MenuButton>
+				}
+				{...menuProps}
 				itemAlignment="right"
 				className={clsx("neo-splitbutton__menu")}
 			>
