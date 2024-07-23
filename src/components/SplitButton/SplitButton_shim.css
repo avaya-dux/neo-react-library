@@ -1,34 +1,60 @@
-.button-group {
+.neo-splitbutton {
+  display: flex;
+}
+
+.neo-splitbutton--secondary>* {
+  margin: 0;
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.neo-splitbutton--secondary .neo-splitbutton__button {
+  border: 2px solid #1B77AF;
+}
+
+.neo-splitbutton .neo-splitbutton__button {
+  border-radius: 2px 0px 0px 2px;
+}
+
+.neo-splitbutton .neo-splitbutton__menu {
+  margin-left: 1px;
+  border-radius: 0px 2px 2px 0px;
+
+  .neo-btn-primary--default,
+  .neo-btn-secondary--default {
+    border-radius: 0px 2px 2px 0px;
+    width: 32px;
     display: flex;
+    justify-content: center;
+
+    &:after {
+      padding: 0;
+    }
   }
-  
-  .button {
-    padding: 10px;
-    margin: 0; /* Remove default margin */
-    background-color: white;
-    position: relative; /* Needed for z-index to work */
-    border: 2px solid #1B77AF; /* Transparent border to maintain layout */
-    outline: 0px solid red; /* Simulate red border using box-shadow */
-    cursor: pointer;
-    box-sizing: content-box; /* Include padding and border in the element's total width and height */
+
+  .neo-btn-secondary--default {
+    padding: 6px 16px;
+    border-width: 0px;
+    border: 2px solid #1B77AF;
+
   }
-  
-  .right {
-    border-radius: 0px 2px 2px 0px;  
-  }
-  
-  .left {
-    border-radius: 2px 0px 0px 2px;
-  }
-  
-  /* Adjust margin to create the illusion of a shared border */
-  .button + .button {
-    margin-left: -2px;
-  }
-  
-  /* On hover, change border color to green and adjust z-index */
-  .button:hover {
-    border-color: #242424; /* Change border color on hover */
-    z-index: 1; /* Ensures the hovered button's border appears on top */
-    box-shadow: none; /* Remove box-shadow to prevent red shadow */
-  }
+}
+
+.neo-splitbutton.neo-splitbutton--secondary .neo-splitbutton__menu {
+  margin-left: -2px;
+}
+
+.neo-splitbutton--secondary .neo-splitbutton__button:hover,
+.neo-splitbutton--secondary .neo-splitbutton__menu .neo-btn-secondary--default:hover {
+  border-color: #242424;
+  z-index: 1;
+}
+
+.neo-splitbutton--midium-height {
+  height: 36px;
+}
+
+.neo-splitbutton--small-height {
+  height: 24px;
+}
