@@ -62,6 +62,7 @@ export type RowHeight = "compact" | "medium" | "large";
 export type TableProps<T extends AnyRecord> = {
 	caption?: string;
 	id?: string;
+	manualPagination?: boolean;
 	showPagination?: boolean;
 	pushPaginationDown?: boolean;
 	draggableRows?: boolean;
