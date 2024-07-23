@@ -1,6 +1,6 @@
 {
 	"name": "@avaya/neo-react",
-	"version": "1.1.35",
+	"version": "1.1.36",
 	"description": "This is the React version of the shared library called 'NEO' built by Avaya",
 	"license": "SEE LICENSE IN LICENSE.md",
 	"repository": "github:avaya-dux/neo-react-library",
@@ -78,7 +78,7 @@
 		"@dnd-kit/modifiers": "7.0.0",
 		"@dnd-kit/sortable": "8.0.0",
 		"@dnd-kit/utilities": "3.2.2",
-		"@avaya/neo": "3.81.9",
+		"@avaya/neo": "3.81.10",
 		"@avaya/neo-icons": "1.8.12",
 		"@biomejs/biome": "1.8.3",
 		"@faker-js/faker": "8.4.1",

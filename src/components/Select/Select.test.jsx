@@ -82,6 +82,46 @@ describe("Select", () => {
 			expect(clearButton).toHaveClass("neo-multiselect-clear-icon-button");
 			expect(clearButton).toBeDisabled();
 		});
+
+		it("does not have a clear button when disabled, even if there are selections", () => {
+			render(
+				<Select multiple disabled label="not important" value={["3", "4"]}>
+					<SelectOption value="1">Option 1</SelectOption>
+					<SelectOption value="2" disabled>
+						Option 2
+					</SelectOption>
+					<SelectOption value="3">Option 3</SelectOption>
+					<SelectOption value="4">Option 4</SelectOption>
+				</Select>,
+			);
+
+			const buttonsMulti = screen.getAllByRole("button");
+			buttonsMulti.forEach((button) => {
+				expect(button).not.toHaveClass("neo-multiselect-clear-icon-button");
+			});
+
+			render(
+				<Select
+					multiple
+					searchable
+					disabled
+					label="not important"
+					value={["3", "4"]}
+				>
+					<SelectOption value="1">Option 1</SelectOption>
+					<SelectOption value="2" disabled>
+						Option 2
+					</SelectOption>
+					<SelectOption value="3">Option 3</SelectOption>
+					<SelectOption value="4">Option 4</SelectOption>
+				</Select>,
+			);
+
+			const buttonsMultiSearchable = screen.getAllByRole("button");
+			buttonsMultiSearchable.forEach((button) => {
+				expect(button).not.toHaveClass("neo-multiselect-clear-icon-button");
+			});
+		});
 	});
 
 	describe("Single Select, non-searchable", () => {
