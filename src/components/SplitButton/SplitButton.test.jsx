@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { axe } from "jest-axe";
 import { MenuItem } from "components";
+import { axe } from "jest-axe";
 import { SplitButton } from "./SplitButton";
 
 import * as stories from "./SplitButton.stories";
