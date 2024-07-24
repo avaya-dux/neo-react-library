@@ -3,7 +3,11 @@ import { axe } from "jest-axe";
 import { MenuItem } from "components";
 import { SplitButton } from "./SplitButton";
 
-import { Default, Varieties } from "./SplitButton.stories";
+import * as stories from "./SplitButton.stories";
+
+import { composeStories } from "@storybook/react";
+
+const { Default, Varieties } = composeStories(stories);
 
 describe("SplitButton", () => {
 	it("should render the SplitButton component", () => {
