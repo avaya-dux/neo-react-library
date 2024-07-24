@@ -18,7 +18,7 @@ export const Default = () => (
 			width: "100%",
 		}}
 	>
-		<SplitButton buttonProps={{ icon: "send" }}>
+		<SplitButton buttonProps={{ icon: "send", ariaLabel: "Button" }}>
 			<MenuItem onClick={() => console.log("Menu Item 1 Clicked")}>
 				Menu Item 1
 			</MenuItem>

@@ -16,17 +16,21 @@ import "./SplitButton_shim.css";
  * @prop {ButtonProps} buttonProps - The props to pass to the Button component.
  */
 type AtLeastOneProps =
-	| { text: string; icon?: IconNamesType }
-	| { text?: string; icon: IconNamesType };
-type ButtonProps = {
+	| { text: string; ariaLabel?: string; icon?: IconNamesType }
+	| { text?: string; ariaLabel: string; icon: IconNamesType };
+type SplitButtonButtonProps = {
 	variant?: "primary" | "secondary";
 	onClick?: () => void;
 } & AtLeastOneProps;
 
+type SplitButtonMenuProps = Omit<
+	MenuProps,
+	"menuRootElement" | "children" | "itemAlignment"
+> & { ariaLabel?: string };
 export interface SplitButtonProps
 	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-	buttonProps?: ButtonProps;
-	menuProps?: Omit<MenuProps, "menuRootElement" | "children" | "itemAlignment">;
+	buttonProps?: SplitButtonButtonProps;
+	menuProps?: SplitButtonMenuProps;
 	children: MenuChildrenType;
 	height?: "sm" | "md";
 }
@@ -56,12 +60,16 @@ export const SplitButton = ({
 	buttonProps: {
 		variant = "primary",
 		text: buttonText,
+		ariaLabel: buttonAriaLabel,
 		onClick,
 		icon,
-	} = {} as ButtonProps,
+	} = {} as SplitButtonButtonProps,
 	height = "md",
 	className,
-	menuProps = {},
+	menuProps: {
+		ariaLabel: menuButtonAriaLabel = "Split Button Menu",
+		...restMenu
+	} = {} as SplitButtonMenuProps,
 	children,
 	...rest
 }: SplitButtonProps) => {
@@ -94,17 +102,18 @@ export const SplitButton = ({
 				onClick={onClick}
 				variant={variant}
 				icon={icon}
+				aria-label={buttonAriaLabel}
 				className={clsx("neo-splitbutton__button")}
 			>
 				{buttonText}
 			</Button>
 			<Menu
 				menuRootElement={
-					<MenuButton variant={variant}>
+					<MenuButton variant={variant} aria-label={menuButtonAriaLabel}>
 						<span />
 					</MenuButton>
 				}
-				{...menuProps}
+				{...restMenu}
 				itemAlignment="right"
 				className={clsx("neo-splitbutton__menu")}
 			>

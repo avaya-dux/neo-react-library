@@ -1,6 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import { MenuItem } from "components";
 import { SplitButton } from "./SplitButton";
+
+import { Default, Varieties } from "./SplitButton.stories";
 
 describe("SplitButton", () => {
 	it("should render the SplitButton component", () => {
@@ -10,6 +13,19 @@ describe("SplitButton", () => {
 			</SplitButton>,
 		);
 		expect(screen.getByText("Send")).toBeInTheDocument();
+	});
+
+	it("passes basic axe compliance", async () => {
+		const { container } = render(
+			<SplitButton
+				buttonProps={{ text: "Send" }}
+				menuProps={{ ariaLabel: "menu" }}
+			>
+				<MenuItem>item1</MenuItem>
+			</SplitButton>,
+		);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
 	});
 
 	it("should render the dropdown menu when the button is clicked", () => {
@@ -25,5 +41,17 @@ describe("SplitButton", () => {
 		expect(screen.getByRole("menu")).toBeInTheDocument();
 		fireEvent.click(buttons[1]);
 		expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+	});
+});
+describe("SplitButton Story Tests", () => {
+	it("Default story passes basic axe compliance", async () => {
+		const { container } = render(<Default />);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+	it("Varieties story passes basic axe compliance", async () => {
+		const { container } = render(<Varieties />);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
 	});
 });
