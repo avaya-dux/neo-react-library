@@ -125,6 +125,15 @@ export const WithIconButton = () => (
 	/>
 );
 
+export const ServerSidePagination = () => (
+	<Table
+		{...FilledFields}
+		manualPagination={true}
+		initialStatePageSize={5}
+		caption="Server Side Pagination Example"
+	/>
+);
+
 export const AdvancedFilteringAndSorting = () => {
 	const columns: Array<Column<IDataTableMockData>> = [
 		...FilledFields.columns,
