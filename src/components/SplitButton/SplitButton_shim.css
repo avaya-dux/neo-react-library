@@ -69,16 +69,16 @@
   z-index: 1;
 }
 
-.neo-splitbutton--medium-height {
+.neo-splitbutton.neo-splitbutton--medium-height {
   height: 36px;
 }
 
-.neo-splitbutton--small-height {
+.neo-splitbutton.neo-splitbutton--small-height {
   height: 24px;
-}
 
-.neo-splitbutton.neo-splitbutton--small-height .neo-splitbutton__menu .neo-btn {
-  height: 24px;
-  padding: 2px 0 6px 0;
+  .neo-splitbutton__menu .neo-btn {
+    height: 24px;
+    padding: 2px 0 6px 0;
 
+  }
 }
