@@ -9,6 +9,27 @@ export default {
 } as Meta<SplitButtonProps>;
 
 export const Default = () => (
+	<div
+		style={{
+			display: "flex",
+			justifyContent: "center",
+			position: "absolute",
+			top: "50px",
+			width: "100%",
+		}}
+	>
+		<SplitButton buttonProps={{ icon: "send" }}>
+			<MenuItem onClick={() => console.log("Menu Item 1 Clicked")}>
+				Menu Item 1
+			</MenuItem>
+			<MenuItem onClick={() => console.log("Menu Item 2 Clicked")}>
+				Menu Item 2
+			</MenuItem>
+		</SplitButton>
+	</div>
+);
+
+export const Varieties = () => (
 	<>
 		<div
 			style={{
@@ -24,7 +45,7 @@ export const Default = () => (
 				height="sm"
 				buttonProps={{
 					variant: "primary",
-					text: "Small",
+					text: "Send",
 					onClick: () => console.log("clicked"),
 				}}
 			>
@@ -35,8 +56,8 @@ export const Default = () => (
 			<SplitButton
 				buttonProps={{
 					variant: "primary",
-					text: "Medium",
-					icon: "settings",
+					text: "Send",
+					icon: "send",
 					onClick: () => console.log("clicked"),
 				}}
 			>
@@ -48,7 +69,7 @@ export const Default = () => (
 				height="sm"
 				buttonProps={{
 					variant: "secondary",
-					text: "Small",
+					text: "Send",
 					onClick: () => console.log("clicked"),
 				}}
 			>
@@ -59,8 +80,8 @@ export const Default = () => (
 			<SplitButton
 				buttonProps={{
 					variant: "secondary",
-					text: "Medium",
-					icon: "settings",
+					text: "Send",
+					icon: "send",
 					onClick: () => console.log("clicked"),
 				}}
 			>
@@ -68,6 +89,18 @@ export const Default = () => (
 				<MenuItem>Item2</MenuItem>
 			</SplitButton>
 		</div>
+		<h4
+			style={{
+				display: "flex",
+				justifyContent: "start",
+				position: "absolute",
+				left: "100px",
+				right: "100px",
+				bottom: "80px",
+			}}
+		>
+			RTL Split Buttons
+		</h4>
 		<div
 			dir="rtl"
 			style={{
@@ -82,7 +115,7 @@ export const Default = () => (
 			<SplitButton
 				buttonProps={{
 					variant: "primary",
-					text: "rtl",
+					text: "Send",
 					onClick: () => console.log("clicked"),
 				}}
 			>
@@ -94,8 +127,8 @@ export const Default = () => (
 				height="sm"
 				buttonProps={{
 					variant: "primary",
-					text: "rtl",
-					icon: "settings",
+					text: "Send",
+					icon: "send",
 					onClick: () => console.log("clicked"),
 				}}
 			>
@@ -106,7 +139,7 @@ export const Default = () => (
 			<SplitButton
 				buttonProps={{
 					variant: "secondary",
-					text: "rtl",
+					text: "Send",
 					onClick: () => console.log("clicked"),
 				}}
 			>
@@ -118,8 +151,8 @@ export const Default = () => (
 				height="sm"
 				buttonProps={{
 					variant: "secondary",
-					text: "rtl",
-					icon: "settings",
+					text: "Send",
+					icon: "send",
 					onClick: () => console.log("clicked"),
 				}}
 			>

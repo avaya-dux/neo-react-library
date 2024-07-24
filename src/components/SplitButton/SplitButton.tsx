@@ -15,15 +15,17 @@ import "./SplitButton_shim.css";
  * @prop {MenuProps} [menuProps] - The props to pass to the Menu component.
  * @prop {ButtonProps} buttonProps - The props to pass to the Button component.
  */
+type AtLeastOneProps =
+	| { text: string; icon?: IconNamesType }
+	| { text?: string; icon: IconNamesType };
+type ButtonProps = {
+	variant?: "primary" | "secondary";
+	onClick?: () => void;
+} & AtLeastOneProps;
+
 export interface SplitButtonProps
 	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-	buttonProps: {
-		variant?: "primary" | "secondary";
-		icon?: IconNamesType;
-		text?: string;
-		onClick?: () => void;
-	};
-
+	buttonProps?: ButtonProps;
 	menuProps?: Omit<MenuProps, "menuRootElement" | "children" | "itemAlignment">;
 	children: MenuChildrenType;
 	height?: "sm" | "md";
@@ -51,7 +53,12 @@ export interface SplitButtonProps
  * </SplitButton>
  */
 export const SplitButton = ({
-	buttonProps: { variant = "primary", text: buttonText, onClick, icon } = {},
+	buttonProps: {
+		variant = "primary",
+		text: buttonText,
+		onClick,
+		icon,
+	} = {} as ButtonProps,
 	height = "md",
 	className,
 	menuProps = {},

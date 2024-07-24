@@ -29,14 +29,17 @@
     width: 32px;
     display: flex;
     justify-content: center;
+    padding: 10px 0;
 
     &:after {
       padding: 0;
+      width: 16px;
+      height: 16px;
     }
   }
 
   .neo-btn-secondary--default {
-    padding: 6px 14px;
+    padding: 6px 14px 10px 14px;
     border-width: 0px;
     border: 2px solid #1B77AF;
   }
@@ -44,6 +47,7 @@
 
 [dir="rtl"] .neo-splitbutton .neo-splitbutton__menu {
   border-radius: 2px 0px 0px 2px;
+
   .neo-btn {
     border-radius: 2px 0px 0px 2px;
   }
@@ -73,4 +77,6 @@
 
 .neo-splitbutton.neo-splitbutton--small-height .neo-splitbutton__menu .neo-btn {
   height: 24px;
+  padding: 2px 0 6px 0;
+
 }
