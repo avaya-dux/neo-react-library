@@ -1,18 +1,26 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { MenuItem } from "components";
-import { SplitButton } from "./SplitButton";
+import { SplitButton, type SplitButtonProps } from "./SplitButton";
 
-type Story = StoryObj<typeof SplitButton>;
+type Story = StoryObj<SplitButtonProps>;
 
-const meta: Meta<typeof SplitButton> = {
+const meta: Meta<SplitButtonProps> = {
 	title: "Components/SplitButton",
 	component: SplitButton,
 };
 export default meta;
 
 export const Default: Story = {
-	render: () => (
+	args: {
+		height: "md",
+		buttonProps: {
+			text: "Send",
+			icon: "send",
+			variant: "primary",
+		},
+	},
+	render: ({ height, buttonProps }) => (
 		<div
 			style={{
 				display: "flex",
@@ -22,7 +30,7 @@ export const Default: Story = {
 				width: "100%",
 			}}
 		>
-			<SplitButton buttonProps={{ icon: "send", ariaLabel: "Button" }}>
+			<SplitButton height={height} buttonProps={buttonProps}>
 				<MenuItem onClick={() => console.log("Menu Item 1 Clicked")}>
 					Menu Item 1
 				</MenuItem>
