@@ -101,6 +101,7 @@ export const Table = <T extends Record<string, any>>({
 	readonly = false,
 	rowHeight = "large",
 	selectableRows = "none",
+	manualPagination = false,
 	showPagination = true,
 	draggableRows = false,
 	pushPaginationDown = false,
