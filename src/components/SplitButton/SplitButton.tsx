@@ -103,7 +103,7 @@ export const SplitButton = ({
 				variant={variant}
 				icon={icon}
 				aria-label={buttonAriaLabel || buttonText || "Button"}
-				className={clsx("neo-splitbutton__button")}
+				className="neo-splitbutton__button"
 			>
 				{buttonText}
 			</Button>
@@ -118,7 +118,7 @@ export const SplitButton = ({
 				}
 				{...restMenu}
 				itemAlignment="right"
-				className={clsx("neo-splitbutton__menu")}
+				className="neo-splitbutton__menu"
 			>
 				{menuItems}
 			</Menu>

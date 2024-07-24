@@ -46,16 +46,17 @@ describe("SplitButton", () => {
 		fireEvent.click(buttons[1]);
 		expect(screen.queryByRole("menu")).not.toBeInTheDocument();
 	});
-});
-describe("SplitButton Story Tests", () => {
-	it("Default story passes basic axe compliance", async () => {
-		const { container } = render(<Default />);
-		const results = await axe(container);
-		expect(results).toHaveNoViolations();
-	});
-	it("Varieties story passes basic axe compliance", async () => {
-		const { container } = render(<Varieties />);
-		const results = await axe(container);
-		expect(results).toHaveNoViolations();
+
+	describe("Story Tests", () => {
+		it("Default story passes basic axe compliance", async () => {
+			const { container } = render(<Default />);
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
+		it("Varieties story passes basic axe compliance", async () => {
+			const { container } = render(<Varieties />);
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
 	});
 });
