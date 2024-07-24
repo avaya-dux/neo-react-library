@@ -7344,6 +7344,11 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
+crypto-extra@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/crypto-extra/-/crypto-extra-1.0.1.tgz#91d9e3d8d35f9a16d548c073c31b147f34eab11e"
+  integrity sha512-EDJ07p6UDdyX+7GL6Bb6FqCuCHY34GuII9esE/xXZtW7tlB+A7MYT9O/c1M/ov2aGTdwvw0b3z5OcO50zYBG5Q==
+
 crypto-random-string@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
@@ -11011,6 +11016,13 @@ muggle-string@^0.3.1:
   resolved "https://registry.yarnpkg.com/muggle-string/-/muggle-string-0.3.1.tgz#e524312eb1728c63dd0b2ac49e3282e6ed85963a"
   integrity sha512-ckmWDJjphvd/FvZawgygcUeQCxzvohjFO5RxTjj4eq8kw359gFF3E1brjfI+viLMxss5JrHTDRHZvu2/tuy0Qg==
 
+namor@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/namor/-/namor-3.0.1.tgz#1e9338587bc395a2f83937bebb5a7c069abe1a92"
+  integrity sha512-DuXHrPcpgSe9p/P7xS+8JdcHNasd6/eyOYa6oKSLK/Lx0tqrdzUIcWhF2HgtoFvZmoSILjzMJeWBo3Lt7T8F8A==
+  dependencies:
+    crypto-extra "1.0.1"
+
 nan@^2.12.1:
   version "2.17.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.17.0.tgz#c0150a2368a182f033e9aa5195ec76ea41a199cb"
@@ -14475,6 +14487,7 @@ worker-farm@^1.7.0:
     errno "~0.1.7"
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==

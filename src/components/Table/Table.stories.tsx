@@ -1,5 +1,5 @@
 import type { Meta, Story } from "@storybook/react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Column, ColumnInstance } from "react-table";
 
 import {
@@ -23,7 +23,7 @@ import { Button } from "components/Button";
 import type { IconNamesType } from "utils";
 
 import { Table, type TableProps } from "./";
-import { FilledFields, type IDataTableMockData } from "./helpers";
+import { FilledFields, type IDataTableMockData, makeData, recordingColumns } from "./helpers";
 
 export default {
 	title: "Components/Table",
@@ -125,14 +125,54 @@ export const WithIconButton = () => (
 	/>
 );
 
-export const ServerSidePagination = () => (
-	<Table
-		{...FilledFields}
-		manualPagination={true}
-		initialStatePageSize={5}
-		caption="Server Side Pagination Example"
-	/>
-);
+export const ServerSidePagination = () => {
+
+		// Let's simulate a large dataset on the server with 10k records
+		const serverData = makeData(10000);
+
+		const [data, setData] = useState([]);
+		// const [loading, setLoading] = useState(false);
+		const [pageCount, setPageCount] = useState(0);
+		const fetchIdRef = useRef(0)
+
+			// biome-ignore lint/correctness/useExhaustiveDependencies: generated data doesn't change once created
+		  const fetchData = useCallback((pageSize: number, pageIndex: number ) => {
+					// This will get called when the table needs new data
+					// You could fetch your data from literally anywhere,
+					// even a server. But for this example, we'll just fake it.
+
+					// Give this fetch an ID
+					const fetchId = ++fetchIdRef.current;
+
+					// Set the loading state
+					// setLoading(true);
+
+					// We'll even set a delay to simulate a server here
+					setTimeout(() => {
+						// Only update the data if this is the latest fetch
+						if (fetchId === fetchIdRef.current) {
+							const startRow = pageSize * pageIndex;
+							const endRow = startRow + pageSize;
+							setData(serverData.slice(startRow, endRow));
+
+							// Your server could send back total page count.
+							// For now we'll just fake it, too
+							setPageCount(Math.ceil(serverData.length / pageSize));
+
+							// setLoading(false);
+						}
+					}, 1000);
+				}, [fetchIdRef, serverData.length]);
+
+				return (
+					<Table
+						columns={}
+						manualPagination={true}
+						initialStatePageSize={5}
+						caption="Server Side Pagination Example"
+					/>
+				);
+	}
 
 export const AdvancedFilteringAndSorting = () => {
 	const columns: Array<Column<IDataTableMockData>> = [
