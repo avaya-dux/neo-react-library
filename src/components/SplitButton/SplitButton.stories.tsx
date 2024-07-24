@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react";
 
-import { SplitButton, type SplitButtonProps } from "./SplitButton";
 import { MenuItem } from "components";
+import { SplitButton, type SplitButtonProps } from "./SplitButton";
 
 export default {
 	title: "Components/SplitButton",

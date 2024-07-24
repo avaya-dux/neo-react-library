@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import { useMemo, type DetailedHTMLProps, type HTMLAttributes } from "react";
 import { Button } from "components/Button";
 import { Menu, MenuButton, MenuItem, type MenuProps } from "components/Menu";
 import type { MenuChildrenType } from "components/Menu/MenuTypes";
+import { type DetailedHTMLProps, type HTMLAttributes, useMemo } from "react";
 import type { IconNamesType } from "utils";
 
 import "./SplitButton_shim.css";

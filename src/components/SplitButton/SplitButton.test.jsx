@@ -1,6 +1,6 @@
-import { render, fireEvent, screen } from "@testing-library/react";
-import { SplitButton } from "./SplitButton";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MenuItem } from "components";
+import { SplitButton } from "./SplitButton";
 
 describe("SplitButton", () => {
 	it("should render the SplitButton component", () => {
