@@ -124,17 +124,21 @@ export const MultiSelectSearchable = () => {
 
 					{selectedItemsAsChips}
 				</span>
-				<button
-					aria-label="clear selections"
-					className={clsx(
-						"neo-input-edit__icon neo-icon-end",
-						"neo-multiselect-clear-icon-button",
-						selectedItems.length === 0 && "neo-display-none",
-					)}
-					type="button"
-					disabled={selectedItems.length === 0}
-					onClick={() => setSelectedItems([])}
-				/>
+
+				{!disabled && (
+					<button
+						aria-label="clear selections"
+						className={clsx(
+							"neo-input-edit__icon neo-icon-end",
+							"neo-multiselect-clear-icon-button",
+							selectedItems.length === 0 && "neo-display-none",
+						)}
+						type="button"
+						disabled={selectedItems.length === 0}
+						onClick={() => setSelectedItems([])}
+					/>
+				)}
+
 				<input
 					className="neo-display-none"
 					id={id}
