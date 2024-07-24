@@ -31,10 +31,23 @@ export const Default = () => (
 
 export const Varieties = () => (
 	<>
+		<h4
+			style={{
+				display: "flex",
+				justifyContent: "start",
+				position: "absolute",
+				left: "100px",
+				right: "100px",
+				top: "10px",
+			}}
+		>
+			LTR Split Buttons:
+		</h4>
 		<div
 			style={{
 				display: "flex",
 				justifyContent: "space-between",
+				alignItems: "baseline",
 				position: "absolute",
 				left: "100px",
 				right: "100px",
@@ -96,10 +109,10 @@ export const Varieties = () => (
 				position: "absolute",
 				left: "100px",
 				right: "100px",
-				bottom: "80px",
+				bottom: "100px",
 			}}
 		>
-			RTL Split Buttons
+			RTL Split Buttons:
 		</h4>
 		<div
 			dir="rtl"

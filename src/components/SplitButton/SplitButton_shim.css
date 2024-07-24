@@ -62,7 +62,9 @@
 }
 
 .neo-splitbutton--secondary .neo-splitbutton__button:hover,
-.neo-splitbutton--secondary .neo-splitbutton__menu .neo-btn-secondary--default:hover {
+.neo-splitbutton--secondary .neo-splitbutton__button:focus,
+.neo-splitbutton--secondary .neo-splitbutton__menu .neo-btn-secondary--default:hover,
+.neo-splitbutton--secondary .neo-splitbutton__menu .neo-btn-secondary--default:focus {
   border-color: #242424;
   z-index: 1;
 }

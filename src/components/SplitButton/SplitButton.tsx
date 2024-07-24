@@ -67,7 +67,7 @@ export const SplitButton = ({
 	height = "md",
 	className,
 	menuProps: {
-		ariaLabel: menuButtonAriaLabel = "Split Button Menu",
+		ariaLabel: menuButtonAriaLabel,
 		...restMenu
 	} = {} as SplitButtonMenuProps,
 	children,
@@ -102,14 +102,17 @@ export const SplitButton = ({
 				onClick={onClick}
 				variant={variant}
 				icon={icon}
-				aria-label={buttonAriaLabel}
+				aria-label={buttonAriaLabel || buttonText || "Button"}
 				className={clsx("neo-splitbutton__button")}
 			>
 				{buttonText}
 			</Button>
 			<Menu
 				menuRootElement={
-					<MenuButton variant={variant} aria-label={menuButtonAriaLabel}>
+					<MenuButton
+						variant={variant}
+						aria-label={menuButtonAriaLabel || "Split Button Menu"}
+					>
 						<span />
 					</MenuButton>
 				}
