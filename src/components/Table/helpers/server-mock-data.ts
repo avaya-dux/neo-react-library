@@ -1,4 +1,3 @@
-import namor from "namor";
 import type { Column } from "react-table";
 
 export interface IRecordingTableMockData {
@@ -16,11 +15,6 @@ export const recordingColumns: Column<IRecordingTableMockData>[] = [
 		Header: "Recording",
 		accessor: "recordingName",
 		disableFilters: true, // HACK: need to update to not need this
-	},
-	{
-		Header: "Date recorded",
-		accessor: "date",
-		disableFilters: true,
 	},
 	{
 		Header: "Duration in minutes",
@@ -55,14 +49,13 @@ const range = (len: number) => {
 
 const newRecording = (index: number): IRecordingTableMockData => {
 	const statusChance = Math.random();
-	const firstName = namor.generate({ words: 1 });
-	const lastName = namor.generate({ words: 1 });
+
 	return {
 		id: index.toString(),
 		recordingName: `rec-${index}`,
 		date: getRandomDate(new Date(2020, 1, 1), new Date()),
 		duration: Math.floor(Math.random() * 120),
-		agentName: `${firstName} ${lastName}`,
+		agentName: `Agent-${index}`,
 		status:
 			statusChance > 0.66
 				? "reviewed"

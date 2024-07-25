@@ -174,10 +174,23 @@ export const ServerSidePagination = () => {
 
 	fetchData(10, 3);
 
+	const columns: Column<IRecordingTableMockData>[]= [
+		...recordingColumns,
+		{
+			Cell: ({ value }: { value: IRecordingTableMockData["date"] }) => (
+				<>{value?.toLocaleDateString()}</>
+			),
+			Header: "Date recorded",
+			accessor: "date",
+			disableFilters: true,
+			sortType: "datetime",
+		},
+	]
+
 	return (
 		<Table
 			data={data}
-			columns={recordingColumns}
+			columns={columns}
 			manualPagination={true}
 			initialStatePageSize={5}
 			caption="Server Side Pagination Example"
