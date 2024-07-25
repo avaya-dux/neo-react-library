@@ -3,30 +3,33 @@ import { Children, type ReactNode, isValidElement } from "react";
 import { reactNodeToString } from "utils";
 
 export const verifyFirstMenuItem = (
-	buttonText?: string,
-	onClick?: () => void,
-	children?: ReactNode,
+  buttonText?: string,
+  onClick?: () => void,
+  children?: ReactNode,
 ) => {
-	if (Children.count(children) === 0) {
-		throw new Error(
-			"If createFirstMenuItem is false, the first menu item must be provided.",
-		);
-	}
-	const firstChild = Children.toArray(children)[0];
-	if (!isValidElement(firstChild) || firstChild.type !== MenuItem) {
-		throw new Error(
-			"If createFirstMenuItem is false, the first menu item must be a MenuItem.",
-		);
-	}
-	const { onClick: menuOnClick, children: menuChildren } = firstChild.props;
-	if (!!buttonText && reactNodeToString(menuChildren) !== buttonText) {
-		throw new Error(
-			"If createFirstMenuItem is false, the first menu item should have the same text as the button.",
-		);
-	}
-	if (!onClick || menuOnClick !== onClick) {
-		throw new Error(
-			"If createFirstMenuItem is false, the first menu item should have the same onClick handler.",
-		);
-	}
+  if (!children || Children.count(children) === 0) {
+    throw new Error(
+      "The first menu item must be provided if createFirstMenuItem is false."
+    );
+  }
+
+  const firstChild = Children.toArray(children)[0];
+  if (!isValidElement(firstChild) || firstChild.type !== MenuItem) {
+    throw new Error(
+      "The first menu item must be a valid MenuItem if createFirstMenuItem is false."
+    );
+  }
+
+  const { onClick: menuOnClick, children: menuChildren } = firstChild.props;
+  if (buttonText && reactNodeToString(menuChildren) !== buttonText) {
+    throw new Error(
+      "The first menu item text must match the button text if createFirstMenuItem is false."
+    );
+  }
+
+  if (onClick && menuOnClick !== onClick) {
+    throw new Error(
+      "The first menu item onClick handler must match the button onClick handler if createFirstMenuItem is false."
+    );
+  }
 };
