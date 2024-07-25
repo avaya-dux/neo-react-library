@@ -6,6 +6,7 @@ import { type DetailedHTMLProps, type HTMLAttributes, useMemo } from "react";
 import type { IconNamesType } from "utils";
 
 import "./SplitButton_shim.css";
+import { verifyFirstMenuItem } from "./helper";
 
 /**
  * SplitButtonProps
@@ -86,6 +87,11 @@ export const SplitButton = ({
 	children,
 	...rest
 }: SplitButtonProps) => {
+	// if createFirstMenuItem is false, check if the first menu item behaves like a button
+	if (!createFirstMenuItem) {
+		verifyFirstMenuItem(buttonText, onClick, children);
+	}
+
 	// create the first menu item that behaves like a button
 	const firstMenuItem = useMemo(
 		() =>
