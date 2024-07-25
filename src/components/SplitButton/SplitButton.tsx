@@ -27,21 +27,33 @@ type SplitButtonMenuProps = Omit<
 	MenuProps,
 	"menuRootElement" | "children" | "itemAlignment"
 > & { ariaLabel?: string };
+/**
+ * Props for SplitButton component
+ * @param {SplitButtonButtonProps} buttonProps - The props to pass to the Button component.
+ * @param {SplitButtonMenuProps} menuProps - The props to pass to the Menu component.
+ * @param {MenuChildrenType} children - The menu items to display in the dropdown.
+ * @param {string} [className] - The class name to add to the component.
+ * @param {"sm" | "md"} [height] - The height of the SplitButton.
+ * @param {boolean} [createFirstMenuItem] - Whether to create a default menu item that behaves like the button if button text and onClick are defined.
+ */
 export interface SplitButtonProps
 	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	buttonProps?: SplitButtonButtonProps;
 	menuProps?: SplitButtonMenuProps;
 	children: MenuChildrenType;
 	height?: "sm" | "md";
+	createFirstMenuItem?: boolean;
 }
 
 /**
  * SplitButton is a button that has a dropdown menu attached to it.
  * It is used to provide a primary action and secondary actions in a single component.
  * The primary action is a button that can have an icon and text.
- * The secondary actions are menu items that are displayed in a dropdown menu.
- * The SplitButton is used to save space in the UI and provide a clean user experience.
- * The SplitButton is used in the Neo design system.
+ * The secondary actions are menu items that are displayed in a dropdown menu.  The first menu item
+ * should be created to behave like the primary button.  If the button text and onClick are defined,
+ * and @param createFirstMenuItem is true, a menu item will be created that behaves like the button.
+ * Set @param createFirstMenuItem to false to manually generate this menu item to comply with this requirement.
+ *
  * @param {SplitButtonProps} props
  * @example
  * <SplitButton
@@ -65,6 +77,7 @@ export const SplitButton = ({
 		icon,
 	} = {} as SplitButtonButtonProps,
 	height = "md",
+	createFirstMenuItem = true,
 	className,
 	menuProps: {
 		ariaLabel: menuButtonAriaLabel,
@@ -76,10 +89,10 @@ export const SplitButton = ({
 	// create the first menu item that behaves like a button
 	const firstMenuItem = useMemo(
 		() =>
-			buttonText && onClick ? (
+			createFirstMenuItem && buttonText && onClick ? (
 				<MenuItem onClick={() => onClick()}>{buttonText}</MenuItem>
 			) : null,
-		[buttonText, onClick],
+		[buttonText, onClick, createFirstMenuItem],
 	);
 	const menuItems = useMemo(() => {
 		if (firstMenuItem) {
