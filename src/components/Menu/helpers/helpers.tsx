@@ -30,7 +30,7 @@ const logger = log.getLogger("menu-helpers");
 logger.disableAll();
 
 export const addIdToChildren = (children: MenuProps["children"]) => {
-	return children.map((child) => {
+	return Children.map(children, (child) => {
 		const childType = child.type;
 
 		if (childType === MenuItem) {
