@@ -6,8 +6,8 @@ import { type DetailedHTMLProps, type HTMLAttributes, useMemo } from "react";
 import type { IconNamesType } from "utils";
 
 import "./SplitButton_shim.css";
-import { verifyFirstMenuItem } from "./helper";
 import { Icon } from "components";
+import { verifyFirstMenuItem } from "./helper";
 
 /**
  * SplitButtonProps
