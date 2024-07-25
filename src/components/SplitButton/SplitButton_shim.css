@@ -18,7 +18,8 @@
 }
 
 .neo-splitbutton--secondary .neo-splitbutton__button {
-  border: 1px solid var(--neo-color-blue-500);
+  border-width: 1px;
+  border-style: solid;
 }
 
 .neo-splitbutton .neo-splitbutton__menu {
@@ -41,8 +42,8 @@
 
   .neo-btn-secondary--default {
     padding: 7px 14px 11px 14px;
-    border-width: 0px;
-    border: 1px solid var(--neo-color-blue-500);
+    border-width: 1px;
+    border-style: solid;
   }
 }
 
@@ -76,7 +77,6 @@
 .neo-splitbutton--secondary .neo-splitbutton__button:focus,
 .neo-splitbutton--secondary .neo-splitbutton__menu .neo-btn-secondary--default:hover,
 .neo-splitbutton--secondary .neo-splitbutton__menu .neo-btn-secondary--default:focus {
-  border-color: #155E8B;
   z-index: 1;
 }
 
