@@ -21,10 +21,6 @@
   border: 1px solid var(--neo-color-blue-500);
 }
 
-.neo-splitbutton [dir="rtl"] .neo-splitbutton .neo-splitbutton__button {
-  border-radius: 0px 2px 2px 0px;
-}
-
 .neo-splitbutton .neo-splitbutton__menu {
   border-radius: 0px 2px 2px 0px;
 
@@ -50,16 +46,26 @@
   }
 }
 
-[dir="rtl"] .neo-splitbutton .neo-splitbutton__menu {
-  border-radius: 2px 0px 0px 2px;
+[dir="rtl"] .neo-splitbutton {
+  .neo-splitbutton__button {
+    border-radius: 0px 2px 2px 0px;
+  }
 
-  .neo-btn {
+  .neo-splitbutton__menu {
     border-radius: 2px 0px 0px 2px;
+
+    .neo-btn {
+      border-radius: 2px 0px 0px 2px;
+    }
   }
 }
 
 .neo-splitbutton .neo-splitbutton__menu {
   margin-inline-start: 1px;
+
+  .menu-item__icon {
+    padding-inline-end: 8px;
+  }
 }
 
 .neo-splitbutton.neo-splitbutton--secondary .neo-splitbutton__menu {

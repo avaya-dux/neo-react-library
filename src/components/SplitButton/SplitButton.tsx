@@ -7,6 +7,7 @@ import type { IconNamesType } from "utils";
 
 import "./SplitButton_shim.css";
 import { verifyFirstMenuItem } from "./helper";
+import { Icon } from "components";
 
 /**
  * SplitButtonProps
@@ -95,9 +96,14 @@ export const SplitButton = ({
 	const firstMenuItem = useMemo(
 		() =>
 			createFirstMenuItem && buttonText && onClick ? (
-				<MenuItem onClick={() => onClick()}>{buttonText}</MenuItem>
+				<MenuItem onClick={() => onClick()}>
+					{icon && (
+						<Icon className="menu-item__icon" icon={icon} aria-label={icon} />
+					)}
+					{buttonText}
+				</MenuItem>
 			) : null,
-		[buttonText, onClick, createFirstMenuItem],
+		[buttonText, icon, onClick, createFirstMenuItem],
 	);
 	const menuItems = useMemo(() => {
 		if (firstMenuItem) {
