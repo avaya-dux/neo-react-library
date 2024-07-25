@@ -82,7 +82,7 @@ export const Tabs = ({
 		onTabChange?.(newActiveTabIndex);
 	};
 
-	const [activePanelIndex, setActivePanelIndex] = useState(defaultIndex);
+	const [activePanelIndex, setActivePanelIndex] = useState(activeTabIndex);
 
 	useEffect(() => {
 		onTabPanelChange?.(activePanelIndex);
