@@ -10,7 +10,7 @@
 }
 
 .neo-splitbutton--secondary .neo-splitbutton__button {
-  border: 2px solid #1B77AF;
+  border: 1px solid #1B77AF;
 }
 
 .neo-splitbutton .neo-splitbutton__button {
@@ -35,13 +35,14 @@
       padding: 0;
       width: 16px;
       height: 16px;
+      font-size: 16px;
     }
   }
 
   .neo-btn-secondary--default {
-    padding: 6px 14px 10px 14px;
+    padding: 7px 14px 11px 14px;
     border-width: 0px;
-    border: 2px solid #1B77AF;
+    border: 1px solid #1B77AF;
   }
 }
 
@@ -79,6 +80,5 @@
   .neo-splitbutton__menu .neo-btn {
     height: 24px;
     padding: 2px 0 6px 0;
-
   }
 }
