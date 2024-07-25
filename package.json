@@ -18,21 +18,11 @@
 			"require": "./dist/avaya-neo-react.umd.js"
 		}
 	},
-	"files": [
-		"dist",
-		"README.md",
-		"LICENSE.md",
-		"LICENSE-3rd-party.html"
-	],
+	"files": ["dist", "README.md", "LICENSE.md", "LICENSE-3rd-party.html"],
 	"engines": {
 		"node": ">=16"
 	},
-	"browserslist": [
-		"> 0.5%",
-		"last 2 versions",
-		"not dead",
-		"not ie <= 11"
-	],
+	"browserslist": ["> 0.5%", "last 2 versions", "not dead", "not ie <= 11"],
 	"scripts": {
 		"dev": "vite build --mode dev --watch",
 		"storybook": "storybook dev -p 6006",
@@ -78,8 +68,8 @@
 		"@dnd-kit/modifiers": "7.0.0",
 		"@dnd-kit/sortable": "8.0.0",
 		"@dnd-kit/utilities": "3.2.2",
-		"@avaya/neo": "3.81.10",
-		"@avaya/neo-icons": "1.8.12",
+		"@avaya/neo": "3.81.11",
+		"@avaya/neo-icons": "1.8.13",
 		"@biomejs/biome": "1.8.3",
 		"@faker-js/faker": "8.4.1",
 		"@storybook/addon-a11y": "7.6.20",
