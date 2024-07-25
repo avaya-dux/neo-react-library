@@ -52,7 +52,7 @@ const newRecording = (index: number): IRecordingTableMockData => {
 
 	return {
 		id: index.toString(),
-		recordingName: `rec-${index}`,
+		recordingName: `call recording-${index}`,
 		date: getRandomDate(new Date(2020, 1, 1), new Date()),
 		duration: Math.floor(Math.random() * 120),
 		agentName: `Agent-${index}`,

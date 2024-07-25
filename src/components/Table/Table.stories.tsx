@@ -172,7 +172,7 @@ export const ServerSidePagination = () => {
 		[fetchIdRef, serverData.length],
 	);
 
-	fetchData(10, 3);
+	fetchData(10, 0);
 
 	const columns: Column<IRecordingTableMockData>[]= [
 		...recordingColumns,
