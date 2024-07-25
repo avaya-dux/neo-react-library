@@ -87,7 +87,6 @@ export const SplitButton = ({
 	children,
 	...rest
 }: SplitButtonProps) => {
-	// if createFirstMenuItem is false, check if the first menu item behaves like a button
 	if (!createFirstMenuItem) {
 		verifyFirstMenuItem(buttonText, onClick, children);
 	}
