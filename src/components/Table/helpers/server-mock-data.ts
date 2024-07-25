@@ -2,16 +2,16 @@ import namor from "namor";
 import type { Column } from "react-table";
 
 export interface IRecordingTableMockData {
-		id: string;
-		recordingName: string;
-		date?: Date;
-		duration?: number;
-		agentName: string;
-		status?: "reviewed" | "transcribed" | "not-reviewed" | "incomplete";
-		disabled?: boolean;
-	}
+	id: string;
+	recordingName: string;
+	date?: Date;
+	duration?: number;
+	agentName: string;
+	status?: "reviewed" | "transcribed" | "not-reviewed" | "incomplete";
+	disabled?: boolean;
+}
 
-export const recordingColumns: Array<Column<IRecordingTableMockData>> = [
+export const recordingColumns: Column<IRecordingTableMockData>[] = [
 	{
 		Header: "Recording",
 		accessor: "recordingName",
@@ -39,13 +39,13 @@ export const recordingColumns: Array<Column<IRecordingTableMockData>> = [
 	},
 ];
 
-const getRandomDate = (start:Date, end:Date): Date => {
+const getRandomDate = (start: Date, end: Date): Date => {
 	return new Date(
-		start.getTime() + Math.random() * (end.getTime() - start.getTime())
+		start.getTime() + Math.random() * (end.getTime() - start.getTime()),
 	);
-}
+};
 
-const range = (len:number) => {
+const range = (len: number) => {
 	const arr = [];
 	for (let i = 0; i < len; i++) {
 		arr.push(i);
@@ -75,7 +75,6 @@ const newRecording = (index: number): IRecordingTableMockData => {
 
 export const makeData = (len: number) => {
 	const makeDataRow = () => {
-
 		return range(len).map((index) => {
 			return {
 				...newRecording(index),
@@ -84,4 +83,4 @@ export const makeData = (len: number) => {
 	};
 
 	return makeDataRow();
-}
+};
