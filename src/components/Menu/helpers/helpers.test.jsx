@@ -18,8 +18,9 @@ menuHelpersLogger.disableAll();
 describe("Menu helper methods", () => {
 	describe("addIdToChildren", () => {
 		it("should do nothing when child is not menu item or sub menu", () => {
-			const children = [<MenuSeparator key="separator" />];
-			expect(addIdToChildren(children)).toEqual(children);
+			const children = <MenuSeparator />;
+			expect(addIdToChildren(children).length).toBe(1);
+			expect(addIdToChildren(children)[0].type).toBe(MenuSeparator);
 		});
 
 		it("should add id when menu item does not have id", () => {
