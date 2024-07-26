@@ -1,20 +1,24 @@
 .neo-splitbutton {
   display: flex;
 
-  .neo-dropdown__content {
-    min-width: 150px;
-  }
-
   .neo-splitbutton__button {
     border-radius: 2px 0px 0px 2px;
+
+    &:before {
+      font-size: 16px;
+    }
   }
 
   .neo-splitbutton__menu {
     border-radius: 0px 2px 2px 0px;
     margin-inline-start: 1px;
 
-    .menu-item__icon {
-      padding-inline-end: 8px;
+    .neo-dropdown__content {
+      min-width: 150px;
+
+      .menu-item__icon {
+        padding-inline-end: 8px;
+      }
     }
 
     .neo-btn {
