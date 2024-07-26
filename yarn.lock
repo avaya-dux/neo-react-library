@@ -28,15 +28,15 @@
   resolved "https://registry.yarnpkg.com/@atomic-layout/core/-/core-0.14.1.tgz#3d69be5f79775f11b8008f18bc603b04a2141ccd"
   integrity sha512-o5nhk/1djuKzB20C2LSOuetTDytsbGg4c0UfxXkq1pqoaN3hKJcHPYF9nV+p6+P5CWqNBaaJddZ32OsFSppULQ==
 
-"@avaya/neo-icons@1.8.12":
-  version "1.8.12"
-  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.12.tgz#aa73ae33dd32507351680e1e4d6b53967f983a4e"
-  integrity sha512-HJFsaJme7m3SMEMEtOuIiOnHVenUAZ7HVR1X2vagqPWhfgDkOq1agFszu2vhCPwUnO6HZIyCkGXrIbxTly1+VQ==
+"@avaya/neo-icons@1.8.13":
+  version "1.8.13"
+  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.13.tgz#5e2bf23983dc2587c7cb1edc3dd433e16ccd251a"
+  integrity sha512-9hvug4QR5IXYcafzto8ETxEvMoadCD/AfDjClJEfyf51DIrCZ3cAyOWMBmRLdzA8Qi0EV8IXHm+qvGXuEKz/6Q==
 
-"@avaya/neo@3.81.10":
-  version "3.81.10"
-  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.10.tgz#7d12f73f3deb143fe0f7c41b212fad9085843c92"
-  integrity sha512-WfrsMWMo/D/gFqW2JJ1LVc8TwUFw8nJGsFCHD0NuCjooqj8/pzRfZKl6dnxKn5yUhqKuxtE/yHzFhJmSOVyPKw==
+"@avaya/neo@3.81.11":
+  version "3.81.11"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.11.tgz#f1a14162ac30a0c9287e2e97cea0398e88396445"
+  integrity sha512-Tq1LMGg/j4J/B/vsiFqiSyTuCaff0VdtYojKFUsUI8eCCA+U3rfK7CI1dNEpsw4LrF/O5NHZTyC5ZmHcWJCxAA==
 
 "@aw-web-design/x-default-browser@1.4.126":
   version "1.4.126"
@@ -14475,6 +14475,7 @@ worker-farm@^1.7.0:
     errno "~0.1.7"
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
