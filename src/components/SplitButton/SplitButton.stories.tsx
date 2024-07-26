@@ -18,6 +18,7 @@ export const Default: Story = {
 			text: "Send",
 			icon: "send",
 			variant: "primary",
+			onClick: () => console.log("clicked"),
 		},
 	},
 	render: ({ height, buttonProps }) => (
