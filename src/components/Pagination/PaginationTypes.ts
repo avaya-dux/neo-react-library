@@ -9,33 +9,34 @@ export interface PaginationTranslations {
 }
 
 export type PaginationProps = {
-	id?: string;
+		id?: string;
 
-	currentPageIndex: number;
-	itemCount: number;
-	itemsPerPage: number;
-	itemsPerPageOptions?: number[];
+		currentPageIndex: number;
+		itemCount: number;
+		itemsPerPage: number;
+		itemsPerPageOptions?: number[];
+		manualPageCount?: number;
 
-	alwaysShowPagination?: boolean;
-	itemDisplayType?: "count" | "page" | "none";
+		alwaysShowPagination?: boolean;
+		itemDisplayType?: "count" | "page" | "none";
 
-	itemDisplayTooltipPosition?: TooltipPosition;
-	itemsPerPageTooltipPosition?: TooltipPosition;
+		itemDisplayTooltipPosition?: TooltipPosition;
+		itemsPerPageTooltipPosition?: TooltipPosition;
 
-	onPageChange: (
-		event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
-		pageIndex: number,
-	) => void;
-	onItemsPerPageChange?: (
-		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-		itemsPerPage: number,
-	) => void;
+		onPageChange: (
+			event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+			pageIndex: number,
+		) => void;
+		onItemsPerPageChange?: (
+			event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+			itemsPerPage: number,
+		) => void;
 
-	// table overrides
-	centerNode?: React.ReactNode;
-	leftNode?: React.ReactNode;
-	rightNode?: React.ReactNode;
-} & PaginationTranslations;
+		// table overrides
+		centerNode?: React.ReactNode;
+		leftNode?: React.ReactNode;
+		rightNode?: React.ReactNode;
+	} & PaginationTranslations;
 
 export type PaginationNavigationProps = {
 	totalPages: number;

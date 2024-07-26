@@ -136,22 +136,19 @@ export const ServerSidePagination = () => {
 	const serverData = makeData(10000);
 
 	const [data, setData] = useState<IRecordingTableMockData[]>([]);
-	// const [loading, setLoading] = useState(false);
-	// const [pageCount, setPageCount] = useState(0);
+	const [pageCount, setPageCount] = useState(0);
 	const fetchIdRef = useRef(0);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: generated data doesn't change once created
 	const fetchData = useCallback(
 		(pageSize: number, pageIndex: number) => {
+			console.log("calling fetchData");
 			// This will get called when the table needs new data
 			// You could fetch your data from literally anywhere,
 			// even a server. But for this example, we'll just fake it.
 
 			// Give this fetch an ID
 			const fetchId = ++fetchIdRef.current;
-
-			// Set the loading state
-			// setLoading(true);
 
 			// We'll even set a delay to simulate a server here
 			setTimeout(() => {
@@ -163,16 +160,19 @@ export const ServerSidePagination = () => {
 
 					// Your server could send back total page count.
 					// For now we'll just fake it, too
-					// setPageCount(Math.ceil(serverData.length / pageSize));
-
-					// setLoading(false);
+					const newPageCount = Math.ceil(serverData.length / pageSize);
+					console.log("setting pageCount to: ", newPageCount);
+					setPageCount(newPageCount);
 				}
 			}, 1000);
 		},
 		[fetchIdRef, serverData.length],
 	);
 
-	fetchData(10, 0);
+	useEffect(() => {
+		fetchData(10, 0);
+	},[fetchData])
+
 
 	const columns: Column<IRecordingTableMockData>[]= [
 		...recordingColumns,
@@ -193,7 +193,8 @@ export const ServerSidePagination = () => {
 			columns={columns}
 			manualPagination={true}
 			initialStatePageSize={5}
-			itemsPerPageOptions={[5,10,20,50]}
+			pageCount={pageCount}
+			itemsPerPageOptions={[5, 10, 20, 50]}
 			caption="Server Side Pagination Example"
 			summary="Choose from the following options"
 		/>

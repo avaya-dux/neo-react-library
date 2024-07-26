@@ -101,7 +101,8 @@ export const Table = <T extends Record<string, any>>({
 	readonly = false,
 	rowHeight = "large",
 	selectableRows = "none",
-	manualPagination = false,
+	manualPagination: overridePagination = false,
+	pageCount: manualPageCount,
 	showPagination = true,
 	draggableRows = false,
 	pushPaginationDown = false,
@@ -131,6 +132,8 @@ export const Table = <T extends Record<string, any>>({
 		{
 			columns,
 			data,
+			manualPagination: overridePagination,
+			pageCount: overridePagination ? manualPageCount : undefined,
 			defaultColumn: {
 				maxWidth: 300,
 				minWidth: 30,
@@ -417,6 +420,7 @@ export const Table = <T extends Record<string, any>>({
 							itemCount={rowCount}
 							itemsPerPage={pageSize}
 							itemsPerPageOptions={itemsPerPageOptions}
+							manualPageCount={pageCount}
 							onPageChange={(e, newIndex) => {
 								e?.preventDefault();
 								const nextIndex = Math.max(0, newIndex - 1);
