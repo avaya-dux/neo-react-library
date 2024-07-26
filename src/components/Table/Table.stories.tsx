@@ -193,7 +193,9 @@ export const ServerSidePagination = () => {
 			columns={columns}
 			manualPagination={true}
 			initialStatePageSize={5}
+			itemsPerPageOptions={[5,10,20,50]}
 			caption="Server Side Pagination Example"
+			summary="Choose from the following options"
 		/>
 	);
 };
