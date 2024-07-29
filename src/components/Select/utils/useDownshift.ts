@@ -42,29 +42,30 @@ const DownshiftWithComboboxProps = (
 			}
 		},
 		onInputValueChange: ({ inputValue }) => {
-			if (inputValue) {
+			const trimmedValue = inputValue?.trim();
+			if (trimmedValue) {
 				const relatedOptions = options.filter((child) => {
 					const childSearchText = child.searchText || child.children;
 
 					return childSearchText
 						.toLowerCase()
-						.includes(inputValue.toLowerCase());
+						.includes(trimmedValue.toLowerCase());
 				});
 
 				if (relatedOptions.length === 0 && creatable) {
 					const createdItem: SelectOptionProps = {
-						children: `${createMessage} '${inputValue}'`,
+						children: `${createMessage} '${trimmedValue}'`,
 						value: createOptionValue,
 					};
 					setFilteredOptions([createdItem]);
 				} else {
 					setFilteredOptions(relatedOptions);
 				}
-			} else if (inputValue === "") {
+			} else if (trimmedValue === "") {
 				setFilteredOptions(options);
 			}
 
-			setInputText(inputValue || "");
+			setInputText(trimmedValue || "");
 		},
 		onSelectedItemChange: ({ selectedItem: clickedItem }) => {
 			if (!clickedItem) {
@@ -119,7 +120,9 @@ const DownshiftWithComboboxMultipleSelectProps = (
 					};
 
 				case useCombobox.stateChangeTypes.InputKeyDownEnter:
-				case useCombobox.stateChangeTypes.ItemClick:
+				case useCombobox.stateChangeTypes.ItemClick: {
+					const newItemValue = state.inputValue.trim();
+
 					if (selectedItem && shouldRemoveItem) {
 						setSelectedItems(
 							selectedItems.filter((item) => item.value !== selectedItem.value),
@@ -127,14 +130,15 @@ const DownshiftWithComboboxMultipleSelectProps = (
 					} else if (
 						selectedItem &&
 						creatable &&
-						selectedItem.value === createOptionValue
+						selectedItem.value === createOptionValue &&
+						selectedItems.every((item) => item.value !== newItemValue)
 					) {
 						const createdItem: SelectOptionProps = {
-							children: state.inputValue,
-							value: state.inputValue,
+							children: newItemValue,
+							value: newItemValue,
 						};
 						setSelectedItems([...selectedItems, createdItem]);
-					} else if (selectedItem) {
+					} else if (selectedItem && selectedItem.value !== createOptionValue) {
 						setSelectedItems([...selectedItems, selectedItem]);
 					}
 
@@ -145,6 +149,7 @@ const DownshiftWithComboboxMultipleSelectProps = (
 						isOpen: true,
 						selectedItem: shouldRemoveItem ? null : selectedItem,
 					};
+				}
 
 				case useCombobox.stateChangeTypes.FunctionSelectItem:
 					/** NOTE: if the user uses arrows+enter to select an item, it triggers
@@ -178,25 +183,33 @@ const DownshiftWithComboboxMultipleSelectProps = (
 			}
 		},
 		onInputValueChange: ({ inputValue }) => {
-			if (inputValue) {
+			const trimmedValue = inputValue?.trim();
+
+			if (trimmedValue) {
 				const relatedOptions = options.filter((child) => {
 					const childSearchText = child.searchText || child.children;
 
 					return childSearchText
 						.toLowerCase()
-						.includes(inputValue.toLowerCase());
+						.includes(trimmedValue.toLowerCase());
 				});
 
-				if (relatedOptions.length === 0 && creatable) {
+				const allowCreate =
+					creatable &&
+					trimmedValue !== "" &&
+					relatedOptions.length === 0 &&
+					!selectedItems.some((item) => item.value === trimmedValue);
+
+				if (allowCreate) {
 					const createdItem: SelectOptionProps = {
-						children: `${createMessage} '${inputValue}'`,
+						children: `${createMessage} '${trimmedValue}'`,
 						value: createOptionValue,
 					};
 					setFilteredOptions([createdItem]);
 				} else {
 					setFilteredOptions(relatedOptions);
 				}
-			} else if (inputValue === "") {
+			} else if (trimmedValue === "") {
 				setFilteredOptions(options);
 			}
 		},
