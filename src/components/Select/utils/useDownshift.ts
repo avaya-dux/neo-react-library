@@ -198,7 +198,7 @@ const DownshiftWithComboboxMultipleSelectProps = (
 					creatable &&
 					trimmedValue !== "" &&
 					relatedOptions.length === 0 &&
-					!selectedItems.some((item) => item.value === trimmedValue);
+					selectedItems.every((item) => item.value !== trimmedValue);
 
 				if (allowCreate) {
 					const createdItem: SelectOptionProps = {
