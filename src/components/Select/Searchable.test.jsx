@@ -276,7 +276,6 @@ describe("Select", () => {
 			expect(screen.getByText(secondOptionText)).toBeInTheDocument();
 		});
 
-		// cannot add whitespace-only, empty, or duplicate options
 		it("does not allow a user to create whitespace-only options, or duplicate existing options", async () => {
 			const newOptionText = "New Option";
 			render(
