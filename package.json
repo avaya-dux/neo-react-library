@@ -1,6 +1,6 @@
 {
 	"name": "@avaya/neo-react",
-	"version": "1.1.36",
+	"version": "1.1.38",
 	"description": "This is the React version of the shared library called 'NEO' built by Avaya",
 	"license": "SEE LICENSE IN LICENSE.md",
 	"repository": "github:avaya-dux/neo-react-library",
@@ -18,21 +18,11 @@
 			"require": "./dist/avaya-neo-react.umd.js"
 		}
 	},
-	"files": [
-		"dist",
-		"README.md",
-		"LICENSE.md",
-		"LICENSE-3rd-party.html"
-	],
+	"files": ["dist", "README.md", "LICENSE.md", "LICENSE-3rd-party.html"],
 	"engines": {
 		"node": ">=16"
 	},
-	"browserslist": [
-		"> 0.5%",
-		"last 2 versions",
-		"not dead",
-		"not ie <= 11"
-	],
+	"browserslist": ["> 0.5%", "last 2 versions", "not dead", "not ie <= 11"],
 	"scripts": {
 		"dev": "vite build --mode dev --watch",
 		"storybook": "storybook dev -p 6006",
@@ -78,8 +68,8 @@
 		"@dnd-kit/modifiers": "7.0.0",
 		"@dnd-kit/sortable": "8.0.0",
 		"@dnd-kit/utilities": "3.2.2",
-		"@avaya/neo": "3.81.10",
-		"@avaya/neo-icons": "1.8.12",
+		"@avaya/neo": "3.81.11",
+		"@avaya/neo-icons": "1.8.13",
 		"@biomejs/biome": "1.8.3",
 		"@faker-js/faker": "8.4.1",
 		"@storybook/addon-a11y": "7.6.20",
@@ -98,11 +88,11 @@
 		"@storybook/testing-react": "2.0.1",
 		"@storybook/theming": "7.6.20",
 		"@tanstack/react-table": "8.19.3",
-		"@testing-library/jest-dom": "6.4.6",
+		"@testing-library/jest-dom": "6.4.8",
 		"@testing-library/react": "16.0.0",
 		"@testing-library/user-event": "14.5.2",
 		"@types/jest-axe": "3.5.9",
-		"@types/node": "20.14.11",
+		"@types/node": "20.14.13",
 		"@types/react": "18.2.21",
 		"@types/react-dom": "18.3.0",
 		"@types/react-input-autosize": "2.2.4",
@@ -124,8 +114,8 @@
 		"react-stopwatch": "2.0.4",
 		"react-table": "7.8.0",
 		"storybook": "7.6.20",
-		"typescript": "5.5.3",
-		"vite": "5.3.4",
+		"typescript": "5.5.4",
+		"vite": "5.3.5",
 		"vite-plugin-dts": "3.9.1",
 		"vitest": "2.0.4"
 	},
@@ -133,7 +123,7 @@
 		"unset-value": "2.0.1",
 		"minimist": "1.2.8",
 		"pug": "3.0.3",
-		"uglify-js": "3.19.0",
+		"uglify-js": "3.19.1",
 		"glob-parent": "6.0.2",
 		"trim": "1.0.1",
 		"trim-newlines": "5.0.0",
