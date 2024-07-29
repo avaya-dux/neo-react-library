@@ -307,8 +307,8 @@ export const Creatable = () => {
 
 				<p style={{ paddingBottom: 10 }}>
 					Please reach out to us{" "}
-					<a href="https://github.com/avaya-dux/neo-react-library/issues/new">
-						via our GitHub page
+					<a href="https://teams.microsoft.com/l/channel/19%3A0c670e994bea49d3b3fd053761191c8c%40thread.tacv2/Neo%20-%20Make%20New%20Requests?groupId=172efbe2-ae64-4652-8f08-de11e90b9230&tenantId=04a2636c-326d-48ff-93f8-709875bd3aa9">
+						via our MS Teams channel
 					</a>{" "}
 					if you have any questions or concerns.
 				</p>
@@ -384,8 +384,8 @@ export const RequiredInForm = () => {
 
 				<p style={{ paddingBottom: 10 }}>
 					We&apos;ve created this example, but please reach out to us{" "}
-					<a href="https://github.com/avaya-dux/neo-react-library/issues/new">
-						via our GitHub page
+					<a href="https://teams.microsoft.com/l/channel/19%3A0c670e994bea49d3b3fd053761191c8c%40thread.tacv2/Neo%20-%20Make%20New%20Requests?groupId=172efbe2-ae64-4652-8f08-de11e90b9230&tenantId=04a2636c-326d-48ff-93f8-709875bd3aa9">
+						via our MS Teams channel
 					</a>{" "}
 					if you have any questions or concerns.
 				</p>
