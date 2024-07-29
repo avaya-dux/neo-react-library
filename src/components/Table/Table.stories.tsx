@@ -141,7 +141,7 @@ export const ServerSidePagination = () => {
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: generated data doesn't change once created
 	const fetchData = useCallback(
-		(pageSize: number, pageIndex: number) => {
+		(pageIndex: number, pageSize: number) => {
 			console.log("calling fetchData");
 			// This will get called when the table needs new data
 			// You could fetch your data from literally anywhere,
@@ -150,7 +150,7 @@ export const ServerSidePagination = () => {
 			// Give this fetch an ID
 			const fetchId = ++fetchIdRef.current;
 
-			// We'll even set a delay to simulate a server here
+			// We'll set a delay to simulate a server here
 			setTimeout(() => {
 				// Only update the data if this is the latest fetch
 				if (fetchId === fetchIdRef.current) {
@@ -164,13 +164,13 @@ export const ServerSidePagination = () => {
 					console.log("setting pageCount to: ", newPageCount);
 					setPageCount(newPageCount);
 				}
-			}, 1000);
+			}, 500);
 		},
 		[fetchIdRef, serverData.length],
 	);
 
 	useEffect(() => {
-		fetchData(10, 0);
+		fetchData(0, 10);
 	},[fetchData])
 
 
@@ -192,8 +192,9 @@ export const ServerSidePagination = () => {
 			data={data}
 			columns={columns}
 			manualPagination={true}
-			initialStatePageSize={5}
+			initialStatePageSize={10}
 			pageCount={pageCount}
+			handlePageChange={fetchData}
 			itemsPerPageOptions={[5, 10, 20, 50]}
 			caption="Server Side Pagination Example"
 			summary="Choose from the following options"
