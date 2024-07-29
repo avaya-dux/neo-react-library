@@ -127,6 +127,7 @@ export const CollapsedNarrowMultiSelect = () => {
 		</Sheet>
 	);
 };
+
 export const Localized = () => {
 	const [lang, setLang] = useState("English");
 	const [currTranslations, setCurrTranslations] = useState(englishTrans);
