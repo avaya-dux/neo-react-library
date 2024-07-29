@@ -275,5 +275,54 @@ describe("Select", () => {
 			expect(screen.getAllByRole("button")).toHaveLength(3);
 			expect(screen.getByText(secondOptionText)).toBeInTheDocument();
 		});
+
+		// cannot add whitespace-only, empty, or duplicate options
+		it("does not allow a user to create whitespace-only options, or duplicate existing options", async () => {
+			const newOptionText = "New Option";
+			render(
+				<Select label={label} multiple searchable creatable>
+					{fruitOptions}
+				</Select>,
+			);
+
+			const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
+			await user.click(comboboxBtn);
+
+			// pre search+add we have all options in the list
+			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
+
+			// pure whitespace is ignored
+			await user.keyboard("    ");
+			expect(screen.getAllByRole("option")).toHaveLength(8);
+
+			// add new option
+			await user.keyboard(newOptionText);
+			expect(screen.getAllByRole("option")).toHaveLength(1);
+			expect(screen.getByRole("option")).toHaveTextContent(newOptionText);
+			await user.keyboard(UserEventKeys.DOWN);
+			await user.keyboard(UserEventKeys.ENTER);
+
+			// now that we've added the new option, we can now see the full list, excluding
+			// the new option as we do not show that in the list
+			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
+
+			// newly created chip has been added
+			expect(screen.getAllByRole("button")).toHaveLength(2);
+			expect(screen.getByText(newOptionText)).toBeInTheDocument();
+
+			// searching for the new option should show: "No options available"
+			await user.keyboard(newOptionText);
+			expect(screen.getAllByRole("option")).toHaveLength(1);
+			expect(screen.getByRole("option")).toHaveTextContent(
+				"No options available",
+			);
+
+			// trying to forcefully add item clears the search and shows all options
+			await user.keyboard(UserEventKeys.ENTER);
+			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
+
+			// still only one chip
+			expect(screen.getAllByRole("button")).toHaveLength(2);
+		});
 	});
 });
