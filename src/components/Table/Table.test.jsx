@@ -390,7 +390,7 @@ describe("Table", () => {
 				1,
 			);
 			expect(
-				screen.getByText(FilledFields.translations.body.clearSelection),
+				screen.getByText(FilledFields.translations.body.clearAll),
 			).toBeVisible();
 		});
 
@@ -412,12 +412,12 @@ describe("Table", () => {
 				1,
 			);
 			expect(
-				screen.getByText(FilledFields.translations.body.clearSelection),
+				screen.getByText(FilledFields.translations.body.clearAll),
 			).toBeVisible();
 
 			// click the 'clear-row' button
 			const clearRowButton = screen.getByText(
-				FilledFields.translations.body.clearSelection,
+				FilledFields.translations.body.clearAll,
 			);
 			await user.click(clearRowButton);
 
