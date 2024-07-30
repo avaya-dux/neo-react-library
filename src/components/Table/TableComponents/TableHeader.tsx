@@ -248,7 +248,7 @@ const CheckboxHeaderCell: TableHeaderComponentType = ({
 	return (
 		<th className="neo-table-checkbox-th">
 			{shouldHaveCheckbox && (
-				<TableSelectionMenu
+				<TableSelectionCheckboxAndMenu
 					handleRowToggled={handleRowToggled}
 					instance={instance}
 					selectableRows={selectableRows}
@@ -262,7 +262,7 @@ const CheckboxHeaderCell: TableHeaderComponentType = ({
 /**
  * A checkbox and dropdown menu used to select or clear all rows in the table or on the current page.
  */
-const TableSelectionMenu: TableHeaderComponentType = ({
+const TableSelectionCheckboxAndMenu: TableHeaderComponentType = ({
 	handleRowToggled = () => null,
 	instance,
 	translations,
@@ -273,18 +273,8 @@ const TableSelectionMenu: TableHeaderComponentType = ({
 		state: { selectedRowIds },
 	} = instance;
 
-	const selectedRowsCount = useMemo(
-		() => Object.keys(selectedRowIds).length,
-		[selectedRowIds],
-	);
-
-	const isSinglePage = useMemo(() => page.length === rows.length, [page, rows]);
-
-	const [
-		pageEnabledRowCount,
-		allPageEnabledRowsSelected,
-		allPageRowsDeselected,
-	] = useMemo(() => {
+	// TODO: simplify
+	const [allPageEnabledRowsSelected, allPageRowsDeselected] = useMemo(() => {
 		const enabledPageRows = page
 			.filter((row) => !row.original.disabled)
 			.map((row) => row.original);
@@ -295,23 +285,8 @@ const TableSelectionMenu: TableHeaderComponentType = ({
 			(row) => !selectedRowIds[row.id],
 		);
 
-		return [
-			enabledPageRows.length,
-			allPageRowsSelectedMemo,
-			allPageRowsDeselectedMemo,
-		];
+		return [allPageRowsSelectedMemo, allPageRowsDeselectedMemo];
 	}, [page, selectedRowIds]);
-
-	const [tableEnabledRowCount, allTableEnabledRowsAreSelected] = useMemo(() => {
-		const enabledRows = rows.filter((row) => !row.original.disabled);
-		const enabledRowCount = enabledRows.length;
-		const rowsSelectedMemo = !!(
-			enabledRowCount && enabledRows.every((row) => selectedRowIds[row.id])
-		);
-
-		return [enabledRowCount, rowsSelectedMemo];
-	}, [rows, selectedRowIds]);
-
 	const checkboxCheckedValue = useMemo(() => {
 		return allPageEnabledRowsSelected
 			? true
@@ -319,6 +294,80 @@ const TableSelectionMenu: TableHeaderComponentType = ({
 				? false
 				: "mixed";
 	}, [allPageEnabledRowsSelected, allPageRowsDeselected]);
+
+	const SelectCurrentPage = useMemo(() => {
+		const hasMoreThanOnePage = page.length !== rows.length;
+		const pageHasSelectableRows = page.some((row) => !row.original.disabled);
+		const notAllPageRowsAreSelected = page.some(
+			(row) => !selectedRowIds[row.id] && !row.original.disabled,
+		);
+
+		return hasMoreThanOnePage &&
+			pageHasSelectableRows &&
+			notAllPageRowsAreSelected ? (
+			<MenuItem
+				onClick={() => setPageRowsSelected(instance, true, handleRowToggled)}
+			>
+				{translations.selectPage}
+			</MenuItem>
+		) : (
+			<></>
+		);
+	}, [page, rows, selectedRowIds, handleRowToggled, instance, translations]);
+
+	const ClearCurrentPage = useMemo(() => {
+		const hasMoreThanOnePage = page.length !== rows.length;
+		const pageHasSelectableRows = page.some((row) => !row.original.disabled);
+		const allPageRowsAreSelected = page.some(
+			(row) => selectedRowIds[row.id] && !row.original.disabled,
+		);
+
+		return hasMoreThanOnePage &&
+			pageHasSelectableRows &&
+			allPageRowsAreSelected ? (
+			<MenuItem
+				onClick={() => setPageRowsSelected(instance, false, handleRowToggled)}
+			>
+				{translations.clearPage}
+			</MenuItem>
+		) : (
+			<></>
+		);
+	}, [page, rows, selectedRowIds, handleRowToggled, instance, translations]);
+
+	const SelectAllPages = useMemo(() => {
+		const hasMoreThanOnePage = page.length !== rows.length;
+		const notAllRowsAreSelect = rows.some(
+			(row) => !selectedRowIds[row.id] && !row.original.disabled,
+		);
+
+		return hasMoreThanOnePage && notAllRowsAreSelect ? (
+			<MenuItem
+				onClick={() => setTableRowsSelected(instance, true, handleRowToggled)}
+			>
+				{translations.selectAllPages}
+			</MenuItem>
+		) : (
+			<></>
+		);
+	}, [page, rows, selectedRowIds, handleRowToggled, instance, translations]);
+
+	const ClearAllPages = useMemo(() => {
+		const hasMoreThanOnePage = page.length !== rows.length;
+		const someRowsAreSelected = rows.some(
+			(row) => selectedRowIds[row.id] && !row.original.disabled,
+		);
+
+		return hasMoreThanOnePage && someRowsAreSelected ? (
+			<MenuItem
+				onClick={() => setTableRowsSelected(instance, false, handleRowToggled)}
+			>
+				{translations.clearAllPages}
+			</MenuItem>
+		) : (
+			<></>
+		);
+	}, [page, rows, selectedRowIds, handleRowToggled, instance, translations]);
 
 	return (
 		<div className="table-selection-menu">
@@ -344,50 +393,108 @@ const TableSelectionMenu: TableHeaderComponentType = ({
 					/>
 				}
 			>
-				{isSinglePage ? (
-					<></>
-				) : (
-					<MenuItem
-						onClick={() =>
-							setPageRowsSelected(
-								instance,
-								!allPageEnabledRowsSelected,
-								handleRowToggled,
-							)
-						}
-					>
-						{allPageEnabledRowsSelected ? (
-							<>
-								{translations.clearPage} ({pageEnabledRowCount}{" "}
-								{translations.items})
-							</>
-						) : (
-							<>
-								{translations.selectPage} ({pageEnabledRowCount}{" "}
-								{translations.items})
-							</>
-						)}
-					</MenuItem>
-				)}
-
-				<MenuItem
-					disabled={allTableEnabledRowsAreSelected}
-					onClick={() => {
-						setTableRowsSelected(instance, true, handleRowToggled);
-					}}
-				>
-					{translations.selectAll} ({tableEnabledRowCount} {translations.items})
-				</MenuItem>
-
-				<MenuItem
-					disabled={selectedRowsCount === 0}
-					onClick={() => {
-						setTableRowsSelected(instance, false, handleRowToggled);
-					}}
-				>
-					{translations.clearAll} ({tableEnabledRowCount} {translations.items})
-				</MenuItem>
+				{SelectCurrentPage}
+				{ClearCurrentPage}
+				{SelectAllPages}
+				{ClearAllPages}
+				{/* {SelectAll} */}
+				{/* {ClearAll} */}
 			</Menu>
 		</div>
 	);
 };
+
+/*
+const selectedRowsCount = useMemo(
+	() => Object.keys(selectedRowIds).length,
+	[selectedRowIds],
+);
+
+const isSinglePage = useMemo(() => page.length === rows.length, [page, rows]);
+
+const [
+	pageEnabledRowCount,
+	allPageEnabledRowsSelected,
+	allPageRowsDeselected,
+] = useMemo(() => {
+	const enabledPageRows = page
+		.filter((row) => !row.original.disabled)
+		.map((row) => row.original);
+	const allPageRowsSelectedMemo =
+		enabledPageRows.length &&
+		enabledPageRows.every((row) => selectedRowIds[row.id]);
+	const allPageRowsDeselectedMemo = enabledPageRows.every(
+		(row) => !selectedRowIds[row.id],
+	);
+
+	return [
+		enabledPageRows.length,
+		allPageRowsSelectedMemo,
+		allPageRowsDeselectedMemo,
+	];
+}, [page, selectedRowIds]);
+
+const [tableEnabledRowCount, allTableEnabledRowsAreSelected] = useMemo(() => {
+	const enabledRows = rows.filter((row) => !row.original.disabled);
+	const enabledRowCount = enabledRows.length;
+	const rowsSelectedMemo = !!(
+		enabledRowCount && enabledRows.every((row) => selectedRowIds[row.id])
+	);
+
+	return [enabledRowCount, rowsSelectedMemo];
+}, [rows, selectedRowIds]);
+
+const checkboxCheckedValue = useMemo(() => {
+	return allPageEnabledRowsSelected
+		? true
+		: allPageRowsDeselected
+			? false
+			: "mixed";
+}, [allPageEnabledRowsSelected, allPageRowsDeselected]);
+*/
+
+/*
+{isSinglePage ? (
+	<></>
+) : (
+	<MenuItem
+		onClick={() =>
+			setPageRowsSelected(
+				instance,
+				!allPageEnabledRowsSelected,
+				handleRowToggled,
+			)
+		}
+	>
+		{allPageEnabledRowsSelected ? (
+			<>
+				{translations.clearPage} ({pageEnabledRowCount}{" "}
+				{translations.items})
+			</>
+		) : (
+			<>
+				{translations.selectPage} ({pageEnabledRowCount}{" "}
+				{translations.items})
+			</>
+		)}
+	</MenuItem>
+)}
+
+<MenuItem
+	disabled={allTableEnabledRowsAreSelected}
+	onClick={() => {
+		setTableRowsSelected(instance, true, handleRowToggled);
+	}}
+>
+	{translations.selectAll} ({tableEnabledRowCount} {translations.items})
+</MenuItem>
+
+<MenuItem
+	disabled={selectedRowsCount === 0}
+	onClick={() => {
+		setTableRowsSelected(instance, false, handleRowToggled);
+	}}
+>
+	{translations.clearAll} ({tableEnabledRowCount} {translations.items})
+</MenuItem>
+*/
