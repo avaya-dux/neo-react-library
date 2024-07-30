@@ -41,7 +41,7 @@ export const TableHeader: TableHeaderComponentType = ({
 	selectableRows,
 	translations,
 }) => {
-	const { rows, headers, toggleSortBy } = instance;
+	const { headers, toggleSortBy } = instance;
 
 	const {
 		allowColumnFilter,
@@ -51,7 +51,7 @@ export const TableHeader: TableHeaderComponentType = ({
 		clearSortByFuncRef,
 	} = useContext(FilterContext);
 
-	const shouldHaveCheckboxColumn = selectableRows !== "none" && rows.length > 0;
+	const shouldHaveCheckboxColumn = selectableRows !== "none";
 
 	return (
 		<thead>
@@ -424,6 +424,7 @@ const TableSelectionCheckboxAndMenu: TableHeaderComponentType = ({
 		<div className="table-selection-menu">
 			<Checkbox
 				checked={checkboxCheckedValue}
+				disabled={rows.length === 0}
 				aria-label={translations.selectPage}
 				onChange={() =>
 					setPageRowsSelected(
