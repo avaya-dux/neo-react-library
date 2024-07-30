@@ -273,27 +273,31 @@ const TableSelectionCheckboxAndMenu: TableHeaderComponentType = ({
 		state: { selectedRowIds },
 	} = instance;
 
-	// TODO: simplify
-	const [allPageEnabledRowsSelected, allPageRowsDeselected] = useMemo(() => {
+	const [checkboxCheckedValue, onClickCheckboxCheckedValue] = useMemo<
+		[boolean | "mixed", boolean]
+	>(() => {
 		const enabledPageRows = page
 			.filter((row) => !row.original.disabled)
 			.map((row) => row.original);
-		const allPageRowsSelectedMemo =
+
+		const allPageEnabledRowsSelected =
 			enabledPageRows.length &&
 			enabledPageRows.every((row) => selectedRowIds[row.id]);
-		const allPageRowsDeselectedMemo = enabledPageRows.every(
+
+		const allPageRowsDeselected = enabledPageRows.every(
 			(row) => !selectedRowIds[row.id],
 		);
 
-		return [allPageRowsSelectedMemo, allPageRowsDeselectedMemo];
-	}, [page, selectedRowIds]);
-	const checkboxCheckedValue = useMemo(() => {
-		return allPageEnabledRowsSelected
+		const checkboxValue = allPageEnabledRowsSelected
 			? true
 			: allPageRowsDeselected
 				? false
 				: "mixed";
-	}, [allPageEnabledRowsSelected, allPageRowsDeselected]);
+
+		const checkboxClickedValue = checkboxValue !== true;
+
+		return [checkboxValue, checkboxClickedValue];
+	}, [page, selectedRowIds]);
 
 	// multi-page options
 	const SelectCurrentPage = useMemo(() => {
@@ -427,7 +431,7 @@ const TableSelectionCheckboxAndMenu: TableHeaderComponentType = ({
 				onChange={() =>
 					setPageRowsSelected(
 						instance,
-						!allPageEnabledRowsSelected,
+						onClickCheckboxCheckedValue,
 						handleRowToggled,
 					)
 				}
