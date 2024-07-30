@@ -1,4 +1,4 @@
-import { type KeyboardEvent, useContext, useMemo, useState } from "react";
+import { type KeyboardEvent, useContext, useMemo } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
@@ -6,7 +6,6 @@ import { Menu, MenuButton, MenuItem } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
-import clsx from "clsx";
 import {
 	FilterContext,
 	calculateAriaSortValue,
@@ -14,6 +13,11 @@ import {
 	setTableRowsSelected,
 } from "../helpers";
 import type { TableHeaderProps } from "../types";
+
+// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
+type TableHeaderComponentType = <T extends Record<string, any>>(
+	props: TableHeaderProps<T>,
+) => JSX.Element;
 
 /**
  * There are more filtering examples to be found here:
@@ -25,63 +29,19 @@ import type { TableHeaderProps } from "../types";
  *
  * @example
  * <TableHeader
+ *  handleRowToggled={handleRowToggled}
+ *  selectableRows={selectableRows}
  *  instance={instance}
  *  translations={translations}
  * />
  */
-// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
-export const TableHeader = <T extends Record<string, any>>({
-	handleRowToggled = () => null,
+export const TableHeader: TableHeaderComponentType = ({
+	handleRowToggled,
 	instance,
 	selectableRows,
 	translations,
-}: TableHeaderProps<T>) => {
-	const {
-		headers,
-		page,
-		rows,
-		state: { selectedRowIds },
-		toggleSortBy,
-	} = instance;
-
-	const selectedRowsCount = useMemo(
-		() => Object.keys(selectedRowIds).length,
-		[selectedRowIds],
-	);
-
-	const isSinglePage = useMemo(() => page.length === rows.length, [page, rows]);
-
-	const [
-		pageEnabledRowCount,
-		allPageEnabledRowsSelected,
-		allPageRowsDeselected,
-	] = useMemo(() => {
-		const enabledPageRows = page
-			.filter((row) => !row.original.disabled)
-			.map((row) => row.original);
-		const allPageRowsSelectedMemo =
-			enabledPageRows.length &&
-			enabledPageRows.every((row) => selectedRowIds[row.id]);
-		const allPageRowsDeselectedMemo = enabledPageRows.every(
-			(row) => !selectedRowIds[row.id],
-		);
-
-		return [
-			enabledPageRows.length,
-			allPageRowsSelectedMemo,
-			allPageRowsDeselectedMemo,
-		];
-	}, [page, selectedRowIds]);
-
-	const [tableEnabledRowCount, allTableEnabledRowsAreSelected] = useMemo(() => {
-		const enabledRows = rows.filter((row) => !row.original.disabled);
-		const enabledRowCount = enabledRows.length;
-		const rowsSelectedMemo = !!(
-			enabledRowCount && enabledRows.every((row) => selectedRowIds[row.id])
-		);
-
-		return [enabledRowCount, rowsSelectedMemo];
-	}, [rows, selectedRowIds]);
+}) => {
+	const { headers, toggleSortBy } = instance;
 
 	const {
 		allowColumnFilter,
@@ -92,115 +52,30 @@ export const TableHeader = <T extends Record<string, any>>({
 	} = useContext(FilterContext);
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none";
-	const shouldHaveCheckbox = selectableRows === "multiple";
 
-	const checkboxCheckedValue = useMemo(() => {
-		return allPageEnabledRowsSelected
-			? true
-			: allPageRowsDeselected
-				? false
-				: "mixed";
-	}, [allPageEnabledRowsSelected, allPageRowsDeselected]);
-
-	const [checkBoxOver, setCheckBoxOver] = useState(false);
+	// TODO: update CSS so that we can remove this
+	// const [checkBoxOver, setCheckBoxOver] = useState(false);
 
 	return (
 		<thead>
 			<tr>
 				{draggableRows && (
-					<th
-						className={clsx(
-							"neo-table__dnd-th",
-							checkBoxOver && "neo-table__dnd-th__hover",
-						)}
-					>
+					<th className="neo-table__dnd-th">
 						<div role="button" aria-label={translations.dragHandle}>
 							&nbsp;
 						</div>
 					</th>
 				)}
+
 				{shouldHaveCheckboxColumn && (
-					<th
-						className="neo-table-checkbox-th"
-						onMouseOver={() => setCheckBoxOver(true)}
-						onFocus={() => setCheckBoxOver(true)}
-						onBlur={() => setCheckBoxOver(false)}
-						onMouseOut={() => setCheckBoxOver(false)}
-					>
-						{shouldHaveCheckbox && (
-							<div className="table-selection-menu">
-								<Checkbox
-									checked={checkboxCheckedValue}
-									aria-label={translations.selectPage}
-									onChange={() =>
-										setPageRowsSelected(
-											instance,
-											!allPageEnabledRowsSelected,
-											handleRowToggled,
-										)
-									}
-									value="all"
-								/>
-
-								<Menu
-									menuRootElement={
-										<button
-											type="button"
-											className="neo-table-th-select-all-btn neo-btn-tertiary neo-dropdown__link-header"
-											aria-label={translations.tableSelectionDropdown}
-										/>
-									}
-								>
-									{isSinglePage ? (
-										<></>
-									) : (
-										<MenuItem
-											onClick={() =>
-												setPageRowsSelected(
-													instance,
-													!allPageEnabledRowsSelected,
-													handleRowToggled,
-												)
-											}
-										>
-											{allPageEnabledRowsSelected ? (
-												<>
-													{translations.clearPage} ({pageEnabledRowCount}{" "}
-													{translations.items})
-												</>
-											) : (
-												<>
-													{translations.selectPage} ({pageEnabledRowCount}{" "}
-													{translations.items})
-												</>
-											)}
-										</MenuItem>
-									)}
-
-									<MenuItem
-										disabled={allTableEnabledRowsAreSelected}
-										onClick={() => {
-											setTableRowsSelected(instance, true, handleRowToggled);
-										}}
-									>
-										{translations.selectAll} ({tableEnabledRowCount}{" "}
-										{translations.items})
-									</MenuItem>
-
-									<MenuItem
-										disabled={selectedRowsCount === 0}
-										onClick={() => {
-											setTableRowsSelected(instance, false, handleRowToggled);
-										}}
-									>
-										{translations.clearAll} ({tableEnabledRowCount}{" "}
-										{translations.items})
-									</MenuItem>
-								</Menu>
-							</div>
-						)}
-					</th>
+					<CheckboxHeaderCell
+						handleRowToggled={handleRowToggled}
+						instance={instance}
+						selectableRows={selectableRows}
+						translations={translations}
+					/>
 				)}
+
 				{headers.map((column) => {
 					const {
 						canFilter,
@@ -244,11 +119,13 @@ export const TableHeader = <T extends Record<string, any>>({
 							setDataSyncOption("asc");
 							clearSortByFuncRef.current = clearSortBy;
 						};
+
 						const handleDescSort = () => {
 							toggleSortBy(column.id, true, false);
 							setDataSyncOption("desc");
 							clearSortByFuncRef.current = clearSortBy;
 						};
+
 						const onSpaceOrEnter = (
 							e: KeyboardEvent<HTMLDivElement>,
 							method: () => void,
@@ -354,5 +231,160 @@ export const TableHeader = <T extends Record<string, any>>({
 				})}
 			</tr>
 		</thead>
+	);
+};
+
+/**
+ * an empty `<th>` if `selectableRows === "multiple"`, else a `<th>` with a checkbox and a dropdown menu
+ */
+const CheckboxHeaderCell: TableHeaderComponentType = ({
+	handleRowToggled,
+	instance,
+	selectableRows,
+	translations,
+}) => {
+	const shouldHaveCheckbox = selectableRows === "multiple";
+
+	return (
+		<th className="neo-table-checkbox-th">
+			{shouldHaveCheckbox && (
+				<TableSelectionMenu
+					handleRowToggled={handleRowToggled}
+					instance={instance}
+					selectableRows={selectableRows}
+					translations={translations}
+				/>
+			)}
+		</th>
+	);
+};
+
+const TableSelectionMenu: TableHeaderComponentType = ({
+	handleRowToggled = () => null,
+	instance,
+	translations,
+}) => {
+	const {
+		page,
+		rows,
+		state: { selectedRowIds },
+	} = instance;
+
+	const selectedRowsCount = useMemo(
+		() => Object.keys(selectedRowIds).length,
+		[selectedRowIds],
+	);
+
+	const isSinglePage = useMemo(() => page.length === rows.length, [page, rows]);
+
+	const [
+		pageEnabledRowCount,
+		allPageEnabledRowsSelected,
+		allPageRowsDeselected,
+	] = useMemo(() => {
+		const enabledPageRows = page
+			.filter((row) => !row.original.disabled)
+			.map((row) => row.original);
+		const allPageRowsSelectedMemo =
+			enabledPageRows.length &&
+			enabledPageRows.every((row) => selectedRowIds[row.id]);
+		const allPageRowsDeselectedMemo = enabledPageRows.every(
+			(row) => !selectedRowIds[row.id],
+		);
+
+		return [
+			enabledPageRows.length,
+			allPageRowsSelectedMemo,
+			allPageRowsDeselectedMemo,
+		];
+	}, [page, selectedRowIds]);
+
+	const [tableEnabledRowCount, allTableEnabledRowsAreSelected] = useMemo(() => {
+		const enabledRows = rows.filter((row) => !row.original.disabled);
+		const enabledRowCount = enabledRows.length;
+		const rowsSelectedMemo = !!(
+			enabledRowCount && enabledRows.every((row) => selectedRowIds[row.id])
+		);
+
+		return [enabledRowCount, rowsSelectedMemo];
+	}, [rows, selectedRowIds]);
+
+	const checkboxCheckedValue = useMemo(() => {
+		return allPageEnabledRowsSelected
+			? true
+			: allPageRowsDeselected
+				? false
+				: "mixed";
+	}, [allPageEnabledRowsSelected, allPageRowsDeselected]);
+
+	return (
+		<div className="table-selection-menu">
+			<Checkbox
+				checked={checkboxCheckedValue}
+				aria-label={translations.selectPage}
+				onChange={() =>
+					setPageRowsSelected(
+						instance,
+						!allPageEnabledRowsSelected,
+						handleRowToggled,
+					)
+				}
+				value="all"
+			/>
+
+			<Menu
+				menuRootElement={
+					<button
+						type="button"
+						className="neo-table-th-select-all-btn neo-btn-tertiary neo-dropdown__link-header"
+						aria-label={translations.tableSelectionDropdown}
+					/>
+				}
+			>
+				{isSinglePage ? (
+					<></>
+				) : (
+					<MenuItem
+						onClick={() =>
+							setPageRowsSelected(
+								instance,
+								!allPageEnabledRowsSelected,
+								handleRowToggled,
+							)
+						}
+					>
+						{allPageEnabledRowsSelected ? (
+							<>
+								{translations.clearPage} ({pageEnabledRowCount}{" "}
+								{translations.items})
+							</>
+						) : (
+							<>
+								{translations.selectPage} ({pageEnabledRowCount}{" "}
+								{translations.items})
+							</>
+						)}
+					</MenuItem>
+				)}
+
+				<MenuItem
+					disabled={allTableEnabledRowsAreSelected}
+					onClick={() => {
+						setTableRowsSelected(instance, true, handleRowToggled);
+					}}
+				>
+					{translations.selectAll} ({tableEnabledRowCount} {translations.items})
+				</MenuItem>
+
+				<MenuItem
+					disabled={selectedRowsCount === 0}
+					onClick={() => {
+						setTableRowsSelected(instance, false, handleRowToggled);
+					}}
+				>
+					{translations.clearAll} ({tableEnabledRowCount} {translations.items})
+				</MenuItem>
+			</Menu>
+		</div>
 	);
 };
