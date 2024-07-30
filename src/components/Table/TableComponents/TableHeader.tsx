@@ -41,7 +41,7 @@ export const TableHeader: TableHeaderComponentType = ({
 	selectableRows,
 	translations,
 }) => {
-	const { headers, toggleSortBy } = instance;
+	const { rows, headers, toggleSortBy } = instance;
 
 	const {
 		allowColumnFilter,
@@ -51,7 +51,7 @@ export const TableHeader: TableHeaderComponentType = ({
 		clearSortByFuncRef,
 	} = useContext(FilterContext);
 
-	const shouldHaveCheckboxColumn = selectableRows !== "none";
+	const shouldHaveCheckboxColumn = selectableRows !== "none" && rows.length > 0;
 
 	// TODO: update CSS so that we can remove this
 	// const [checkBoxOver, setCheckBoxOver] = useState(false);
