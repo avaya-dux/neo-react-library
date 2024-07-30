@@ -53,9 +53,6 @@ export const TableHeader: TableHeaderComponentType = ({
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none" && rows.length > 0;
 
-	// TODO: update CSS so that we can remove this
-	// const [checkBoxOver, setCheckBoxOver] = useState(false);
-
 	return (
 		<thead>
 			<tr>
