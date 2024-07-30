@@ -18,12 +18,10 @@ export interface IToolbarTranslations extends ITableFilterTranslations {
 }
 
 export interface IBodyTranslations {
-	someItemsSelected?: string;
-	pageSelected?: string;
-	allSelected?: string;
-	clearSelection?: string;
-	selectAll?: string;
 	noDataAvailable?: string;
+	itemsSelected?: string;
+	clearAll?: string;
+	selectAll?: string;
 }
 
 export interface IPaginationTranslations {
