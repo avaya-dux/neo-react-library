@@ -235,7 +235,7 @@ export const TableHeader: TableHeaderComponentType = ({
 };
 
 /**
- * an empty `<th>` if `selectableRows === "multiple"`, else a `<th>` with a checkbox and a dropdown menu
+ * An empty `<th>` if `selectableRows === "multiple"`, else a `<th>` with a checkbox and a dropdown menu
  */
 const CheckboxHeaderCell: TableHeaderComponentType = ({
 	handleRowToggled,
@@ -259,6 +259,9 @@ const CheckboxHeaderCell: TableHeaderComponentType = ({
 	);
 };
 
+/**
+ * A checkbox and dropdown menu used to select or clear all rows in the table or on the current page.
+ */
 const TableSelectionMenu: TableHeaderComponentType = ({
 	handleRowToggled = () => null,
 	instance,
