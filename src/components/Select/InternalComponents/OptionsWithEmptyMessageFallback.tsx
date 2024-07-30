@@ -20,7 +20,7 @@ export const OptionsWithEmptyMessageFallback = () => {
 					/>
 				))
 			) : (
-				<InternalSelectOption disabled index={0} key="no-available-options">
+				<InternalSelectOption disabled index={-1} key="no-available-options">
 					{noOptionsMessage}
 				</InternalSelectOption>
 			)}
