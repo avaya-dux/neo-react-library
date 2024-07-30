@@ -142,10 +142,11 @@ export const ServerSidePagination = () => {
 	// biome-ignore lint/correctness/useExhaustiveDependencies: generated data doesn't change once created
 	const fetchData = useCallback(
 		(pageIndex: number, pageSize: number) => {
-			console.log("calling fetchData");
-			// This will get called when the table needs new data
+			// This will get called when the table needs new data,
+			// it's up to the developer to determine when to fetch it and how many pages or records to load.
+			// In our case we always load one page of data.
 			// You could fetch your data from literally anywhere,
-			// even a server. But for this example, we'll just fake it.
+			// like a server but for this example, we'll just mock it.
 
 			// Give this fetch an ID
 			const fetchId = ++fetchIdRef.current;
@@ -161,7 +162,6 @@ export const ServerSidePagination = () => {
 					// Your server could send back total page count.
 					// For now we'll just fake it, too
 					const newPageCount = Math.ceil(serverData.length / pageSize);
-					console.log("setting pageCount to: ", newPageCount);
 					setPageCount(newPageCount);
 				}
 			}, 500);
@@ -191,13 +191,13 @@ export const ServerSidePagination = () => {
 		<Table
 			data={data}
 			columns={columns}
-			manualPagination={true}
+			manualPagination={true} // Very important to set manualPagination to true.
 			initialStatePageSize={10}
 			pageCount={pageCount}
 			handlePageChange={fetchData}
 			itemsPerPageOptions={[5, 10, 20, 50]}
 			caption="Server Side Pagination Example"
-			summary="Choose from the following options"
+			summary="This table will load one page at a time."
 		/>
 	);
 };
