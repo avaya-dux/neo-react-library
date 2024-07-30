@@ -171,10 +171,9 @@ export const ServerSidePagination = () => {
 
 	useEffect(() => {
 		fetchData(0, 10);
-	},[fetchData])
+	}, [fetchData]);
 
-
-	const columns: Column<IRecordingTableMockData>[]= [
+	const columns: Column<IRecordingTableMockData>[] = [
 		...recordingColumns,
 		{
 			Cell: ({ value }: { value: IRecordingTableMockData["date"] }) => (
@@ -185,7 +184,7 @@ export const ServerSidePagination = () => {
 			disableFilters: true,
 			sortType: "datetime",
 		},
-	]
+	];
 
 	return (
 		<Table
