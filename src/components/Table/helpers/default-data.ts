@@ -20,16 +20,19 @@ export const translations: ITableTranslations = {
 	header: {
 		clearSort: "Clear Sort",
 		filterColumn: "Filter Column",
-		clearAll: "Clear all",
-		selectAll: "Select all",
-		clearPage: "Clear page",
-		selectPage: "Select page",
-		items: "items",
-		tableSelectionDropdown: "Table Selection Dropdown",
 		sortAscending: "A - Z",
 		sortDescending: "Z - A",
 		toggleSortBy: "Toggle SortBy",
 		dragHandle: "Drag Handle",
+
+		// menu translations
+		tableSelectionDropdown: "Table Selection Dropdown",
+		selectPage: "Select all items on current page",
+		clearPage: "Clear all items on current page",
+		selectAllPages: "Select all items on all pages",
+		clearAllPages: "Clear all items on all pages",
+		selectAll: "Select all items",
+		clearAll: "Clear all items",
 	},
 	body: {
 		noDataAvailable: "no data available",
