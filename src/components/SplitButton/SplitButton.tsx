@@ -1,10 +1,10 @@
 import clsx from "clsx";
+import { Icon } from "components";
 import { Button } from "components/Button";
 import { Menu, MenuButton, MenuItem, type MenuProps } from "components/Menu";
 import type { MenuChildrenType } from "components/Menu/MenuTypes";
 import { type DetailedHTMLProps, type HTMLAttributes, useMemo } from "react";
 import type { IconNamesType } from "utils";
-import { Icon } from "components";
 import { verifyFirstMenuItem } from "./helper";
 
 /**

@@ -33,10 +33,10 @@
   resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.13.tgz#5e2bf23983dc2587c7cb1edc3dd433e16ccd251a"
   integrity sha512-9hvug4QR5IXYcafzto8ETxEvMoadCD/AfDjClJEfyf51DIrCZ3cAyOWMBmRLdzA8Qi0EV8IXHm+qvGXuEKz/6Q==
 
-"@avaya/neo@3.81.11":
-  version "3.81.11"
-  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.11.tgz#f1a14162ac30a0c9287e2e97cea0398e88396445"
-  integrity sha512-Tq1LMGg/j4J/B/vsiFqiSyTuCaff0VdtYojKFUsUI8eCCA+U3rfK7CI1dNEpsw4LrF/O5NHZTyC5ZmHcWJCxAA==
+"@avaya/neo@3.81.12":
+  version "3.81.12"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.12.tgz#a078a9993c6637452949fa4f25e613174cdd83e0"
+  integrity sha512-e6rKTm1+2n2WXN0ejOcH68BdZDK4hvNBm6xcnPIEXuQE/rNKhWIWwdcDR5s+QxkztwktzHWGXzpSfcfZ2lvBzA==
 
 "@aw-web-design/x-default-browser@1.4.126":
   version "1.4.126"
@@ -14475,6 +14475,7 @@ worker-farm@^1.7.0:
     errno "~0.1.7"
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
