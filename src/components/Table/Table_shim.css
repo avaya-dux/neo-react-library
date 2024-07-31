@@ -90,7 +90,7 @@
 }
 
 /* set background color on dnd-th when checkbox-th is hovered */
-.neo-table th.neo-table__dnd-th:has(~ .neo-table-checkbox-th:hover) {
+.neo-table th.neo-table__dnd-th:has(+ .neo-table-checkbox-th:hover) {
 	background-color: inherit;
 }
 
