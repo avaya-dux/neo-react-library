@@ -18,12 +18,10 @@ export interface IToolbarTranslations extends ITableFilterTranslations {
 }
 
 export interface IBodyTranslations {
-	someItemsSelected?: string;
-	pageSelected?: string;
-	allSelected?: string;
-	clearSelection?: string;
-	selectAll?: string;
 	noDataAvailable?: string;
+	itemsSelected?: string;
+	clearAll?: string;
+	selectAll?: string;
 }
 
 export interface IPaginationTranslations {
@@ -37,15 +35,19 @@ export interface IPaginationTranslations {
 export interface ITableHeaderTranslations {
 	clearSort?: string;
 	filterColumn?: string;
-	clearAll: string;
-	selectAll: string;
-	clearPage: string;
-	selectPage: string;
-	tableSelectionDropdown: string;
 	sortAscending?: string;
 	sortDescending?: string;
 	toggleSortBy?: string;
 	dragHandle?: string;
+
+	// menu translations
+	tableSelectionDropdown: string;
+	selectPage: string;
+	clearPage: string;
+	selectAllPages: string;
+	clearAllPages: string;
+	selectAll: string;
+	clearAll: string;
 }
 
 export interface ITableTranslations {

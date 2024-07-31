@@ -136,17 +136,25 @@ describe("Table", () => {
 		it("does not update `pageIndex` when all data is removed (refreshed)", async () => {
 			render(<EditableData />);
 
-			const refreshButton = screen.getByLabelText("Refresh");
-
+			// move from the first page to the second page
 			expect(screen.getByText("1")).toHaveClass(selectedPageClass);
+			const nextPageButton = screen.getByLabelText("next");
+			await user.click(nextPageButton);
+			expect(screen.getByText("2")).toHaveClass(selectedPageClass);
 
-			// refresh data, removing all data and then adding default data back in
+			// refresh data shows "no data available", then shows the last select page
+			const refreshButton = screen.getByLabelText("Refresh");
 			await user.click(refreshButton);
 			expect(screen.getByText("no data available")).toBeVisible();
-			await waitFor(() => {
-				expect(screen.getByText("1")).toBeVisible();
-				expect(screen.getByText("1")).toHaveClass(selectedPageClass);
-			});
+			await waitFor(
+				() => {
+					expect(screen.getByText("1")).toBeVisible();
+					expect(screen.getByText("1")).not.toHaveClass(selectedPageClass);
+					expect(screen.getByText("2")).toBeVisible();
+					expect(screen.getByText("2")).toHaveClass(selectedPageClass);
+				},
+				{ timeout: 5000 },
+			);
 		});
 
 		it("updates `pageIndex` if data is removed, re-added, and new data set has fewer pages", async () => {
@@ -390,7 +398,7 @@ describe("Table", () => {
 				1,
 			);
 			expect(
-				screen.getByText(FilledFields.translations.body.clearSelection),
+				screen.getByText(FilledFields.translations.body.clearAll),
 			).toBeVisible();
 		});
 
@@ -403,7 +411,7 @@ describe("Table", () => {
 			);
 			await user.click(dropdown);
 			const selectAllRows = screen.getByText(
-				`${FilledFields.translations.header.selectAll} (10)`,
+				FilledFields.translations.header.selectAllPages,
 			);
 			await user.click(selectAllRows);
 
@@ -412,12 +420,12 @@ describe("Table", () => {
 				1,
 			);
 			expect(
-				screen.getByText(FilledFields.translations.body.clearSelection),
+				screen.getByText(FilledFields.translations.body.clearAll),
 			).toBeVisible();
 
 			// click the 'clear-row' button
 			const clearRowButton = screen.getByText(
-				FilledFields.translations.body.clearSelection,
+				FilledFields.translations.body.clearAll,
 			);
 			await user.click(clearRowButton);
 
@@ -551,7 +559,7 @@ describe("Table", () => {
 			await user.click(dropdown);
 
 			const selectPageRows = screen.getByText(
-				`${FilledFields.translations.header.selectPage} (2)`,
+				FilledFields.translations.header.selectPage,
 			);
 			await user.click(selectPageRows);
 
@@ -821,7 +829,7 @@ describe("Table", () => {
 			);
 			await user.click(dropdown);
 			const selectAllRows = screen.getByText(
-				`${FilledFields.translations.header.selectAll} (8)`,
+				FilledFields.translations.header.selectAllPages,
 			);
 			await user.click(selectAllRows);
 
@@ -846,7 +854,7 @@ describe("Table", () => {
 			);
 			await user.click(dropdown);
 			const selectAllRows = screen.getByText(
-				`${FilledFields.translations.header.selectPage} (3)`,
+				FilledFields.translations.header.selectPage,
 			);
 			await user.click(selectAllRows);
 
