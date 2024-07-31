@@ -1,5 +1,5 @@
 import type { Meta, Story } from "@storybook/react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Column, ColumnInstance } from "react-table";
 
 import {
@@ -23,7 +23,13 @@ import { Button } from "components/Button";
 import type { IconNamesType } from "utils";
 
 import { Table, type TableProps } from "./";
-import { FilledFields, type IDataTableMockData } from "./helpers";
+import {
+	FilledFields,
+	type IDataTableMockData,
+	type IRecordingTableMockData,
+	makeData,
+	recordingColumns,
+} from "./helpers";
 
 export default {
 	title: "Components/Table",
@@ -124,6 +130,78 @@ export const WithIconButton = () => (
 		data={[...FilledFields.data]}
 	/>
 );
+
+export const ServerSidePagination = () => {
+	// Let's simulate a large dataset on the server with 10k records
+	const numOfRecords = 10000;
+	const serverData = makeData(numOfRecords);
+
+	const [data, setData] = useState<IRecordingTableMockData[]>([]);
+	const [pageCount, setPageCount] = useState(0);
+	const fetchIdRef = useRef(0);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: generated data doesn't change once created
+	const fetchData = useCallback(
+		(pageIndex: number, pageSize: number) => {
+			// This will get called when the table needs new data,
+			// it's up to the developer to determine when to fetch it and how many pages or records to load.
+			// In our case we always load one page of data.
+			// You could fetch your data from literally anywhere,
+			// like a server but for this example, we'll just mock it.
+
+			// Give this fetch an ID
+			const fetchId = ++fetchIdRef.current;
+
+			// We'll set a delay to simulate a server here
+			setTimeout(() => {
+				// Only update the data if this is the latest fetch
+				if (fetchId === fetchIdRef.current) {
+					const startRow = pageSize * pageIndex;
+					const endRow = startRow + pageSize;
+					setData(serverData.slice(startRow, endRow));
+
+					// Your server could send back total page count.
+					// For now we'll just fake it, too
+					const newPageCount = Math.ceil(serverData.length / pageSize);
+					setPageCount(newPageCount);
+				}
+			}, 500);
+		},
+		[fetchIdRef, serverData.length],
+	);
+
+	useEffect(() => {
+		fetchData(0, 10);
+	}, [fetchData]);
+
+	const columns: Column<IRecordingTableMockData>[] = [
+		...recordingColumns,
+		{
+			Cell: ({ value }: { value: IRecordingTableMockData["date"] }) => (
+				<>{value?.toLocaleDateString()}</>
+			),
+			Header: "Date recorded",
+			accessor: "date",
+			disableFilters: true,
+			sortType: "datetime",
+		},
+	];
+
+	return (
+		<Table
+			data={data}
+			columns={columns}
+			manualPagination={true} // Very important to set manualPagination to true.
+			manualRowCount={numOfRecords} // Must provide total row count when using server side pagination.
+			initialStatePageSize={10}
+			pageCount={pageCount}
+			handlePageChange={fetchData}
+			itemsPerPageOptions={[5, 10, 20, 50]}
+			caption="Server Side Pagination Example"
+			summary="This table will load one page at a time."
+		/>
+	);
+};
 
 export const AdvancedFilteringAndSorting = () => {
 	const columns: Array<Column<IDataTableMockData>> = [

@@ -101,6 +101,9 @@ export const Table = <T extends Record<string, any>>({
 	readonly = false,
 	rowHeight = "large",
 	selectableRows = "none",
+	manualPagination: overridePagination = false,
+	manualRowCount = 0,
+	pageCount: manualPageCount,
 	showPagination = true,
 	draggableRows = false,
 	pushPaginationDown = false,
@@ -130,6 +133,8 @@ export const Table = <T extends Record<string, any>>({
 		{
 			columns,
 			data,
+			manualPagination: overridePagination,
+			pageCount: overridePagination ? manualPageCount : -1,
 			defaultColumn: {
 				maxWidth: 300,
 				minWidth: 30,
@@ -161,7 +166,7 @@ export const Table = <T extends Record<string, any>>({
 		prepareRow,
 		pageCount,
 	} = instance;
-	const rowCount = rows.length;
+	const rowCount = overridePagination ? manualRowCount : rows.length;
 
 	const [dataSyncOption, setDataSyncOption] =
 		useState<DataSyncOptionType>("no");
@@ -210,7 +215,6 @@ export const Table = <T extends Record<string, any>>({
 		const currentPage = pageIndex + 1;
 		if (currentPage > pageCount) {
 			const finalPageIndex = Math.max(0, pageCount - 1); // index is 0-based
-
 			gotoPage(finalPageIndex);
 			setRootLevelPageIndex(finalPageIndex);
 			handlePageChange(finalPageIndex, pageSize);
@@ -416,6 +420,7 @@ export const Table = <T extends Record<string, any>>({
 							itemCount={rowCount}
 							itemsPerPage={pageSize}
 							itemsPerPageOptions={itemsPerPageOptions}
+							manualPageCount={pageCount}
 							onPageChange={(e, newIndex) => {
 								e?.preventDefault();
 								const nextIndex = Math.max(0, newIndex - 1);
