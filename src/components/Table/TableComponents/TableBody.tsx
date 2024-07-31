@@ -85,7 +85,6 @@ const ClearSelectionRow: TableBodyComponentType = ({
 
 	const {
 		headers,
-		page,
 		rows,
 		state: { selectedRowIds },
 	} = instance;
@@ -100,70 +99,35 @@ const ClearSelectionRow: TableBodyComponentType = ({
 		return headers.length + checkboxColumns + dragColumn;
 	}, [draggableRows, headers.length, shouldShowCheckbox]);
 
-	const [allPageEnabledRowsSelected, allTableEnabledRowsAreSelected] =
-		useMemo(() => {
-			const enabledPageRows = page
-				.filter((row) => !row.original.disabled)
-				.map((row) => row.original);
-			const allPageEnabledRowsSelectedMemo =
-				enabledPageRows.length &&
-				enabledPageRows.every((row) => selectedRowIds[row.id]);
+	const allTableEnabledRowsAreSelected = useMemo(() => {
+		const enabledTableRows = rows.filter((row) => !row.original.disabled);
+		const enabledTableRowCount = enabledTableRows.length;
+		const enabledTableRowsSelected =
+			enabledTableRowCount &&
+			enabledTableRows.every((row) => selectedRowIds[row.id]);
 
-			const enabledTableRows = rows.filter((row) => !row.original.disabled);
-			const enabledTableRowCount = enabledTableRows.length;
-			const enabledTableRowsSelected =
-				enabledTableRowCount &&
-				enabledTableRows.every((row) => selectedRowIds[row.id]);
-
-			return [allPageEnabledRowsSelectedMemo, enabledTableRowsSelected];
-		}, [page, rows, selectedRowIds]);
+		return enabledTableRowsSelected;
+	}, [rows, selectedRowIds]);
 
 	const selectionButton = useMemo(() => {
-		if (allTableEnabledRowsAreSelected) {
-			return (
-				<>
-					<span>
-						{translations.allSelected} ({selectedRowCount})
-						<ClearButton
-							onClick={() =>
-								setTableRowsSelected(instance, false, handleRowToggled)
-							}
-						>
-							{translations.clearSelection}
-						</ClearButton>
-					</span>
-				</>
-			);
-		}
-
-		if (!allTableEnabledRowsAreSelected && allPageEnabledRowsSelected) {
-			return (
-				<>
-					<span>
-						{translations.pageSelected} ({selectedRowCount})
-						<ClearButton
-							onClick={() =>
-								setTableRowsSelected(instance, true, handleRowToggled)
-							}
-						>
-							{translations.selectAll}
-						</ClearButton>
-					</span>
-				</>
-			);
-		}
-
 		return (
 			<>
 				<span>
-					{translations.someItemsSelected} ({selectedRowCount})
+					{translations.itemsSelected} ({selectedRowCount}).
 					<ClearButton
 						onClick={() =>
-							setTableRowsSelected(instance, true, handleRowToggled)
+							setTableRowsSelected(
+								instance,
+								!allTableEnabledRowsAreSelected,
+								handleRowToggled,
+							)
 						}
 					>
-						{translations.selectAll}
-					</ClearButton>
+						{allTableEnabledRowsAreSelected
+							? translations.clearAll
+							: translations.selectAll}
+					</ClearButton>{" "}
+					({rows.length}).
 				</span>
 			</>
 		);
@@ -172,7 +136,7 @@ const ClearSelectionRow: TableBodyComponentType = ({
 		translations,
 		selectedRowCount,
 		allTableEnabledRowsAreSelected,
-		allPageEnabledRowsSelected,
+		rows.length,
 		handleRowToggled,
 	]);
 
