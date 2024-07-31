@@ -179,9 +179,6 @@ export const Table = <T extends Record<string, any>>({
 		[rows, originalData, dataSyncOption],
 	);
 
-	console.log("after instance pageCount:", pageCount);
-	console.log("overridePagination:", overridePagination);
-
 	logger.debug(
 		"Table: originalData",
 		originalData.map((row) => row.id),
@@ -212,17 +209,12 @@ export const Table = <T extends Record<string, any>>({
 
 	// this `useEffect` handles the edge cases of page change logic
 	useEffect(() => {
-		console.log("pageIndex:", pageIndex);
-		console.log("pageCount:", pageCount);
-		console.log("pageSize:", pageSize);
 		if (pageCount === 0) return; // no table data, ignore (effectively memoizing `pageIndex`)
 
 		// use-case: user deletes all rows on the last page while on the last page
 		const currentPage = pageIndex + 1;
 		if (currentPage > pageCount) {
 			const finalPageIndex = Math.max(0, pageCount - 1); // index is 0-based
-			console.log({ finalPageIndex });
-
 			gotoPage(finalPageIndex);
 			setRootLevelPageIndex(finalPageIndex);
 			handlePageChange(finalPageIndex, pageSize);
@@ -432,7 +424,6 @@ export const Table = <T extends Record<string, any>>({
 							onPageChange={(e, newIndex) => {
 								e?.preventDefault();
 								const nextIndex = Math.max(0, newIndex - 1);
-								console.log("nextIndex:", nextIndex);
 								gotoPage(nextIndex);
 								setRootLevelPageIndex(nextIndex);
 								handlePageChange(nextIndex, pageSize);
