@@ -1,10 +1,12 @@
 [Link to updated components in Deploy Preview](UPDATEMEWITHALINK)
+[Link to Figma reference](UPDATEMEWITHALINK)
 
 **Before tagging the team for a review, I have done the following:**
 
 - [ ] run `yarn all` locally: ensures that all tests pass, formatting is done, types pass, and builds pass
 - [ ] reviewed my code changes
-- [ ] updated the link at the top of this PR (or remove it if not applicable)
+- [ ] updated the Deploy Preview link at the top of this PR (or remove it if not applicable)
+- [ ] updated the Figma referense link at the top of this PR (or remove it if not applicable)
 - [ ] added any important information to this PR (description, images, GIFs, ect.)
 - [ ] done an accessibility check on my work (tested with Chrome's `axe Dev Tools`, Mac's VoiceOver, etc.)
 - [ ] tagged `@avaya-dux/dux-design` if any visual changes have occurred
