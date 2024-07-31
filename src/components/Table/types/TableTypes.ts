@@ -63,6 +63,7 @@ export type TableProps<T extends AnyRecord> = {
 	caption?: string;
 	id?: string;
 	manualPagination?: boolean;
+	manualRowCount?: number;
 	showPagination?: boolean;
 	pushPaginationDown?: boolean;
 	draggableRows?: boolean;

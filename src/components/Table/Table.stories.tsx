@@ -133,7 +133,8 @@ export const WithIconButton = () => (
 
 export const ServerSidePagination = () => {
 	// Let's simulate a large dataset on the server with 10k records
-	const serverData = makeData(10000);
+	const numOfRecords = 10000;
+	const serverData = makeData(numOfRecords);
 
 	const [data, setData] = useState<IRecordingTableMockData[]>([]);
 	const [pageCount, setPageCount] = useState(0);
@@ -191,6 +192,7 @@ export const ServerSidePagination = () => {
 			data={data}
 			columns={columns}
 			manualPagination={true} // Very important to set manualPagination to true.
+			manualRowCount={numOfRecords} // Must provide total row count when using server side pagination.
 			initialStatePageSize={10}
 			pageCount={pageCount}
 			handlePageChange={fetchData}
