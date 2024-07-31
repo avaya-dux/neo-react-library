@@ -134,7 +134,7 @@ export const Table = <T extends Record<string, any>>({
 			columns,
 			data,
 			manualPagination: overridePagination,
-			pageCount: overridePagination ? manualPageCount : undefined,
+			pageCount: overridePagination ? manualPageCount : -1,
 			defaultColumn: {
 				maxWidth: 300,
 				minWidth: 30,
