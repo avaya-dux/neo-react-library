@@ -356,11 +356,11 @@ const TableSelectionCheckboxAndMenu: TableHeaderComponentType = ({
 
 	const ClearAllPages = useMemo(() => {
 		const hasMoreThanOnePage = page.length !== rows.length;
-		const someRowsAreSelected = rows.some(
-			(row) => selectedRowIds[row.id] && !row.original.disabled,
+		const someRowsAreSelectedThatAreNotOnCurrentPage = rows.some(
+			(row) => selectedRowIds[row.id] && !page.find((p) => p.id === row.id),
 		);
 
-		return hasMoreThanOnePage && someRowsAreSelected ? (
+		return hasMoreThanOnePage && someRowsAreSelectedThatAreNotOnCurrentPage ? (
 			<MenuItem
 				onClick={() => setTableRowsSelected(instance, false, handleRowToggled)}
 			>
