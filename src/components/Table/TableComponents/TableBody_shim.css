@@ -7,7 +7,9 @@
 .neo-table tr.clear-row:hover {
 	background-color: var(--neo-color-blue-100);
 }
-
+.neo-dark .neo-table tr.clear-row {
+	background-color: var(--neo-color-blue-800);
+}
 @media (prefers-color-scheme: dark) {
 	:root .neo-dynamic .neo-table tr.clear-row,
 	:root .neo-dynamic .neo-table tr.clear-row:hover {
@@ -20,4 +22,14 @@
 	transition: none;
 	background-color: transparent;
 	background-image: none;
+	color: var(--neo-color-blue-600);
+}
+.neo-dark .neo-table tr.clear-row button.neo-table-link-btn {
+	color: var(--neo-color-blue-300);
+}
+@media (prefers-color-scheme: dark) {
+	:root .neo-dark .neo-table tr.clear-row button.neo-table-link-btn,
+	:root .neo-dynamic .neo-table tr.clear-row button.neo-table-link-btn {
+		color: var(--neo-color-blue-300);
+	}
 }
