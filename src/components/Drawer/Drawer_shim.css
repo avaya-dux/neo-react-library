@@ -5,7 +5,7 @@
 	bottom: 0px;
 	width: 20rem;
 	max-height: 100vh;
-	max-width: 40rem;
+	max-width: 80%;
 
 	transition: all 0.3s ease-in-out;
 	transform: translate(20rem);
@@ -38,10 +38,11 @@
 .neo-drawer__header {
 	display: flex;
 	justify-content: space-between;
+	border-bottom: 1px solid #f1f1f1;
 	padding-inline-start: 1.5rem;
 	padding-inline-end: 1.5rem;
-	padding-top: 0.75rem;
-	padding-bottom: 0.75rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
 }
 
 .neo-drawer__header .neo-drawer__header--left {
@@ -95,7 +96,7 @@
 
 .neo-drawer__actions {
 	display: flex;
-	border-top: 1px solid #c9c9c9;
+	border-top: 1px solid #f1f1f1;
 	padding-inline-start: 1.5rem;
 	padding-inline-end: 1.5rem;
 	padding-top: 1rem;
