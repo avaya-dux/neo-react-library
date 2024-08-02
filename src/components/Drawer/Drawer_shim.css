@@ -38,7 +38,7 @@
 .neo-drawer__header {
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px solid #f1f1f1;
+	border-bottom: 1px solid var(--neo-color-base-100);
 	padding-inline-start: 1.5rem;
 	padding-inline-end: 1.5rem;
 	padding-top: 1rem;
@@ -96,7 +96,7 @@
 
 .neo-drawer__actions {
 	display: flex;
-	border-top: 1px solid #f1f1f1;
+	border-top: 1px solid var(--neo-color-base-100);
 	padding-inline-start: 1.5rem;
 	padding-inline-end: 1.5rem;
 	padding-top: 1rem;
