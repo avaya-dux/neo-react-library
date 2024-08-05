@@ -8,7 +8,8 @@
 }
 
 .neo-btn-tbl-toolbar{
-	min-height: 32px;
+	max-height: 32px;
+	max-width: 32px;
 }
 
 .neo-table td .neo-btn.neo-btn-square.neo-icon-btn,
