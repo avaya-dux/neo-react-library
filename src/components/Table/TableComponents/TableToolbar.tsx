@@ -140,6 +140,8 @@ export const TableToolbar = <T extends Record<string, any>>({
 						icon="refresh"
 						onClick={handleRefresh}
 						shape="square"
+						className="neo-btn-tbl-toolbar"
+						size="large"
 						variant="tertiary"
 					/>
 				)}
@@ -153,6 +155,8 @@ export const TableToolbar = <T extends Record<string, any>>({
 								aria-label={translations.selectRowHeight || "Select row height"}
 								variant="tertiary"
 								shape="square"
+								className="neo-btn-tbl-toolbar"
+								size="large"
 							/>
 						}
 					>

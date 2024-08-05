@@ -768,6 +768,7 @@ export const DisabledRows = () => {
 				columns={FilledFields.columns}
 				data={data}
 				readonly={readonly}
+				allowColumnFilter
 				selectableRows="multiple"
 				initialStatePageSize={5}
 				draggableRows
