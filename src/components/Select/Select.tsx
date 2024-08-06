@@ -1,13 +1,14 @@
 import { Children, useEffect, useId, useMemo, useState } from "react";
+import isEqual from "react-fast-compare";
 
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 import { handleAccessbilityError } from "utils/accessibilityUtils";
 import { useIsInitialRender } from "utils/hooks/useIsInitialRender";
 
-import isEqual from "react-fast-compare";
 import { InternalSelect } from "./InternalComponents";
 import { SelectContext } from "./utils/SelectContext";
-import type { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
+
+import type { SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
 
 import log from "loglevel";
