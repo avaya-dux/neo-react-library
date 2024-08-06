@@ -53,7 +53,7 @@ export const TableFilter = <T extends Record<string, any>>({
 				icon="filter"
 				variant="tertiary"
 				shape="square"
-				className="neo-btn-tbl-toolbar"
+				className="neo-table__toolbar-btn"
 				size="large"
 				onClick={toggleFilterSheetVisible}
 			/>
