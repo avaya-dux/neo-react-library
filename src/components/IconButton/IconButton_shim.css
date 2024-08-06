@@ -7,11 +7,6 @@
 	font-size: 22px;
 }
 
-.neo-table__toolbar-btn{
-	max-height: 32px;
-	max-width: 32px;
-}
-
 .neo-table td .neo-btn.neo-btn-square.neo-icon-btn,
 .neo-table tr:focus-within:not([class*="disabled"]) td .neo-btn.neo-btn-square.neo-icon-btn,
 .neo-table tr:hover:not([class*="disabled"]) td .neo-btn.neo-btn-square.neo-icon-btn {

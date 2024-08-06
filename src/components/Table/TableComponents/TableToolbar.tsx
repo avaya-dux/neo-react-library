@@ -8,6 +8,7 @@ import { TextInput } from "components/TextInput";
 import { FilterContext } from "../helpers";
 import type { TableToolbarProps } from "../types";
 import { TableFilter } from "./TableFilter";
+import "./TableToolbar_shim.css";
 
 /**
  * TableToolbar is used by the Table component to render the search and action inputs for the table
