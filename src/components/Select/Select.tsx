@@ -15,6 +15,7 @@ const logger = log.getLogger("select-logger");
 logger.disableAll();
 
 import "./Select_shim.css";
+import { useSelectedItems } from "./utils/useSelectedItems";
 
 /**
  * The `Select` component allows the user to select one or more options from a list
@@ -116,19 +117,14 @@ export const Select = (props: SelectProps) => {
 		}
 	}, [options]);
 
-	const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);
+	const [selectedItems, setSelectedItems] = useSelectedItems({
+		defaultValue,
+		options,
+		multiple,
+	});
 	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
 	useEffect(() => {
-		if (isInitialRender && defaultValue) {
-			const userSelectedOptions = options.filter((option) =>
-				multiple
-					? defaultValue.includes(option.value as string)
-					: defaultValue === option.value,
-			);
-			setSelectedItems(userSelectedOptions);
-		} else if (isInitialRender && options.some((o) => o.selected)) {
-			setSelectedItems(options.filter((option) => option.selected));
-		} else if (!isInitialRender || value) {
+		if (!isInitialRender || value) {
 			const selectionHasChanged = multiple
 				? selectedItems.length !== value?.length ||
 					!selectedItems.every((item) => value.includes(item.value as string))
