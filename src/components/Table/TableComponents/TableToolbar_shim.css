@@ -1,0 +1,9 @@
+.neo-table__toolbar-btn {
+	max-height: 32px;
+	max-width: 32px;
+	margin-left: 8px;
+}
+
+.neo-table__actions .neo-table__actions--right .neo-form {
+	margin-right: 0;
+}

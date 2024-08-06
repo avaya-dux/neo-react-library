@@ -8,6 +8,7 @@ import { TextInput } from "components/TextInput";
 import { FilterContext } from "../helpers";
 import type { TableToolbarProps } from "../types";
 import { TableFilter } from "./TableFilter";
+import "./TableToolbar_shim.css";
 
 /**
  * TableToolbar is used by the Table component to render the search and action inputs for the table
@@ -140,6 +141,8 @@ export const TableToolbar = <T extends Record<string, any>>({
 						icon="refresh"
 						onClick={handleRefresh}
 						shape="square"
+						className="neo-table__toolbar-btn"
+						size="large"
 						variant="tertiary"
 					/>
 				)}
@@ -153,6 +156,8 @@ export const TableToolbar = <T extends Record<string, any>>({
 								aria-label={translations.selectRowHeight || "Select row height"}
 								variant="tertiary"
 								shape="square"
+								className="neo-table__toolbar-btn"
+								size="large"
 							/>
 						}
 					>
