@@ -1,11 +1,7 @@
 import { useContext } from "react";
 import type { TableInstance } from "react-table";
 
-import { Button } from "components/Button";
-import { Checkbox } from "components/Checkbox";
-import { IconButton } from "components/IconButton";
-import { Sheet } from "components/Sheet";
-
+import { Button, Checkbox, Drawer, IconButton } from "components";
 import { FilterContext, translations as defaultTranslations } from "../helpers";
 import type { ITableFilterTranslations } from "../types";
 
@@ -21,6 +17,7 @@ export const TableFilter = <T extends Record<string, any>>({
 	instance,
 }: TableFilterProps<T>) => {
 	// translations
+	const apply = translations.apply || defaultTranslations.toolbar.apply;
 	const clear = translations.clear || defaultTranslations.toolbar.clear;
 	const close =
 		translations.close || defaultTranslations.toolbar.close || "Close";
@@ -30,20 +27,37 @@ export const TableFilter = <T extends Record<string, any>>({
 		"Filter Columns";
 
 	const { allColumns, setHiddenColumns } = instance;
+	console.log({instance});
 
 	const { filterSheetVisible, toggleFilterSheetVisible } =
 		useContext(FilterContext);
 
-	const buttons = [
-		<IconButton
-			aria-label={close}
-			icon="close"
-			shape="circle"
+	const actionButtons = [
+		<Button
+			aria-label={apply}
 			style={{ color: "black" }}
+			variant="primary"
+			onClick={toggleFilterSheetVisible}
+			key="table-filter-apply-button"
+		>
+			{apply}
+		</Button>,
+		<Button
+			aria-label={clear}
+			variant="secondary"
+			onClick={() => setHiddenColumns([])}
+			key="table-filter-reset-icon-button"
+		>
+			{clear}
+		</Button>,
+		<Button
+			aria-label={close}
 			variant="tertiary"
 			onClick={toggleFilterSheetVisible}
-			key="table-filter-close-icon-button"
-		/>,
+			key="table-filter-close-button"
+		>
+			{close}
+		</Button>,
 	];
 
 	return (
@@ -58,12 +72,10 @@ export const TableFilter = <T extends Record<string, any>>({
 				onClick={toggleFilterSheetVisible}
 			/>
 
-			<Sheet
-				actions={buttons}
-				className="neo-table__filters--sheet"
-				open={filterSheetVisible}
-				slide={filterSheetVisible}
+			<Drawer
 				title={filterColumns}
+				open={filterSheetVisible}
+				actions={actionButtons}
 			>
 				<section>
 					{allColumns.map((column) => (
@@ -72,29 +84,7 @@ export const TableFilter = <T extends Record<string, any>>({
 						</Checkbox>
 					))}
 				</section>
-
-				<div
-					className="neo-table__filters--sheet__footer"
-					style={{ flexWrap: "wrap" }}
-				>
-					<Button
-						onClick={() => setHiddenColumns([])}
-						size="wide"
-						status="alert"
-						variant="tertiary"
-					>
-						{clear}
-					</Button>
-
-					<Button
-						onClick={toggleFilterSheetVisible}
-						size="wide"
-						variant="tertiary"
-					>
-						{close}
-					</Button>
-				</div>
-			</Sheet>
+			</Drawer>
 		</>
 	);
 };
