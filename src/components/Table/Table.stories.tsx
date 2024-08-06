@@ -882,6 +882,7 @@ export const EmbeddedSelects = () => {
 			id: "2",
 			name: "Jane Doe",
 			number: "2",
+			lastAction: reset,
 		},
 		{
 			id: "3",
