@@ -26,7 +26,7 @@ export const TableFilter = <T extends Record<string, any>>({
 		"Filter Columns";
 
 	const { allColumns, setHiddenColumns } = instance;
-	console.log({instance});
+	console.log({ instance });
 
 	const { filterSheetVisible, toggleFilterSheetVisible } =
 		useContext(FilterContext);
@@ -70,13 +70,13 @@ export const TableFilter = <T extends Record<string, any>>({
 			>
 				<section>
 					{allColumns.map((column) => {
-				console.log(column.getToggleHiddenProps);
-				return (
-					<Checkbox key={column.id} {...column.getToggleHiddenProps()}>
-						{column.Header}
-					</Checkbox>
-				);
-			})}
+						console.log(column.getToggleHiddenProps);
+						return (
+							<Checkbox key={column.id} {...column.getToggleHiddenProps()}>
+								{column.Header}
+							</Checkbox>
+						);
+					})}
 				</section>
 			</Drawer>
 		</>
