@@ -18,7 +18,6 @@ export const TableFilter = <T extends Record<string, any>>({
 }: TableFilterProps<T>) => {
 	// translations
 	const apply = translations.apply || defaultTranslations.toolbar.apply;
-	const clear = translations.clear || defaultTranslations.toolbar.clear;
 	const close =
 		translations.close || defaultTranslations.toolbar.close || "Close";
 	const filterColumns =
@@ -41,14 +40,6 @@ export const TableFilter = <T extends Record<string, any>>({
 			key="table-filter-apply-button"
 		>
 			{apply}
-		</Button>,
-		<Button
-			aria-label={clear}
-			variant="secondary"
-			onClick={() => setHiddenColumns([])}
-			key="table-filter-reset-icon-button"
-		>
-			{clear}
 		</Button>,
 		<Button
 			aria-label={close}
@@ -78,11 +69,14 @@ export const TableFilter = <T extends Record<string, any>>({
 				actions={actionButtons}
 			>
 				<section>
-					{allColumns.map((column) => (
-						<Checkbox key={column.id} {...column.getToggleHiddenProps()}>
-							{column.Header}
-						</Checkbox>
-					))}
+					{allColumns.map((column) => {
+				console.log(column.getToggleHiddenProps);
+				return (
+					<Checkbox key={column.id} {...column.getToggleHiddenProps()}>
+						{column.Header}
+					</Checkbox>
+				);
+			})}
 				</section>
 			</Drawer>
 		</>
