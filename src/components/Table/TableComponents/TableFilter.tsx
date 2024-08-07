@@ -18,15 +18,16 @@ export const TableFilter = <T extends Record<string, any>>({
 }: TableFilterProps<T>) => {
 	// translations
 	const apply = translations.apply || defaultTranslations.toolbar.apply;
-	const close =
-		translations.close || defaultTranslations.toolbar.close || "Close";
+	const cancel =
+		translations.cancel || defaultTranslations.toolbar.cancel || "Cancel";
 	const filterColumns =
 		translations.filterColumns ||
 		defaultTranslations.toolbar.filterColumns ||
 		"Filter Columns";
 
-	const { allColumns, setHiddenColumns } = instance;
-	console.log({ instance });
+	const { allColumns, setHiddenColumns, visibleColumns } = instance;
+	// console.log({ instance });
+	console.log({ visibleColumns });
 
 	const { filterSheetVisible, toggleFilterSheetVisible } =
 		useContext(FilterContext);
@@ -42,12 +43,12 @@ export const TableFilter = <T extends Record<string, any>>({
 			{apply}
 		</Button>,
 		<Button
-			aria-label={close}
+			aria-label={cancel}
 			variant="tertiary"
 			onClick={toggleFilterSheetVisible}
-			key="table-filter-close-button"
+			key="table-filter-cancel-button"
 		>
-			{close}
+			{cancel}
 		</Button>,
 	];
 
@@ -70,7 +71,8 @@ export const TableFilter = <T extends Record<string, any>>({
 			>
 				<section>
 					{allColumns.map((column) => {
-						console.log(column.getToggleHiddenProps);
+						const colProps = { ...column.getToggleHiddenProps() };
+						console.log({colProps});
 						return (
 							<Checkbox key={column.id} {...column.getToggleHiddenProps()}>
 								{column.Header}

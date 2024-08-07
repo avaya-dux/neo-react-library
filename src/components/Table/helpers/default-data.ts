@@ -3,6 +3,7 @@ import type { ITableTranslations } from "../types";
 export const translations: ITableTranslations = {
 	toolbar: {
 		apply: "Apply",
+		cancel: "Cancel",
 		clear: "Reset",
 		close: "Close",
 		create: "Create",
