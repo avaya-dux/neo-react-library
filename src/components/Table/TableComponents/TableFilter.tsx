@@ -35,8 +35,6 @@ export const TableFilter = <T extends Record<string, any>>({
 	const actionButtons = [
 		<Button
 			aria-label={apply}
-			style={{ color: "black" }}
-			variant="primary"
 			onClick={toggleFilterSheetVisible}
 			key="table-filter-apply-button"
 		>
@@ -44,7 +42,7 @@ export const TableFilter = <T extends Record<string, any>>({
 		</Button>,
 		<Button
 			aria-label={cancel}
-			variant="tertiary"
+			variant="secondary"
 			onClick={toggleFilterSheetVisible}
 			key="table-filter-cancel-button"
 		>
