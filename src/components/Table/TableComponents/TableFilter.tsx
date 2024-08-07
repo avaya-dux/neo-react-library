@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import type { TableInstance } from "react-table";
+import { useCallback, useContext, useState } from "react";
+import type { IdType, TableInstance } from "react-table";
 
 import { Button, Checkbox, Drawer, IconButton } from "components";
 import { FilterContext, translations as defaultTranslations } from "../helpers";
@@ -50,6 +50,19 @@ export const TableFilter = <T extends Record<string, any>>({
 		</Button>,
 	];
 
+	const [visibleCols, setVisibleCols] = useState(visibleColumns);
+
+	const handleColumnVisibilityChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+		console.log("column checked: ", e.target);
+		const newCols:IdType<T>[]= [];
+
+		visibleCols.map((col)=> {
+			if (col.id !== "recordingName")
+				newCols.push(col.id);
+		})
+		setHiddenColumns(newCols);
+	}, []);
+
 	return (
 		<>
 			<IconButton
@@ -71,8 +84,15 @@ export const TableFilter = <T extends Record<string, any>>({
 					{allColumns.map((column) => {
 						const colProps = { ...column.getToggleHiddenProps() };
 						console.log({colProps});
+						console.log("column.id: ", column.id);
 						return (
-							<Checkbox key={column.id} {...column.getToggleHiddenProps()}>
+							<Checkbox
+								key={column.id}
+								id={column.id}
+								checked={colProps.checked}
+								title={colProps.title}
+								onChange={handleColumnVisibilityChange}
+							>
 								{column.Header}
 							</Checkbox>
 						);

@@ -197,6 +197,7 @@ export const ServerSidePagination = () => {
 			pageCount={pageCount}
 			handlePageChange={fetchData}
 			itemsPerPageOptions={[5, 10, 20, 50]}
+			allowColumnFilter
 			caption="Server Side Pagination Example"
 			summary="This table will load one page at a time."
 		/>
