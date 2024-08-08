@@ -559,14 +559,39 @@ export const EditableData = () => {
 	);
 };
 
-export const EmptyDataSet = () => (
-	<Table
-		caption="Storybook Empty Date Set Table Example"
-		columns={FilledFields.columns}
-		data={[]}
-		handleRefresh={() => undefined}
-	/>
-);
+export const EmptyDataSet = () => {
+	const [draggable, setDraggable] = useState(false);
+	const [multiple, setMultiple] = useState(false);
+
+	return (
+		<div>
+			<Table
+				caption="Storybook Empty Date Set Table Example"
+				columns={FilledFields.columns}
+				data={[]}
+				handleRefresh={() => undefined}
+				draggableRows={draggable}
+				selectableRows={multiple ? "multiple" : "none"}
+				customActionsNode={
+					<section>
+						<Switch
+							checked={draggable}
+							onChange={(_e, updatedChecked) => setDraggable(updatedChecked)}
+						>
+							Draggable Switch
+						</Switch>
+						<Switch
+							checked={multiple}
+							onChange={(_e, updatedChecked) => setMultiple(updatedChecked)}
+						>
+							Multiple Switch
+						</Switch>
+					</section>
+				}
+			/>
+		</div>
+	);
+};
 
 export const PaginationPushedDown = () => (
 	<Table
