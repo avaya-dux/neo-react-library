@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useEffect, useContext, useState } from "react";
 import type { IdType, TableInstance } from "react-table";
 
 import { Button, Checkbox, Drawer, IconButton } from "components";
@@ -32,10 +32,46 @@ export const TableFilter = <T extends Record<string, any>>({
 	const { filterSheetVisible, toggleFilterSheetVisible } =
 		useContext(FilterContext);
 
+	const [newVizColumnIds, setNewVizColumnIds] = useState<IdType<T>[]>([]);
+
+	useEffect(() => {
+		const newColumnIds: IdType<T>[] = [];
+		visibleColumns.map((col) => {
+			newColumnIds.push(col.id);
+		});
+
+		setNewVizColumnIds(newColumnIds);
+	}, [visibleColumns]);
+
+	const handleColumnVisibilityChange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			console.log("column checked: ", e.target.checked);
+			const newColumnIds: IdType<T>[] = [...newVizColumnIds];
+
+			if (e.target.checked) {
+				//Add column to newVizColumnIds array
+				setNewVizColumnIds([...newColumnIds, e.target.id]);
+			} else {
+				// Remove column from newVizColumnIds array
+				setNewVizColumnIds(newColumnIds.filter((id) => id !== e.target.id));
+			}
+		},
+		[newVizColumnIds],
+	);
+
+	const handleApplyChanges = useCallback(() => {
+		const newHiddenColumns = allColumns.filter(
+			(col) => !newVizColumnIds.includes(col.id),
+		);
+		const newHiddenColIds = newHiddenColumns.map((col) => col.id);
+
+		setHiddenColumns(newHiddenColIds);
+	}, [allColumns, newVizColumnIds, setHiddenColumns]);
+
 	const actionButtons = [
 		<Button
 			aria-label={apply}
-			onClick={toggleFilterSheetVisible}
+			onClick={handleApplyChanges}
 			key="table-filter-apply-button"
 		>
 			{apply}
@@ -49,19 +85,6 @@ export const TableFilter = <T extends Record<string, any>>({
 			{cancel}
 		</Button>,
 	];
-
-	const [visibleCols, setVisibleCols] = useState(visibleColumns);
-
-	const handleColumnVisibilityChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log("column checked: ", e.target);
-		const newCols:IdType<T>[]= [];
-
-		visibleCols.map((col)=> {
-			if (col.id !== "recordingName")
-				newCols.push(col.id);
-		})
-		setHiddenColumns(newCols);
-	}, []);
 
 	return (
 		<>
@@ -83,7 +106,7 @@ export const TableFilter = <T extends Record<string, any>>({
 				<section>
 					{allColumns.map((column) => {
 						const colProps = { ...column.getToggleHiddenProps() };
-						console.log({colProps});
+						console.log({ colProps });
 						console.log("column.id: ", column.id);
 						return (
 							<Checkbox
