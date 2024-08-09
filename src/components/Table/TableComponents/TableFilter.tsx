@@ -56,9 +56,12 @@ export const TableFilter = <T extends Record<string, any>>({
 
 			//Update newAllColumns array checked value
 			const nextColumns = newAllColumns.map((col) => {
-					 return { id: col.id, hdr: col.hdr, checked: col.id === value ? checked : col.checked }
-				}
-			);
+				return {
+					id: col.id,
+					hdr: col.hdr,
+					checked: col.id === value ? checked : col.checked,
+				};
+			});
 
 			setNewAllColumns(nextColumns);
 
@@ -90,11 +93,9 @@ export const TableFilter = <T extends Record<string, any>>({
 			const colProps = { ...col.getToggleHiddenProps() };
 			console.log({ colProps });
 			newAllCols.push({
-				key: col.id,
 				id: col.id,
 				hdr: col.Header?.toString(),
 				checked: colProps.checked,
-				title: colProps,
 			});
 		});
 		setNewAllColumns(newAllCols);
@@ -102,14 +103,20 @@ export const TableFilter = <T extends Record<string, any>>({
 	}, [allColumns]);
 
 	const handleApplyChanges = useCallback(() => {
-		const newHiddenColumns = allColumns.filter(
-			(col) => !newVizColumnIds.includes(col.id),
-		);
-		const newHiddenColIds = newHiddenColumns.map((col) => col.id);
+		const newHiddenColIds: IdType<T>[] = [];
+		newAllColumns.forEach((col) => {
+			if (!col.checked) {
+				newHiddenColIds.push(col.id);
+			}
+		});
 
 		setHiddenColumns(newHiddenColIds);
 		toggleFilterSheetVisible();
-	}, [allColumns, newVizColumnIds, setHiddenColumns, toggleFilterSheetVisible]);
+	}, [
+		newAllColumns,
+		setHiddenColumns,
+		toggleFilterSheetVisible,
+	]);
 
 	const actionButtons = [
 		<Button
