@@ -42,15 +42,16 @@ export const TableFilter = <T extends Record<string, any>>({
 	const { filterSheetVisible, toggleFilterSheetVisible } =
 		useContext(FilterContext);
 
-	// newAllColumns is a temporary array that is used while the filter Drawer is open.
-	const [newAllColumns, setNewAllColumns] = useState<FilterColumns[]>([]);
+	// filteredColumns is a temporary array that is used while the filter Drawer is open.
+	const [filteredColumns, setNewAllColumns] = useState<FilterColumns[]>([]);
+	const [applyEnabled, setApplyEnabled] = useState<boolean>(false);
 
 	const handleColumnVisibilityChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
 			const { checked, value } = e.target;
 
-			//Update newAllColumns array checked value
-			const nextColumns = newAllColumns.map((col) => {
+			//Update filteredColumns array checked value
+			const nextColumns = filteredColumns.map((col) => {
 				return {
 					id: col.id,
 					hdr: col.hdr,
@@ -59,8 +60,9 @@ export const TableFilter = <T extends Record<string, any>>({
 			});
 
 			setNewAllColumns(nextColumns);
+			setApplyEnabled(true);
 		},
-		[newAllColumns],
+		[filteredColumns],
 	);
 
 	useEffect(() => {
@@ -79,16 +81,17 @@ export const TableFilter = <T extends Record<string, any>>({
 
 	const handleApplyChanges = useCallback(() => {
 		const newHiddenColIds: IdType<T>[] = [];
-		newAllColumns.forEach((col) => {
+		filteredColumns.forEach((col) => {
 			if (!col.checked) {
 				newHiddenColIds.push(col.id);
 			}
 		});
 
 		setHiddenColumns(newHiddenColIds); // Using Table api to hide unchecked columns.
+		setApplyEnabled(false);
 		toggleFilterSheetVisible();
 	}, [
-		newAllColumns,
+		filteredColumns,
 		setHiddenColumns,
 		toggleFilterSheetVisible,
 	]);
@@ -97,6 +100,7 @@ export const TableFilter = <T extends Record<string, any>>({
 		<Button
 			aria-label={apply}
 			onClick={handleApplyChanges}
+			disabled={!applyEnabled}
 			key="table-filter-apply-button"
 		>
 			{apply}
@@ -134,7 +138,7 @@ export const TableFilter = <T extends Record<string, any>>({
 						aria-labelledby="column-filter"
 						onChange={handleColumnVisibilityChange}
 					>
-						{newAllColumns.map((col) => {
+						{filteredColumns.map((col) => {
 							return (
 								<Checkbox value={col.id} key={col.id} checked={col.checked}>
 									{col.hdr}
