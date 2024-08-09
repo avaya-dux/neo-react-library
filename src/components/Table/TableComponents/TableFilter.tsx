@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useContext, useState } from "react";
 import type { IdType, TableInstance } from "react-table";
 
-import { Button, Checkbox, Drawer, IconButton } from "components";
+import {
+	Button,
+	Checkbox,
+	CheckboxGroup,
+	Drawer,
+	IconButton,
+} from "components";
 import { FilterContext, translations as defaultTranslations } from "../helpers";
 import type { ITableFilterTranslations } from "../types";
 
@@ -9,6 +15,12 @@ import type { ITableFilterTranslations } from "../types";
 type TableFilterProps<T extends Record<string, any>> = {
 	translations: ITableFilterTranslations;
 	instance: TableInstance<T>;
+};
+
+type FilterColumns = {
+	id: string;
+	hdr: string | undefined | null;
+	checked: boolean | "mixed";
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
@@ -27,37 +39,67 @@ export const TableFilter = <T extends Record<string, any>>({
 
 	const { allColumns, setHiddenColumns, visibleColumns } = instance;
 	// console.log({ instance });
-	console.log({ visibleColumns });
+	// console.log({ visibleColumns });
 
 	const { filterSheetVisible, toggleFilterSheetVisible } =
 		useContext(FilterContext);
 
+	const [newAllColumns, setNewAllColumns] = useState<FilterColumns[]>([]);
 	const [newVizColumnIds, setNewVizColumnIds] = useState<IdType<T>[]>([]);
-
-	useEffect(() => {
-		const newColumnIds: IdType<T>[] = [];
-		visibleColumns.map((col) => {
-			newColumnIds.push(col.id);
-		});
-
-		setNewVizColumnIds(newColumnIds);
-	}, [visibleColumns]);
 
 	const handleColumnVisibilityChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
-			console.log("column checked: ", e.target.checked);
-			const newColumnIds: IdType<T>[] = [...newVizColumnIds];
+			console.log("e.target: ", e.target);
+			// const newColumnIds: IdType<T>[] = [...newVizColumnIds];
 
-			if (e.target.checked) {
-				//Add column to newVizColumnIds array
-				setNewVizColumnIds([...newColumnIds, e.target.id]);
-			} else {
-				// Remove column from newVizColumnIds array
-				setNewVizColumnIds(newColumnIds.filter((id) => id !== e.target.id));
-			}
+			const { checked, value } = e.target;
+
+			//Update newAllColumns array checked value
+			const nextColumns = newAllColumns.map((col) => {
+					 return { id: col.id, hdr: col.hdr, checked: col.id === value ? checked : col.checked }
+				}
+			);
+
+			setNewAllColumns(nextColumns);
+
+			// if (e.target.checked) {
+			// 	//Add column to newVizColumnIds array
+			// 	setNewAllColumns([
+			// 		...newAllColumns,
+			// 		{ id: value, hdr: ariaLabel, checked: checked },
+			// 	]);
+			// 	// setNewVizColumnIds([...newColumnIds, e.target.id]);
+			// } else {
+			// 	console.log("Hiding colId: ", value);
+			// 	// Remove column from newVizColumnIds array
+			// 	// setNewVizColumnIds(newColumnIds.filter((id) => id !== e.target.id));
+			// 	setNewAllColumns(newAllColumns.filter((col) => col.id !== value));
+			// }
 		},
-		[newVizColumnIds],
+		[newAllColumns],
 	);
+
+	useEffect(() => {
+		const newAllCols: FilterColumns[] = [];
+		// const newVizColIds: IdType<T>[] = [];
+		// visibleColumns.map((col) => {
+		// 	newVizColIds.push(col.id);
+		// });
+
+		allColumns.map((col) => {
+			const colProps = { ...col.getToggleHiddenProps() };
+			console.log({ colProps });
+			newAllCols.push({
+				key: col.id,
+				id: col.id,
+				hdr: col.Header?.toString(),
+				checked: colProps.checked,
+				title: colProps,
+			});
+		});
+		setNewAllColumns(newAllCols);
+		// setNewVizColumnIds(newColumnIds);
+	}, [allColumns]);
 
 	const handleApplyChanges = useCallback(() => {
 		const newHiddenColumns = allColumns.filter(
@@ -66,7 +108,8 @@ export const TableFilter = <T extends Record<string, any>>({
 		const newHiddenColIds = newHiddenColumns.map((col) => col.id);
 
 		setHiddenColumns(newHiddenColIds);
-	}, [allColumns, newVizColumnIds, setHiddenColumns]);
+		toggleFilterSheetVisible();
+	}, [allColumns, newVizColumnIds, setHiddenColumns, toggleFilterSheetVisible]);
 
 	const actionButtons = [
 		<Button
@@ -103,23 +146,20 @@ export const TableFilter = <T extends Record<string, any>>({
 				open={filterSheetVisible}
 				actions={actionButtons}
 			>
-				<section>
-					{allColumns.map((column) => {
-						const colProps = { ...column.getToggleHiddenProps() };
-						console.log({ colProps });
-						console.log("column.id: ", column.id);
-						return (
-							<Checkbox
-								key={column.id}
-								id={column.id}
-								checked={colProps.checked}
-								title={colProps.title}
-								onChange={handleColumnVisibilityChange}
-							>
-								{column.Header}
-							</Checkbox>
-						);
-					})}
+				<section id="column-filter">
+					<CheckboxGroup
+						groupName="TableColumns"
+						aria-labelledby="column-filter"
+						onChange={handleColumnVisibilityChange}
+					>
+						{newAllColumns.map((col) => {
+							return (
+								<Checkbox value={col.id} key={col.id} checked={col.checked}>
+									{col.hdr}
+								</Checkbox>
+							);
+						})}
+					</CheckboxGroup>
 				</section>
 			</Drawer>
 		</>
