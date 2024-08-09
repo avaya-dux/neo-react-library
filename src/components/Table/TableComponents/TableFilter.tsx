@@ -37,21 +37,16 @@ export const TableFilter = <T extends Record<string, any>>({
 		defaultTranslations.toolbar.filterColumns ||
 		"Filter Columns";
 
-	const { allColumns, setHiddenColumns, visibleColumns } = instance;
-	// console.log({ instance });
-	// console.log({ visibleColumns });
+	const { allColumns, setHiddenColumns } = instance;
 
 	const { filterSheetVisible, toggleFilterSheetVisible } =
 		useContext(FilterContext);
 
+	// newAllColumns is a temporary array that is used while the filter Drawer is open.
 	const [newAllColumns, setNewAllColumns] = useState<FilterColumns[]>([]);
-	const [newVizColumnIds, setNewVizColumnIds] = useState<IdType<T>[]>([]);
 
 	const handleColumnVisibilityChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
-			console.log("e.target: ", e.target);
-			// const newColumnIds: IdType<T>[] = [...newVizColumnIds];
-
 			const { checked, value } = e.target;
 
 			//Update newAllColumns array checked value
@@ -64,34 +59,15 @@ export const TableFilter = <T extends Record<string, any>>({
 			});
 
 			setNewAllColumns(nextColumns);
-
-			// if (e.target.checked) {
-			// 	//Add column to newVizColumnIds array
-			// 	setNewAllColumns([
-			// 		...newAllColumns,
-			// 		{ id: value, hdr: ariaLabel, checked: checked },
-			// 	]);
-			// 	// setNewVizColumnIds([...newColumnIds, e.target.id]);
-			// } else {
-			// 	console.log("Hiding colId: ", value);
-			// 	// Remove column from newVizColumnIds array
-			// 	// setNewVizColumnIds(newColumnIds.filter((id) => id !== e.target.id));
-			// 	setNewAllColumns(newAllColumns.filter((col) => col.id !== value));
-			// }
 		},
 		[newAllColumns],
 	);
 
 	useEffect(() => {
 		const newAllCols: FilterColumns[] = [];
-		// const newVizColIds: IdType<T>[] = [];
-		// visibleColumns.map((col) => {
-		// 	newVizColIds.push(col.id);
-		// });
 
 		allColumns.map((col) => {
 			const colProps = { ...col.getToggleHiddenProps() };
-			console.log({ colProps });
 			newAllCols.push({
 				id: col.id,
 				hdr: col.Header?.toString(),
@@ -99,7 +75,6 @@ export const TableFilter = <T extends Record<string, any>>({
 			});
 		});
 		setNewAllColumns(newAllCols);
-		// setNewVizColumnIds(newColumnIds);
 	}, [allColumns]);
 
 	const handleApplyChanges = useCallback(() => {
@@ -110,7 +85,7 @@ export const TableFilter = <T extends Record<string, any>>({
 			}
 		});
 
-		setHiddenColumns(newHiddenColIds);
+		setHiddenColumns(newHiddenColIds); // Using Table api to hide unchecked columns.
 		toggleFilterSheetVisible();
 	}, [
 		newAllColumns,
