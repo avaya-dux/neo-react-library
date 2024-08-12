@@ -1,6 +1,6 @@
 {
 	"name": "@avaya/neo-react",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "This is the React version of the shared library called 'NEO' built by Avaya",
 	"license": "SEE LICENSE IN LICENSE.md",
 	"repository": "github:avaya-dux/neo-react-library",
@@ -92,7 +92,7 @@
 		"@testing-library/react": "16.0.0",
 		"@testing-library/user-event": "14.5.2",
 		"@types/jest-axe": "3.5.9",
-		"@types/node": "20.14.14",
+		"@types/node": "20.14.15",
 		"@types/react": "18.2.21",
 		"@types/react-dom": "18.3.0",
 		"@types/react-input-autosize": "2.2.4",
@@ -116,14 +116,14 @@
 		"storybook": "7.6.20",
 		"typescript": "5.5.4",
 		"vite": "5.3.5",
-		"vite-plugin-dts": "3.9.1",
+		"vite-plugin-dts": "4.0.2",
 		"vitest": "2.0.5"
 	},
 	"resolutions": {
 		"unset-value": "2.0.1",
 		"minimist": "1.2.8",
 		"pug": "3.0.3",
-		"uglify-js": "3.19.1",
+		"uglify-js": "3.19.2",
 		"glob-parent": "6.0.2",
 		"trim": "1.0.1",
 		"trim-newlines": "5.0.0",
