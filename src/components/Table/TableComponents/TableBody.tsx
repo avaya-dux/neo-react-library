@@ -44,13 +44,18 @@ export const TableBody: TableBodyComponentType = ({
 	translations,
 }) => {
 	const { getTableBodyProps, headers, page, rows } = instance;
-
+	const shouldHaveCheckboxColumn = selectableRows !== "none";
+	const { draggableRows } = useContext(FilterContext);
+	const numberOfColumns =
+		headers.length +
+		(shouldHaveCheckboxColumn ? 1 : 0) +
+		(draggableRows ? 1 : 0);
 	return (
 		<tbody {...getTableBodyProps()}>
 			<SortableContext items={rows} strategy={verticalListSortingStrategy}>
 				{page.length === 0 ? (
 					<tr>
-						<td colSpan={headers.length}>{translations.noDataAvailable}</td>
+						<td colSpan={numberOfColumns}>{translations.noDataAvailable}</td>
 					</tr>
 				) : (
 					<>
