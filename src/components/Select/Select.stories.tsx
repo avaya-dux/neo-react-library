@@ -751,7 +751,7 @@ export const ControlledVSUncontrolledSelects = () => {
 						setControlledFavFoods(["pear"]);
 					}}
 				>
-					Select Pear
+					Set selection to Pear
 				</Button>
 
 				<Button
@@ -760,7 +760,7 @@ export const ControlledVSUncontrolledSelects = () => {
 						setControlledFavFoods([]);
 					}}
 				>
-					Clear Selection
+					Clear Selection(s)
 				</Button>
 
 				<p>
