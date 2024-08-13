@@ -121,20 +121,20 @@ export const TableFilter = <T extends Record<string, any>>({
 
 	const actionButtons = [
 		<Button
-			aria-label={apply}
-			onClick={handleApplyChanges}
-			disabled={!applyBtnEnabled}
-			key="table-filter-apply-button"
-		>
-			{apply}
-		</Button>,
-		<Button
 			aria-label={cancel}
 			variant="secondary"
 			onClick={toggleFilterSheetVisible}
 			key="table-filter-cancel-button"
 		>
 			{cancel}
+		</Button>,
+		<Button
+			aria-label={apply}
+			onClick={handleApplyChanges}
+			disabled={!applyBtnEnabled}
+			key="table-filter-apply-button"
+		>
+			{apply}
 		</Button>,
 	];
 
