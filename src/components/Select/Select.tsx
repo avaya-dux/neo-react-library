@@ -10,13 +10,13 @@ import { SelectContext } from "./utils/SelectContext";
 
 import type { SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
+import { useSelectedItems } from "./utils/useSelectedItems";
 
 import log from "loglevel";
 const logger = log.getLogger("select-logger");
 logger.disableAll();
 
 import "./Select_shim.css";
-import { useSelectedItems } from "./utils/useSelectedItems";
 
 /**
  * The `Select` component allows the user to select one or more options from a list
