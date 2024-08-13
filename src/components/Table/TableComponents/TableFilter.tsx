@@ -44,14 +44,36 @@ export const TableFilter = <T extends Record<string, any>>({
 
 	// filteredColumns is a temporary array that is used while the filter Drawer is open.
 	const [filteredColumns, setNewAllColumns] = useState<FilterColumns[]>([]);
-	const [applyEnabled, setApplyEnabled] = useState<boolean>(false);
+	const [originalVisibleColIds, setOriginalVisibleColIds] = useState<
+		IdType<T>[]
+	>([]);
+	const [applyBtnEnabled, setApplyBtnEnabled] = useState<boolean>(false);
+
+	const didColumnsSelectionsChange = useCallback(
+		(newVisibleColIds: IdType<T>[]) => {
+			if (newVisibleColIds.length !== originalVisibleColIds.length) return true;
+
+			const arraysAreEqual = newVisibleColIds.every((id) =>
+				originalVisibleColIds.includes(id),
+			);
+			return !arraysAreEqual;
+		},
+		[originalVisibleColIds],
+	);
 
 	const handleColumnVisibilityChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
 			const { checked, value } = e.target;
+			const visibleColumnIds: IdType<T>[] = [];
 
 			//Update filteredColumns array checked value
 			const nextColumns = filteredColumns.map((col) => {
+				if (
+					(col.id === value && checked) ||
+					(col.id !== value && col.checked)
+				) {
+					visibleColumnIds.push(col.id); // Only push visible columns
+				}
 				return {
 					id: col.id,
 					hdr: col.hdr,
@@ -60,13 +82,14 @@ export const TableFilter = <T extends Record<string, any>>({
 			});
 
 			setNewAllColumns(nextColumns);
-			setApplyEnabled(true);
+			setApplyBtnEnabled(didColumnsSelectionsChange(visibleColumnIds));
 		},
-		[filteredColumns],
+		[didColumnsSelectionsChange, filteredColumns],
 	);
 
 	useEffect(() => {
 		const newAllCols: FilterColumns[] = [];
+		const visibleColumnIds: IdType<T>[] = [];
 
 		allColumns.map((col) => {
 			const colProps = { ...col.getToggleHiddenProps() };
@@ -75,8 +98,12 @@ export const TableFilter = <T extends Record<string, any>>({
 				hdr: col.Header?.toString(),
 				checked: colProps.checked,
 			});
+			if (colProps.checked) {
+				visibleColumnIds.push(col.id);
+			}
 		});
 		setNewAllColumns(newAllCols);
+		setOriginalVisibleColIds(visibleColumnIds);
 	}, [allColumns]);
 
 	const handleApplyChanges = useCallback(() => {
@@ -88,19 +115,15 @@ export const TableFilter = <T extends Record<string, any>>({
 		});
 
 		setHiddenColumns(newHiddenColIds); // Using Table api to hide unchecked columns.
-		setApplyEnabled(false);
+		setApplyBtnEnabled(false);
 		toggleFilterSheetVisible();
-	}, [
-		filteredColumns,
-		setHiddenColumns,
-		toggleFilterSheetVisible,
-	]);
+	}, [filteredColumns, setHiddenColumns, toggleFilterSheetVisible]);
 
 	const actionButtons = [
 		<Button
 			aria-label={apply}
 			onClick={handleApplyChanges}
-			disabled={!applyEnabled}
+			disabled={!applyBtnEnabled}
 			key="table-filter-apply-button"
 		>
 			{apply}
