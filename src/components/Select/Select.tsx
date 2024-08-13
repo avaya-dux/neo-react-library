@@ -90,6 +90,12 @@ export const Select = (props: SelectProps) => {
 		);
 	}
 
+	if (value && defaultValue && !isEqual(value, defaultValue)) {
+		console.warn(
+			"You have passed both `value` and `defaultValue` props to Select. `value` will be used.",
+		);
+	}
+
 	const helperId = useMemo(() => `helper-text-${id}`, [id]);
 	const isInitialRender = useIsInitialRender();
 
@@ -120,6 +126,7 @@ export const Select = (props: SelectProps) => {
 
 	const [selectedItems, setSelectedItems] = useSelectedItems({
 		defaultValue,
+		value,
 		options,
 		multiple,
 	});
