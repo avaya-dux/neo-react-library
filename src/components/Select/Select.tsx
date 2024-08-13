@@ -130,27 +130,8 @@ export const Select = (props: SelectProps) => {
 		options,
 		multiple,
 	});
-	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
-	useEffect(() => {
-		if (!isInitialRender || value) {
-			const selectionHasChanged = multiple
-				? selectedItems.length !== value?.length ||
-					!selectedItems.every((item) => value.includes(item.value as string))
-				: selectedItems[0]?.value !== value;
 
-			if (selectionHasChanged) {
-				const userSelectedOptions = options.filter((option) =>
-					multiple
-						? value?.includes(option.value as string)
-						: value === option.value,
-				);
-
-				setSelectedItems(userSelectedOptions);
-			}
-		}
-	}, [value]);
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
+	// biome-ignore lint/correctness/useExhaustiveDependencies: we only want to run this when the user updates their selection
 	useEffect(() => {
 		if (!isInitialRender && onChange) {
 			if (multiple) {
