@@ -669,6 +669,16 @@ export const ControlledVSUncontrolledSelects = () => {
 					Select Pear
 				</Button>
 
+				<Button
+					className="margin-top-20"
+					onClick={() => {
+						// BUG: not working
+						setControlledFavFood("");
+					}}
+				>
+					Clear Selection
+				</Button>
+
 				<p>
 					Controlled Value: <code>{controlledFavFood}</code>
 				</p>
@@ -743,6 +753,15 @@ export const ControlledVSUncontrolledSelects = () => {
 					}}
 				>
 					Select Pear
+				</Button>
+
+				<Button
+					className="margin-top-20"
+					onClick={() => {
+						setControlledFavFoods([]);
+					}}
+				>
+					Clear Selection
 				</Button>
 
 				<p>
