@@ -641,7 +641,7 @@ export const InlineCustomWidths = () => {
 	);
 };
 
-export const ControlledVSUncontrolledSingleSelects = () => {
+export const ControlledVSUncontrolledSelects = () => {
 	const ControlledSingleSelect = () => {
 		const [controlledFavFood, setControlledFavFood] = useState("oranges");
 
