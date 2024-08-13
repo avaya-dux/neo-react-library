@@ -640,3 +640,78 @@ export const InlineCustomWidths = () => {
 		</>
 	);
 };
+
+export const ControlledVSUncontrolledSingleSelects = () => {
+	const [controlledFavFood, setControlledFavFood] = useState("oranges");
+	const [uncontrolledFavFood, setUncontrolledFavFood] = useState("blueberries");
+
+	return (
+		<div>
+			<Sheet
+				title="Testing Single Select as a controlled component"
+				style={{ width: 400 }}
+			>
+				<p>Initial Value: Oranges</p>
+
+				<Select
+					helperText="Please select one"
+					label="Select a favorite food"
+					value={controlledFavFood}
+					onChange={(value) => setControlledFavFood(value as string)}
+				>
+					{fruitOptions}
+				</Select>
+
+				<div>
+					<Button
+						onClick={() => {
+							setControlledFavFood("pear");
+						}}
+					>
+						Select Pear
+					</Button>
+				</div>
+
+				<p>
+					Controlled Value: <code>{controlledFavFood}</code>
+				</p>
+			</Sheet>
+
+			<Sheet
+				title="Testing Single Select as an uncontrolled component"
+				style={{ width: 400, marginTop: 50 }}
+			>
+				<p>Initial Default Value: Blueberries</p>
+
+				<Select
+					helperText="Please select one"
+					label="Select a favorite food"
+					defaultValue={uncontrolledFavFood}
+					onChange={(value) => setUncontrolledFavFood(value as string)}
+				>
+					{fruitOptions}
+				</Select>
+
+				<div>
+					<Button
+						onClick={() => {
+							setUncontrolledFavFood("grapes");
+						}}
+					>
+						Select Grapes
+					</Button>
+
+					<p>(this 👆 button should not update Select)</p>
+
+					<p>
+						(but <i>should</i> update the value 👇)
+					</p>
+
+					<p>
+						Uncontrolled Value: <code>{uncontrolledFavFood}</code>
+					</p>
+				</div>
+			</Sheet>
+		</div>
+	);
+};
