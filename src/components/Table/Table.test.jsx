@@ -729,7 +729,9 @@ describe("Table", () => {
 			);
 			expect(firstColumnSortButton).toBeVisible();
 
-			expect(getByRole("dialog")).not.toHaveClass("neo-drawer neo-drawer--isOpen");
+			expect(getByRole("dialog")).not.toHaveClass(
+				"neo-drawer neo-drawer--isOpen",
+			);
 
 			await user.click(firstColumnSortButton);
 
@@ -765,7 +767,9 @@ describe("Table", () => {
 				`button[aria-label="${FilledFields.translations.toolbar.filterColumns}"]`,
 			);
 
-			expect(getByRole("dialog")).not.toHaveClass("neo-drawer neo-drawer--isOpen");
+			expect(getByRole("dialog")).not.toHaveClass(
+				"neo-drawer neo-drawer--isOpen",
+			);
 
 			await user.click(columnFilterButton);
 
