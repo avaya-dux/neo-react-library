@@ -678,9 +678,7 @@ export const ControlledVSUncontrolledSelects = () => {
 					Clear Selection
 				</Button>
 
-				<p>
-					Controlled Value: <code>{controlledFavFood}</code>
-				</p>
+				<p>Controlled Value: {controlledFavFood || "none selected"}</p>
 			</Sheet>
 		);
 	};
@@ -719,9 +717,7 @@ export const ControlledVSUncontrolledSelects = () => {
 					(but <i>should</i> update the value 👇)
 				</p>
 
-				<p>
-					Uncontrolled Value: <code>{uncontrolledFavFood}</code>
-				</p>
+				<p>Uncontrolled Value: {uncontrolledFavFood}</p>
 			</Sheet>
 		);
 	};
@@ -764,7 +760,8 @@ export const ControlledVSUncontrolledSelects = () => {
 				</Button>
 
 				<p>
-					Controlled Value(s): <code>{controlledFavFoods.join(", ")}</code>
+					Controlled Value(s):{" "}
+					{controlledFavFoods.join(", ") || "none selected"}
 				</p>
 			</Sheet>
 		);
@@ -806,9 +803,7 @@ export const ControlledVSUncontrolledSelects = () => {
 					(but <i>should</i> update the value 👇)
 				</p>
 
-				<p>
-					Uncontrolled Value(s): <code>{uncontrolledFavFoods.join(", ")}</code>
-				</p>
+				<p>Uncontrolled Value(s): {uncontrolledFavFoods.join(", ")}</p>
 			</Sheet>
 		);
 	};
