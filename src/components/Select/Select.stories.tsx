@@ -807,7 +807,7 @@ export const ControlledVSUncontrolledSelects = () => {
 				</p>
 
 				<p>
-					Uncontrolled Values: <code>{uncontrolledFavFoods.join(", ")}</code>
+					Uncontrolled Value(s): <code>{uncontrolledFavFoods.join(", ")}</code>
 				</p>
 			</Sheet>
 		);
