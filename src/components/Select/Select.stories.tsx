@@ -672,7 +672,6 @@ export const ControlledVSUncontrolledSelects = () => {
 				<Button
 					className="margin-top-20"
 					onClick={() => {
-						// BUG: not working
 						setControlledFavFood("");
 					}}
 				>

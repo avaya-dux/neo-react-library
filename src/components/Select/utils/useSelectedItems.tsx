@@ -44,7 +44,7 @@ export const useSelectedItems = ({
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: _only_ update when `value` (`updatedValue`) changes
 	useEffect(() => {
-		if (updatedValue) {
+		if (updatedValue || updatedValue === "") {
 			const selectionHasChanged = multiple
 				? selectedItems.length !== updatedValue?.length ||
 					!selectedItems.every((item) =>
