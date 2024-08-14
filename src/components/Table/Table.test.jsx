@@ -747,7 +747,7 @@ describe("Table", () => {
 			await user.click(nameCheckbox);
 			expect(nameCheckbox).not.toBeChecked();
 
-			const applyButton = getByLabelText("Apply");
+			const applyButton = getByLabelText(FilledFields.translations.toolbar.apply);
 			await user.click(applyButton);
 			expect(firstColumnSortButton).not.toBeVisible();
 		});
@@ -781,7 +781,7 @@ describe("Table", () => {
 			await user.click(nameCheckbox);
 			expect(nameCheckbox).not.toBeChecked();
 
-			const applyButton = getByLabelText("Apply");
+			const applyButton = getByLabelText(FilledFields.translations.toolbar.apply);
 			await user.click(applyButton);
 			expect(firstColumnSortButton).not.toBeVisible();
 		});

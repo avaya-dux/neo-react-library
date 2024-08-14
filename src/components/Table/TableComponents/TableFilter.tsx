@@ -19,7 +19,7 @@ type TableFilterProps<T extends Record<string, any>> = {
 
 type FilterColumns = {
 	id: string;
-	hdr: string | undefined | null;
+	checkboxDisplayText: string | undefined | null;
 	checked: boolean | "mixed";
 };
 
@@ -30,8 +30,7 @@ export const TableFilter = <T extends Record<string, any>>({
 }: TableFilterProps<T>) => {
 	// translations
 	const apply = translations.apply || defaultTranslations.toolbar.apply;
-	const cancel =
-		translations.cancel || defaultTranslations.toolbar.cancel || "Cancel";
+	const cancel = translations.cancel || defaultTranslations.toolbar.cancel;
 	const filterColumns =
 		translations.filterColumns ||
 		defaultTranslations.toolbar.filterColumns ||
@@ -51,6 +50,8 @@ export const TableFilter = <T extends Record<string, any>>({
 
 	const didColumnsSelectionsChange = useCallback(
 		(newVisibleColIds: IdType<T>[]) => {
+			if (newVisibleColIds.length < 1) return false; // disable Apply button if no columns are selected.
+
 			if (newVisibleColIds.length !== originalVisibleColIds.length) return true;
 
 			const arraysAreEqual = newVisibleColIds.every((id) =>
@@ -76,7 +77,7 @@ export const TableFilter = <T extends Record<string, any>>({
 				}
 				return {
 					id: col.id,
-					hdr: col.hdr,
+					checkboxDisplayText: col.checkboxDisplayText,
 					checked: col.id === value ? checked : col.checked,
 				};
 			});
@@ -95,7 +96,7 @@ export const TableFilter = <T extends Record<string, any>>({
 			const colProps = { ...col.getToggleHiddenProps() };
 			newAllCols.push({
 				id: col.id,
-				hdr: col.Header?.toString(),
+				checkboxDisplayText: col.Header?.toString(),
 				checked: colProps.checked,
 			});
 			if (colProps.checked) {
@@ -164,7 +165,7 @@ export const TableFilter = <T extends Record<string, any>>({
 						{filteredColumns.map((col) => {
 							return (
 								<Checkbox value={col.id} key={col.id} checked={col.checked}>
-									{col.hdr}
+									{col.checkboxDisplayText}
 								</Checkbox>
 							);
 						})}
