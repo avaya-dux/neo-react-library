@@ -62,7 +62,7 @@ export const useSelectedItems = ({
 				setSelectedItems(userSelectedOptions);
 			}
 		}
-	}, [JSON.stringify(updatedValue)]);
+	}, [updatedValue]);
 
 	return [selectedItems, setSelectedItems];
 };
