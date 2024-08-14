@@ -1,6 +1,8 @@
 export interface ITableFilterTranslations {
 	clear?: string;
 	close?: string;
+	apply?: string;
+	cancel?: string;
 	filterColumns?: string;
 }
 export interface IToolbarTranslations extends ITableFilterTranslations {

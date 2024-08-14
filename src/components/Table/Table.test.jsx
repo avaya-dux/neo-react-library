@@ -730,10 +730,7 @@ describe("Table", () => {
 			expect(firstColumnSortButton).toBeVisible();
 
 			expect(getByRole("dialog")).not.toHaveClass(
-				"sheet-horizontal-slide-in-shim",
-			);
-			expect(getByRole("dialog")).not.toHaveClass(
-				"sheet-horizontal-slide-out-shim",
+				"neo-drawer neo-drawer--isOpen",
 			);
 
 			await user.click(firstColumnSortButton);
@@ -742,16 +739,18 @@ describe("Table", () => {
 			expect(menuItems).toHaveLength(4);
 			await user.click(queryAllByRole("menuitem")[3]);
 
-			expect(getByRole("dialog")).toHaveClass("sheet-horizontal-slide-in-shim");
-			expect(getByRole("dialog")).not.toHaveClass(
-				"sheet-horizontal-slide-out-shim",
-			);
+			expect(getByRole("dialog")).toHaveClass("neo-drawer neo-drawer--isOpen");
 
 			const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
 			expect(nameCheckbox).toBeChecked();
 
 			await user.click(nameCheckbox);
 			expect(nameCheckbox).not.toBeChecked();
+
+			const applyButton = getByLabelText(
+				FilledFields.translations.toolbar.apply,
+			);
+			await user.click(applyButton);
 			expect(firstColumnSortButton).not.toBeVisible();
 		});
 
@@ -771,24 +770,23 @@ describe("Table", () => {
 			);
 
 			expect(getByRole("dialog")).not.toHaveClass(
-				"sheet-horizontal-slide-in-shim",
-			);
-			expect(getByRole("dialog")).not.toHaveClass(
-				"sheet-horizontal-slide-out-shim",
+				"neo-drawer neo-drawer--isOpen",
 			);
 
 			await user.click(columnFilterButton);
 
-			expect(getByRole("dialog")).toHaveClass("sheet-horizontal-slide-in-shim");
-			expect(getByRole("dialog")).not.toHaveClass(
-				"sheet-horizontal-slide-out-shim",
-			);
+			expect(getByRole("dialog")).toHaveClass("neo-drawer neo-drawer--isOpen");
 
 			const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
 			expect(nameCheckbox).toBeChecked();
 
 			await user.click(nameCheckbox);
 			expect(nameCheckbox).not.toBeChecked();
+
+			const applyButton = getByLabelText(
+				FilledFields.translations.toolbar.apply,
+			);
+			await user.click(applyButton);
 			expect(firstColumnSortButton).not.toBeVisible();
 		});
 	});
