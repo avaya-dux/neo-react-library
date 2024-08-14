@@ -624,12 +624,12 @@ export const InlineCustomWidths = () => {
 				style={{ width: 1000, marginTop: 20 }}
 			>
 				<Form inline>
-					<Select className="select-width-400" label="Select a favorite food">
+					<Select className="width-400" label="Select a favorite food">
 						{fruitOptions}
 					</Select>
 
 					<Select
-						className="select-width-400"
+						className="width-400"
 						label="Select a few nice foods"
 						multiple
 					>
@@ -638,5 +638,185 @@ export const InlineCustomWidths = () => {
 				</Form>
 			</Sheet>
 		</>
+	);
+};
+
+export const ControlledVSUncontrolledSelects = () => {
+	const ControlledSingleSelect = () => {
+		const [controlledFavFood, setControlledFavFood] = useState("oranges");
+
+		return (
+			<Sheet
+				title="Testing Single Select as a controlled component"
+				className="width-400"
+			>
+				<p>Initial Value: Oranges</p>
+
+				<Select
+					label="Select a favorite food"
+					value={controlledFavFood}
+					onChange={(value) => setControlledFavFood(value as string)}
+				>
+					{fruitOptions}
+				</Select>
+
+				<Button
+					className="margin-top-20"
+					onClick={() => {
+						setControlledFavFood("pear");
+					}}
+				>
+					Select Pear
+				</Button>
+
+				<Button
+					className="margin-top-20"
+					onClick={() => {
+						setControlledFavFood("");
+					}}
+				>
+					Clear Selection
+				</Button>
+
+				<p>Controlled Value: {controlledFavFood || "none selected"}</p>
+			</Sheet>
+		);
+	};
+
+	const UncontrolledSingleSelect = () => {
+		const [uncontrolledFavFood, setUncontrolledFavFood] =
+			useState("blueberries");
+
+		return (
+			<Sheet
+				title="Testing Single Select as an uncontrolled component"
+				className="width-400"
+			>
+				<p>Initial Default Value: Blueberries</p>
+
+				<Select
+					label="Select a favorite food"
+					defaultValue={uncontrolledFavFood}
+					onChange={(value) => setUncontrolledFavFood(value as string)}
+				>
+					{fruitOptions}
+				</Select>
+
+				<Button
+					className="margin-top-20"
+					onClick={() => {
+						setUncontrolledFavFood("grapes");
+					}}
+				>
+					Select Grapes
+				</Button>
+
+				<p>(this 👆 button should not update Select)</p>
+
+				<p>
+					(but <i>should</i> update the value 👇)
+				</p>
+
+				<p>Uncontrolled Value: {uncontrolledFavFood}</p>
+			</Sheet>
+		);
+	};
+
+	const ControlledMultiSelect = () => {
+		const [controlledFavFoods, setControlledFavFoods] = useState(["oranges"]);
+
+		return (
+			<Sheet
+				title="Testing Multiple Select as a controlled component"
+				className="width-400"
+			>
+				<p>Initial Values: Oranges</p>
+
+				<Select
+					label="Select your favorite foods"
+					value={controlledFavFoods}
+					onChange={(value) => setControlledFavFoods(value as string[])}
+					multiple
+				>
+					{fruitOptions}
+				</Select>
+
+				<Button
+					className="margin-top-20"
+					onClick={() => {
+						setControlledFavFoods(["pear"]);
+					}}
+				>
+					Set selection to Pear
+				</Button>
+
+				<Button
+					className="margin-top-20"
+					onClick={() => {
+						setControlledFavFoods([]);
+					}}
+				>
+					Clear Selection(s)
+				</Button>
+
+				<p>
+					Controlled Value(s):{" "}
+					{controlledFavFoods.join(", ") || "none selected"}
+				</p>
+			</Sheet>
+		);
+	};
+
+	const UncontrolledMultiSelect = () => {
+		const [uncontrolledFavFoods, setUncontrolledFavFoods] = useState([
+			"blueberries",
+		]);
+
+		return (
+			<Sheet
+				title="Testing Multiple Select as an uncontrolled component"
+				className="width-400"
+			>
+				<p>Initial Default Values: Blueberries</p>
+
+				<Select
+					label="Select your favorite foods"
+					defaultValue={uncontrolledFavFoods}
+					onChange={(value) => setUncontrolledFavFoods(value as string[])}
+					multiple
+				>
+					{fruitOptions}
+				</Select>
+
+				<Button
+					className="margin-top-20"
+					onClick={() => {
+						setUncontrolledFavFoods(["grapes"]);
+					}}
+				>
+					Select Grapes
+				</Button>
+
+				<p>(this 👆 button should not update Select)</p>
+
+				<p>
+					(but <i>should</i> update the value 👇)
+				</p>
+
+				<p>Uncontrolled Value(s): {uncontrolledFavFoods.join(", ")}</p>
+			</Sheet>
+		);
+	};
+
+	return (
+		<div className="controlling-selects-stories">
+			<ControlledSingleSelect />
+
+			<UncontrolledSingleSelect />
+
+			<ControlledMultiSelect />
+
+			<UncontrolledMultiSelect />
+		</div>
 	);
 };

@@ -1,14 +1,16 @@
 import { Children, useEffect, useId, useMemo, useState } from "react";
+import isEqual from "react-fast-compare";
 
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 import { handleAccessbilityError } from "utils/accessibilityUtils";
 import { useIsInitialRender } from "utils/hooks/useIsInitialRender";
 
-import isEqual from "react-fast-compare";
 import { InternalSelect } from "./InternalComponents";
 import { SelectContext } from "./utils/SelectContext";
-import type { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
+
+import type { SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
+import { useSelectedItems } from "./utils/useSelectedItems";
 
 import log from "loglevel";
 const logger = log.getLogger("select-logger");
@@ -88,6 +90,12 @@ export const Select = (props: SelectProps) => {
 		);
 	}
 
+	if (value && defaultValue && !isEqual(value, defaultValue)) {
+		console.warn(
+			"You have passed both `value` and `defaultValue` props to Select. `value` will be used.",
+		);
+	}
+
 	const helperId = useMemo(() => `helper-text-${id}`, [id]);
 	const isInitialRender = useIsInitialRender();
 
@@ -116,37 +124,14 @@ export const Select = (props: SelectProps) => {
 		}
 	}, [options]);
 
-	const [selectedItems, setSelectedItems] = useState<SelectOptionProps[]>([]);
-	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
-	useEffect(() => {
-		if (isInitialRender && defaultValue) {
-			const userSelectedOptions = options.filter((option) =>
-				multiple
-					? defaultValue.includes(option.value as string)
-					: defaultValue === option.value,
-			);
-			setSelectedItems(userSelectedOptions);
-		} else if (isInitialRender && options.some((o) => o.selected)) {
-			setSelectedItems(options.filter((option) => option.selected));
-		} else if (!isInitialRender || value) {
-			const selectionHasChanged = multiple
-				? selectedItems.length !== value?.length ||
-					!selectedItems.every((item) => value.includes(item.value as string))
-				: selectedItems[0]?.value !== value;
+	const [selectedItems, setSelectedItems] = useSelectedItems({
+		defaultValue,
+		value,
+		options,
+		multiple,
+	});
 
-			if (selectionHasChanged) {
-				const userSelectedOptions = options.filter((option) =>
-					multiple
-						? value?.includes(option.value as string)
-						: value === option.value,
-				);
-
-				setSelectedItems(userSelectedOptions);
-			}
-		}
-	}, [value]);
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: self explanatory
+	// biome-ignore lint/correctness/useExhaustiveDependencies: we only want to run this when the user updates their selection
 	useEffect(() => {
 		if (!isInitialRender && onChange) {
 			if (multiple) {

@@ -1,6 +1,6 @@
 import type { Meta, Story } from "@storybook/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Column, ColumnInstance } from "react-table";
+import type { Column, ColumnInstance, Row } from "react-table";
 
 import {
 	Chip,
@@ -10,7 +10,9 @@ import {
 	ListItem,
 	Menu,
 	MenuItem,
+	Select,
 	SelectNative,
+	SelectOption,
 	Switch,
 	Tab,
 	TabList,
@@ -853,6 +855,130 @@ export const DisabledRows = () => {
 				</List>
 			</section>
 		</section>
+	);
+};
+
+export const EmbeddedSelects = () => {
+	const addten = "addten";
+	const minusten = "minusten";
+	const reset = "reset";
+
+	type IData = {
+		id: string;
+		name: string;
+		number: string;
+		lastAction?: string;
+	};
+	const columns: Array<Column<IData>> = [
+		{
+			Header: "Name",
+			accessor: "name",
+		},
+		{
+			Header: "Number",
+			accessor: "number",
+		},
+		{
+			Header: "Actions",
+			Cell: ({ row }: { row: Row<IData> }) => {
+				const { lastAction } = row.original;
+
+				return (
+					<Select
+						aria-label="Actions"
+						defaultValue={lastAction}
+						onChange={(action) => {
+							handleSelectedValueChange(action, row.original);
+						}}
+					>
+						<SelectOption value={addten}>Add 10</SelectOption>
+						<SelectOption value={minusten}>Minus Ten</SelectOption>
+						<SelectOption value={reset}>Reset</SelectOption>
+					</Select>
+				);
+			},
+		},
+	];
+	const mockdata: IData[] = [
+		{
+			id: "1",
+			name: "John Doe",
+			number: "1",
+		},
+		{
+			id: "2",
+			name: "Jane Doe",
+			number: "2",
+			lastAction: reset,
+		},
+		{
+			id: "3",
+			name: "Joe Schmoe",
+			number: "3",
+		},
+		{
+			id: "4",
+			name: "Jill Schmoe",
+			number: "4",
+		},
+	];
+
+	const [data, setData] = useState(mockdata);
+
+	const handleSelectedValueChange = (
+		action: null | string | string[],
+		row: IData,
+	) => {
+		switch (action) {
+			case addten:
+				setData(
+					data.map((d) => {
+						if (d.id === row.id) {
+							return {
+								...d,
+								number: (Number.parseInt(d.number, 10) + 10).toString(),
+								lastAction: addten,
+							};
+						}
+						return d;
+					}),
+				);
+				break;
+
+			case minusten:
+				setData(
+					data.map((d) => {
+						if (d.id === row.id) {
+							return {
+								...d,
+								number: (Number.parseInt(d.number, 10) - 10).toString(),
+								lastAction: minusten,
+							};
+						}
+						return d;
+					}),
+				);
+				break;
+
+			case reset: {
+				const originalData = mockdata.find((d) => d.id === row.id) as IData;
+				setData(data.map((d) => (d.id === row.id ? originalData : d)));
+				break;
+			}
+
+			default:
+				break;
+		}
+	};
+
+	return (
+		<Table
+			data={data}
+			columns={columns}
+			showRowHeightMenu={false}
+			showSearch={false}
+			showPagination={false}
+		/>
 	);
 };
 

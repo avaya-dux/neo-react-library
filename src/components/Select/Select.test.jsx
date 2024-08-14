@@ -28,11 +28,14 @@ const {
 	MoreThanOneMultipleSelect,
 	SmallSelects,
 	InlineCustomWidths,
+	ControlledVSUncontrolledSelects,
 } = composeStories(SelectStories);
 
 const label = "Select Label";
 
 describe("Select", () => {
+	const user = userEvent.setup();
+
 	describe("base tests", () => {
 		it("has class 'neo-multiselect--small' when size is set to 'sm'", () => {
 			const { container } = render(<SmallSelects />);
@@ -173,6 +176,25 @@ describe("Select", () => {
 			expect(getByText(errorText)).toBeInTheDocument();
 		});
 
+		it("sets and clears controlled value appropriately", async () => {
+			render(<ControlledVSUncontrolledSelects />);
+
+			const selectPearButton = screen.getByText("Select Pear");
+			const selectClearButton = screen.getByText("Clear Selection");
+
+			expect(screen.getByText("Controlled Value: oranges")).toBeInTheDocument();
+
+			await user.click(selectPearButton);
+
+			expect(screen.getByText("Controlled Value: pear")).toBeInTheDocument();
+
+			await user.click(selectClearButton);
+
+			expect(
+				screen.getByText("Controlled Value: none selected"),
+			).toBeInTheDocument();
+		});
+
 		it("passes basic axe compliance", async () => {
 			const { container } = renderResult;
 			const results = await axe(container);
@@ -238,6 +260,29 @@ describe("Select", () => {
 
 				rerender(<Select multiple label={label} errorList={[errorText]} />);
 				expect(getByText(errorText)).toBeInTheDocument();
+			});
+
+			it("sets and clears controlled value appropriately", async () => {
+				render(<ControlledVSUncontrolledSelects />);
+
+				const selectPearButton = screen.getByText("Set selection to Pear");
+				const selectClearButton = screen.getByText("Clear Selection(s)");
+
+				expect(
+					screen.getByText("Controlled Value(s): oranges"),
+				).toBeInTheDocument();
+
+				await user.click(selectPearButton);
+
+				expect(
+					screen.getByText("Controlled Value(s): pear"),
+				).toBeInTheDocument();
+
+				await user.click(selectClearButton);
+
+				expect(
+					screen.getByText("Controlled Value(s): none selected"),
+				).toBeInTheDocument();
 			});
 
 			it("passes basic axe compliance", async () => {
