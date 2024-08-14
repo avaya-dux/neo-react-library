@@ -1,11 +1,13 @@
-import { useContext } from "react";
-import type { TableInstance } from "react-table";
+import { useCallback, useContext, useEffect, useState } from "react";
+import type { IdType, TableInstance } from "react-table";
 
-import { Button } from "components/Button";
-import { Checkbox } from "components/Checkbox";
-import { IconButton } from "components/IconButton";
-import { Sheet } from "components/Sheet";
-
+import {
+	Button,
+	Checkbox,
+	CheckboxGroup,
+	Drawer,
+	IconButton,
+} from "components";
 import { FilterContext, translations as defaultTranslations } from "../helpers";
 import type { ITableFilterTranslations } from "../types";
 
@@ -15,15 +17,20 @@ type TableFilterProps<T extends Record<string, any>> = {
 	instance: TableInstance<T>;
 };
 
+type FilterColumns = {
+	id: string;
+	checkboxDisplayText: string | undefined | null;
+	checked: boolean | "mixed";
+};
+
 // biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 export const TableFilter = <T extends Record<string, any>>({
 	translations,
 	instance,
 }: TableFilterProps<T>) => {
 	// translations
-	const clear = translations.clear || defaultTranslations.toolbar.clear;
-	const close =
-		translations.close || defaultTranslations.toolbar.close || "Close";
+	const apply = translations.apply || defaultTranslations.toolbar.apply;
+	const cancel = translations.cancel || defaultTranslations.toolbar.cancel;
 	const filterColumns =
 		translations.filterColumns ||
 		defaultTranslations.toolbar.filterColumns ||
@@ -34,16 +41,102 @@ export const TableFilter = <T extends Record<string, any>>({
 	const { filterSheetVisible, toggleFilterSheetVisible } =
 		useContext(FilterContext);
 
-	const buttons = [
-		<IconButton
-			aria-label={close}
-			icon="close"
-			shape="circle"
-			style={{ color: "black" }}
-			variant="tertiary"
+	// filteredColumns is a temporary array that is used while the filter Drawer is open.
+	const [filteredColumns, setNewAllColumns] = useState<FilterColumns[]>([]);
+	const [originalVisibleColIds, setOriginalVisibleColIds] = useState<
+		IdType<T>[]
+	>([]);
+	const [applyBtnEnabled, setApplyBtnEnabled] = useState<boolean>(false);
+
+	const didColumnsSelectionsChange = useCallback(
+		(newVisibleColIds: IdType<T>[]) => {
+			if (newVisibleColIds.length < 1) return false; // disable Apply button if no columns are selected.
+
+			if (newVisibleColIds.length !== originalVisibleColIds.length) return true;
+
+			const arraysAreEqual = newVisibleColIds.every((id) =>
+				originalVisibleColIds.includes(id),
+			);
+			return !arraysAreEqual;
+		},
+		[originalVisibleColIds],
+	);
+
+	const handleColumnVisibilityChange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			const { checked, value } = e.target;
+			const visibleColumnIds: IdType<T>[] = [];
+
+			//Update filteredColumns array checked value
+			const nextColumns = filteredColumns.map((col) => {
+				if (
+					(col.id === value && checked) ||
+					(col.id !== value && col.checked)
+				) {
+					visibleColumnIds.push(col.id); // Only push visible columns
+				}
+				return {
+					id: col.id,
+					checkboxDisplayText: col.checkboxDisplayText,
+					checked: col.id === value ? checked : col.checked,
+				};
+			});
+
+			setNewAllColumns(nextColumns);
+			setApplyBtnEnabled(didColumnsSelectionsChange(visibleColumnIds));
+		},
+		[didColumnsSelectionsChange, filteredColumns],
+	);
+
+	useEffect(() => {
+		const newAllCols: FilterColumns[] = [];
+		const visibleColumnIds: IdType<T>[] = [];
+
+		allColumns.map((col) => {
+			const colProps = { ...col.getToggleHiddenProps() };
+			newAllCols.push({
+				id: col.id,
+				checkboxDisplayText: col.Header?.toString(),
+				checked: colProps.checked,
+			});
+			if (colProps.checked) {
+				visibleColumnIds.push(col.id);
+			}
+		});
+		setNewAllColumns(newAllCols);
+		setOriginalVisibleColIds(visibleColumnIds);
+	}, [allColumns]);
+
+	const handleApplyChanges = useCallback(() => {
+		const newHiddenColIds: IdType<T>[] = [];
+		filteredColumns.forEach((col) => {
+			if (!col.checked) {
+				newHiddenColIds.push(col.id);
+			}
+		});
+
+		setHiddenColumns(newHiddenColIds); // Using Table api to hide unchecked columns.
+		setApplyBtnEnabled(false);
+		toggleFilterSheetVisible();
+	}, [filteredColumns, setHiddenColumns, toggleFilterSheetVisible]);
+
+	const actionButtons = [
+		<Button
+			aria-label={cancel}
+			variant="secondary"
 			onClick={toggleFilterSheetVisible}
-			key="table-filter-close-icon-button"
-		/>,
+			key="table-filter-cancel-button"
+		>
+			{cancel}
+		</Button>,
+		<Button
+			aria-label={apply}
+			onClick={handleApplyChanges}
+			disabled={!applyBtnEnabled}
+			key="table-filter-apply-button"
+		>
+			{apply}
+		</Button>,
 	];
 
 	return (
@@ -58,43 +151,27 @@ export const TableFilter = <T extends Record<string, any>>({
 				onClick={toggleFilterSheetVisible}
 			/>
 
-			<Sheet
-				actions={buttons}
-				className="neo-table__filters--sheet"
-				open={filterSheetVisible}
-				slide={filterSheetVisible}
+			<Drawer
 				title={filterColumns}
+				open={filterSheetVisible}
+				actions={actionButtons}
 			>
-				<section>
-					{allColumns.map((column) => (
-						<Checkbox key={column.id} {...column.getToggleHiddenProps()}>
-							{column.Header}
-						</Checkbox>
-					))}
+				<section id="column-filter">
+					<CheckboxGroup
+						groupName="TableColumns"
+						aria-labelledby="column-filter"
+						onChange={handleColumnVisibilityChange}
+					>
+						{filteredColumns.map((col) => {
+							return (
+								<Checkbox value={col.id} key={col.id} checked={col.checked}>
+									{col.checkboxDisplayText}
+								</Checkbox>
+							);
+						})}
+					</CheckboxGroup>
 				</section>
-
-				<div
-					className="neo-table__filters--sheet__footer"
-					style={{ flexWrap: "wrap" }}
-				>
-					<Button
-						onClick={() => setHiddenColumns([])}
-						size="wide"
-						status="alert"
-						variant="tertiary"
-					>
-						{clear}
-					</Button>
-
-					<Button
-						onClick={toggleFilterSheetVisible}
-						size="wide"
-						variant="tertiary"
-					>
-						{close}
-					</Button>
-				</div>
-			</Sheet>
+			</Drawer>
 		</>
 	);
 };
