@@ -15,6 +15,7 @@ import type { ITableFilterTranslations } from "../types";
 type TableFilterProps<T extends Record<string, any>> = {
 	translations: ITableFilterTranslations;
 	instance: TableInstance<T>;
+	handleChooseColumns?: () => void;
 };
 
 type FilterColumns = {
@@ -27,6 +28,7 @@ type FilterColumns = {
 export const TableFilter = <T extends Record<string, any>>({
 	translations,
 	instance,
+	handleChooseColumns,
 }: TableFilterProps<T>) => {
 	// translations
 	const apply = translations.apply || defaultTranslations.toolbar.apply;
@@ -47,6 +49,16 @@ export const TableFilter = <T extends Record<string, any>>({
 		IdType<T>[]
 	>([]);
 	const [applyBtnEnabled, setApplyBtnEnabled] = useState<boolean>(false);
+
+	const onChooseColumns = useCallback(() => {
+		if (handleChooseColumns !== undefined) {
+			console.log("provided custom handleChooseColumns()");
+			handleChooseColumns();
+		} else {
+			console.log("DID NOT PROVIDE custom handleChooseColumns()");
+			toggleFilterSheetVisible();
+		}
+	}, [handleChooseColumns, toggleFilterSheetVisible]);
 
 	const didColumnsSelectionsChange = useCallback(
 		(newVisibleColIds: IdType<T>[]) => {
@@ -148,7 +160,7 @@ export const TableFilter = <T extends Record<string, any>>({
 				shape="square"
 				className="neo-table__toolbar-btn"
 				size="large"
-				onClick={toggleFilterSheetVisible}
+				onClick={onChooseColumns}
 			/>
 
 			<Drawer

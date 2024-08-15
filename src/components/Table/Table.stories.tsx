@@ -4,6 +4,7 @@ import type { Column, ColumnInstance, Row } from "react-table";
 
 import {
 	Chip,
+	Drawer,
 	Icon,
 	IconButton,
 	List,
@@ -614,6 +615,30 @@ export const BareBones = () => (
 		data={[...FilledFields.data]}
 	/>
 );
+
+export const CustomGlobalColumnFilter = () => {
+	const [openChooseColumnsDrawer, setOpenChooseColumnsDrawer] =
+		useState<boolean>(false);
+	const handleChooseColumns = () => setOpenChooseColumnsDrawer((v) => !v);
+	return (
+		<>
+			<Table
+				columns={FilledFields.columns}
+				handleChooseColumns={handleChooseColumns}
+				allowColumnFilter
+				data={[...FilledFields.data]}
+			/>
+			<Drawer
+				title="Custom Filter"
+				open={openChooseColumnsDrawer}
+			>
+				<p>
+					Testing
+				</p>
+			</Drawer>
+		</>
+	);
+};
 
 export const WithRowSeparator = () => (
 	<Table

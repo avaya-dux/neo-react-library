@@ -96,6 +96,7 @@ export const Table = <T extends Record<string, any>>({
 	handleDelete,
 	handleEdit,
 	handleRefresh,
+	handleChooseColumns,
 	handleRowToggled,
 	handlePageChange = () => null,
 	readonly = false,
@@ -373,6 +374,7 @@ export const Table = <T extends Record<string, any>>({
 							handleDelete={handleDelete}
 							handleEdit={handleEdit}
 							handleRefresh={handleRefresh}
+							handleChooseColumns={handleChooseColumns}
 							handleRowHeightChange={onRowHeightChangeHandler}
 							rowHeight={rowHeightValue}
 							showRowHeightMenu={showRowHeightMenu}
