@@ -620,6 +620,7 @@ export const CustomGlobalColumnFilter = () => {
 	const [openChooseColumnsDrawer, setOpenChooseColumnsDrawer] =
 		useState<boolean>(false);
 	const handleChooseColumns = () => setOpenChooseColumnsDrawer((v) => !v);
+	const closeFilterDrawer = () => {setOpenChooseColumnsDrawer(false)};
 	return (
 		<>
 			<Table
@@ -631,10 +632,11 @@ export const CustomGlobalColumnFilter = () => {
 			<Drawer
 				title="Custom Filter"
 				open={openChooseColumnsDrawer}
+				onClose={closeFilterDrawer}
 			>
-				<p>
-					Testing
-				</p>
+				<p>Close button above</p>
+				<p>Any content goes here</p>
+				<p> Look, no action buttons below!</p>
 			</Drawer>
 		</>
 	);
