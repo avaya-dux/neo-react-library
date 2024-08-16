@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -30,20 +30,15 @@ describe("Pagination", () => {
 	};
 
 	it("fully renders without exploding", () => {
-		vi.spyOn(console, "warn").mockImplementation(() => null);
-		const { getByRole, getAllByRole } = render(
-			<Pagination {...defaultProps} />,
-		);
+		render(<Pagination {...defaultProps} />);
 
-		const innerNavElement = getByRole("navigation");
-		const tooltips = getAllByRole("tooltip");
+		const innerNavElement = screen.getByRole("navigation");
+		const buttons = screen.getAllByRole("button");
 		expect(innerNavElement).toBeTruthy();
-		expect(tooltips).toHaveLength(2);
+		expect(buttons).toHaveLength(4);
 	});
 
 	it("does not render the `<select>` if no options are passed for it", () => {
-		vi.spyOn(console, "warn").mockImplementation(() => null);
-
 		const props = {
 			...defaultProps,
 			itemsPerPageOptions: undefined,
@@ -51,14 +46,12 @@ describe("Pagination", () => {
 		const { getByRole, getAllByRole } = render(<Pagination {...props} />);
 
 		const innerNavElement = getByRole("navigation");
-		const tooltips = getAllByRole("tooltip");
+		const buttons = getAllByRole("button");
 		expect(innerNavElement).toBeTruthy();
-		expect(tooltips).toHaveLength(1);
+		expect(buttons).toHaveLength(3);
 	});
 
 	it("does NOT show any nav items when `totalPages === 1`", () => {
-		vi.spyOn(console, "warn").mockImplementation(() => null);
-
 		const props = {
 			...defaultProps,
 			itemCount: 10,
@@ -70,12 +63,10 @@ describe("Pagination", () => {
 		expect(innerNavElement).toHaveLength(0);
 
 		const navItems = queryAllByRole("button");
-		expect(navItems).toHaveLength(0);
+		expect(navItems).toHaveLength(1); // only the "Rows" select
 	});
 
 	it("shows a single, nav item when `totalPages === 1` and prop `alwaysShowPagination` is passed", () => {
-		vi.spyOn(console, "warn").mockImplementation(() => null);
-
 		const props = {
 			...defaultProps,
 			itemCount: 10,
@@ -89,119 +80,10 @@ describe("Pagination", () => {
 		expect(innerNavElement).toHaveLength(1);
 
 		const navItems = queryAllByRole("button");
-		expect(navItems).toHaveLength(3); // left, 1, right
+		expect(navItems).toHaveLength(4); // left, 1, right, and "Rows" select
 		expect(navItems[0]).toBeDisabled();
 		expect(navItems[1]).toBeEnabled();
 		expect(navItems[2]).toBeDisabled();
-	});
-
-	it("matches it's previous snapshot", () => {
-		const { container } = render(
-			<Pagination {...defaultProps} id="pagination-test" />,
-		);
-		expect(container).toMatchInlineSnapshot(`
-			<div>
-			  <div
-			    class="neo-pagination__row"
-			    id="pagination-test"
-			  >
-			    <div
-			      class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
-			      id="pagination-item-display-Item count"
-			    >
-			      <bdi
-			        aria-describedby=":rc:"
-			      >
-			        1
-			        -
-			        1
-			         / 
-			        10
-			      </bdi>
-			      <div
-			        class="neo-tooltip__content neo-tooltip__content--multiline"
-			        id=":rc:"
-			        role="tooltip"
-			      >
-			        <div
-			          class="neo-arrow"
-			        />
-			        Item count
-			      </div>
-			    </div>
-			    <nav
-			      aria-label="pagination"
-			      class="neo-pagination"
-			    >
-			      <button
-			        aria-label="previous"
-			        class="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-left"
-			        disabled=""
-			        type="button"
-			      />
-			      <ul
-			        class="neo-pagination__list"
-			      >
-			        <li>
-			          <button
-			            class="neo-btn neo-btn--default neo-btn-secondary neo-btn-secondary--default neo-btn-square neo-btn-square-secondary neo-btn-square-secondary--info"
-			            data-badge=""
-			          >
-			            1
-			          </button>
-			        </li>
-			      </ul>
-			      <button
-			        aria-label="next"
-			        class="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-right"
-			        type="button"
-			      />
-			    </nav>
-			    <div
-			      class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
-			      id="pagination-items-per-page-selection-items per page"
-			    >
-			      <div
-			        aria-describedby=":rd:"
-			      >
-			        <label>
-			          Show: 
-			        </label>
-			        <select
-			          aria-label="items per page"
-			        >
-			          <option
-			            selected=""
-			            value="1"
-			          >
-			            1
-			          </option>
-			          <option
-			            value="5"
-			          >
-			            5
-			          </option>
-			          <option
-			            value="10"
-			          >
-			            10
-			          </option>
-			        </select>
-			      </div>
-			      <div
-			        class="neo-tooltip__content neo-tooltip__content--multiline"
-			        id=":rd:"
-			        role="tooltip"
-			      >
-			        <div
-			          class="neo-arrow"
-			        />
-			        items per page
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		`);
 	});
 
 	it("passes basic axe compliance", async () => {

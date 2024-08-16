@@ -1,6 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table";
 
-import type { TooltipPosition } from "components/Tooltip";
 import type { RowHeight } from "../../types";
 import type { ITableNextTranslations } from "./TranslationTypes";
 
@@ -19,8 +18,6 @@ export interface TableNextProps<T> {
 	// pagination options
 	itemsPerPageOptions?: number[];
 	initialStatePageIndex?: number;
-	itemDisplayTooltipPosition?: TooltipPosition;
-	itemsPerPageTooltipPosition?: TooltipPosition;
 	pushPaginationDown?: boolean;
 
 	translations?: ITableNextTranslations;

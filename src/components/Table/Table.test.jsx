@@ -101,13 +101,13 @@ describe("Table", () => {
 		it("respects when a user clicks to the next page", async () => {
 			render(<Table {...FilledFields} itemsPerPageOptions={[1, 2]} />);
 
-			expect(screen.getAllByText("1")).toHaveLength(2);
+			expect(screen.getAllByText("1")).toHaveLength(3);
 			expect(screen.getAllByText("2")).toHaveLength(1);
 
 			const nextButton = screen.getByLabelText("next");
 			await user.click(nextButton);
 
-			expect(screen.getAllByText("1")).toHaveLength(1);
+			expect(screen.getAllByText("1")).toHaveLength(2);
 			expect(screen.getAllByText("2")).toHaveLength(2);
 		});
 
@@ -124,8 +124,10 @@ describe("Table", () => {
 			const page5Button = page5Buttons[0];
 			expect(page5Button).toBeVisible();
 
-			const itemsPerPageSelect = screen.getByLabelText("items per page");
-			await userEvent.selectOptions(itemsPerPageSelect, "5");
+			await user.click(screen.getAllByRole("button").pop()); // open
+			await user.keyboard(UserEventKeys.DOWN); // move to first item (2	)
+			await user.keyboard(UserEventKeys.DOWN); // move to second item (5)
+			await user.keyboard(UserEventKeys.ENTER); // select second item (5)
 
 			const page2Buttons = screen.getAllByText("2");
 			const page2Button = page2Buttons[0];

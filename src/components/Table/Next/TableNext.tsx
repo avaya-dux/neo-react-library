@@ -62,8 +62,6 @@ export const TableNext = ({
 	// pagination options
 	itemsPerPageOptions = [10, 25, 50, 100],
 	initialStatePageIndex = 0,
-	itemDisplayTooltipPosition = "auto",
-	itemsPerPageTooltipPosition = "auto",
 
 	translations: translationsProp,
 
@@ -164,8 +162,6 @@ export const TableNext = ({
 				table={table}
 				itemsPerPageOptions={itemsPerPageOptions}
 				translations={translations.pagination}
-				itemDisplayTooltipPosition={itemDisplayTooltipPosition}
-				itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
 			/>
 		</div>
 	);
