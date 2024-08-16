@@ -2,16 +2,11 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
 import type { Row } from "react-table";
-import styled from "styled-components";
 import { DragHandle } from "./DragHandle";
 
 import log from "loglevel";
 export const logger = log.getLogger("TableComponents/DraggableTableRow");
 logger.disableAll();
-
-const EmptyRow = styled.td`
-  background: var(--neo-color-blue-500);
-`;
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const DraggableTableRow = <T extends Record<string, any>>({
@@ -42,42 +37,46 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 	const cellCount = row.cells.length + 1 + (checkboxTd ? 1 : 0);
 
 	return (
-		<tr
+		<tbody
 			ref={setNodeRef}
-			role={preparedRowProps.role}
-			style={{ ...style, ...preparedRowProps.style }}
-			key={preparedRowProps.key || `table-row-${row.id}`}
-			className={clsx(
-				row.isSelected && "active",
-				preparedRowProps.className,
-				row.original.disabled && "disabled",
-			)}
-			tabIndex={0}
+			style={{ ...style }}
+			className={clsx(isDragging && "neo-table__tbody--dragging")}
 		>
-			{isDragging ? (
-				<EmptyRow colSpan={cellCount}>&nbsp;</EmptyRow>
-			) : (
-				<>
-					<td className="neo-table__dnd-td">
-						<DragHandle
-							ref={setActivatorNodeRef}
-							{...attributes}
-							{...listeners}
-						/>
-					</td>
-					{checkboxTd && (
-						<td style={{ padding: "0px 0px 0px 5px" }}>{checkboxTd}</td>
-					)}
-					{row.cells.map((cell) => {
-						const { key, ...restCellProps } = cell.getCellProps();
-						return (
-							<td {...restCellProps} key={key}>
-								{cell.render("Cell")}
-							</td>
-						);
-					})}
-				</>
-			)}
-		</tr>
+			<tr
+				role={preparedRowProps.role}
+				style={{ ...preparedRowProps.style }}
+				key={preparedRowProps.key || `table-row-${row.id}`}
+				className={clsx(
+					row.isSelected && "active",
+					preparedRowProps.className,
+					row.original.disabled && "disabled",
+				)}
+				tabIndex={0}
+			>
+				<td className="neo-table__dnd-td">
+					<DragHandle
+						ref={setActivatorNodeRef}
+						{...attributes}
+						{...listeners}
+					/>
+				</td>
+				{checkboxTd && (
+					<td style={{ padding: "0px 0px 0px 5px" }}>{checkboxTd}</td>
+				)}
+				{row.cells.map((cell) => {
+					const { key, ...restCellProps } = cell.getCellProps();
+					return (
+						<td {...restCellProps} key={key}>
+							{cell.render("Cell")}
+						</td>
+					);
+				})}
+			</tr>
+			{row.isExpanded ? (
+				<tr>
+					<td colSpan={cellCount}>inset table</td>
+				</tr>
+			) : null}
+		</tbody>
 	);
 };

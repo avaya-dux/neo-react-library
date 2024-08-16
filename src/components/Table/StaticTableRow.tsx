@@ -11,33 +11,42 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 	checkboxTd: JSX.Element | null;
 	showDragHandle: boolean;
 }) => {
+	const cellCount =
+		row.cells.length + (showDragHandle ? 1 : 0) + (checkboxTd ? 1 : 0);
+
 	const { key: _, ...restProps } = row.getRowProps();
 	return (
-		<tr
-			{...restProps}
+		<tbody
 			className={clsx(
 				showDragHandle && "neo-set-keyboard-focus",
 				row.original.disabled ? "disabled" : undefined,
 			)}
 		>
-			{showDragHandle && (
-				<td className="neo-table__dnd-td">
-					<DragHandle />
-				</td>
-			)}
-			{checkboxTd && (
-				<td style={{ padding: "0px 0px 0px 5px", width: "60px" }}>
-					{checkboxTd}
-				</td>
-			)}
-			{row.cells.map((cell) => {
-				const { key, ...restCellProps } = cell.getCellProps();
-				return (
-					<td key={key} {...restCellProps}>
-						<span>{cell.render("Cell")}</span>
+			<tr {...restProps}>
+				{showDragHandle && (
+					<td className="neo-table__dnd-td">
+						<DragHandle />
 					</td>
-				);
-			})}
-		</tr>
+				)}
+				{checkboxTd && (
+					<td style={{ padding: "0px 0px 0px 5px", width: "60px" }}>
+						{checkboxTd}
+					</td>
+				)}
+				{row.cells.map((cell) => {
+					const { key, ...restCellProps } = cell.getCellProps();
+					return (
+						<td key={key} {...restCellProps}>
+							<span>{cell.render("Cell")}</span>
+						</td>
+					);
+				})}
+			</tr>
+			{row.isExpanded ? (
+				<tr>
+					<td colSpan={cellCount}>inset table</td>
+				</tr>
+			) : null}
+		</tbody>
 	);
 };
