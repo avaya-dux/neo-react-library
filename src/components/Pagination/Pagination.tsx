@@ -7,6 +7,8 @@ import {
 } from "./Nodes/";
 import type { PaginationProps } from "./PaginationTypes";
 
+import "./Pagination_shim.css";
+
 /**
  * This component is used to render pagination.
  * It can be used as a standalone component.
@@ -43,7 +45,6 @@ export const Pagination = ({
 	manualPageCount = 0,
 
 	itemDisplayTooltipPosition,
-	itemsPerPageTooltipPosition,
 
 	alwaysShowPagination,
 	itemDisplayType,
@@ -55,7 +56,6 @@ export const Pagination = ({
 	backIconButtonText,
 	nextIconButtonText,
 	tooltipForCurrentPage,
-	tooltipForShownPagesSelect,
 
 	// default overrides
 	centerNode,
@@ -114,9 +114,7 @@ export const Pagination = ({
 					itemsPerPage={itemsPerPage}
 					itemsPerPageLabel={itemsPerPageLabel}
 					itemsPerPageOptions={itemsPerPageOptions}
-					itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
 					onItemsPerPageChange={onItemsPerPageChange}
-					tooltipForShownPagesSelect={tooltipForShownPagesSelect}
 				/>
 			)}
 		</div>
