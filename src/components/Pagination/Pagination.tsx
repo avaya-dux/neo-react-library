@@ -5,6 +5,7 @@ import {
 	PaginationItemsPerPageSelection,
 	PaginationNavigation,
 } from "./Nodes/";
+
 import type { PaginationProps } from "./PaginationTypes";
 
 import "./Pagination_shim.css";
@@ -44,8 +45,6 @@ export const Pagination = ({
 	itemsPerPageOptions,
 	manualPageCount = 0,
 
-	itemDisplayTooltipPosition,
-
 	alwaysShowPagination,
 	itemDisplayType,
 
@@ -55,7 +54,6 @@ export const Pagination = ({
 	// translations
 	backIconButtonText,
 	nextIconButtonText,
-	tooltipForCurrentPage,
 
 	// default overrides
 	centerNode,
@@ -87,11 +85,9 @@ export const Pagination = ({
 		<div className="neo-pagination__row" id={id} ref={rootRef}>
 			{leftNode || (
 				<PaginationItemDisplay
-					tooltipForCurrentPage={tooltipForCurrentPage}
 					currentPageIndex={currentPageIndex}
 					itemCount={itemCount}
 					itemDisplayType={itemDisplayType}
-					itemDisplayTooltipPosition={itemDisplayTooltipPosition}
 					itemsPerPage={itemsPerPage}
 					totalPages={totalPages}
 				/>

@@ -2,7 +2,6 @@ export interface PaginationTranslations {
 	backIconButtonText?: string;
 	itemsPerPageLabel?: string;
 	nextIconButtonText?: string;
-	tooltipForCurrentPage?: string;
 }
 
 export type PaginationProps = {

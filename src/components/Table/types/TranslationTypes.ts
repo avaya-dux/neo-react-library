@@ -30,8 +30,6 @@ export interface IPaginationTranslations {
 	backIconButtonText?: string;
 	itemsPerPageLabel?: string;
 	nextIconButtonText?: string;
-	tooltipForCurrentPage?: string;
-	tooltipForShownPagesSelect?: string;
 }
 
 export interface ITableHeaderTranslations {
