@@ -25,7 +25,7 @@ import { Button } from "components/Button";
 import type { IconNamesType } from "utils";
 
 import { Table, type TableProps } from "./";
-import {TableDrawer} from "./TableComponents";
+import {TableFilterDrawer} from "./TableComponents";
 import {
 	FilledFields,
 	type IDataTableMockData,
@@ -616,7 +616,7 @@ export const BareBones = () => (
 	/>
 );
 
-export const CustomGlobalColumnFilter = () => {
+export const BasicTableDrawer = () => {
 	const [openChooseColumnsDrawer, setOpenChooseColumnsDrawer] =
 		useState<boolean>(false);
 	const handleChooseColumns = () => setOpenChooseColumnsDrawer((v) => !v);
@@ -629,14 +629,14 @@ export const CustomGlobalColumnFilter = () => {
 				allowColumnFilter
 				data={[...FilledFields.data]}
 			/>
-			<TableDrawer
-				title="Custom Filter"
+			<TableFilterDrawer
+				title="Basic Table Drawer"
 				open={openChooseColumnsDrawer}
 				handleCancel={closeFilterDrawer}
 			>
-				<p>Any content goes here</p>
-				<p> Missing Apply handler</p>
-			</TableDrawer>
+				<p>Custom content goes here</p>
+				<p> 'Cancel' and 'Apply' buttons are built-in</p>
+			</TableFilterDrawer>
 		</>
 	);
 };

@@ -3,7 +3,7 @@ import type { TableInstance } from "react-table";
 import { forwardRef } from "react";
 
 // biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
-type BaseTableDrawerProps<T extends Record<string, any>> = {
+type BaseTableFilterDrawerProps<T extends Record<string, any>> = {
 	disableApply?: boolean;
 	handleCancel?: () => void;
 	handleApply?: () => void;
@@ -11,10 +11,10 @@ type BaseTableDrawerProps<T extends Record<string, any>> = {
 }
 
 // biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
-export type TableDrawerProps<T extends Record<string, any>> = DrawerProps &
-	BaseTableDrawerProps<T>;
+export type TableFilterDrawerProps<T extends Record<string, any>> = DrawerProps &
+	BaseTableFilterDrawerProps<T>;
 
-export const TableDrawer = forwardRef(
+export const TableFilterDrawer = forwardRef(
 	// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 	<T extends Record<string, any>>(
 		{
@@ -31,7 +31,7 @@ export const TableDrawer = forwardRef(
 			title,
 
 			...rest
-		}: TableDrawerProps<T>,
+		}: TableFilterDrawerProps<T>,
 		ref: React.Ref<HTMLDivElement>,
 	) => {
 		const actionButtons = [
@@ -72,4 +72,4 @@ export const TableDrawer = forwardRef(
 		);
 	},
 );
-TableDrawer.displayName = "TableDrawer";
+TableFilterDrawer.displayName = "TableFilterDrawer";
