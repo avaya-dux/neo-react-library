@@ -4,7 +4,6 @@ import type { Column, ColumnInstance, Row } from "react-table";
 
 import {
 	Chip,
-	Drawer,
 	Icon,
 	IconButton,
 	List,
@@ -26,6 +25,7 @@ import { Button } from "components/Button";
 import type { IconNamesType } from "utils";
 
 import { Table, type TableProps } from "./";
+import {TableDrawer} from "./TableComponents";
 import {
 	FilledFields,
 	type IDataTableMockData,
@@ -629,15 +629,14 @@ export const CustomGlobalColumnFilter = () => {
 				allowColumnFilter
 				data={[...FilledFields.data]}
 			/>
-			<Drawer
+			<TableDrawer
 				title="Custom Filter"
 				open={openChooseColumnsDrawer}
-				onClose={closeFilterDrawer}
+				handleCancel={closeFilterDrawer}
 			>
-				<p>Close button above</p>
 				<p>Any content goes here</p>
-				<p> Look, no action buttons below!</p>
-			</Drawer>
+				<p> Missing Apply handler</p>
+			</TableDrawer>
 		</>
 	);
 };
