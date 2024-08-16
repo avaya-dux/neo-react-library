@@ -962,7 +962,11 @@ export const EmbeddedSelects = () => {
 
 			case reset: {
 				const originalData = mockdata.find((d) => d.id === row.id) as IData;
-				setData(data.map((d) => (d.id === row.id ? originalData : d)));
+				setData(
+					data.map((d) =>
+						d.id === row.id ? { ...originalData, lastAction: reset } : d,
+					),
+				);
 				break;
 			}
 
