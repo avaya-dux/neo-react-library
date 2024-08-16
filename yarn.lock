@@ -28,15 +28,15 @@
   resolved "https://registry.yarnpkg.com/@atomic-layout/core/-/core-0.14.1.tgz#3d69be5f79775f11b8008f18bc603b04a2141ccd"
   integrity sha512-o5nhk/1djuKzB20C2LSOuetTDytsbGg4c0UfxXkq1pqoaN3hKJcHPYF9nV+p6+P5CWqNBaaJddZ32OsFSppULQ==
 
-"@avaya/neo-icons@1.8.13":
-  version "1.8.13"
-  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.13.tgz#5e2bf23983dc2587c7cb1edc3dd433e16ccd251a"
-  integrity sha512-9hvug4QR5IXYcafzto8ETxEvMoadCD/AfDjClJEfyf51DIrCZ3cAyOWMBmRLdzA8Qi0EV8IXHm+qvGXuEKz/6Q==
+"@avaya/neo-icons@1.8.15":
+  version "1.8.15"
+  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.15.tgz#4814998c290c3c443f16b751ed540d4da2400f50"
+  integrity sha512-ZqPOpcwvv+EiDLHpcDz0TdsaMaYNqZ7jkZkSKQeOxJNfo1iIdtR6QIk98j6nPvkPOvqW+oSPNdgHZohK70q2fg==
 
-"@avaya/neo@3.81.12":
-  version "3.81.12"
-  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.12.tgz#a078a9993c6637452949fa4f25e613174cdd83e0"
-  integrity sha512-e6rKTm1+2n2WXN0ejOcH68BdZDK4hvNBm6xcnPIEXuQE/rNKhWIWwdcDR5s+QxkztwktzHWGXzpSfcfZ2lvBzA==
+"@avaya/neo@3.81.13":
+  version "3.81.13"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.13.tgz#cabf570a90a6957519f1a4e7d80c0312424f61a2"
+  integrity sha512-ok8Xx6lodEjjjqUWbsKg4ZmNVyBTt7XX7sd5EWLhoIP+cPv17o0AlxN8J+y3J6dJrUtD2P22GuL5Uq3dqY0m2A==
 
 "@aw-web-design/x-default-browser@1.4.126":
   version "1.4.126"
@@ -7994,9 +7994,9 @@ electron-to-chromium@^1.4.601:
   integrity sha512-1n7zWYh8eS0L9Uy+GskE0lkBUNK83cXTVJI0pU3mGprFsbfSdAc15VTFbo+A+Bq4pwstmL30AVcEU3Fo463lNg==
 
 elliptic@^6.5.3, elliptic@^6.5.4:
-  version "6.5.4"
-  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.4.tgz#da37cebd31e79a1367e941b592ed1fbebd58abbb"
-  integrity sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==
+  version "6.5.7"
+  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.7.tgz#8ec4da2cb2939926a1b9a73619d768207e647c8b"
+  integrity sha512-ESVCtTwiA+XhY3wyh24QqRGBoP3rEdDUl3EDUUo9tft074fi19IrdpH7hLCMMP3CIj7jb3W96rn8lt/BqIlt5Q==
   dependencies:
     bn.js "^4.11.9"
     brorand "^1.1.0"

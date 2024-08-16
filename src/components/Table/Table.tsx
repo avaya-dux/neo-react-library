@@ -469,14 +469,12 @@ export const Table = <T extends Record<string, any>>({
 							rowHeightValue === "medium" && "neo-table--medium",
 						)}
 					>
-						<tbody>
-							<StaticTableRow
-								key={selectedRow.original.id}
-								row={selectedRow}
-								showDragHandle={true}
-								checkboxTd={createCheckboxTd(selectedRow)}
-							/>
-						</tbody>
+						<StaticTableRow
+							key={selectedRow.original.id}
+							row={selectedRow}
+							showDragHandle={true}
+							checkboxTd={createCheckboxTd(selectedRow)}
+						/>
 					</table>
 				)}
 			</DragOverlay>

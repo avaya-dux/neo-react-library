@@ -78,10 +78,10 @@
 	display: none;
 }
 
-.neo-table tbody tr:hover td.neo-table__dnd-td>div,
-.neo-table tbody tr:focus-within td.neo-table__dnd-td>div,
-.neo-table tbody tr.neo-set-keyboard-focus td.neo-table__dnd-td>div,
-.neo-table tbody tr:focus td.neo-table__dnd-td>div {
+.neo-table tbody:hover td.neo-table__dnd-td>div,
+.neo-table tbody:focus-within td.neo-table__dnd-td>div,
+.neo-table tbody.neo-set-keyboard-focus td.neo-table__dnd-td>div,
+.neo-table tbody:focus td.neo-table__dnd-td>div {
 	display: inline-block;
 }
 
@@ -93,6 +93,7 @@
 .neo-table th.neo-table__dnd-th:has(+ .neo-table-checkbox-th:hover) {
 	background-color: inherit;
 }
+
 
 .neo-table th.neo-table-checkbox-th {
 	padding: 0;
@@ -121,4 +122,10 @@
 			left: -30px;
 		}
 	}
+}
+
+/* replaces EmptyCell */
+.neo-table tbody.neo-table__tbody--dragging tr td {
+	color: transparent;
+	background: var(--neo-color-blue-500);
 }
