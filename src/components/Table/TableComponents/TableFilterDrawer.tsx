@@ -1,22 +1,18 @@
 import { Button, Drawer, type DrawerProps } from "components";
-import type { TableInstance } from "react-table";
+import type { ITableFilterTranslations } from "../types";
 import { forwardRef } from "react";
 
-// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
-type BaseTableFilterDrawerProps<T extends Record<string, any>> = {
+type BaseTableFilterDrawerProps = {
 	disableApply?: boolean;
 	handleCancel?: () => void;
 	handleApply?: () => void;
-	tableInstance?: TableInstance<T>;
-}
+	translations?: ITableFilterTranslations;
+};
 
-// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
-export type TableFilterDrawerProps<T extends Record<string, any>> = DrawerProps &
-	BaseTableFilterDrawerProps<T>;
+export type TableFilterDrawerProps = DrawerProps & BaseTableFilterDrawerProps;
 
 export const TableFilterDrawer = forwardRef(
-	// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
-	<T extends Record<string, any>>(
+	(
 		{
 			children,
 			className,
@@ -29,28 +25,33 @@ export const TableFilterDrawer = forwardRef(
 			closeOnScrimClick = false,
 			open = false,
 			title,
+			translations,
 
 			...rest
-		}: TableFilterDrawerProps<T>,
+		}: TableFilterDrawerProps,
 		ref: React.Ref<HTMLDivElement>,
 	) => {
+		// translations
+		const applyLabel = translations?.apply || "Apply";
+		const cancelLabel = translations?.cancel || "Cancel";
+
 		const actionButtons = [
 			<Button
 				form={id}
-				aria-label="cancel"
+				aria-label={cancelLabel}
 				variant="secondary"
 				onClick={handleCancel}
 				key="table-filter-cancel-button"
 			>
-				Cancel
+				{cancelLabel}
 			</Button>,
 			<Button
-				aria-label={"Apply"}
+				aria-label={applyLabel}
 				onClick={handleApply}
 				disabled={disableApply}
 				key="table-filter-apply-button"
 			>
-				Apply
+				{applyLabel}
 			</Button>,
 		];
 
