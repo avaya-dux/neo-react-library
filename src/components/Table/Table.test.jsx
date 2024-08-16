@@ -157,7 +157,8 @@ describe("Table", () => {
 			);
 		});
 
-		it("updates `pageIndex` if data is removed, re-added, and new data set has fewer pages", async () => {
+		// IMPORTANT: this test always works locally, but fails intermittently on CI. Fix is planned for in NEO-2353.
+		it.skip("updates `pageIndex` if data is removed, re-added, and new data set has fewer pages", async () => {
 			render(<EditableData />);
 
 			const refreshButton = screen.getByLabelText("Refresh");

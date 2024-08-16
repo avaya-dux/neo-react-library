@@ -886,7 +886,7 @@ export const EmbeddedSelects = () => {
 				return (
 					<Select
 						aria-label="Actions"
-						defaultValue={lastAction}
+						value={lastAction}
 						onChange={(action) => {
 							handleSelectedValueChange(action, row.original);
 						}}
@@ -929,6 +929,9 @@ export const EmbeddedSelects = () => {
 		action: null | string | string[],
 		row: IData,
 	) => {
+		// HACK: (NEO-2351) actions are being called twice, this fixes that issue
+		if (action === row.lastAction) return;
+
 		switch (action) {
 			case addten:
 				setData(
@@ -962,7 +965,11 @@ export const EmbeddedSelects = () => {
 
 			case reset: {
 				const originalData = mockdata.find((d) => d.id === row.id) as IData;
-				setData(data.map((d) => (d.id === row.id ? originalData : d)));
+				setData(
+					data.map((d) =>
+						d.id === row.id ? { ...originalData, lastAction: reset } : d,
+					),
+				);
 				break;
 			}
 
