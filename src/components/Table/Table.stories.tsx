@@ -886,7 +886,7 @@ export const EmbeddedSelects = () => {
 				return (
 					<Select
 						aria-label="Actions"
-						defaultValue={lastAction}
+						value={lastAction}
 						onChange={(action) => {
 							handleSelectedValueChange(action, row.original);
 						}}
