@@ -929,6 +929,9 @@ export const EmbeddedSelects = () => {
 		action: null | string | string[],
 		row: IData,
 	) => {
+		// HACK: actions are being called twice, this fixes that issue
+		if (action === row.lastAction) return;
+
 		switch (action) {
 			case addten:
 				setData(
