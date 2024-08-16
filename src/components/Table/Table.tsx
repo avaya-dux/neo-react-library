@@ -111,8 +111,6 @@ export const Table = <T extends Record<string, any>>({
 	showRowHeightMenu = true,
 	showRowSelectionHelper = true,
 	showSearch = true,
-	itemDisplayTooltipPosition = "auto",
-	itemsPerPageTooltipPosition = "auto",
 	translations,
 
 	...rest
@@ -445,14 +443,6 @@ export const Table = <T extends Record<string, any>>({
 							backIconButtonText={paginationTranslations.backIconButtonText}
 							itemsPerPageLabel={paginationTranslations.itemsPerPageLabel}
 							nextIconButtonText={paginationTranslations.nextIconButtonText}
-							tooltipForCurrentPage={
-								paginationTranslations.tooltipForCurrentPage
-							}
-							tooltipForShownPagesSelect={
-								paginationTranslations.tooltipForShownPagesSelect
-							}
-							itemDisplayTooltipPosition={itemDisplayTooltipPosition}
-							itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
 						/>
 					)}
 				</div>

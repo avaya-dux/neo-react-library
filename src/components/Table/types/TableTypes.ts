@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import type { TableInstance, TableOptions } from "react-table";
 
-import type { TooltipPosition } from "components/Tooltip/TooltipTypes";
 import type {
 	IBodyTranslations,
 	ITableHeaderTranslations,
@@ -68,8 +67,6 @@ export type TableProps<T extends AnyRecord> = {
 	pushPaginationDown?: boolean;
 	draggableRows?: boolean;
 	handlePageChange?: (pageIndex: number, pageSize: number) => void;
-	itemDisplayTooltipPosition?: TooltipPosition;
-	itemsPerPageTooltipPosition?: TooltipPosition;
 	itemsPerPageOptions?: number[];
 	initialStatePageIndex?: number;
 	initialStatePageSize?: number;

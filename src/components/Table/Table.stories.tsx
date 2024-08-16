@@ -52,15 +52,6 @@ export const MultiSelectWithoutHelper = () => (
 	/>
 );
 
-export const TooltipPositioning = () => (
-	<Table
-		{...FilledFields}
-		itemDisplayTooltipPosition="top-right"
-		itemsPerPageTooltipPosition="top-left"
-		caption="Tooltip positioning in Pagination Example"
-	/>
-);
-
 export const MoreActionsMenu = () => (
 	<Table
 		caption="Last column has more actions menu."

@@ -45,8 +45,6 @@ export const translations: ITableTranslations = {
 	pagination: {
 		backIconButtonText: "back",
 		nextIconButtonText: "next",
-		itemsPerPageLabel: "SHOW: ",
-		tooltipForCurrentPage: "current page",
-		tooltipForShownPagesSelect: "items per page",
+		itemsPerPageLabel: "Rows",
 	},
 };

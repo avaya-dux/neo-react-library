@@ -1,38 +1,27 @@
-import { Tooltip } from "components/Tooltip";
-
 import type { PaginationProps } from "..";
 
 export const PaginationItemsPerPageSelection = ({
 	itemsPerPage,
-	itemsPerPageLabel = "Show: ",
+	itemsPerPageLabel = "Rows",
 	itemsPerPageOptions = [],
-	itemsPerPageTooltipPosition = "auto",
 	onItemsPerPageChange,
-	tooltipForShownPagesSelect = "items per page",
 }: Pick<
 	PaginationProps,
 	| "itemsPerPage"
 	| "itemsPerPageLabel"
 	| "itemsPerPageOptions"
 	| "onItemsPerPageChange"
-	| "tooltipForShownPagesSelect"
-	| "itemsPerPageTooltipPosition"
 >) => {
 	if (itemsPerPageOptions.length <= 0) {
 		return null;
 	}
 
 	return (
-		<Tooltip
-			id={`pagination-items-per-page-selection-${tooltipForShownPagesSelect}`}
-			label={tooltipForShownPagesSelect}
-			position={itemsPerPageTooltipPosition}
-		>
-			<label>{itemsPerPageLabel}</label>
+		<label>
+			{itemsPerPageLabel}
 
 			{/* // TODO-618: use our Select component when it is available */}
 			<select
-				aria-label={tooltipForShownPagesSelect}
 				defaultValue={itemsPerPage}
 				onBlur={(e) => {
 					onItemsPerPageChange?.(e, Number.parseInt(e.target.value, 10));
@@ -47,6 +36,6 @@ export const PaginationItemsPerPageSelection = ({
 					</option>
 				))}
 			</select>
-		</Tooltip>
+		</label>
 	);
 };
