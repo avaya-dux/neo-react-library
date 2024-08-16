@@ -15,10 +15,14 @@
 	margin-right: 0;
 }
 
-.neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
+.neo-pagination__row .neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
 	min-height: 32px;
 }
 
-.neo-input-group .neo-multiselect span.neo-multiselect-combo__header button.neo-multiselect__header {
+.neo-pagination__row .neo-input-group .neo-multiselect span.neo-multiselect-combo__header button.neo-multiselect__header {
 	margin-right: 4px;
+}
+
+.neo-pagination__row .neo-multiselect span.neo-multiselect-combo__header button.neo-multiselect__header:last-child {
+	width: auto;
 }
