@@ -52,10 +52,8 @@ export const TableFilter = <T extends Record<string, any>>({
 
 	const onChooseColumns = useCallback(() => {
 		if (handleChooseColumns !== undefined) {
-			console.log("provided custom handleChooseColumns()");
 			handleChooseColumns();
 		} else {
-			console.log("DID NOT PROVIDE custom handleChooseColumns()");
 			toggleFilterSheetVisible();
 		}
 	}, [handleChooseColumns, toggleFilterSheetVisible]);

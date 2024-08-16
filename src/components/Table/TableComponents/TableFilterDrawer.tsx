@@ -31,7 +31,7 @@ export const TableFilterDrawer = forwardRef(
 		}: TableFilterDrawerProps,
 		ref: React.Ref<HTMLDivElement>,
 	) => {
-		// translations
+		// translations for button labels
 		const applyLabel = translations?.apply || "Apply";
 		const cancelLabel = translations?.cancel || "Cancel";
 
