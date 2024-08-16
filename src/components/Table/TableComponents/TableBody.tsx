@@ -51,32 +51,34 @@ export const TableBody: TableBodyComponentType = ({
 		(shouldHaveCheckboxColumn ? 1 : 0) +
 		(draggableRows ? 1 : 0);
 	return (
-		<tbody {...getTableBodyProps()}>
-			<SortableContext items={rows} strategy={verticalListSortingStrategy}>
-				{page.length === 0 ? (
-					<tr>
-						<td colSpan={numberOfColumns}>{translations.noDataAvailable}</td>
-					</tr>
-				) : (
-					<>
-						{showRowSelectionHelper && (
-							<ClearSelectionRow
-								instance={instance}
-								selectableRows={selectableRows}
-								translations={translations}
-							/>
-						)}
-
-						<TableDataRows
-							handleRowToggled={handleRowToggled}
+		<SortableContext
+			items={rows}
+			strategy={verticalListSortingStrategy}
+			{...getTableBodyProps()}
+		>
+			{page.length === 0 ? (
+				<tr>
+					<td colSpan={numberOfColumns}>{translations.noDataAvailable}</td>
+				</tr>
+			) : (
+				<>
+					{showRowSelectionHelper && (
+						<ClearSelectionRow
 							instance={instance}
 							selectableRows={selectableRows}
 							translations={translations}
 						/>
-					</>
-				)}
-			</SortableContext>
-		</tbody>
+					)}
+
+					<TableDataRows
+						handleRowToggled={handleRowToggled}
+						instance={instance}
+						selectableRows={selectableRows}
+						translations={translations}
+					/>
+				</>
+			)}
+		</SortableContext>
 	);
 };
 
