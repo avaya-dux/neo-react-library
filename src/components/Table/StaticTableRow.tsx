@@ -42,9 +42,11 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 					);
 				})}
 			</tr>
-			<tr>
-				<td colSpan={cellCount}>inset table</td>
-			</tr>{" "}
+			{row.isExpanded ? (
+				<tr>
+					<td colSpan={cellCount}>inset table</td>
+				</tr>
+			) : null}
 		</tbody>
 	);
 };
