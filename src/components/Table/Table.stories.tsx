@@ -616,7 +616,7 @@ export const BareBones = () => (
 	/>
 );
 
-export const BasicTableDrawer = () => {
+export const CustomBasicTableFilterDrawer = () => {
 	const [openChooseColumnsDrawer, setOpenChooseColumnsDrawer] =
 		useState<boolean>(false);
 	const handleChooseColumns = () => setOpenChooseColumnsDrawer((v) => !v);
@@ -630,11 +630,12 @@ export const BasicTableDrawer = () => {
 				data={[...FilledFields.data]}
 			/>
 			<TableFilterDrawer
-				title="Basic Table Drawer"
+				title="Custom Table Filter Drawer"
 				open={openChooseColumnsDrawer}
 				handleCancel={closeFilterDrawer}
 			>
 				<p>Custom content goes here</p>
+				<br/>
 				<p> 'Cancel' and 'Apply' buttons are built-in</p>
 			</TableFilterDrawer>
 		</>
