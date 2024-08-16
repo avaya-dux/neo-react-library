@@ -133,7 +133,11 @@ export const TableToolbar = <T extends Record<string, any>>({
 				</div>
 
 				{allowColumnFilter && (
-					<TableFilter handleChooseColumns={handleChooseColumns} translations={translations} instance={instance} />
+					<TableFilter
+						handleChooseColumns={handleChooseColumns}
+						translations={translations}
+						instance={instance}
+					/>
 				)}
 
 				{handleRefresh && (

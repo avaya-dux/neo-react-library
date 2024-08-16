@@ -1,6 +1,6 @@
 import { Button, Drawer, type DrawerProps } from "components";
-import type { ITableFilterTranslations } from "../types";
 import { forwardRef } from "react";
+import type { ITableFilterTranslations } from "../types";
 
 type BaseTableFilterDrawerProps = {
 	disableApply?: boolean;
