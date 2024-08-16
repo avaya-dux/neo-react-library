@@ -79,8 +79,14 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 					</>
 				)}
 			</tr>
-			<tr>
-				<td colSpan={cellCount}>{isDragging ? "\u00A0" : "inset table"}</td>
+			<tr
+				className={clsx(
+					row.isSelected && "active",
+					preparedRowProps.className,
+					row.original.disabled && "disabled",
+				)}
+			>
+				<td colSpan={cellCount}>inset table</td>
 			</tr>
 		</tbody>
 	);

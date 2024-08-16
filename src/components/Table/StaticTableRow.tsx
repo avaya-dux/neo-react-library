@@ -11,16 +11,18 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 	checkboxTd: JSX.Element | null;
 	showDragHandle: boolean;
 }) => {
+	const cellCount =
+		row.cells.length + (showDragHandle ? 1 : 0) + (checkboxTd ? 1 : 0);
+
 	const { key: _, ...restProps } = row.getRowProps();
 	return (
-		<tbody>
-			<tr
-				{...restProps}
-				className={clsx(
-					showDragHandle && "neo-set-keyboard-focus",
-					row.original.disabled ? "disabled" : undefined,
-				)}
-			>
+		<tbody
+			className={clsx(
+				showDragHandle && "neo-set-keyboard-focus",
+				row.original.disabled ? "disabled" : undefined,
+			)}
+		>
+			<tr {...restProps}>
 				{showDragHandle && (
 					<td className="neo-table__dnd-td">
 						<DragHandle />
@@ -41,7 +43,7 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 				})}
 			</tr>
 			<tr>
-				<td colSpan={row.cells.length}>inset table</td>
+				<td colSpan={cellCount}>inset table</td>
 			</tr>{" "}
 		</tbody>
 	);
