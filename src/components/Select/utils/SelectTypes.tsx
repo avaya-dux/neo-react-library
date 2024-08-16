@@ -30,7 +30,7 @@ export type SelectProps = {
 	loading?: boolean;
 	multiple?: boolean;
 	noOptionsMessage?: string;
-	onChange?: (value: null | string | string[]) => void;
+	onChange?: (value: null | string | string[], event?: React.ChangeEvent<HTMLSelectElement>) => void;
 	placeholder?: string;
 	required?: boolean;
 	searchable?: boolean;
