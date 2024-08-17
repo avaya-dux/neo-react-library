@@ -617,23 +617,23 @@ export const BareBones = () => (
 );
 
 export const CustomBasicTableFilterDrawer = () => {
-	const [openChooseColumnsDrawer, setOpenChooseColumnsDrawer] =
+	const [openColumnsFilterDrawer, setOpenColumnsFilterDrawer] =
 		useState<boolean>(false);
-	const handleChooseColumns = () => setOpenChooseColumnsDrawer((v) => !v);
+	const handleShowColumnsFilter = () => setOpenColumnsFilterDrawer((v) => !v);
 	const closeFilterDrawer = () => {
-		setOpenChooseColumnsDrawer(false);
+		setOpenColumnsFilterDrawer(false);
 	};
 	return (
 		<>
 			<Table
 				columns={FilledFields.columns}
-				handleChooseColumns={handleChooseColumns}
+				handleShowColumnsFilter={handleShowColumnsFilter}
 				allowColumnFilter
 				data={[...FilledFields.data]}
 			/>
 			<TableFilterDrawer
 				title="Custom Table Filter Drawer"
-				open={openChooseColumnsDrawer}
+				open={openColumnsFilterDrawer}
 				handleCancel={closeFilterDrawer}
 			>
 				<p>Custom content goes here</p>

@@ -20,7 +20,7 @@ interface ToolbarSharedProps<T extends AnyRecord> {
 	handleDelete?: (selectedRowIds: string[]) => Promise<void> | void;
 	handleEdit?: (selectedRow: T) => Promise<void> | void;
 	handleRefresh?: () => Promise<void> | void;
-	handleChooseColumns?: () => void;
+	handleShowColumnsFilter?: () => void;
 	showRowHeightMenu?: boolean;
 	showSearch?: boolean;
 	rowHeight?: RowHeight;

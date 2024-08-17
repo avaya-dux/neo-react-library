@@ -15,7 +15,7 @@ import type { ITableFilterTranslations } from "../types";
 type TableFilterProps<T extends Record<string, any>> = {
 	translations: ITableFilterTranslations;
 	instance: TableInstance<T>;
-	handleChooseColumns?: () => void;
+	handleShowColumnsFilter?: () => void;
 };
 
 type FilterColumns = {
@@ -28,7 +28,7 @@ type FilterColumns = {
 export const TableFilter = <T extends Record<string, any>>({
 	translations,
 	instance,
-	handleChooseColumns,
+	handleShowColumnsFilter,
 }: TableFilterProps<T>) => {
 	// translations
 	const apply = translations.apply || defaultTranslations.toolbar.apply;
@@ -51,12 +51,12 @@ export const TableFilter = <T extends Record<string, any>>({
 	const [applyBtnEnabled, setApplyBtnEnabled] = useState<boolean>(false);
 
 	const onChooseColumns = useCallback(() => {
-		if (handleChooseColumns !== undefined) {
-			handleChooseColumns();
+		if (handleShowColumnsFilter !== undefined) {
+			handleShowColumnsFilter();
 		} else {
 			toggleFilterSheetVisible();
 		}
-	}, [handleChooseColumns, toggleFilterSheetVisible]);
+	}, [handleShowColumnsFilter, toggleFilterSheetVisible]);
 
 	const didColumnsSelectionsChange = useCallback(
 		(newVisibleColIds: IdType<T>[]) => {
