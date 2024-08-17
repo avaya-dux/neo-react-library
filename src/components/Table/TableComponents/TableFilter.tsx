@@ -50,7 +50,7 @@ export const TableFilter = <T extends Record<string, any>>({
 	>([]);
 	const [applyBtnEnabled, setApplyBtnEnabled] = useState<boolean>(false);
 
-	const onChooseColumns = useCallback(() => {
+	const onOpenColumnsFilter = useCallback(() => {
 		if (handleShowColumnsFilter !== undefined) {
 			handleShowColumnsFilter();
 		} else {
@@ -158,7 +158,7 @@ export const TableFilter = <T extends Record<string, any>>({
 				shape="square"
 				className="neo-table__toolbar-btn"
 				size="large"
-				onClick={onChooseColumns}
+				onClick={onOpenColumnsFilter}
 			/>
 
 			<Drawer
