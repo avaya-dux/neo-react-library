@@ -5,6 +5,7 @@ import {
 	PaginationItemsPerPageSelection,
 	PaginationNavigation,
 } from "./Nodes/";
+
 import type { PaginationProps } from "./PaginationTypes";
 
 /**
@@ -42,9 +43,6 @@ export const Pagination = ({
 	itemsPerPageOptions,
 	manualPageCount = 0,
 
-	itemDisplayTooltipPosition,
-	itemsPerPageTooltipPosition,
-
 	alwaysShowPagination,
 	itemDisplayType,
 
@@ -54,8 +52,6 @@ export const Pagination = ({
 	// translations
 	backIconButtonText,
 	nextIconButtonText,
-	tooltipForCurrentPage,
-	tooltipForShownPagesSelect,
 
 	// default overrides
 	centerNode,
@@ -87,11 +83,9 @@ export const Pagination = ({
 		<div className="neo-pagination__row" id={id} ref={rootRef}>
 			{leftNode || (
 				<PaginationItemDisplay
-					tooltipForCurrentPage={tooltipForCurrentPage}
 					currentPageIndex={currentPageIndex}
 					itemCount={itemCount}
 					itemDisplayType={itemDisplayType}
-					itemDisplayTooltipPosition={itemDisplayTooltipPosition}
 					itemsPerPage={itemsPerPage}
 					totalPages={totalPages}
 				/>
@@ -114,9 +108,7 @@ export const Pagination = ({
 					itemsPerPage={itemsPerPage}
 					itemsPerPageLabel={itemsPerPageLabel}
 					itemsPerPageOptions={itemsPerPageOptions}
-					itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
 					onItemsPerPageChange={onItemsPerPageChange}
-					tooltipForShownPagesSelect={tooltipForShownPagesSelect}
 				/>
 			)}
 		</div>

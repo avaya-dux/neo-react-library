@@ -36,9 +36,9 @@ describe("Pagination", () => {
 		);
 
 		const innerNavElement = getByRole("navigation");
-		const tooltips = getAllByRole("tooltip");
+		const buttons = getAllByRole("button");
 		expect(innerNavElement).toBeTruthy();
-		expect(tooltips).toHaveLength(2);
+		expect(buttons).toHaveLength(3);
 	});
 
 	it("does not render the `<select>` if no options are passed for it", () => {
@@ -51,9 +51,9 @@ describe("Pagination", () => {
 		const { getByRole, getAllByRole } = render(<Pagination {...props} />);
 
 		const innerNavElement = getByRole("navigation");
-		const tooltips = getAllByRole("tooltip");
+		const buttons = getAllByRole("button");
 		expect(innerNavElement).toBeTruthy();
-		expect(tooltips).toHaveLength(1);
+		expect(buttons).toHaveLength(3);
 	});
 
 	it("does NOT show any nav items when `totalPages === 1`", () => {
@@ -93,115 +93,6 @@ describe("Pagination", () => {
 		expect(navItems[0]).toBeDisabled();
 		expect(navItems[1]).toBeEnabled();
 		expect(navItems[2]).toBeDisabled();
-	});
-
-	it("matches it's previous snapshot", () => {
-		const { container } = render(
-			<Pagination {...defaultProps} id="pagination-test" />,
-		);
-		expect(container).toMatchInlineSnapshot(`
-			<div>
-			  <div
-			    class="neo-pagination__row"
-			    id="pagination-test"
-			  >
-			    <div
-			      class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
-			      id="pagination-item-display-Item count"
-			    >
-			      <bdi
-			        aria-describedby=":rc:"
-			      >
-			        1
-			        -
-			        1
-			         / 
-			        10
-			      </bdi>
-			      <div
-			        class="neo-tooltip__content neo-tooltip__content--multiline"
-			        id=":rc:"
-			        role="tooltip"
-			      >
-			        <div
-			          class="neo-arrow"
-			        />
-			        Item count
-			      </div>
-			    </div>
-			    <nav
-			      aria-label="pagination"
-			      class="neo-pagination"
-			    >
-			      <button
-			        aria-label="previous"
-			        class="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-left"
-			        disabled=""
-			        type="button"
-			      />
-			      <ul
-			        class="neo-pagination__list"
-			      >
-			        <li>
-			          <button
-			            class="neo-btn neo-btn--default neo-btn-secondary neo-btn-secondary--default neo-btn-square neo-btn-square-secondary neo-btn-square-secondary--info"
-			            data-badge=""
-			          >
-			            1
-			          </button>
-			        </li>
-			      </ul>
-			      <button
-			        aria-label="next"
-			        class="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-right"
-			        type="button"
-			      />
-			    </nav>
-			    <div
-			      class="neo-tooltip neo-tooltip--up neo-tooltip--onhover"
-			      id="pagination-items-per-page-selection-items per page"
-			    >
-			      <div
-			        aria-describedby=":rd:"
-			      >
-			        <label>
-			          Show: 
-			        </label>
-			        <select
-			          aria-label="items per page"
-			        >
-			          <option
-			            selected=""
-			            value="1"
-			          >
-			            1
-			          </option>
-			          <option
-			            value="5"
-			          >
-			            5
-			          </option>
-			          <option
-			            value="10"
-			          >
-			            10
-			          </option>
-			        </select>
-			      </div>
-			      <div
-			        class="neo-tooltip__content neo-tooltip__content--multiline"
-			        id=":rd:"
-			        role="tooltip"
-			      >
-			        <div
-			          class="neo-arrow"
-			        />
-			        items per page
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		`);
 	});
 
 	it("passes basic axe compliance", async () => {

@@ -124,7 +124,9 @@ describe("Table", () => {
 			const page5Button = page5Buttons[0];
 			expect(page5Button).toBeVisible();
 
-			const itemsPerPageSelect = screen.getByLabelText("items per page");
+			const itemsPerPageSelect = screen.getByLabelText(
+				FilledFields.translations.pagination.itemsPerPageLabel,
+			);
 			await userEvent.selectOptions(itemsPerPageSelect, "5");
 
 			const page2Buttons = screen.getAllByText("2");

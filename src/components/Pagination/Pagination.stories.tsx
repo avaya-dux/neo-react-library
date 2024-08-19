@@ -178,6 +178,4 @@ Templated.args = {
 export const TooltipPositions = Template.bind({});
 TooltipPositions.args = {
 	...Templated.args,
-	itemsPerPageTooltipPosition: "left",
-	itemDisplayTooltipPosition: "right",
 };
