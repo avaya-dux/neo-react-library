@@ -1,3 +1,5 @@
+import { Select, SelectOption } from "components/Select";
+
 import type { PaginationProps } from "..";
 
 export const PaginationItemsPerPageSelection = ({
@@ -17,25 +19,18 @@ export const PaginationItemsPerPageSelection = ({
 	}
 
 	return (
-		<label>
-			{itemsPerPageLabel}
-
-			{/* // TODO-618: use our Select component when it is available */}
-			<select
-				defaultValue={itemsPerPage}
-				onBlur={(e) => {
-					onItemsPerPageChange?.(e, Number.parseInt(e.target.value, 10));
-				}}
-				onChange={(e) => {
-					onItemsPerPageChange?.(e, Number.parseInt(e.target.value, 10));
-				}}
-			>
-				{itemsPerPageOptions.map((option, i) => (
-					<option key={`option-${i}-${option}`} value={option}>
-						{option}
-					</option>
-				))}
-			</select>
-		</label>
+		<Select
+			defaultValue={itemsPerPage.toString()}
+			label={itemsPerPageLabel}
+			onChange={(value) => {
+				onItemsPerPageChange?.(Number.parseInt(value as string, 10));
+			}}
+		>
+			{itemsPerPageOptions.map((option, i) => (
+				<SelectOption key={`option-${i}-${option}`} value={option.toString()}>
+					{option.toString()}
+				</SelectOption>
+			))}
+		</Select>
 	);
 };
