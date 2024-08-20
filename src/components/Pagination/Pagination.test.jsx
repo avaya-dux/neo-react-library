@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -30,20 +30,15 @@ describe("Pagination", () => {
 	};
 
 	it("fully renders without exploding", () => {
-		vi.spyOn(console, "warn").mockImplementation(() => null);
-		const { getByRole, getAllByRole } = render(
-			<Pagination {...defaultProps} />,
-		);
+		render(<Pagination {...defaultProps} />);
 
-		const innerNavElement = getByRole("navigation");
-		const buttons = getAllByRole("button");
+		const innerNavElement = screen.getByRole("navigation");
+		const buttons = screen.getAllByRole("button");
 		expect(innerNavElement).toBeTruthy();
-		expect(buttons).toHaveLength(3);
+		expect(buttons).toHaveLength(4);
 	});
 
 	it("does not render the `<select>` if no options are passed for it", () => {
-		vi.spyOn(console, "warn").mockImplementation(() => null);
-
 		const props = {
 			...defaultProps,
 			itemsPerPageOptions: undefined,
@@ -57,8 +52,6 @@ describe("Pagination", () => {
 	});
 
 	it("does NOT show any nav items when `totalPages === 1`", () => {
-		vi.spyOn(console, "warn").mockImplementation(() => null);
-
 		const props = {
 			...defaultProps,
 			itemCount: 10,
@@ -70,12 +63,10 @@ describe("Pagination", () => {
 		expect(innerNavElement).toHaveLength(0);
 
 		const navItems = queryAllByRole("button");
-		expect(navItems).toHaveLength(0);
+		expect(navItems).toHaveLength(1); // only the "Rows" select
 	});
 
 	it("shows a single, nav item when `totalPages === 1` and prop `alwaysShowPagination` is passed", () => {
-		vi.spyOn(console, "warn").mockImplementation(() => null);
-
 		const props = {
 			...defaultProps,
 			itemCount: 10,
@@ -89,7 +80,7 @@ describe("Pagination", () => {
 		expect(innerNavElement).toHaveLength(1);
 
 		const navItems = queryAllByRole("button");
-		expect(navItems).toHaveLength(3); // left, 1, right
+		expect(navItems).toHaveLength(4); // left, 1, right, and "Rows" select
 		expect(navItems[0]).toBeDisabled();
 		expect(navItems[1]).toBeEnabled();
 		expect(navItems[2]).toBeDisabled();

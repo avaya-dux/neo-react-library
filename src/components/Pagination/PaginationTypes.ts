@@ -20,10 +20,7 @@ export type PaginationProps = {
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
 		pageIndex: number,
 	) => void;
-	onItemsPerPageChange?: (
-		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-		itemsPerPage: number,
-	) => void;
+	onItemsPerPageChange?: (itemsPerPage: number) => void;
 
 	// table overrides
 	centerNode?: React.ReactNode;
