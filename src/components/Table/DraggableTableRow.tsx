@@ -36,7 +36,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 	const preparedRowProps = row.getRowProps();
 	logger.debug("row.isSelected", row.isSelected);
 
-	const { hasInsetTable } = useContext(FilterContext);
+	const { hasInsetTable, renderInsetTable } = useContext(FilterContext);
 
 	// + handle and checkbox columns
 	const cellCount =
@@ -94,7 +94,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 			</tr>
 			{row.isExpanded ? (
 				<tr>
-					<td colSpan={cellCount}>inset table</td>
+					<td colSpan={cellCount}>{renderInsetTable(row)}</td>
 				</tr>
 			) : null}
 		</tbody>

@@ -14,7 +14,7 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 	checkboxTd: JSX.Element | null;
 	showDragHandle: boolean;
 }) => {
-	const { hasInsetTable } = useContext(FilterContext);
+	const { hasInsetTable, renderInsetTable } = useContext(FilterContext);
 
 	// + handle and checkbox columns
 	const cellCount =
@@ -67,7 +67,7 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 			</tr>
 			{row.isExpanded ? (
 				<tr>
-					<td colSpan={cellCount}>inset table</td>
+					<td colSpan={cellCount}>{renderInsetTable(row)}</td>
 				</tr>
 			) : null}
 		</tbody>

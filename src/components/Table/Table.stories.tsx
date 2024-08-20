@@ -439,6 +439,7 @@ export const TableInTabs = () => (
 export const CustomActions = () => {
 	const [checked, setChecked] = useState(false);
 	const [multiple, setMultiple] = useState(false);
+	const [expandable, setExpandable] = useState(false);
 
 	return (
 		<Table
@@ -446,6 +447,7 @@ export const CustomActions = () => {
 			draggableRows={checked}
 			selectableRows={multiple ? "multiple" : "none"}
 			caption="Custom Actions"
+			renderInsetTable={expandable ? () => "inset table" : undefined}
 			customActionsNode={
 				<section>
 					<Button
@@ -471,6 +473,12 @@ export const CustomActions = () => {
 						onChange={(_e, updatedChecked) => setMultiple(updatedChecked)}
 					>
 						Multiple Switch
+					</Switch>
+					<Switch
+						checked={expandable}
+						onChange={(_e, updatedChecked) => setExpandable(updatedChecked)}
+					>
+						Expandable Switch
 					</Switch>
 				</section>
 			}
