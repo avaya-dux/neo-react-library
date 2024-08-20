@@ -130,7 +130,8 @@
 	background: var(--neo-color-blue-500);
 }
 
-.neo-table th.neo-table__th-inset, .neo-table td.neo-table__td-inset {
+.neo-table th.neo-table__th-inset,
+.neo-table td.neo-table__td-inset {
 	width: 16px;
 	padding: 0;
 }
@@ -142,6 +143,7 @@
 	align-items: center;
 	color: var(--base-black-100);
 	background-image: inherit;
+
 	span[class*=neo-icon-]:before {
 		font-size: 14px;
 	}
