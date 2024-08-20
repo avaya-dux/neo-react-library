@@ -1,9 +1,9 @@
 import clsx from "clsx";
+import { IconButton } from "components";
+import { useContext } from "react";
 import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
 import { FilterContext } from "./helpers";
-import { useContext } from "react";
-import { IconButton } from "components";
 
 export const StaticTableRow = <T extends Record<string, unknown>>({
 	row,
@@ -64,7 +64,9 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 			</tr>
 			{row.isExpanded ? (
 				<tr>
-					<td colSpan={cellCount}>{renderInsetTable(row)}</td>
+					<td colSpan={cellCount}>
+						{renderInsetTable ? renderInsetTable(row) : null}
+					</td>
 				</tr>
 			) : null}
 		</tbody>

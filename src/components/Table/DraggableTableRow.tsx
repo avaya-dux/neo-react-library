@@ -4,10 +4,10 @@ import clsx from "clsx";
 import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
 
-import log from "loglevel";
-import { FilterContext } from "./helpers";
-import { useContext } from "react";
 import { IconButton } from "components";
+import log from "loglevel";
+import { useContext } from "react";
+import { FilterContext } from "./helpers";
 export const logger = log.getLogger("TableComponents/DraggableTableRow");
 logger.disableAll();
 
@@ -91,7 +91,9 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 			</tr>
 			{row.isExpanded ? (
 				<tr>
-					<td colSpan={cellCount}>{renderInsetTable(row)}</td>
+					<td colSpan={cellCount}>
+						{renderInsetTable ? renderInsetTable(row) : null}
+					</td>
 				</tr>
 			) : null}
 		</tbody>

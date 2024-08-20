@@ -54,8 +54,8 @@ export interface IFilterContext {
 	dataSyncOption: DataSyncOptionType;
 	setDataSyncOption: (dataSyncOption: DataSyncOptionType) => void;
 	clearSortByFuncRef: React.MutableRefObject<(() => void) | null>;
-	hasInsetTable: boolean;
-	renderInsetTable: (row: AnyRecord) => ReactNode;
+	hasInsetTable?: boolean;
+	renderInsetTable?: (row: AnyRecord) => ReactNode;
 }
 
 export type RowHeight = "compact" | "medium" | "large";

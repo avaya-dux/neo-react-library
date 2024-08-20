@@ -17,11 +17,11 @@ import clsx from "clsx";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	type Row,
+	useExpanded,
 	useFilters,
 	useGlobalFilter,
 	usePagination,
 	useRowSelect,
-	useExpanded,
 	useSortBy,
 	useTable,
 } from "react-table";
