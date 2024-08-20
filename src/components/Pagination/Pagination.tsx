@@ -51,10 +51,13 @@ export const Pagination = ({
 
 	onPageChange,
 	onItemsPerPageChange,
+	inputDelay = 500,
 
 	// translations
 	backIconButtonText,
 	nextIconButtonText,
+	pagesText = "pages",
+	goToPageText = "Go to page",
 
 	// default overrides
 	centerNode,
@@ -109,10 +112,12 @@ export const Pagination = ({
 			{rightNode || (
 				<div className="neo-pagination__pages-selection">
 					<GoToPage
+						aria-label={goToPageText}
 						currentPageIndex={currentPageIndex}
+						delay={inputDelay}
+						onPageChange={onPageChange}
+						pagesText={pagesText}
 						totalPages={totalPages}
-						onPageChange={() => {}}
-						pagesText={"pages"}
 					/>
 
 					<PaginationItemsPerPageSelection

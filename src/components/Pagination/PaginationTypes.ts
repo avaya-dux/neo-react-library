@@ -2,6 +2,8 @@ export interface PaginationTranslations {
 	backIconButtonText?: string;
 	itemsPerPageLabel?: string;
 	nextIconButtonText?: string;
+	pagesText?: string;
+	goToPageText?: string;
 }
 
 export type PaginationProps = {
@@ -17,10 +19,14 @@ export type PaginationProps = {
 	itemDisplayType?: "count" | "page" | "none";
 
 	onPageChange: (
-		event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+		event:
+			| React.MouseEvent<HTMLButtonElement, MouseEvent>
+			| React.ChangeEvent<HTMLInputElement>
+			| null,
 		pageIndex: number,
 	) => void;
 	onItemsPerPageChange?: (itemsPerPage: number) => void;
+	inputDelay?: number;
 
 	// table overrides
 	centerNode?: React.ReactNode;

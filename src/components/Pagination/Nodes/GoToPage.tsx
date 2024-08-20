@@ -1,46 +1,72 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { TextInput } from "components/TextInput";
+import { useIsInitialRender } from "utils";
+
+interface GoToPageProps {
+	currentPageIndex: number;
+	delay: number;
+	totalPages: number;
+
+	onPageChange: (
+		e: React.ChangeEvent<HTMLInputElement> | null,
+		newPageIndex: number,
+	) => void;
+
+	// translations
+	pagesText: string;
+	"aria-label": string;
+}
 
 export const GoToPage = ({
 	currentPageIndex,
+	delay,
 	totalPages,
+
 	onPageChange,
-	pagesText = "pages",
-	"aria-label": ariaLabel = "Go to page",
-}: {
-	currentPageIndex: number;
-	totalPages: number;
-	onPageChange: (newPage: number) => void;
-	pagesText?: string;
-	"aria-label"?: string;
-}) => {
-	const [newPage, setNewPage] = useState(currentPageIndex);
 
-	const handlePageChange = () => {
-		const newPageNumber =
-			newPage > totalPages ? totalPages : newPage < 1 ? 1 : newPage;
-		onPageChange(newPageNumber);
-	};
+	// translations
+	pagesText,
+	"aria-label": ariaLabel,
+}: GoToPageProps) => {
+	const isInitialRender = useIsInitialRender();
 
-	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === "Enter") {
-			handlePageChange();
+	/* NOTE: we need to control both `value` and `event`
+	 * `value` so that we can respond to changes in `currentPageIndex` and the user typing
+	 * `event` so that we can debounce `onPageChange` */
+	const [value, setValue] = useState(currentPageIndex);
+	const [event, setEvent] =
+		useState<React.ChangeEvent<HTMLInputElement> | null>(null);
+
+	useEffect(() => {
+		setValue(currentPageIndex);
+	}, [currentPageIndex]);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: only track "real" changes to `newPage`
+	useEffect(() => {
+		const newPage = event ? Number.parseInt(event.target.value, 10) : null;
+
+		// debounce the page change
+		if (!isInitialRender && !!newPage && newPage !== currentPageIndex) {
+			const handler = setTimeout(() => onPageChange(event, newPage), delay);
+			return () => clearTimeout(handler);
 		}
-	};
+	}, [event]);
 
 	return (
 		<div className="pagination__go-to-page">
 			<TextInput
-				type="number"
-				clearable={false}
 				aria-label={ariaLabel}
-				value={newPage}
+				type="number"
+				value={value}
+				clearable={false} // TODO: check with Matt/Justin if we can set this to true (remove)
 				pattern="[0-9]+"
+				min={1}
+				max={totalPages}
 				onChange={(e) => {
-					setNewPage(Number.parseInt(e.target.value, 10));
+					setEvent(e);
+					setValue(Number.parseInt(e.target.value, 10));
 				}}
-				onKeyPress={handleKeyPress}
 			/>
 
 			<span>

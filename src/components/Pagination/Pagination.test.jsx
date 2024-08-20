@@ -86,6 +86,12 @@ describe("Pagination", () => {
 		expect(navItems[2]).toBeDisabled();
 	});
 
+	it("`GoToPage` responds to user input and page click appropriately", () => {
+		// when user types, the middle node updates after the debounce (test visual before and after debounce delay)
+		// when user clicks pagination arrows, `GoToPage` updates it's text input appropriately
+		// when user clicks a page number, `GoToPage` updates it's text input appropriately
+	});
+
 	it("passes basic axe compliance", async () => {
 		const { container } = render(<Pagination {...defaultProps} />);
 		const results = await axe(container);
