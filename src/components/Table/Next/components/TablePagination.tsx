@@ -41,8 +41,7 @@ export const TablePagination = ({
 				e?.preventDefault();
 				setPageIndex(newIndex - 1);
 			}}
-			onItemsPerPageChange={(e, newItemsPerPage) => {
-				e?.preventDefault();
+			onItemsPerPageChange={(newItemsPerPage) => {
 				setPageSize(newItemsPerPage);
 
 				// when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page

@@ -435,8 +435,7 @@ export const Table = <T extends Record<string, any>>({
 								setRootLevelPageIndex(nextIndex);
 								handlePageChange(nextIndex, pageSize);
 							}}
-							onItemsPerPageChange={(e, newItemsPerPage) => {
-								e?.preventDefault();
+							onItemsPerPageChange={(newItemsPerPage) => {
 								setPageSize(newItemsPerPage);
 
 								// when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page

@@ -87,8 +87,7 @@ const BookOfPages = ({
 
 							setPageIndex(newIndex);
 						}}
-						onItemsPerPageChange={(e, newItemsPerPage) => {
-							e?.preventDefault();
+						onItemsPerPageChange={(newItemsPerPage) => {
 							setLogItems([
 								<ListItem key={`${newItemsPerPage}-${genId()}`}>
 									setting new items per page: {newItemsPerPage}
