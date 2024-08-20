@@ -39,6 +39,7 @@ export interface ITableHeaderTranslations {
 	sortDescending?: string;
 	toggleSortBy?: string;
 	dragHandle?: string;
+	expandToggle?: string;
 
 	// menu translations
 	tableSelectionDropdown: string;

@@ -1,6 +1,9 @@
 import clsx from "clsx";
 import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
+import { FilterContext } from "./helpers";
+import { useContext } from "react";
+import { Icon } from "components";
 
 export const StaticTableRow = <T extends Record<string, unknown>>({
 	row,
@@ -11,8 +14,14 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 	checkboxTd: JSX.Element | null;
 	showDragHandle: boolean;
 }) => {
+	const { hasInsetTable } = useContext(FilterContext);
+
+	// + handle and checkbox columns
 	const cellCount =
-		row.cells.length + (showDragHandle ? 1 : 0) + (checkboxTd ? 1 : 0);
+		row.cells.length +
+		(showDragHandle ? 1 : 0) +
+		(checkboxTd ? 1 : 0) +
+		(hasInsetTable ? 1 : 0);
 
 	const { key: _, ...restProps } = row.getRowProps();
 	return (
@@ -31,6 +40,20 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 				{checkboxTd && (
 					<td style={{ padding: "0px 0px 0px 5px", width: "60px" }}>
 						{checkboxTd}
+					</td>
+				)}
+				{hasInsetTable && (
+					<td
+						{...row.getToggleRowExpandedProps({
+							className: "neo-table__td-inset",
+						})}
+					>
+						<Icon
+							icon={row.isExpanded ? "chevron-down" : "chevron-right"}
+							size="sm"
+							aria-label={row.isExpanded ? "expand" : "collapse"}
+							className="td-icon--expand"
+						/>
 					</td>
 				)}
 				{row.cells.map((cell) => {

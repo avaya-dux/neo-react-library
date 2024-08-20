@@ -5,6 +5,9 @@ import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
 
 import log from "loglevel";
+import { Icon } from "components/Icon";
+import { FilterContext } from "./helpers";
+import { useContext } from "react";
 export const logger = log.getLogger("TableComponents/DraggableTableRow");
 logger.disableAll();
 
@@ -33,8 +36,11 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 	const preparedRowProps = row.getRowProps();
 	logger.debug("row.isSelected", row.isSelected);
 
+	const { hasInsetTable } = useContext(FilterContext);
+
 	// + handle and checkbox columns
-	const cellCount = row.cells.length + 1 + (checkboxTd ? 1 : 0);
+	const cellCount =
+		row.cells.length + 1 + (checkboxTd ? 1 : 0) + (hasInsetTable ? 1 : 0);
 
 	return (
 		<tbody
@@ -62,6 +68,20 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 				</td>
 				{checkboxTd && (
 					<td style={{ padding: "0px 0px 0px 5px" }}>{checkboxTd}</td>
+				)}
+				{hasInsetTable && (
+					<td
+						{...row.getToggleRowExpandedProps({
+							className: "neo-table__td-inset",
+						})}
+					>
+						<Icon
+							icon={row.isExpanded ? "chevron-down" : "chevron-right"}
+							size="sm"
+							aria-label={row.isExpanded ? "expand" : "collapse"}
+							className="td-icon--expand"
+						/>
+					</td>
 				)}
 				{row.cells.map((cell) => {
 					const { key, ...restCellProps } = cell.getCellProps();
