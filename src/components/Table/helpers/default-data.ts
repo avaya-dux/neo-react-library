@@ -26,6 +26,7 @@ export const translations: ITableTranslations = {
 		sortDescending: "Z - A",
 		toggleSortBy: "Toggle SortBy",
 		dragHandle: "Drag Handle",
+		expandToggle: "Expand Toggle",
 
 		// menu translations
 		tableSelectionDropdown: "Table Selection Dropdown",

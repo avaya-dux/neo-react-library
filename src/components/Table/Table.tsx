@@ -17,6 +17,7 @@ import clsx from "clsx";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	type Row,
+	useExpanded,
 	useFilters,
 	useGlobalFilter,
 	usePagination,
@@ -112,7 +113,7 @@ export const Table = <T extends Record<string, any>>({
 	showRowSelectionHelper = true,
 	showSearch = true,
 	translations,
-
+	renderInsetTable,
 	...rest
 }: TableProps<T>) => {
 	const [rootLevelPageIndex, setRootLevelPageIndex] = useState(
@@ -146,11 +147,13 @@ export const Table = <T extends Record<string, any>>({
 			},
 			autoResetSelectedRows: false,
 			autoResetSortBy: false,
+			autoResetExpanded: false,
 			...rest,
 		},
 		useFilters,
 		useGlobalFilter,
 		useSortBy,
+		useExpanded,
 		usePagination,
 		useRowSelect,
 	);
@@ -270,6 +273,10 @@ export const Table = <T extends Record<string, any>>({
 
 	const clearSortByFuncRef = useRef<(() => void) | null>(null);
 
+	const hasInsetTable = useMemo(() => {
+		return renderInsetTable && typeof renderInsetTable === "function";
+	}, [renderInsetTable]);
+
 	const filterContext: IFilterContext = {
 		allowColumnFilter,
 		draggableRows,
@@ -279,6 +286,8 @@ export const Table = <T extends Record<string, any>>({
 		dataSyncOption,
 		setDataSyncOption,
 		clearSortByFuncRef,
+		hasInsetTable,
+		renderInsetTable,
 	};
 
 	const sensors = useSensors(
@@ -445,26 +454,26 @@ export const Table = <T extends Record<string, any>>({
 						/>
 					)}
 				</div>
-			</FilterContext.Provider>
 
-			<DragOverlay>
-				{activeId && selectedRow && (
-					<table
-						className={clsx(
-							"neo-table",
-							rowHeightValue === "compact" && "neo-table--compact",
-							rowHeightValue === "medium" && "neo-table--medium",
-						)}
-					>
-						<StaticTableRow
-							key={selectedRow.original.id}
-							row={selectedRow}
-							showDragHandle={true}
-							checkboxTd={createCheckboxTd(selectedRow)}
-						/>
-					</table>
-				)}
-			</DragOverlay>
+				<DragOverlay>
+					{activeId && selectedRow && (
+						<table
+							className={clsx(
+								"neo-table",
+								rowHeightValue === "compact" && "neo-table--compact",
+								rowHeightValue === "medium" && "neo-table--medium",
+							)}
+						>
+							<StaticTableRow
+								key={selectedRow.original.id}
+								row={selectedRow}
+								showDragHandle={true}
+								checkboxTd={createCheckboxTd(selectedRow)}
+							/>
+						</table>
+					)}
+				</DragOverlay>
+			</FilterContext.Provider>
 		</DndContext>
 	);
 };

@@ -54,6 +54,8 @@ export interface IFilterContext {
 	dataSyncOption: DataSyncOptionType;
 	setDataSyncOption: (dataSyncOption: DataSyncOptionType) => void;
 	clearSortByFuncRef: React.MutableRefObject<(() => void) | null>;
+	hasInsetTable?: boolean;
+	renderInsetTable?: (row: AnyRecord) => ReactNode;
 }
 
 export type RowHeight = "compact" | "medium" | "large";
@@ -79,4 +81,5 @@ export type TableProps<T extends AnyRecord> = {
 } & ToolbarSharedProps<T> &
 	TableOptions<T> &
 	Pick<TableBodyProps<T>, "handleRowToggled"> &
-	Partial<Pick<IFilterContext, "allowColumnFilter">>;
+	Partial<Pick<IFilterContext, "allowColumnFilter">> &
+	Partial<Pick<IFilterContext, "renderInsetTable">>;

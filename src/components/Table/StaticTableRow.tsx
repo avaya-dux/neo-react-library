@@ -1,6 +1,9 @@
 import clsx from "clsx";
+import { IconButton } from "components";
+import { useContext } from "react";
 import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
+import { FilterContext } from "./helpers";
 
 export const StaticTableRow = <T extends Record<string, unknown>>({
 	row,
@@ -11,8 +14,14 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 	checkboxTd: JSX.Element | null;
 	showDragHandle: boolean;
 }) => {
+	const { hasInsetTable, renderInsetTable } = useContext(FilterContext);
+
+	// count dynamic columns
 	const cellCount =
-		row.cells.length + (showDragHandle ? 1 : 0) + (checkboxTd ? 1 : 0);
+		row.cells.length +
+		(showDragHandle ? 1 : 0) +
+		(checkboxTd ? 1 : 0) +
+		(hasInsetTable ? 1 : 0);
 
 	const { key: _, ...restProps } = row.getRowProps();
 	return (
@@ -33,6 +42,17 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 						{checkboxTd}
 					</td>
 				)}
+				{hasInsetTable && (
+					<td className="neo-table__td-inset">
+						<IconButton
+							icon={row.isExpanded ? "chevron-down" : "chevron-right"}
+							size="compact"
+							aria-label={row.isExpanded ? "expand" : "collapse"}
+							className="td-icon--expand"
+							{...row.getToggleRowExpandedProps({})}
+						/>
+					</td>
+				)}
 				{row.cells.map((cell) => {
 					const { key, ...restCellProps } = cell.getCellProps();
 					return (
@@ -44,7 +64,9 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 			</tr>
 			{row.isExpanded ? (
 				<tr>
-					<td colSpan={cellCount}>inset table</td>
+					<td colSpan={cellCount}>
+						{renderInsetTable ? renderInsetTable(row) : null}
+					</td>
 				</tr>
 			) : null}
 		</tbody>
