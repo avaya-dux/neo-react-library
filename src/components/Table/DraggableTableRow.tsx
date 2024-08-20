@@ -8,6 +8,7 @@ import log from "loglevel";
 import { Icon } from "components/Icon";
 import { FilterContext } from "./helpers";
 import { useContext } from "react";
+import { Button, IconButton } from "components";
 export const logger = log.getLogger("TableComponents/DraggableTableRow");
 logger.disableAll();
 
@@ -38,7 +39,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 
 	const { hasInsetTable, renderInsetTable } = useContext(FilterContext);
 
-	// + handle and checkbox columns
+	// count dynamic columns
 	const cellCount =
 		row.cells.length + 1 + (checkboxTd ? 1 : 0) + (hasInsetTable ? 1 : 0);
 
@@ -70,16 +71,13 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 					<td style={{ padding: "0px 0px 0px 5px" }}>{checkboxTd}</td>
 				)}
 				{hasInsetTable && (
-					<td
-						{...row.getToggleRowExpandedProps({
-							className: "neo-table__td-inset",
-						})}
-					>
-						<Icon
+					<td className="neo-table__td-inset">
+						<IconButton
 							icon={row.isExpanded ? "chevron-down" : "chevron-right"}
-							size="sm"
+							size="compact"
 							aria-label={row.isExpanded ? "expand" : "collapse"}
 							className="td-icon--expand"
+							{...row.getToggleRowExpandedProps({})}
 						/>
 					</td>
 				)}

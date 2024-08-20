@@ -135,13 +135,14 @@
 	padding: 0;
 }
 
-.neo-table td span.td-icon--expand {
+.neo-table td button.td-icon--expand {
 	display: flex;
 	height: 14px;
 	width: 14px;
 	align-items: center;
-
-	&[class*=neo-icon-]:before {
+	color: var(--base-black-100);
+	background-image: inherit;
+	span[class*=neo-icon-]:before {
 		font-size: 14px;
 	}
 }

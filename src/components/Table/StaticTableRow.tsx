@@ -3,7 +3,7 @@ import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
 import { FilterContext } from "./helpers";
 import { useContext } from "react";
-import { Icon } from "components";
+import { IconButton } from "components";
 
 export const StaticTableRow = <T extends Record<string, unknown>>({
 	row,
@@ -16,7 +16,7 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 }) => {
 	const { hasInsetTable, renderInsetTable } = useContext(FilterContext);
 
-	// + handle and checkbox columns
+	// count dynamic columns
 	const cellCount =
 		row.cells.length +
 		(showDragHandle ? 1 : 0) +
@@ -43,16 +43,13 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 					</td>
 				)}
 				{hasInsetTable && (
-					<td
-						{...row.getToggleRowExpandedProps({
-							className: "neo-table__td-inset",
-						})}
-					>
-						<Icon
+					<td className="neo-table__td-inset">
+						<IconButton
 							icon={row.isExpanded ? "chevron-down" : "chevron-right"}
-							size="sm"
+							size="compact"
 							aria-label={row.isExpanded ? "expand" : "collapse"}
 							className="td-icon--expand"
+							{...row.getToggleRowExpandedProps({})}
 						/>
 					</td>
 				)}
