@@ -5,10 +5,9 @@ import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
 
 import log from "loglevel";
-import { Icon } from "components/Icon";
 import { FilterContext } from "./helpers";
 import { useContext } from "react";
-import { Button, IconButton } from "components";
+import { IconButton } from "components";
 export const logger = log.getLogger("TableComponents/DraggableTableRow");
 logger.disableAll();
 
