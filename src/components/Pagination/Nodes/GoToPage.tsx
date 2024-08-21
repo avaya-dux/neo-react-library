@@ -70,7 +70,6 @@ export const GoToPage = ({
 			/>
 
 			<span>
-				{" "}
 				/ {totalPages} {pagesText}
 			</span>
 		</div>
