@@ -47,6 +47,7 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 						<IconButton
 							icon={row.isExpanded ? "chevron-down" : "chevron-right"}
 							size="compact"
+							iconSize="sm"
 							aria-label={row.isExpanded ? "expand" : "collapse"}
 							className="td-icon--expand"
 							{...row.getToggleRowExpandedProps({})}
