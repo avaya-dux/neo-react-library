@@ -446,7 +446,7 @@ export const CustomActions = () => {
 	const [dark, setDark] = useState(false);
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const renderInsetTable = (row: any) => {
-		console.log(row);
+		// inset table of 3 rows for name starting with "Sir"
 		if (row.original.name.startsWith("Sir"))
 			return (
 				<Table
@@ -458,6 +458,7 @@ export const CustomActions = () => {
 					data={[...FilledFields.data.slice(row.index, 3)]}
 				/>
 			);
+		// inline form for name starting with "Madam"
 		if (row.original.name.startsWith("Madam"))
 			return (
 				<Form aria-label="Playground form" inline>
@@ -482,7 +483,7 @@ export const CustomActions = () => {
 					</Button>
 				</Form>
 			);
-		return "inset table";
+		return <p>Name: {row.original.name}</p>;
 	};
 	return (
 		<div className={clsx(dark && "neo-dark")}>
