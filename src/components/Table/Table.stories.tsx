@@ -24,6 +24,7 @@ import {
 import { Button } from "components/Button";
 import type { IconNamesType } from "utils";
 
+import clsx from "clsx";
 import { Table, type TableProps } from "./";
 import {
 	FilledFields,
@@ -440,49 +441,57 @@ export const CustomActions = () => {
 	const [checked, setChecked] = useState(false);
 	const [multiple, setMultiple] = useState(false);
 	const [expandable, setExpandable] = useState(false);
-
+	const [dark, setDark] = useState(false);
 	return (
-		<Table
-			{...FilledFields}
-			draggableRows={checked}
-			selectableRows={multiple ? "multiple" : "none"}
-			caption="Custom Actions"
-			renderInsetTable={expandable ? () => "inset table" : undefined}
-			customActionsNode={
-				<section>
-					<Button
-						onClick={() => alert("custom action number one")}
-						variant="tertiary"
-					>
-						Example One
-					</Button>
-					<Button
-						onClick={() => alert("custom action number two")}
-						variant="tertiary"
-					>
-						Example Two
-					</Button>
-					<Switch
-						checked={checked}
-						onChange={(_e, updatedChecked) => setChecked(updatedChecked)}
-					>
-						Draggable Switch
-					</Switch>
-					<Switch
-						checked={multiple}
-						onChange={(_e, updatedChecked) => setMultiple(updatedChecked)}
-					>
-						Multiple Switch
-					</Switch>
-					<Switch
-						checked={expandable}
-						onChange={(_e, updatedChecked) => setExpandable(updatedChecked)}
-					>
-						Expandable Switch
-					</Switch>
-				</section>
-			}
-		/>
+		<div className={clsx(dark && "neo-dark")}>
+			<Table
+				{...FilledFields}
+				draggableRows={checked}
+				selectableRows={multiple ? "multiple" : "none"}
+				caption="Custom Actions"
+				renderInsetTable={expandable ? () => "inset table" : undefined}
+				customActionsNode={
+					<section>
+						<Button
+							onClick={() => alert("custom action number one")}
+							variant="tertiary"
+						>
+							Example One
+						</Button>
+						<Button
+							onClick={() => alert("custom action number two")}
+							variant="tertiary"
+						>
+							Example Two
+						</Button>
+						<Switch
+							checked={dark}
+							onChange={(_e, updatedChecked) => setDark(updatedChecked)}
+						>
+							Dark Mode
+						</Switch>
+						<Switch
+							checked={checked}
+							onChange={(_e, updatedChecked) => setChecked(updatedChecked)}
+						>
+							Draggable Switch
+						</Switch>
+						<Switch
+							checked={multiple}
+							onChange={(_e, updatedChecked) => setMultiple(updatedChecked)}
+						>
+							Multiple Switch
+						</Switch>
+						<Switch
+							checked={expandable}
+							onChange={(_e, updatedChecked) => setExpandable(updatedChecked)}
+						>
+							Expandable Switch
+						</Switch>
+					</section>
+				}
+			/>
+		</div>
 	);
 };
 
