@@ -49,6 +49,7 @@ export const TableHeader: TableHeaderComponentType = ({
 		draggableRows,
 		setDataSyncOption,
 		clearSortByFuncRef,
+		hasInsetTable,
 	} = useContext(FilterContext);
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none";
@@ -58,7 +59,11 @@ export const TableHeader: TableHeaderComponentType = ({
 			<tr>
 				{draggableRows && (
 					<th className="neo-table__dnd-th">
-						<div role="button" aria-label={translations.dragHandle}>
+						<div
+							role="button"
+							tabIndex={-1}
+							aria-label={translations.dragHandle}
+						>
 							&nbsp;
 						</div>
 					</th>
@@ -71,6 +76,18 @@ export const TableHeader: TableHeaderComponentType = ({
 						selectableRows={selectableRows}
 						translations={translations}
 					/>
+				)}
+
+				{hasInsetTable && (
+					<th className="neo-table__th-inset">
+						<div
+							role="button"
+							tabIndex={-1}
+							aria-label={translations.expandToggle}
+						>
+							&nbsp;
+						</div>
+					</th>
 				)}
 
 				{headers.map((column) => {

@@ -30,8 +30,6 @@ export interface IPaginationTranslations {
 	backIconButtonText?: string;
 	itemsPerPageLabel?: string;
 	nextIconButtonText?: string;
-	tooltipForCurrentPage?: string;
-	tooltipForShownPagesSelect?: string;
 }
 
 export interface ITableHeaderTranslations {
@@ -41,6 +39,7 @@ export interface ITableHeaderTranslations {
 	sortDescending?: string;
 	toggleSortBy?: string;
 	dragHandle?: string;
+	expandToggle?: string;
 
 	// menu translations
 	tableSelectionDropdown: string;

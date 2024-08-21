@@ -17,6 +17,7 @@ import clsx from "clsx";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	type Row,
+	useExpanded,
 	useFilters,
 	useGlobalFilter,
 	usePagination,
@@ -112,10 +113,8 @@ export const Table = <T extends Record<string, any>>({
 	showRowHeightMenu = true,
 	showRowSelectionHelper = true,
 	showSearch = true,
-	itemDisplayTooltipPosition = "auto",
-	itemsPerPageTooltipPosition = "auto",
 	translations,
-
+	renderInsetTable,
 	...rest
 }: TableProps<T>) => {
 	const [rootLevelPageIndex, setRootLevelPageIndex] = useState(
@@ -149,11 +148,13 @@ export const Table = <T extends Record<string, any>>({
 			},
 			autoResetSelectedRows: false,
 			autoResetSortBy: false,
+			autoResetExpanded: false,
 			...rest,
 		},
 		useFilters,
 		useGlobalFilter,
 		useSortBy,
+		useExpanded,
 		usePagination,
 		useRowSelect,
 	);
@@ -273,6 +274,10 @@ export const Table = <T extends Record<string, any>>({
 
 	const clearSortByFuncRef = useRef<(() => void) | null>(null);
 
+	const hasInsetTable = useMemo(() => {
+		return renderInsetTable && typeof renderInsetTable === "function";
+	}, [renderInsetTable]);
+
 	const filterContext: IFilterContext = {
 		allowColumnFilter,
 		draggableRows,
@@ -282,6 +287,8 @@ export const Table = <T extends Record<string, any>>({
 		dataSyncOption,
 		setDataSyncOption,
 		clearSortByFuncRef,
+		hasInsetTable,
+		renderInsetTable,
 	};
 
 	const sensors = useSensors(
@@ -430,8 +437,7 @@ export const Table = <T extends Record<string, any>>({
 								setRootLevelPageIndex(nextIndex);
 								handlePageChange(nextIndex, pageSize);
 							}}
-							onItemsPerPageChange={(e, newItemsPerPage) => {
-								e?.preventDefault();
+							onItemsPerPageChange={(newItemsPerPage) => {
 								setPageSize(newItemsPerPage);
 
 								// when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page
@@ -447,37 +453,29 @@ export const Table = <T extends Record<string, any>>({
 							backIconButtonText={paginationTranslations.backIconButtonText}
 							itemsPerPageLabel={paginationTranslations.itemsPerPageLabel}
 							nextIconButtonText={paginationTranslations.nextIconButtonText}
-							tooltipForCurrentPage={
-								paginationTranslations.tooltipForCurrentPage
-							}
-							tooltipForShownPagesSelect={
-								paginationTranslations.tooltipForShownPagesSelect
-							}
-							itemDisplayTooltipPosition={itemDisplayTooltipPosition}
-							itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
 						/>
 					)}
 				</div>
-			</FilterContext.Provider>
 
-			<DragOverlay>
-				{activeId && selectedRow && (
-					<table
-						className={clsx(
-							"neo-table",
-							rowHeightValue === "compact" && "neo-table--compact",
-							rowHeightValue === "medium" && "neo-table--medium",
-						)}
-					>
-						<StaticTableRow
-							key={selectedRow.original.id}
-							row={selectedRow}
-							showDragHandle={true}
-							checkboxTd={createCheckboxTd(selectedRow)}
-						/>
-					</table>
-				)}
-			</DragOverlay>
+				<DragOverlay>
+					{activeId && selectedRow && (
+						<table
+							className={clsx(
+								"neo-table",
+								rowHeightValue === "compact" && "neo-table--compact",
+								rowHeightValue === "medium" && "neo-table--medium",
+							)}
+						>
+							<StaticTableRow
+								key={selectedRow.original.id}
+								row={selectedRow}
+								showDragHandle={true}
+								checkboxTd={createCheckboxTd(selectedRow)}
+							/>
+						</table>
+					)}
+				</DragOverlay>
+			</FilterContext.Provider>
 		</DndContext>
 	);
 };

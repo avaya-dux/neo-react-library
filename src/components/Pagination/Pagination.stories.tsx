@@ -87,8 +87,7 @@ const BookOfPages = ({
 
 							setPageIndex(newIndex);
 						}}
-						onItemsPerPageChange={(e, newItemsPerPage) => {
-							e?.preventDefault();
+						onItemsPerPageChange={(newItemsPerPage) => {
 							setLogItems([
 								<ListItem key={`${newItemsPerPage}-${genId()}`}>
 									setting new items per page: {newItemsPerPage}
@@ -178,6 +177,4 @@ Templated.args = {
 export const TooltipPositions = Template.bind({});
 TooltipPositions.args = {
 	...Templated.args,
-	itemsPerPageTooltipPosition: "left",
-	itemDisplayTooltipPosition: "right",
 };

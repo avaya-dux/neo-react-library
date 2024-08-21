@@ -1,11 +1,7 @@
-import type { TooltipPosition } from "components/Tooltip";
-
 export interface PaginationTranslations {
 	backIconButtonText?: string;
 	itemsPerPageLabel?: string;
 	nextIconButtonText?: string;
-	tooltipForCurrentPage?: string;
-	tooltipForShownPagesSelect?: string;
 }
 
 export type PaginationProps = {
@@ -20,17 +16,11 @@ export type PaginationProps = {
 	alwaysShowPagination?: boolean;
 	itemDisplayType?: "count" | "page" | "none";
 
-	itemDisplayTooltipPosition?: TooltipPosition;
-	itemsPerPageTooltipPosition?: TooltipPosition;
-
 	onPageChange: (
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
 		pageIndex: number,
 	) => void;
-	onItemsPerPageChange?: (
-		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-		itemsPerPage: number,
-	) => void;
+	onItemsPerPageChange?: (itemsPerPage: number) => void;
 
 	// table overrides
 	centerNode?: React.ReactNode;

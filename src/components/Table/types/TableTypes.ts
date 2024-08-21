@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import type { TableInstance, TableOptions } from "react-table";
 
-import type { TooltipPosition } from "components/Tooltip/TooltipTypes";
 import type {
 	IBodyTranslations,
 	ITableHeaderTranslations,
@@ -56,6 +55,8 @@ export interface IFilterContext {
 	dataSyncOption: DataSyncOptionType;
 	setDataSyncOption: (dataSyncOption: DataSyncOptionType) => void;
 	clearSortByFuncRef: React.MutableRefObject<(() => void) | null>;
+	hasInsetTable?: boolean;
+	renderInsetTable?: (row: AnyRecord) => ReactNode;
 }
 
 export type RowHeight = "compact" | "medium" | "large";
@@ -69,8 +70,6 @@ export type TableProps<T extends AnyRecord> = {
 	pushPaginationDown?: boolean;
 	draggableRows?: boolean;
 	handlePageChange?: (pageIndex: number, pageSize: number) => void;
-	itemDisplayTooltipPosition?: TooltipPosition;
-	itemsPerPageTooltipPosition?: TooltipPosition;
 	itemsPerPageOptions?: number[];
 	initialStatePageIndex?: number;
 	initialStatePageSize?: number;
@@ -83,4 +82,5 @@ export type TableProps<T extends AnyRecord> = {
 } & ToolbarSharedProps<T> &
 	TableOptions<T> &
 	Pick<TableBodyProps<T>, "handleRowToggled"> &
-	Partial<Pick<IFilterContext, "allowColumnFilter">>;
+	Partial<Pick<IFilterContext, "allowColumnFilter">> &
+	Partial<Pick<IFilterContext, "renderInsetTable">>;

@@ -26,6 +26,7 @@ export const translations: ITableTranslations = {
 		sortDescending: "Z - A",
 		toggleSortBy: "Toggle SortBy",
 		dragHandle: "Drag Handle",
+		expandToggle: "Expand Toggle",
 
 		// menu translations
 		tableSelectionDropdown: "Table Selection Dropdown",
@@ -45,8 +46,6 @@ export const translations: ITableTranslations = {
 	pagination: {
 		backIconButtonText: "back",
 		nextIconButtonText: "next",
-		itemsPerPageLabel: "SHOW: ",
-		tooltipForCurrentPage: "current page",
-		tooltipForShownPagesSelect: "items per page",
+		itemsPerPageLabel: "Rows",
 	},
 };

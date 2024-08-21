@@ -3,23 +3,18 @@ import { useMemo } from "react";
 
 import { Pagination } from "components/Pagination";
 import type { PaginationTranslations } from "components/Pagination/PaginationTypes";
-import type { TooltipPosition } from "components/Tooltip";
 
 import { translations as defaultTranslations } from "../../helpers";
 
 export const TablePagination = ({
 	table,
 	itemsPerPageOptions,
-	itemDisplayTooltipPosition,
-	itemsPerPageTooltipPosition,
 	translations,
 }: {
 	// biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 	table: Table<any>;
 
 	itemsPerPageOptions?: number[];
-	itemDisplayTooltipPosition?: TooltipPosition;
-	itemsPerPageTooltipPosition?: TooltipPosition;
 
 	translations?: PaginationTranslations;
 }) => {
@@ -46,8 +41,7 @@ export const TablePagination = ({
 				e?.preventDefault();
 				setPageIndex(newIndex - 1);
 			}}
-			onItemsPerPageChange={(e, newItemsPerPage) => {
-				e?.preventDefault();
+			onItemsPerPageChange={(newItemsPerPage) => {
 				setPageSize(newItemsPerPage);
 
 				// when the user has chosen more rows, and there are thus fewer pages, check if we need to update the current page
@@ -59,12 +53,6 @@ export const TablePagination = ({
 			backIconButtonText={paginationTranslations.backIconButtonText}
 			itemsPerPageLabel={paginationTranslations.itemsPerPageLabel}
 			nextIconButtonText={paginationTranslations.nextIconButtonText}
-			tooltipForCurrentPage={paginationTranslations.tooltipForCurrentPage}
-			tooltipForShownPagesSelect={
-				paginationTranslations.tooltipForShownPagesSelect
-			}
-			itemDisplayTooltipPosition={itemDisplayTooltipPosition}
-			itemsPerPageTooltipPosition={itemsPerPageTooltipPosition}
 		/>
 	);
 };
