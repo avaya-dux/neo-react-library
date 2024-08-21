@@ -444,6 +444,7 @@ export const CustomActions = () => {
 	const [multiple, setMultiple] = useState(false);
 	const [expandable, setExpandable] = useState(false);
 	const [dark, setDark] = useState(false);
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const renderInsetTable = (row: any) => {
 		console.log(row);
 		if (row.original.name.startsWith("Sir"))
