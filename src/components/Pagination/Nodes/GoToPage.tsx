@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { debounce } from "lodash";
 
 import { TextInput } from "components/TextInput";
-import { useIsInitialRender } from "utils";
 
 interface GoToPageProps {
 	currentPageIndex: number;
@@ -29,43 +29,33 @@ export const GoToPage = ({
 	pagesText,
 	"aria-label": ariaLabel,
 }: GoToPageProps) => {
-	const isInitialRender = useIsInitialRender();
-
-	/* NOTE: we need to control both `value` and `event`
-	 * `value` so that we can respond to changes in `currentPageIndex` and the user typing
-	 * `event` so that we can debounce `onPageChange` */
 	const [value, setValue] = useState(currentPageIndex);
-	const [event, setEvent] =
-		useState<React.ChangeEvent<HTMLInputElement> | null>(null);
 
 	useEffect(() => {
 		setValue(currentPageIndex);
 	}, [currentPageIndex]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: only track "real" changes to `newPage`
-	useEffect(() => {
-		const newPage = event ? Number.parseInt(event.target.value, 10) : null;
-
-		// debounce the page change
-		if (!isInitialRender && !!newPage && newPage !== currentPageIndex) {
-			const handler = setTimeout(() => onPageChange(event, newPage), delay);
-			return () => clearTimeout(handler);
-		}
-	}, [event]);
+	const handleInputChange = useCallback(
+		debounce((e, v) => {
+			onPageChange(e, v);
+		}, delay),
+		[],
+	);
 
 	return (
 		<div className="pagination__go-to-page">
 			<TextInput
 				aria-label={ariaLabel}
 				type="number"
-				value={value}
+				value={value || ""}
 				clearable={false}
 				pattern="[0-9]+"
 				min={1}
 				max={totalPages}
 				onChange={(e) => {
-					setEvent(e);
-					setValue(Number.parseInt(e.target.value, 10));
+					const value = Number(e.target.value);
+					handleInputChange(e, value);
+					setValue(value);
 				}}
 			/>
 
