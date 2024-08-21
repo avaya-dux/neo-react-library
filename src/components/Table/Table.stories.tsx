@@ -4,6 +4,7 @@ import type { Column, ColumnInstance, Row } from "react-table";
 
 import {
 	Chip,
+	Form,
 	Icon,
 	IconButton,
 	List,
@@ -19,6 +20,7 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	TextInput,
 	Tooltip,
 } from "components";
 import { Button } from "components/Button";
@@ -442,6 +444,45 @@ export const CustomActions = () => {
 	const [multiple, setMultiple] = useState(false);
 	const [expandable, setExpandable] = useState(false);
 	const [dark, setDark] = useState(false);
+	const renderInsetTable = (row: any) => {
+		console.log(row);
+		if (row.original.name.startsWith("Sir"))
+			return (
+				<Table
+					columns={FilledFields.columns}
+					showSearch={false}
+					readonly
+					showPagination={false}
+					pageCount={3}
+					data={[...FilledFields.data.slice(row.index, 3)]}
+				/>
+			);
+		if (row.original.name.startsWith("Madam"))
+			return (
+				<Form aria-label="Playground form" inline>
+					<TextInput
+						clearable
+						label="Name"
+						placeholder="Type your name here."
+						defaultValue={row.original.name}
+						type="text"
+					/>
+					<TextInput
+						clearable
+						label="Color"
+						defaultValue={row.original.hexValue}
+						type="text"
+					/>
+					<Button id="btn-submit-inline" variant="primary">
+						Submit
+					</Button>
+					<Button id="btnCancel" variant="secondary">
+						Cancel
+					</Button>
+				</Form>
+			);
+		return "inset table";
+	};
 	return (
 		<div className={clsx(dark && "neo-dark")}>
 			<Table
@@ -449,7 +490,7 @@ export const CustomActions = () => {
 				draggableRows={checked}
 				selectableRows={multiple ? "multiple" : "none"}
 				caption="Custom Actions"
-				renderInsetTable={expandable ? () => "inset table" : undefined}
+				renderInsetTable={expandable ? renderInsetTable : undefined}
 				customActionsNode={
 					<section>
 						<Button
