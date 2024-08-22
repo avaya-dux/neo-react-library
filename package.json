@@ -45,6 +45,7 @@
 	},
 	"dependencies": {
 		"atomic-layout": "0.16.2",
+		"lodash.debounce": "4.0.8",
 		"loglevel": "1.9.1",
 		"react-click-away-listener": "2.2.3",
 		"react-fast-compare": "3.2.2",
@@ -92,6 +93,7 @@
 		"@testing-library/react": "16.0.0",
 		"@testing-library/user-event": "14.5.2",
 		"@types/jest-axe": "3.5.9",
+		"@types/lodash.debounce": "4.0.9",
 		"@types/node": "20.16.1",
 		"@types/react": "18.2.21",
 		"@types/react-dom": "18.3.0",
