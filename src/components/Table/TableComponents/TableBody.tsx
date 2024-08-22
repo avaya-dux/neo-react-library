@@ -88,7 +88,7 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	selectableRows,
 	translations,
 }) => {
-	const { draggableRows } = useContext(FilterContext);
+	const { draggableRows, hasInsetTable } = useContext(FilterContext);
 
 	const {
 		headers,
@@ -102,9 +102,10 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	const columnsLength = useMemo(() => {
 		const checkboxColumns = shouldShowCheckbox ? 1 : 0;
 		const dragColumn = draggableRows ? 1 : 0;
+		const insetTableColumn = hasInsetTable ? 1 : 0;
 
-		return headers.length + checkboxColumns + dragColumn;
-	}, [draggableRows, headers.length, shouldShowCheckbox]);
+		return headers.length + checkboxColumns + dragColumn + insetTableColumn;
+	}, [draggableRows, headers.length, shouldShowCheckbox, hasInsetTable]);
 
 	const allTableEnabledRowsAreSelected = useMemo(() => {
 		const enabledTableRows = rows.filter((row) => !row.original.disabled);

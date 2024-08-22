@@ -28,6 +28,7 @@ export const TableToolbar = <T extends Record<string, any>>({
 	handleDelete,
 	handleEdit,
 	handleRefresh,
+	handleShowColumnsFilter,
 	handleRowHeightChange,
 	showRowHeightMenu,
 	showSearch,
@@ -132,7 +133,11 @@ export const TableToolbar = <T extends Record<string, any>>({
 				</div>
 
 				{allowColumnFilter && (
-					<TableFilter translations={translations} instance={instance} />
+					<TableFilter
+						handleShowColumnsFilter={handleShowColumnsFilter}
+						translations={translations}
+						instance={instance}
+					/>
 				)}
 
 				{handleRefresh && (

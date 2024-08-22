@@ -15,6 +15,7 @@ import type { ITableFilterTranslations } from "../types";
 type TableFilterProps<T extends Record<string, any>> = {
 	translations: ITableFilterTranslations;
 	instance: TableInstance<T>;
+	handleShowColumnsFilter?: () => void;
 };
 
 type FilterColumns = {
@@ -27,6 +28,7 @@ type FilterColumns = {
 export const TableFilter = <T extends Record<string, any>>({
 	translations,
 	instance,
+	handleShowColumnsFilter,
 }: TableFilterProps<T>) => {
 	// translations
 	const apply = translations.apply || defaultTranslations.toolbar.apply;
@@ -47,6 +49,14 @@ export const TableFilter = <T extends Record<string, any>>({
 		IdType<T>[]
 	>([]);
 	const [applyBtnEnabled, setApplyBtnEnabled] = useState<boolean>(false);
+
+	const onOpenColumnsFilter = useCallback(() => {
+		if (handleShowColumnsFilter !== undefined) {
+			handleShowColumnsFilter();
+		} else {
+			toggleFilterSheetVisible();
+		}
+	}, [handleShowColumnsFilter, toggleFilterSheetVisible]);
 
 	const didColumnsSelectionsChange = useCallback(
 		(newVisibleColIds: IdType<T>[]) => {
@@ -148,7 +158,7 @@ export const TableFilter = <T extends Record<string, any>>({
 				shape="square"
 				className="neo-table__toolbar-btn"
 				size="large"
-				onClick={toggleFilterSheetVisible}
+				onClick={onOpenColumnsFilter}
 			/>
 
 			<Drawer

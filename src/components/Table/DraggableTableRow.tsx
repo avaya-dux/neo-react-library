@@ -74,6 +74,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 						<IconButton
 							icon={row.isExpanded ? "chevron-down" : "chevron-right"}
 							size="compact"
+							iconSize="sm"
 							aria-label={row.isExpanded ? "expand" : "collapse"}
 							className="td-icon--expand"
 							{...row.getToggleRowExpandedProps({})}

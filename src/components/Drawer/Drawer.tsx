@@ -53,13 +53,14 @@ const propsAreAccessible = (
 	return true;
 };
 
-interface BaseDrawerProps
+export interface BaseDrawerProps
 	extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
 	children?: React.ReactNode;
 	id?: string;
 	onBack?: () => void;
 	onClose?: () => void;
 	closeOnScrimClick?: boolean;
+	ref?: React.Ref<HTMLDivElement>;
 	open?: boolean;
 	width?: string;
 	actions?: React.ReactNode[];
@@ -81,6 +82,7 @@ export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
  * @see https://design.avayacloud.com/components/web/drawer-web
  */
 export const Drawer = ({
+	ref,
 	children,
 	className,
 	id,

@@ -26,6 +26,7 @@ node_modules
 coverage
 cypress/integration/
 cypress/screenshots/
+cypress/downloads/
 cypress/videos/
 dist
 dist-ssr
