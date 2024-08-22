@@ -28,6 +28,7 @@ import type { IconNamesType } from "utils";
 
 import clsx from "clsx";
 import { Table, type TableProps } from "./";
+import { TableFilterDrawer } from "./TableComponents";
 import {
 	FilledFields,
 	type IDataTableMockData,
@@ -665,6 +666,34 @@ export const BareBones = () => (
 		data={[...FilledFields.data]}
 	/>
 );
+
+export const CustomBasicTableFilterDrawer = () => {
+	const [openColumnsFilterDrawer, setOpenColumnsFilterDrawer] =
+		useState<boolean>(false);
+	const handleShowColumnsFilter = () => setOpenColumnsFilterDrawer((v) => !v);
+	const closeFilterDrawer = () => {
+		setOpenColumnsFilterDrawer(false);
+	};
+	return (
+		<>
+			<Table
+				columns={FilledFields.columns}
+				handleShowColumnsFilter={handleShowColumnsFilter}
+				allowColumnFilter
+				data={[...FilledFields.data]}
+			/>
+			<TableFilterDrawer
+				title="Custom Table Filter Drawer"
+				open={openColumnsFilterDrawer}
+				handleCancel={closeFilterDrawer}
+			>
+				<p>Custom content goes here</p>
+				<br />
+				<p> 'Cancel' and 'Apply' buttons are built-in</p>
+			</TableFilterDrawer>
+		</>
+	);
+};
 
 export const WithRowSeparator = () => (
 	<Table
