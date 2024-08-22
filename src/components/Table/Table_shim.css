@@ -23,6 +23,11 @@
 	:root .neo-dark .neo-table th button {
 		color: white;
 	}
+	
+	:root .neo-dynamic .neo-table td button.td-icon--expand,
+	:root .neo-dark .neo-table td button.td-icon--expand{
+		color: var(--neo-color-base-150);
+	}
 }
 
 .neo-table th button span {
@@ -141,7 +146,7 @@
 	height: 14px;
 	width: 14px;
 	align-items: center;
-	color: var(--base-black-100);
+	color: var(--neo-color-base-800);
 	background-image: inherit;
 
 	span[class*=neo-icon-]:before {

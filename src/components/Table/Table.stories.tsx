@@ -4,6 +4,7 @@ import type { Column, ColumnInstance, Row } from "react-table";
 
 import {
 	Chip,
+	Form,
 	Icon,
 	IconButton,
 	List,
@@ -19,12 +20,15 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
+	TextInput,
 	Tooltip,
 } from "components";
 import { Button } from "components/Button";
 import type { IconNamesType } from "utils";
 
+import clsx from "clsx";
 import { Table, type TableProps } from "./";
+import { TableFilterDrawer } from "./TableComponents";
 import {
 	FilledFields,
 	type IDataTableMockData,
@@ -440,49 +444,98 @@ export const CustomActions = () => {
 	const [checked, setChecked] = useState(false);
 	const [multiple, setMultiple] = useState(false);
 	const [expandable, setExpandable] = useState(false);
-
+	const [dark, setDark] = useState(false);
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	const renderInsetTable = (row: any) => {
+		// inset table of 3 rows for name starting with "Sir"
+		if (row.original.name.startsWith("Sir"))
+			return (
+				<Table
+					columns={FilledFields.columns}
+					showSearch={false}
+					readonly
+					showPagination={false}
+					pageCount={3}
+					data={[...FilledFields.data.slice(row.index, 3)]}
+				/>
+			);
+		// inline form for name starting with "Madam"
+		if (row.original.name.startsWith("Madam"))
+			return (
+				<Form aria-label="Playground form" inline>
+					<TextInput
+						clearable
+						label="Name"
+						placeholder="Type your name here."
+						defaultValue={row.original.name}
+						type="text"
+					/>
+					<TextInput
+						clearable
+						label="Color"
+						defaultValue={row.original.hexValue}
+						type="text"
+					/>
+					<Button id="btn-submit-inline" variant="primary">
+						Submit
+					</Button>
+					<Button id="btnCancel" variant="secondary">
+						Cancel
+					</Button>
+				</Form>
+			);
+		return <p>Name: {row.original.name}</p>;
+	};
 	return (
-		<Table
-			{...FilledFields}
-			draggableRows={checked}
-			selectableRows={multiple ? "multiple" : "none"}
-			caption="Custom Actions"
-			renderInsetTable={expandable ? () => "inset table" : undefined}
-			customActionsNode={
-				<section>
-					<Button
-						onClick={() => alert("custom action number one")}
-						variant="tertiary"
-					>
-						Example One
-					</Button>
-					<Button
-						onClick={() => alert("custom action number two")}
-						variant="tertiary"
-					>
-						Example Two
-					</Button>
-					<Switch
-						checked={checked}
-						onChange={(_e, updatedChecked) => setChecked(updatedChecked)}
-					>
-						Draggable Switch
-					</Switch>
-					<Switch
-						checked={multiple}
-						onChange={(_e, updatedChecked) => setMultiple(updatedChecked)}
-					>
-						Multiple Switch
-					</Switch>
-					<Switch
-						checked={expandable}
-						onChange={(_e, updatedChecked) => setExpandable(updatedChecked)}
-					>
-						Expandable Switch
-					</Switch>
-				</section>
-			}
-		/>
+		<div className={clsx(dark && "neo-dark")}>
+			<Table
+				{...FilledFields}
+				draggableRows={checked}
+				selectableRows={multiple ? "multiple" : "none"}
+				caption="Custom Actions"
+				renderInsetTable={expandable ? renderInsetTable : undefined}
+				customActionsNode={
+					<section>
+						<Button
+							onClick={() => alert("custom action number one")}
+							variant="tertiary"
+						>
+							Example One
+						</Button>
+						<Button
+							onClick={() => alert("custom action number two")}
+							variant="tertiary"
+						>
+							Example Two
+						</Button>
+						<Switch
+							checked={dark}
+							onChange={(_e, updatedChecked) => setDark(updatedChecked)}
+						>
+							Dark Mode
+						</Switch>
+						<Switch
+							checked={checked}
+							onChange={(_e, updatedChecked) => setChecked(updatedChecked)}
+						>
+							Draggable Switch
+						</Switch>
+						<Switch
+							checked={multiple}
+							onChange={(_e, updatedChecked) => setMultiple(updatedChecked)}
+						>
+							Multiple Switch
+						</Switch>
+						<Switch
+							checked={expandable}
+							onChange={(_e, updatedChecked) => setExpandable(updatedChecked)}
+						>
+							Expandable Switch
+						</Switch>
+					</section>
+				}
+			/>
+		</div>
 	);
 };
 
@@ -613,6 +666,34 @@ export const BareBones = () => (
 		data={[...FilledFields.data]}
 	/>
 );
+
+export const CustomBasicTableFilterDrawer = () => {
+	const [openColumnsFilterDrawer, setOpenColumnsFilterDrawer] =
+		useState<boolean>(false);
+	const handleShowColumnsFilter = () => setOpenColumnsFilterDrawer((v) => !v);
+	const closeFilterDrawer = () => {
+		setOpenColumnsFilterDrawer(false);
+	};
+	return (
+		<>
+			<Table
+				columns={FilledFields.columns}
+				handleShowColumnsFilter={handleShowColumnsFilter}
+				allowColumnFilter
+				data={[...FilledFields.data]}
+			/>
+			<TableFilterDrawer
+				title="Custom Table Filter Drawer"
+				open={openColumnsFilterDrawer}
+				handleCancel={closeFilterDrawer}
+			>
+				<p>Custom content goes here</p>
+				<br />
+				<p> 'Cancel' and 'Apply' buttons are built-in</p>
+			</TableFilterDrawer>
+		</>
+	);
+};
 
 export const WithRowSeparator = () => (
 	<Table
