@@ -1,5 +1,5 @@
 import debounce from "lodash.debounce";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { type ChangeEvent, useCallback, useEffect, useState } from "react";
 
 import { TextInput } from "components/TextInput";
 
@@ -35,9 +35,8 @@ export const GoToPage = ({
 		setValue(currentPageIndex);
 	}, [currentPageIndex]);
 
-	const callback = useCallback(
+	const onPageChangeWrapper = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
-			console.log("debounce");
 			const value = Number(e.target.value);
 			if (value) {
 				onPageChange(e, value);
@@ -46,7 +45,11 @@ export const GoToPage = ({
 		[onPageChange],
 	);
 
-	const handleInputChange = useCallback(debounce(callback, delay), [callback, delay]);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	const onPageChangeDebounced = useCallback(
+		debounce(onPageChangeWrapper, delay),
+		[onPageChangeWrapper, delay],
+	);
 
 	return (
 		<div className="pagination__go-to-page">
@@ -60,7 +63,7 @@ export const GoToPage = ({
 				max={totalPages}
 				onChange={(e) => {
 					setValue(Number(e.target.value));
-					handleInputChange(e);
+					onPageChangeDebounced(e);
 				}}
 			/>
 
