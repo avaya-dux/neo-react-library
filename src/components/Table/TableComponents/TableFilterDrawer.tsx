@@ -37,7 +37,6 @@ export const TableFilterDrawer = forwardRef(
 
 		const actionButtons = [
 			<Button
-				form={id}
 				aria-label={cancelLabel}
 				variant="secondary"
 				onClick={handleCancel}
