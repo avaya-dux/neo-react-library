@@ -142,8 +142,8 @@
 
 .neo-table td button.td-icon--expand {
 	display: flex;
-	height: 14px;
-	width: 14px;
+	height: 32px;
+	width: 32px;
 	align-items: center;
 	color: var(--neo-color-base-800);
 	background-image: inherit;
