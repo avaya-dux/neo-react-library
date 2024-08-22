@@ -136,8 +136,8 @@
 }
 
 .neo-table th.neo-table__th-inset, .neo-table td.neo-table__td-inset {
-	width: 16px;
-	padding: 0;
+	width: 67px;
+	height: 44px;
 }
 
 .neo-table td button.td-icon--expand {
