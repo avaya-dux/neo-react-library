@@ -1,5 +1,9 @@
 .neo-table {
 	table-layout: fixed;
+
+	tbody tr {
+		height: 100%;
+	}
 }
 
 .neo-table th button {
@@ -23,9 +27,9 @@
 	:root .neo-dark .neo-table th button {
 		color: white;
 	}
-	
+
 	:root .neo-dynamic .neo-table td button.td-icon--expand,
-	:root .neo-dark .neo-table td button.td-icon--expand{
+	:root .neo-dark .neo-table td button.td-icon--expand {
 		color: var(--neo-color-base-150);
 	}
 }
@@ -104,6 +108,10 @@
 	padding: 0;
 	width: 60px;
 
+	&.narrow {
+		width: 32px;
+	}
+
 	&:hover,
 	&:focus {
 		color: var(--button-hover-color-default-info);
@@ -135,19 +143,41 @@
 	background: var(--neo-color-blue-500);
 }
 
-.neo-table th.neo-table__th-inset, .neo-table td.neo-table__td-inset {
-	width: 16px;
-	padding: 0;
-}
+.neo-table td.checkbox-andor-expand {
+	padding-inline: 0;
+	width: 60px;
 
-.neo-table td button.td-icon--expand {
-	display: flex;
-	height: 14px;
-	width: 14px;
-	align-items: center;
-	color: var(--neo-color-base-800);
-	background-image: inherit;
-	span[class*=neo-icon-]:before {
-		font-size: 14px;
+	&.narrow {
+		width: 32px;
+	}
+
+	div {
+		display: flex;
+		align-items: center;
+		padding-inline-start: 5px;
+
+		button.td-icon--expand {
+			display: flex;
+			height: 16px;
+			min-height: 16px;
+			width: 20px;
+			align-items: center;
+			color: var(--neo-color-base-800);
+			background-image: inherit;
+
+			&:focus-visible {
+				outline: none;
+				box-shadow: 0 0 0 2px #1473e6;
+			}
+
+			span {
+				width: 16px;
+
+				&[class*=neo-icon-]:before {
+					font-size: 14px;
+				}
+			}
+
+		}
 	}
 }
