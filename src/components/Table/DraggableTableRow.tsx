@@ -40,7 +40,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 
 	// count dynamic columns
 	const cellCount =
-		row.cells.length + 1 + (checkboxTd ? 1 : 0) + (hasInsetTable ? 1 : 0);
+		row.cells.length + 1 + (checkboxTd || hasInsetTable ? 1 : 0);
 
 	return (
 		<tbody
@@ -66,20 +66,24 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 						{...listeners}
 					/>
 				</td>
-				{checkboxTd && (
-					<td style={{ padding: "0px 0px 0px 5px" }}>{checkboxTd}</td>
-				)}
-				{hasInsetTable && (
-					<td className="neo-table__td-inset">
-						<IconButton
-							icon={row.isExpanded ? "chevron-down" : "chevron-right"}
-							size="compact"
-							iconSize="sm"
-							status="event"
-							aria-label={row.isExpanded ? "expand" : "collapse"}
-							className="td-icon--expand"
-							{...row.getToggleRowExpandedProps({})}
-						/>
+				{(checkboxTd || hasInsetTable) && (
+					<td
+						className={clsx("checkbox-andor-expand", !checkboxTd && "narrow")}
+					>
+						<div>
+							{checkboxTd}
+							{hasInsetTable && (
+								<IconButton
+									icon={row.isExpanded ? "chevron-down" : "chevron-right"}
+									size="compact"
+									iconSize="sm"
+									status="event"
+									aria-label={row.isExpanded ? "expand" : "collapse"}
+									className="td-icon--expand"
+									{...row.getToggleRowExpandedProps({})}
+								/>
+							)}
+						</div>
 					</td>
 				)}
 				{row.cells.map((cell) => {

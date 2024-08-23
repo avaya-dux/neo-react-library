@@ -6,6 +6,7 @@ import { Menu, MenuButton, MenuItem } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
+import clsx from "clsx";
 import {
 	FilterContext,
 	calculateAriaSortValue,
@@ -52,7 +53,7 @@ export const TableHeader: TableHeaderComponentType = ({
 		hasInsetTable,
 	} = useContext(FilterContext);
 
-	const shouldHaveCheckboxColumn = selectableRows !== "none";
+	const shouldHaveCheckboxColumn = selectableRows !== "none" || hasInsetTable;
 
 	return (
 		<thead>
@@ -76,18 +77,6 @@ export const TableHeader: TableHeaderComponentType = ({
 						selectableRows={selectableRows}
 						translations={translations}
 					/>
-				)}
-
-				{hasInsetTable && (
-					<th className="neo-table__th-inset">
-						<div
-							role="button"
-							tabIndex={-1}
-							aria-label={translations.expandToggle}
-						>
-							&nbsp;
-						</div>
-					</th>
 				)}
 
 				{headers.map((column) => {
@@ -260,7 +249,9 @@ const CheckboxHeaderCell: TableHeaderComponentType = ({
 	const shouldHaveCheckbox = selectableRows === "multiple";
 
 	return (
-		<th className="neo-table-checkbox-th">
+		<th
+			className={clsx("neo-table-checkbox-th", !shouldHaveCheckbox && "narrow")}
+		>
 			{shouldHaveCheckbox && (
 				<TableSelectionCheckboxAndMenu
 					handleRowToggled={handleRowToggled}
