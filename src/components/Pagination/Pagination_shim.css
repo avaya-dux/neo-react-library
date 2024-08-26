@@ -26,3 +26,38 @@
 .neo-pagination__row .neo-multiselect span.neo-multiselect-combo__header button.neo-multiselect__header:last-child {
 	width: auto;
 }
+
+.neo-pagination__row .neo-pagination__pages-selection {
+	display: flex;
+	gap: 1rem;
+
+	.pagination__go-to-page {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.neo-input {
+		height: 32px;
+		min-height: unset;
+		margin: 0;
+
+		&:focus {
+			margin: 0;
+		}
+	}
+
+	/* NOTE: this hides the "spin button" from the number input: https://stackoverflow.com/a/4298216/1022765 */
+	input[type="number"] {
+		appearance: textfield;
+		-moz-appearance: textfield;
+		-webkit-appearance: none;
+
+		&::-webkit-inner-spin-button,
+		&::-webkit-outer-spin-button {
+			/* display: none; <- Crashes Chrome on hover */
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	}
+}

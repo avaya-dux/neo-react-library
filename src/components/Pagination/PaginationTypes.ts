@@ -2,6 +2,8 @@ export interface PaginationTranslations {
 	backIconButtonText?: string;
 	itemsPerPageLabel?: string;
 	nextIconButtonText?: string;
+	pagesText?: string;
+	goToPageText?: string;
 }
 
 export type PaginationProps = {
@@ -17,7 +19,10 @@ export type PaginationProps = {
 	itemDisplayType?: "count" | "page" | "none";
 
 	onPageChange: (
-		event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+		event:
+			| React.MouseEvent<HTMLButtonElement, MouseEvent>
+			| React.KeyboardEvent<HTMLInputElement>
+			| null,
 		pageIndex: number,
 	) => void;
 	onItemsPerPageChange?: (itemsPerPage: number) => void;

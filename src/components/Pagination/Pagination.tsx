@@ -1,10 +1,11 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 import {
+	GoToPage,
 	PaginationItemDisplay,
 	PaginationItemsPerPageSelection,
 	PaginationNavigation,
-} from "./Nodes/";
+} from "./Nodes";
 
 import type { PaginationProps } from "./PaginationTypes";
 
@@ -54,6 +55,8 @@ export const Pagination = ({
 	// translations
 	backIconButtonText,
 	nextIconButtonText,
+	pagesText = "pages",
+	goToPageText = "Go to page",
 
 	// default overrides
 	centerNode,
@@ -106,12 +109,22 @@ export const Pagination = ({
 			)}
 
 			{rightNode || (
-				<PaginationItemsPerPageSelection
-					itemsPerPage={itemsPerPage}
-					itemsPerPageLabel={itemsPerPageLabel}
-					itemsPerPageOptions={itemsPerPageOptions}
-					onItemsPerPageChange={onItemsPerPageChange}
-				/>
+				<div className="neo-pagination__pages-selection">
+					<GoToPage
+						aria-label={goToPageText}
+						currentPageIndex={currentPageIndex}
+						onPageChange={onPageChange}
+						pagesText={pagesText}
+						totalPages={totalPages}
+					/>
+
+					<PaginationItemsPerPageSelection
+						itemsPerPage={itemsPerPage}
+						itemsPerPageLabel={itemsPerPageLabel}
+						itemsPerPageOptions={itemsPerPageOptions}
+						onItemsPerPageChange={onItemsPerPageChange}
+					/>
+				</div>
 			)}
 		</div>
 	);

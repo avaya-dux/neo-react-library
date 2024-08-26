@@ -100,11 +100,10 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	const selectedRowCount = Object.keys(selectedRowIds).length;
 
 	const columnsLength = useMemo(() => {
-		const checkboxColumns = shouldShowCheckbox ? 1 : 0;
+		const checkboxColumns = shouldShowCheckbox || hasInsetTable ? 1 : 0;
 		const dragColumn = draggableRows ? 1 : 0;
-		const insetTableColumn = hasInsetTable ? 1 : 0;
 
-		return headers.length + checkboxColumns + dragColumn + insetTableColumn;
+		return headers.length + checkboxColumns + dragColumn;
 	}, [draggableRows, headers.length, shouldShowCheckbox, hasInsetTable]);
 
 	const allTableEnabledRowsAreSelected = useMemo(() => {
