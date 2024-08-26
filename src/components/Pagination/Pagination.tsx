@@ -51,7 +51,6 @@ export const Pagination = ({
 
 	onPageChange,
 	onItemsPerPageChange,
-	inputDelay = 500,
 
 	// translations
 	backIconButtonText,
@@ -114,7 +113,6 @@ export const Pagination = ({
 					<GoToPage
 						aria-label={goToPageText}
 						currentPageIndex={currentPageIndex}
-						delay={inputDelay}
 						onPageChange={onPageChange}
 						pagesText={pagesText}
 						totalPages={totalPages}

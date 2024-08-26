@@ -21,12 +21,11 @@ export type PaginationProps = {
 	onPageChange: (
 		event:
 			| React.MouseEvent<HTMLButtonElement, MouseEvent>
-			| React.ChangeEvent<HTMLInputElement>
+			| React.KeyboardEvent<HTMLInputElement>
 			| null,
 		pageIndex: number,
 	) => void;
 	onItemsPerPageChange?: (itemsPerPage: number) => void;
-	inputDelay?: number;
 
 	// table overrides
 	centerNode?: React.ReactNode;

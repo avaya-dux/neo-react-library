@@ -109,10 +109,11 @@ describe("Pagination", () => {
 		await user.click(rightArrow);
 		expect(goToPageInput).toHaveValue(6);
 
-		// when user types, the middle node updates after the debounce (test visual before and after debounce delay)
 		await user.type(goToPageInput, UserEventKeys.BACKSPACE);
 		await user.type(goToPageInput, "11");
 		expect(goToPageInput).toHaveValue(11);
+
+		await user.type(goToPageInput, UserEventKeys.ENTER);
 		await waitFor(() => {
 			const activePaginationPageButton = screen.getByText("11");
 			expect(activePaginationPageButton).toHaveClass(selectedPageClass);
