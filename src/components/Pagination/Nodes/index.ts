@@ -1,3 +1,4 @@
+export * from "./GoToPage";
 export * from "./PaginationItemDisplay";
 export * from "./PaginationItemsPerPageSelection";
 export * from "./PaginationNavigation";

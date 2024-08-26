@@ -1,7 +1,10 @@
 import { composeStories } from "@storybook/testing-react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
+
+import { UserEventKeys } from "utils";
 
 import { Pagination } from ".";
 import {
@@ -16,10 +19,15 @@ const {
 	WithSpaceForFiveNavItems,
 	WithSpaceForSevenNavItems,
 	WithSpaceForTenNavItems,
+	SettingTheDefaultIndex,
 	Templated,
 } = composeStories(PaginationStories);
 
 describe("Pagination", () => {
+	const user = userEvent.setup();
+
+	const selectedPageClass = "neo-btn-secondary";
+
 	const defaultProps = {
 		currentPageIndex: 1,
 		itemCount: 10,
@@ -84,6 +92,32 @@ describe("Pagination", () => {
 		expect(navItems[0]).toBeDisabled();
 		expect(navItems[1]).toBeEnabled();
 		expect(navItems[2]).toBeDisabled();
+	});
+
+	it("`GoToPage` responds to user input and page click appropriately", async () => {
+		render(<SettingTheDefaultIndex />);
+
+		const goToPageInput = screen.getByRole("spinbutton");
+		expect(goToPageInput).toHaveValue(5);
+
+		// when user clicks pagination arrows, `GoToPage` updates it's text input appropriately
+		const leftArrow = screen.getByLabelText("previous");
+		const rightArrow = screen.getByLabelText("next");
+		await user.click(leftArrow);
+		expect(goToPageInput).toHaveValue(4);
+		await user.click(rightArrow);
+		await user.click(rightArrow);
+		expect(goToPageInput).toHaveValue(6);
+
+		await user.type(goToPageInput, UserEventKeys.BACKSPACE);
+		await user.type(goToPageInput, "11");
+		expect(goToPageInput).toHaveValue(11);
+
+		await user.type(goToPageInput, UserEventKeys.ENTER);
+		await waitFor(() => {
+			const activePaginationPageButton = screen.getByText("11");
+			expect(activePaginationPageButton).toHaveClass(selectedPageClass);
+		});
 	});
 
 	it("passes basic axe compliance", async () => {
