@@ -167,6 +167,7 @@ export const Table = <T extends Record<string, any>>({
 		setPageSize,
 		prepareRow,
 		pageCount,
+		toggleAllRowsSelected,
 	} = instance;
 	const rowCount = overridePagination ? manualRowCount : rows.length;
 
@@ -179,6 +180,16 @@ export const Table = <T extends Record<string, any>>({
 				? originalData
 				: rows.map(({ original }) => original),
 		[rows, originalData, dataSyncOption],
+	);
+
+	const handleDeleteWrapper = useCallback(
+		(selectedRowsIds: string[]) => {
+			if (handleDelete) {
+				handleDelete(selectedRowsIds);
+				toggleAllRowsSelected(false);
+			}
+		},
+		[handleDelete, toggleAllRowsSelected],
 	);
 
 	logger.debug(
@@ -378,7 +389,7 @@ export const Table = <T extends Record<string, any>>({
 						<TableToolbar
 							customActionsNode={customActionsNode}
 							handleCreate={handleCreate}
-							handleDelete={handleDelete}
+							handleDelete={handleDeleteWrapper}
 							handleEdit={handleEdit}
 							handleRefresh={handleRefresh}
 							handleShowColumnsFilter={handleShowColumnsFilter}
