@@ -535,7 +535,7 @@ describe("Table", () => {
 				queryAllByRole("row")[2].querySelector("label");
 			await user.click(secondRowCheckboxLabel);
 			const thirdRowCheckboxLabel =
-				queryAllByRole("row")[3].querySelector("label");
+				queryAllByRole("row")[4].querySelector("label");
 			await user.click(thirdRowCheckboxLabel);
 
 			// callable when multiple rows are selected

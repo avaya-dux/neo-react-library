@@ -151,9 +151,11 @@ const ClearSelectionRow: TableBodyComponentType = ({
 	if (selectedRowCount === 0) return undefined;
 
 	return (
-		<tr className="clear-row">
-			<td colSpan={columnsLength}>{selectionButton}</td>
-		</tr>
+		<tbody>
+			<tr className="clear-row">
+				<td colSpan={columnsLength}>{selectionButton}</td>
+			</tr>
+		</tbody>
 	);
 };
 
