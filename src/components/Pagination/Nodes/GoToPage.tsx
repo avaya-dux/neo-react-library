@@ -55,9 +55,8 @@ export const GoToPage = ({
 				}}
 			/>
 
-			<span>
-				/ {totalPages} {pagesText}
-			</span>
+			<span>/ {totalPages}</span>
+			<span>{pagesText}</span>
 		</div>
 	);
 };
