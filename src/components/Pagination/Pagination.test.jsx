@@ -94,36 +94,51 @@ describe("Pagination", () => {
 		expect(navItems[2]).toBeDisabled();
 	});
 
-	it("`GoToPage` responds to user input and page click appropriately", async () => {
-		render(<SettingTheDefaultIndex />);
-
-		const goToPageInput = screen.getByRole("spinbutton");
-		expect(goToPageInput).toHaveValue(5);
-
-		// when user clicks pagination arrows, `GoToPage` updates it's text input appropriately
-		const leftArrow = screen.getByLabelText("previous");
-		const rightArrow = screen.getByLabelText("next");
-		await user.click(leftArrow);
-		expect(goToPageInput).toHaveValue(4);
-		await user.click(rightArrow);
-		await user.click(rightArrow);
-		expect(goToPageInput).toHaveValue(6);
-
-		await user.type(goToPageInput, UserEventKeys.BACKSPACE);
-		await user.type(goToPageInput, "11");
-		expect(goToPageInput).toHaveValue(11);
-
-		await user.type(goToPageInput, UserEventKeys.ENTER);
-		await waitFor(() => {
-			const activePaginationPageButton = screen.getByText("11");
-			expect(activePaginationPageButton).toHaveClass(selectedPageClass);
-		});
-	});
-
 	it("passes basic axe compliance", async () => {
 		const { container } = render(<Pagination {...defaultProps} />);
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
+	});
+
+	describe("`GoToPage` functionality", () => {
+		it("`GoToPage` responds to user input and page click appropriately", async () => {
+			render(<SettingTheDefaultIndex />);
+
+			const goToPageInput = screen.getByRole("spinbutton");
+			expect(goToPageInput).toHaveValue(5);
+
+			// when user clicks pagination arrows, `GoToPage` updates it's text input appropriately
+			const leftArrow = screen.getByLabelText("previous");
+			const rightArrow = screen.getByLabelText("next");
+			await user.click(leftArrow);
+			expect(goToPageInput).toHaveValue(4);
+			await user.click(rightArrow);
+			await user.click(rightArrow);
+			expect(goToPageInput).toHaveValue(6);
+
+			await user.type(goToPageInput, UserEventKeys.BACKSPACE);
+			await user.type(goToPageInput, "11");
+			expect(goToPageInput).toHaveValue(11);
+
+			await user.type(goToPageInput, UserEventKeys.ENTER);
+			await waitFor(() => {
+				const activePaginationPageButton = screen.getByText("11");
+				expect(activePaginationPageButton).toHaveClass(selectedPageClass);
+			});
+		});
+
+		it("`GoToPage` sets value to `1` if users enters no value", async () => {
+			render(<SettingTheDefaultIndex />);
+
+			const goToPageInput = screen.getByRole("spinbutton");
+			expect(goToPageInput).toHaveValue(5);
+
+			await user.type(goToPageInput, UserEventKeys.BACKSPACE);
+			await user.type(goToPageInput, UserEventKeys.ENTER);
+			await waitFor(() => {
+				expect(screen.getByRole("spinbutton")).toHaveValue(1);
+			});
+		});
 	});
 
 	describe("storybook tests", () => {
