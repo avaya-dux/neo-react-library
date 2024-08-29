@@ -77,6 +77,9 @@ export const SingleSelectSearchable = () => {
 						className="neo-input"
 						disabled={disabled}
 						placeholder={selectedItems.length ? undefined : placeholder}
+						onFocus={() =>{
+							// logger.debug("onFocused called");
+						}}
 						onKeyDown={(e) => {
 							if (
 								e.key === Keys.ENTER &&
