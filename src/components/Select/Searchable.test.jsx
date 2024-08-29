@@ -1,12 +1,7 @@
-import {
-	act,
-	fireEvent,
-	render,
-	screen,
-} from "@testing-library/react";
-import { vi } from "vitest";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { UserEventKeys } from "utils";
 
