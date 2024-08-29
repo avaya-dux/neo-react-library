@@ -139,6 +139,32 @@ describe("Pagination", () => {
 				expect(screen.getByRole("spinbutton")).toHaveValue(1);
 			});
 		});
+
+		it("`GoToPage` sets value to `1` if users enters a value less than one", async () => {
+			render(<SettingTheDefaultIndex />);
+
+			const goToPageInput = screen.getByRole("spinbutton");
+			expect(goToPageInput).toHaveValue(5);
+
+			await user.type(goToPageInput, "-1");
+			await user.type(goToPageInput, UserEventKeys.ENTER);
+			await waitFor(() => {
+				expect(screen.getByRole("spinbutton")).toHaveValue(1);
+			});
+		});
+
+		it("`GoToPage` sets value to `totalPages` if users enters a value more than `totalPages`", async () => {
+			render(<SettingTheDefaultIndex />);
+
+			const goToPageInput = screen.getByRole("spinbutton");
+			expect(goToPageInput).toHaveValue(5);
+
+			await user.type(goToPageInput, "30000");
+			await user.type(goToPageInput, UserEventKeys.ENTER);
+			await waitFor(() => {
+				expect(screen.getByRole("spinbutton")).toHaveValue(20);
+			});
+		});
 	});
 
 	describe("storybook tests", () => {
