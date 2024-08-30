@@ -58,9 +58,11 @@ export const TableBody: TableBodyComponentType = ({
 			{...getTableBodyProps()}
 		>
 			{page.length === 0 ? (
-				<tr>
-					<td colSpan={numberOfColumns}>{translations.noDataAvailable}</td>
-				</tr>
+				<tbody>
+					<tr>
+						<td colSpan={numberOfColumns}>{translations.noDataAvailable}</td>
+					</tr>
+				</tbody>
 			) : (
 				<>
 					{showRowSelectionHelper && (

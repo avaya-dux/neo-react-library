@@ -172,7 +172,6 @@ export const Table = <T extends Record<string, any>>({
 		toggleAllRowsSelected,
 	} = instance;
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const handleSearchWrapper = useMemo(() => {
 		if (handleSearch) {
 			return (searchString: string, pageSize: number) => {
@@ -182,7 +181,7 @@ export const Table = <T extends Record<string, any>>({
 			};
 		}
 		return undefined;
-	}, [handleSearch]);
+	}, [handleSearch, gotoPage]);
 
 	const rowCount = overridePagination ? manualRowCount : rows.length;
 
