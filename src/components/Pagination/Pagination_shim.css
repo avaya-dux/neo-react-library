@@ -32,9 +32,19 @@
 	gap: 1rem;
 
 	.pagination__go-to-page {
-		display: flex;
+		display: grid;
+		grid-template-columns: 1fr auto auto;
 		align-items: center;
 		gap: 0.5rem;
+
+		.neo-input {
+			max-width: unset;
+			padding-right: 6px;
+		}
+	}
+
+	.neo-input-editable__wrapper {
+		min-height: unset;
 	}
 
 	.neo-input {
