@@ -1,3 +1,4 @@
+import log from "loglevel";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import { Button } from "components/Button";
@@ -9,7 +10,9 @@ import { FilterContext } from "../helpers";
 import type { TableToolbarProps } from "../types";
 import { TableFilter } from "./TableFilter";
 import "./TableToolbar_shim.css";
-
+const logger = log.getLogger("TableComponents/TableToolbar");
+logger.disableAll();
+export { logger as tableToolbarLogger };
 /**
  * TableToolbar is used by the Table component to render the search and action inputs for the table
  *
@@ -28,6 +31,7 @@ export const TableToolbar = <T extends Record<string, any>>({
 	handleDelete,
 	handleEdit,
 	handleRefresh,
+	handleSearch,
 	handleShowColumnsFilter,
 	handleRowHeightChange,
 	showRowHeightMenu,
@@ -37,11 +41,12 @@ export const TableToolbar = <T extends Record<string, any>>({
 	readonly = false,
 	translations,
 }: TableToolbarProps<T>) => {
+	logger.debug("TableToolbar Start");
 	const {
 		data,
 		setGlobalFilter,
 		rowsById,
-		state: { globalFilter, selectedRowIds },
+		state: { globalFilter, selectedRowIds, pageSize },
 	} = instance;
 
 	const selectedRowIdsStringArray = useMemo(
@@ -52,16 +57,24 @@ export const TableToolbar = <T extends Record<string, any>>({
 	const [search, setSearch] = useState<string>(globalFilter || "");
 	const setSearches = useCallback(
 		(searchString: string) => {
+			logger.debug("TableToolbar: setSearches", searchString);
 			setSearch(searchString);
-			setGlobalFilter(searchString);
+			if (handleSearch) {
+				handleSearch(searchString, pageSize);
+			} else {
+				setGlobalFilter(searchString);
+			}
 		},
-		[setGlobalFilter],
+		[setGlobalFilter, handleSearch, pageSize],
 	);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: handle data update (e.g. new/more data pulled from server)
 	useEffect(() => {
-		setSearches(search);
-	}, [data, setSearches]);
+		if (!handleSearch && search) {
+			logger.debug("apply global filter on data update");
+			setGlobalFilter(search);
+		}
+	}, [data]);
 
 	const editDisabled = readonly || selectedRowIdsStringArray.length !== 1;
 	const deleteDisabled = readonly || selectedRowIdsStringArray.length === 0;

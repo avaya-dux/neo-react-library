@@ -41,7 +41,8 @@ import type { DataSyncOptionType, IFilterContext, RowHeight } from "./types";
 import "./Table_shim.css";
 import { Checkbox } from "components/Checkbox";
 import log from "loglevel";
-export const logger = log.getLogger("Table");
+const logger = log.getLogger("Table");
+export { logger as tableLogger };
 logger.disableAll();
 /**
  * The Table is used to organize and display data within rows and columns.
@@ -97,6 +98,7 @@ export const Table = <T extends Record<string, any>>({
 	handleDelete,
 	handleEdit,
 	handleRefresh,
+	handleSearch,
 	handleShowColumnsFilter,
 	handleRowToggled,
 	handlePageChange = () => null,
@@ -169,7 +171,21 @@ export const Table = <T extends Record<string, any>>({
 		pageCount,
 		toggleAllRowsSelected,
 	} = instance;
+
+	const handleSearchWrapper = useMemo(() => {
+		if (handleSearch) {
+			return (searchString: string, pageSize: number) => {
+				handleSearch(searchString, pageSize);
+				gotoPage(0);
+				setRootLevelPageIndex(0);
+			};
+		}
+		return undefined;
+	}, [handleSearch, gotoPage]);
+
 	const rowCount = overridePagination ? manualRowCount : rows.length;
+
+	logger.info({ initialStatePageIndex, rootLevelPageIndex, pageIndex });
 
 	const [dataSyncOption, setDataSyncOption] =
 		useState<DataSyncOptionType>("no");
@@ -229,6 +245,13 @@ export const Table = <T extends Record<string, any>>({
 		if (currentPage > pageCount) {
 			const finalPageIndex = Math.max(0, pageCount - 1); // index is 0-based
 			gotoPage(finalPageIndex);
+			logger.info(
+				"set root level page index to ",
+				finalPageIndex,
+				pageCount,
+				currentPage,
+				pageIndex,
+			);
 			setRootLevelPageIndex(finalPageIndex);
 			handlePageChange(finalPageIndex, pageSize);
 		}
@@ -392,6 +415,7 @@ export const Table = <T extends Record<string, any>>({
 							handleDelete={handleDeleteWrapper}
 							handleEdit={handleEdit}
 							handleRefresh={handleRefresh}
+							handleSearch={handleSearchWrapper}
 							handleShowColumnsFilter={handleShowColumnsFilter}
 							handleRowHeightChange={onRowHeightChangeHandler}
 							rowHeight={rowHeightValue}
@@ -444,6 +468,7 @@ export const Table = <T extends Record<string, any>>({
 							onPageChange={(e, newIndex) => {
 								e?.preventDefault();
 								const nextIndex = Math.max(0, newIndex - 1);
+								logger.info("onPageChange", newIndex, nextIndex);
 								gotoPage(nextIndex);
 								setRootLevelPageIndex(nextIndex);
 								handlePageChange(nextIndex, pageSize);
