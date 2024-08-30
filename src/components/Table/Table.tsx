@@ -181,9 +181,6 @@ export const Table = <T extends Record<string, any>>({
 				setRootLevelPageIndex(0);
 			};
 		}
-
-		// gotoPage(0);
-		// setRootLevelPageIndex(0);
 		return undefined;
 	}, [handleSearch]);
 
