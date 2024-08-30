@@ -4,6 +4,8 @@ import { Button } from "components/Button";
 
 import type { PaginationNavigationProps } from "../PaginationTypes";
 
+import "./NavListItemButton_shim.css";
+
 /**
  * This component is used by the `PaginationNavigation` component and the
  * helper method `buildNavItems` to render a single `<li>` element that
@@ -25,7 +27,7 @@ export const NavListItemButton = ({
 	pageToNavigateTo: number;
 	isCurrentPage?: boolean;
 } & Pick<PaginationNavigationProps, "onPageChange">) => {
-	const variant = isCurrentPage ? "secondary" : "tertiary";
+	const variant = isCurrentPage ? "primary" : "tertiary";
 
 	return (
 		<li>

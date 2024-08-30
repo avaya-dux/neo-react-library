@@ -49,7 +49,7 @@ export const PaginationNavigation = ({
 				disabled={leftArrowDisabled}
 				aria-label={backIconButtonText}
 				onClick={(e) => onPageChange(e, currentPageIndex - 1)}
-				className="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-left"
+				className="neo-btn-square neo-pagination__arrow-btn neo-icon-chevron-left"
 			/>
 
 			<ul className="neo-pagination__list">{navListItems}</ul>
@@ -59,7 +59,7 @@ export const PaginationNavigation = ({
 				disabled={rightArrowDisabled}
 				aria-label={nextIconButtonText}
 				onClick={(e) => onPageChange(e, currentPageIndex + 1)}
-				className="neo-btn-square neo-pagination__arrow-btn neo-icon-arrow-right"
+				className="neo-btn-square neo-pagination__arrow-btn neo-icon-chevron-right"
 			/>
 		</nav>
 	);

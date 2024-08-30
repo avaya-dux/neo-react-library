@@ -36,7 +36,7 @@ describe("Table", () => {
 
 	const clearRowClassName = "clear-row";
 
-	const selectedPageClass = "neo-btn-secondary";
+	const selectedPageClass = "neo-btn-primary";
 
 	it("fully renders without exploding", () => {
 		const { getByRole } = render(<Table {...FilledFields} />);
