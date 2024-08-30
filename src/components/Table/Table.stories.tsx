@@ -1,7 +1,4 @@
 import type { Meta, Story } from "@storybook/react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Column, ColumnInstance, Row } from "react-table";
-
 import {
 	Chip,
 	Form,
@@ -24,6 +21,9 @@ import {
 	Tooltip,
 } from "components";
 import { Button } from "components/Button";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { Column, ColumnInstance, Row } from "react-table";
+import { useDebouncedCallback } from "use-debounce";
 import type { IconNamesType } from "utils";
 
 import clsx from "clsx";
@@ -36,6 +36,10 @@ import {
 	makeData,
 	recordingColumns,
 } from "./helpers";
+
+import log from "loglevel";
+const logger = log.getLogger("TableStories");
+logger.disableAll();
 
 export default {
 	title: "Components/Table",
@@ -130,12 +134,36 @@ export const WithIconButton = () => (
 
 export const ServerSidePagination = () => {
 	// Let's simulate a large dataset on the server with 10k records
-	const numOfRecords = 10000;
-	const serverData = makeData(numOfRecords);
-
-	const [data, setData] = useState<IRecordingTableMockData[]>([]);
+	const totalRecords = 10000;
+	const originalData = useMemo(() => makeData(totalRecords), []);
+	const [numOfRecords, setNumberOfRecords] = useState(totalRecords);
+	const [serverData, setServerData] = useState(originalData);
+	const [pageData, setPageData] = useState<IRecordingTableMockData[]>([]);
 	const [pageCount, setPageCount] = useState(0);
 	const fetchIdRef = useRef(0);
+
+	const searchDebounced = useDebouncedCallback(
+		(search: string, pageSize: number) => {
+			logger.log({ searchString: search, pageSize });
+			let data = [];
+			if (!search) {
+				data = originalData;
+			} else {
+				data = originalData.filter((row) => {
+					return Object.values(row).some((value) =>
+						value.toString().includes(search),
+					);
+				});
+			}
+
+			setServerData(data);
+			setNumberOfRecords(data.length);
+			setPageData(data.slice(0, pageSize));
+			const newPageCount = Math.ceil(data.length / pageSize);
+			setPageCount(newPageCount);
+		},
+		1000,
+	);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: generated data doesn't change once created
 	const fetchData = useCallback(
@@ -155,7 +183,7 @@ export const ServerSidePagination = () => {
 				if (fetchId === fetchIdRef.current) {
 					const startRow = pageSize * pageIndex;
 					const endRow = startRow + pageSize;
-					setData(serverData.slice(startRow, endRow));
+					setPageData(serverData.slice(startRow, endRow));
 
 					// Your server could send back total page count.
 					// For now we'll just fake it, too
@@ -171,33 +199,66 @@ export const ServerSidePagination = () => {
 		fetchData(0, 10);
 	}, [fetchData]);
 
-	const columns: Column<IRecordingTableMockData>[] = [
-		...recordingColumns,
-		{
-			Cell: ({ value }: { value: IRecordingTableMockData["date"] }) => (
-				<>{value?.toLocaleDateString()}</>
-			),
-			Header: "Date recorded",
-			accessor: "date",
-			disableFilters: true,
-			sortType: "datetime",
-		},
-	];
+	const columns: Column<IRecordingTableMockData>[] = useMemo(
+		() => [
+			...recordingColumns,
+			{
+				Cell: ({ value }: { value: IRecordingTableMockData["date"] }) => (
+					<>{value?.toLocaleDateString()}</>
+				),
+				Header: "Date recorded",
+				accessor: "date",
+				disableFilters: true,
+				sortType: "datetime",
+			},
+		],
+		[],
+	);
 
 	return (
-		<Table
-			data={data}
-			columns={columns}
-			manualPagination={true} // Very important to set manualPagination to true.
-			manualRowCount={numOfRecords} // Must provide total row count when using server side pagination.
-			initialStatePageSize={10}
-			pageCount={pageCount}
-			handlePageChange={fetchData}
-			itemsPerPageOptions={[5, 10, 20, 50]}
-			allowColumnFilter
-			caption="Server Side Pagination Example"
-			summary="This table will load one page at a time."
-		/>
+		<section>
+			<h3>Server Side Pagination and Search Example</h3>
+			<h4>How the example work:</h4>
+			<ul>
+				<li>
+					Simulate page load one at a time from server when clicking the page
+					number.
+				</li>
+				<li>
+					Simulate server side filtering when searching by a full or partial
+					value, such as transcribed, of the "Recording Status" column.
+				</li>
+			</ul>
+			<h4>
+				How to implement server side pagination and search in your application:
+			</h4>
+			<ul>
+				<li>
+					For server side pagination, implement handPageChange callback that
+					sends page index, page size, and/or search string to the server. The
+					server should return the page data, the total number of records, and
+					the page count, to the callback.
+				</li>
+				<li>
+					For server side search, implement handleSearch callback that sends the
+					search string and the page size to the server. The server should
+					return the first page of data, the total number of records, and the
+					page count, to the callback.
+				</li>
+			</ul>
+			<Table
+				data={pageData}
+				columns={columns}
+				manualPagination={true} // Very important to set manualPagination to true.
+				manualRowCount={numOfRecords} // Must provide total row count when using server side pagination.
+				initialStatePageSize={10}
+				pageCount={pageCount}
+				handlePageChange={fetchData}
+				handleSearch={searchDebounced}
+				itemsPerPageOptions={[5, 10, 20, 50]}
+				allowColumnFilter
+			/>
+		</section>
 	);
 };
 

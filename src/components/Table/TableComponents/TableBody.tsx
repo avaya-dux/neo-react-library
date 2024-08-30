@@ -14,8 +14,9 @@ import { DraggableTableRow } from "../DraggableTableRow";
 import { StaticTableRow } from "../StaticTableRow";
 import { FilterContext } from "../helpers";
 import type { TableBodyProps } from "../types";
-export const logger = log.getLogger("TableComponents/TableBody");
+const logger = log.getLogger("TableComponents/TableBody");
 logger.disableAll();
+export { logger as tableBodyLogger };
 
 import { setTableRowsSelected } from "../helpers";
 
@@ -57,9 +58,11 @@ export const TableBody: TableBodyComponentType = ({
 			{...getTableBodyProps()}
 		>
 			{page.length === 0 ? (
-				<tr>
-					<td colSpan={numberOfColumns}>{translations.noDataAvailable}</td>
-				</tr>
+				<tbody>
+					<tr>
+						<td colSpan={numberOfColumns}>{translations.noDataAvailable}</td>
+					</tr>
+				</tbody>
 			) : (
 				<>
 					{showRowSelectionHelper && (
