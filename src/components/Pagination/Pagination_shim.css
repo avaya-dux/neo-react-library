@@ -37,10 +37,6 @@
 		align-items: center;
 		gap: 0.5rem;
 
-		.neo-input-editable__wrapper {
-			width: -webkit-fill-available;
-		}
-
 		.neo-input {
 			max-width: unset;
 			padding-right: 6px;
