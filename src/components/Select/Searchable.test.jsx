@@ -58,9 +58,8 @@ describe("Select", () => {
 			const searchableElement = getByRole("combobox");
 			expect(searchableElement).toHaveAttribute("aria-expanded", "false");
 			fireEvent.click(toggleButton);
-			await vi.waitUntil(
-				() =>
-					expect(searchableElement).toHaveAttribute("aria-expanded", "true")
+			await vi.waitUntil(() =>
+				expect(searchableElement).toHaveAttribute("aria-expanded", "true"),
 			);
 			fireEvent.click(toggleButton);
 			expect(searchableElement).toHaveAttribute("aria-expanded", "false");
