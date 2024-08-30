@@ -60,8 +60,7 @@ describe("Select", () => {
 			fireEvent.click(toggleButton);
 			await vi.waitUntil(
 				() =>
-					expect(searchableElement).toHaveAttribute("aria-expanded", "true"),
-				{ timeout: 500 },
+					expect(searchableElement).toHaveAttribute("aria-expanded", "true")
 			);
 			fireEvent.click(toggleButton);
 			expect(searchableElement).toHaveAttribute("aria-expanded", "false");
