@@ -49,15 +49,17 @@ export const GoToPage = ({
 				}}
 				onKeyUp={(e) => {
 					if (e.key === Keys.ENTER) {
-						const v = Number.parseInt((e.target as HTMLInputElement).value, 10);
+						let v = (e.target as HTMLInputElement).valueAsNumber || 1;
+						if (v < 1) v = 1;
+						if (v > totalPages) v = totalPages;
+
 						onPageChange(e, v);
 					}
 				}}
 			/>
 
-			<span>
-				/ {totalPages} {pagesText}
-			</span>
+			<span>/ {totalPages}</span>
+			<span>{pagesText}</span>
 		</div>
 	);
 };
