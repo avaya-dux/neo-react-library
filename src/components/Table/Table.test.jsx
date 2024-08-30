@@ -595,6 +595,29 @@ describe("Table", () => {
 			expect(filteredtrs.length).toBeLessThan(alltrs.length);
 		});
 
+		it("properly calls handleSearch method ", async () => {
+			const handleSearch = vi.fn();
+			const { getByLabelText, queryAllByRole } = render(
+				<Table
+					{...FilledFields}
+					itemsPerPageOptions={[50]}
+					handleSearch={handleSearch}
+				/>,
+			);
+
+			const alltrs = queryAllByRole("row");
+			expect(alltrs).toHaveLength(FilledFields.data.length + 1);
+
+			const searchInput = getByLabelText(
+				FilledFields.translations.toolbar.searchInputPlaceholder,
+			);
+			await user.click(searchInput);
+			await user.keyboard(FilledFields.data[0].label);
+
+			expect(handleSearch).toHaveBeenCalled();
+			expect(handleSearch).toHaveBeenCalledWith(FilledFields.data[0].label, 50);
+		});
+
 		it("search will update current page index appropriately", async () => {
 			render(<Table {...FilledFields} />);
 
@@ -630,7 +653,7 @@ describe("Table", () => {
 			await user.keyboard("ddddddddd");
 
 			// confirm that there is no data
-			expect("no data available").toBeTruthy();
+			expect(screen.queryByText("no data available")).toBeTruthy();
 
 			// clear search
 			await user.click(screen.getByLabelText("clear input"));

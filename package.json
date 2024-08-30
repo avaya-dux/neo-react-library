@@ -18,11 +18,21 @@
 			"require": "./dist/avaya-neo-react.umd.js"
 		}
 	},
-	"files": ["dist", "README.md", "LICENSE.md", "LICENSE-3rd-party.html"],
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE.md",
+		"LICENSE-3rd-party.html"
+	],
 	"engines": {
 		"node": ">=16"
 	},
-	"browserslist": ["> 0.5%", "last 2 versions", "not dead", "not ie <= 11"],
+	"browserslist": [
+		"> 0.5%",
+		"last 2 versions",
+		"not dead",
+		"not ie <= 11"
+	],
 	"scripts": {
 		"dev": "vite build --mode dev --watch",
 		"storybook": "storybook dev -p 6006",
@@ -115,6 +125,7 @@
 		"react-table": "7.8.0",
 		"storybook": "7.6.20",
 		"typescript": "5.5.4",
+		"use-debounce": "^10.0.3",
 		"vite": "5.3.5",
 		"vite-plugin-dts": "4.0.3",
 		"vitest": "2.0.5"
