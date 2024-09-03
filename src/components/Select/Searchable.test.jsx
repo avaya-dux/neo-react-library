@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { UserEventKeys } from "utils";
 
@@ -49,7 +50,7 @@ describe("Select", () => {
 			);
 		});
 
-		it("toggles aria-expanded prop on click", () => {
+		it("toggles aria-expanded prop on click", async () => {
 			const { container, getByRole } = renderResult;
 			const toggleButton = container.querySelector(
 				"span.neo-multiselect-combo__header",
@@ -57,7 +58,9 @@ describe("Select", () => {
 			const searchableElement = getByRole("combobox");
 			expect(searchableElement).toHaveAttribute("aria-expanded", "false");
 			fireEvent.click(toggleButton);
-			expect(searchableElement).toHaveAttribute("aria-expanded", "true");
+			await vi.waitUntil(() =>
+				expect(searchableElement).toHaveAttribute("aria-expanded", "true"),
+			);
 			fireEvent.click(toggleButton);
 			expect(searchableElement).toHaveAttribute("aria-expanded", "false");
 		});
