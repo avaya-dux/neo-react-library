@@ -505,6 +505,57 @@ describe("Table", () => {
 			expect(mock).toHaveBeenCalled();
 		});
 
+		it("properly hides `delete` button when handleDelete is not defined", async () => {
+			const { getByText, queryAllByRole } = render(
+				<Table
+					{...FilledFields}
+					itemsPerPageOptions={[50]}
+					selectableRows="multiple"
+				/>,
+			);
+
+			// expect button to not be rendered when zero rows are selected
+			expect(() =>
+				getByText(FilledFields.translations.toolbar.delete),
+			).toThrow();
+
+			// select first row
+			const firstRowCheckboxLabel =
+				queryAllByRole("row")[1].querySelector("label");
+			await user.click(firstRowCheckboxLabel);
+
+			// delete is hidden since handleDelete is not defined
+			expect(() =>
+				getByText(FilledFields.translations.toolbar.delete),
+			).toThrow();
+		});
+
+		it("properly hides `delete` button when handleDelete is null", async () => {
+			const { getByText, queryAllByRole } = render(
+				<Table
+					{...FilledFields}
+					itemsPerPageOptions={[50]}
+					handleDelete={null}
+					selectableRows="multiple"
+				/>,
+			);
+
+			// expect button to not be rendered when zero rows are selected
+			expect(() =>
+				getByText(FilledFields.translations.toolbar.delete),
+			).toThrow();
+
+			// select first row
+			const firstRowCheckboxLabel =
+				queryAllByRole("row")[1].querySelector("label");
+			await user.click(firstRowCheckboxLabel);
+
+			// delete is hidden since handleDelete is null
+			expect(() =>
+				getByText(FilledFields.translations.toolbar.delete),
+			).toThrow();
+		});
+
 		it("properly calls it's `delete` method", async () => {
 			const mock = vi.fn();
 			const { getByText, queryAllByRole } = render(

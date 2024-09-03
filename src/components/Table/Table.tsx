@@ -198,15 +198,15 @@ export const Table = <T extends Record<string, any>>({
 		[rows, originalData, dataSyncOption],
 	);
 
-	const handleDeleteWrapper = useCallback(
-		(selectedRowsIds: string[]) => {
-			if (handleDelete) {
+	const handleDeleteWrapper = useMemo(() => {
+		if (handleDelete) {
+			return (selectedRowsIds: string[]) => {
 				handleDelete(selectedRowsIds);
 				toggleAllRowsSelected(false);
-			}
-		},
-		[handleDelete, toggleAllRowsSelected],
-	);
+			};
+		}
+		return undefined;
+	}, [handleDelete, toggleAllRowsSelected]);
 
 	logger.debug(
 		"Table: originalData",
