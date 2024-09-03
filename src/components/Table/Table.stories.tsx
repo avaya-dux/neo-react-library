@@ -1,4 +1,5 @@
 import type { Meta, Story } from "@storybook/react";
+import clsx from "clsx";
 import {
 	Chip,
 	Form,
@@ -22,11 +23,10 @@ import {
 } from "components";
 import { Button } from "components/Button";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Column, ColumnInstance, Row } from "react-table";
+import type { ColumnInstance, Row } from "react-table";
 import { useDebouncedCallback } from "use-debounce";
 import type { IconNamesType } from "utils";
 
-import clsx from "clsx";
 import { Table, type TableProps } from "./";
 import { TableFilterDrawer } from "./TableComponents";
 import {
@@ -36,6 +36,7 @@ import {
 	makeData,
 	recordingColumns,
 } from "./helpers";
+import type { NeoColumn } from "./types";
 
 import log from "loglevel";
 const logger = log.getLogger("TableStories");
@@ -201,7 +202,7 @@ export const ServerSidePagination = () => {
 		fetchData(0, 10);
 	}, [fetchData]);
 
-	const columns: Column<IRecordingTableMockData>[] = useMemo(
+	const columns: NeoColumn<IRecordingTableMockData>[] = useMemo(
 		() => [
 			...recordingColumns,
 			{
@@ -265,7 +266,7 @@ export const ServerSidePagination = () => {
 };
 
 export const AdvancedFilteringAndSorting = () => {
-	const columns: Array<Column<IDataTableMockData>> = [
+	const columns: Array<NeoColumn<IDataTableMockData>> = [
 		...FilledFields.columns,
 		{
 			Header: "Level",
@@ -1019,7 +1020,7 @@ export const EmbeddedSelects = () => {
 		number: string;
 		lastAction?: string;
 	};
-	const columns: Array<Column<IData>> = [
+	const columns: Array<NeoColumn<IData>> = [
 		{
 			Header: "Name",
 			accessor: "name",

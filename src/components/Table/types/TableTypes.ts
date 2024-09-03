@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { TableInstance, TableOptions } from "react-table";
+import type { Column, TableInstance, TableOptions } from "react-table";
 
 import type {
 	IBodyTranslations,
@@ -10,6 +10,10 @@ import type {
 
 // biome-ignore lint/suspicious/noExplicitAny: We require maximum flexibility here
 type AnyRecord = Record<string, any>;
+
+export type NeoColumn<T extends AnyRecord> = Column<T> & {
+	show?: boolean;
+};
 
 interface ToolbarSharedProps<T extends AnyRecord> {
 	readonly?: boolean;
