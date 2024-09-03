@@ -36,6 +36,11 @@ const DownshiftWithComboboxProps = (
 						...changes,
 						isOpen,
 					};
+				case useCombobox.stateChangeTypes.InputFocus:
+					return {
+						...changes,
+						isOpen: false,
+					};
 
 				default:
 					return changes;
@@ -113,6 +118,11 @@ const DownshiftWithComboboxMultipleSelectProps = (
 			);
 
 			switch (type) {
+				case useCombobox.stateChangeTypes.InputFocus:
+					return {
+						...changes,
+						isOpen: false,
+					};
 				case useCombobox.stateChangeTypes.ToggleButtonClick:
 					return {
 						...changes,

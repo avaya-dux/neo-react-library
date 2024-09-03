@@ -43,10 +43,6 @@ export const MultiSelectSearchable = () => {
 		getToggleButtonProps();
 	const { id, onKeyDown, ...restInputProps } = getInputProps();
 
-	if (restInputProps.onFocus) {
-		restInputProps.onFocus = undefined; // Override downshift behavior to fix NEO-2175
-	}
-
 	// clear the search when dropdown closes (when the user selects an item or clicks away)
 	useEffect(() => {
 		if (isOpen === false) {
