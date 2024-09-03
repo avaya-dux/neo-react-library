@@ -41,6 +41,8 @@ import log from "loglevel";
 const logger = log.getLogger("TableStories");
 logger.disableAll();
 
+import "./TableStories_shim.css";
+
 export default {
 	title: "Components/Table",
 	component: Table,
@@ -405,16 +407,23 @@ export const AdvancedFilteringAndSorting = () => {
 			Header: "Long Text",
 			accessor: "longText",
 			disableFilters: true,
+			show: false,
 		},
 	];
 
 	return (
-		<section>
+		<section className="extra-spacing">
 			<h3>How to setup Advanced Filtering and Sorting</h3>
 
 			<p>
 				The Table component has several advanced features that you can use to
 				customize how data is displayed in the Table.
+			</p>
+
+			<p>
+				If you want to hide a column, you can add <code>show: false</code> to
+				the column definition. The table below hides its "Long Text" column by
+				default.
 			</p>
 
 			<p>
