@@ -866,6 +866,26 @@ describe("Table", () => {
 			await user.click(applyButton);
 			expect(firstColumnSortButton).not.toBeVisible();
 		});
+
+		it("allows user to predefine hidden rows", async () => {
+			// find the "Long Text" `<th>` element
+			const longTextElements = screen.queryAllByText("Long Text");
+			expect(longTextElements).toHaveLength(3);
+			const thDivLongTextElement = longTextElements[2];
+			const thLongTextElement = thDivLongTextElement.closest("th");
+
+			// assert "Long Text" column is not shown in the table
+			expect(thLongTextElement).not.toBeVisible();
+
+			// open filter dialog and show "Long Text" column
+			await user.click(screen.getAllByLabelText("Filter Columns")[0]);
+			expect(screen.getByLabelText("Long Text")).not.toBeChecked();
+			await user.click(screen.getByLabelText("Long Text"));
+			await user.click(screen.getByLabelText("Apply"));
+
+			// assert "Long Text" column is now shown in the table
+			expect(thLongTextElement).toBeVisible();
+		});
 	});
 
 	describe("disabled row functionality", () => {
