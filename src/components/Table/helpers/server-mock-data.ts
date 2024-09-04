@@ -1,4 +1,4 @@
-import type { NeoColumn } from "../types";
+import type { Column } from "react-table";
 
 export interface IRecordingTableMockData {
 	id: string;
@@ -10,7 +10,7 @@ export interface IRecordingTableMockData {
 	disabled?: boolean;
 }
 
-export const recordingColumns: NeoColumn<IRecordingTableMockData>[] = [
+export const recordingColumns: Column<IRecordingTableMockData>[] = [
 	{
 		Header: "Recording",
 		accessor: "recordingName",

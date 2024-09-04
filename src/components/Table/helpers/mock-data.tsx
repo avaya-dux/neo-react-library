@@ -1,4 +1,6 @@
-import type { NeoColumn, TableProps } from "../types";
+import type { Column } from "react-table";
+
+import type { TableProps } from "../types";
 import { translations } from "./default-data";
 
 export interface IDataTableMockData {
@@ -15,7 +17,7 @@ export interface IDataTableMockData {
 	longText?: string;
 }
 
-const columnsExample: Array<NeoColumn<IDataTableMockData>> = [
+const columnsExample: Array<Column<IDataTableMockData>> = [
 	{
 		Header: "Name",
 		accessor: "name",

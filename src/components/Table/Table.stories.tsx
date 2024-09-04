@@ -23,7 +23,7 @@ import {
 } from "components";
 import { Button } from "components/Button";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { ColumnInstance, Row } from "react-table";
+import type { Column, ColumnInstance, Row } from "react-table";
 import { useDebouncedCallback } from "use-debounce";
 import type { IconNamesType } from "utils";
 
@@ -36,7 +36,6 @@ import {
 	makeData,
 	recordingColumns,
 } from "./helpers";
-import type { NeoColumn } from "./types";
 
 import log from "loglevel";
 const logger = log.getLogger("TableStories");
@@ -202,7 +201,7 @@ export const ServerSidePagination = () => {
 		fetchData(0, 10);
 	}, [fetchData]);
 
-	const columns: NeoColumn<IRecordingTableMockData>[] = useMemo(
+	const columns: Column<IRecordingTableMockData>[] = useMemo(
 		() => [
 			...recordingColumns,
 			{
@@ -266,7 +265,7 @@ export const ServerSidePagination = () => {
 };
 
 export const AdvancedFilteringAndSorting = () => {
-	const columns: Array<NeoColumn<IDataTableMockData>> = [
+	const columns: Array<Column<IDataTableMockData>> = [
 		...FilledFields.columns,
 		{
 			Header: "Level",
@@ -1020,7 +1019,7 @@ export const EmbeddedSelects = () => {
 		number: string;
 		lastAction?: string;
 	};
-	const columns: Array<NeoColumn<IData>> = [
+	const columns: Array<Column<IData>> = [
 		{
 			Header: "Name",
 			accessor: "name",

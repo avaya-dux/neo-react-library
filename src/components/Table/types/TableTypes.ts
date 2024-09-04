@@ -1,12 +1,5 @@
 import type { ReactNode } from "react";
-import type {
-	Column,
-	TableInstance,
-	TableOptions,
-	UseFiltersColumnOptions,
-	UseGroupByColumnOptions,
-	UseSortByColumnOptions,
-} from "react-table";
+import type { TableInstance, TableOptions } from "react-table";
 
 import type {
 	IBodyTranslations,
@@ -17,12 +10,6 @@ import type {
 
 // biome-ignore lint/suspicious/noExplicitAny: We require maximum flexibility here
 type AnyRecord = Record<string, any>;
-
-export type NeoColumn<T extends AnyRecord> = Column<T> & {
-	show?: boolean;
-} & UseFiltersColumnOptions<T> &
-	UseGroupByColumnOptions<T> &
-	UseSortByColumnOptions<T>;
 
 interface ToolbarSharedProps<T extends AnyRecord> {
 	readonly?: boolean;

@@ -36,12 +36,7 @@ import {
 	convertRowIdsArrayToObject,
 	translations as defaultTranslations,
 } from "./helpers";
-import type {
-	DataSyncOptionType,
-	IFilterContext,
-	NeoColumn,
-	RowHeight,
-} from "./types";
+import type { DataSyncOptionType, IFilterContext, RowHeight } from "./types";
 
 import "./Table_shim.css";
 import { Checkbox } from "components/Checkbox";
@@ -152,7 +147,7 @@ export const Table = <T extends Record<string, any>>({
 				pageSize: initialStatePageSize || itemsPerPageOptions?.[0] || 10,
 				selectedRowIds: convertRowIdsArrayToObject(defaultSelectedRowIds || []),
 				pageIndex: rootLevelPageIndex,
-				hiddenColumns: (columns.map((col: NeoColumn<T>) => {
+				hiddenColumns: (columns.map((col) => {
 					// logic from TanStack discussion: https://github.com/TanStack/table/discussions/1971#discussioncomment-1164
 					if (col.show === false) {
 						return col.accessor || col.id;
