@@ -1,3 +1,8 @@
+.neo-pagination__row {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
 .neo-pagination__row .neo-form-control .neo-input-group {
 	display: flex;
 	flex-direction: row;
@@ -29,6 +34,7 @@
 
 .neo-pagination__row .neo-pagination__pages-selection {
 	display: flex;
+	justify-content: flex-end;
 	gap: 1rem;
 
 	.pagination__go-to-page {
@@ -70,4 +76,10 @@
 			margin: 0;
 		}
 	}
+}
+
+nav.neo-pagination button.neo-btn-square.neo-pagination__arrow-btn {
+	width: 24px;
+	margin-left: 4px;
+	margin-right: 4px;
 }

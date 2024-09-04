@@ -26,7 +26,7 @@ const {
 describe("Pagination", () => {
 	const user = userEvent.setup();
 
-	const selectedPageClass = "neo-btn-secondary";
+	const selectedPageClass = "neo-btn-primary";
 
 	const defaultProps = {
 		currentPageIndex: 1,
