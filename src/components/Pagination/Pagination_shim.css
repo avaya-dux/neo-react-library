@@ -71,3 +71,9 @@
 		}
 	}
 }
+
+nav.neo-pagination button.neo-btn-square.neo-pagination__arrow-btn {
+	width: 24px;
+	margin-left: 4px;
+	margin-right: 4px;
+}
