@@ -1,8 +1,11 @@
-import { Default } from "./Pagination.stories";
+import { composeStories } from "@storybook/testing-react";
+
+import * as PaginationStories from "./Pagination.stories";
+const { Basic } = composeStories(PaginationStories);
 
 describe("Pagination component", () => {
 	it("should update the page count based on how many items are shown per page", () => {
-		cy.mount(<Default />);
+		cy.mount(<Basic />);
 
 		// there should be 100 items in the list
 		cy.get("input").should("have.value", "100");
@@ -21,7 +24,7 @@ describe("Pagination component", () => {
 	});
 
 	it("should navigate between page via 'left'/'right' buttons", () => {
-		cy.mount(<Default />);
+		cy.mount(<Basic />);
 
 		const leftNavBtn = "button[aria-label='previous']";
 		const rightNavBtn = "button[aria-label='next']";
@@ -39,7 +42,7 @@ describe("Pagination component", () => {
 	});
 
 	it("should navigate between page via nav buttons", () => {
-		cy.mount(<Default />);
+		cy.mount(<Basic />);
 
 		const navItems = "ul.neo-pagination__list button";
 
@@ -59,9 +62,9 @@ describe("Pagination component", () => {
 	});
 
 	it("should navigate smoothly via tabbing", () => {
-		cy.mount(<Default />);
+		cy.mount(<Basic />);
 
-		cy.get("#default-pagination");
+		cy.get("#templated-pagination");
 		cy.click();
 		cy.realPress("Tab"); // 1
 		cy.realPress("Tab"); // 2
