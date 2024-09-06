@@ -16,6 +16,11 @@
 }
 
 /* overrides */
+.neo-pagination__row nav.neo-pagination,
+.neo-pagination__row .neo-pagination .neo-pagination__list {
+	flex-wrap: nowrap;
+}
+
 .neo-pagination__row .neo-multiselect {
 	margin-right: 0;
 }
