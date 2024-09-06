@@ -15,13 +15,7 @@ import {
 } from "./Nodes/helpers";
 import * as PaginationStories from "./Pagination.stories";
 
-const {
-	WithSpaceForFiveNavItems,
-	WithSpaceForSevenNavItems,
-	WithSpaceForTenNavItems,
-	SettingTheDefaultIndex,
-	Templated,
-} = composeStories(PaginationStories);
+const { Basic, DefaultIndex } = composeStories(PaginationStories);
 
 describe("Pagination", () => {
 	const user = userEvent.setup();
@@ -102,7 +96,7 @@ describe("Pagination", () => {
 
 	describe("`GoToPage` functionality", () => {
 		it("`GoToPage` responds to user input and page click appropriately", async () => {
-			render(<SettingTheDefaultIndex />);
+			render(<DefaultIndex />);
 
 			const goToPageInput = screen.getByRole("spinbutton");
 			expect(goToPageInput).toHaveValue(5);
@@ -128,7 +122,7 @@ describe("Pagination", () => {
 		});
 
 		it("`GoToPage` sets value to `1` if users enters no value", async () => {
-			render(<SettingTheDefaultIndex />);
+			render(<DefaultIndex />);
 
 			const goToPageInput = screen.getByRole("spinbutton");
 			expect(goToPageInput).toHaveValue(5);
@@ -141,7 +135,7 @@ describe("Pagination", () => {
 		});
 
 		it("`GoToPage` sets value to `1` if users enters a value less than one", async () => {
-			render(<SettingTheDefaultIndex />);
+			render(<DefaultIndex />);
 
 			const goToPageInput = screen.getByRole("spinbutton");
 			expect(goToPageInput).toHaveValue(5);
@@ -154,7 +148,7 @@ describe("Pagination", () => {
 		});
 
 		it("`GoToPage` sets value to `totalPages` if users enters a value more than `totalPages`", async () => {
-			render(<SettingTheDefaultIndex />);
+			render(<DefaultIndex />);
 
 			const goToPageInput = screen.getByRole("spinbutton");
 			expect(goToPageInput).toHaveValue(5);
@@ -162,74 +156,17 @@ describe("Pagination", () => {
 			await user.type(goToPageInput, "30000");
 			await user.type(goToPageInput, UserEventKeys.ENTER);
 			await waitFor(() => {
-				expect(screen.getByRole("spinbutton")).toHaveValue(20);
+				expect(screen.getByRole("spinbutton")).toHaveValue(50);
 			});
 		});
 	});
 
 	describe("storybook tests", () => {
-		describe("WithSpaceForFiveNavItems", () => {
+		describe("Basic", () => {
 			let renderResult;
 
 			beforeEach(() => {
-				renderResult = render(<WithSpaceForFiveNavItems />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("WithSpaceForSevenNavItems", () => {
-			let renderResult;
-
-			beforeEach(() => {
-				renderResult = render(<WithSpaceForSevenNavItems />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("WithSpaceForTenNavItems", () => {
-			let renderResult;
-
-			beforeEach(() => {
-				renderResult = render(<WithSpaceForTenNavItems />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("Templated", () => {
-			let renderResult;
-
-			beforeEach(() => {
-				renderResult = render(<Templated />);
+				renderResult = render(<Basic />);
 			});
 
 			it("should render ok", () => {

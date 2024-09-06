@@ -1,180 +1,104 @@
-import type { Meta, Story } from "@storybook/react";
-import { useMemo, useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Form, List, ListItem, Sheet, TextInput } from "components";
-import { genId } from "utils";
+import type { ComponentProps, ComponentType } from "react";
+import { useState } from "react";
 
-import { Pagination, type PaginationProps } from "./";
+import { Pagination } from ".";
 
-export default {
-	title: "Components/Pagination",
+const meta: Meta<typeof Pagination> = {
 	component: Pagination,
-} as Meta<PaginationProps>;
+	title: "Components/Pagination",
+	args: {
+		id: "templated-pagination",
+		currentPageIndex: 1,
+		itemCount: 500,
+		itemsPerPage: 10,
+		itemsPerPageOptions: [5, 10, 25, 50, 100],
+		onPageChange: () => null,
+		onItemsPerPageChange: () => null,
+	},
+	argTypes: {
+		onPageChange: { table: { disable: true } },
+		onItemsPerPageChange: { table: { disable: true } },
+		itemDisplayType: { table: { disable: true } }, // TODO: (NEO-2329) this is deprecated, remove
+	},
+};
+export default meta;
 
-const BookOfPages = ({
-	sectionWidth,
-	direction = "ltr",
-}: {
-	sectionWidth?: number;
-	direction?: string;
-}) => {
-	const paginationId = "default-pagination";
-	const logsId = "default-pagination-logs";
+type PaginationStoryArgs = ComponentProps<typeof Pagination> & {
+	header: string;
+};
+type Story = StoryObj<PaginationStoryArgs>;
 
-	const [pageIndex, setPageIndex] = useState(1);
-	const [itemsPerPage, setItemsPerPage] = useState(5);
+const Template: Story = {
+	args: {
+		header: "Pagination Example",
+	},
+	render: ({
+		currentPageIndex,
+		itemsPerPage: initialItemsPerPage,
+		header = "Pagination Example",
+		...rest
+	}) => {
+		const [pageIndex, setPageIndex] = useState(currentPageIndex);
+		const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
 
-	const [numParagraphs, setNumParagraphs] = useState(100);
-	const paragraphArray: JSX.Element[] = useMemo(() => {
-		const paragraphs = Array(numParagraphs)
-			.fill(0)
-			.map((_v: unknown, i: number) => (
-				<p key={`paragraph-${i}`}>This is paragraph number: {i}</p>
-			));
-
-		const maxPageIndex = Math.ceil(paragraphs.length / itemsPerPage);
-		if (pageIndex > maxPageIndex) {
-			setPageIndex(maxPageIndex);
-		}
-
-		return paragraphs;
-	}, [itemsPerPage, numParagraphs, pageIndex]);
-
-	const displayedParagraphs = useMemo(() => {
-		const startIndex = (pageIndex - 1) * itemsPerPage;
-		const endIndex = startIndex + itemsPerPage;
-
-		return paragraphArray.slice(startIndex, endIndex);
-	}, [pageIndex, itemsPerPage, paragraphArray]);
-
-	const [logItems, setLogItems] = useState<JSX.Element[]>([]);
-
-	return (
-		<main dir={direction}>
-			<section>
-				<h3>
-					Pagination example for paging through a &quot;book&quot; of pages
-				</h3>
+		return (
+			<main>
+				<h1>{header}</h1>
 
 				<section>
-					<Form inline onSubmit={(e) => e.preventDefault()}>
-						<TextInput
-							clearable={false}
-							label="Number of <p> to generate"
-							value={numParagraphs}
-							onChange={(e) => setNumParagraphs(Number(e.currentTarget.value))}
-						/>
-					</Form>
-				</section>
-
-				<section style={{ width: sectionWidth }}>
-					<Sheet title="displayed <p>s">{displayedParagraphs}</Sheet>
-
 					<Pagination
-						id={paginationId}
-						currentPageIndex={pageIndex}
-						itemCount={paragraphArray.length}
+						{...rest}
 						itemsPerPage={itemsPerPage}
-						itemsPerPageOptions={[1, 2, 5, 10]}
-						onPageChange={(e, newIndex) => {
-							e?.preventDefault();
-							setLogItems([
-								<ListItem key={`${newIndex}-${genId()}`}>
-									setting new page index: {newIndex}
-								</ListItem>,
-								...logItems,
-							]);
-
-							setPageIndex(newIndex);
-						}}
-						onItemsPerPageChange={(newItemsPerPage) => {
-							setLogItems([
-								<ListItem key={`${newItemsPerPage}-${genId()}`}>
-									setting new items per page: {newItemsPerPage}
-								</ListItem>,
-								...logItems,
-							]);
-
-							setItemsPerPage(newItemsPerPage);
-
-							const maxPageIndex = Math.ceil(
-								paragraphArray.length / newItemsPerPage,
-							);
-							if (pageIndex > maxPageIndex) {
-								setPageIndex(maxPageIndex);
-							}
-						}}
+						currentPageIndex={pageIndex}
+						onPageChange={(_, newIndex) => setPageIndex(newIndex)}
+						onItemsPerPageChange={(newItemsPerPage) =>
+							setItemsPerPage(newItemsPerPage)
+						}
 					/>
 				</section>
-			</section>
-
-			<section>
-				<h3>`onChange` logs:</h3>
-
-				<List id={logsId}>{logItems}</List>
-			</section>
-		</main>
-	);
+			</main>
+		);
+	},
 };
 
-export const Default = () => <BookOfPages />;
-
-export const WithRTLSettings = () => (
-	<BookOfPages direction="rtl" sectionWidth={500} />
-);
-
-export const WithSpaceForFiveNavItems = () => (
-	<BookOfPages sectionWidth={500} />
-);
-
-export const WithSpaceForSevenNavItems = () => (
-	<BookOfPages sectionWidth={600} />
-);
-
-export const WithSpaceForTenNavItems = () => <BookOfPages sectionWidth={800} />;
-
-export const SettingTheDefaultIndex = () => {
-	const [pageIndex, setPageIndex] = useState(5);
-
-	return (
-		<main>
-			<section>
-				<h3>Setting the default page index to 5</h3>
-
-				<Pagination
-					id="default-page-index-pagination"
-					currentPageIndex={pageIndex}
-					itemCount={100}
-					itemsPerPage={5}
-					itemsPerPageOptions={[1, 2, 5, 10]}
-					onPageChange={(e, newIndex) => {
-						e?.preventDefault();
-						setPageIndex(newIndex);
-					}}
-					onItemsPerPageChange={() => null}
-				/>
-			</section>
-		</main>
-	);
+export const Basic = {
+	...Template,
+	name: "Basic usage",
+	args: { header: "Basic usage" },
 };
 
-const Template: Story<PaginationProps> = (props: PaginationProps) => (
-	<Pagination {...props} />
-);
-
-export const Templated = Template.bind({});
-Templated.args = {
-	id: "templated-pagination",
-
-	currentPageIndex: 1,
-	itemCount: 5,
-	itemsPerPage: 1,
-	itemsPerPageOptions: [1, 2, 3, 4, 5],
-	onPageChange: () => null,
-	onItemsPerPageChange: () => null,
+export const DefaultIndex = {
+	...Template,
+	name: "Setting the default index",
+	args: { currentPageIndex: 5, header: "Setting the default index" },
 };
 
-export const TooltipPositions = Template.bind({});
-TooltipPositions.args = {
-	...Templated.args,
+export const AsRTL: Story = {
+	...Template,
+	name: "As RTL",
+	args: { header: "Pagination when `dir='rtl'`" },
+	decorators: [
+		(Story: ComponentType) => (
+			<div dir="rtl">
+				<Story />
+			</div>
+		),
+	],
 };
+
+export const DarkMode: Story = {
+	...Template,
+	name: "Dark mode",
+	args: { header: "Pagination in dark mode" },
+	decorators: [
+		(Story: ComponentType) => (
+			<div className="neo-global-colors neo-dark" style={{ padding: "2rem" }}>
+				<Story />
+			</div>
+		),
+	],
+};
+
+// TODO: (NEO-2298) review old stories with Matt to confirm which of these we want to support
