@@ -9,7 +9,7 @@ import type {
 } from ".";
 
 // biome-ignore lint/suspicious/noExplicitAny: We require maximum flexibility here
-type AnyRecord = Record<string, any>;
+export type AnyRecord = Record<string, any>;
 
 interface ToolbarSharedProps<T extends AnyRecord> {
 	readonly?: boolean;

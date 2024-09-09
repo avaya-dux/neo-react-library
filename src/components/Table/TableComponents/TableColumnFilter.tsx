@@ -1,11 +1,11 @@
 import { Checkbox } from "components/Checkbox";
 import { CheckboxGroup } from "components/CheckboxGroup";
-import { useCallback, useContext, useMemo, useState } from "react";
-import type { ColumnInstance } from "react-table";
-import type { IdType, Row } from "react-table";
-
 import log from "loglevel";
+import { useCallback, useContext, useMemo, useState } from "react";
+import type { ColumnInstance, IdType, Row } from "react-table";
+
 import { FilterContext } from "../helpers";
+import type { AnyRecord } from "../types";
 import { TableFilterDrawer } from "./TableFilterDrawer";
 const logger = log.getLogger("table-column-filter-logger");
 export { logger as tableColumnFilterLogger };
@@ -55,8 +55,7 @@ export const TableColumnFilterDrawer = () => {
 /**
  *  Define a default UI for filtering
  */
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const DefaultColumnFilter = <T extends Record<string, any>>({
+export const DefaultColumnFilter = <T extends AnyRecord>({
 	column: { filterValue, preFilteredRows },
 	onChange,
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -79,8 +78,7 @@ export const DefaultColumnFilter = <T extends Record<string, any>>({
 /**
  * Define a CheckboxGroupFilter that renders a CheckboxGroup of unique values from a column
  */
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const CheckboxGroupFilter = <T extends Record<string, any>>({
+export const CheckboxGroupFilter = <T extends AnyRecord>({
 	column,
 	onChange,
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
