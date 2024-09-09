@@ -156,7 +156,7 @@ describe("Pagination", () => {
 			await user.type(goToPageInput, "30000");
 			await user.type(goToPageInput, UserEventKeys.ENTER);
 			await waitFor(() => {
-				expect(screen.getByRole("spinbutton")).toHaveValue(50);
+				expect(screen.getByRole("spinbutton")).toHaveValue(5000);
 			});
 		});
 	});

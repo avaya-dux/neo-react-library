@@ -11,7 +11,7 @@ const meta: Meta<typeof Pagination> = {
 	args: {
 		id: "templated-pagination",
 		currentPageIndex: 1,
-		itemCount: 500,
+		itemCount: 50000,
 		itemsPerPage: 10,
 		itemsPerPageOptions: [5, 10, 25, 50, 100],
 		onPageChange: () => null,
@@ -78,7 +78,7 @@ export const DefaultIndex = {
 export const AsRTL: Story = {
 	...Template,
 	name: "As RTL",
-	args: { header: "Pagination when `dir='rtl'`" },
+	args: { header: "Pagination when in RTL mode" },
 	decorators: [
 		(Story: ComponentType) => (
 			<div dir="rtl">
