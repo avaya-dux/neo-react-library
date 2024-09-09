@@ -3,13 +3,10 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 	}
-.neo-pagination__row {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+}
 
-	bdi {
-		justify-self: baseline;
-	}
+.neo-pagination__row bdi {
+	justify-self: baseline;
 }
 
 .neo-pagination__row .neo-form-control .neo-input-group {
