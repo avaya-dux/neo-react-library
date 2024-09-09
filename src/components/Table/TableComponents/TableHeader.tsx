@@ -7,6 +7,7 @@ import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
 import clsx from "clsx";
+import type { ColumnInstance } from "react-table";
 import {
 	FilterContext,
 	calculateAriaSortValue,
@@ -46,11 +47,11 @@ export const TableHeader: TableHeaderComponentType = ({
 
 	const {
 		allowColumnFilter,
-		toggleFilterSheetVisible,
 		draggableRows,
 		setDataSyncOption,
 		clearSortByFuncRef,
 		hasInsetTable,
+		setFilterColumn,
 	} = useContext(FilterContext);
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none" || hasInsetTable;
@@ -96,6 +97,9 @@ export const TableHeader: TableHeaderComponentType = ({
 					const ariasort = calculateAriaSortValue(isSorted, sortedDir);
 
 					let content = render("Header");
+					// canFilter is false when disableFilters is true on the column
+					// column.Filter is the renderer function for the filter UI
+					// The plan now is to not show filter ui on the header cell, but show it when filter column is clicked
 					if (canFilter && column.Filter) {
 						content = render("Filter");
 					} else if (canSort) {
@@ -204,9 +208,13 @@ export const TableHeader: TableHeaderComponentType = ({
 
 								{allowColumnFilter ? (
 									<MenuItem
-										onClick={toggleFilterSheetVisible}
+										onClick={() =>
+											setFilterColumn(column as unknown as ColumnInstance)
+										}
 										onKeyDown={(e) =>
-											onSpaceOrEnter(e, toggleFilterSheetVisible)
+											onSpaceOrEnter(e, () =>
+												setFilterColumn(column as unknown as ColumnInstance),
+											)
 										}
 									>
 										{translations.filterColumn || "Filter Column"}

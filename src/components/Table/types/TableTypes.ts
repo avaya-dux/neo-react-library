@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import type { TableInstance, TableOptions } from "react-table";
+import type { Dispatch, ReactNode, SetStateAction } from "react";
+import type { ColumnInstance, TableInstance, TableOptions } from "react-table";
 
 import type {
 	IBodyTranslations,
@@ -9,7 +9,7 @@ import type {
 } from ".";
 
 // biome-ignore lint/suspicious/noExplicitAny: We require maximum flexibility here
-type AnyRecord = Record<string, any>;
+export type AnyRecord = Record<string, any>;
 
 interface ToolbarSharedProps<T extends AnyRecord> {
 	readonly?: boolean;
@@ -47,7 +47,7 @@ export type TableBodyProps<T extends AnyRecord> = {
 } & TableHeaderBodySharedProps<T>;
 
 export type DataSyncOptionType = "no" | "clear" | "asc" | "desc";
-export interface IFilterContext {
+export interface IFilterContext<T extends AnyRecord = AnyRecord> {
 	allowColumnFilter: boolean;
 	draggableRows: boolean;
 	filterSheetVisible: boolean;
@@ -58,6 +58,8 @@ export interface IFilterContext {
 	clearSortByFuncRef: React.MutableRefObject<(() => void) | null>;
 	hasInsetTable?: boolean;
 	renderInsetTable?: (row: AnyRecord) => ReactNode;
+	filterColumn?: ColumnInstance<T>;
+	setFilterColumn: Dispatch<SetStateAction<ColumnInstance<T> | undefined>>;
 }
 
 export type RowHeight = "compact" | "medium" | "large";
