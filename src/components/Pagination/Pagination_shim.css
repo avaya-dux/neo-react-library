@@ -1,6 +1,8 @@
-.neo-pagination__row {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+@media (min-width: 900px) {
+	.neo-pagination__row {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 }
 
 .neo-pagination__row .neo-form-control .neo-input-group {
@@ -16,6 +18,11 @@
 }
 
 /* overrides */
+.neo-pagination__row nav.neo-pagination,
+.neo-pagination__row .neo-pagination .neo-pagination__list {
+	flex-wrap: nowrap;
+}
+
 .neo-pagination__row .neo-multiselect {
 	margin-right: 0;
 }
