@@ -11,4 +11,6 @@ export const FilterContext = createContext<IFilterContext>({
 	dataSyncOption: "no",
 	setDataSyncOption: () => null,
 	clearSortByFuncRef: null as unknown as MutableRefObject<(() => void) | null>,
+	filterColumn: undefined,
+	setFilterColumn: () => null,
 });
