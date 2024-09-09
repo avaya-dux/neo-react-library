@@ -1,3 +1,8 @@
+@media (min-width: 900px) {
+	.neo-pagination__row {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 .neo-pagination__row {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -20,6 +25,15 @@
 }
 
 /* overrides */
+.neo-pagination__row nav.neo-pagination,
+.neo-pagination__row .neo-pagination .neo-pagination__list {
+	flex-wrap: nowrap;
+}
+
+.neo-pagination__row .neo-multiselect {
+	margin-right: 0;
+}
+
 .neo-pagination__row .neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
 	min-height: 32px;
 }
