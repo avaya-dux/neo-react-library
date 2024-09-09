@@ -36,6 +36,7 @@ import {
 	TableColumnFilterDrawer,
 	TableHeader,
 	TableToolbar,
+	includesValue,
 } from "./TableComponents";
 import {
 	FilterContext,
@@ -137,6 +138,11 @@ export const Table = <T extends Record<string, any>>({
 		setData(originalData);
 	}, [originalData]);
 
+	const filterTypes = useMemo(() => {
+		return {
+			includesValue,
+		};
+	}, []);
 	const instance = useTable<T>(
 		{
 			columns,
@@ -161,6 +167,7 @@ export const Table = <T extends Record<string, any>>({
 					// biome-ignore lint/suspicious/noExplicitAny: HACK: TS is being annoying
 				}) || []) as any,
 			},
+			filterTypes,
 			autoResetSelectedRows: false,
 			autoResetSortBy: false,
 			autoResetExpanded: false,

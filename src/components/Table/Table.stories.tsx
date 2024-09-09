@@ -315,6 +315,7 @@ export const AdvancedFilteringAndSorting = () => {
 			disableFilters: true,
 			sortType: (row) => (row.original.hasOnCallBeeper ? 1 : -1), // `boolean` is not supported by default
 			width: 75,
+			filter: "includesValue",
 		},
 		{
 			Cell: ({ value }: { value: IDataTableMockData["date"] }) => (
@@ -324,6 +325,7 @@ export const AdvancedFilteringAndSorting = () => {
 			accessor: "date",
 			disableFilters: true,
 			sortType: "datetime",
+			filter: "includesValue",
 		},
 		{
 			Cell: ({ value }: { value: IDataTableMockData["status"] }) => {
