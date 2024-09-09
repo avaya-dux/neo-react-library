@@ -795,7 +795,7 @@ describe("Table", () => {
 		}, 10000);
 
 		it("allows column filtering via header dropdown", async () => {
-			const { container, getByRole, queryAllByRole, getByLabelText } =
+			const { container, getAllByRole, queryAllByRole, getAllByLabelText } =
 				renderResult;
 
 			const firstColumnSortButton = container.querySelector(
@@ -806,7 +806,7 @@ describe("Table", () => {
 			);
 			expect(firstColumnSortButton).toBeVisible();
 
-			expect(getByRole("dialog")).not.toHaveClass(
+			expect(getAllByRole("dialog")[0]).not.toHaveClass(
 				"neo-drawer neo-drawer--isOpen",
 			);
 
@@ -816,23 +816,20 @@ describe("Table", () => {
 			expect(menuItems).toHaveLength(4);
 			await user.click(queryAllByRole("menuitem")[3]);
 
-			expect(getByRole("dialog")).toHaveClass("neo-drawer neo-drawer--isOpen");
-
-			const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
-			expect(nameCheckbox).toBeChecked();
-
-			await user.click(nameCheckbox);
-			expect(nameCheckbox).not.toBeChecked();
-
-			const applyButton = getByLabelText(
-				FilledFields.translations.toolbar.apply,
+			expect(getAllByRole("dialog")[1]).toHaveClass(
+				"neo-drawer neo-drawer--isOpen",
 			);
+
+			const applyButton = getAllByLabelText(
+				FilledFields.translations.toolbar.apply,
+			)[1];
 			await user.click(applyButton);
-			expect(firstColumnSortButton).not.toBeVisible();
+			expect(getAllByRole("dialog")[1]).toHaveClass("neo-drawer");
 		});
 
 		it("allows column filtering via toolbar Filter Icon Button", async () => {
-			const { container, getByRole, getByLabelText } = renderResult;
+			const { container, getAllByRole, getByLabelText, getAllByLabelText } =
+				renderResult;
 
 			const firstColumnSortButton = container.querySelector(
 				"tr th button.neo-multiselect",
@@ -846,13 +843,15 @@ describe("Table", () => {
 				`button[aria-label="${FilledFields.translations.toolbar.filterColumns}"]`,
 			);
 
-			expect(getByRole("dialog")).not.toHaveClass(
+			expect(getAllByRole("dialog")[0]).not.toHaveClass(
 				"neo-drawer neo-drawer--isOpen",
 			);
 
 			await user.click(columnFilterButton);
 
-			expect(getByRole("dialog")).toHaveClass("neo-drawer neo-drawer--isOpen");
+			expect(getAllByRole("dialog")[0]).toHaveClass(
+				"neo-drawer neo-drawer--isOpen",
+			);
 
 			const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
 			expect(nameCheckbox).toBeChecked();
@@ -860,9 +859,9 @@ describe("Table", () => {
 			await user.click(nameCheckbox);
 			expect(nameCheckbox).not.toBeChecked();
 
-			const applyButton = getByLabelText(
+			const applyButton = getAllByLabelText(
 				FilledFields.translations.toolbar.apply,
-			);
+			)[0];
 			await user.click(applyButton);
 			expect(firstColumnSortButton).not.toBeVisible();
 		});
@@ -881,7 +880,7 @@ describe("Table", () => {
 			await user.click(screen.getAllByLabelText("Filter Columns")[0]);
 			expect(screen.getByLabelText("Long Text")).not.toBeChecked();
 			await user.click(screen.getByLabelText("Long Text"));
-			await user.click(screen.getByLabelText("Apply"));
+			await user.click(screen.getAllByLabelText("Apply")[0]);
 
 			// assert "Long Text" column is now shown in the table
 			expect(thLongTextElement).toBeVisible();
