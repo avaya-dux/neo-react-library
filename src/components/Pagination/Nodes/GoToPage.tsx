@@ -34,7 +34,9 @@ export const GoToPage = ({
 		setValue(currentPageIndex);
 	}, [currentPageIndex]);
 
-	return (
+	return totalPages <= 1 ? (
+		<div />
+	) : (
 		<div className="pagination__go-to-page">
 			<TextInput
 				aria-label={ariaLabel}
