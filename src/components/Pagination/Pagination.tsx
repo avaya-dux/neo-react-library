@@ -44,7 +44,6 @@ export const Pagination = ({
 	itemsPerPage,
 	itemsPerPageLabel,
 	itemsPerPageOptions,
-	manualPageCount = 0,
 
 	alwaysShowPagination,
 	itemDisplayType,
@@ -66,7 +65,7 @@ export const Pagination = ({
 	const generatedId = `pagination-${useId()}`;
 	id = id || generatedId;
 	const rootRef = useRef<HTMLDivElement>(null);
-	const totalPages = manualPageCount || Math.ceil(itemCount / itemsPerPage);
+	const totalPages = Math.ceil(itemCount / itemsPerPage);
 
 	const [rootWidth, setRootWidth] = useState(0);
 	useEffect(() => {
