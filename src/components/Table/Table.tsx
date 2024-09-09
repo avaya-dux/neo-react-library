@@ -16,6 +16,7 @@ import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import clsx from "clsx";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+	type ColumnInstance,
 	type Row,
 	useExpanded,
 	useFilters,
@@ -30,7 +31,12 @@ import { StaticTableRow } from "./StaticTableRow";
 import { Pagination } from "components/Pagination";
 
 import type { TableProps } from ".";
-import { TableBody, TableHeader, TableToolbar } from "./TableComponents";
+import {
+	TableBody,
+	TableColumnFilterDrawer,
+	TableHeader,
+	TableToolbar,
+} from "./TableComponents";
 import {
 	FilterContext,
 	convertRowIdsArrayToObject,
@@ -301,8 +307,13 @@ export const Table = <T extends Record<string, any>>({
 		};
 	}, [translations]);
 
+	// global filter
 	const [filterSheetVisible, setFilterSheetVisible] = useState(false);
 	const toggleFilterSheetVisible = () => setFilterSheetVisible((v) => !v);
+
+	// column filter
+	const [filterColumn, setFilterColumn] = useState<ColumnInstance>();
+
 	const [rowHeightValue, setRowHeightValue] = useState(rowHeight);
 
 	useEffect(() => {
@@ -330,6 +341,8 @@ export const Table = <T extends Record<string, any>>({
 		clearSortByFuncRef,
 		hasInsetTable,
 		renderInsetTable,
+		filterColumn,
+		setFilterColumn,
 	};
 
 	const sensors = useSensors(
@@ -433,7 +446,7 @@ export const Table = <T extends Record<string, any>>({
 							translations={toolbarTranslations}
 						/>
 					)}
-
+					<TableColumnFilterDrawer />
 					<table
 						{...getTableProps()}
 						className={clsx(

@@ -385,6 +385,7 @@ export const AdvancedFilteringAndSorting = () => {
 			accessor: "status",
 			disableSortBy: true,
 			filter: "exactTextCase",
+			disableFilters: false,
 		},
 		{
 			Cell: ({ value }: { value: IDataTableMockData["longText"] }) =>
