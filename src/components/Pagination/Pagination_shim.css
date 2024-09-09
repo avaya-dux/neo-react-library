@@ -5,6 +5,10 @@
 	}
 }
 
+.neo-pagination__row bdi {
+	justify-self: baseline;
+}
+
 .neo-pagination__row .neo-form-control .neo-input-group {
 	display: flex;
 	flex-direction: row;
@@ -33,6 +37,11 @@
 
 .neo-pagination__row .neo-input-group .neo-multiselect span.neo-multiselect-combo__header button.neo-multiselect__header {
 	margin-right: 8px;
+
+	[dir=rtl] & {
+		margin-right: 0;
+		margin-left: 8px;
+	}
 }
 
 .neo-pagination__row .neo-multiselect span.neo-multiselect-combo__header button.neo-multiselect__header:last-child {
@@ -53,6 +62,11 @@
 		.neo-input {
 			max-width: unset;
 			padding-right: 6px;
+
+			[dir=rtl] & {
+				padding-left: 6px;
+				padding-right: 12px;
+			}
 		}
 	}
 
@@ -89,4 +103,17 @@ nav.neo-pagination button.neo-btn-square.neo-pagination__arrow-btn {
 	width: 24px;
 	margin-left: 4px;
 	margin-right: 4px;
+}
+
+[dir=rtl] .neo-pagination__row .pagination__go-to-page .neo-input:not(last-child) {
+	margin-left: unset;
+	/* TODO: the proper fix is to remove the three lines from `_pagination.scss` that are:
+	@include rtl-selector {
+		margin-left: 32px;
+	} */
+}
+
+/* IMPORTANT: this single `padding-left` overrides a broken style that I can't find in either library */
+[dir=rtl] .neo-multiselect .neo-multiselect-combo__header {
+	padding-left: 24px;
 }

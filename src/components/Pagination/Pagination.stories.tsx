@@ -78,7 +78,7 @@ export const DefaultIndex = {
 export const AsRTL: Story = {
 	...Template,
 	name: "As RTL",
-	args: { header: "Pagination when `dir='rtl'`" },
+	args: { header: "Pagination when in RTL mode" },
 	decorators: [
 		(Story: ComponentType) => (
 			<div dir="rtl">
