@@ -4,7 +4,7 @@ import log from "loglevel";
 import { useCallback, useContext, useMemo, useState } from "react";
 import type { ColumnInstance, IdType, Row } from "react-table";
 import { FilterContext } from "../helpers";
-import type { AnyRecord } from "../types";
+import type { AnyRecord, ITableHeaderTranslations } from "../types";
 import { TableFilterDrawer } from "./TableFilterDrawer";
 
 const logger = log.getLogger("table-column-filter-logger");
@@ -12,7 +12,9 @@ logger.disableAll();
 
 export { logger as tableColumnFilterLogger };
 // given a column, return a default filter UI wrapped in TableFilterDrawer
-export const TableColumnFilterDrawer = () => {
+export const TableColumnFilterDrawer = ({
+	translations,
+}: { translations: ITableHeaderTranslations }) => {
 	const { filterColumn: column, setFilterColumn } = useContext(FilterContext);
 	const [newFilterValue, setNewFilterValue] = useState(column?.filterValue);
 
@@ -22,11 +24,15 @@ export const TableColumnFilterDrawer = () => {
 
 		if (filter === "includesValue") {
 			return (
-				<CheckboxGroupFilter column={column} onChange={setNewFilterValue} />
+				<CheckboxGroupFilter
+					column={column}
+					onChange={setNewFilterValue}
+					translations={translations}
+				/>
 			);
 		}
 		return <DefaultColumnFilter column={column} onChange={setNewFilterValue} />;
-	}, [column]);
+	}, [column, translations]);
 
 	const handleCancel = useCallback(() => {
 		const { setFilter, filterValue } = column || {};
@@ -44,7 +50,7 @@ export const TableColumnFilterDrawer = () => {
 
 	return (
 		<TableFilterDrawer
-			title="Filter by column"
+			title={`Filter by column: ${column?.Header}`}
 			open={!!filterComponent}
 			handleApply={handleApply}
 			handleCancel={handleCancel}
@@ -89,7 +95,12 @@ const convertValueToString = (value: unknown): string => {
 export const CheckboxGroupFilter = <T extends AnyRecord>({
 	column,
 	onChange,
-}: { column: ColumnInstance<T>; onChange: React.Dispatch<unknown> }) => {
+	translations,
+}: {
+	column: ColumnInstance<T>;
+	onChange: React.Dispatch<unknown>;
+	translations: ITableHeaderTranslations;
+}) => {
 	const { id, preFilteredRows } = column;
 	logger.debug("CheckboxGroupFilter filterValue", column.filterValue);
 	const [filterValue, setFilterValue] = useState(column.filterValue || []);
@@ -104,7 +115,10 @@ export const CheckboxGroupFilter = <T extends AnyRecord>({
 	logger.debug("CheckboxGroupFilter options", options);
 	return (
 		<CheckboxGroup
-			label={id}
+			label={
+				translations.checkboxGroupFilterLabel ||
+				"Check one or more values to filter"
+			}
 			groupName={id}
 			onChange={(e) => {
 				const value = e.target.value;

@@ -36,6 +36,8 @@ export const translations: ITableTranslations = {
 		clearAllPages: "Clear all items on all pages",
 		selectAll: "Select all items",
 		clearAll: "Clear all items",
+		// column filter translations
+		checkboxGroupFilterLabel: "Check one or more values to filter",
 	},
 	body: {
 		noDataAvailable: "no data available",
