@@ -261,8 +261,6 @@ export const AdvancedFilteringAndSorting = () => {
 		{
 			Header: "Level",
 			accessor: "level",
-			disableFilters: true,
-
 			sortType: (rowA, rowB) => {
 				const {
 					original: { level: levelA },
@@ -303,7 +301,6 @@ export const AdvancedFilteringAndSorting = () => {
 			},
 			Header: "Has On Call Beeper",
 			accessor: "hasOnCallBeeper",
-			disableFilters: true,
 			sortType: (row) => (row.original.hasOnCallBeeper ? 1 : -1), // `boolean` is not supported by default
 			width: 75,
 			filter: "includesValue",
@@ -314,7 +311,6 @@ export const AdvancedFilteringAndSorting = () => {
 			),
 			Header: "Date",
 			accessor: "date",
-			disableFilters: true,
 			sortType: "datetime",
 			filter: "includesValue",
 		},
@@ -378,7 +374,6 @@ export const AdvancedFilteringAndSorting = () => {
 			accessor: "status",
 			disableSortBy: true,
 			filter: "exactTextCase",
-			disableFilters: false,
 		},
 		{
 			Cell: ({ value }: { value: IDataTableMockData["longText"] }) =>

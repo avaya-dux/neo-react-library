@@ -49,6 +49,9 @@ export interface ITableHeaderTranslations {
 	clearAllPages: string;
 	selectAll: string;
 	clearAll: string;
+
+	// column filter translations
+	checkboxGroupFilterLabel: string;
 }
 
 export interface ITableTranslations {

@@ -451,7 +451,7 @@ export const Table = <T extends Record<string, any>>({
 							translations={toolbarTranslations}
 						/>
 					)}
-					<TableColumnFilterDrawer />
+					<TableColumnFilterDrawer translations={headerTranslations} />
 					<table
 						{...getTableProps()}
 						className={clsx(
