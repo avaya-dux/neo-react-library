@@ -141,6 +141,7 @@ export const ServerSidePagination = () => {
 	const [numOfRecords, setNumberOfRecords] = useState(totalRecords);
 	const [serverData, setServerData] = useState(originalData);
 	const [pageData, setPageData] = useState<IRecordingTableMockData[]>([]);
+	const [pageCount, setPageCount] = useState(0);
 	const fetchIdRef = useRef(0);
 
 	const searchDebounced = useDebouncedCallback(
@@ -160,6 +161,8 @@ export const ServerSidePagination = () => {
 			setServerData(data);
 			setNumberOfRecords(data.length);
 			setPageData(data.slice(0, pageSize));
+			const newPageCount = Math.ceil(data.length / pageSize);
+			setPageCount(newPageCount);
 		},
 		1000,
 	);
@@ -183,6 +186,11 @@ export const ServerSidePagination = () => {
 					const startRow = pageSize * pageIndex;
 					const endRow = startRow + pageSize;
 					setPageData(serverData.slice(startRow, endRow));
+
+					// Your server could send back total page count.
+					// For now we'll just fake it, too
+					const newPageCount = Math.ceil(serverData.length / pageSize);
+					setPageCount(newPageCount);
 				}
 			}, 500);
 		},
@@ -246,6 +254,7 @@ export const ServerSidePagination = () => {
 				manualPagination={true} // Very important to set manualPagination to true.
 				manualRowCount={numOfRecords} // Must provide total row count when using server side pagination.
 				initialStatePageSize={10}
+				pageCount={pageCount}
 				handlePageChange={fetchData}
 				handleSearch={searchDebounced}
 				itemsPerPageOptions={[5, 10, 20, 50]}
