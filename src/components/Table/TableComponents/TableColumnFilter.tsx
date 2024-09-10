@@ -11,6 +11,12 @@ const logger = log.getLogger("table-column-filter-logger");
 logger.disableAll();
 
 export { logger as tableColumnFilterLogger };
+
+// Utility function to get the string representation of a column header
+const getColumnHeaderString = (column?: ColumnInstance<AnyRecord>) => {
+	return column?.render("Header") ?? "";
+};
+
 // given a column, return a default filter UI wrapped in TableFilterDrawer
 export const TableColumnFilterDrawer = ({
 	translations,
@@ -50,7 +56,7 @@ export const TableColumnFilterDrawer = ({
 
 	return (
 		<TableFilterDrawer
-			title={`Filter by column: ${column?.Header}`}
+			title={`Filter by column: ${getColumnHeaderString(column)}`}
 			open={!!filterComponent}
 			handleApply={handleApply}
 			handleCancel={handleCancel}
