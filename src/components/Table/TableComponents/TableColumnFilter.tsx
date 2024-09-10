@@ -121,10 +121,7 @@ export const CheckboxGroupFilter = <T extends AnyRecord>({
 	logger.debug("CheckboxGroupFilter options", options);
 	return (
 		<CheckboxGroup
-			label={
-				translations.checkboxGroupFilterLabel ||
-				"Check one or more values to filter"
-			}
+			label={translations.checkboxGroupFilterLabel}
 			groupName={id}
 			onChange={(e) => {
 				const value = e.target.value;
