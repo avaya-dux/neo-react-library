@@ -13,7 +13,6 @@ export type PaginationProps = {
 	itemCount: number;
 	itemsPerPage: number;
 	itemsPerPageOptions?: number[];
-	manualPageCount?: number;
 
 	alwaysShowPagination?: boolean;
 	itemDisplayType?: "count" | "page" | "none";
