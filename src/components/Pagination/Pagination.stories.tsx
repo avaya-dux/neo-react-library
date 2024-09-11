@@ -61,17 +61,21 @@ const Template: Story = {
 			<main>
 				<h1>{header}</h1>
 
-				<section>
-					<Pagination
-						{...rest}
-						itemsPerPage={itemsPerPage}
-						currentPageIndex={pageIndex}
-						onPageChange={(_, newIndex) => setPageIndex(newIndex)}
-						onItemsPerPageChange={(newItemsPerPage) =>
-							setItemsPerPage(newItemsPerPage)
+				<Pagination
+					{...rest}
+					itemsPerPage={itemsPerPage}
+					currentPageIndex={pageIndex}
+					onPageChange={(_, newIndex) => setPageIndex(newIndex)}
+					onItemsPerPageChange={(newItemsPerPage) => {
+						setItemsPerPage(newItemsPerPage);
+
+						if (itemsPerPage < newItemsPerPage && pageIndex > 1) {
+							const { itemCount } = rest;
+							const lastPage = Math.ceil(itemCount / newItemsPerPage);
+							setPageIndex(lastPage);
 						}
-					/>
-				</section>
+					}}
+				/>
 			</main>
 		);
 	},
