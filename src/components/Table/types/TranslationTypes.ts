@@ -52,6 +52,7 @@ export interface ITableHeaderTranslations {
 
 	// column filter translations
 	checkboxGroupFilterLabel: string;
+	filterApplied: string;
 }
 
 export interface ITableTranslations {

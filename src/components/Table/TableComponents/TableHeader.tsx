@@ -2,7 +2,7 @@ import { type KeyboardEvent, useContext, useMemo } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
-import { Menu, MenuButton, MenuItem } from "components/Menu";
+import { Menu, MenuButton, MenuItem, MenuSeparator } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
@@ -90,12 +90,13 @@ export const TableHeader: TableHeaderComponentType = ({
 						isSorted,
 						isSortedDesc,
 						isVisible,
+						filterValue,
 						render,
 					} = column;
 
 					const sortedDir = isSortedDesc ? "descending" : "ascending";
 					const ariasort = calculateAriaSortValue(isSorted, sortedDir);
-
+					const isFiltering = filterValue && filterValue.length > 0;
 					let content = render("Header");
 					// canFilter is false when disableFilters is true on the column
 					// column.Filter is the renderer function for the filter UI
@@ -173,6 +174,12 @@ export const TableHeader: TableHeaderComponentType = ({
 											>
 												{render("Header")}
 											</span>
+											{isFiltering && (
+												<Icon
+													icon="filter"
+													aria-label={translations.filterApplied}
+												/>
+											)}
 											{isSorted && (
 												<Icon
 													icon={sortIcon}
@@ -207,18 +214,27 @@ export const TableHeader: TableHeaderComponentType = ({
 								</MenuItem>
 
 								{allowColumnFilter ? (
-									<MenuItem
-										onClick={() =>
-											setFilterColumn(column as unknown as ColumnInstance)
-										}
-										onKeyDown={(e) =>
-											onSpaceOrEnter(e, () =>
-												setFilterColumn(column as unknown as ColumnInstance),
-											)
-										}
-									>
-										{translations.filterColumn || "Filter Column"}
-									</MenuItem>
+									<>
+										<MenuSeparator />
+										<MenuItem
+											onClick={() =>
+												setFilterColumn(column as unknown as ColumnInstance)
+											}
+											onKeyDown={(e) =>
+												onSpaceOrEnter(e, () =>
+													setFilterColumn(column as unknown as ColumnInstance),
+												)
+											}
+										>
+											{isFiltering && (
+												<Icon
+													icon="check"
+													aria-label={translations.filterApplied}
+												/>
+											)}
+											{translations.filterColumn}
+										</MenuItem>
+									</>
 								) : (
 									<></>
 								)}
