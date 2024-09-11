@@ -232,7 +232,7 @@ export const TableHeader: TableHeaderComponentType = ({
 													aria-label={translations.filterApplied}
 												/>
 											)}
-											{translations.filterColumn || "Filter Column"}
+											{translations.filterColumn}
 										</MenuItem>
 									</>
 								) : (
