@@ -38,6 +38,7 @@ export const translations: ITableTranslations = {
 		clearAll: "Clear all items",
 		// column filter translations
 		checkboxGroupFilterLabel: "Check one or more values to filter",
+		filterApplied: "Filter applied",
 	},
 	body: {
 		noDataAvailable: "no data available",

@@ -90,12 +90,13 @@ export const TableHeader: TableHeaderComponentType = ({
 						isSorted,
 						isSortedDesc,
 						isVisible,
+						filterValue,
 						render,
 					} = column;
 
 					const sortedDir = isSortedDesc ? "descending" : "ascending";
 					const ariasort = calculateAriaSortValue(isSorted, sortedDir);
-
+					const isFiltering = filterValue && filterValue.length > 0;
 					let content = render("Header");
 					// canFilter is false when disableFilters is true on the column
 					// column.Filter is the renderer function for the filter UI
@@ -173,6 +174,12 @@ export const TableHeader: TableHeaderComponentType = ({
 											>
 												{render("Header")}
 											</span>
+											{isFiltering && (
+												<Icon
+													icon="filter"
+													aria-label={translations.filterApplied}
+												/>
+											)}
 											{isSorted && (
 												<Icon
 													icon={sortIcon}
@@ -217,6 +224,12 @@ export const TableHeader: TableHeaderComponentType = ({
 											)
 										}
 									>
+										{isFiltering && (
+											<Icon
+												icon="check"
+												aria-label={translations.filterApplied}
+											/>
+										)}
 										{translations.filterColumn || "Filter Column"}
 									</MenuItem>
 								) : (
