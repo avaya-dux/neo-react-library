@@ -18,9 +18,23 @@ const meta: Meta<typeof Pagination> = {
 		onItemsPerPageChange: () => null,
 	},
 	argTypes: {
+		// don't show the id prop
+		id: { table: { disable: true } },
+
+		// don't show JS/React specific props
 		onPageChange: { table: { disable: true } },
 		onItemsPerPageChange: { table: { disable: true } },
 		itemDisplayType: { table: { disable: true } }, // TODO: (NEO-2329) this is deprecated, remove
+		leftNode: { table: { disable: true } },
+		centerNode: { table: { disable: true } },
+		rightNode: { table: { disable: true } },
+
+		// don't show translations
+		backIconButtonText: { table: { disable: true } },
+		nextIconButtonText: { table: { disable: true } },
+		pagesText: { table: { disable: true } },
+		goToPageText: { table: { disable: true } },
+		itemsPerPageLabel: { table: { disable: true } },
 	},
 };
 export default meta;
@@ -47,17 +61,21 @@ const Template: Story = {
 			<main>
 				<h1>{header}</h1>
 
-				<section>
-					<Pagination
-						{...rest}
-						itemsPerPage={itemsPerPage}
-						currentPageIndex={pageIndex}
-						onPageChange={(_, newIndex) => setPageIndex(newIndex)}
-						onItemsPerPageChange={(newItemsPerPage) =>
-							setItemsPerPage(newItemsPerPage)
+				<Pagination
+					{...rest}
+					itemsPerPage={itemsPerPage}
+					currentPageIndex={pageIndex}
+					onPageChange={(_, newIndex) => setPageIndex(newIndex)}
+					onItemsPerPageChange={(newItemsPerPage) => {
+						setItemsPerPage(newItemsPerPage);
+
+						if (itemsPerPage < newItemsPerPage && pageIndex > 1) {
+							const { itemCount } = rest;
+							const lastPage = Math.ceil(itemCount / newItemsPerPage);
+							setPageIndex(lastPage);
 						}
-					/>
-				</section>
+					}}
+				/>
 			</main>
 		);
 	},
