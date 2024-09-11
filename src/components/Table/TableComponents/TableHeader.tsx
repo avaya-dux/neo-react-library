@@ -2,7 +2,7 @@ import { type KeyboardEvent, useContext, useMemo } from "react";
 
 import { Checkbox } from "components/Checkbox";
 import { Icon } from "components/Icon";
-import { Menu, MenuButton, MenuItem } from "components/Menu";
+import { Menu, MenuButton, MenuItem, MenuSeparator } from "components/Menu";
 import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
@@ -214,24 +214,27 @@ export const TableHeader: TableHeaderComponentType = ({
 								</MenuItem>
 
 								{allowColumnFilter ? (
-									<MenuItem
-										onClick={() =>
-											setFilterColumn(column as unknown as ColumnInstance)
-										}
-										onKeyDown={(e) =>
-											onSpaceOrEnter(e, () =>
-												setFilterColumn(column as unknown as ColumnInstance),
-											)
-										}
-									>
-										{isFiltering && (
-											<Icon
-												icon="check"
-												aria-label={translations.filterApplied}
-											/>
-										)}
-										{translations.filterColumn || "Filter Column"}
-									</MenuItem>
+									<>
+										<MenuSeparator />
+										<MenuItem
+											onClick={() =>
+												setFilterColumn(column as unknown as ColumnInstance)
+											}
+											onKeyDown={(e) =>
+												onSpaceOrEnter(e, () =>
+													setFilterColumn(column as unknown as ColumnInstance),
+												)
+											}
+										>
+											{isFiltering && (
+												<Icon
+													icon="check"
+													aria-label={translations.filterApplied}
+												/>
+											)}
+											{translations.filterColumn || "Filter Column"}
+										</MenuItem>
+									</>
 								) : (
 									<></>
 								)}
