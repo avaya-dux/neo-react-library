@@ -44,6 +44,7 @@
 .neo-pagination__row .neo-pagination .neo-pagination__list {
 	flex-wrap: nowrap;
 	gap: 4px;
+	margin: 0;
 
 	& li {
 		height: 32px;
