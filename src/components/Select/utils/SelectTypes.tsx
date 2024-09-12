@@ -18,7 +18,8 @@ type LabelOrAriaLabelProps =
 export type SelectProps = {
 	children?:
 		| ReactElement<SelectOptionProps>
-		| ReactElement<SelectOptionProps>[];
+		| ReactElement<SelectOptionProps>[]
+		| (ReactElement<SelectOptionProps> | ReactElement<SelectOptionProps>[])[];
 	className?: string;
 	creatable?: boolean;
 	createMessage?: string;

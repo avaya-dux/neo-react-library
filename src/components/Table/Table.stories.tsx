@@ -358,19 +358,22 @@ export const AdvancedFilteringAndSorting = () => {
 					return Array.from(optionSet.values());
 				}, [id, preFilteredRows]);
 
-				const all = (
-					<SelectOption key="All" value="">
-						All
-					</SelectOption>
+				const all = useMemo(
+					() => (
+						<SelectOption key="All" value="">
+							All
+						</SelectOption>
+					),
+					[],
 				);
-				const children = options.map((option) => {
-					return (
+
+				const rest = useMemo(() => {
+					return options.map((option) => (
 						<SelectOption key={option as string} value={option as string}>
 							{(option as string).toUpperCase()}
 						</SelectOption>
-					);
-				});
-				children.unshift(all);
+					));
+				}, [options]);
 
 				return (
 					<div style={{ margin: "0px 0px -8px 0px" }}>
@@ -384,7 +387,8 @@ export const AdvancedFilteringAndSorting = () => {
 								}
 							}}
 						>
-							{children}
+							{all}
+							{rest}
 						</Select>
 					</div>
 				);
