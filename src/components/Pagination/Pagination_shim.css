@@ -50,6 +50,14 @@
 		height: 32px;
 		width: unset;
 	}
+
+	& li:has(>.neo-icon-ellipses-horizontal) {
+		min-width: 32px;
+	}
+
+	.neo-icon-ellipses-horizontal {
+		font-size: 16px;
+	}
 }
 
 .neo-pagination__row .neo-multiselect {
