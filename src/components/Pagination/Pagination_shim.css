@@ -27,9 +27,28 @@
 }
 
 /* overrides */
+.neo-pagination__row nav.neo-pagination .neo-pagination__list .neo-btn-square {
+	padding-left: 7px;
+	padding-right: 7px;
+
+	width: unset;
+	min-width: 32px;
+
+	&.neo-btn-square-tertiary--info {
+		background-image: unset;
+		background-color: transparent;
+	}
+}
+
 .neo-pagination__row nav.neo-pagination,
 .neo-pagination__row .neo-pagination .neo-pagination__list {
 	flex-wrap: nowrap;
+	gap: 4px;
+
+	& li {
+		height: 32px;
+		width: unset;
+	}
 }
 
 .neo-pagination__row .neo-multiselect {
@@ -37,7 +56,8 @@
 }
 
 .neo-pagination__row .neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
-	min-height: 32px;
+	height: 30px;
+	min-height: unset;
 }
 
 .neo-pagination__row .neo-input-group .neo-multiselect span.neo-multiselect-combo__header button.neo-multiselect__header {
@@ -80,7 +100,7 @@
 	}
 
 	.neo-input {
-		height: 32px;
+		height: 30px;
 		min-height: unset;
 		margin: 0;
 
