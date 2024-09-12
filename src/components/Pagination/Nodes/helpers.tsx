@@ -47,7 +47,9 @@ export const buildAllNavItems = (
 	return result;
 };
 
-const NavigationMenuButton = () => <span className="neo-icon-ellipses-horizontal" />;
+const NavigationMenuButton = () => (
+	<span className="neo-icon-ellipses-horizontal" />
+);
 
 /**
  * Assumes that there are at minimum five nodes available as that is the minimum
