@@ -48,7 +48,7 @@ export type TableBodyProps<T extends AnyRecord> = {
 
 export type DataSyncOptionType = "no" | "clear" | "asc" | "desc";
 export interface IFilterContext<T extends AnyRecord = AnyRecord> {
-	allowColumnFilter: boolean;
+	allowToggleColumnVisibility: boolean;
 	draggableRows: boolean;
 	filterSheetVisible: boolean;
 	setFilterSheetVisible: (visible: boolean) => void;
@@ -85,5 +85,5 @@ export type TableProps<T extends AnyRecord> = {
 } & ToolbarSharedProps<T> &
 	TableOptions<T> &
 	Pick<TableBodyProps<T>, "handleRowToggled"> &
-	Partial<Pick<IFilterContext, "allowColumnFilter">> &
+	Partial<Pick<IFilterContext, "allowToggleColumnVisibility">> &
 	Partial<Pick<IFilterContext, "renderInsetTable">>;
