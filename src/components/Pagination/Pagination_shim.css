@@ -1,4 +1,9 @@
-@media (min-width: 900px) {
+*:has(>.neo-pagination__row) {
+	container-name: pagination;
+	container-type: inline-size;
+}
+
+@container pagination (inline-size > 1000px) {
 	.neo-pagination__row {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
