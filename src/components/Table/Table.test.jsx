@@ -673,7 +673,7 @@ describe("Table", () => {
 			render(<Table {...FilledFields} />);
 
 			// there are 10 pages
-			expect(screen.queryByText("1-1 / 10")).toBeTruthy();
+			expect(screen.queryByText("1 - 1 / 10")).toBeTruthy();
 
 			// go to last page
 			const nextButton = screen.getByLabelText("next");
@@ -681,7 +681,7 @@ describe("Table", () => {
 			for (let i = 0; i < 9; i++) {
 				await user.click(nextButton);
 			}
-			expect(screen.queryByText("10-10 / 10")).toBeTruthy();
+			expect(screen.queryByText("10 - 10 / 10")).toBeTruthy();
 			expect(nextButton).toBeDisabled();
 
 			// reduce data set
@@ -692,13 +692,13 @@ describe("Table", () => {
 			await user.keyboard("a");
 
 			// confirm that there are now 9 pages
-			expect(screen.queryByText("9-9 / 9")).toBeTruthy();
+			expect(screen.queryByText("9 - 9 / 9")).toBeTruthy();
 
 			// reduce data set
 			await user.keyboard("s");
 
 			// confirm that there is not a single page
-			expect(screen.queryByText("1-1 / 1")).toBeTruthy();
+			expect(screen.queryByText("1 - 1 / 1")).toBeTruthy();
 
 			// reduce data set to zero
 			await user.keyboard("ddddddddd");
@@ -710,7 +710,7 @@ describe("Table", () => {
 			await user.click(screen.getByLabelText("clear input"));
 
 			// confirm that there are 10 pages again and that we are on the initial page
-			expect(screen.queryByText("1-1 / 10")).toBeTruthy();
+			expect(screen.queryByText("1 - 1 / 10")).toBeTruthy();
 		});
 	});
 
