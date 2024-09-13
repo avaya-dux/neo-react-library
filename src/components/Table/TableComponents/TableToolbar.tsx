@@ -79,7 +79,7 @@ export const TableToolbar = <T extends Record<string, any>>({
 	const editDisabled = readonly || selectedRowIdsStringArray.length !== 1;
 	const deleteDisabled = readonly || selectedRowIdsStringArray.length === 0;
 
-	const { allowColumnFilter } = useContext(FilterContext);
+	const { allowToggleColumnVisibility } = useContext(FilterContext);
 
 	return (
 		<div className="neo-table__actions">
@@ -145,7 +145,7 @@ export const TableToolbar = <T extends Record<string, any>>({
 					)}
 				</div>
 
-				{allowColumnFilter && (
+				{allowToggleColumnVisibility && (
 					<TableFilter
 						handleShowColumnsFilter={handleShowColumnsFilter}
 						translations={translations}

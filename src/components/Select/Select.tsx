@@ -1,4 +1,11 @@
-import { Children, useEffect, useId, useMemo, useState } from "react";
+import {
+	Children,
+	type ReactElement,
+	useEffect,
+	useId,
+	useMemo,
+	useState,
+} from "react";
 import isEqual from "react-fast-compare";
 
 import { NeoInputWrapper } from "components/NeoInputWrapper";
@@ -8,7 +15,7 @@ import { useIsInitialRender } from "utils/hooks/useIsInitialRender";
 import { InternalSelect } from "./InternalComponents";
 import { SelectContext } from "./utils/SelectContext";
 
-import type { SelectProps } from "./utils/SelectTypes";
+import type { SelectOptionProps, SelectProps } from "./utils/SelectTypes";
 import { useDownshift } from "./utils/useDownshift";
 import { useSelectedItems } from "./utils/useSelectedItems";
 
@@ -100,18 +107,20 @@ export const Select = (props: SelectProps) => {
 	const isInitialRender = useIsInitialRender();
 
 	// if the `value` is not set, use `children` as `value`
-	const options = useMemo(
-		() =>
-			Children.map(children, (child) => {
-				const childprops = { ...child.props };
-				if (!childprops.value) {
-					childprops.value = childprops.children;
-				}
+	const options = useMemo(() => {
+		const childrenArray = Children.toArray(
+			children,
+		) as ReactElement<SelectOptionProps>[];
 
-				return childprops;
-			}),
-		[children],
-	);
+		return Children.map(childrenArray, (child) => {
+			const childprops = { ...child.props };
+			if (!childprops.value) {
+				childprops.value = childprops.children;
+			}
+
+			return childprops;
+		});
+	}, [children]);
 	const [filteredOptions, setFilteredOptions] = useState(options);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: filteredOptions should not be in dep array

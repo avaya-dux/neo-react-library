@@ -46,7 +46,6 @@ export const TableHeader: TableHeaderComponentType = ({
 	const { headers, toggleSortBy } = instance;
 
 	const {
-		allowColumnFilter,
 		draggableRows,
 		setDataSyncOption,
 		clearSortByFuncRef,
@@ -101,9 +100,7 @@ export const TableHeader: TableHeaderComponentType = ({
 					// canFilter is false when disableFilters is true on the column
 					// column.Filter is the renderer function for the filter UI
 					// The plan now is to not show filter ui on the header cell, but show it when filter column is clicked
-					if (canFilter && column.Filter) {
-						content = render("Filter");
-					} else if (canSort) {
+					if (canSort) {
 						const thDivProps = getSortByToggleProps({
 							// keep mouse-click from triggering sort
 							onClick: (e) => {
@@ -213,7 +210,7 @@ export const TableHeader: TableHeaderComponentType = ({
 									{translations.sortDescending || "Z - A"}
 								</MenuItem>
 
-								{allowColumnFilter ? (
+								{canFilter ? (
 									<>
 										<MenuSeparator />
 										<MenuItem

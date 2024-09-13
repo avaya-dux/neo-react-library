@@ -98,7 +98,7 @@ export const Table = <T extends Record<string, any>>({
 	initialStatePageIndex = 0,
 	initialStatePageSize,
 
-	allowColumnFilter = false,
+	allowToggleColumnVisibility = false,
 	containerClassName = "",
 	customActionsNode,
 	handleCreate,
@@ -336,7 +336,7 @@ export const Table = <T extends Record<string, any>>({
 	}, [renderInsetTable]);
 
 	const filterContext: IFilterContext = {
-		allowColumnFilter,
+		allowToggleColumnVisibility,
 		draggableRows,
 		filterSheetVisible,
 		setFilterSheetVisible,
