@@ -1,3 +1,4 @@
+/* new styles */
 *:has(>.neo-pagination__row) {
 	container-name: pagination;
 	container-type: inline-size;
@@ -7,6 +8,24 @@
 	.neo-pagination__row {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+
+/* set special font and background colors for pagination buttons */
+.neo-pagination__row {
+	color: var(--neo-color-base-900);
+
+	.neo-pagination__pages-selection label {
+		color: var(--neo-color-base-900);
+	}
+
+	nav.neo-pagination .neo-pagination__list button.neo-btn-tertiary {
+		color: var(--neo-color-base-900);
+
+		&:hover {
+			color: var(--neo-color-base-900);
+			background-color: var(--neo-color-base-100);
+		}
 	}
 }
 
