@@ -360,7 +360,7 @@ export const AdvancedFilteringAndSorting = () => {
 
 				const all = useMemo(
 					() => (
-						<SelectOption key="All" value="">
+						<SelectOption key="All" value="All">
 							All
 						</SelectOption>
 					),
