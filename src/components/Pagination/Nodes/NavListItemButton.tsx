@@ -43,7 +43,7 @@ export const NavListItemButton = ({
 				}}
 				variant={variant}
 			>
-				{pageToNavigateTo}
+				{pageToNavigateTo.toLocaleString()}
 			</Button>
 		</li>
 	);
