@@ -42,6 +42,7 @@ export const NavListItemButton = ({
 					}
 				}}
 				variant={variant}
+				disabled={isCurrentPage}
 			>
 				{pageToNavigateTo.toLocaleString()}
 			</Button>

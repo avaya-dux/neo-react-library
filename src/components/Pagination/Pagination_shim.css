@@ -27,6 +27,10 @@
 			background-color: var(--neo-color-base-100);
 		}
 	}
+
+	nav.neo-pagination .neo-pagination__list button.neo-btn-primary:disabled {
+		background-color: var(--button-color-primary);
+	}
 }
 
 .neo-pagination__row bdi {
