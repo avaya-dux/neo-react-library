@@ -10,7 +10,6 @@ import {
 	Menu,
 	MenuItem,
 	Select,
-	SelectNative,
 	SelectOption,
 	Switch,
 	Tab,
@@ -23,7 +22,7 @@ import {
 } from "components";
 import { Button } from "components/Button";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Column, ColumnInstance, Row } from "react-table";
+import type { Column, Row } from "react-table";
 import { useDebouncedCallback } from "use-debounce";
 import type { IconNamesType } from "utils";
 
@@ -258,7 +257,7 @@ export const ServerSidePagination = () => {
 				handlePageChange={fetchData}
 				handleSearch={searchDebounced}
 				itemsPerPageOptions={[5, 10, 20, 50]}
-				allowColumnFilter
+				allowToggleColumnVisibility
 			/>
 		</section>
 	);
@@ -348,9 +347,8 @@ export const AdvancedFilteringAndSorting = () => {
 				return <Chip icon={icon}>{value?.toUpperCase() || ""}</Chip>;
 			},
 			Filter: ({
-				column: { setFilter, preFilteredRows, id },
-			}: {
-				column: ColumnInstance<IDataTableMockData>;
+				column: { preFilteredRows, id, filterValue },
+				onFilterValueChange,
 			}) => {
 				const options = useMemo(() => {
 					const optionSet = new Set();
@@ -360,29 +358,44 @@ export const AdvancedFilteringAndSorting = () => {
 					return Array.from(optionSet.values());
 				}, [id, preFilteredRows]);
 
+				const all = useMemo(
+					() => (
+						<SelectOption key="All" value="All">
+							All
+						</SelectOption>
+					),
+					[],
+				);
+
+				const rest = useMemo(() => {
+					return options.map((option) => (
+						<SelectOption key={option as string} value={option as string}>
+							{(option as string).toUpperCase()}
+						</SelectOption>
+					));
+				}, [options]);
+
 				return (
 					<div style={{ margin: "0px 0px -8px 0px" }}>
-						<SelectNative
+						<Select
 							aria-label="Status"
-							onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-								setFilter(e.target.value || undefined);
+							value={filterValue || ""}
+							onChange={(value) => {
+								logger.debug("Status Filter onChange", value);
+								if (onFilterValueChange) {
+									onFilterValueChange(value === "All" ? "" : value);
+								}
 							}}
 						>
-							<option value="">All</option>
-
-							{options.map((option, i) => (
-								<option key={i} value={option as string}>
-									{(option as string).toUpperCase()}
-								</option>
-							))}
-						</SelectNative>
+							{all}
+							{rest}
+						</Select>
 					</div>
 				);
 			},
 			Header: "Status",
 			accessor: "status",
-			disableSortBy: true,
-			filter: "exactTextCase",
+			filter: "exactText",
 		},
 		{
 			Cell: ({ value }: { value: IDataTableMockData["longText"] }) =>
@@ -473,7 +486,7 @@ export const AdvancedFilteringAndSorting = () => {
 			</ul>
 
 			<Table
-				allowColumnFilter
+				allowToggleColumnVisibility
 				columns={columns}
 				data={[...FilledFields.data]}
 			/>
@@ -498,7 +511,7 @@ export const TableInTabs = () => (
 
 				<TabPanel>
 					<Table
-						allowColumnFilter
+						allowToggleColumnVisibility
 						columns={[...FilledFields.columns]}
 						data={[...FilledFields.data]}
 					/>
@@ -747,7 +760,7 @@ export const CustomBasicTableFilterDrawer = () => {
 			<Table
 				columns={FilledFields.columns}
 				handleShowColumnsFilter={handleShowColumnsFilter}
-				allowColumnFilter
+				allowToggleColumnVisibility
 				data={[...FilledFields.data]}
 			/>
 			<TableFilterDrawer
@@ -944,7 +957,7 @@ export const DisabledRows = () => {
 				columns={FilledFields.columns}
 				data={data}
 				readonly={readonly}
-				allowColumnFilter
+				allowToggleColumnVisibility
 				selectableRows="multiple"
 				initialStatePageSize={5}
 				draggableRows

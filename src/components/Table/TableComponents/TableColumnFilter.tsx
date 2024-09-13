@@ -24,10 +24,19 @@ export const TableColumnFilterDrawer = ({
 	const { filterColumn: column, setFilterColumn } = useContext(FilterContext);
 	const [newFilterValue, setNewFilterValue] = useState(column?.filterValue);
 
+	const handleOnChange = useCallback((value: string | string[]) => {
+		logger.debug("handleOnChange value", value);
+		setNewFilterValue(value);
+	}, []);
+
 	const filterComponent = useMemo(() => {
 		if (!column) return null;
-		const { filter } = column || {};
+		const { Filter } = column || {};
+		if (Filter) {
+			return column.render("Filter", { onFilterValueChange: handleOnChange });
+		}
 
+		const { filter } = column || {};
 		if (filter === "includesValue") {
 			return (
 				<CheckboxGroupFilter
@@ -38,7 +47,7 @@ export const TableColumnFilterDrawer = ({
 			);
 		}
 		return <DefaultColumnFilter column={column} onChange={setNewFilterValue} />;
-	}, [column, translations]);
+	}, [column, translations, handleOnChange]);
 
 	const handleCancel = useCallback(() => {
 		const { setFilter, filterValue } = column || {};
@@ -49,6 +58,7 @@ export const TableColumnFilterDrawer = ({
 	const handleApply = useCallback(() => {
 		// apply filter
 		const { setFilter } = column || {};
+		logger.debug("handleApply newFilterValue", newFilterValue);
 		setFilter?.(newFilterValue);
 		// clear filter column in context
 		setFilterColumn?.(undefined);
