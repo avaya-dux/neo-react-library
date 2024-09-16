@@ -73,19 +73,19 @@ describe("Table", () => {
 		it("modifies the row height when the select is changed", async () => {
 			render(<Table rowHeight="compact" {...FilledFields} />);
 
-			expect(screen.getByRole("table").classList).toHaveLength(2);
+			expect(screen.getByRole("table").classList).toHaveLength(3);
 			expect(screen.getByRole("table")).toHaveClass("neo-table--compact");
 
 			await user.click(screen.getByLabelText("Select row height"));
 			await user.click(screen.getByText("Medium"));
 
-			expect(screen.getByRole("table").classList).toHaveLength(2);
+			expect(screen.getByRole("table").classList).toHaveLength(3);
 			expect(screen.getByRole("table")).toHaveClass("neo-table--medium");
 
 			await user.click(screen.getByLabelText("Select row height"));
 			await user.click(screen.getByText("Large"));
 
-			expect(screen.getByRole("table").classList).toHaveLength(1);
+			expect(screen.getByRole("table").classList).toHaveLength(2);
 		});
 	});
 
@@ -689,13 +689,13 @@ describe("Table", () => {
 				FilledFields.translations.toolbar.searchInputPlaceholder,
 			);
 			await user.click(searchInput);
-			await user.keyboard("a");
+			await user.keyboard("d");
 
-			// confirm that there are now 9 pages
-			expect(screen.queryByText("9-9 / 9")).toBeTruthy();
+			// confirm that there are now 8 pages
+			expect(screen.queryByText("8-8 / 8")).toBeTruthy();
 
 			// reduce data set
-			await user.keyboard("s");
+			await user.keyboard("an");
 
 			// confirm that there is not a single page
 			expect(screen.queryByText("1-1 / 1")).toBeTruthy();
