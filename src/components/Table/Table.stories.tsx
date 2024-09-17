@@ -146,10 +146,17 @@ export const ServerSidePagination = () => {
 	const [searchString, setSearchString] = useState("");
 	const fetchIdRef = useRef(0);
 
+	// simulate fetch server data per global search string and a column filter value
 	const searchDebounced = useDebouncedCallback(
-		(search: string, pageSize: number) => {
+		(
+			search: string,
+			pageSize: number,
+			columnFilter: string = dateTimeTarget,
+		) => {
 			logger.log({ searchString: search, pageSize, dateTimeTarget });
-			setSearchString(search);
+			if (search !== searchString) {
+				setSearchString(search);
+			}
 			let data = [];
 			if (!search) {
 				data = originalData;
@@ -160,9 +167,9 @@ export const ServerSidePagination = () => {
 					);
 				});
 			}
-			if (dateTimeTarget) {
+			if (columnFilter) {
 				data = data.filter((row) => {
-					return row.date?.toLocaleDateString().includes(dateTimeTarget);
+					return row.date?.toLocaleDateString().includes(columnFilter);
 				});
 			}
 			setServerData(data);
@@ -209,35 +216,14 @@ export const ServerSidePagination = () => {
 		fetchData(0, 10);
 	}, [fetchData]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const onApplyFilterValue = useCallback(
 		(columnId: string, value: unknown) => {
 			logger.debug("Filter Applied", { columnId, value });
-			let data = [];
-			if (!searchString) {
-				data = originalData;
-			} else {
-				data = originalData.filter((row) => {
-					return Object.values(row).some((value) =>
-						value.toString().includes(searchString),
-					);
-				});
-			}
-			if (value && typeof value === "string") {
-				data = data.filter((row) => {
-					return row.date?.toLocaleDateString().includes(value);
-				});
-			}
-			logger.debug("Date Filter", { value, pageSize });
-			const newRows = data.slice(0, pageSize);
-			setPageData(newRows);
-			setDateTimeTarget(value as string);
-			setServerData(data);
-			setNumberOfRecords(data.length);
-			const newPageCount = Math.ceil(data.length / pageSize);
-			setPageCount(newPageCount);
+			const filterValue = value as string;
+			setDateTimeTarget(filterValue);
+			searchDebounced(searchString, pageSize, filterValue);
 		},
-		[searchString],
+		[searchString, pageSize, searchDebounced],
 	);
 
 	const onCancelFilterValue = useCallback(
