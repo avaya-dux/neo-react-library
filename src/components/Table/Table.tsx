@@ -114,6 +114,9 @@ export const Table = <T extends Record<string, any>>({
 	selectableRows = "none",
 	manualPagination: overridePagination = false,
 	manualRowCount = 0,
+	manualColumnFilters = false,
+	onApplyFilterValue,
+	onCancelFilterValue,
 	showPagination = true,
 	draggableRows = false,
 	pushPaginationDown = false,
@@ -166,9 +169,11 @@ export const Table = <T extends Record<string, any>>({
 				}) || []) as any,
 			},
 			filterTypes,
+			manualFilters: manualColumnFilters,
 			autoResetSelectedRows: false,
 			autoResetSortBy: false,
 			autoResetExpanded: false,
+			autoResetFilters: !manualColumnFilters,
 			...rest,
 		},
 		useFilters,
@@ -451,7 +456,11 @@ export const Table = <T extends Record<string, any>>({
 							translations={toolbarTranslations}
 						/>
 					)}
-					<TableColumnFilterDrawer translations={headerTranslations} />
+					<TableColumnFilterDrawer
+						translations={headerTranslations}
+						onApplyFilterValue={onApplyFilterValue}
+						onCancelFilterValue={onCancelFilterValue}
+					/>
 					<table
 						{...getTableProps()}
 						className={clsx(

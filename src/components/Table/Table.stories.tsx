@@ -27,7 +27,7 @@ import { useDebouncedCallback } from "use-debounce";
 import type { IconNamesType } from "utils";
 
 import { Table, type TableProps } from "./";
-import { TableFilterDrawer } from "./TableComponents";
+import { DefaultColumnFilter, TableFilterDrawer } from "./TableComponents";
 import {
 	FilledFields,
 	type IDataTableMockData,
@@ -38,7 +38,7 @@ import {
 
 import log from "loglevel";
 const logger = log.getLogger("TableStories");
-logger.disableAll();
+logger.enableAll();
 
 import "./TableStories_shim.css";
 
@@ -141,11 +141,15 @@ export const ServerSidePagination = () => {
 	const [serverData, setServerData] = useState(originalData);
 	const [pageData, setPageData] = useState<IRecordingTableMockData[]>([]);
 	const [pageCount, setPageCount] = useState(0);
+	const [pageSize, setPageSize] = useState(10);
+	const [dateTimeTarget, setDateTimeTarget] = useState("");
+	const [searchString, setSearchString] = useState("");
 	const fetchIdRef = useRef(0);
 
 	const searchDebounced = useDebouncedCallback(
 		(search: string, pageSize: number) => {
-			logger.log({ searchString: search, pageSize });
+			logger.log({ searchString: search, pageSize, dateTimeTarget });
+			setSearchString(search);
 			let data = [];
 			if (!search) {
 				data = originalData;
@@ -156,7 +160,11 @@ export const ServerSidePagination = () => {
 					);
 				});
 			}
-
+			if (dateTimeTarget) {
+				data = data.filter((row) => {
+					return row.date?.toLocaleDateString().includes(dateTimeTarget);
+				});
+			}
 			setServerData(data);
 			setNumberOfRecords(data.length);
 			setPageData(data.slice(0, pageSize));
@@ -169,6 +177,7 @@ export const ServerSidePagination = () => {
 	// biome-ignore lint/correctness/useExhaustiveDependencies: generated data doesn't change once created
 	const fetchData = useCallback(
 		(pageIndex: number, pageSize: number) => {
+			setPageSize(pageSize);
 			// This will get called when the table needs new data,
 			// it's up to the developer to determine when to fetch it and how many pages or records to load.
 			// In our case we always load one page of data.
@@ -200,6 +209,44 @@ export const ServerSidePagination = () => {
 		fetchData(0, 10);
 	}, [fetchData]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	const onApplyFilterValue = useCallback(
+		(columnId: string, value: unknown) => {
+			logger.debug("Filter Applied", { columnId, value });
+			let data = [];
+			if (!searchString) {
+				data = originalData;
+			} else {
+				data = originalData.filter((row) => {
+					return Object.values(row).some((value) =>
+						value.toString().includes(searchString),
+					);
+				});
+			}
+			if (value && typeof value === "string") {
+				data = data.filter((row) => {
+					return row.date?.toLocaleDateString().includes(value);
+				});
+			}
+			logger.debug("Date Filter", { value, pageSize });
+			const newRows = data.slice(0, pageSize);
+			setPageData(newRows);
+			setDateTimeTarget(value as string);
+			setServerData(data);
+			setNumberOfRecords(data.length);
+			const newPageCount = Math.ceil(data.length / pageSize);
+			setPageCount(newPageCount);
+		},
+		[searchString],
+	);
+
+	const onCancelFilterValue = useCallback(
+		(columnId: string, value: unknown) => {
+			logger.debug("Filter Cancelled", { columnId, value });
+		},
+		[],
+	);
+
 	const columns: Column<IRecordingTableMockData>[] = useMemo(
 		() => [
 			...recordingColumns,
@@ -209,8 +256,16 @@ export const ServerSidePagination = () => {
 				),
 				Header: "Date recorded",
 				accessor: "date",
-				disableFilters: true,
+				disableFilters: false,
 				sortType: "datetime",
+				Filter: ({ column, onFilterValueChange }) => {
+					return (
+						<DefaultColumnFilter
+							column={column}
+							onChange={onFilterValueChange}
+						/>
+					);
+				},
 			},
 		],
 		[],
@@ -252,6 +307,9 @@ export const ServerSidePagination = () => {
 				columns={columns}
 				manualPagination={true} // Very important to set manualPagination to true.
 				manualRowCount={numOfRecords} // Must provide total row count when using server side pagination.
+				manualColumnFilters={true} // Must provide manualColumnFilters to true when using server side column filtering.
+				onApplyFilterValue={onApplyFilterValue}
+				onCancelFilterValue={onCancelFilterValue}
 				initialStatePageSize={10}
 				pageCount={pageCount}
 				handlePageChange={fetchData}
