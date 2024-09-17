@@ -210,7 +210,6 @@ export const Select = (props: SelectProps) => {
 			required={required}
 			style={style}
 		>
-			{/* biome-ignore lint/a11y/noLabelWithoutControl: it does have a control, it's just put in by the `getLabelProps` method */}
 			{label && <label {...getLabelProps()}>{label}</label>}
 
 			<SelectContext.Provider value={contextValue}>
