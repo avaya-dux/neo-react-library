@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 import {
 	GoToPage,
@@ -37,7 +37,7 @@ import "./Pagination_shim.css";
  * @see https://design.avayacloud.com/components/web/tables-web
  */
 export const Pagination = ({
-	id,
+	id = `pagination-${useId()}`,
 
 	currentPageIndex,
 	itemCount,
@@ -62,10 +62,11 @@ export const Pagination = ({
 	leftNode,
 	rightNode,
 }: PaginationProps) => {
-	const generatedId = `pagination-${useId()}`;
-	id = id || generatedId;
 	const rootRef = useRef<HTMLDivElement>(null);
-	const totalPages = Math.ceil(itemCount / itemsPerPage);
+	const totalPages = useMemo(
+		() => Math.ceil(itemCount / itemsPerPage),
+		[itemCount, itemsPerPage],
+	);
 
 	const [rootWidth, setRootWidth] = useState(0);
 	useEffect(() => {
