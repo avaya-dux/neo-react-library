@@ -12,30 +12,9 @@
 	}
 }
 
-/* set special font and background colors for pagination buttons */
-:root .neo-pagination__row {
-	--font-color: var(--neo-color-base-900);
-	--unselect-button-hover-color: var(--neo-color-base-100);
-}
-
-@media (prefers-color-scheme: light) {
-	:root .neo-dynamic .neo-pagination__row {
-		--font-color: var(--neo-color-base-900);
-		--unselect-button-hover-color: var(--neo-color-base-100);
-	}
-}
-
-@media (prefers-color-scheme: dark) {
-	:root .neo-dynamic .neo-pagination__row,
-	:root .neo-dark .neo-pagination__row {
-		--font-color: var(--neo-color-base-100);
-		--unselect-button-hover-color: var(--neo-color-base-800);
-	}
-}
-
 /* new styles, these extend the styles set by neo-css */
 .neo-pagination__row {
-	color: var(--font-color);
+	color: var(--pagination-font-color);
 
 	/* cender node, page buttons */
 	nav.neo-pagination .neo-pagination__list {
@@ -45,11 +24,11 @@
 		}
 
 		button.neo-btn-tertiary {
-			color: var(--font-color);
+			color: var(--pagination-font-color);
 
 			&:hover {
-				color: var(--font-color);
-				background-color: var(--unselect-button-hover-color);
+				color: var(--pagination-font-color);
+				background-color: var(--pagination-unselect-button-hover-color);
 			}
 		}
 	}
@@ -63,7 +42,7 @@
 			gap: 0.5rem;
 
 			label {
-				color: var(--font-color);
+				color: var(--pagination-font-color);
 				font-size: 14px;
 				padding-bottom: 0;
 			}
@@ -129,10 +108,7 @@
 		min-height: unset;
 	}
 
-	.neo-input-group
-		.neo-multiselect
-		span.neo-multiselect-combo__header
-		button.neo-multiselect__header {
+	.neo-input-group .neo-multiselect span.neo-multiselect-combo__header button.neo-multiselect__header {
 		margin-right: 8px;
 
 		[dir="rtl"] & {
@@ -141,9 +117,7 @@
 		}
 	}
 
-	.neo-multiselect
-		span.neo-multiselect-combo__header
-		button.neo-multiselect__header:last-child {
+	.neo-multiselect span.neo-multiselect-combo__header button.neo-multiselect__header:last-child {
 		width: auto;
 	}
 
