@@ -1,5 +1,5 @@
 /* new styles */
-*:has(>.neo-pagination__row) {
+*:has(> .neo-pagination__row) {
 	container-name: pagination;
 	container-type: inline-size;
 }
@@ -25,7 +25,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
 	:root .neo-dynamic .neo-pagination__row,
 	:root .neo-dark .neo-pagination__row {
 		--font-color: var(--neo-color-base-100);
@@ -96,7 +95,7 @@
 		width: unset;
 	}
 
-	& li:has(>.neo-icon-ellipses-horizontal) {
+	& li:has(> .neo-icon-ellipses-horizontal) {
 		min-width: 32px;
 	}
 
@@ -109,7 +108,10 @@
 	margin-right: 0;
 }
 
-.neo-pagination__row .neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
+.neo-pagination__row
+	.neo-input-group
+	.neo-multiselect
+	span.neo-multiselect-combo__header {
 	height: 30px;
 	min-height: unset;
 }
