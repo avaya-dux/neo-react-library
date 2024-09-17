@@ -60,8 +60,8 @@ export const GoToPage = ({
 				}}
 			/>
 
-			<span>/ {totalPages}</span>
-			<span>{pagesText}</span>
+			<span>/ {totalPages.toLocaleString()}</span>
+			<span>{pagesText.toLocaleString()}</span>
 		</div>
 	);
 };

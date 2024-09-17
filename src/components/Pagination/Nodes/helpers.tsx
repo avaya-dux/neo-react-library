@@ -47,6 +47,10 @@ export const buildAllNavItems = (
 	return result;
 };
 
+const NavigationMenuButton = () => (
+	<span className="neo-icon-ellipses-horizontal" />
+);
+
 /**
  * Assumes that there are at minimum five nodes available as that is the minimum
  * number of nodes needed to render pagination properly.
@@ -86,7 +90,7 @@ export const buildNavItemsWithSeparators = (
 
 		result.push(
 			<li key="nav-dots-center">
-				<span className="neo-pagination__dots">&hellip;</span>
+				<NavigationMenuButton />
 			</li>,
 		);
 
@@ -112,7 +116,7 @@ export const buildNavItemsWithSeparators = (
 
 		result.push(
 			<li key="nav-dots-center">
-				<span className="neo-pagination__dots">&hellip;</span>
+				<NavigationMenuButton />
 			</li>,
 		);
 
@@ -137,7 +141,7 @@ export const buildNavItemsWithSeparators = (
 
 		result.push(
 			<li key="nav-dots-left">
-				<span className="neo-pagination__dots">&hellip;</span>
+				<NavigationMenuButton />
 			</li>,
 		);
 
@@ -154,7 +158,7 @@ export const buildNavItemsWithSeparators = (
 
 		result.push(
 			<li key="nav-dots-right">
-				<span className="neo-pagination__dots">&hellip;</span>
+				<NavigationMenuButton />
 			</li>,
 		);
 
@@ -179,7 +183,7 @@ export const buildNavItemsWithSeparators = (
 
 		result.push(
 			<li key="nav-dots-center">
-				<span className="neo-pagination__dots">&hellip;</span>
+				<NavigationMenuButton />
 			</li>,
 		);
 
@@ -201,7 +205,7 @@ export const buildNavItemsWithSeparators = (
 
 		result.push(
 			<li key="nav-dots-center">
-				<span className="neo-pagination__dots">&hellip;</span>
+				<NavigationMenuButton />
 			</li>,
 		);
 
@@ -226,7 +230,7 @@ export const buildNavItemsWithSeparators = (
 
 		result.push(
 			<li key="nav-dots-left">
-				<span className="neo-pagination__dots">&hellip;</span>
+				<NavigationMenuButton />
 			</li>,
 		);
 
@@ -241,7 +245,7 @@ export const buildNavItemsWithSeparators = (
 
 		result.push(
 			<li key="nav-dots-right">
-				<span className="neo-pagination__dots">&hellip;</span>
+				<NavigationMenuButton />
 			</li>,
 		);
 

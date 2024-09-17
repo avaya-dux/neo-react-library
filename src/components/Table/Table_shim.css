@@ -58,6 +58,10 @@
 	border-bottom: 1px solid #f1f1f1;
 }
 
+.neo-table + .neo-pagination__row {
+	margin-top: 1rem;
+}
+
 .neo-table--push-pagination-down {
 	display: flex;
 	flex-direction: column;
