@@ -21,7 +21,7 @@
 }
 
 .neo-drawer__scrim {
-	position:fixed;
+	position: fixed;
 	left: 0;
 	right: 0;
 	top: 0;
@@ -31,7 +31,7 @@
 	height: 100%;
 	width: 100%;
 	z-index: 999;
-	visibility:visible;
+	visibility: visible;
 	transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
@@ -62,14 +62,14 @@
 	margin-right: -10px;
 }
 
-.neo-drawer__header--left>.neo-drawer-icon-chevron-left {
+.neo-drawer__header--left > .neo-drawer-icon-chevron-left {
 	color: var(--neo-color-base-800);
 	background-color: transparent;
 	font-size: 21px;
 	margin-right: 8px;
 }
 
-.neo-drawer__header--right>.neo-drawer-icon-close {
+.neo-drawer__header--right > .neo-drawer-icon-close {
 	color: var(--neo-color-base-800);
 	background-color: transparent;
 	font-size: 21px;
@@ -81,7 +81,7 @@
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
 	flex: 1 1 0%;
-	overflow:auto;
+	overflow: auto;
 }
 
 .drawer-horizontal-slide-in-shim {

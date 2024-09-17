@@ -1,7 +1,7 @@
 .neo-tabs__item a span.neo-icon-end {
-  padding-right: 0;
+	padding-right: 0;
 }
 
 [dir="rtl"] .neo-tabs__item a span.neo-icon-end {
-  padding-left: 0;
+	padding-left: 0;
 }
