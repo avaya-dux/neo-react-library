@@ -19,6 +19,7 @@
 	/* cender node, page buttons */
 	nav.neo-pagination .neo-pagination__list {
 		button.neo-btn-primary:disabled {
+			font-weight: 600;
 			background-color: var(--button-color-primary);
 			cursor: pointer;
 		}
