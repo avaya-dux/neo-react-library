@@ -22,7 +22,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
 	:root .neo-dynamic .neo-table th button,
 	:root .neo-dark .neo-table th button {
 		color: white;
@@ -74,7 +73,6 @@
 	align-items: flex-end;
 }
 
-
 .neo-table tr th.neo-table__dnd-th,
 .neo-table tr td.neo-table__dnd-td {
 	width: 24px;
@@ -88,24 +86,24 @@
 	cursor: grab;
 }
 
-.neo-table tr th.neo-table__dnd-th>div,
-.neo-table tr td.neo-table__dnd-td>div {
+.neo-table tr th.neo-table__dnd-th > div,
+.neo-table tr td.neo-table__dnd-td > div {
 	width: 16px;
 	min-height: 16px;
 }
 
-.neo-table tr td.neo-table__dnd-td>div {
+.neo-table tr td.neo-table__dnd-td > div {
 	display: none;
 }
 
-.neo-table tbody:hover td.neo-table__dnd-td>div,
-.neo-table tbody:focus-within td.neo-table__dnd-td>div,
-.neo-table tbody.neo-set-keyboard-focus td.neo-table__dnd-td>div,
-.neo-table tbody:focus td.neo-table__dnd-td>div {
+.neo-table tbody:hover td.neo-table__dnd-td > div,
+.neo-table tbody:focus-within td.neo-table__dnd-td > div,
+.neo-table tbody.neo-set-keyboard-focus td.neo-table__dnd-td > div,
+.neo-table tbody:focus td.neo-table__dnd-td > div {
 	display: inline-block;
 }
 
-.neo-table tr td.neo-table__dnd-td div span[class*=neo-icon-]:before {
+.neo-table tr td.neo-table__dnd-td div span[class*="neo-icon-"]:before {
 	font-size: 16px;
 }
 
@@ -183,11 +181,10 @@
 			span {
 				width: 16px;
 
-				&[class*=neo-icon-]:before {
+				&[class*="neo-icon-"]:before {
 					font-size: 14px;
 				}
 			}
-
 		}
 	}
 }

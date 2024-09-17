@@ -37,7 +37,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "20",
 		label: "Daniel",
-		name: "Sir Daniel",
+		name: "Daniel Smith",
 		other: "Delor Itum",
 		date: new Date(2000, 2, 1),
 		status: "inactive",
@@ -48,7 +48,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "10",
 		label: "Fred",
-		name: "Sir Fred",
+		name: "Fred Williams",
 		other: "Lorem Ipsum",
 		date: new Date(2001, 1, 1),
 		status: "active",
@@ -61,7 +61,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "30",
 		label: "Tif",
-		name: "Madam Tif",
+		name: "Tif Brown",
 		other: "Asdf Fded",
 		date: new Date(2010, 2, 12),
 		status: "in call",
@@ -72,7 +72,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "40",
 		label: "Hailey",
-		name: "Madam Hailey",
+		name: "Hailey Garcia",
 		other: "Consectetur Adipiscing",
 		date: new Date(2020, 1, 21),
 		status: "awc",
@@ -83,7 +83,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "50",
 		label: "Alex",
-		name: "Intersex Alex",
+		name: "Alex Miller",
 		other: "Duis aute",
 		date: new Date(2000, 2, 11),
 		status: "awc",
@@ -94,7 +94,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "60",
 		label: "Skyler",
-		name: "Androgynous Skyler",
+		name: "Skyler Hernandez",
 		other: "Excepteur sint",
 		date: new Date(2000, 2, 26),
 		status: "in call",
@@ -105,7 +105,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "70",
 		label: "Frank",
-		name: <a href="#frank">Fancy Frank</a>,
+		name: <a href="#frank">Frank Lopez</a>,
 		other: "Nulla pariatur",
 		date: new Date(2000, 3, 11),
 		status: "awc",
@@ -116,7 +116,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "80",
 		label: "Scott",
-		name: <a href="#scott">Synchronous Scott</a>,
+		name: <a href="#scott">Scott Anderson</a>,
 		other: "Etora platurude",
 		date: new Date(2000, 3, 15),
 		status: "active",
@@ -127,7 +127,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "90",
 		label: "Alfred",
-		name: "Alfred the Great",
+		name: "Alfred Moore",
 		other: "Cupidatat non proident",
 		date: new Date(2001, 2, 12),
 		status: "active",
@@ -138,7 +138,7 @@ const dataExample: IDataTableMockData[] = [
 	{
 		id: "100",
 		label: "Bruce",
-		name: "Bruce Splingsteen",
+		name: "Bruce Jackson",
 		other: "Eunt in culpa qui officia",
 		date: new Date(2002, 1, 1),
 		status: "active",
@@ -152,7 +152,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 	{
 		id: "20",
 		label: "Daniel",
-		name: "Sir Daniel",
+		name: "Daniel Smith",
 		other: "Delor Itum",
 		date: new Date(2000, 2, 1),
 		status: "inactive",
@@ -164,7 +164,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 		id: "10",
 		label: "Fred",
 		disabled: true,
-		name: "Sir Fred",
+		name: "Fred Williams",
 		other: "Lorem Ipsum",
 		date: new Date(2001, 1, 1),
 		status: "active",
@@ -178,7 +178,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 		id: "30",
 		label: "Tif",
 		disabled: true,
-		name: "Madam Tif",
+		name: "Tif Brown",
 		other: "Asdf Fded",
 		date: new Date(2010, 2, 12),
 		status: "in call",
@@ -189,7 +189,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 	{
 		id: "40",
 		label: "Hailey",
-		name: "Madam Hailey",
+		name: "Hailey Garcia",
 		other: "Consectetur Adipiscing",
 		date: new Date(2020, 1, 21),
 		status: "awc",
@@ -200,7 +200,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 	{
 		id: "50",
 		label: "Alex",
-		name: "Intersex Alex",
+		name: "Alex Miller",
 		other: "Duis aute",
 		date: new Date(2000, 2, 11),
 		status: "awc",
@@ -211,7 +211,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 	{
 		id: "60",
 		label: "Skyler",
-		name: "Androgynous Skyler",
+		name: "Skyler Hernandez",
 		other: "Excepteur sint",
 		date: new Date(2000, 2, 26),
 		status: "in call",
@@ -222,7 +222,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 	{
 		id: "70",
 		label: "Frank",
-		name: <a href="#frank">Fancy Frank</a>,
+		name: <a href="#frank">Frank Lopez</a>,
 		other: "Nulla pariatur",
 		date: new Date(2000, 3, 11),
 		status: "awc",
@@ -233,7 +233,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 	{
 		id: "80",
 		label: "Scott",
-		name: <a href="#scott">Synchronous Scott</a>,
+		name: <a href="#scott">Scott Anderson</a>,
 		other: "Etora platurude",
 		date: new Date(2000, 3, 15),
 		status: "active",
@@ -244,7 +244,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 	{
 		id: "90",
 		label: "Alfred",
-		name: "Alfred the Great",
+		name: "Alfred Moore",
 		other: "Cupidatat non proident",
 		date: new Date(2001, 2, 12),
 		status: "active",
@@ -255,7 +255,7 @@ const dataWithDisabledRowsExample: IDataTableMockData[] = [
 	{
 		id: "100",
 		label: "Bruce",
-		name: "Bruce Splingsteen",
+		name: "Bruce Jackson",
 		other: "Eunt in culpa qui officia",
 		date: new Date(2002, 1, 1),
 		status: "active",

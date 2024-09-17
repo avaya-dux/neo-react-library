@@ -1,292 +1,296 @@
 .neo-form-control--disabled .neo-multiselect .neo-multiselect__header:after,
 .neo-form-control--disabled
-  .neo-multiselect
-  .neo-multiselect-combo__header:after {
-  background-color: var(--input-disabled-bg);
+	.neo-multiselect
+	.neo-multiselect-combo__header:after {
+	background-color: var(--input-disabled-bg);
 }
 
 .neo-multiselect
-  span.neo-multiselect-combo__header.neo-multiselect-combo__header--no-after:after,
+	span.neo-multiselect-combo__header.neo-multiselect-combo__header--no-after:after,
 .neo-multiselect
-  span.neo-multiselect-combo__header .neo-multiselect__padded-container button.neo-multiselect__header.neo-multiselect__header--no-after::after {
-  display: none;
+	span.neo-multiselect-combo__header
+	.neo-multiselect__padded-container
+	button.neo-multiselect__header.neo-multiselect__header--no-after::after {
+	display: none;
 }
 
 body .neo-multiselect .neo-multiselect-combo__header {
-  flex-wrap: nowrap;
+	flex-wrap: nowrap;
 }
 
-body .neo-multiselect .neo-multiselect-combo__header.neo-multiselect-combo__header--focus-visible:focus-visible {
-  outline: 0;
+body
+	.neo-multiselect
+	.neo-multiselect-combo__header.neo-multiselect-combo__header--focus-visible:focus-visible {
+	outline: 0;
 }
 
 body .neo-multiselect__content.neo-set-keyboard-focus,
 body .neo-multiselect__content:focus-visible {
-  outline-offset: 1px;
-  outline: 1px auto var(--global-outline-color);
+	outline-offset: 1px;
+	outline: 1px auto var(--global-outline-color);
 }
 
 .neo-multiselect__content:empty {
-  border: none;
-  box-shadow: none;
+	border: none;
+	box-shadow: none;
 }
 
 .neo-multiselect__content .neo-option:not(last-child) {
-  margin-right: 0;
+	margin-right: 0;
 }
 
 .neo-multiselect__content .neo-option {
-  padding: 8px 16px !important;
+	padding: 8px 16px !important;
 }
 
 .neo-input-group .neo-option {
-  pointer-events: auto !important;
+	pointer-events: auto !important;
 }
 
 .neo-option:not(.neo-option--disabled):hover,
 .neo-option:not(.neo-option--disabled):focus {
-  background-color: #f1f1f1; /* $token-color-base-100 */
+	background-color: #f1f1f1; /* $token-color-base-100 */
 }
 
 .neo-option.neo-option--selected:not(.neo-option--disabled):hover,
 .neo-option.neo-option--selected:not(.neo-option--disabled):focus {
-  background-color: #dddddd; /* $token-color-base-150 */
+	background-color: #dddddd; /* $token-color-base-150 */
 }
 
 .neo-option:focus-visible {
-  outline: 0;
+	outline: 0;
 }
 
 .neo-option.neo-option::before {
-  background: #fff;
-  border: 1px solid #1473e6;
-  content: "";
-  display: inline-block;
-  height: 16px;
-  margin-right: 8px;
-  vertical-align: text-top;
-  min-width: 16px;
-  border-radius: 4px;
-  line-height: 1.5;
+	background: #fff;
+	border: 1px solid #1473e6;
+	content: "";
+	display: inline-block;
+	height: 16px;
+	margin-right: 8px;
+	vertical-align: text-top;
+	min-width: 16px;
+	border-radius: 4px;
+	line-height: 1.5;
 }
 
 div.neo-multiselect
-  span.neo-multiselect-combo__header
-  span.neo-multiselect__padded-container
-  div
-  input.neo-input {
-  border: 0;
-  display: inline-block;
-  width: 12ch;
+	span.neo-multiselect-combo__header
+	span.neo-multiselect__padded-container
+	div
+	input.neo-input {
+	border: 0;
+	display: inline-block;
+	width: 12ch;
 }
 
 div.neo-multiselect:not(.neo-multiselect--small)
-  span.neo-multiselect-combo__header
-  span.neo-multiselect__padded-container
-  div
-  input.neo-input {
-  height: 34px;
-  min-height: 34px;
+	span.neo-multiselect-combo__header
+	span.neo-multiselect__padded-container
+	div
+	input.neo-input {
+	height: 34px;
+	min-height: 34px;
 }
 
 /* no left padding while loading */
 .neo-multiselect.neo-select__spinner span input.neo-input {
-  padding-left: 0;
+	padding-left: 0;
 }
 
 /* no left padding while loading */
 .neo-multiselect.neo-select__spinner button.neo-multiselect__header,
 .neo-multiselect.neo-select__spinner span.neo-multiselect-combo__header {
-  padding-left: 32px;
-  background-color: #f1f1f1;
+	padding-left: 32px;
+	background-color: #f1f1f1;
 }
 
 div.neo-multiselect span.neo-multiselect-combo__header {
-  min-height: 36px;
+	min-height: 36px;
 }
 
 div.neo-multiselect
-  span.neo-multiselect-combo__header
-  div.neo-multiselect-combo__buttons-container {
-  display: flex;
-  flex-grow: 1;
-  justify-content: space-between;
+	span.neo-multiselect-combo__header
+	div.neo-multiselect-combo__buttons-container {
+	display: flex;
+	flex-grow: 1;
+	justify-content: space-between;
 }
 
 div.neo-multiselect button.neo-multiselect__header {
-  flex-grow: 1;
-  padding: 7px 24px 7px 12px;
+	flex-grow: 1;
+	padding: 7px 24px 7px 12px;
 }
 
 div.neo-multiselect.neo-multiselect--small
-  span.neo-multiselect-combo__header
-  button.neo-multiselect__header {
-  min-height: initial;
+	span.neo-multiselect-combo__header
+	button.neo-multiselect__header {
+	min-height: initial;
 }
 
 div.neo-multiselect.neo-multiselect--small
-  span.neo-multiselect-combo__header
-  button.neo-multiselect__header:last-child {
-  height: auto;
-  min-height: 26px;
+	span.neo-multiselect-combo__header
+	button.neo-multiselect__header:last-child {
+	height: auto;
+	min-height: 26px;
 }
 
 div.neo-multiselect.neo-multiselect--small
-  span.neo-multiselect-combo__header
-  span.neo-multiselect__padded-container {
-  min-height: initial;
-  padding: 0px;
+	span.neo-multiselect-combo__header
+	span.neo-multiselect__padded-container {
+	min-height: initial;
+	padding: 0px;
 }
 
 div.neo-multiselect.neo-multiselect--small
-  span.neo-multiselect-combo__header
-  span.neo-multiselect__padded-container
-  div
-  input.neo-input.neo-multiselect__input--small {
-  max-height: 26px;
-  min-height: initial;
+	span.neo-multiselect-combo__header
+	span.neo-multiselect__padded-container
+	div
+	input.neo-input.neo-multiselect__input--small {
+	max-height: 26px;
+	min-height: initial;
 }
 
 div.neo-multiselect.neo-multiselect--small
-  span.neo-multiselect-combo__header
-  span.neo-multiselect__padded-container
-  .neo-chip {
-  min-height: initial;
-  max-height: 18px;
-  margin: 0px 2px;
+	span.neo-multiselect-combo__header
+	span.neo-multiselect__padded-container
+	.neo-chip {
+	min-height: initial;
+	max-height: 18px;
+	margin: 0px 2px;
 }
 
 .neo-multiselect.neo-multiselect--small.neo-multiselect--small-searchable:focus-within
-  .neo-multiselect-combo__header,
+	.neo-multiselect-combo__header,
 .neo-multiselect.neo-multiselect--small:focus-within .neo-multiselect__header {
-  margin: 0 -1px;
+	margin: 0 -1px;
 }
 
 div.neo-multiselect.neo-multiselect--small button.neo-multiselect__header,
 div.neo-multiselect.neo-multiselect--small span.neo-multiselect-combo__header {
-  min-height: 26px;
+	min-height: 26px;
 }
 
 span.neo-multiselect-combo__header .neo-multiselect__padded-container {
-  align-items: center;
-  background-color: var(--input-background-color);
-  color: var(--input-font-color);
-  border: 0;
-  letter-spacing: 0;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  flex-grow: 1;
-  display: flex;
+	align-items: center;
+	background-color: var(--input-background-color);
+	color: var(--input-font-color);
+	border: 0;
+	letter-spacing: 0;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	flex-grow: 1;
+	display: flex;
 }
 
 .neo-multiselect.neo-multiselect--disabled
-  .neo-multiselect-combo__header
-  .neo-multiselect__padded-container {
-  background-color: var(--input-disabled-bg);
-  color: var(--input-disabled-color) !important;
-  cursor: not-allowed !important;
+	.neo-multiselect-combo__header
+	.neo-multiselect__padded-container {
+	background-color: var(--input-disabled-bg);
+	color: var(--input-disabled-color) !important;
+	cursor: not-allowed !important;
 }
 
 /* internal select option highlight styles */
 .neo-multiselect__content
-  .neo-input-group
-  option.neo-option[aria-selected="true"],
+	.neo-input-group
+	option.neo-option[aria-selected="true"],
 .neo-multiselect__content ul li[aria-selected="true"] {
-  background-color: #e8f1fc;
+	background-color: #e8f1fc;
 }
 
 /* remove innapropriate padding */
 .neo-multiselect .neo-multiselect__content .neo-input-group {
-  padding-bottom: 0;
+	padding-bottom: 0;
 }
 
 /* multiselect button */
 .neo-multiselect
-  span.neo-multiselect-combo__header
-  button.neo-multiselect__header:last-child {
-  width: 10px;
-  min-height: 30px;
-  height: 30px; /* same as chip */
-  padding: 0;
-  display: flex;
-  justify-content: flex-start;
-  order: 2;
+	span.neo-multiselect-combo__header
+	button.neo-multiselect__header:last-child {
+	width: 10px;
+	min-height: 30px;
+	height: 30px; /* same as chip */
+	padding: 0;
+	display: flex;
+	justify-content: flex-start;
+	order: 2;
 }
 
 .neo-multiselect-combo__header
-  .neo-multiselect__padded-container
-  > input:first-child {
-  min-height: 26px;
-  height: 26px;
-  padding-left: 0;
-  padding-right: 0;
-  order: 2;
+	.neo-multiselect__padded-container
+	> input:first-child {
+	min-height: 26px;
+	height: 26px;
+	padding-left: 0;
+	padding-right: 0;
+	order: 2;
 }
 
 .neo-multiselect.neo-select__spinner
-  span.neo-multiselect-combo__header
-  span.neo-multiselect__padded-container {
-  background-color: var(--input-disabled-bg);
+	span.neo-multiselect-combo__header
+	span.neo-multiselect__padded-container {
+	background-color: var(--input-disabled-bg);
 }
 
 .neo-multiselect__content .neo-option + .neo-input-hint {
-  white-space: nowrap;
-  margin: 0;
-  padding-left: 40px;
-  padding-right: 8px;
+	white-space: nowrap;
+	margin: 0;
+	padding-left: 40px;
+	padding-right: 8px;
 }
 
 /* BUG: need to figure out a better way to disable hover for the multi-select when an option is disabled */
 div.neo-multiselect div.neo-input-group:hover {
-  background-color: transparent;
+	background-color: transparent;
 }
 
 /* override bad styling for the multi-select (non-searchable) */
 .neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
-  justify-content: start;
+	justify-content: start;
 }
 .neo-input-group
-  .neo-multiselect
-  span.neo-multiselect-combo__header
-  button.neo-multiselect__header {
-  border: none;
-  margin: 0;
+	.neo-multiselect
+	span.neo-multiselect-combo__header
+	button.neo-multiselect__header {
+	border: none;
+	margin: 0;
 }
 
 /* fix bug where the option hint text was incorrectly marked as error text */
 .neo-form-control--error
-  .neo-multiselect__content
-  .neo-input-group
-  .neo-input-hint {
-  color: #5e5e5e; /* --input-hint-color */
+	.neo-multiselect__content
+	.neo-input-group
+	.neo-input-hint {
+	color: #5e5e5e; /* --input-hint-color */
 }
 .neo-form-control--error
-  .neo-multiselect__content
-  .neo-input-group
-  .neo-input-hint:before {
-  content: "";
+	.neo-multiselect__content
+	.neo-input-group
+	.neo-input-hint:before {
+	content: "";
 }
 
 div.neo-multiselect
-  > span.neo-multiselect-combo__header
-  span.neo-multiselect__padded-container
-  > div:first-child {
-  order: 2;
+	> span.neo-multiselect-combo__header
+	span.neo-multiselect__padded-container
+	> div:first-child {
+	order: 2;
 }
 
 .neo-option-plain.neo-option-plain--focused {
-  background-color: #f1f1f1;
+	background-color: #f1f1f1;
 }
 
 .neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
-  justify-content: start;
-  box-sizing: content-box;
-  min-height: 34px;
+	justify-content: start;
+	box-sizing: content-box;
+	min-height: 34px;
 }
 .neo-input-group .neo-multiselect .neo-multiselect-combo__header:after,
 .neo-input-group .neo-multiselect .neo-multiselect__header:after {
-  width: 16px;
-  height: 16px;
-  margin-top: 0px;
-  margin-bottom: 4px;
+	width: 16px;
+	height: 16px;
+	margin-top: 0px;
+	margin-bottom: 4px;
 }

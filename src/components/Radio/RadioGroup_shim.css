@@ -1,133 +1,133 @@
 .neo-radio-group {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .neo-radio + .neo-tooltip > label:before {
-  border: 1px solid var(--radio-border);
+	border: 1px solid var(--radio-border);
 }
 
 .neo-radio:not(.neo-radio-readonly):checked + .neo-tooltip > label:after {
-  background-color: var(--radio-background-active-color);
+	background-color: var(--radio-background-active-color);
 }
 
 .neo-input-group--inline .neo-radio + label + .neo-tooltip {
-  display: flex;
-  margin-top: 0px;
+	display: flex;
+	margin-top: 0px;
 }
 
 .neo-input-group--inline label:not(.neo-switch):not(.neo-label) {
-  line-height: initial;
+	line-height: initial;
 }
 
 .neo-radio + label + .neo-tooltip {
-  width: fit-content;
-  margin-top: 8px;
+	width: fit-content;
+	margin-top: 8px;
 }
 .neo-radio + label + .neo-tooltip label {
-  padding-left: 24px;
-  pointer-events: initial !important;
-  color: var(--global-font-color);
-  cursor: pointer;
-  text-indent: 24px;
-  margin-top: 8px;
-  position: relative;
-  font-size: 14px !important;
+	padding-left: 24px;
+	pointer-events: initial !important;
+	color: var(--global-font-color);
+	cursor: pointer;
+	text-indent: 24px;
+	margin-top: 8px;
+	position: relative;
+	font-size: 14px !important;
 }
 
 [dir="rtl"] .neo-radio + label + .neo-tooltip label {
-  margin-right: 0;
+	margin-right: 0;
 }
 
 .neo-radio + label + .neo-tooltip label:after {
-  background-color: var(--radio-background);
-  content: "";
-  height: 10px;
-  width: 10px;
-  background-color: var(--radio-background);
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  top: 5px;
-  left: 3px;
+	background-color: var(--radio-background);
+	content: "";
+	height: 10px;
+	width: 10px;
+	background-color: var(--radio-background);
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+	top: 5px;
+	left: 3px;
 }
 
 [dir="rtl"] .neo-radio + label + .neo-tooltip label:after {
-  left: auto;
-  right: 3px;
+	left: auto;
+	right: 3px;
 }
 
 .neo-radio + label + .neo-tooltip label:before {
-  background-color: var(--radio-background);
-  content: "";
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  top: 2px;
+	background-color: var(--radio-background);
+	content: "";
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+	top: 2px;
 }
 
 .neo-radio:checked + label + .neo-tooltip label:after {
-  content: "";
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  top: 5px;
-  left: 3px;
+	content: "";
+	height: 10px;
+	width: 10px;
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+	top: 5px;
+	left: 3px;
 }
 
 .neo-tooltip .neo-radio[disabled] + label {
-  cursor: not-allowed;
-  color: #757474;
+	cursor: not-allowed;
+	color: #757474;
 }
 
 [dir="rtl"] .neo-radio:checked + label + .neo-tooltip label:after {
-  left: auto;
-  right: 3px;
+	left: auto;
+	right: 3px;
 }
 
 .neo-radio.neo-radio--disabled + label + .neo-tooltip label {
-  cursor: not-allowed;
-  color: var(--global-disabled-color);
+	cursor: not-allowed;
+	color: var(--global-disabled-color);
 }
 
 .neo-radio.neo-radio--disabled + label + .neo-tooltip label:before {
-  border: var(--radio-disabled-border);
+	border: var(--radio-disabled-border);
 }
 
 .neo-radio.neo-radio--disabled:checked + label + .neo-tooltip label:after {
-  background-color: var(--radio-background);
-  content: "";
-  height: 10px;
-  width: 10px;
-  background-color: var(--radio-background);
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  top: 5px;
-  left: 3px;
+	background-color: var(--radio-background);
+	content: "";
+	height: 10px;
+	width: 10px;
+	background-color: var(--radio-background);
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+	top: 5px;
+	left: 3px;
 }
 
 [dir="rtl"]
-  .neo-radio.neo-radio--disabled:checked
-  + label
-  + .neo-tooltip
-  label:after {
-  left: auto;
-  right: 3px;
+	.neo-radio.neo-radio--disabled:checked
+	+ label
+	+ .neo-tooltip
+	label:after {
+	left: auto;
+	right: 3px;
 }
 
 .neo-radio.neo-radio--disabled:checked + label + .neo-tooltip label:before {
-  background-color: var(--radio-background);
-  border: var(--radio-disabled-border);
-  content: "";
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  top: 2px;
+	background-color: var(--radio-background);
+	border: var(--radio-disabled-border);
+	content: "";
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+	top: 2px;
 }
