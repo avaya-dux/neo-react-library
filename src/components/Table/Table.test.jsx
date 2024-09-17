@@ -1,5 +1,11 @@
 import { composeStories } from "@storybook/testing-react";
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+	render,
+	screen,
+	waitFor,
+	waitForElementToBeRemoved,
+	within,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
@@ -28,7 +34,23 @@ const {
 	Templated,
 	SecondPage,
 	DisabledRows,
+	ServerSidePagination,
 } = composeStories(TableStories);
+
+const getLastNumberFromBDI = async () => {
+	const bdiElement = await waitFor(() => screen.queryByText(/\d+-\d+ \/ \d+/));
+	if (!bdiElement) {
+		console.error("BDI element not found");
+		console.log(document.body.innerHTML);
+		throw new Error("Test failed: BDI Element not found");
+	}
+	const bdiText = bdiElement.textContent;
+	const lastNumberMatch = bdiText.match(/\d+$/);
+	const totalNumberOfRows = lastNumberMatch
+		? Number.parseInt(lastNumberMatch[0], 10)
+		: Number.MAX_VALUE;
+	return [bdiText, totalNumberOfRows];
+};
 
 describe("Table", () => {
 	const user = userEvent.setup();
@@ -714,6 +736,86 @@ describe("Table", () => {
 		});
 	});
 
+	describe("server side pagination, search, column filtering", () => {
+		let renderResult;
+
+		beforeEach(() => {
+			renderResult = render(<ServerSidePagination />);
+		});
+
+		it("filters by date value", async () => {
+			const { queryByText, queryAllByRole } = renderResult;
+
+			// waitfor the no data available message to disappear
+			await waitForElementToBeRemoved(() => queryByText("no data available"), {
+				timeout: 5000,
+			});
+			// should see 10000 rows now
+			const [bdiText, totalNumberOfRows] = await getLastNumberFromBDI();
+			expect(totalNumberOfRows).toBe(10000);
+
+			// get the first date value
+			const firstDateValue = queryAllByRole("cell")[4].textContent;
+			console.log("firstDateValue", firstDateValue);
+			// Get the span element with the text content "Date recorded"
+			const dateRecordedElements = screen.getAllByText("Date recorded");
+			const spanElement = dateRecordedElements.find(
+				(span) => span.tagName.toLowerCase() === "span",
+			);
+
+			if (!spanElement) {
+				console.error("Span element not found");
+				console.log(document.body.innerHTML);
+				throw new Error("Test failed: Span element not found");
+			}
+
+			// Get the closest button element
+			const dateColumnFilterButton = spanElement.closest("button");
+			await user.click(dateColumnFilterButton);
+
+			const dateColumnFilterMenuItems = queryAllByRole("menuitem");
+			expect(dateColumnFilterMenuItems).toHaveLength(4);
+			await user.click(dateColumnFilterMenuItems[3]);
+
+			const columnFilterDrawer = queryAllByRole("dialog")[1];
+			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--isOpen");
+
+			// Wait for the input box to appear
+			const dateInput = await waitFor(() =>
+				within(columnFilterDrawer).getByRole("textbox"),
+			);
+
+			if (!dateInput) {
+				console.error("Input box not found");
+				console.log(document.body.innerHTML);
+				throw new Error("Test failed: Input box not found");
+			}
+
+			await user.type(dateInput, firstDateValue);
+
+			const dateColumnFilterApplyButton =
+				within(columnFilterDrawer).getByLabelText("Apply");
+			await user.click(dateColumnFilterApplyButton);
+
+			// check that the filter icon is displayed
+			const filters = screen.queryAllByRole("img", { name: "Filter applied" });
+			expect(filters).toHaveLength(1);
+
+			// Wait for the bdiElement to disappear
+			await waitForElementToBeRemoved(() => queryByText(bdiText), {
+				timeout: 5000,
+			});
+			// Wait for the bdiElement to reappear
+			const [_, filteredNumberOfRows] = await getLastNumberFromBDI();
+			try {
+				expect(filteredNumberOfRows).toBeLessThan(10000);
+			} catch (error) {
+				console.error(error);
+				console.log(document.body.innerHTML);
+				throw error;
+			}
+		});
+	});
 	describe("sort and filter functionality", () => {
 		let renderResult;
 
