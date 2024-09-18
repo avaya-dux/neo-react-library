@@ -226,13 +226,6 @@ export const ServerSidePagination = () => {
 		[searchString, pageSize, searchDebounced],
 	);
 
-	const onCancelFilterValue = useCallback(
-		(columnId: string, value: unknown) => {
-			logger.debug("Filter Cancelled", { columnId, value });
-		},
-		[],
-	);
-
 	const columns: Column<IRecordingTableMockData>[] = useMemo(
 		() => [
 			...recordingColumns,
@@ -290,6 +283,12 @@ export const ServerSidePagination = () => {
 					return the first page of data, the total number of records, and the
 					page count, to the callback.
 				</li>
+				<li>
+					For server side column filter, implement a customer Filter,
+					onApplyFilterValue, and set manualColumnFilters to true. In this
+					example, the date column has a custom filter that simulates server
+					side filtering by exact date match.
+				</li>
 			</ul>
 			<Table
 				data={pageData}
@@ -298,7 +297,6 @@ export const ServerSidePagination = () => {
 				manualRowCount={numOfRecords} // Must provide total row count when using server side pagination.
 				manualColumnFilters={true} // Must provide manualColumnFilters to true when using server side column filtering.
 				onApplyFilterValue={onApplyFilterValue}
-				onCancelFilterValue={onCancelFilterValue}
 				initialStatePageSize={10}
 				pageCount={pageCount}
 				handlePageChange={fetchData}
