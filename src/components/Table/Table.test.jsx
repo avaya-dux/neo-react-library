@@ -744,7 +744,7 @@ describe("Table", () => {
 		});
 
 		it("filters by date value", async () => {
-			const { queryByText, queryAllByRole } = renderResult;
+			const { container, queryByText, queryAllByRole } = renderResult;
 
 			// waitfor the no data available message to disappear
 			await waitForElementToBeRemoved(() => queryByText("no data available"), {
@@ -756,49 +756,36 @@ describe("Table", () => {
 
 			// get the first date value
 			const firstDateValue = queryAllByRole("cell")[4].textContent;
-			console.log("firstDateValue", firstDateValue);
-			// Get the span element with the text content "Date recorded"
-			const dateRecordedElements = screen.getAllByText("Date recorded");
-			const spanElement = dateRecordedElements.find(
-				(span) => span.tagName.toLowerCase() === "span",
-			);
+			const pattern = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+			expect(firstDateValue).toMatch(pattern);
 
-			if (!spanElement) {
-				console.error("Span element not found");
-				console.log(document.body.innerHTML);
-				throw new Error("Test failed: Span element not found");
-			}
-
-			// Get the closest button element
-			const dateColumnFilterButton = spanElement.closest("button");
+			// Get the menu button element with the text content "Date recorded"
+			let dateColumnFilterButton = container.querySelectorAll(
+				"tr th button.neo-multiselect",
+			)[4];
+			expect(dateColumnFilterButton).toHaveTextContent("Date recorded");
 			await user.click(dateColumnFilterButton);
 
-			const dateColumnFilterMenuItems = queryAllByRole("menuitem");
+			let dateColumnFilterMenuItems = queryAllByRole("menuitem");
 			expect(dateColumnFilterMenuItems).toHaveLength(4);
 			await user.click(dateColumnFilterMenuItems[3]);
 
-			const columnFilterDrawer = queryAllByRole("dialog")[1];
+			let columnFilterDrawer = queryAllByRole("dialog")[1];
 			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--isOpen");
 
 			// Wait for the input box to appear
-			const dateInput = await waitFor(() =>
+			let dateInput = await waitFor(() =>
 				within(columnFilterDrawer).getByRole("textbox"),
 			);
 
-			if (!dateInput) {
-				console.error("Input box not found");
-				console.log(document.body.innerHTML);
-				throw new Error("Test failed: Input box not found");
-			}
-
 			await user.type(dateInput, firstDateValue);
 
-			const dateColumnFilterApplyButton =
+			let dateColumnFilterApplyButton =
 				within(columnFilterDrawer).getByLabelText("Apply");
 			await user.click(dateColumnFilterApplyButton);
 
 			// check that the filter icon is displayed
-			const filters = screen.queryAllByRole("img", {
+			let filters = screen.queryAllByRole("img", {
 				name: FilledFields.translations.header.filterApplied,
 			});
 			expect(filters).toHaveLength(1);
@@ -807,15 +794,73 @@ describe("Table", () => {
 			await waitForElementToBeRemoved(() => queryByText(bdiText), {
 				timeout: 5000,
 			});
+
 			// Wait for the bdiElement to reappear
-			const [_, filteredNumberOfRows] = await getLastNumberFromBDI();
-			try {
-				expect(filteredNumberOfRows).toBeLessThan(10000);
-			} catch (error) {
-				console.error(error);
-				console.log(document.body.innerHTML);
-				throw error;
-			}
+			const [filteredBidText, filteredNumberOfRows] =
+				await getLastNumberFromBDI();
+			expect(filteredNumberOfRows).toBeLessThan(10000);
+
+			dateColumnFilterButton = container.querySelectorAll(
+				"tr th button.neo-multiselect",
+			)[4];
+			await user.click(dateColumnFilterButton);
+
+			// check icon in front of menu item should be visible
+			let checkIcon = container.querySelector(
+				"tr th div[role='menuitem'] span[role='img']",
+			);
+			expect(checkIcon).toBeVisible();
+
+			dateColumnFilterMenuItems = queryAllByRole("menuitem");
+			expect(dateColumnFilterMenuItems).toHaveLength(4);
+			await user.click(dateColumnFilterMenuItems[3]);
+
+			columnFilterDrawer = queryAllByRole("dialog")[1];
+			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--isOpen");
+
+			// Wait for the input box to appear
+			dateInput = await waitFor(() =>
+				within(columnFilterDrawer).getByRole("textbox"),
+			);
+			expect(dateInput).toBeVisible();
+			expect(dateInput).toHaveValue(firstDateValue);
+
+			const dateColumnFilterClearButton =
+				within(columnFilterDrawer).getByLabelText("clear input");
+			expect(dateColumnFilterClearButton).toBeVisible();
+			await user.click(dateColumnFilterClearButton);
+
+			expect(dateInput).toHaveValue("");
+			// apply empty filter value
+			dateColumnFilterApplyButton =
+				within(columnFilterDrawer).getByLabelText("Apply");
+			await user.click(dateColumnFilterApplyButton);
+
+			// check that the filter icon is gone
+			filters = screen.queryAllByRole("img", {
+				name: FilledFields.translations.header.filterApplied,
+			});
+			expect(filters.length).toBe(0);
+
+			// Wait for the filteredBidText to disappear
+			await waitForElementToBeRemoved(() => queryByText(filteredBidText), {
+				timeout: 5000,
+			});
+
+			// Wait for the bdiElement to reappear as 10000
+			const [_, restoredNumberOfRows] = await getLastNumberFromBDI();
+			expect(restoredNumberOfRows).toBe(10000);
+
+			dateColumnFilterButton = container.querySelectorAll(
+				"tr th button.neo-multiselect",
+			)[4];
+			await user.click(dateColumnFilterButton);
+
+			// check icon in front of menu item is gone
+			checkIcon = container.querySelector(
+				"tr th div[role='menuitem'] span[role='img']",
+			);
+			expect(checkIcon).toBeNull();
 		});
 	});
 	describe("sort and filter functionality", () => {
