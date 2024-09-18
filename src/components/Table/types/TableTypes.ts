@@ -93,8 +93,8 @@ export type TableProps<T extends AnyRecord> = {
 	translations?: ITableTranslations;
 } & ToolbarSharedProps<T> &
 	TableOptions<T> &
-	Pick<TableColumnFilterProps, "onApplyFilterValue"> &
-	Pick<TableColumnFilterProps, "onCancelFilterValue"> &
+	Pick<TableColumnFilterProps, "onApplyFilterValue" | "onCancelFilterValue"> &
 	Pick<TableBodyProps<T>, "handleRowToggled"> &
-	Partial<Pick<IFilterContext, "allowToggleColumnVisibility">> &
-	Partial<Pick<IFilterContext, "renderInsetTable">>;
+	Partial<
+		Pick<IFilterContext, "allowToggleColumnVisibility" | "renderInsetTable">
+	>;
