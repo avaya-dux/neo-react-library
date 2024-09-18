@@ -10,6 +10,7 @@ import type {
 	TableColumnFilterProps,
 } from "../types";
 import { TableFilterDrawer } from "./TableFilterDrawer";
+import { TextInput } from "components/TextInput";
 
 const logger = log.getLogger("table-column-filter-logger");
 logger.disableAll();
@@ -91,22 +92,30 @@ export const TableColumnFilterDrawer = ({
 export const DefaultColumnFilter = <T extends AnyRecord>({
 	column: { filterValue, preFilteredRows },
 	onChange,
+	label = "Search",
+	placeholder,
+	helperText = "",
 }: {
 	column: ColumnInstance<T>;
 	onChange: (value: string | string[]) => void;
+	label?: string;
+	placeholder?: string;
+	helperText?: string;
 }) => {
 	const [value, setValue] = useState(filterValue || "");
 	const count = preFilteredRows.length;
 
 	return (
-		<input
+		<TextInput
+			label={label}
 			value={value}
+			helperText={helperText}
 			onChange={(e) => {
 				const value = e.target.value || "";
 				onChange(value);
 				setValue(value);
 			}}
-			placeholder={`Search ${count} records...`}
+			placeholder={placeholder || `Search ${count} records...`}
 		/>
 	);
 };

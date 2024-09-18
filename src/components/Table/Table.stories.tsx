@@ -247,6 +247,9 @@ export const ServerSidePagination = () => {
 				Filter: ({ column, onFilterValueChange }) => {
 					return (
 						<DefaultColumnFilter
+							label="Date"
+							placeholder="Search by date"
+							helperText="Only rows with exactly matching date will be shown.  Clear to show all."
 							column={column}
 							onChange={onFilterValueChange}
 						/>
