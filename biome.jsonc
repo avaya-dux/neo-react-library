@@ -3,6 +3,11 @@
 {
 	"linter": {
 		"rules": {
+			"a11y": {
+				// NOTE: these rules are experimental as of v1.9.1 and are throwing innacurate errors
+				"useSemanticElements": "off",
+				"noLabelWithoutControl": "off"
+			},
 			"correctness": {
 				"noUnusedVariables": "error",
 				"noUnusedImports": "error"

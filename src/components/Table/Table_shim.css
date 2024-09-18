@@ -22,7 +22,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
 	:root .neo-dynamic .neo-table th button,
 	:root .neo-dark .neo-table th button {
 		color: white;
@@ -59,6 +58,10 @@
 	border-bottom: 1px solid #f1f1f1;
 }
 
+.neo-table + .neo-pagination__row {
+	margin-top: 1rem;
+}
+
 .neo-table--push-pagination-down {
 	display: flex;
 	flex-direction: column;
@@ -69,7 +72,6 @@
 	flex-grow: 1;
 	align-items: flex-end;
 }
-
 
 .neo-table tr th.neo-table__dnd-th,
 .neo-table tr td.neo-table__dnd-td {
@@ -84,24 +86,24 @@
 	cursor: grab;
 }
 
-.neo-table tr th.neo-table__dnd-th>div,
-.neo-table tr td.neo-table__dnd-td>div {
+.neo-table tr th.neo-table__dnd-th > div,
+.neo-table tr td.neo-table__dnd-td > div {
 	width: 16px;
 	min-height: 16px;
 }
 
-.neo-table tr td.neo-table__dnd-td>div {
+.neo-table tr td.neo-table__dnd-td > div {
 	display: none;
 }
 
-.neo-table tbody:hover td.neo-table__dnd-td>div,
-.neo-table tbody:focus-within td.neo-table__dnd-td>div,
-.neo-table tbody.neo-set-keyboard-focus td.neo-table__dnd-td>div,
-.neo-table tbody:focus td.neo-table__dnd-td>div {
+.neo-table tbody:hover td.neo-table__dnd-td > div,
+.neo-table tbody:focus-within td.neo-table__dnd-td > div,
+.neo-table tbody.neo-set-keyboard-focus td.neo-table__dnd-td > div,
+.neo-table tbody:focus td.neo-table__dnd-td > div {
 	display: inline-block;
 }
 
-.neo-table tr td.neo-table__dnd-td div span[class*=neo-icon-]:before {
+.neo-table tr td.neo-table__dnd-td div span[class*="neo-icon-"]:before {
 	font-size: 16px;
 }
 
@@ -109,7 +111,6 @@
 .neo-table th.neo-table__dnd-th:has(+ .neo-table-checkbox-th:hover) {
 	background-color: inherit;
 }
-
 
 .neo-table th.neo-table-checkbox-th {
 	padding: 0;
@@ -180,11 +181,10 @@
 			span {
 				width: 16px;
 
-				&[class*=neo-icon-]:before {
+				&[class*="neo-icon-"]:before {
 					font-size: 14px;
 				}
 			}
-
 		}
 	}
 }

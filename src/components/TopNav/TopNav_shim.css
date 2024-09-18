@@ -1,120 +1,120 @@
 .neo-navbar .neo-nav {
-  margin-left: auto;
+	margin-left: auto;
 }
 
 .neo-navbar .neo-nav .neo-tabs {
-  height: 57px;
+	height: 57px;
 }
 
 .neo-navbar .neo-nav--right {
-  padding-right: 1px;
+	padding-right: 1px;
 }
 
 .neo-navbar .neo-nav--right [type="search"]::-webkit-search-cancel-button,
 .neo-navbar .neo-nav--right [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-  appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
 }
 
 .neo-navbar h1.neo-nav-title {
-  font-size: 19px;
-  line-height: 28px;
-  margin-left: 16px;
+	font-size: 19px;
+	line-height: 28px;
+	margin-left: 16px;
 }
 
 .neo-navbar a.neo-nav-link-btn {
-  display: flex;
-  align-items: center;
-  color: var(--tab-default-color);
-  font-size: 16px;
-  text-decoration: none;
-  padding-left: 32px;
-  padding-right: 32px;
-  border-bottom: 2px solid transparent;
+	display: flex;
+	align-items: center;
+	color: var(--tab-default-color);
+	font-size: 16px;
+	text-decoration: none;
+	padding-left: 32px;
+	padding-right: 32px;
+	border-bottom: 2px solid transparent;
 }
 .neo-navbar a.neo-nav-link-btn:hover {
-  color: var(--tab-item-hover-color);
-  background-color: var(--tab-background-hover-color);
-  transition: background-color 0.4s;
+	color: var(--tab-item-hover-color);
+	background-color: var(--tab-background-hover-color);
+	transition: background-color 0.4s;
 }
 .neo-navbar button.neo-nav-link-btn:disabled {
-  font-size: 16px;
-  padding-left: 32px;
-  padding-right: 32px;
-  border-bottom: 2px solid transparent;
-  background-color: unset;
-  background-image: none;
-  transition: none;
+	font-size: 16px;
+	padding-left: 32px;
+	padding-right: 32px;
+	border-bottom: 2px solid transparent;
+	background-color: unset;
+	background-image: none;
+	transition: none;
 
-  /* HACK: disabled tertiary button has some issues that need fixing, hacking this to make it work for now */
-  color: var(--navbar-active-disabled-color);
+	/* HACK: disabled tertiary button has some issues that need fixing, hacking this to make it work for now */
+	color: var(--navbar-active-disabled-color);
 }
 
 /* HACK: disabled tertiary button has some issues that need fixing, hacking this to make it work for now */
 .neo-navbar button.neo-nav-link-btn:disabled:hover {
-  background-color: unset;
-  background-image: none;
-  transition: none;
-  cursor: not-allowed;
+	background-color: unset;
+	background-image: none;
+	transition: none;
+	cursor: not-allowed;
 }
 
 .neo-navbar a.neo-nav-link-btn.neo-nav-link-btn-active {
-  border-bottom: 2px solid var(--tab-action-color);
-  color: var(--tab-action-color);
-  font-weight: 600;
+	border-bottom: 2px solid var(--tab-action-color);
+	color: var(--tab-action-color);
+	font-weight: 600;
 }
 .neo-navbar button.neo-nav-link-btn.neo-nav-link-btn-active:disabled {
-  background-color: unset;
-  background-image: none;
-  transition: none;
-  border-bottom: 2px solid var(--navbar-active-disabled-color);
-  font-weight: 400;
+	background-color: unset;
+	background-image: none;
+	transition: none;
+	border-bottom: 2px solid var(--navbar-active-disabled-color);
+	font-weight: 400;
 }
 
 /* center search input */
 nav.neo-navbar .neo-nav .neo-form-control.neo-input-icon {
-  display: flex;
-  align-items: center;
-  padding-left: 32px;
-  padding-right: 32px;
+	display: flex;
+	align-items: center;
+	padding-left: 32px;
+	padding-right: 32px;
 }
 
 .neo-nav .neo-dropdown:not(:last-child) {
-  padding-right: 0px;
+	padding-right: 0px;
 }
 
 [dir="rtl"] .neo-nav .neo-dropdown:not(:last-child) {
-  padding-left: 0px;
+	padding-left: 0px;
 }
 
 /* grid-ify top nav when screen is <799px */
 @media (max-width: 799px) {
-  .neo-navbar {
-    display: grid;
-    grid-template-areas:
-      "a c"
-      "b b";
-  }
+	.neo-navbar {
+		display: grid;
+		grid-template-areas:
+			"a c"
+			"b b";
+	}
 
-  .neo-navbar .neo-nav--left {
-    grid-area: a;
-  }
-  .neo-navbar .neo-nav {
-    grid-area: b;
-    justify-content: space-between;
-    height: 58px;
-    margin: 0;
-    padding: 0;
-  }
-  .neo-navbar .neo-nav--right {
-    grid-area: c;
-  }
+	.neo-navbar .neo-nav--left {
+		grid-area: a;
+	}
+	.neo-navbar .neo-nav {
+		grid-area: b;
+		justify-content: space-between;
+		height: 58px;
+		margin: 0;
+		padding: 0;
+	}
+	.neo-navbar .neo-nav--right {
+		grid-area: c;
+	}
 
-  .neo-navbar button.neo-nav-link-btn {
-    margin-top: 2px;
-  }
+	.neo-navbar button.neo-nav-link-btn {
+		margin-top: 2px;
+	}
 
-  .neo-navbar .neo-badge__navbutton {
-    margin-top: 1px;
-  }
+	.neo-navbar .neo-badge__navbutton {
+		margin-top: 1px;
+	}
 }

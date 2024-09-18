@@ -33,14 +33,15 @@ export const PaginationItemDisplay = ({
 
 		return (
 			<bdi>
-				{startingItemIndex}-{endingItemIndex} / {itemCount}
+				{startingItemIndex.toLocaleString()} -{" "}
+				{endingItemIndex.toLocaleString()} / {itemCount.toLocaleString()}
 			</bdi>
 		);
 	}
 	if (itemDisplayType === "page") {
 		return (
 			<bdi>
-				{currentPageIndex} / {totalPages}
+				{currentPageIndex.toLocaleString()} / {totalPages.toLocaleString()}
 			</bdi>
 		);
 	}

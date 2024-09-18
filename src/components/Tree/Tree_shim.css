@@ -2,64 +2,64 @@
 
 /* sub tree classes */
 li[role="treeitem"] > ul[role="group"][aria-expanded="false"] {
-  display: none;
+	display: none;
 }
 li[role="treeitem"] > ul[role="group"][aria-expanded="true"] {
-  display: block;
+	display: block;
 }
 
 li[dir="ltr"].neo-treeview__sub-tree-item > ul {
-  margin-left: 1rem;
+	margin-left: 1rem;
 }
 li[dir="rtl"].neo-treeview__sub-tree-item > ul {
-  margin-right: 1rem;
+	margin-right: 1rem;
 }
 
 .neo-treeview__sub-tree-item > .neo-treeview__item {
-  border-right: 2px solid transparent;
-  border-left: 2px solid transparent;
+	border-right: 2px solid transparent;
+	border-left: 2px solid transparent;
 }
 
 li[dir="ltr"].neo-treeview__sub-tree-item
-  > .neo-treeview__item.neo-treeview__item--selected {
-  border-right: 2px solid transparent;
-  border-left: 2px solid #1473e6;
+	> .neo-treeview__item.neo-treeview__item--selected {
+	border-right: 2px solid transparent;
+	border-left: 2px solid #1473e6;
 }
 li[dir="rtl"].neo-treeview__sub-tree-item
-  > .neo-treeview__item.neo-treeview__item--selected {
-  border-right: 2px solid #1473e6;
-  border-left: 2px solid transparent;
+	> .neo-treeview__item.neo-treeview__item--selected {
+	border-right: 2px solid #1473e6;
+	border-left: 2px solid transparent;
 }
 
 .neo-treeview__item--expandable {
-  width: 20px;
+	width: 20px;
 }
 
 li[dir="rtl"].neo-treeview__sub-tree-item
-  .neo-treeview__item--expandable:before {
-  transform: rotate(180deg);
+	.neo-treeview__item--expandable:before {
+	transform: rotate(180deg);
 }
 li[dir="rtl"].neo-treeview__sub-tree-item
-  .neo-treeview__item--expanded
-  .neo-treeview__item--expandable:before {
-  transform: rotate(0deg);
+	.neo-treeview__item--expanded
+	.neo-treeview__item--expandable:before {
+	transform: rotate(0deg);
 }
 /* sub tree classes */
 
 /* treeitem classes */
 li[dir="rtl"].neo-treeview__item {
-  border-right: 2px solid transparent;
-  border-left: 2px solid transparent;
+	border-right: 2px solid transparent;
+	border-left: 2px solid transparent;
 }
 
 li[dir="rtl"].neo-treeview__item.neo-treeview__item--selected {
-  border-left: 2px solid transparent;
-  border-right: 2px solid #1473e6;
+	border-left: 2px solid transparent;
+	border-right: 2px solid #1473e6;
 }
 
 .neo-treeview__item.neo-treeview__item--disabled {
-  color: #939393;
-  /* --treeview-disabled-font-colour: #939393 */
+	color: #939393;
+	/* --treeview-disabled-font-colour: #939393 */
 }
 
 /* treeitem classes */

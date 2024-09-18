@@ -84,7 +84,7 @@ describe("Pagination", () => {
 		const navItems = queryAllByRole("button");
 		expect(navItems).toHaveLength(4); // left, 1, right, and "Rows" select
 		expect(navItems[0]).toBeDisabled();
-		expect(navItems[1]).toBeEnabled();
+		expect(navItems[1]).toBeDisabled();
 		expect(navItems[2]).toBeDisabled();
 	});
 
@@ -232,7 +232,11 @@ describe("Pagination", () => {
 
 					navItems.forEach((navItem, index) => {
 						expect(navItem).toHaveTextContent(expectedDisplayedText[index]);
-						expect(navItem).toBeEnabled();
+						if (navItem.classList.contains(selectedPageClass)) {
+							expect(navItem).toBeDisabled();
+						} else {
+							expect(navItem).toBeEnabled();
+						}
 					});
 
 					// unmount to avoid memory leak
@@ -291,7 +295,7 @@ describe("Pagination", () => {
 						expect(navItemLeftOfSelected).toBeEnabled();
 						const selectedNavItem = navItems[2];
 						expect(selectedNavItem).toHaveTextContent(currentPageIndex);
-						expect(selectedNavItem).toBeEnabled();
+						expect(selectedNavItem).toBeDisabled();
 						const navItemRightOfSelected = navItems[3];
 						expect(navItemRightOfSelected).toHaveTextContent(
 							currentPageIndex + 1,
@@ -350,7 +354,7 @@ describe("Pagination", () => {
 
 						const selectedNavItem = navItems[1];
 						expect(selectedNavItem).toHaveTextContent(currentPageIndex);
-						expect(selectedNavItem).toBeEnabled();
+						expect(selectedNavItem).toBeDisabled();
 
 						// unmount to avoid memory leak
 						unmount();
@@ -372,7 +376,7 @@ describe("Pagination", () => {
 
 					const navItem = navItems[0];
 					expect(navItem).toHaveTextContent(i);
-					expect(navItem).toBeEnabled();
+					expect(navItem).toBeDisabled();
 
 					// unmount to avoid memory leak
 					unmount();
