@@ -286,7 +286,7 @@ export const ServerSidePagination = () => {
 				<li>
 					For server side column filter, implement a customer Filter,
 					onApplyFilterValue, and set manualColumnFilters to true. In this
-					example, the date column has a custom filter that simulates server
+					example, the Date recorded column has a custom filter that simulates server
 					side filtering by exact date match.
 				</li>
 			</ul>
