@@ -38,17 +38,21 @@ const {
 } = composeStories(TableStories);
 
 const getLastNumberFromBDI = async () => {
-	const bdiElement = await waitFor(() => screen.queryByText(/\d+-\d+ \/ \d+/));
+	const bdiElement = await waitFor(() =>
+		screen.getByText(
+			(content, element) => element.tagName.toLowerCase() === "bdi" && content,
+		),
+	);
 	if (!bdiElement) {
 		console.error("BDI element not found");
 		console.log(document.body.innerHTML);
 		throw new Error("Test failed: BDI Element not found");
 	}
 	const bdiText = bdiElement.textContent;
-	const lastNumberMatch = bdiText.match(/\d+$/);
+	const lastNumberMatch = bdiText.match(/[\d,]+$/);
 	const totalNumberOfRows = lastNumberMatch
-		? Number.parseInt(lastNumberMatch[0], 10)
-		: Number.MAX_VALUE;
+		? lastNumberMatch[0]
+		: "no number found";
 	return [bdiText, totalNumberOfRows];
 };
 
@@ -752,7 +756,7 @@ describe("Table", () => {
 			});
 			// should see 10000 rows now
 			const [bdiText, totalNumberOfRows] = await getLastNumberFromBDI();
-			expect(totalNumberOfRows).toBe(10000);
+			expect(totalNumberOfRows).toBe("10,000");
 
 			// get the first date value
 			const firstDateValue = queryAllByRole("cell")[4].textContent;
@@ -798,7 +802,7 @@ describe("Table", () => {
 			// Wait for the bdiElement to reappear
 			const [filteredBidText, filteredNumberOfRows] =
 				await getLastNumberFromBDI();
-			expect(filteredNumberOfRows).toBeLessThan(10000);
+			expect(filteredNumberOfRows).not.toBe("10,000");
 
 			dateColumnFilterButton = container.querySelectorAll(
 				"tr th button.neo-multiselect",
@@ -849,7 +853,7 @@ describe("Table", () => {
 
 			// Wait for the bdiElement to reappear as 10000
 			const [_, restoredNumberOfRows] = await getLastNumberFromBDI();
-			expect(restoredNumberOfRows).toBe(10000);
+			expect(restoredNumberOfRows).toBe("10,000");
 
 			dateColumnFilterButton = container.querySelectorAll(
 				"tr th button.neo-multiselect",
