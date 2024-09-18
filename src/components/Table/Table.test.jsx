@@ -798,7 +798,9 @@ describe("Table", () => {
 			await user.click(dateColumnFilterApplyButton);
 
 			// check that the filter icon is displayed
-			const filters = screen.queryAllByRole("img", { name: "Filter applied" });
+			const filters = screen.queryAllByRole("img", {
+				name: FilledFields.translations.header.filterApplied,
+			});
 			expect(filters).toHaveLength(1);
 
 			// Wait for the bdiElement to disappear
