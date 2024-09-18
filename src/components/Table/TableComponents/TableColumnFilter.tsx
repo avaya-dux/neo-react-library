@@ -1,5 +1,6 @@
 import { Checkbox } from "components/Checkbox";
 import { CheckboxGroup } from "components/CheckboxGroup";
+import { TextInput } from "components/TextInput";
 import log from "loglevel";
 import { useCallback, useContext, useMemo, useState } from "react";
 import type { ColumnInstance, IdType, Row } from "react-table";
@@ -10,7 +11,6 @@ import type {
 	TableColumnFilterProps,
 } from "../types";
 import { TableFilterDrawer } from "./TableFilterDrawer";
-import { TextInput } from "components/TextInput";
 
 const logger = log.getLogger("table-column-filter-logger");
 logger.disableAll();
