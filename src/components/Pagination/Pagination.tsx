@@ -34,7 +34,7 @@ import "./Pagination_shim.css";
     }}
  * />
  *
- * @see https://design.avayacloud.com/components/web/tables-web
+ * @see https://design.avaya.com/components/pagination
  */
 export const Pagination = ({
 	id = `pagination-${useId()}`,
