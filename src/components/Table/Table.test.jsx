@@ -924,14 +924,70 @@ describe("Table", () => {
 				"neo-drawer neo-drawer--isOpen",
 			);
 
+			let nameInput = getAllByRole("textbox")[1];
+			expect(nameInput).toBeVisible();
+			await user.type(nameInput, "daneil");
+
 			const applyButton = getAllByLabelText(
 				FilledFields.translations.toolbar.apply,
 			)[1];
 			await user.click(applyButton);
+
+			// only one row should be visible
 			expect(getAllByRole("dialog")[1]).toHaveClass("neo-drawer");
+			const numberOfRows = getAllByRole("row");
+			expect(numberOfRows).toHaveLength(2);
+
+			// header filter icon should be visible
+			let filterIcon = container.querySelector("tr th button span[role='img']");
+			expect(filterIcon).toBeVisible();
+
+			// check icon in menu should be visible
+			await user.click(firstColumnSortButton);
+			let checkIcon = container.querySelector(
+				"tr th div[role='menuitem'] span[role='img']",
+			);
+			expect(checkIcon).toBeVisible();
+
+			// open filter dialog
+			await user.click(queryAllByRole("menuitem")[3]);
+
+			nameInput = getAllByRole("textbox")[1];
+			expect(nameInput).toBeVisible();
+			expect(nameInput).toHaveValue("daneil");
+
+			const clearButton = container.querySelectorAll(
+				"button[aria-label='clear input']",
+			)[1];
+			expect(clearButton).toBeVisible();
+
+			await user.click(clearButton);
+
+			expect(nameInput).toBeVisible();
+			expect(nameInput).toHaveValue("");
+
+			const applyButtonAgain = getAllByLabelText(
+				FilledFields.translations.toolbar.apply,
+			)[1];
+			expect(applyButtonAgain).toBeVisible();
+			await user.click(applyButtonAgain);
+
+			// expect all rows to be visible
+			expect(queryAllByRole("row")).toHaveLength(11);
+
+			// expect filter icon to be hidden
+			filterIcon = container.querySelector("tr th button span[role='img']");
+			expect(filterIcon).toBeNull();
+
+			// check icon in menu should be visible
+			await user.click(firstColumnSortButton);
+			checkIcon = container.querySelector(
+				"tr th div[role='menuitem'] span[role='img']",
+			);
+			expect(checkIcon).toBeNull();
 		});
 
-		it("allows column filtering via toolbar Filter Icon Button", async () => {
+		it("toggles column visibility via toolbar Filter Icon Button", async () => {
 			const { container, getAllByRole, getByLabelText, getAllByLabelText } =
 				renderResult;
 
