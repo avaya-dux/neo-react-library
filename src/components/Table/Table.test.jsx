@@ -805,7 +805,7 @@ describe("Table", () => {
 			)[4];
 			await user.click(dateColumnFilterButton);
 
-			// check icon in front of menu item should be visible
+			// check icon in front of menu item is visible
 			let checkIcon = container.querySelector(
 				"tr th div[role='menuitem'] span[role='img']",
 			);

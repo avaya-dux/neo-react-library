@@ -38,7 +38,7 @@ import {
 
 import log from "loglevel";
 const logger = log.getLogger("TableStories");
-logger.enableAll();
+logger.disableAll();
 
 import "./TableStories_shim.css";
 
