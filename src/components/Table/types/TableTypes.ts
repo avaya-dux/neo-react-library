@@ -46,6 +46,14 @@ export type TableBodyProps<T extends AnyRecord> = {
 	translations: IBodyTranslations;
 } & TableHeaderBodySharedProps<T>;
 
+export type FilterCallback = (columnId: string, value: unknown) => void;
+
+export type TableColumnFilterProps = {
+	translations: ITableHeaderTranslations;
+	onApplyFilterValue?: FilterCallback;
+	onCancelFilterValue?: FilterCallback;
+};
+
 export type DataSyncOptionType = "no" | "clear" | "asc" | "desc";
 export interface IFilterContext<T extends AnyRecord = AnyRecord> {
 	allowToggleColumnVisibility: boolean;
@@ -69,6 +77,7 @@ export type TableProps<T extends AnyRecord> = {
 	id?: string;
 	manualPagination?: boolean;
 	manualRowCount?: number;
+	manualColumnFilters?: boolean;
 	showPagination?: boolean;
 	pushPaginationDown?: boolean;
 	draggableRows?: boolean;
@@ -84,6 +93,8 @@ export type TableProps<T extends AnyRecord> = {
 	translations?: ITableTranslations;
 } & ToolbarSharedProps<T> &
 	TableOptions<T> &
+	Pick<TableColumnFilterProps, "onApplyFilterValue" | "onCancelFilterValue"> &
 	Pick<TableBodyProps<T>, "handleRowToggled"> &
-	Partial<Pick<IFilterContext, "allowToggleColumnVisibility">> &
-	Partial<Pick<IFilterContext, "renderInsetTable">>;
+	Partial<
+		Pick<IFilterContext, "allowToggleColumnVisibility" | "renderInsetTable">
+	>;

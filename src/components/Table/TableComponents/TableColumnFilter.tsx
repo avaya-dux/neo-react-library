@@ -1,10 +1,15 @@
 import { Checkbox } from "components/Checkbox";
 import { CheckboxGroup } from "components/CheckboxGroup";
+import { TextInput } from "components/TextInput";
 import log from "loglevel";
 import { useCallback, useContext, useMemo, useState } from "react";
 import type { ColumnInstance, IdType, Row } from "react-table";
 import { FilterContext } from "../helpers";
-import type { AnyRecord, ITableHeaderTranslations } from "../types";
+import type {
+	AnyRecord,
+	ITableHeaderTranslations,
+	TableColumnFilterProps,
+} from "../types";
 import { TableFilterDrawer } from "./TableFilterDrawer";
 
 const logger = log.getLogger("table-column-filter-logger");
@@ -20,7 +25,9 @@ const getColumnHeaderString = (column?: ColumnInstance<AnyRecord>) => {
 // given a column, return a default filter UI wrapped in TableFilterDrawer
 export const TableColumnFilterDrawer = ({
 	translations,
-}: { translations: ITableHeaderTranslations }) => {
+	onApplyFilterValue,
+	onCancelFilterValue,
+}: TableColumnFilterProps) => {
 	const { filterColumn: column, setFilterColumn } = useContext(FilterContext);
 	const [newFilterValue, setNewFilterValue] = useState(column?.filterValue);
 
@@ -41,28 +48,32 @@ export const TableColumnFilterDrawer = ({
 			return (
 				<CheckboxGroupFilter
 					column={column}
-					onChange={setNewFilterValue}
+					onChange={handleOnChange}
 					translations={translations}
 				/>
 			);
 		}
-		return <DefaultColumnFilter column={column} onChange={setNewFilterValue} />;
+		return <DefaultColumnFilter column={column} onChange={handleOnChange} />;
 	}, [column, translations, handleOnChange]);
 
 	const handleCancel = useCallback(() => {
-		const { setFilter, filterValue } = column || {};
+		if (!column) return;
+		const { setFilter, filterValue, id: columnId } = column;
 		setFilter?.(filterValue);
 		setFilterColumn?.(undefined);
-	}, [column, setFilterColumn]);
+		onCancelFilterValue?.(columnId, filterValue);
+	}, [column, setFilterColumn, onCancelFilterValue]);
 
 	const handleApply = useCallback(() => {
+		if (!column) return;
 		// apply filter
-		const { setFilter } = column || {};
+		const { setFilter, id: columnId } = column;
 		logger.debug("handleApply newFilterValue", newFilterValue);
 		setFilter?.(newFilterValue);
 		// clear filter column in context
 		setFilterColumn?.(undefined);
-	}, [column, newFilterValue, setFilterColumn]);
+		onApplyFilterValue?.(columnId, newFilterValue);
+	}, [column, newFilterValue, setFilterColumn, onApplyFilterValue]);
 
 	return (
 		<TableFilterDrawer
@@ -81,20 +92,30 @@ export const TableColumnFilterDrawer = ({
 export const DefaultColumnFilter = <T extends AnyRecord>({
 	column: { filterValue, preFilteredRows },
 	onChange,
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-}: { column: ColumnInstance<T>; onChange: React.Dispatch<any> }) => {
-	const [value, setValue] = useState(filterValue);
+	label = "Search",
+	placeholder,
+	helperText = "",
+}: {
+	column: ColumnInstance<T>;
+	onChange: (value: string | string[]) => void;
+	label?: string;
+	placeholder?: string;
+	helperText?: string;
+}) => {
+	const [value, setValue] = useState(filterValue || "");
 	const count = preFilteredRows.length;
 
 	return (
-		<input
+		<TextInput
+			label={label}
 			value={value}
+			helperText={helperText}
 			onChange={(e) => {
-				const value = e.target.value || undefined;
+				const value = e.target.value || "";
 				onChange(value);
 				setValue(value);
 			}}
-			placeholder={`Search ${count} records...`}
+			placeholder={placeholder || `Search ${count} records...`}
 		/>
 	);
 };
@@ -114,7 +135,7 @@ export const CheckboxGroupFilter = <T extends AnyRecord>({
 	translations,
 }: {
 	column: ColumnInstance<T>;
-	onChange: React.Dispatch<unknown>;
+	onChange: (value: string | string[]) => void;
 	translations: ITableHeaderTranslations;
 }) => {
 	const { id, preFilteredRows } = column;

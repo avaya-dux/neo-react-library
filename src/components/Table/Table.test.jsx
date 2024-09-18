@@ -1,5 +1,11 @@
 import { composeStories } from "@storybook/testing-react";
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+	render,
+	screen,
+	waitFor,
+	waitForElementToBeRemoved,
+	within,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
@@ -28,7 +34,27 @@ const {
 	Templated,
 	SecondPage,
 	DisabledRows,
+	ServerSidePagination,
 } = composeStories(TableStories);
+
+const getLastNumberFromBDI = async () => {
+	const bdiElement = await waitFor(() =>
+		screen.getByText(
+			(content, element) => element.tagName.toLowerCase() === "bdi" && content,
+		),
+	);
+	if (!bdiElement) {
+		console.error("BDI element not found");
+		console.log(document.body.innerHTML);
+		throw new Error("Test failed: BDI Element not found");
+	}
+	const bdiText = bdiElement.textContent;
+	const lastNumberMatch = bdiText.match(/[\d,]+$/);
+	const totalNumberOfRows = lastNumberMatch
+		? lastNumberMatch[0]
+		: "no number found";
+	return [bdiText, totalNumberOfRows];
+};
 
 describe("Table", () => {
 	const user = userEvent.setup();
@@ -714,6 +740,133 @@ describe("Table", () => {
 		});
 	});
 
+	describe("server side pagination, search, column filtering", () => {
+		let renderResult;
+
+		beforeEach(() => {
+			renderResult = render(<ServerSidePagination />);
+		});
+
+		it("filters by date value", async () => {
+			const { container, queryByText, queryAllByRole } = renderResult;
+
+			// waitfor the no data available message to disappear
+			await waitForElementToBeRemoved(() => queryByText("no data available"), {
+				timeout: 5000,
+			});
+			// should see 10000 rows now
+			const [bdiText, totalNumberOfRows] = await getLastNumberFromBDI();
+			expect(totalNumberOfRows).toBe("10,000");
+
+			// get the first date value
+			const firstDateValue = queryAllByRole("cell")[4].textContent;
+			const pattern = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+			expect(firstDateValue).toMatch(pattern);
+
+			// Get the menu button element with the text content "Date recorded"
+			let dateColumnFilterButton = container.querySelectorAll(
+				"tr th button.neo-multiselect",
+			)[4];
+			expect(dateColumnFilterButton).toHaveTextContent("Date recorded");
+			await user.click(dateColumnFilterButton);
+
+			let dateColumnFilterMenuItems = queryAllByRole("menuitem");
+			expect(dateColumnFilterMenuItems).toHaveLength(4);
+			await user.click(dateColumnFilterMenuItems[3]);
+
+			let columnFilterDrawer = queryAllByRole("dialog")[1];
+			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--isOpen");
+
+			// Wait for the input box to appear
+			let dateInput = await waitFor(() =>
+				within(columnFilterDrawer).getByRole("textbox"),
+			);
+
+			await user.type(dateInput, firstDateValue);
+
+			let dateColumnFilterApplyButton =
+				within(columnFilterDrawer).getByLabelText("Apply");
+			await user.click(dateColumnFilterApplyButton);
+
+			// check that the filter icon is displayed
+			let filters = screen.queryAllByRole("img", {
+				name: FilledFields.translations.header.filterApplied,
+			});
+			expect(filters).toHaveLength(1);
+
+			// Wait for the bdiElement to disappear
+			await waitForElementToBeRemoved(() => queryByText(bdiText), {
+				timeout: 5000,
+			});
+
+			// Wait for the bdiElement to reappear
+			const [filteredBidText, filteredNumberOfRows] =
+				await getLastNumberFromBDI();
+			expect(filteredNumberOfRows).not.toBe("10,000");
+
+			dateColumnFilterButton = container.querySelectorAll(
+				"tr th button.neo-multiselect",
+			)[4];
+			await user.click(dateColumnFilterButton);
+
+			// check icon in front of menu item is visible
+			let checkIcon = container.querySelector(
+				"tr th div[role='menuitem'] span[role='img']",
+			);
+			expect(checkIcon).toBeVisible();
+
+			dateColumnFilterMenuItems = queryAllByRole("menuitem");
+			expect(dateColumnFilterMenuItems).toHaveLength(4);
+			await user.click(dateColumnFilterMenuItems[3]);
+
+			columnFilterDrawer = queryAllByRole("dialog")[1];
+			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--isOpen");
+
+			// Wait for the input box to appear
+			dateInput = await waitFor(() =>
+				within(columnFilterDrawer).getByRole("textbox"),
+			);
+			expect(dateInput).toBeVisible();
+			expect(dateInput).toHaveValue(firstDateValue);
+
+			const dateColumnFilterClearButton =
+				within(columnFilterDrawer).getByLabelText("clear input");
+			expect(dateColumnFilterClearButton).toBeVisible();
+			await user.click(dateColumnFilterClearButton);
+
+			expect(dateInput).toHaveValue("");
+			// apply empty filter value
+			dateColumnFilterApplyButton =
+				within(columnFilterDrawer).getByLabelText("Apply");
+			await user.click(dateColumnFilterApplyButton);
+
+			// check that the filter icon is gone
+			filters = screen.queryAllByRole("img", {
+				name: FilledFields.translations.header.filterApplied,
+			});
+			expect(filters.length).toBe(0);
+
+			// Wait for the filteredBidText to disappear
+			await waitForElementToBeRemoved(() => queryByText(filteredBidText), {
+				timeout: 5000,
+			});
+
+			// Wait for the bdiElement to reappear as 10000
+			const [_, restoredNumberOfRows] = await getLastNumberFromBDI();
+			expect(restoredNumberOfRows).toBe("10,000");
+
+			dateColumnFilterButton = container.querySelectorAll(
+				"tr th button.neo-multiselect",
+			)[4];
+			await user.click(dateColumnFilterButton);
+
+			// check icon in front of menu item is gone
+			checkIcon = container.querySelector(
+				"tr th div[role='menuitem'] span[role='img']",
+			);
+			expect(checkIcon).toBeNull();
+		});
+	});
 	describe("sort and filter functionality", () => {
 		let renderResult;
 
@@ -820,14 +973,70 @@ describe("Table", () => {
 				"neo-drawer neo-drawer--isOpen",
 			);
 
+			let nameInput = getAllByRole("textbox")[1];
+			expect(nameInput).toBeVisible();
+			await user.type(nameInput, "daneil");
+
 			const applyButton = getAllByLabelText(
 				FilledFields.translations.toolbar.apply,
 			)[1];
 			await user.click(applyButton);
+
+			// only one row should be visible
 			expect(getAllByRole("dialog")[1]).toHaveClass("neo-drawer");
+			const numberOfRows = getAllByRole("row");
+			expect(numberOfRows).toHaveLength(2);
+
+			// header filter icon should be visible
+			let filterIcon = container.querySelector("tr th button span[role='img']");
+			expect(filterIcon).toBeVisible();
+
+			// check icon in menu should be visible
+			await user.click(firstColumnSortButton);
+			let checkIcon = container.querySelector(
+				"tr th div[role='menuitem'] span[role='img']",
+			);
+			expect(checkIcon).toBeVisible();
+
+			// open filter dialog
+			await user.click(queryAllByRole("menuitem")[3]);
+
+			nameInput = getAllByRole("textbox")[1];
+			expect(nameInput).toBeVisible();
+			expect(nameInput).toHaveValue("daneil");
+
+			const clearButton = container.querySelectorAll(
+				"button[aria-label='clear input']",
+			)[1];
+			expect(clearButton).toBeVisible();
+
+			await user.click(clearButton);
+
+			expect(nameInput).toBeVisible();
+			expect(nameInput).toHaveValue("");
+
+			const applyButtonAgain = getAllByLabelText(
+				FilledFields.translations.toolbar.apply,
+			)[1];
+			expect(applyButtonAgain).toBeVisible();
+			await user.click(applyButtonAgain);
+
+			// expect all rows to be visible
+			expect(queryAllByRole("row")).toHaveLength(11);
+
+			// expect filter icon to be hidden
+			filterIcon = container.querySelector("tr th button span[role='img']");
+			expect(filterIcon).toBeNull();
+
+			// check icon in menu should be visible
+			await user.click(firstColumnSortButton);
+			checkIcon = container.querySelector(
+				"tr th div[role='menuitem'] span[role='img']",
+			);
+			expect(checkIcon).toBeNull();
 		});
 
-		it("allows column filtering via toolbar Filter Icon Button", async () => {
+		it("toggles column visibility via toolbar Filter Icon Button", async () => {
 			const { container, getAllByRole, getByLabelText, getAllByLabelText } =
 				renderResult;
 
