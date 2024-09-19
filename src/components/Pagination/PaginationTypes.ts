@@ -15,7 +15,7 @@ export type PaginationProps = {
 	itemsPerPageOptions?: number[];
 
 	alwaysShowPagination?: boolean;
-	forceCondensedView?: boolean;
+	view?: "expanded" | "condensed" | "auto";
 	itemDisplayType?: "count" | "page" | "none";
 
 	onPageChange: (

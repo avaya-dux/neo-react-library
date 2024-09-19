@@ -48,7 +48,7 @@ export const Pagination = ({
 
 	alwaysShowPagination,
 	itemDisplayType,
-	forceCondensedView = false,
+	view = "auto",
 
 	onPageChange,
 	onItemsPerPageChange,
@@ -88,8 +88,10 @@ export const Pagination = ({
 
 	const isCondensed = useMemo(() => {
 		const requiredWidth = 820; // TODO: calculate if we must condense the pagination
-		return forceCondensedView || rootWidth < requiredWidth;
-	}, [forceCondensedView, rootWidth]);
+		return (
+			view === "condensed" || (view === "auto" && rootWidth < requiredWidth)
+		);
+	}, [view, rootWidth]);
 
 	return (
 		<div className="neo-pagination__row" id={id} ref={rootRef}>
