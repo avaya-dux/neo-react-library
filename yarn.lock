@@ -28,15 +28,15 @@
   resolved "https://registry.yarnpkg.com/@atomic-layout/core/-/core-0.14.1.tgz#3d69be5f79775f11b8008f18bc603b04a2141ccd"
   integrity sha512-o5nhk/1djuKzB20C2LSOuetTDytsbGg4c0UfxXkq1pqoaN3hKJcHPYF9nV+p6+P5CWqNBaaJddZ32OsFSppULQ==
 
-"@avaya/neo-icons@1.8.15":
-  version "1.8.15"
-  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.15.tgz#4814998c290c3c443f16b751ed540d4da2400f50"
-  integrity sha512-ZqPOpcwvv+EiDLHpcDz0TdsaMaYNqZ7jkZkSKQeOxJNfo1iIdtR6QIk98j6nPvkPOvqW+oSPNdgHZohK70q2fg==
+"@avaya/neo-icons@1.8.16":
+  version "1.8.16"
+  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.16.tgz#63ab62ae5d884f294e7939adb603ef32453ad637"
+  integrity sha512-GZ9eR21i/IyYN17xQDaVdOEywGIfq8o+zOtips9mKCkqvUnumx5ZOqv+h+9UzIr1A9YFRBdqGiPz+fH9zBQPIw==
 
-"@avaya/neo@3.81.15":
-  version "3.81.15"
-  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.15.tgz#86d6f673bec403ea6a8a8922715b31a3fc8a0f67"
-  integrity sha512-vZKQZjFpoBTGt7xn1qmOoT/K1p6zHh8lLuupeqJnbII1ZiC3DoFYs8P906irGkf91Uw7Lde61bJ9cpkxXCcqEA==
+"@avaya/neo@3.81.16":
+  version "3.81.16"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.16.tgz#1424d2d9683b843361c7f8fd41e495b1272a6852"
+  integrity sha512-5v3Z73pkcnhws8Dhi03cfMUdK0af9cWl7Xl7vpTOdQt5JgAeM2MckofJzsc4VmQihcA/b5UvL+yOL66fNadOFA==
 
 "@aw-web-design/x-default-browser@1.4.126":
   version "1.4.126"
