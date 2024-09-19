@@ -7,8 +7,8 @@ import {
 	PaginationNavigation,
 } from "./Nodes";
 
-import type { PaginationProps } from "./PaginationTypes";
 import { PaginationCondensed } from "./Nodes/PaginationCondensed";
+import type { PaginationProps } from "./PaginationTypes";
 
 import "./Pagination_shim.css";
 
