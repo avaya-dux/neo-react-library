@@ -8,6 +8,7 @@ import {
 } from "./Nodes";
 
 import type { PaginationProps } from "./PaginationTypes";
+import { PaginationCondensed } from "./Nodes/PaginationCondensed";
 
 import "./Pagination_shim.css";
 
@@ -47,6 +48,7 @@ export const Pagination = ({
 
 	alwaysShowPagination,
 	itemDisplayType,
+	forceCondensedView = false,
 
 	onPageChange,
 	onItemsPerPageChange,
@@ -84,47 +86,66 @@ export const Pagination = ({
 		return () => window.removeEventListener("resize", updateRootWidth);
 	}, []);
 
+	const isCondensed = useMemo(() => {
+		const requiredWidth = 820; // TODO: calculate if we must condense the pagination
+		return forceCondensedView || rootWidth < requiredWidth;
+	}, [forceCondensedView, rootWidth]);
+
 	return (
 		<div className="neo-pagination__row" id={id} ref={rootRef}>
-			{leftNode || (
-				<PaginationItemDisplay
+			{isCondensed ? (
+				<PaginationCondensed
 					currentPageIndex={currentPageIndex}
-					itemCount={itemCount}
-					itemDisplayType={itemDisplayType}
-					itemsPerPage={itemsPerPage}
+					onPageChange={onPageChange}
 					totalPages={totalPages}
-				/>
-			)}
-
-			{centerNode || (
-				<PaginationNavigation
+					pagesText={pagesText}
+					goToPageText={goToPageText}
 					backIconButtonText={backIconButtonText}
 					nextIconButtonText={nextIconButtonText}
-					alwaysShowPagination={alwaysShowPagination}
-					currentPageIndex={currentPageIndex}
-					totalPages={totalPages}
-					onPageChange={onPageChange}
-					paginationRootWidth={rootWidth}
 				/>
-			)}
+			) : (
+				<>
+					{leftNode || (
+						<PaginationItemDisplay
+							currentPageIndex={currentPageIndex}
+							itemCount={itemCount}
+							itemDisplayType={itemDisplayType}
+							itemsPerPage={itemsPerPage}
+							totalPages={totalPages}
+						/>
+					)}
 
-			{rightNode || (
-				<div className="neo-pagination__pages-selection">
-					<GoToPage
-						aria-label={goToPageText}
-						currentPageIndex={currentPageIndex}
-						onPageChange={onPageChange}
-						pagesText={pagesText}
-						totalPages={totalPages}
-					/>
+					{centerNode || (
+						<PaginationNavigation
+							backIconButtonText={backIconButtonText}
+							nextIconButtonText={nextIconButtonText}
+							alwaysShowPagination={alwaysShowPagination}
+							currentPageIndex={currentPageIndex}
+							totalPages={totalPages}
+							onPageChange={onPageChange}
+							paginationRootWidth={rootWidth}
+						/>
+					)}
 
-					<PaginationItemsPerPageSelection
-						itemsPerPage={itemsPerPage}
-						itemsPerPageLabel={itemsPerPageLabel}
-						itemsPerPageOptions={itemsPerPageOptions}
-						onItemsPerPageChange={onItemsPerPageChange}
-					/>
-				</div>
+					{rightNode || (
+						<div className="neo-pagination__pages-selection">
+							<GoToPage
+								aria-label={goToPageText}
+								currentPageIndex={currentPageIndex}
+								onPageChange={onPageChange}
+								pagesText={pagesText}
+								totalPages={totalPages}
+							/>
+
+							<PaginationItemsPerPageSelection
+								itemsPerPage={itemsPerPage}
+								itemsPerPageLabel={itemsPerPageLabel}
+								itemsPerPageOptions={itemsPerPageOptions}
+								onItemsPerPageChange={onItemsPerPageChange}
+							/>
+						</div>
+					)}
+				</>
 			)}
 		</div>
 	);
