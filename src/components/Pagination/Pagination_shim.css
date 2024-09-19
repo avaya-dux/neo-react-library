@@ -131,34 +131,6 @@
 		display: flex;
 		justify-content: flex-end;
 		gap: 1rem;
-
-		.neo-input-editable__wrapper {
-			min-height: unset;
-		}
-
-		.neo-input {
-			height: 30px;
-			min-height: unset;
-			margin: 0;
-
-			&:focus {
-				margin: 0;
-			}
-		}
-
-		/* NOTE: this hides the "spin button" from the number input: https://stackoverflow.com/a/4298216/1022765 */
-		input[type="number"] {
-			appearance: textfield;
-			-moz-appearance: textfield;
-			-webkit-appearance: none;
-
-			&::-webkit-inner-spin-button,
-			&::-webkit-outer-spin-button {
-				/* display: none; <- Crashes Chrome on hover */
-				-webkit-appearance: none;
-				margin: 0;
-			}
-		}
 	}
 
 	[dir="rtl"] & .neo-multiselect .neo-multiselect-combo__header {
