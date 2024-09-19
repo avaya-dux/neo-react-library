@@ -132,23 +132,6 @@
 		justify-content: flex-end;
 		gap: 1rem;
 
-		.pagination__go-to-page {
-			display: grid;
-			grid-template-columns: 1fr auto auto;
-			align-items: center;
-			gap: 4px;
-
-			.neo-input {
-				max-width: unset;
-				padding-right: 6px;
-
-				[dir="rtl"] & {
-					padding-left: 6px;
-					padding-right: 12px;
-				}
-			}
-		}
-
 		.neo-input-editable__wrapper {
 			min-height: unset;
 		}
@@ -176,16 +159,6 @@
 				margin: 0;
 			}
 		}
-	}
-
-	[dir="rtl"] & .pagination__go-to-page .neo-input:not(last-child) {
-		margin-left: unset;
-
-		/* TODO: the proper fix is to remove the three lines from `_pagination.scss` that are:
-			@include rtl-selector {
-				margin-left: 32px;
-			}
-		*/
 	}
 
 	[dir="rtl"] & .neo-multiselect .neo-multiselect-combo__header {
