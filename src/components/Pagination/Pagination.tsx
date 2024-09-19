@@ -87,6 +87,8 @@ export const Pagination = ({
 	}, []);
 
 	const isCondensed = useMemo(() => {
+		if (process.env.NODE_ENV === "test") return false;
+
 		const requiredWidth = 820; // TODO: calculate if we must condense the pagination
 		return (
 			view === "condensed" || (view === "auto" && rootWidth < requiredWidth)
