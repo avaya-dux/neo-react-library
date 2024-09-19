@@ -1,0 +1,195 @@
+/* `neo-pagination__row` is the root pagination class, this marks it's immediate parent be the container */
+*:has(> .neo-pagination__row) {
+	container-name: pagination;
+	container-type: inline-size;
+}
+
+/* neo-css default to `display: flex`, when the container is >1000px, use a grid format so that the pagination buttons are visually centered */
+@container pagination (inline-size > 1000px) {
+	.neo-pagination__row {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+
+/* new styles, these extend the styles set by neo-css */
+.neo-pagination__row {
+	color: var(--pagination-font-color);
+
+	/* cender node, page buttons */
+	nav.neo-pagination .neo-pagination__list {
+		button.neo-btn-primary:disabled {
+			font-weight: 600;
+			background-color: var(--button-color-primary);
+			cursor: pointer;
+		}
+
+		button.neo-btn-tertiary {
+			color: var(--pagination-font-color);
+
+			&:hover {
+				color: var(--pagination-font-color);
+				background-color: var(--pagination-unselect-button-hover-color);
+			}
+		}
+	}
+
+	/* right node, go-to and "rows" */
+	.neo-pagination__pages-selection {
+		.neo-form-control .neo-input-group {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 0.5rem;
+
+			label {
+				color: var(--pagination-font-color);
+				font-size: 14px;
+				padding-bottom: 0;
+			}
+		}
+	}
+}
+
+/* overriding styles, these overwrite to the styles set by neo-css */
+.neo-pagination__row {
+	nav.neo-pagination {
+		flex-wrap: nowrap;
+		gap: 4px;
+		margin: 0;
+
+		/* NOTE: this cannot go inside of `.neo-pagination__list` as the styles conflict and output the wrong result */
+		button.neo-btn-square.neo-pagination__arrow-btn {
+			width: 24px;
+			margin-left: 4px;
+			margin-right: 4px;
+			/* TODO: ask Matt if we can just trash this style, do the arrows _really_ need special width+margin? */
+		}
+
+		.neo-pagination__list {
+			flex-wrap: nowrap;
+			gap: 4px;
+			margin: 0;
+
+			& li {
+				height: 32px;
+				width: unset;
+
+				&:has(> .neo-icon-ellipses-horizontal) {
+					min-width: 32px;
+				}
+			}
+
+			.neo-icon-ellipses-horizontal {
+				font-size: 16px;
+			}
+
+			.neo-btn-square {
+				padding-left: 7px;
+				padding-right: 7px;
+
+				width: unset;
+				min-width: 32px;
+
+				&.neo-btn-square-tertiary--info {
+					background-image: unset;
+					background-color: transparent;
+				}
+			}
+		}
+	}
+
+	/* TODO: ^ is good enough, below this line needs work */
+	.neo-multiselect {
+		margin-right: 0;
+	}
+
+	.neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
+		height: 30px;
+		min-height: unset;
+	}
+
+	.neo-input-group
+		.neo-multiselect
+		span.neo-multiselect-combo__header
+		button.neo-multiselect__header {
+		margin-right: 8px;
+
+		[dir="rtl"] & {
+			margin-right: 0;
+			margin-left: 8px;
+		}
+	}
+
+	.neo-multiselect
+		span.neo-multiselect-combo__header
+		button.neo-multiselect__header:last-child {
+		width: auto;
+	}
+
+	.neo-pagination__pages-selection {
+		display: flex;
+		justify-content: flex-end;
+		gap: 1rem;
+
+		.pagination__go-to-page {
+			display: grid;
+			grid-template-columns: 1fr auto auto;
+			align-items: center;
+			gap: 4px;
+
+			.neo-input {
+				max-width: unset;
+				padding-right: 6px;
+
+				[dir="rtl"] & {
+					padding-left: 6px;
+					padding-right: 12px;
+				}
+			}
+		}
+
+		.neo-input-editable__wrapper {
+			min-height: unset;
+		}
+
+		.neo-input {
+			height: 30px;
+			min-height: unset;
+			margin: 0;
+
+			&:focus {
+				margin: 0;
+			}
+		}
+
+		/* NOTE: this hides the "spin button" from the number input: https://stackoverflow.com/a/4298216/1022765 */
+		input[type="number"] {
+			appearance: textfield;
+			-moz-appearance: textfield;
+			-webkit-appearance: none;
+
+			&::-webkit-inner-spin-button,
+			&::-webkit-outer-spin-button {
+				/* display: none; <- Crashes Chrome on hover */
+				-webkit-appearance: none;
+				margin: 0;
+			}
+		}
+	}
+
+	[dir="rtl"] & .pagination__go-to-page .neo-input:not(last-child) {
+		margin-left: unset;
+
+		/* TODO: the proper fix is to remove the three lines from `_pagination.scss` that are:
+			@include rtl-selector {
+				margin-left: 32px;
+			}
+		*/
+	}
+
+	[dir="rtl"] & .neo-multiselect .neo-multiselect-combo__header {
+		/* IMPORTANT: this overrides a broken style that I can't find in either library */
+		padding-left: 24px;
+	}
+}

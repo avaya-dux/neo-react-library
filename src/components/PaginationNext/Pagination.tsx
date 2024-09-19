@@ -1,7 +1,14 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 import type { PaginationProps } from "./PaginationTypes";
-import { PaginationContext } from "./PaginationContext";
+
+import { PaginationCondensed } from "./PaginationCondensed";
+import {
+	GoToPage,
+	PaginationItemDisplay,
+	PaginationItemsPerPageSelection,
+	PaginationNavigation,
+} from "./Nodes";
 
 import "./Pagination_shim.css";
 
@@ -14,44 +21,30 @@ import "./Pagination_shim.css";
  *
  * @example
  * <Pagination
-    currentPageIndex={pageIndex}
-    itemCount={itemArray.length}
-    itemsPerPage={itemsPerPage}
-    itemsPerPageOptions={[1, 5, 10]}
-    onPageChange={(e, newIndex) => {
-      e?.preventDefault();
-      setPageIndex(newIndex);
-    }}
-    onItemsPerPageChange={(e, newItemsPerPage) => {
-      e?.preventDefault();
-      setItemsPerPage(newItemsPerPage);
-    }}
+ *  currentPageIndex={pageIndex}
+ *  itemCount={itemArray.length}
+ *  itemsPerPage={itemsPerPage}
+ *  itemsPerPageOptions={[5, 10, 50]}
+ *  onPageChange={(e, newIndex) => {
+ *   setPageIndex(newIndex);
+ *  }}
+ *  onItemsPerPageChange={(e, newItemsPerPage) => {
+ *   setItemsPerPage(newItemsPerPage);
+ *  }}
  * />
  *
  * @see https://design.avaya.com/components/pagination
  */
-export const Pagination = ({
-	id = `pagination-${useId()}`,
+export const Pagination = (props: PaginationProps) => {
+	const {
+		id = `pagination-${useId()}`,
 
-	currentPageIndex,
-	itemCount,
-	itemsPerPage = 10,
-	itemsPerPageOptions = [5, 10, 25, 50],
+		itemCount,
+		itemsPerPage = 10,
 
-	alwaysShowPagination = false,
-	forceCondensedView = false,
+		forceCondensedView = false,
+	} = props;
 
-	// event handlers
-	onPageChange,
-	onItemsPerPageChange,
-
-	// translations
-	backIconButtonText = "back",
-	nextIconButtonText = "next",
-	goToPageText = "Go to page",
-	pagesText = "pages",
-	itemsPerPageLabel = "Rows",
-}: PaginationProps) => {
 	const totalPages = useMemo(
 		() => Math.ceil(itemCount / itemsPerPage),
 		[itemCount, itemsPerPage],
@@ -75,23 +68,31 @@ export const Pagination = ({
 	}, []);
 
 	const isCondensed = useMemo(() => {
-		const requiredWidth = 400; // TODO: calculate if we must condense the pagination
+		const requiredWidth = 820; // TODO: calculate if we must condense the pagination
 		return forceCondensedView || rootWidth < requiredWidth;
 	}, [forceCondensedView, rootWidth]);
 
 	return (
-		<PaginationContext.Provider
-			value={{
-				totalPages,
-				currentPageIndex,
-				onPageChange,
-				onItemsPerPageChange,
-			}}
-		>
-			<div className="neo-pagination__row" id={id} ref={rootRef}>
-				{isCondensed ? "Condensed Mode" : "Full Mode"}
-			</div>
-		</PaginationContext.Provider>
+		<div className="neo-pagination__row" id={id} ref={rootRef}>
+			{isCondensed ? (
+				<PaginationCondensed {...props} totalPages={totalPages} />
+			) : (
+				<>
+					<PaginationItemDisplay itemCount={itemCount} />
+
+					<PaginationNavigation {...props} totalPages={totalPages} />
+
+					<div className="neo-pagination__pages-selection">
+						<GoToPage {...props} totalPages={totalPages} />
+
+						<PaginationItemsPerPageSelection
+							{...props}
+							totalPages={totalPages}
+						/>
+					</div>
+				</>
+			)}
+		</div>
 	);
 };
 Pagination.displayName = "Pagination";

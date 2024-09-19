@@ -8,8 +8,8 @@ export interface PaginationTranslations {
 
 export interface PaginationProps extends PaginationTranslations {
 	id?: string;
-
 	currentPageIndex: number;
+
 	itemCount: number;
 	itemsSelectedCount?: number;
 	itemsPerPage?: number;
@@ -28,37 +28,6 @@ export interface PaginationProps extends PaginationTranslations {
 	onItemsPerPageChange: (itemsPerPage: number) => void;
 }
 
-// NOTE: all nodes get this context, thus why they have so few props
-export type IPaginationContext = {
+export interface PaginationSharedProps extends PaginationProps {
 	totalPages: number;
-} & Pick<
-	PaginationProps,
-	"currentPageIndex" | "onPageChange" | "onItemsPerPageChange"
->;
-
-// left node
-export interface PaginationItemCountProps {
-	itemCount: number;
-	itemsText?: string;
-
-	itemsSelected?: number;
-	itemsSelectedText?: string;
 }
-
-// center node
-export type PaginationPageSelectionsProps = Pick<
-	PaginationTranslations,
-	"backIconButtonText" | "nextIconButtonText"
->;
-
-// right node, first component
-export type PaginationGoToPageProps = Pick<
-	PaginationTranslations,
-	"goToPageText" | "pagesText"
->;
-
-// right node, second component
-export type PaginationRowsSelectionProps = Pick<
-	PaginationTranslations,
-	"itemsPerPageLabel"
->;
