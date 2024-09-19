@@ -54,8 +54,8 @@ export const Pagination = ({
 	onItemsPerPageChange,
 
 	// translations
-	backIconButtonText,
-	nextIconButtonText,
+	backIconButtonText = "previous",
+	nextIconButtonText = "next",
 	pagesText = "pages",
 	goToPageText = "Go to page",
 
