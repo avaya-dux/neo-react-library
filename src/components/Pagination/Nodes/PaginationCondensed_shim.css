@@ -1,0 +1,4 @@
+.neo-pagination__row:has(> nav.neo-pagination.neo-pagination__condensed) {
+	display: flex;
+	justify-content: center;
+}

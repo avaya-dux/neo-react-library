@@ -1,17 +1,15 @@
-import type { KeyboardEvent } from "react";
 import { useEffect, useState } from "react";
 
 import { TextInput } from "components/TextInput";
 import { Keys } from "utils";
 
-interface GoToPageProps {
+import type { PaginationProps } from "../PaginationTypes";
+
+import "./GoToPage_shim.css";
+
+export interface GoToPageProps extends Pick<PaginationProps, "onPageChange"> {
 	currentPageIndex: number;
 	totalPages: number;
-
-	onPageChange: (
-		e: KeyboardEvent<HTMLInputElement> | null,
-		newPageIndex: number,
-	) => void;
 
 	// translations
 	pagesText: string;

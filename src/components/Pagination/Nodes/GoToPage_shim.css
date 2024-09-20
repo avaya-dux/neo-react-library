@@ -1,0 +1,52 @@
+.neo-pagination__row {
+	[dir="rtl"] & .pagination__go-to-page .neo-input:not(last-child) {
+		margin-left: unset;
+		/* TODO: the proper fix is to remove the three lines from `_pagination.scss` that are:
+			@include rtl-selector {
+				margin-left: 32px;
+			}
+		*/
+	}
+
+	.pagination__go-to-page {
+		display: grid;
+		grid-template-columns: 1fr auto auto;
+		align-items: center;
+		gap: 4px;
+
+		.neo-input-editable__wrapper {
+			min-height: unset;
+
+			.neo-input {
+				max-width: unset;
+				padding-right: 6px;
+				height: 30px;
+				min-height: unset;
+				margin: 0;
+
+				&:focus {
+					margin: 0;
+				}
+
+				[dir="rtl"] & {
+					padding-left: 6px;
+					padding-right: 12px;
+				}
+			}
+
+			/* NOTE: this hides the "spin button" from the number input: https://stackoverflow.com/a/4298216/1022765 */
+			input[type="number"] {
+				appearance: textfield;
+				-moz-appearance: textfield;
+				-webkit-appearance: none;
+
+				&::-webkit-inner-spin-button,
+				&::-webkit-outer-spin-button {
+					/* display: none; <- Crashes Chrome on hover */
+					-webkit-appearance: none;
+					margin: 0;
+				}
+			}
+		}
+	}
+}
