@@ -146,7 +146,35 @@ export const ServerSidePagination = () => {
 	const [dateTimeTarget, setDateTimeTarget] = useState("");
 	const [searchString, setSearchString] = useState("");
 	const [sortType, setSortType] = useState<SortType>("unsorted");
+	const [columnToSort, setColumnToSort] = useState<
+		keyof IRecordingTableMockData | undefined
+	>(undefined);
 	const fetchIdRef = useRef(0);
+
+	const compareValues = (
+		a: IRecordingTableMockData,
+		b: IRecordingTableMockData,
+		columnToSort: keyof IRecordingTableMockData,
+	): number => {
+		const aValue = a[columnToSort];
+		const bValue = b[columnToSort];
+
+		if (typeof aValue === "string" && typeof bValue === "string") {
+			return aValue.localeCompare(bValue);
+		}
+		if (typeof aValue === "number" && typeof bValue === "number") {
+			return aValue - bValue;
+		}
+		if (typeof aValue === "boolean" && typeof bValue === "boolean") {
+			const aValueNumber = aValue ? 1 : 0;
+			const bValueNumber = bValue ? 1 : 0;
+			return aValueNumber - bValueNumber;
+		}
+		if (aValue instanceof Date && bValue instanceof Date) {
+			return aValue.getTime() - bValue.getTime();
+		}
+		return 0;
+	};
 
 	// simulate fetch server data per global search string and a column filter value
 	const searchDebounced = useDebouncedCallback(
@@ -176,10 +204,20 @@ export const ServerSidePagination = () => {
 				});
 			}
 
-			if (sort === "asc") {
-				data.sort((a, b) => (a.duration || 0) - (b.duration || 0));
-			} else if (sort === "desc") {
-				data.sort((a, b) => (b.duration || 0) - (a.duration || 0));
+			if (sort === "asc" && columnToSort) {
+				data.sort((a, b) => {
+					if (!columnToSort) {
+						return 0;
+					}
+					return compareValues(a, b, columnToSort);
+				});
+			} else if (sort === "desc" && columnToSort) {
+				data.sort((a, b) => {
+					if (!columnToSort) {
+						return 0;
+					}
+					return compareValues(b, a, columnToSort);
+				});
 			}
 			setServerData(data);
 			setNumberOfRecords(data.length);
@@ -238,6 +276,7 @@ export const ServerSidePagination = () => {
 	const onManualSortBy = useCallback(
 		(columnId: string, sortType: SortType) => {
 			logger.debug("Sort Applied", { columnId, sortType });
+			setColumnToSort(columnId);
 			setSortType(sortType);
 			searchDebounced(searchString, pageSize, dateTimeTarget, sortType);
 		},
