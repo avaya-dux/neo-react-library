@@ -49,6 +49,10 @@
 			}
 		}
 	}
+
+	bdi {
+		justify-self: baseline;
+	}
 }
 
 /* overriding styles, these overwrite to the styles set by neo-css */
