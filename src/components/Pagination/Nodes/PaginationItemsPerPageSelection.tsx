@@ -5,7 +5,7 @@ import type { PaginationProps } from "..";
 export const PaginationItemsPerPageSelection = ({
 	itemsPerPage,
 	itemsPerPageLabel = "Rows",
-	itemsPerPageOptions = [],
+	itemsPerPageOptions = [20, 50, 100],
 	onItemsPerPageChange,
 }: Pick<
 	PaginationProps,

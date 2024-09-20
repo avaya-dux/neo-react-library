@@ -24,7 +24,7 @@ import "./Pagination_shim.css";
     currentPageIndex={pageIndex}
     itemCount={itemArray.length}
     itemsPerPage={itemsPerPage}
-    itemsPerPageOptions={[1, 5, 10]}
+    itemsPerPageOptions={[20, 50, 100]}
     onPageChange={(e, newIndex) => {
       e?.preventDefault();
       setPageIndex(newIndex);
@@ -44,7 +44,7 @@ export const Pagination = ({
 	itemCount,
 	itemsPerPage,
 	itemsPerPageLabel,
-	itemsPerPageOptions,
+	itemsPerPageOptions = [20, 50, 100],
 
 	alwaysShowPagination,
 	itemDisplayType,
