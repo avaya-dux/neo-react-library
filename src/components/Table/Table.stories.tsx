@@ -41,6 +41,7 @@ const logger = log.getLogger("TableStories");
 logger.disableAll();
 
 import "./TableStories_shim.css";
+import type { SortType } from "./types";
 
 export default {
 	title: "Components/Table",
@@ -138,12 +139,13 @@ export const ServerSidePagination = () => {
 	const totalRecords = 10000;
 	const originalData = useMemo(() => makeData(totalRecords), []);
 	const [numOfRecords, setNumberOfRecords] = useState(totalRecords);
-	const [serverData, setServerData] = useState(originalData);
+	const [serverData, setServerData] = useState([...originalData]);
 	const [pageData, setPageData] = useState<IRecordingTableMockData[]>([]);
 	const [pageCount, setPageCount] = useState(0);
 	const [pageSize, setPageSize] = useState(10);
 	const [dateTimeTarget, setDateTimeTarget] = useState("");
 	const [searchString, setSearchString] = useState("");
+	const [sortType, setSortType] = useState<SortType>("unsorted");
 	const fetchIdRef = useRef(0);
 
 	// simulate fetch server data per global search string and a column filter value
@@ -152,6 +154,7 @@ export const ServerSidePagination = () => {
 			search: string,
 			pageSize: number,
 			columnFilter: string = dateTimeTarget,
+			sort: SortType = sortType,
 		) => {
 			logger.log({ searchString: search, pageSize, dateTimeTarget });
 			if (search !== searchString) {
@@ -159,7 +162,7 @@ export const ServerSidePagination = () => {
 			}
 			let data = [];
 			if (!search) {
-				data = originalData;
+				data = [...originalData];
 			} else {
 				data = originalData.filter((row) => {
 					return Object.values(row).some((value) =>
@@ -171,6 +174,12 @@ export const ServerSidePagination = () => {
 				data = data.filter((row) => {
 					return row.date?.toLocaleDateString().includes(columnFilter);
 				});
+			}
+
+			if (sort === "asc") {
+				data.sort((a, b) => (a.duration || 0) - (b.duration || 0));
+			} else if (sort === "desc") {
+				data.sort((a, b) => (b.duration || 0) - (a.duration || 0));
 			}
 			setServerData(data);
 			setNumberOfRecords(data.length);
@@ -209,7 +218,7 @@ export const ServerSidePagination = () => {
 				}
 			}, 500);
 		},
-		[fetchIdRef, serverData.length],
+		[fetchIdRef, serverData],
 	);
 
 	useEffect(() => {
@@ -224,6 +233,15 @@ export const ServerSidePagination = () => {
 			searchDebounced(searchString, pageSize, filterValue);
 		},
 		[searchString, pageSize, searchDebounced],
+	);
+
+	const onManualSortBy = useCallback(
+		(columnId: string, sortType: SortType) => {
+			logger.debug("Sort Applied", { columnId, sortType });
+			setSortType(sortType);
+			searchDebounced(searchString, pageSize, dateTimeTarget, sortType);
+		},
+		[searchString, pageSize, dateTimeTarget, searchDebounced],
 	);
 
 	const columns: Column<IRecordingTableMockData>[] = useMemo(
@@ -289,6 +307,10 @@ export const ServerSidePagination = () => {
 					example, the Date recorded column has a custom filter that simulates
 					server side filtering by exact date match.
 				</li>
+				<li>
+					For server side column sort, set manualSortBy to true and implement
+					onManualSortBy callback.
+				</li>
 			</ul>
 			<Table
 				data={pageData}
@@ -297,6 +319,8 @@ export const ServerSidePagination = () => {
 				manualRowCount={numOfRecords} // Must provide total row count when using server side pagination.
 				manualColumnFilters={true} // Must provide manualColumnFilters to true when using server side column filtering.
 				onApplyFilterValue={onApplyFilterValue}
+				manualSortBy={true} // Must set manualSortBy to true when using server side column sorting.
+				onManualSortBy={onManualSortBy}
 				initialStatePageSize={10}
 				pageCount={pageCount}
 				handlePageChange={fetchData}
