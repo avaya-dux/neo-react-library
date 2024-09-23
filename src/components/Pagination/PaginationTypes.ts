@@ -15,6 +15,7 @@ export type PaginationProps = {
 	itemsPerPageOptions?: number[];
 
 	alwaysShowPagination?: boolean;
+	view?: "expanded" | "condensed" | "auto";
 	itemDisplayType?: "count" | "page" | "none";
 
 	onPageChange: (

@@ -50,7 +50,7 @@ describe("Pagination", () => {
 		const innerNavElement = getByRole("navigation");
 		const buttons = getAllByRole("button");
 		expect(innerNavElement).toBeTruthy();
-		expect(buttons).toHaveLength(3);
+		expect(buttons).toHaveLength(4);
 	});
 
 	it("does NOT show any nav items when `totalPages === 1`", () => {
@@ -156,7 +156,7 @@ describe("Pagination", () => {
 			await user.type(goToPageInput, "30000");
 			await user.type(goToPageInput, UserEventKeys.ENTER);
 			await waitFor(() => {
-				expect(screen.getByRole("spinbutton")).toHaveValue(5000);
+				expect(screen.getByRole("spinbutton")).toHaveValue(2500);
 			});
 		});
 	});

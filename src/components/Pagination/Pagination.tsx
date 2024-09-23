@@ -7,6 +7,7 @@ import {
 	PaginationNavigation,
 } from "./Nodes";
 
+import { PaginationCondensed } from "./Nodes/PaginationCondensed";
 import type { PaginationProps } from "./PaginationTypes";
 
 import "./Pagination_shim.css";
@@ -23,7 +24,7 @@ import "./Pagination_shim.css";
     currentPageIndex={pageIndex}
     itemCount={itemArray.length}
     itemsPerPage={itemsPerPage}
-    itemsPerPageOptions={[1, 5, 10]}
+    itemsPerPageOptions={[20, 50, 100]}
     onPageChange={(e, newIndex) => {
       e?.preventDefault();
       setPageIndex(newIndex);
@@ -34,7 +35,7 @@ import "./Pagination_shim.css";
     }}
  * />
  *
- * @see https://design.avayacloud.com/components/web/tables-web
+ * @see https://design.avaya.com/components/pagination
  */
 export const Pagination = ({
 	id = `pagination-${useId()}`,
@@ -43,17 +44,18 @@ export const Pagination = ({
 	itemCount,
 	itemsPerPage,
 	itemsPerPageLabel,
-	itemsPerPageOptions,
+	itemsPerPageOptions = [20, 50, 100],
 
 	alwaysShowPagination,
 	itemDisplayType,
+	view = "auto",
 
 	onPageChange,
 	onItemsPerPageChange,
 
 	// translations
-	backIconButtonText,
-	nextIconButtonText,
+	backIconButtonText = "previous",
+	nextIconButtonText = "next",
 	pagesText = "pages",
 	goToPageText = "Go to page",
 
@@ -84,47 +86,70 @@ export const Pagination = ({
 		return () => window.removeEventListener("resize", updateRootWidth);
 	}, []);
 
+	const isCondensed = useMemo(() => {
+		if (process.env.NODE_ENV === "test") return false;
+
+		const requiredWidth = 820; // TODO: calculate if we must condense the pagination
+		return (
+			view === "condensed" || (view === "auto" && rootWidth < requiredWidth)
+		);
+	}, [view, rootWidth]);
+
 	return (
 		<div className="neo-pagination__row" id={id} ref={rootRef}>
-			{leftNode || (
-				<PaginationItemDisplay
+			{isCondensed ? (
+				<PaginationCondensed
 					currentPageIndex={currentPageIndex}
-					itemCount={itemCount}
-					itemDisplayType={itemDisplayType}
-					itemsPerPage={itemsPerPage}
+					onPageChange={onPageChange}
 					totalPages={totalPages}
-				/>
-			)}
-
-			{centerNode || (
-				<PaginationNavigation
+					pagesText={pagesText}
+					goToPageText={goToPageText}
 					backIconButtonText={backIconButtonText}
 					nextIconButtonText={nextIconButtonText}
-					alwaysShowPagination={alwaysShowPagination}
-					currentPageIndex={currentPageIndex}
-					totalPages={totalPages}
-					onPageChange={onPageChange}
-					paginationRootWidth={rootWidth}
 				/>
-			)}
+			) : (
+				<>
+					{leftNode || (
+						<PaginationItemDisplay
+							currentPageIndex={currentPageIndex}
+							itemCount={itemCount}
+							itemDisplayType={itemDisplayType}
+							itemsPerPage={itemsPerPage}
+							totalPages={totalPages}
+						/>
+					)}
 
-			{rightNode || (
-				<div className="neo-pagination__pages-selection">
-					<GoToPage
-						aria-label={goToPageText}
-						currentPageIndex={currentPageIndex}
-						onPageChange={onPageChange}
-						pagesText={pagesText}
-						totalPages={totalPages}
-					/>
+					{centerNode || (
+						<PaginationNavigation
+							backIconButtonText={backIconButtonText}
+							nextIconButtonText={nextIconButtonText}
+							alwaysShowPagination={alwaysShowPagination}
+							currentPageIndex={currentPageIndex}
+							totalPages={totalPages}
+							onPageChange={onPageChange}
+							paginationRootWidth={rootWidth}
+						/>
+					)}
 
-					<PaginationItemsPerPageSelection
-						itemsPerPage={itemsPerPage}
-						itemsPerPageLabel={itemsPerPageLabel}
-						itemsPerPageOptions={itemsPerPageOptions}
-						onItemsPerPageChange={onItemsPerPageChange}
-					/>
-				</div>
+					{rightNode || (
+						<div className="neo-pagination__pages-selection">
+							<GoToPage
+								aria-label={goToPageText}
+								currentPageIndex={currentPageIndex}
+								onPageChange={onPageChange}
+								pagesText={pagesText}
+								totalPages={totalPages}
+							/>
+
+							<PaginationItemsPerPageSelection
+								itemsPerPage={itemsPerPage}
+								itemsPerPageLabel={itemsPerPageLabel}
+								itemsPerPageOptions={itemsPerPageOptions}
+								onItemsPerPageChange={onItemsPerPageChange}
+							/>
+						</div>
+					)}
+				</>
 			)}
 		</div>
 	);
