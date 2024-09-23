@@ -877,7 +877,7 @@ describe("Table", () => {
 		});
 
 		it("sorts by duration column", async () => {
-			const { container, queryByText, queryAllByRole } = renderResult;
+			const { queryByText, queryAllByRole } = renderResult;
 
 			// waitfor the no data available message to disappear
 			await waitForElementToBeRemoved(() => queryByText("no data available"), {
