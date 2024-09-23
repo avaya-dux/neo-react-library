@@ -890,7 +890,9 @@ describe("Table", () => {
 			// get all the duration values in column 2
 			const durationValues = getDurationValues(queryAllByRole);
 			// assert that durationValues are not sorted
-			expect(durationValues).not.toEqual([...durationValues].sort());
+			expect(durationValues).not.toEqual(
+				[...durationValues].sort((a, b) => a - b),
+			);
 
 			// Get the menu button element with text "Duration in minutes"
 			const durationColumnFilterButton = container.querySelectorAll(
