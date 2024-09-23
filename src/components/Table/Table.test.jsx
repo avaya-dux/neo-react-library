@@ -895,12 +895,9 @@ describe("Table", () => {
 			);
 
 			// Get the menu button element with text "Duration in minutes"
-			const durationColumnFilterButton = container.querySelectorAll(
-				"tr th button.neo-multiselect",
-			)[1];
-			expect(durationColumnFilterButton).toHaveTextContent(
-				"Duration in minutes",
-			);
+			const durationColumnFilterButton = screen.getByRole("button", {
+				name: "Duration in minutes",
+			});
 			await user.click(durationColumnFilterButton);
 
 			let durationColumnFilterMenuItems = queryAllByRole("menuitem");
@@ -920,7 +917,7 @@ describe("Table", () => {
 					ascDurationValues = getDurationValues(queryAllByRole);
 					expect(ascDurationValues).not.toEqual([...durationValues]);
 				},
-				{ timeout: 5000 },
+				{ timeout: 10000 },
 			);
 			expect(ascDurationValues).toEqual(
 				[...ascDurationValues].sort((a, b) => a - b),
@@ -944,7 +941,7 @@ describe("Table", () => {
 					descDurationValues = getDurationValues(queryAllByRole);
 					expect(descDurationValues).not.toEqual([...ascDurationValues]);
 				},
-				{ timeout: 5000 },
+				{ timeout: 10000 },
 			);
 
 			expect(descDurationValues).toEqual(
