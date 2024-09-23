@@ -276,7 +276,7 @@ export const ServerSidePagination = () => {
 	const onManualSortBy = useCallback(
 		(columnId: string, sortType: SortType) => {
 			logger.debug("Sort Applied", { columnId, sortType });
-			setColumnToSort(columnId);
+			setColumnToSort(columnId as keyof IRecordingTableMockData);
 			setSortType(sortType);
 			searchDebounced(searchString, pageSize, dateTimeTarget, sortType);
 		},

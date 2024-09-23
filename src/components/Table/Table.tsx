@@ -510,7 +510,7 @@ export const Table = <T extends Record<string, any>>({
 							handleRowToggled={handleRowToggled}
 							instance={instance}
 							selectableRows={selectableRows}
-							munualSortBy={manualSortBy}
+							manualSortBy={manualSortBy}
 							onManualSortBy={handleManualSortBy}
 							translations={headerTranslations}
 						/>

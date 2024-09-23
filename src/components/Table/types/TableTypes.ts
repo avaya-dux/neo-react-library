@@ -39,7 +39,7 @@ interface TableHeaderBodySharedProps<T extends AnyRecord> {
 
 export type TableHeaderProps<T extends AnyRecord> = {
 	translations: ITableHeaderTranslations;
-	munualSortBy?: boolean;
+	manualSortBy?: boolean;
 	onManualSortBy?: (columnId: string, sortType: SortType) => void;
 } & TableHeaderBodySharedProps<T>;
 

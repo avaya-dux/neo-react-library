@@ -40,7 +40,7 @@ type TableHeaderComponentType = <T extends Record<string, any>>(
 export const TableHeader: TableHeaderComponentType = ({
 	handleRowToggled,
 	instance,
-	munualSortBy,
+	manualSortBy,
 	onManualSortBy,
 	selectableRows,
 	translations,
@@ -120,7 +120,7 @@ export const TableHeader: TableHeaderComponentType = ({
 							setDataSyncOption("clear");
 							clearSortByFuncRef.current = clearSortBy;
 
-							if (munualSortBy && onManualSortBy) {
+							if (manualSortBy && onManualSortBy) {
 								onManualSortBy(column.id, "unsorted");
 							}
 						};
@@ -129,7 +129,7 @@ export const TableHeader: TableHeaderComponentType = ({
 							toggleSortBy(column.id, false, false);
 							setDataSyncOption("asc");
 							clearSortByFuncRef.current = clearSortBy;
-							if (munualSortBy && onManualSortBy) {
+							if (manualSortBy && onManualSortBy) {
 								onManualSortBy(column.id, "asc");
 							}
 						};
@@ -138,7 +138,7 @@ export const TableHeader: TableHeaderComponentType = ({
 							toggleSortBy(column.id, true, false);
 							setDataSyncOption("desc");
 							clearSortByFuncRef.current = clearSortBy;
-							if (munualSortBy && onManualSortBy) {
+							if (manualSortBy && onManualSortBy) {
 								onManualSortBy(column.id, "desc");
 							}
 						};
