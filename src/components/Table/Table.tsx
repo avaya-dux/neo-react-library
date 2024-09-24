@@ -43,7 +43,12 @@ import {
 	convertRowIdsArrayToObject,
 	translations as defaultTranslations,
 } from "./helpers";
-import type { DataSyncOptionType, IFilterContext, RowHeight } from "./types";
+import type {
+	DataSyncOptionType,
+	IFilterContext,
+	RowHeight,
+	SortType,
+} from "./types";
 
 import "./Table_shim.css";
 import { Checkbox } from "components/Checkbox";
@@ -117,6 +122,8 @@ export const Table = <T extends Record<string, any>>({
 	manualColumnFilters = false,
 	onApplyFilterValue,
 	onCancelFilterValue,
+	manualSortBy = false,
+	onManualSortBy,
 	showPagination = true,
 	draggableRows = false,
 	pushPaginationDown = false,
@@ -131,6 +138,7 @@ export const Table = <T extends Record<string, any>>({
 	const [rootLevelPageIndex, setRootLevelPageIndex] = useState(
 		initialStatePageIndex,
 	);
+
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
 	const [data, setData] = useState(originalData);
@@ -170,6 +178,7 @@ export const Table = <T extends Record<string, any>>({
 			},
 			filterTypes,
 			manualFilters: manualColumnFilters,
+			manualSortBy: manualSortBy,
 			autoResetSelectedRows: false,
 			autoResetSortBy: false,
 			autoResetExpanded: false,
@@ -206,6 +215,27 @@ export const Table = <T extends Record<string, any>>({
 		return undefined;
 	}, [handleSearch, gotoPage]);
 
+	const handleColumnFilterApply = useMemo(() => {
+		if (onApplyFilterValue) {
+			return (columnId: string, value: unknown) => {
+				onApplyFilterValue(columnId, value);
+				gotoPage(0);
+				setRootLevelPageIndex(0);
+			};
+		}
+		return undefined;
+	}, [onApplyFilterValue, gotoPage]);
+
+	const handleManualSortBy = useMemo(() => {
+		if (onManualSortBy) {
+			return (columnId: string, sortType: SortType) => {
+				onManualSortBy(columnId, sortType);
+				gotoPage(0);
+				setRootLevelPageIndex(0);
+			};
+		}
+		return undefined;
+	}, [onManualSortBy, gotoPage]);
 	const rowCount = overridePagination ? manualRowCount : rows.length;
 
 	logger.info({ initialStatePageIndex, rootLevelPageIndex, pageIndex });
@@ -458,7 +488,7 @@ export const Table = <T extends Record<string, any>>({
 					)}
 					<TableColumnFilterDrawer
 						translations={headerTranslations}
-						onApplyFilterValue={onApplyFilterValue}
+						onApplyFilterValue={handleColumnFilterApply}
 						onCancelFilterValue={onCancelFilterValue}
 					/>
 					<table
@@ -480,6 +510,8 @@ export const Table = <T extends Record<string, any>>({
 							handleRowToggled={handleRowToggled}
 							instance={instance}
 							selectableRows={selectableRows}
+							manualSortBy={manualSortBy}
+							onManualSortBy={handleManualSortBy}
 							translations={headerTranslations}
 						/>
 
