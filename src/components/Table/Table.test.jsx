@@ -56,6 +56,15 @@ const getLastNumberFromBDI = async () => {
 	return [bdiText, totalNumberOfRows];
 };
 
+const getDurationValues = (queryAllByRole) => {
+	const durationValues = [];
+	for (let row = 0; row < 10; row++) {
+		const durationValue = queryAllByRole("cell")[1 + row * 5].textContent;
+		durationValues.push(Number.parseInt(durationValue));
+	}
+	return durationValues;
+};
+
 describe("Table", () => {
 	const user = userEvent.setup();
 	vi.spyOn(console, "warn").mockImplementation(() => null); // ignore tooltip warnings
@@ -865,6 +874,79 @@ describe("Table", () => {
 				"tr th div[role='menuitem'] span[role='img']",
 			);
 			expect(checkIcon).toBeNull();
+		});
+
+		it("sorts by duration column", async () => {
+			const { queryByText, queryAllByRole } = renderResult;
+
+			// waitfor the no data available message to disappear
+			await waitForElementToBeRemoved(() => queryByText("no data available"), {
+				timeout: 5000,
+			});
+			// should see 10000 rows now
+			const [_, totalNumberOfRows] = await getLastNumberFromBDI();
+			expect(totalNumberOfRows).toBe("10,000");
+
+			// get all the duration values in column 2
+			const durationValues = getDurationValues(queryAllByRole);
+			// assert that durationValues are not sorted
+			expect(durationValues).not.toEqual(
+				[...durationValues].sort((a, b) => a - b),
+			);
+
+			// Get the menu button element with text "Duration in minutes"
+			const durationColumnFilterButton = screen.getByRole("button", {
+				name: "Duration in minutes",
+			});
+			await user.click(durationColumnFilterButton);
+
+			let durationColumnFilterMenuItems = queryAllByRole("menuitem");
+			expect(durationColumnFilterMenuItems).toHaveLength(3);
+
+			// click on the sort ascending a-z
+			expect(durationColumnFilterMenuItems[1]).toHaveTextContent("A - Z");
+			await user.click(durationColumnFilterMenuItems[1]);
+
+			// check icon, down arrow, is visible in header
+			let icons = screen.queryAllByRole("img", { name: "arrow down" });
+			expect(icons).toHaveLength(1);
+
+			let ascDurationValues = [...durationValues];
+			await waitFor(
+				() => {
+					ascDurationValues = getDurationValues(queryAllByRole);
+					expect(ascDurationValues).not.toEqual([...durationValues]);
+				},
+				{ timeout: 10000 },
+			);
+			expect(ascDurationValues).toEqual(
+				[...ascDurationValues].sort((a, b) => a - b),
+			);
+
+			await user.click(durationColumnFilterButton);
+
+			durationColumnFilterMenuItems = queryAllByRole("menuitem");
+			expect(durationColumnFilterMenuItems).toHaveLength(3);
+
+			// click on the sort Z -A
+			expect(durationColumnFilterMenuItems[2]).toHaveTextContent("Z - A");
+			await user.click(durationColumnFilterMenuItems[2]);
+
+			icons = screen.queryAllByRole("img", { name: "arrow up" });
+			expect(icons).toHaveLength(1);
+
+			let descDurationValues = [...ascDurationValues];
+			await waitFor(
+				() => {
+					descDurationValues = getDurationValues(queryAllByRole);
+					expect(descDurationValues).not.toEqual([...ascDurationValues]);
+				},
+				{ timeout: 10000 },
+			);
+
+			expect(descDurationValues).toEqual(
+				[...descDurationValues].sort((a, b) => b - a),
+			);
 		});
 	});
 	describe("sort and filter functionality", () => {
