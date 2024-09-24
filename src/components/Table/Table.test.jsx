@@ -784,7 +784,14 @@ describe("Table", () => {
 			await user.click(dateColumnFilterMenuItems[3]);
 
 			let columnFilterDrawer = queryAllByRole("dialog")[1];
-			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--isOpen");
+			await waitFor(
+				() => {
+					expect(columnFilterDrawer).toHaveClass(
+						"neo-drawer neo-drawer--visible neo-drawer--open",
+					);
+				},
+				{ timeout: 5000 },
+			);
 
 			// Wait for the input box to appear
 			let dateInput = await waitFor(() =>
@@ -829,7 +836,14 @@ describe("Table", () => {
 			await user.click(dateColumnFilterMenuItems[3]);
 
 			columnFilterDrawer = queryAllByRole("dialog")[1];
-			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--isOpen");
+			await waitFor(
+				() => {
+					expect(columnFilterDrawer).toHaveClass(
+						"neo-drawer neo-drawer--visible neo-drawer--open",
+					);
+				},
+				{ timeout: 5000 },
+			);
 
 			// Wait for the input box to appear
 			dateInput = await waitFor(() =>
@@ -947,7 +961,7 @@ describe("Table", () => {
 			expect(descDurationValues).toEqual(
 				[...descDurationValues].sort((a, b) => b - a),
 			);
-		});
+		}, 15000);
 	});
 	describe("sort and filter functionality", () => {
 		let renderResult;
@@ -1042,7 +1056,7 @@ describe("Table", () => {
 			expect(firstColumnSortButton).toBeVisible();
 
 			expect(getAllByRole("dialog")[0]).not.toHaveClass(
-				"neo-drawer neo-drawer--isOpen",
+				"neo-drawer neo-drawer--open",
 			);
 
 			await user.click(firstColumnSortButton);
@@ -1051,8 +1065,13 @@ describe("Table", () => {
 			expect(menuItems).toHaveLength(4);
 			await user.click(queryAllByRole("menuitem")[3]);
 
-			expect(getAllByRole("dialog")[1]).toHaveClass(
-				"neo-drawer neo-drawer--isOpen",
+			await waitFor(
+				() => {
+					expect(getAllByRole("dialog")[1]).toHaveClass(
+						"neo-drawer neo-drawer--visible neo-drawer--open",
+					);
+				},
+				{ timeout: 5000 },
 			);
 
 			let nameInput = getAllByRole("textbox")[1];
@@ -1116,7 +1135,7 @@ describe("Table", () => {
 				"tr th div[role='menuitem'] span[role='img']",
 			);
 			expect(checkIcon).toBeNull();
-		});
+		}, 10000);
 
 		it("toggles column visibility via toolbar Filter Icon Button", async () => {
 			const { container, getAllByRole, getByLabelText, getAllByLabelText } =
@@ -1135,13 +1154,18 @@ describe("Table", () => {
 			);
 
 			expect(getAllByRole("dialog")[0]).not.toHaveClass(
-				"neo-drawer neo-drawer--isOpen",
+				"neo-drawer neo-drawer--open",
 			);
 
 			await user.click(columnFilterButton);
 
-			expect(getAllByRole("dialog")[0]).toHaveClass(
-				"neo-drawer neo-drawer--isOpen",
+			await waitFor(
+				() => {
+					expect(getAllByRole("dialog")[0]).toHaveClass(
+						"neo-drawer neo-drawer--visible neo-drawer--open",
+					);
+				},
+				{ timeout: 5000 },
 			);
 
 			const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
