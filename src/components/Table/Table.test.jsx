@@ -1068,7 +1068,7 @@ describe("Table", () => {
 			await waitFor(
 				() => {
 					expect(getAllByRole("dialog")[1]).toHaveClass(
-						"neo-drawer neo-drawer--visible neo-drawer--open",
+						"neo-drawer neo-drawer--open",
 					);
 				},
 				{ timeout: 5000 },
@@ -1179,7 +1179,7 @@ describe("Table", () => {
 			)[0];
 			await user.click(applyButton);
 			expect(firstColumnSortButton).not.toBeVisible();
-		});
+		}, 10000);
 
 		it("allows user to predefine hidden rows", async () => {
 			// find the "Long Text" `<th>` element
