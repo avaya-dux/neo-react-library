@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
@@ -56,14 +56,21 @@ describe("Drawer", () => {
 			render(<Drawer open={true} title="drawer title" />);
 
 			const drawer = screen.getByRole("dialog");
-			expect(drawer).toHaveClass("neo-drawer--isOpen");
+			await waitFor(
+				() => {
+					expect(drawer).toHaveClass(
+						"neo-drawer neo-drawer--visible neo-drawer--open",
+					);
+				},
+				{ timeout: 5000 },
+			);
 		});
 
 		it("when `open={false}`, a Drawer's contents are _not_ visible", () => {
 			render(<Drawer open={false} title="drawer title" />);
 
 			const drawer = screen.getByRole("dialog");
-			expect(drawer).not.toHaveClass("neo-drawer--isOpen");
+			expect(drawer).not.toHaveClass("neo-drawer--open");
 		});
 	});
 });

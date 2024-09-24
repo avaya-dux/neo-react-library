@@ -4,6 +4,7 @@ import {
 	type KeyboardEventHandler,
 	useEffect,
 	useId,
+	useRef,
 	useState,
 } from "react";
 
@@ -151,6 +152,26 @@ const BasicDrawer = ({
 	style?: object | undefined;
 	actions?: React.ReactNode[];
 }) => {
+	const drawerRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const drawer = drawerRef.current;
+		if (!drawer) return;
+		if (open) {
+			// Make the drawer visible first
+			drawer.classList.add("neo-drawer--visible");
+
+			// After a short delay, apply the transformation to slide it in
+			setTimeout(() => {
+				drawer.classList.add("neo-drawer--open");
+			}, 10);
+		} else {
+			drawer.classList.remove("neo-drawer--open");
+			setTimeout(() => {
+				drawer.classList.remove("neo-drawer--visible");
+			}, 300);
+		}
+	}, [open]);
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
 	) => {
@@ -163,15 +184,12 @@ const BasicDrawer = ({
 		<div>
 			<FocusLock disabled={!open}>
 				<div
+					ref={drawerRef}
 					onKeyDown={onKeyDownScrimHandler}
 					role="dialog"
 					style={style}
 					aria-labelledby={id}
-					className={clsx(
-						"neo-drawer",
-						open && "neo-drawer--isOpen",
-						className,
-					)}
+					className={clsx("neo-drawer", className)}
 					{...rest}
 				>
 					<div className="neo-drawer__header">

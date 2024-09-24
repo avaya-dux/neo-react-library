@@ -6,16 +6,19 @@
 	width: 20rem;
 	max-height: 100vh;
 	max-width: 80%;
-
+	display: none;
 	transition: all 0.3s ease-in-out;
 	transform: translate(20rem);
-	display: flex;
 	flex-direction: column;
 	z-index: 1000;
 	background-color: var(--sheet-background);
 }
 
-.neo-drawer--isOpen {
+.neo-drawer--visible {
+	display: flex;
+}
+
+.neo-drawer--open {
 	transform: translate(0);
 	box-shadow: 0px 8px 16px var(--sheet-shadow);
 }
