@@ -931,7 +931,7 @@ describe("Table", () => {
 					ascDurationValues = getDurationValues(queryAllByRole);
 					expect(ascDurationValues).not.toEqual([...durationValues]);
 				},
-				{ timeout: 10000 },
+				{ timeout: 5000 },
 			);
 			expect(ascDurationValues).toEqual(
 				[...ascDurationValues].sort((a, b) => a - b),
@@ -955,13 +955,13 @@ describe("Table", () => {
 					descDurationValues = getDurationValues(queryAllByRole);
 					expect(descDurationValues).not.toEqual([...ascDurationValues]);
 				},
-				{ timeout: 10000 },
+				{ timeout: 5000 },
 			);
 
 			expect(descDurationValues).toEqual(
 				[...descDurationValues].sort((a, b) => b - a),
 			);
-		}, 15000);
+		}, 10000);
 	});
 	describe("sort and filter functionality", () => {
 		let renderResult;

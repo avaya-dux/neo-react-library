@@ -62,7 +62,7 @@ describe("Drawer", () => {
 						"neo-drawer neo-drawer--visible neo-drawer--open",
 					);
 				},
-				{ timeout: 5000 },
+				{ timeout: 1000 },
 			);
 		});
 
