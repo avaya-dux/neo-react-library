@@ -8,15 +8,145 @@ import { SubMenu } from "../SubMenu";
 import {
 	addIdToChildren,
 	buildMenuIndexes,
+	flattenChildren,
 	getContentCss,
 	layoutChildren,
 } from "./";
-
 const menuHelpersLogger = log.getLogger("menu-helpers");
 menuHelpersLogger.disableAll();
 
 describe("Menu helper methods", () => {
+	describe("flattenChildren", () => {
+		it("returns empty fragment with an empty fragment", () => {
+			const children = <></>;
+			expect(flattenChildren(children)).toEqual(children);
+		});
+		it("returns empty array with empty array", () => {
+			const children = [];
+			const expected = <></>;
+			expect(flattenChildren(children)).toEqual(expected);
+		});
+		it("returns single child wrapped inside fragment", () => {
+			const children = <MenuItem id="1">View</MenuItem>;
+			expect(flattenChildren(children)).toMatchInlineSnapshot(`
+				<React.Fragment>
+				  <MenuItem
+				    id="1"
+				  >
+				    View
+				  </MenuItem>
+				</React.Fragment>
+			`);
+		});
+		it("returns the same children wrapped inside fragment", () => {
+			const children = (
+				<>
+					<MenuItem key="1" id="1">
+						View
+					</MenuItem>
+					<MenuItem key="2" id="2">
+						Edit
+					</MenuItem>
+					<MenuItem key="3" id="3">
+						Delete
+					</MenuItem>
+				</>
+			);
+			expect(flattenChildren(children)).toMatchInlineSnapshot(`
+				<React.Fragment>
+				  <MenuItem
+				    id="1"
+				  >
+				    View
+				  </MenuItem>
+				  <MenuItem
+				    id="2"
+				  >
+				    Edit
+				  </MenuItem>
+				  <MenuItem
+				    id="3"
+				  >
+				    Delete
+				  </MenuItem>
+				</React.Fragment>
+			`);
+		});
+		it("should flatten children inside fragment", () => {
+			const children = [
+				<MenuItem key="1" id="1">
+					View
+				</MenuItem>,
+				<>
+					<MenuItem key="2-1" id="2-1">
+						View
+					</MenuItem>
+					<MenuItem key="2-2" id="2-2">
+						Edit
+					</MenuItem>
+					<MenuItem key="2-3" id="2-3">
+						Delete
+					</MenuItem>
+				</>,
+			];
+			expect(flattenChildren(children).props.children.length).toEqual(4);
+			expect(flattenChildren(children)).toMatchInlineSnapshot(`
+				<React.Fragment>
+				  <MenuItem
+				    id="1"
+				  >
+				    View
+				  </MenuItem>
+				  <MenuItem
+				    id="2-1"
+				  >
+				    View
+				  </MenuItem>
+				  <MenuItem
+				    id="2-2"
+				  >
+				    Edit
+				  </MenuItem>
+				  <MenuItem
+				    id="2-3"
+				  >
+				    Delete
+				  </MenuItem>
+				</React.Fragment>
+			`);
+		});
+		it("should not flatten SubMenu", () => {
+			const children = (
+				<>
+					<MenuItem key="1" id="1">
+						View
+					</MenuItem>
+					,
+					<SubMenu
+						key="2"
+						id="2"
+						menuRootElement={<MenuItem id="20">File</MenuItem>}
+					>
+						<MenuItem id="21">View</MenuItem>
+						<MenuItem id="22">Edit</MenuItem>
+						<MenuItem id="23">Delete</MenuItem>
+					</SubMenu>
+					,
+					<MenuItem key="3" id="3">
+						Help
+					</MenuItem>
+					,
+				</>
+			);
+			expect(flattenChildren(children).props.children.length).toEqual(3);
+		});
+	});
+
 	describe("addIdToChildren", () => {
+		it("should return empty array with empty fragment", () => {
+			const children = <></>;
+			expect(addIdToChildren(children)).toEqual([]);
+		});
 		it("should do nothing when child is not menu item or sub menu", () => {
 			const children = <MenuSeparator />;
 			expect(addIdToChildren(children).length).toBe(1);
@@ -51,6 +181,10 @@ describe("Menu helper methods", () => {
 	});
 
 	describe("buildMenuIndexes", () => {
+		it("should return empty array with empty fragment", () => {
+			const children = <></>;
+			expect(buildMenuIndexes(children)).toEqual([]);
+		});
 		it("should return empty array with empty children", () => {
 			const children = [];
 			expect(buildMenuIndexes(children)).toEqual([]);
