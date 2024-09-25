@@ -212,7 +212,7 @@ const BasicDrawer = ({
 					</div>
 					<div className="neo-drawer__content">{children}</div>
 					{actions && <div className="neo-drawer__actions">{actions}</div>}
-					{/* The code below will render in the footer section */}
+					{/* The code below will render the default buttons in the footer section */}
 					{(onCancel || onApply) && (
 						<div className="neo-drawer__actions">
 							{onCancel && (

@@ -135,15 +135,14 @@ export const BackButtonAndScrimOptions: Story = {
 	},
 };
 
-// This story showcases how Action buttons can work within Form content.
-export const WithForm: Story = {
+// This story showcases how to use the default Cancel and Apply buttons.
+export const withDefaultButtons: Story = {
 	render: () => {
 		const [formDrawerOpen, setFormDrawerOpen] = useState(false);
-		const handleSubmit = (e:any) => {
+		const handleSubmit = (e: any) => {
 			e.preventDefault();
 			alert("you successfully Applied");
-		}
-
+		};
 
 		return (
 			<main>
@@ -168,12 +167,17 @@ export const WithForm: Story = {
 					closeOnScrimClick={false}
 					// Set form attribute to the corresponding Form id
 					actions={[
-						<Button form="the-form" key={1} type="reset" variant="secondary">
-							Reset
+						<Button
+							form="the-form"
+							key="cancel-btn"
+							variant="secondary"
+							type="submit"
+						>
+							Cancel
 						</Button>,
-						// <Button form="the-form" key={2} type="submit">
-						// 	Submit
-						// </Button>,
+						<Button form="the-form" key="submit-btn" type="submit">
+							Submit
+						</Button>,
 					]}
 				>
 					<Form id="the-form" className="form-drawer" onSubmit={handleSubmit}>
@@ -181,10 +185,89 @@ export const WithForm: Story = {
 							Terms of Service Example. User must accept ToS before being
 							allowed to proceed.
 						</p>
-
 						<Switch required name="ToS" value="accepted">
 							Do you accept the Terms of Service?
 						</Switch>
+						<Button
+							form="the-form"
+							key="reset-btn"
+							type="reset"
+							variant="secondary"
+						>
+							Reset
+						</Button>
+					</Form>
+				</Drawer>
+			</main>
+		);
+	},
+};
+
+// This story showcases how Action buttons can work within Form content.
+export const WithForm: Story = {
+	render: () => {
+		const [formDrawerOpen, setFormDrawerOpen] = useState(false);
+
+		return (
+			<main>
+				<section
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						marginBottom: "1rem",
+					}}
+				>
+					<Button onClick={() => setFormDrawerOpen(!formDrawerOpen)}>
+						Toggle Drawer Open
+					</Button>
+				</section>
+
+				<Drawer
+					open={formDrawerOpen}
+					title="Submission Form"
+					closeOnScrimClick={false}
+					// Set form attribute to the corresponding Form id
+					actions={[
+						<Button
+							key="cancel-btn"
+							variant="secondary"
+							onClick={() => {
+								const myInput = document.getElementById("the-form") as HTMLFormElement;
+								myInput?.reset();
+								setFormDrawerOpen(false);
+							}}
+						>
+							Cancel
+						</Button>,
+						<Button form="the-form" key="submit-btn" type="submit">
+							Submit
+						</Button>,
+					]}
+				>
+					<Form
+						id="the-form"
+						className="form-drawer"
+						onSubmit={(e: FormEvent<HTMLFormElement>) => {
+							e.preventDefault();
+							alert("you successfully submitted");
+							setFormDrawerOpen(false);
+						}}
+					>
+						<p style={{ paddingBottom: 20 }}>
+							Terms of Service Example. User must accept ToS before being
+							allowed to proceed.
+						</p>
+						<Switch required name="ToS" value="accepted">
+							Do you accept the Terms of Service?
+						</Switch>
+						<Button
+							form="the-form"
+							key="reset-btn"
+							type="reset"
+							variant="secondary"
+						>
+							Reset
+						</Button>
 					</Form>
 				</Drawer>
 			</main>
