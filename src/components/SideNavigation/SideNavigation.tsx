@@ -14,7 +14,9 @@ import type {
 import { TopLinkItem } from "./TopLinkItem";
 
 /**
- * Side Navigation
+ * The side navigation bar is used to display the secondary navigation elements
+ * of an application. These include a list of links that can be used to move
+ * between sections or pages within the application or the site.
  *
  * @example
  * <SideNavigation aria-label="Collapsible Navigation Menu">
