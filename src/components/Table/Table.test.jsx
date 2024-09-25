@@ -784,14 +784,7 @@ describe("Table", () => {
 			await user.click(dateColumnFilterMenuItems[3]);
 
 			let columnFilterDrawer = queryAllByRole("dialog")[1];
-			await waitFor(
-				() => {
-					expect(columnFilterDrawer).toHaveClass(
-						"neo-drawer neo-drawer--visible neo-drawer--open",
-					);
-				},
-				{ timeout: 5000 },
-			);
+			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--open");
 
 			// Wait for the input box to appear
 			let dateInput = await waitFor(() =>
@@ -836,15 +829,7 @@ describe("Table", () => {
 			await user.click(dateColumnFilterMenuItems[3]);
 
 			columnFilterDrawer = queryAllByRole("dialog")[1];
-			await waitFor(
-				() => {
-					expect(columnFilterDrawer).toHaveClass(
-						"neo-drawer neo-drawer--visible neo-drawer--open",
-					);
-				},
-				{ timeout: 5000 },
-			);
-
+			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--open");
 			// Wait for the input box to appear
 			dateInput = await waitFor(() =>
 				within(columnFilterDrawer).getByRole("textbox"),
@@ -1158,16 +1143,9 @@ describe("Table", () => {
 			);
 
 			await user.click(columnFilterButton);
-
-			await waitFor(
-				() => {
-					expect(getAllByRole("dialog")[0]).toHaveClass(
-						"neo-drawer neo-drawer--visible neo-drawer--open",
-					);
-				},
-				{ timeout: 5000 },
+			expect(getAllByRole("dialog")[0]).toHaveClass(
+				"neo-drawer  neo-drawer--open",
 			);
-
 			const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
 			expect(nameCheckbox).toBeChecked();
 
@@ -1179,7 +1157,7 @@ describe("Table", () => {
 			)[0];
 			await user.click(applyButton);
 			expect(firstColumnSortButton).not.toBeVisible();
-		}, 10000);
+		});
 
 		it("allows user to predefine hidden rows", async () => {
 			// find the "Long Text" `<th>` element

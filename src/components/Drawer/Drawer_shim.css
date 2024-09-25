@@ -7,20 +7,21 @@
 	max-height: 100vh;
 	max-width: 80%;
 	display: none;
-	transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out allow-discrete;
 	transform: translate(20rem);
 	flex-direction: column;
 	z-index: 1000;
 	background-color: var(--sheet-background);
 }
 
-.neo-drawer--visible {
-	display: flex;
-}
-
 .neo-drawer--open {
+	display: flex;
 	transform: translate(0);
 	box-shadow: 0px 8px 16px var(--sheet-shadow);
+
+	@starting-style {
+		transform: translate(20rem);
+	}
 }
 
 .neo-drawer__scrim {

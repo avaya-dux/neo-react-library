@@ -33,9 +33,6 @@ type EnforcedAccessibleLabel =
 			"aria-labelledby": string;
 	  };
 
-const OPEN_DELAY = 10;
-const CLOSE_DELAY = 300;
-
 const propsAreAccessible = (
 	title: string | JSX.Element | undefined,
 	actionNodes: React.ReactNode[] | undefined,
@@ -157,38 +154,6 @@ const BasicDrawer = ({
 }) => {
 	const drawerRef = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
-		const drawer = drawerRef.current;
-		if (!drawer) return;
-
-		if (open) {
-			// Make the drawer visible first
-			drawer.classList.add("neo-drawer--visible");
-
-			// Add the open class after a short delay
-			const openTimer = setTimeout(() => {
-				drawer.classList.add("neo-drawer--open");
-			}, OPEN_DELAY);
-
-			// Cleanup the timer when the component unmounts or open state changes
-			return () => {
-				clearTimeout(openTimer);
-			};
-		}
-		// Remove the open class first
-		drawer.classList.remove("neo-drawer--open");
-
-		// Remove the visible class after the transition duration
-		const closeTimer = setTimeout(() => {
-			drawer.classList.remove("neo-drawer--visible");
-		}, CLOSE_DELAY);
-
-		// Cleanup the timer when the component unmounts or open state changes
-		return () => {
-			clearTimeout(closeTimer);
-		};
-	}, [open]);
-
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
 	) => {
@@ -206,7 +171,7 @@ const BasicDrawer = ({
 					role="dialog"
 					style={style}
 					aria-labelledby={id}
-					className={clsx("neo-drawer", className)}
+					className={clsx("neo-drawer", open && "neo-drawer--open", className)}
 					{...rest}
 				>
 					<div className="neo-drawer__header">
