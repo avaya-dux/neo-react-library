@@ -7,6 +7,8 @@ import {
 	useState,
 } from "react";
 
+import { Button } from "components";
+
 import FocusLock from "react-focus-lock";
 import { handleAccessbilityError } from "utils";
 
@@ -59,6 +61,8 @@ export interface BaseDrawerProps
 	id?: string;
 	onBack?: () => void;
 	onClose?: () => void;
+	onCancel?: () => void;
+	onApply?: (e:any) => void;
 	closeOnScrimClick?: boolean;
 	ref?: React.Ref<HTMLDivElement>;
 	open?: boolean;
@@ -133,6 +137,8 @@ const BasicDrawer = ({
 	id,
 	onBack,
 	onClose,
+	onCancel,
+	onApply,
 	closeOnScrimClick,
 	open,
 	title,
@@ -145,6 +151,8 @@ const BasicDrawer = ({
 	id?: string;
 	onBack?: () => void;
 	onClose?: () => void;
+	onCancel?: () => void;
+	onApply?: (e:any) => void;
 	closeOnScrimClick: boolean;
 	open: boolean;
 	title?: string | JSX.Element;
@@ -204,6 +212,26 @@ const BasicDrawer = ({
 					</div>
 					<div className="neo-drawer__content">{children}</div>
 					{actions && <div className="neo-drawer__actions">{actions}</div>}
+					{/* The code below will render in the footer section */}
+					{(onCancel || onApply) && (
+						<div className="neo-drawer__actions">
+							{onCancel && (
+								<Button onClick={onCancel} key="on-cancel" variant="secondary">
+									Cancel
+								</Button>
+							)}
+							{onApply && (
+								<Button
+									// onClick={onApply}
+									form="the-form"
+									key={2}
+									type="submit"
+								>
+									Apply
+								</Button>
+							)}
+						</div>
+					)}
 				</div>
 			</FocusLock>
 			{open && (

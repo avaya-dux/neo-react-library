@@ -139,6 +139,11 @@ export const BackButtonAndScrimOptions: Story = {
 export const WithForm: Story = {
 	render: () => {
 		const [formDrawerOpen, setFormDrawerOpen] = useState(false);
+		const handleSubmit = (e:any) => {
+			e.preventDefault();
+			alert("you successfully Applied");
+		}
+
 
 		return (
 			<main>
@@ -156,7 +161,9 @@ export const WithForm: Story = {
 
 				<Drawer
 					open={formDrawerOpen}
+					onCancel={() => setFormDrawerOpen(false)}
 					onClose={() => setFormDrawerOpen(false)}
+					onApply={handleSubmit}
 					title="Submission Form"
 					closeOnScrimClick={false}
 					// Set form attribute to the corresponding Form id
@@ -164,19 +171,12 @@ export const WithForm: Story = {
 						<Button form="the-form" key={1} type="reset" variant="secondary">
 							Reset
 						</Button>,
-						<Button form="the-form" key={2} type="submit">
-							Submit
-						</Button>,
+						// <Button form="the-form" key={2} type="submit">
+						// 	Submit
+						// </Button>,
 					]}
 				>
-					<Form
-						id="the-form"
-						className="form-drawer"
-						onSubmit={(e: FormEvent<HTMLFormElement>) => {
-							e.preventDefault();
-							alert("you successfully submitted");
-						}}
-					>
+					<Form id="the-form" className="form-drawer" onSubmit={handleSubmit}>
 						<p style={{ paddingBottom: 20 }}>
 							Terms of Service Example. User must accept ToS before being
 							allowed to proceed.
