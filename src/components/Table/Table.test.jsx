@@ -946,7 +946,7 @@ describe("Table", () => {
 			expect(descDurationValues).toEqual(
 				[...descDurationValues].sort((a, b) => b - a),
 			);
-		}, 10000);
+		}, 5000);
 	});
 	describe("sort and filter functionality", () => {
 		let renderResult;
@@ -1049,14 +1049,8 @@ describe("Table", () => {
 			const menuItems = queryAllByRole("menuitem");
 			expect(menuItems).toHaveLength(4);
 			await user.click(queryAllByRole("menuitem")[3]);
-
-			await waitFor(
-				() => {
-					expect(getAllByRole("dialog")[1]).toHaveClass(
-						"neo-drawer neo-drawer--open",
-					);
-				},
-				{ timeout: 5000 },
+			expect(getAllByRole("dialog")[1]).toHaveClass(
+				"neo-drawer neo-drawer--open",
 			);
 
 			let nameInput = getAllByRole("textbox")[1];
@@ -1120,7 +1114,7 @@ describe("Table", () => {
 				"tr th div[role='menuitem'] span[role='img']",
 			);
 			expect(checkIcon).toBeNull();
-		}, 10000);
+		});
 
 		it("toggles column visibility via toolbar Filter Icon Button", async () => {
 			const { container, getAllByRole, getByLabelText, getAllByLabelText } =
