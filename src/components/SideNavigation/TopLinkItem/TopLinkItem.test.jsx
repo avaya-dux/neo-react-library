@@ -26,7 +26,7 @@ describe("TopLinkItem", () => {
 			</SideNavigation>,
 		);
 		const linkElement = screen.getByRole("listitem");
-		expect(linkElement).toHaveClass("neo-SideNavigation__main--active");
+		expect(linkElement).toHaveClass("neo-leftnav__main--active");
 		rerender(
 			<SideNavigation
 				currentUrl="#test"
@@ -36,7 +36,7 @@ describe("TopLinkItem", () => {
 				<SideNavigation.TopLinkItem href="#test" label={TopLinkItemLabel} />
 			</SideNavigation>,
 		);
-		expect(linkElement).not.toHaveClass("neo-SideNavigation__main--active");
+		expect(linkElement).not.toHaveClass("neo-leftnav__main--active");
 	});
 
 	it("passes basic axe compliance", async () => {
@@ -57,7 +57,7 @@ describe("TopLinkItem", () => {
 	//     </SideNavigation>
 	//   );
 	//   const linkElement = screen.getByRole("listitem");
-	//   expect(linkElement).toHaveClass("neo-SideNavigation__main--active");
+	//   expect(linkElement).toHaveClass("neo-leftnav__main--active");
 	// });
 	// it("assigns the appropriate class name when `icon` prop is passed with `active` prop", () => {
 	//   render(
