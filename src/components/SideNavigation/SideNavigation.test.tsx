@@ -70,6 +70,9 @@ describe("Side Navigation", () => {
 					<SideNavigation aria-label="">{examplechildren}</SideNavigation>,
 				),
 			).toThrowError();
+
+			// Restore console.error after the test
+			vi.restoreAllMocks();
 		});
 	});
 
