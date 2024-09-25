@@ -10,8 +10,8 @@ import {
 
 import { Button } from "components/Button";
 
-import { LeftNavContext } from "../LeftNavContext";
-import type { TopLinkItemProps } from "../LeftNavTypes";
+import { SideNavigationContext } from "../SideNavigationContext";
+import type { TopLinkItemProps } from "../SideNavigationTypes";
 
 import "./TopLinkItem_shim.css";
 
@@ -19,14 +19,14 @@ import "./TopLinkItem_shim.css";
  * Is meant to be used as a top level link. Eg, one that is not nested.
  *
  * @example
- * <LeftNav
+ * <SideNavigation
     aria-label="Main Navigation"
     onNavigate={handleClick}
     currentUrl="#active"
   >
-    <LeftNav.TopLinkItem label="Active by default" href="#active" />
-    <LeftNav.TopLinkItem label="Link 2" href="#test2" />
-  </LeftNav>
+    <SideNavigation.TopLinkItem label="Active by default" href="#active" />
+    <SideNavigation.TopLinkItem label="Link 2" href="#test2" />
+  </SideNavigation>
  */
 export const TopLinkItem = ({
 	disabled,
@@ -38,7 +38,7 @@ export const TopLinkItem = ({
 }: TopLinkItemProps) => {
 	const generatedId = useId();
 	id = id || generatedId;
-	const ctx = useContext(LeftNavContext);
+	const ctx = useContext(SideNavigationContext);
 	const [isActive, setIsActive] = useState(false);
 
 	const anchorRef = useRef<HTMLAnchorElement>(null);

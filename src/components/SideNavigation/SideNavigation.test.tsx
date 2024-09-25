@@ -2,47 +2,53 @@ import { type RenderResult, render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
-import { LeftNav } from "./";
+import { SideNavigation } from ".";
 import {
 	CategoryGroups,
 	CategoryGroupsWithIcons,
 	Default,
 	DoesNotConflictWithOtherNavs,
-} from "./LeftNav.stories";
+} from "./SideNavigation.stories";
 
-describe("LeftNav", () => {
+describe("Side Navigation", () => {
 	window.HTMLElement.prototype.scrollIntoView = vi.fn();
 	describe("a11y tests", () => {
 		const examplechildren = (
 			<>
-				<LeftNav.TopLinkItem label="Active by default" href="#active" />
+				<SideNavigation.TopLinkItem label="Active by default" href="#active" />
 
-				<LeftNav.TopLinkItem label="Link 2" href="#test2" disabled />
+				<SideNavigation.TopLinkItem label="Link 2" href="#test2" disabled />
 
-				<LeftNav.NavCategory expanded={true} label="Text Only Category">
-					<LeftNav.LinkItem href="http://first.com">
+				<SideNavigation.NavCategory expanded={true} label="Text Only Category">
+					<SideNavigation.LinkItem href="http://first.com">
 						First Item
-					</LeftNav.LinkItem>
-					<LeftNav.LinkItem href="http://avaya.com" disabled>
+					</SideNavigation.LinkItem>
+					<SideNavigation.LinkItem href="http://avaya.com" disabled>
 						Disabled Item
-					</LeftNav.LinkItem>
-				</LeftNav.NavCategory>
+					</SideNavigation.LinkItem>
+				</SideNavigation.NavCategory>
 			</>
 		);
 
 		it("renders properly when `aria-label` is passed", () => {
-			render(<LeftNav aria-label="Main Navigation">{examplechildren}</LeftNav>);
+			render(
+				<SideNavigation aria-label="Main Navigation">
+					{examplechildren}
+				</SideNavigation>,
+			);
 
 			expect(screen.getByRole("navigation")).toBeInTheDocument();
 		});
 
 		it("renders properly when `aria-labelledby` is passed", () => {
-			const id = "left-nav-title";
+			const id = "side-nav-title";
 			render(
 				<div>
-					<h1 id={id}>Left Navigation</h1>
+					<h1 id={id}>Side Navigation</h1>
 
-					<LeftNav aria-labelledby={id}>{examplechildren}</LeftNav>
+					<SideNavigation aria-labelledby={id}>
+						{examplechildren}
+					</SideNavigation>
 				</div>,
 			);
 
@@ -53,8 +59,10 @@ describe("LeftNav", () => {
 			vi.spyOn(console, "error").mockImplementation(() => null);
 
 			expect(() =>
-				// biome-ignore lint/a11y/useValidAriaValues: we are purposefully testing an invalid value
-				render(<LeftNav aria-label="">{examplechildren}</LeftNav>),
+				render(
+					// biome-ignore lint/a11y/useValidAriaValues: we are purposefully testing an invalid value
+					<SideNavigation aria-label="">{examplechildren}</SideNavigation>,
+				),
 			).toThrowError();
 		});
 	});

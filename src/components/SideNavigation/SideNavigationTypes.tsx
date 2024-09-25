@@ -34,7 +34,7 @@ type EnforcedAccessibleLabel =
 	| { "aria-label": string }
 	| { "aria-labelledby": string };
 
-export type LeftNavProps = {
+export type SideNavigationProps = {
 	currentUrl?: string;
 	isActiveOverride?: boolean;
 	onNavigate?: (id: string, url: string) => void;
@@ -44,13 +44,13 @@ export type LeftNavProps = {
 } & React.BaseHTMLAttributes<HTMLElement> &
 	EnforcedAccessibleLabel;
 
-export interface LeftNavSubComponents {
+export interface SideNavigationSubComponents {
 	LinkItem: React.FC<LinkItemProps>;
 	NavCategory: React.FC<NavCategoryProps>;
 	TopLinkItem: React.FC<TopLinkItemProps>;
 }
 
-export interface LeftNavContextType {
+export interface SideNavigationContextType {
 	currentUrl: string;
 	onSelectedLink?: (id: string, url: string) => void;
 	isActiveOverride?: boolean;

@@ -18,10 +18,10 @@ import { useFocusEffect, useRovingTabIndex } from "react-roving-tabindex";
 
 import { Keys, getIconClass } from "utils";
 
-import { LeftNavContext } from "../LeftNavContext";
-import type { NavCategoryProps } from "../LeftNavTypes";
+import { SideNavigationContext } from "../SideNavigationContext";
+import type { NavCategoryProps } from "../SideNavigationTypes";
 
-const LEFTNAV_CATEGORY_STYLE = "neo-leftnav__main";
+const SIDENAV_CATEGORY_STYLE = "neo-leftnav__main";
 
 function getItemClassNames(
 	expanded: boolean,
@@ -29,7 +29,7 @@ function getItemClassNames(
 	disabled: boolean,
 ) {
 	const classNames = clsx(
-		LEFTNAV_CATEGORY_STYLE,
+		SIDENAV_CATEGORY_STYLE,
 		expanded && "neo-leftnav__main--expand",
 		active && "neo-leftnav__main--active",
 		disabled && "neo-leftnav__disabled",
@@ -42,10 +42,10 @@ function getItemClassNames(
  * Is meant to wrap an array of `LinkItem`.
  *
  * @example
- * <LeftNav.NavCategory icon="audio-on" label="Collapsed">
-    <LeftNav.LinkItem href="#first">First Item</LeftNav.LinkItem>
-    <LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
-  </LeftNav.NavCategory>
+ * <SideNavigation.NavCategory icon="audio-on" label="Collapsed">
+    <SideNavigation.LinkItem href="#first">First Item</SideNavigation.LinkItem>
+    <SideNavigation.LinkItem href="#second">Second Item</SideNavigation.LinkItem>
+  </SideNavigation.NavCategory>
  *
  * @see https://design.avayacloud.com/components/web/list-web
  */
@@ -64,7 +64,7 @@ export const NavCategory = ({
 	id = id || generatedId;
 	const listClass = "neo-leftnav__nav";
 	const [isExpanded, setIsExpanded] = useState(expanded);
-	const [navItemClass, setNavItemClass] = useState(LEFTNAV_CATEGORY_STYLE);
+	const [navItemClass, setNavItemClass] = useState(SIDENAV_CATEGORY_STYLE);
 	const [iconClass, setIconClass] = useState("");
 	const [childIsActive, setChildIsActive] = useState(false);
 
@@ -75,7 +75,7 @@ export const NavCategory = ({
 	);
 	useFocusEffect(isActive, ref);
 
-	const ctx = useContext(LeftNavContext);
+	const ctx = useContext(SideNavigationContext);
 
 	useEffect(() => {
 		const active = childIsActive;

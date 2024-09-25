@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
-import { LeftNav } from "../LeftNav";
+import { SideNavigation } from "../SideNavigation";
 
 describe("TopLinkItem", () => {
 	const user = userEvent.setup();
@@ -13,7 +13,7 @@ describe("TopLinkItem", () => {
 
 	it("fully renders without exploding", () => {
 		const { getByText } = render(
-			<LeftNav.TopLinkItem label={TopLinkItemLabel} />,
+			<SideNavigation.TopLinkItem label={TopLinkItemLabel} />,
 		);
 		const topLinkElement = getByText(TopLinkItemLabel);
 		expect(topLinkElement).toBeInTheDocument();
@@ -21,24 +21,28 @@ describe("TopLinkItem", () => {
 
 	it("accepts override of internal setting of active state", () => {
 		const { rerender } = render(
-			<LeftNav currentUrl="#test" aria-label="test-label">
-				<LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
-			</LeftNav>,
+			<SideNavigation currentUrl="#test" aria-label="test-label">
+				<SideNavigation.TopLinkItem href="#test" label={TopLinkItemLabel} />
+			</SideNavigation>,
 		);
 		const linkElement = screen.getByRole("listitem");
-		expect(linkElement).toHaveClass("neo-leftnav__main--active");
+		expect(linkElement).toHaveClass("neo-SideNavigation__main--active");
 		rerender(
-			<LeftNav currentUrl="#test" aria-label="test-label" isActiveOverride>
-				<LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
-			</LeftNav>,
+			<SideNavigation
+				currentUrl="#test"
+				aria-label="test-label"
+				isActiveOverride
+			>
+				<SideNavigation.TopLinkItem href="#test" label={TopLinkItemLabel} />
+			</SideNavigation>,
 		);
-		expect(linkElement).not.toHaveClass("neo-leftnav__main--active");
+		expect(linkElement).not.toHaveClass("neo-SideNavigation__main--active");
 	});
 
 	it("passes basic axe compliance", async () => {
 		const { container } = render(
 			<ul>
-				<LeftNav.TopLinkItem label={TopLinkItemLabel} />
+				<SideNavigation.TopLinkItem label={TopLinkItemLabel} />
 			</ul>,
 		);
 		const results = await axe(container);
@@ -48,16 +52,16 @@ describe("TopLinkItem", () => {
 	// TODO: skipping due to not seeing an `active` prop being used
 	// it("assigns the appropriate class name when the `active` prop is passed", () => {
 	//   render(
-	//     <LeftNav currentUrl="#test">
-	//       <LeftNav.TopLinkItem href="#test" label={TopLinkItemLabel} />
-	//     </LeftNav>
+	//     <SideNavigation currentUrl="#test">
+	//       <SideNavigation.TopLinkItem href="#test" label={TopLinkItemLabel} />
+	//     </SideNavigation>
 	//   );
 	//   const linkElement = screen.getByRole("listitem");
-	//   expect(linkElement).toHaveClass("neo-leftnav__main--active");
+	//   expect(linkElement).toHaveClass("neo-SideNavigation__main--active");
 	// });
 	// it("assigns the appropriate class name when `icon` prop is passed with `active` prop", () => {
 	//   render(
-	//     <LeftNav.TopLinkItem
+	//     <SideNavigation.TopLinkItem
 	//       label={TopLinkItemLabel}
 	//       active
 	//       icon="address-book"
@@ -69,7 +73,7 @@ describe("TopLinkItem", () => {
 	// });
 	// it("assigns the appropriate class name when `icon` prop is passed without `active` prop", () => {
 	//   render(
-	//     <LeftNav.TopLinkItem
+	//     <SideNavigation.TopLinkItem
 	//       label={TopLinkItemLabel}
 	//       icon="address-book"
 	//       href="#"
@@ -82,13 +86,13 @@ describe("TopLinkItem", () => {
 	it("should simulate onclick function when not disabled", async () => {
 		const mockedFunction = vi.fn();
 		const { getByText } = render(
-			<LeftNav
+			<SideNavigation
 				aria-label="Main Navigation"
 				onNavigate={mockedFunction}
 				currentUrl=""
 			>
-				<LeftNav.TopLinkItem label={TopLinkItemLabel} />
-			</LeftNav>,
+				<SideNavigation.TopLinkItem label={TopLinkItemLabel} />
+			</SideNavigation>,
 		);
 		const linkElement = getByText(TopLinkItemLabel);
 		await user.click(linkElement);
@@ -97,7 +101,7 @@ describe("TopLinkItem", () => {
 
 	it("uses a `<button>` when it _is_ disabled", () => {
 		const { container } = render(
-			<LeftNav.TopLinkItem label={TopLinkItemLabel} disabled />,
+			<SideNavigation.TopLinkItem label={TopLinkItemLabel} disabled />,
 		);
 		const linkElement = container.querySelector("a");
 		const buttonElement = container.querySelector("button");
@@ -108,7 +112,7 @@ describe("TopLinkItem", () => {
 	it("should not simulate onclick function for disable link", async () => {
 		const mockedFunction = vi.fn();
 		const { getByText } = render(
-			<LeftNav.TopLinkItem
+			<SideNavigation.TopLinkItem
 				onClick={mockedFunction}
 				label={TopLinkItemLabel}
 				disabled

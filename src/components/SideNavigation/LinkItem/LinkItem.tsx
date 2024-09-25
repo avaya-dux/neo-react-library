@@ -14,17 +14,17 @@ import { useFocusEffect, useRovingTabIndex } from "react-roving-tabindex";
 import { Button } from "components/Button";
 import { Keys } from "utils";
 
-import { LeftNavContext } from "../LeftNavContext";
-import type { LinkItemProps } from "../LeftNavTypes";
+import { SideNavigationContext } from "../SideNavigationContext";
+import type { LinkItemProps } from "../SideNavigationTypes";
 
 /**
  * Is meant to be used as a link that is nested under a `NavCategory`.
  *
  * @example
- * <LeftNav.NavCategory icon="audio-on" label="Collapsed">
- *  <LeftNav.LinkItem href="#first">First Item</LeftNav.LinkItem>
- *  <LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
- * </LeftNav.NavCategory>
+ * <SideNavigation.NavCategory icon="audio-on" label="Collapsed">
+ *  <SideNavigation.LinkItem href="#first">First Item</SideNavigation.LinkItem>
+ *  <SideNavigation.LinkItem href="#second">Second Item</SideNavigation.LinkItem>
+ * </SideNavigation.NavCategory>
  */
 export const LinkItem = ({
 	active = false,
@@ -41,7 +41,7 @@ export const LinkItem = ({
 }: LinkItemProps) => {
 	const generatedId = useId();
 	id = id || generatedId;
-	const ctx = useContext(LeftNavContext);
+	const ctx = useContext(SideNavigationContext);
 	const [itemStyle, setItemStyle] = useState({ padding: "8px 28px 8px 20px" });
 
 	const ref = useRef(null);
