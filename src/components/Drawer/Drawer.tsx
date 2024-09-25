@@ -4,7 +4,6 @@ import {
 	type KeyboardEventHandler,
 	useEffect,
 	useId,
-	useRef,
 	useState,
 } from "react";
 
@@ -152,8 +151,6 @@ const BasicDrawer = ({
 	style?: object | undefined;
 	actions?: React.ReactNode[];
 }) => {
-	const drawerRef = useRef<HTMLDivElement>(null);
-
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
 	) => {
@@ -166,7 +163,6 @@ const BasicDrawer = ({
 		<div>
 			<FocusLock disabled={!open}>
 				<div
-					ref={drawerRef}
 					onKeyDown={onKeyDownScrimHandler}
 					role="dialog"
 					style={style}
