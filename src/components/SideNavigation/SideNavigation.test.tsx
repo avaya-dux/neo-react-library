@@ -1,14 +1,18 @@
-import { type RenderResult, render, screen } from "@testing-library/react";
+import { composeStories } from "@storybook/testing-react";
+import type { RenderResult } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
 
 import { SideNavigation } from ".";
-import {
+
+import * as SideNavigationStories from "./SideNavigation.stories";
+const {
 	CategoryGroups,
 	CategoryGroupsWithIcons,
 	Default,
 	DoesNotConflictWithOtherNavs,
-} from "./SideNavigation.stories";
+} = composeStories(SideNavigationStories);
 
 describe("Side Navigation", () => {
 	window.HTMLElement.prototype.scrollIntoView = vi.fn();
