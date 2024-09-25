@@ -19,7 +19,7 @@ import { useFocusEffect, useRovingTabIndex } from "react-roving-tabindex";
 import { Keys, getIconClass } from "utils";
 
 import { SideNavigationContext } from "../SideNavigationContext";
-import type { NavCategoryProps } from "../SideNavigationTypes";
+import type { SideNavigationNavCategoryProps } from "../SideNavigationTypes";
 
 const SIDENAV_CATEGORY_STYLE = "neo-leftnav__main";
 
@@ -59,7 +59,7 @@ export const NavCategory = ({
 	disabled = false,
 	// active = false, // BUG: definied by never used
 	...rest
-}: NavCategoryProps) => {
+}: SideNavigationNavCategoryProps) => {
 	const generatedId = useId();
 	id = id || generatedId;
 	const listClass = "neo-leftnav__nav";

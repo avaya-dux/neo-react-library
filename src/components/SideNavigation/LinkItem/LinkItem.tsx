@@ -15,7 +15,7 @@ import { Button } from "components/Button";
 import { Keys } from "utils";
 
 import { SideNavigationContext } from "../SideNavigationContext";
-import type { LinkItemProps } from "../SideNavigationTypes";
+import type { SideNavigationLinkItemProps } from "../SideNavigationTypes";
 
 /**
  * Is meant to be used as a link that is nested under a `NavCategory`.
@@ -38,7 +38,7 @@ export const LinkItem = ({
 	parentHasIcon,
 
 	...rest
-}: LinkItemProps) => {
+}: SideNavigationLinkItemProps) => {
 	const generatedId = useId();
 	id = id || generatedId;
 	const ctx = useContext(SideNavigationContext);

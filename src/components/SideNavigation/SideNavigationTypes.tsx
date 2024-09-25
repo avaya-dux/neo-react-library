@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactElement } from "react";
 
 import type { IconNamesType } from "utils";
 
-export interface TopLinkItemProps {
+export interface SideNavigationTopLinkItemProps {
 	label: string;
 	href: string;
 	disabled?: boolean;
@@ -11,7 +11,7 @@ export interface TopLinkItemProps {
 	className?: string;
 }
 
-export interface LinkItemProps
+export interface SideNavigationLinkItemProps
 	extends HTMLAttributes<HTMLLIElement | HTMLAnchorElement> {
 	children: string;
 	active?: boolean;
@@ -20,14 +20,16 @@ export interface LinkItemProps
 	parentHasIcon?: boolean;
 }
 
-export interface NavCategoryProps
+export interface SideNavigationNavCategoryProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	label: string;
 	icon?: IconNamesType;
 	expanded?: boolean;
 	disabled?: boolean;
 	active?: boolean;
-	children?: ReactElement<LinkItemProps> | ReactElement<LinkItemProps>[];
+	children?:
+		| ReactElement<SideNavigationLinkItemProps>
+		| ReactElement<SideNavigationLinkItemProps>[];
 }
 
 type EnforcedAccessibleLabel =
@@ -39,15 +41,19 @@ export type SideNavigationProps = {
 	isActiveOverride?: boolean;
 	onNavigate?: (id: string, url: string) => void;
 	children?:
-		| ReactElement<NavCategoryProps | TopLinkItemProps>
-		| ReactElement<NavCategoryProps | TopLinkItemProps>[];
+		| ReactElement<
+				SideNavigationNavCategoryProps | SideNavigationTopLinkItemProps
+		  >
+		| ReactElement<
+				SideNavigationNavCategoryProps | SideNavigationTopLinkItemProps
+		  >[];
 } & React.BaseHTMLAttributes<HTMLElement> &
 	EnforcedAccessibleLabel;
 
 export interface SideNavigationSubComponents {
-	LinkItem: React.FC<LinkItemProps>;
-	NavCategory: React.FC<NavCategoryProps>;
-	TopLinkItem: React.FC<TopLinkItemProps>;
+	LinkItem: React.FC<SideNavigationLinkItemProps>;
+	NavCategory: React.FC<SideNavigationNavCategoryProps>;
+	TopLinkItem: React.FC<SideNavigationTopLinkItemProps>;
 }
 
 export interface SideNavigationContextType {

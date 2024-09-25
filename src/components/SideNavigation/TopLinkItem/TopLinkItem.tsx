@@ -11,7 +11,7 @@ import {
 import { Button } from "components/Button";
 
 import { SideNavigationContext } from "../SideNavigationContext";
-import type { TopLinkItemProps } from "../SideNavigationTypes";
+import type { SideNavigationTopLinkItemProps } from "../SideNavigationTypes";
 
 import "./TopLinkItem_shim.css";
 
@@ -35,7 +35,7 @@ export const TopLinkItem = ({
 	id,
 	label,
 	className,
-}: TopLinkItemProps) => {
+}: SideNavigationTopLinkItemProps) => {
 	const generatedId = useId();
 	id = id || generatedId;
 	const ctx = useContext(SideNavigationContext);
