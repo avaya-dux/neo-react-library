@@ -17,6 +17,7 @@ import { genId } from "utils";
 
 import { handleMenuItemClick } from "../EventHandlers";
 import { MenuItem } from "../MenuItem";
+import { MenuSeparator } from "../MenuSeparator";
 import type {
 	ActionType,
 	MenuIndexesType,
@@ -29,25 +30,55 @@ import { SubMenu } from "../SubMenu";
 const logger = log.getLogger("menu-helpers");
 logger.disableAll();
 
-export const addIdToChildren = (children: MenuProps["children"]) => {
-	return Children.map(children, (child) => {
-		const childType = child.type;
+export const flattenChildren = (children: React.ReactNode): ReactElement => {
+	const flatChildren: React.ReactNode[] = [];
 
-		if (childType === MenuItem) {
-			return cloneElement(child, { id: child.props.id || genId() });
+	Children.forEach(children, (child) => {
+		if (!isValidElement(child)) {
+			return;
 		}
-		if (childType === SubMenu) {
-			const buttonElement = (child.props as SubMenuProps).menuRootElement;
-			const buttonElementId = buttonElement.props.id || genId();
-			const cloneButton = cloneElement(buttonElement, {
-				id: buttonElementId,
-			});
-			return cloneElement(child as ReactElement<SubMenuProps>, {
-				menuRootElement: cloneButton,
-			});
+		if (child.type === Fragment) {
+			const flatChild = flattenChildren(child.props.children);
+			if (flatChild) {
+				flatChildren.push(...Children.toArray(flatChild.props.children));
+			}
+		} else if (
+			child.type === SubMenu ||
+			child.type === MenuItem ||
+			child.type === MenuSeparator
+		) {
+			flatChildren.push(child);
 		}
-		return child;
 	});
+
+	if (flatChildren.length === 0) {
+		return <></>;
+	}
+	return <>{flatChildren}</>;
+};
+
+export const addIdToChildren = (children: MenuProps["children"]) => {
+	const flatChildren = flattenChildren(children);
+	return (
+		Children.map(flatChildren.props.children, (child) => {
+			const childType = child.type;
+
+			if (childType === MenuItem) {
+				return cloneElement(child, { id: child.props.id || genId() });
+			}
+			if (childType === SubMenu) {
+				const buttonElement = (child.props as SubMenuProps).menuRootElement;
+				const buttonElementId = buttonElement.props.id || genId();
+				const cloneButton = cloneElement(buttonElement, {
+					id: buttonElementId,
+				});
+				return cloneElement(child as ReactElement<SubMenuProps>, {
+					menuRootElement: cloneButton,
+				});
+			}
+			return child;
+		}) || []
+	);
 };
 
 export const getContentCss = (

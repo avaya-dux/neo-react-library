@@ -167,11 +167,7 @@ const BasicDrawer = ({
 					role="dialog"
 					style={style}
 					aria-labelledby={id}
-					className={clsx(
-						"neo-drawer",
-						open && "neo-drawer--isOpen",
-						className,
-					)}
+					className={clsx("neo-drawer", open && "neo-drawer--open", className)}
 					{...rest}
 				>
 					<div className="neo-drawer__header">
