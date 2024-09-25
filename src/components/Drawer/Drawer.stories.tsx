@@ -161,42 +161,22 @@ export const withDefaultButtons: Story = {
 				<Drawer
 					open={formDrawerOpen}
 					onCancel={() => setFormDrawerOpen(false)}
-					onClose={() => setFormDrawerOpen(false)}
 					onApply={handleSubmit}
-					title="Submission Form"
+					title="App Settings"
 					closeOnScrimClick={false}
-					// Set form attribute to the corresponding Form id
-					actions={[
-						<Button
-							form="the-form"
-							key="cancel-btn"
-							variant="secondary"
-							type="submit"
-						>
-							Cancel
-						</Button>,
-						<Button form="the-form" key="submit-btn" type="submit">
-							Submit
-						</Button>,
-					]}
 				>
-					<Form id="the-form" className="form-drawer" onSubmit={handleSubmit}>
-						<p style={{ paddingBottom: 20 }}>
-							Terms of Service Example. User must accept ToS before being
-							allowed to proceed.
-						</p>
-						<Switch required name="ToS" value="accepted">
-							Do you accept the Terms of Service?
-						</Switch>
-						<Button
-							form="the-form"
-							key="reset-btn"
-							type="reset"
-							variant="secondary"
-						>
-							Reset
-						</Button>
-					</Form>
+					<Switch defaultChecked name="autostart" value="on">
+						Auto-start On
+					</Switch>
+					<Switch name="darkmode" value="on">
+						Dark Mode On
+					</Switch>
+					<Switch defaultChecked name="powersave" value="on">
+						Power Save Mode On
+					</Switch>
+					<Switch name="animations" value="on">
+						Animations On
+					</Switch>
 				</Drawer>
 			</main>
 		);
