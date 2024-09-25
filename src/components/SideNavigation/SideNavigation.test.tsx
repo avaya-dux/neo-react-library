@@ -15,7 +15,9 @@ const {
 } = composeStories(SideNavigationStories);
 
 describe("Side Navigation", () => {
+	// TODO: "Avoid mutating global prototypes directly; use setup and teardown methods" per CodeRabbit - https://github.com/avaya-dux/neo-react-library/pull/549#discussion_r1775919025
 	window.HTMLElement.prototype.scrollIntoView = vi.fn();
+
 	describe("a11y tests", () => {
 		const examplechildren = (
 			<>
