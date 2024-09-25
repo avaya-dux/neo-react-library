@@ -77,79 +77,33 @@ describe("Side Navigation", () => {
 	});
 
 	describe("storybook tests", () => {
-		describe("Default", () => {
-			let renderResult: RenderResult;
+		const stories = [
+			{ name: "Default", Component: Default },
+			{ name: "CategoryGroups", Component: CategoryGroups },
+			{ name: "CategoryGroupsWithIcons", Component: CategoryGroupsWithIcons },
+			{
+				name: "DoesNotConflictWithOtherNavs",
+				Component: DoesNotConflictWithOtherNavs,
+			},
+		];
+		stories.forEach(({ name, Component }) => {
+			describe(name, () => {
+				let renderResult: RenderResult;
 
-			beforeEach(() => {
-				renderResult = render(<Default />);
-			});
+				beforeEach(() => {
+					renderResult = render(<Component />);
+				});
 
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
+				it("should render ok", () => {
+					const { container } = renderResult;
+					expect(container).not.toBe(null);
+				});
 
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("CategoryGroups", () => {
-			let renderResult: RenderResult;
-
-			beforeEach(() => {
-				renderResult = render(<CategoryGroups />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("CategoryGroupsWithIcons", () => {
-			let renderResult: RenderResult;
-
-			beforeEach(() => {
-				renderResult = render(<CategoryGroupsWithIcons />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("DoesNotConflictWithOtherNavs", () => {
-			let renderResult: RenderResult;
-
-			beforeEach(() => {
-				renderResult = render(<DoesNotConflictWithOtherNavs />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
+				it("passes basic axe compliance", async () => {
+					const { container } = renderResult;
+					const results = await axe(container);
+					expect(results).toHaveNoViolations();
+				});
 			});
 		});
 	});
