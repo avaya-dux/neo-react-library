@@ -56,19 +56,25 @@ const propsAreAccessible = (
 };
 
 export interface BaseDrawerProps
-	extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
-	children?: React.ReactNode;
-	id?: string;
-	onBack?: () => void;
-	onClose?: () => void;
-	onCancel?: () => void;
-	onApply?: (e:any) => void;
-	closeOnScrimClick?: boolean;
-	ref?: React.Ref<HTMLDivElement>;
-	open?: boolean;
-	width?: string;
-	actions?: React.ReactNode[];
-}
+		extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
+		children?: React.ReactNode;
+		id?: string;
+		onBack?: () => void;
+		onClose?: () => void;
+		onCancel?: () => void;
+		onApply?: (e: any) => void;
+		closeOnScrimClick?: boolean;
+		ref?: React.Ref<HTMLDivElement>;
+		open?: boolean;
+		width?: string;
+		actions?: React.ReactNode[];
+		translations?: {
+			apply: string;
+			back: string;
+			cancel: string;
+			close: string;
+		};
+	}
 
 export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
 
@@ -97,6 +103,12 @@ export const Drawer = ({
 	closeOnScrimClick = true,
 	width,
 	actions,
+	translations = {
+		apply: "Apply",
+		back: "Go back",
+		cancel: "Cancel",
+		close: "Close drawer",
+	},
 
 	...rest
 }: DrawerProps) => {
@@ -123,6 +135,7 @@ export const Drawer = ({
 				title={title}
 				style={widthStyle}
 				actions={actions}
+				translations={translations}
 				{...rest}
 			>
 				{children}
@@ -144,6 +157,7 @@ const BasicDrawer = ({
 	title,
 	style,
 	actions,
+	translations,
 	...rest
 }: {
 	children?: React.ReactNode;
@@ -152,12 +166,18 @@ const BasicDrawer = ({
 	onBack?: () => void;
 	onClose?: () => void;
 	onCancel?: () => void;
-	onApply?: (e:any) => void;
+	onApply?: (e: any) => void;
 	closeOnScrimClick: boolean;
 	open: boolean;
 	title?: string | JSX.Element;
 	style?: object | undefined;
 	actions?: React.ReactNode[];
+	translations?: {
+		apply: string;
+		back: string;
+		cancel: string;
+		close: string;
+	};
 }) => {
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
@@ -189,7 +209,7 @@ const BasicDrawer = ({
 									onClick={onBack}
 									variant="tertiary"
 									shape="square"
-									aria-label="back" // TODO: localize this aria-label
+									aria-label={translations?.back || "Back"}
 									icon="chevron-left"
 									className="neo-drawer-icon-chevron-left"
 								/>
@@ -198,12 +218,12 @@ const BasicDrawer = ({
 						</div>
 
 						<div className="neo-drawer__header--right">
-							{onClose !== undefined && (
+							{onClose !== undefined && onCancel == undefined  && (
 								<IconButton
 									onClick={onClose}
 									variant="tertiary"
 									shape="square"
-									aria-label="close" // TODO: localize this aria-label
+									aria-label={translations?.close || "Close"}
 									icon="close"
 									className="neo-drawer-icon-close"
 								/>
@@ -217,16 +237,12 @@ const BasicDrawer = ({
 						<div className="neo-drawer__actions">
 							{onCancel && (
 								<Button onClick={onCancel} key="cancel-btn" variant="secondary">
-									Cancel
+									{translations?.cancel}
 								</Button>
 							)}
 							{onApply && (
-								<Button
-									onClick={onApply}
-									key="apply-btn"
-									type="submit"
-								>
-									Apply
+								<Button onClick={onApply} key="apply-btn" type="submit">
+									{translations?.apply}
 								</Button>
 							)}
 						</div>
