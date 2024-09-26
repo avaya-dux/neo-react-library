@@ -6,10 +6,10 @@ import {
 	Avatar,
 	Image,
 	ImageLink,
-	LeftNav,
 	Menu,
 	MenuButton,
 	MenuItem,
+	SideNavigation,
 	SubMenu,
 	Tab,
 	TabLink,
@@ -55,47 +55,59 @@ NavigationToggle.args = {
 };
 NavigationToggle.decorators = [
 	(Story, context) => {
-		const [displayLeftNav, setDisplayLeftNav] = useState(false);
+		const [displaySideNav, setDisplaySideNav] = useState(false);
 
 		const args = { ...context.args };
 
 		const navMenuToggleWithHandler = cloneElement(args.menuToggleBtn!, {
-			onClick: () => setDisplayLeftNav(!displayLeftNav),
+			onClick: () => setDisplaySideNav(!displaySideNav),
 		});
 
 		return (
 			<>
 				<Story args={{ ...args, menuToggleBtn: navMenuToggleWithHandler }} />
-				{displayLeftNav && (
+				{displaySideNav && (
 					<div
 						className={
-							displayLeftNav
+							displaySideNav
 								? "neo-slide neo-slide--in-left neo-leftnav--collapsible"
 								: "neo-leftnav--collapsible neo-slide neo-slide--out-left"
 						}
 						style={{ width: "15%" }}
 					>
-						<LeftNav aria-label="Collapsible Navigation Menu">
-							<LeftNav.NavCategory icon="audio-on" label="Collapsed">
-								<LeftNav.LinkItem href="#first">First Item</LeftNav.LinkItem>
-								<LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
-							</LeftNav.NavCategory>
-							<LeftNav.NavCategory expanded icon="call" label="Active">
-								<LeftNav.LinkItem href="#item1">Item 1</LeftNav.LinkItem>
-								<LeftNav.LinkItem href="#item2" active>
-									Active Item 2
-								</LeftNav.LinkItem>
-								<LeftNav.LinkItem href="#item3">Item 3</LeftNav.LinkItem>
-							</LeftNav.NavCategory>
-							<LeftNav.NavCategory disabled icon="available" label="Disabled">
-								<LeftNav.LinkItem href="#disabled1">
+						<SideNavigation aria-label="Collapsible Navigation Menu">
+							<SideNavigation.NavCategory icon="audio-on" label="Collapsed">
+								<SideNavigation.LinkItem href="#first">
 									First Item
-								</LeftNav.LinkItem>
-								<LeftNav.LinkItem href="#disabled2">
+								</SideNavigation.LinkItem>
+								<SideNavigation.LinkItem href="#second">
 									Second Item
-								</LeftNav.LinkItem>
-							</LeftNav.NavCategory>
-						</LeftNav>
+								</SideNavigation.LinkItem>
+							</SideNavigation.NavCategory>
+							<SideNavigation.NavCategory expanded icon="call" label="Active">
+								<SideNavigation.LinkItem href="#item1">
+									Item 1
+								</SideNavigation.LinkItem>
+								<SideNavigation.LinkItem href="#item2" active>
+									Active Item 2
+								</SideNavigation.LinkItem>
+								<SideNavigation.LinkItem href="#item3">
+									Item 3
+								</SideNavigation.LinkItem>
+							</SideNavigation.NavCategory>
+							<SideNavigation.NavCategory
+								disabled
+								icon="available"
+								label="Disabled"
+							>
+								<SideNavigation.LinkItem href="#disabled1">
+									First Item
+								</SideNavigation.LinkItem>
+								<SideNavigation.LinkItem href="#disabled2">
+									Second Item
+								</SideNavigation.LinkItem>
+							</SideNavigation.NavCategory>
+						</SideNavigation>
 					</div>
 				)}
 			</>

@@ -2,7 +2,7 @@ import type { Meta } from "@storybook/react";
 import type { ReactNode } from "react";
 
 import { Icon } from "components/Icon";
-import { LeftNav } from "components/LeftNav";
+import { SideNavigation } from "components/SideNavigation";
 import { Widget } from "components/Widget";
 import { AppLayout, type AppLayoutProps } from "./";
 
@@ -11,23 +11,27 @@ export default {
 	component: AppLayout,
 } as Meta<AppLayoutProps>;
 
-const leftNav: ReactNode = (
-	<LeftNav
+const sideNav: ReactNode = (
+	<SideNavigation
 		aria-label="Integration Testing App Menu"
 		currentUrl="http://active.com"
 	>
-		<LeftNav.TopLinkItem
+		<SideNavigation.TopLinkItem
 			icon="interaction-details"
 			label="Getting Started"
 			href="/"
 		/>
-		<LeftNav.TopLinkItem icon="user-add" label="Users" href="/users" />
-		<LeftNav.TopLinkItem icon="awfos" label="SAML IDP" href="/idps" />
-		<LeftNav.NavCategory icon="code-cloud" label="Demo Pages">
-			<LeftNav.LinkItem href="/table"> Table Component </LeftNav.LinkItem>
-			<LeftNav.LinkItem href="/form"> Form Component </LeftNav.LinkItem>
-		</LeftNav.NavCategory>
-	</LeftNav>
+		<SideNavigation.TopLinkItem icon="user-add" label="Users" href="/users" />
+		<SideNavigation.TopLinkItem icon="awfos" label="SAML IDP" href="/idps" />
+		<SideNavigation.NavCategory icon="code-cloud" label="Demo Pages">
+			<SideNavigation.LinkItem href="/table">
+				Table Component
+			</SideNavigation.LinkItem>
+			<SideNavigation.LinkItem href="/form">
+				Form Component
+			</SideNavigation.LinkItem>
+		</SideNavigation.NavCategory>
+	</SideNavigation>
 );
 
 const headerWidget: ReactNode = (
@@ -91,10 +95,10 @@ export const RightPanelAndContent = () => (
 	<AppLayout rightPanel={rightPanelWidget} mainContent={mainContentWidget} />
 );
 
-export const LeftNavHeaderAndContent = () => (
+export const SideNavHeaderAndContent = () => (
 	<AppLayout
 		header={headerWidget}
-		leftPanel={leftNav}
+		leftPanel={sideNav}
 		mainContent={mainContentWidget}
 	/>
 );

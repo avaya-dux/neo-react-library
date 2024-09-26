@@ -14,28 +14,7 @@ import { NavCategory } from "./NavCategory";
 import { TopLinkItem } from "./TopLinkItem";
 
 /**
- * This is the main Left Navigation outer container that contains all other subComponents
- *
- * @example
- * <LeftNav aria-label="Collapsible Navigation Menu">
-    <LeftNav.NavCategory icon="audio-on" label="Collapsed">
-      <LeftNav.LinkItem href="#first">First Item</LeftNav.LinkItem>
-      <LeftNav.LinkItem href="#second">Second Item</LeftNav.LinkItem>
-    </LeftNav.NavCategory>
-    <LeftNav.NavCategory expanded icon="call" label="Active">
-      <LeftNav.LinkItem href="#item1">Item 1</LeftNav.LinkItem>
-      <LeftNav.LinkItem href="#item2" active>
-        Active Item 2
-      </LeftNav.LinkItem>
-      <LeftNav.LinkItem href="#item3"> Item 3</LeftNav.LinkItem>
-    </LeftNav.NavCategory>
-    <LeftNav.NavCategory disabled icon="available" label="Disabled">
-      <LeftNav.LinkItem href="#disabled1">First Item</LeftNav.LinkItem>
-      <LeftNav.LinkItem href="#disabled2">Second Item</LeftNav.LinkItem>
-    </LeftNav.NavCategory>
-  </LeftNav>
-
- * @see https://design.avayacloud.com/components/web/left-nav-web
+ * DEPRECATED: Please use <code>SideNavigation</code>
  */
 export const LeftNav: FC<LeftNavProps> & LeftNavSubComponents = ({
 	children,
