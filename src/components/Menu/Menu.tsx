@@ -18,6 +18,7 @@ import {
 } from "react";
 import ClickAwayListener from "react-click-away-listener";
 
+import { Tooltip } from "components/Tooltip";
 import {
 	handleBlurEvent,
 	handleButtonKeyDownEvent,
@@ -74,7 +75,7 @@ export const Menu = forwardRef(
 			closeOnSelect = true,
 			defaultIsOpen = false,
 			itemAlignment = "left",
-			menuRootElement,
+			menuRootElement: menuRootElementOriginal,
 			onMenuClose = () => null,
 			openOnHover = false,
 			positionToToggle = "below",
@@ -218,6 +219,11 @@ export const Menu = forwardRef(
 		type MenuButtonOnClickEventType = HTMLButtonElement & HTMLDivElement;
 
 		const menuButton = useMemo(() => {
+			let menuRootElement = menuRootElementOriginal;
+			if (menuRootElementOriginal.type === Tooltip) {
+				menuRootElement = menuRootElementOriginal.props
+					.children as React.ReactElement;
+			}
 			const buttonProps = {
 				...menuRootElement.props,
 
@@ -248,8 +254,12 @@ export const Menu = forwardRef(
 				},
 				ref: toggleRef,
 			};
-			return cloneElement(menuRootElement, buttonProps);
-		}, [menuRootElement, toggleRef, isOpen, menuIndexes, openOnHover]);
+			const button = cloneElement(menuRootElement, buttonProps);
+			if (menuRootElementOriginal.type === Tooltip) {
+				return cloneElement(menuRootElementOriginal, { children: button });
+			}
+			return button;
+		}, [menuRootElementOriginal, toggleRef, isOpen, menuIndexes, openOnHover]);
 
 		const menuContext: MenuContextType = {
 			closeOnSelect,
