@@ -48,8 +48,16 @@
 	border-radius: 50%;
 	display: block;
 	position: absolute;
-	top: 3px;
+	top: 5px;
 	left: 3px;
+}
+
+.neo-radio + label:after {
+	top: 3px;
+}
+
+.neo-input-group--inline .neo-radio + label:after {
+	top: 5px;
 }
 
 [dir="rtl"] .neo-radio + label + .neo-tooltip label:after {
@@ -65,7 +73,15 @@
 	border-radius: 50%;
 	display: block;
 	position: absolute;
+	top: 2px;
+}
+
+.neo-radio + label:before {
 	top: 0;
+}
+
+.neo-input-group--inline .neo-radio + label:before {
+	top: 2px;
 }
 
 .neo-radio:checked + label + .neo-tooltip label:after {
@@ -77,6 +93,14 @@
 	position: absolute;
 	top: 5px;
 	left: 3px;
+}
+
+.neo-radio:checked + label:after {
+	top: 3px;
+}
+
+.neo-input-group--inline .neo-radio:checked + label:after {
+	top: 5px;
 }
 
 .neo-tooltip .neo-radio[disabled] + label {
@@ -129,5 +153,13 @@
 	border-radius: 50%;
 	display: block;
 	position: absolute;
+	top: 2px;
+}
+
+.neo-radio.neo-radio--disabled:checked + label:before {
+	top: 0;
+}
+
+.neo-input-group--inline .neo-radio.neo-radio--disabled:checked + label:before {
 	top: 2px;
 }
