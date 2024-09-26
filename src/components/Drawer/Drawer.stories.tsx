@@ -139,7 +139,7 @@ export const BackButtonAndScrimOptions: Story = {
 export const withDefaultButtons: Story = {
 	render: () => {
 		const [drawerOpen, setDrawerOpen] = useState(false);
-		const handleSubmit = (e: any) => {
+		const handleSubmit = () => {
 			alert("you successfully Applied");
 			setDrawerOpen(false);
 		};
@@ -212,7 +212,9 @@ export const WithForm: Story = {
 							key="cancel-btn"
 							variant="secondary"
 							onClick={() => {
-								const myInput = document.getElementById("the-form") as HTMLFormElement;
+								const myInput = document.getElementById(
+									"the-form",
+								) as HTMLFormElement;
 								myInput?.reset();
 								setFormDrawerOpen(false);
 							}}
