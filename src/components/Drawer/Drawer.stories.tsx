@@ -122,13 +122,13 @@ export const BackButtonAndScrimOptions: Story = {
 
 				<Drawer
 					open={hasBackButtonDrawerOpen}
-					onClose={() => toggleDrawerByName("back-button")}
+					onCancel={() => toggleDrawerByName("back-button")}
 					onBack={() => {
 						alert("Back button pressed");
 					}}
 					title="With back button"
 				>
-					<p>This Drawer both a Back button and the x close button</p>
+					<p>This Drawer both a Back button and the Cancel button</p>
 				</Drawer>
 			</main>
 		);
