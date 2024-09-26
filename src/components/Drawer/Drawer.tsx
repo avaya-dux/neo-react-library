@@ -216,15 +216,14 @@ const BasicDrawer = ({
 					{(onCancel || onApply) && (
 						<div className="neo-drawer__actions">
 							{onCancel && (
-								<Button onClick={onCancel} key="on-cancel" variant="secondary">
+								<Button onClick={onCancel} key="cancel-btn" variant="secondary">
 									Cancel
 								</Button>
 							)}
 							{onApply && (
 								<Button
-									// onClick={onApply}
-									form="the-form"
-									key={2}
+									onClick={onApply}
+									key="apply-btn"
 									type="submit"
 								>
 									Apply

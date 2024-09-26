@@ -138,10 +138,10 @@ export const BackButtonAndScrimOptions: Story = {
 // This story showcases how to use the default Cancel and Apply buttons.
 export const withDefaultButtons: Story = {
 	render: () => {
-		const [formDrawerOpen, setFormDrawerOpen] = useState(false);
+		const [drawerOpen, setDrawerOpen] = useState(false);
 		const handleSubmit = (e: any) => {
-			e.preventDefault();
 			alert("you successfully Applied");
+			setDrawerOpen(false);
 		};
 
 		return (
@@ -153,14 +153,14 @@ export const withDefaultButtons: Story = {
 						marginBottom: "1rem",
 					}}
 				>
-					<Button onClick={() => setFormDrawerOpen(!formDrawerOpen)}>
+					<Button onClick={() => setDrawerOpen(!drawerOpen)}>
 						Toggle Drawer Open
 					</Button>
 				</section>
 
 				<Drawer
-					open={formDrawerOpen}
-					onCancel={() => setFormDrawerOpen(false)}
+					open={drawerOpen}
+					onCancel={() => setDrawerOpen(false)}
 					onApply={handleSubmit}
 					title="App Settings"
 					closeOnScrimClick={false}
