@@ -56,6 +56,15 @@ const getLastNumberFromBDI = async () => {
 	return [bdiText, totalNumberOfRows];
 };
 
+const getDurationValues = (queryAllByRole) => {
+	const durationValues = [];
+	for (let row = 0; row < 10; row++) {
+		const durationValue = queryAllByRole("cell")[1 + row * 5].textContent;
+		durationValues.push(Number.parseInt(durationValue));
+	}
+	return durationValues;
+};
+
 describe("Table", () => {
 	const user = userEvent.setup();
 	vi.spyOn(console, "warn").mockImplementation(() => null); // ignore tooltip warnings
@@ -775,7 +784,7 @@ describe("Table", () => {
 			await user.click(dateColumnFilterMenuItems[3]);
 
 			let columnFilterDrawer = queryAllByRole("dialog")[1];
-			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--isOpen");
+			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--open");
 
 			// Wait for the input box to appear
 			let dateInput = await waitFor(() =>
@@ -820,8 +829,7 @@ describe("Table", () => {
 			await user.click(dateColumnFilterMenuItems[3]);
 
 			columnFilterDrawer = queryAllByRole("dialog")[1];
-			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--isOpen");
-
+			expect(columnFilterDrawer).toHaveClass("neo-drawer neo-drawer--open");
 			// Wait for the input box to appear
 			dateInput = await waitFor(() =>
 				within(columnFilterDrawer).getByRole("textbox"),
@@ -866,6 +874,79 @@ describe("Table", () => {
 			);
 			expect(checkIcon).toBeNull();
 		});
+
+		it("sorts by duration column", async () => {
+			const { queryByText, queryAllByRole } = renderResult;
+
+			// waitfor the no data available message to disappear
+			await waitForElementToBeRemoved(() => queryByText("no data available"), {
+				timeout: 5000,
+			});
+			// should see 10000 rows now
+			const [_, totalNumberOfRows] = await getLastNumberFromBDI();
+			expect(totalNumberOfRows).toBe("10,000");
+
+			// get all the duration values in column 2
+			const durationValues = getDurationValues(queryAllByRole);
+			// assert that durationValues are not sorted
+			expect(durationValues).not.toEqual(
+				[...durationValues].sort((a, b) => a - b),
+			);
+
+			// Get the menu button element with text "Duration in minutes"
+			const durationColumnFilterButton = screen.getByRole("button", {
+				name: "Duration in minutes",
+			});
+			await user.click(durationColumnFilterButton);
+
+			let durationColumnFilterMenuItems = queryAllByRole("menuitem");
+			expect(durationColumnFilterMenuItems).toHaveLength(3);
+
+			// click on the sort ascending a-z
+			expect(durationColumnFilterMenuItems[1]).toHaveTextContent("A - Z");
+			await user.click(durationColumnFilterMenuItems[1]);
+
+			// check icon, down arrow, is visible in header
+			let icons = screen.queryAllByRole("img", { name: "arrow down" });
+			expect(icons).toHaveLength(1);
+
+			let ascDurationValues = [...durationValues];
+			await waitFor(
+				() => {
+					ascDurationValues = getDurationValues(queryAllByRole);
+					expect(ascDurationValues).not.toEqual([...durationValues]);
+				},
+				{ timeout: 5000 },
+			);
+			expect(ascDurationValues).toEqual(
+				[...ascDurationValues].sort((a, b) => a - b),
+			);
+
+			await user.click(durationColumnFilterButton);
+
+			durationColumnFilterMenuItems = queryAllByRole("menuitem");
+			expect(durationColumnFilterMenuItems).toHaveLength(3);
+
+			// click on the sort Z -A
+			expect(durationColumnFilterMenuItems[2]).toHaveTextContent("Z - A");
+			await user.click(durationColumnFilterMenuItems[2]);
+
+			icons = screen.queryAllByRole("img", { name: "arrow up" });
+			expect(icons).toHaveLength(1);
+
+			let descDurationValues = [...ascDurationValues];
+			await waitFor(
+				() => {
+					descDurationValues = getDurationValues(queryAllByRole);
+					expect(descDurationValues).not.toEqual([...ascDurationValues]);
+				},
+				{ timeout: 5000 },
+			);
+
+			expect(descDurationValues).toEqual(
+				[...descDurationValues].sort((a, b) => b - a),
+			);
+		}, 5000);
 	});
 	describe("sort and filter functionality", () => {
 		let renderResult;
@@ -960,7 +1041,7 @@ describe("Table", () => {
 			expect(firstColumnSortButton).toBeVisible();
 
 			expect(getAllByRole("dialog")[0]).not.toHaveClass(
-				"neo-drawer neo-drawer--isOpen",
+				"neo-drawer neo-drawer--open",
 			);
 
 			await user.click(firstColumnSortButton);
@@ -968,9 +1049,8 @@ describe("Table", () => {
 			const menuItems = queryAllByRole("menuitem");
 			expect(menuItems).toHaveLength(4);
 			await user.click(queryAllByRole("menuitem")[3]);
-
 			expect(getAllByRole("dialog")[1]).toHaveClass(
-				"neo-drawer neo-drawer--isOpen",
+				"neo-drawer neo-drawer--open",
 			);
 
 			let nameInput = getAllByRole("textbox")[1];
@@ -1053,15 +1133,13 @@ describe("Table", () => {
 			);
 
 			expect(getAllByRole("dialog")[0]).not.toHaveClass(
-				"neo-drawer neo-drawer--isOpen",
+				"neo-drawer neo-drawer--open",
 			);
 
 			await user.click(columnFilterButton);
-
 			expect(getAllByRole("dialog")[0]).toHaveClass(
-				"neo-drawer neo-drawer--isOpen",
+				"neo-drawer  neo-drawer--open",
 			);
-
 			const nameCheckbox = getByLabelText(FilledFields.columns[0].Header);
 			expect(nameCheckbox).toBeChecked();
 

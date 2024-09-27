@@ -39,6 +39,8 @@ interface TableHeaderBodySharedProps<T extends AnyRecord> {
 
 export type TableHeaderProps<T extends AnyRecord> = {
 	translations: ITableHeaderTranslations;
+	manualSortBy?: boolean;
+	onManualSortBy?: (columnId: string, sortType: SortType) => void;
 } & TableHeaderBodySharedProps<T>;
 
 export type TableBodyProps<T extends AnyRecord> = {
@@ -71,6 +73,7 @@ export interface IFilterContext<T extends AnyRecord = AnyRecord> {
 }
 
 export type RowHeight = "compact" | "medium" | "large";
+export type SortType = "asc" | "desc" | "unsorted";
 
 export type TableProps<T extends AnyRecord> = {
 	caption?: string;
@@ -78,6 +81,8 @@ export type TableProps<T extends AnyRecord> = {
 	manualPagination?: boolean;
 	manualRowCount?: number;
 	manualColumnFilters?: boolean;
+	manualSortBy?: boolean;
+	onManualSortBy?: (columnId: string, sortType: SortType) => void;
 	showPagination?: boolean;
 	pushPaginationDown?: boolean;
 	draggableRows?: boolean;

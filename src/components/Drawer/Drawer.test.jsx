@@ -52,18 +52,18 @@ describe("Drawer", () => {
 	});
 
 	describe("`open` functionality", () => {
-		it("when `open={true}`, a Drawer's contents _are_ visible", async () => {
+		it("when `open={true}`, a Drawer's contents _are_ visible", () => {
 			render(<Drawer open={true} title="drawer title" />);
 
 			const drawer = screen.getByRole("dialog");
-			expect(drawer).toHaveClass("neo-drawer--isOpen");
+			expect(drawer).toHaveClass("neo-drawer neo-drawer--open");
 		});
 
 		it("when `open={false}`, a Drawer's contents are _not_ visible", () => {
 			render(<Drawer open={false} title="drawer title" />);
 
 			const drawer = screen.getByRole("dialog");
-			expect(drawer).not.toHaveClass("neo-drawer--isOpen");
+			expect(drawer).not.toHaveClass("neo-drawer--open");
 		});
 	});
 });
