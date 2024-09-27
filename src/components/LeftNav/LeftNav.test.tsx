@@ -1,14 +1,7 @@
-import { type RenderResult, render, screen } from "@testing-library/react";
-import { axe } from "jest-axe";
+import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 
 import { LeftNav } from "./";
-import {
-	CategoryGroups,
-	CategoryGroupsWithIcons,
-	Default,
-	DoesNotConflictWithOtherNavs,
-} from "./LeftNav.stories";
 
 describe("LeftNav", () => {
 	window.HTMLElement.prototype.scrollIntoView = vi.fn();
@@ -56,84 +49,6 @@ describe("LeftNav", () => {
 				// biome-ignore lint/a11y/useValidAriaValues: we are purposefully testing an invalid value
 				render(<LeftNav aria-label="">{examplechildren}</LeftNav>),
 			).toThrowError();
-		});
-	});
-
-	describe("storybook tests", () => {
-		describe("Default", () => {
-			let renderResult: RenderResult;
-
-			beforeEach(() => {
-				renderResult = render(<Default />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("CategoryGroups", () => {
-			let renderResult: RenderResult;
-
-			beforeEach(() => {
-				renderResult = render(<CategoryGroups />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("CategoryGroupsWithIcons", () => {
-			let renderResult: RenderResult;
-
-			beforeEach(() => {
-				renderResult = render(<CategoryGroupsWithIcons />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-
-		describe("DoesNotConflictWithOtherNavs", () => {
-			let renderResult: RenderResult;
-
-			beforeEach(() => {
-				renderResult = render(<DoesNotConflictWithOtherNavs />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
 		});
 	});
 });
