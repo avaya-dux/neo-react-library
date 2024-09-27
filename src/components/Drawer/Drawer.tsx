@@ -101,6 +101,8 @@ export const Drawer = ({
 	title,
 	onBack,
 	onClose,
+	onApply,
+	onCancel,
 	closeOnScrimClick = true,
 	width,
 	actions,
@@ -130,6 +132,8 @@ export const Drawer = ({
 				className={className}
 				onBack={onBack}
 				onClose={onClose}
+				onApply={onApply}
+				onCancel={onCancel}
 				closeOnScrimClick={closeOnScrimClick}
 				open={open}
 				id={id}
@@ -206,7 +210,7 @@ const BasicDrawer = ({
 									onClick={onBack}
 									variant="tertiary"
 									shape="square"
-									aria-label={translations?.back || "Back"}
+									aria-label={translations?.back || "Go back"}
 									icon="chevron-left"
 									className="neo-drawer-icon-chevron-left"
 								/>
@@ -220,7 +224,7 @@ const BasicDrawer = ({
 									onClick={onClose}
 									variant="tertiary"
 									shape="square"
-									aria-label={translations?.close || "Close"}
+									aria-label={translations?.close || "Close drawer"}
 									icon="close"
 									className="neo-drawer-icon-close"
 								/>
