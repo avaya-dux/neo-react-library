@@ -65,6 +65,24 @@ describe("Select", () => {
 			expect(searchableElement).toHaveAttribute("aria-expanded", "false");
 		});
 
+		it("clears content before input box where there is input from user", async () => {
+			const { container } = renderResult;
+			const inputbox = container.querySelector(
+				"span.neo-multiselect-combo__header input:first-child",
+			);
+			await user.tab();
+			expect(inputbox).toHaveFocus();
+			// select apple by typing in apple and pressing enter
+			await user.keyboard("apple{Enter}");
+			expect(inputbox.closest("span")).toHaveTextContent("Apple");
+			expect(inputbox).toHaveValue("");
+			// type in banana without pressing enter
+			await user.keyboard("banana");
+			expect(inputbox).toHaveValue("banana");
+			// apple is removed in span
+			expect(inputbox.closest("span")).toHaveTextContent("");
+		});
+
 		it("passes basic axe compliance", async () => {
 			const { container } = renderResult;
 			const results = await axe(container);

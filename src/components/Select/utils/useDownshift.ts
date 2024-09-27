@@ -41,12 +41,12 @@ const DownshiftWithComboboxProps = (
 						...changes,
 						isOpen: false,
 					};
-
 				default:
 					return changes;
 			}
 		},
 		onInputValueChange: ({ inputValue }) => {
+			logger.debug({ location: "onInputValueChange", inputValue });
 			const trimmedValue = inputValue?.trim();
 			if (trimmedValue) {
 				const relatedOptions = options.filter((child) => {
@@ -88,6 +88,7 @@ const DownshiftWithComboboxProps = (
 				setSelectedItems([clickedItem]);
 			}
 		},
+		itemToString: (item) => item?.value || String(item),
 		// BUG: items are not announced in screen reader when selected
 	});
 };

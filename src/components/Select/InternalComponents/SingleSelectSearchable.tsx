@@ -38,17 +38,22 @@ export const SingleSelectSearchable = () => {
 		reset,
 		selectItem,
 		setInputValue,
+		highlightedIndex,
 	} = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
-
-	logger.debug(selectedItems[0]);
 
 	const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
 		getToggleButtonProps();
 	const { id, onKeyDown, ...restInputProps } = getInputProps();
-
+	logger.debug({
+		value: restInputProps.value,
+		inputValue,
+		selected: selectedItems[0]?.children,
+	});
 	// clear the search when dropdown closes (when the user selects an item or clicks away)
 	useEffect(() => {
 		if (isOpen === false) {
+			logger.debug("clearing input value", selectedItems[0]?.children);
+			// setInputValue(selectedItems[0]?.children || "");
 			setInputValue("");
 		}
 	}, [isOpen, setInputValue]);
@@ -78,13 +83,21 @@ export const SingleSelectSearchable = () => {
 						disabled={disabled}
 						placeholder={selectedItems.length ? undefined : placeholder}
 						onKeyDown={(e) => {
-							if (
-								e.key === Keys.ENTER &&
-								filteredOptions.length === 1 &&
-								!filteredOptions[0].disabled
-							) {
+							logger.debug("keydown", e.key, highlightedIndex, filteredOptions);
+							if (e.key === Keys.ENTER) {
 								e.preventDefault();
-								selectItem(filteredOptions[0]);
+								if (
+									filteredOptions.length === 1 &&
+									!filteredOptions[0].disabled
+								) {
+									selectItem(filteredOptions[0]);
+								} else if (
+									filteredOptions.length === 0 ||
+									(filteredOptions.length === 1 && filteredOptions[0].disabled)
+								) {
+									//  no options or only disabled options, clear selection
+									reset();
+								}
 								closeMenu();
 							} else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
 								reset();
@@ -93,9 +106,7 @@ export const SingleSelectSearchable = () => {
 							onKeyDown(e);
 						}}
 					/>
-
-					{selectedItems[0]?.children}
-
+					{inputValue?.length > 0 ? "" : selectedItems[0]?.children}
 					<input
 						className="neo-display-none"
 						id={id}

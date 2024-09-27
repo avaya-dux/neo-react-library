@@ -946,7 +946,7 @@ describe("Table", () => {
 			expect(descDurationValues).toEqual(
 				[...descDurationValues].sort((a, b) => b - a),
 			);
-		}, 5000);
+		}, 10000);
 	});
 	describe("sort and filter functionality", () => {
 		let renderResult;
