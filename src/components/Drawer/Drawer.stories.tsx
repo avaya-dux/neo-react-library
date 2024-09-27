@@ -64,10 +64,10 @@ export const BasicDrawer: Story = {
 	},
 };
 
-export const BackButtonAndScrimOptions: Story = {
+export const ScrimOptions: Story = {
 	render: () => {
 		const [noDismissDrawerOpen, setNoDismissDrawerOpen] = useState(false);
-		const [hasBackButtonDrawerOpen, sethasBackButtonDrawerOpen] =
+		const [dismissEnabledDrawerOpen, setDismissEnabledDrawerOpen] =
 			useState(false);
 
 		const toggleDrawerByName = (drawerName: string) => {
@@ -75,8 +75,8 @@ export const BackButtonAndScrimOptions: Story = {
 				case "no-dismiss":
 					setNoDismissDrawerOpen(!noDismissDrawerOpen);
 					break;
-				case "back-button":
-					sethasBackButtonDrawerOpen(!hasBackButtonDrawerOpen);
+				case "dismiss-on-click":
+					setDismissEnabledDrawerOpen(!dismissEnabledDrawerOpen);
 					break;
 			}
 		};
@@ -91,11 +91,11 @@ export const BackButtonAndScrimOptions: Story = {
 					}}
 				>
 					<Button onClick={() => toggleDrawerByName("no-dismiss")}>
-						Open Drawer dismiss disabled
+						Click on Scrim dismiss disabled
 					</Button>
 
-					<Button onClick={() => toggleDrawerByName("back-button")}>
-						Open Drawer with Back button
+					<Button onClick={() => toggleDrawerByName("dismiss-on-click")}>
+						Click on Scrim dismiss enabled
 					</Button>
 				</section>
 				<section>
@@ -114,21 +114,18 @@ export const BackButtonAndScrimOptions: Story = {
 				<Drawer
 					open={noDismissDrawerOpen}
 					onClose={() => toggleDrawerByName("no-dismiss")}
-					title="Drawer with dimiss on scrim click disabled"
+					title="Dimiss on scrim click disabled"
 					closeOnScrimClick={false}
 				>
 					<p>This Drawer will not close if you click on the scrim background</p>
 				</Drawer>
 
 				<Drawer
-					open={hasBackButtonDrawerOpen}
-					onCancel={() => toggleDrawerByName("back-button")}
-					onBack={() => {
-						alert("Back button pressed");
-					}}
-					title="With back button"
+					open={dismissEnabledDrawerOpen}
+					onClose={() => toggleDrawerByName("dismiss-on-click")}
+					title="Dismiss enabled"
 				>
-					<p>This Drawer both a Back button and the Cancel button</p>
+					<p>This Drawer will close when you click on the scrim background</p>
 				</Drawer>
 			</main>
 		);
@@ -165,18 +162,21 @@ export const withDefaultButtons: Story = {
 					title="App Settings"
 					closeOnScrimClick={false}
 				>
-					<Switch defaultChecked name="autostart" value="on">
-						Auto-start On
-					</Switch>
-					<Switch name="darkmode" value="on">
-						Dark Mode On
-					</Switch>
-					<Switch defaultChecked name="powersave" value="on">
-						Power Save Mode On
-					</Switch>
-					<Switch name="animations" value="on">
-						Animations On
-					</Switch>
+					<div className="drawer-container">
+						<Switch defaultChecked name="autostart" value="on">
+							Auto-start On
+						</Switch>
+						<Switch name="darkmode" value="on">
+							Dark Mode On
+						</Switch>
+						<Switch defaultChecked name="powersave" value="on">
+							Power Save Mode On
+						</Switch>
+						<Switch name="animations" value="on">
+							Animations On
+						</Switch>
+						<p> You can place any UI elements within this area of the Drawer</p>
+					</div>
 				</Drawer>
 			</main>
 		);
@@ -236,9 +236,10 @@ export const WithForm: Story = {
 						}}
 					>
 						<p style={{ paddingBottom: 20 }}>
-							Terms of Service Example. User must accept ToS before being
+							Username with Terms of Service Example. User must accept ToS before being
 							allowed to proceed.
 						</p>
+						<TextInput placeholder="username" aria-label="Enter username" key="usernam" />
 						<Switch required name="ToS" value="accepted">
 							Do you accept the Terms of Service?
 						</Switch>
@@ -246,9 +247,9 @@ export const WithForm: Story = {
 							form="the-form"
 							key="reset-btn"
 							type="reset"
-							variant="secondary"
+							variant="tertiary"
 						>
-							Reset
+							Clear Fields
 						</Button>
 					</Form>
 				</Drawer>
