@@ -57,25 +57,25 @@ const propsAreAccessible = (
 };
 
 export interface BaseDrawerProps
-	extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
-	children?: React.ReactNode;
-	id?: string;
-	onBack?: () => void;
-	onClose?: () => void;
-	onCancel?: () => void;
-	onApply?: (e: MouseEvent<HTMLButtonElement>) => void;
-	closeOnScrimClick?: boolean;
-	ref?: React.Ref<HTMLDivElement>;
-	open?: boolean;
-	width?: string;
-	actions?: React.ReactNode[];
-	translations?: {
-		apply: string;
-		back: string;
-		cancel: string;
-		close: string;
-	};
-}
+		extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
+		children?: React.ReactNode;
+		id?: string;
+		onBack?: () => void;
+		onClose?: () => void;
+		onCancel?: (e: MouseEvent<HTMLButtonElement>) => void;
+		onApply?: (e: MouseEvent<HTMLButtonElement>) => void;
+		closeOnScrimClick?: boolean;
+		ref?: React.Ref<HTMLDivElement>;
+		open?: boolean;
+		width?: string;
+		actions?: React.ReactNode[];
+		translations?: {
+			apply: string;
+			back: string;
+			cancel: string;
+			close: string;
+		};
+	}
 
 export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
 
@@ -166,7 +166,7 @@ const BasicDrawer = ({
 	id?: string;
 	onBack?: () => void;
 	onClose?: () => void;
-	onCancel?: () => void;
+	onCancel?: (e: MouseEvent<HTMLButtonElement>) => void;
 	onApply?: (e: MouseEvent<HTMLButtonElement>) => void;
 	closeOnScrimClick: boolean;
 	open: boolean;
