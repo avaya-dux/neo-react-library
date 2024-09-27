@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Keys } from "utils";
 
@@ -40,7 +40,7 @@ export const SingleSelectSearchable = () => {
 		setInputValue,
 		highlightedIndex,
 	} = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
-
+	const [highlighting, setHighlighting] = useState(false);
 	const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
 		getToggleButtonProps();
 	const { id, onKeyDown, ...restInputProps } = getInputProps();
@@ -52,7 +52,6 @@ export const SingleSelectSearchable = () => {
 	// clear the search when dropdown closes (when the user selects an item or clicks away)
 	useEffect(() => {
 		if (isOpen === false) {
-			logger.debug("clearing input value", selectedItems[0]?.children);
 			// setInputValue(selectedItems[0]?.children || "");
 			setInputValue("");
 		}
@@ -76,28 +75,33 @@ export const SingleSelectSearchable = () => {
 					isOpen && "neo-multiselect-combo__header--expanded",
 				)}
 			>
-				<span className="neo-multiselect__padded-container">
+				<span
+					className={clsx(
+						"neo-multiselect__padded-container",
+						highlighting && "highlighted",
+					)}
+				>
 					<input
 						{...restInputProps}
 						className="neo-input"
 						disabled={disabled}
 						placeholder={selectedItems.length ? undefined : placeholder}
+						onFocus={() => setHighlighting(true)}
+						onBlur={() => setHighlighting(false)}
 						onKeyDown={(e) => {
 							logger.debug("keydown", e.key, highlightedIndex, filteredOptions);
 							if (e.key === Keys.ENTER) {
 								e.preventDefault();
-								if (
-									filteredOptions.length === 1 &&
-									!filteredOptions[0].disabled
-								) {
-									selectItem(filteredOptions[0]);
-								} else if (
-									filteredOptions.length === 0 ||
-									(filteredOptions.length === 1 && filteredOptions[0].disabled)
-								) {
+								const firstEnableOption = filteredOptions.find(
+									(option) => !option.disabled,
+								);
+								if (firstEnableOption) {
+									selectItem(firstEnableOption);
+								} else {
 									//  no options or only disabled options, clear selection
 									reset();
 								}
+								setHighlighting(false);
 								closeMenu();
 							} else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
 								reset();

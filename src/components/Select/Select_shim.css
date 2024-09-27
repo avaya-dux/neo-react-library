@@ -49,12 +49,14 @@ body .neo-multiselect__content:focus-visible {
 
 .neo-option:not(.neo-option--disabled):hover,
 .neo-option:not(.neo-option--disabled):focus {
-	background-color: #f1f1f1; /* $token-color-base-100 */
+	background-color: #f1f1f1;
+	/* $token-color-base-100 */
 }
 
 .neo-option.neo-option--selected:not(.neo-option--disabled):hover,
 .neo-option.neo-option--selected:not(.neo-option--disabled):focus {
-	background-color: #dddddd; /* $token-color-base-150 */
+	background-color: #dddddd;
+	/* $token-color-base-150 */
 }
 
 .neo-option:focus-visible {
@@ -191,6 +193,14 @@ span.neo-multiselect-combo__header .neo-multiselect__padded-container {
 	cursor: not-allowed !important;
 }
 
+.neo-multiselect
+	.neo-multiselect-combo__header
+	.neo-multiselect__padded-container.highlighted:not(
+		:has(.neo-multiselect-combo__buttons-container)
+	) {
+	background-color: #accef7;
+}
+
 /* internal select option highlight styles */
 .neo-multiselect__content
 	.neo-input-group
@@ -210,7 +220,8 @@ span.neo-multiselect-combo__header .neo-multiselect__padded-container {
 	button.neo-multiselect__header:last-child {
 	width: 10px;
 	min-height: 30px;
-	height: 30px; /* same as chip */
+	height: 30px;
+	/* same as chip */
 	padding: 0;
 	display: flex;
 	justify-content: flex-start;
@@ -249,6 +260,7 @@ div.neo-multiselect div.neo-input-group:hover {
 .neo-input-group .neo-multiselect span.neo-multiselect-combo__header {
 	justify-content: start;
 }
+
 .neo-input-group
 	.neo-multiselect
 	span.neo-multiselect-combo__header
@@ -262,8 +274,10 @@ div.neo-multiselect div.neo-input-group:hover {
 	.neo-multiselect__content
 	.neo-input-group
 	.neo-input-hint {
-	color: #5e5e5e; /* --input-hint-color */
+	color: #5e5e5e;
+	/* --input-hint-color */
 }
+
 .neo-form-control--error
 	.neo-multiselect__content
 	.neo-input-group
@@ -287,6 +301,7 @@ div.neo-multiselect
 	box-sizing: content-box;
 	min-height: 34px;
 }
+
 .neo-input-group .neo-multiselect .neo-multiselect-combo__header:after,
 .neo-input-group .neo-multiselect .neo-multiselect__header:after {
 	width: 16px;
