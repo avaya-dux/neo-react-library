@@ -236,10 +236,14 @@ export const WithForm: Story = {
 						}}
 					>
 						<p style={{ paddingBottom: 20 }}>
-							Username with Terms of Service Example. User must accept ToS before being
-							allowed to proceed.
+							Username with Terms of Service Example. User must accept ToS
+							before being allowed to proceed.
 						</p>
-						<TextInput placeholder="username" aria-label="Enter username" key="usernam" />
+						<TextInput
+							placeholder="username"
+							aria-label="Enter username"
+							key="usernam"
+						/>
 						<Switch required name="ToS" value="accepted">
 							Do you accept the Terms of Service?
 						</Switch>
