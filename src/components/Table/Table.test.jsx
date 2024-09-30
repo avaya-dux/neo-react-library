@@ -935,7 +935,7 @@ describe("Table", () => {
 			expect(icons).toHaveLength(1);
 
 			let descDurationValues = [...ascDurationValues];
-			await waitFor(
+			await vi.waitFor(
 				() => {
 					descDurationValues = getDurationValues(queryAllByRole);
 					expect(descDurationValues).not.toEqual([...ascDurationValues]);
