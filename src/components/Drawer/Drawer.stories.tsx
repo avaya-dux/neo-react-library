@@ -136,8 +136,10 @@ export const ScrimOptions: Story = {
 export const withDefaultButtons: Story = {
 	render: () => {
 		const [drawerOpen, setDrawerOpen] = useState(false);
+		const [applyBtnDisabled, setApplyBtnDisabled] = useState(true);
 		const handleSubmit = () => {
 			alert("you successfully Applied");
+			setApplyBtnDisabled(true);
 			setDrawerOpen(false);
 		};
 
@@ -159,20 +161,39 @@ export const withDefaultButtons: Story = {
 					open={drawerOpen}
 					onCancel={() => setDrawerOpen(false)}
 					onApply={handleSubmit}
+					disableApplyButton={applyBtnDisabled}
 					title="App Settings"
 					closeOnScrimClick={false}
 				>
 					<div className="drawer-container">
-						<Switch defaultChecked name="autostart" value="on">
+						<Switch
+							onChange={() => setApplyBtnDisabled(false)}
+							defaultChecked
+							name="autostart"
+							value="on"
+						>
 							Auto-start On
 						</Switch>
-						<Switch name="darkmode" value="on">
+						<Switch
+							onChange={() => setApplyBtnDisabled(false)}
+							name="darkmode"
+							value="on"
+						>
 							Dark Mode On
 						</Switch>
-						<Switch defaultChecked name="powersave" value="on">
+						<Switch
+							onChange={() => setApplyBtnDisabled(false)}
+							defaultChecked
+							name="powersave"
+							value="on"
+						>
 							Power Save Mode On
 						</Switch>
-						<Switch name="animations" value="on">
+						<Switch
+							onChange={() => setApplyBtnDisabled(false)}
+							name="animations"
+							value="on"
+						>
 							Animations On
 						</Switch>
 						<p> You can place any UI elements within this area of the Drawer</p>
