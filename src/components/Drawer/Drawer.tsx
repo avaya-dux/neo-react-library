@@ -64,6 +64,7 @@ export interface BaseDrawerProps
 	onClose?: () => void;
 	onCancel?: (e: MouseEvent<HTMLButtonElement>) => void;
 	onApply?: (e: MouseEvent<HTMLButtonElement>) => void;
+	enableApplyButton?: boolean;
 	closeOnScrimClick?: boolean;
 	ref?: React.Ref<HTMLDivElement>;
 	open?: boolean;
@@ -103,6 +104,7 @@ export const Drawer = ({
 	onClose,
 	onApply,
 	onCancel,
+	enableApplyButton = true,
 	closeOnScrimClick = true,
 	width,
 	actions,
@@ -134,6 +136,7 @@ export const Drawer = ({
 				onClose={onClose}
 				onApply={onApply}
 				onCancel={onCancel}
+				enableApplyButton={enableApplyButton}
 				closeOnScrimClick={closeOnScrimClick}
 				open={open}
 				id={id}
@@ -157,6 +160,7 @@ const BasicDrawer = ({
 	onClose,
 	onCancel,
 	onApply,
+	enableApplyButton,
 	closeOnScrimClick,
 	open,
 	title,
@@ -172,6 +176,7 @@ const BasicDrawer = ({
 	onClose?: () => void;
 	onCancel?: (e: MouseEvent<HTMLButtonElement>) => void;
 	onApply?: (e: MouseEvent<HTMLButtonElement>) => void;
+	enableApplyButton: boolean;
 	closeOnScrimClick: boolean;
 	open: boolean;
 	title?: string | JSX.Element;
@@ -242,7 +247,12 @@ const BasicDrawer = ({
 								</Button>
 							)}
 							{onApply && (
-								<Button onClick={onApply} key="apply-btn" type="submit">
+								<Button
+									disabled={enableApplyButton}
+									onClick={onApply}
+									key="apply-btn"
+									type="submit"
+								>
 									{translations?.apply}
 								</Button>
 							)}
