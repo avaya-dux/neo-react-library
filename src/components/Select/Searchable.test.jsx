@@ -76,12 +76,12 @@ describe("Select", () => {
 			await user.keyboard("{Enter}");
 			expect(inputbox.closest("span")).toHaveTextContent("");
 
-			// select apple by typing in apple and pressing enter
+			// typing in apple and pressing enter
 			await user.keyboard("apple{Enter}");
 			expect(inputbox.closest("span")).toHaveTextContent("Apple");
 			expect(inputbox).toHaveValue("");
 
-			// type in banana without pressing enter
+			// typing in banana without pressing enter
 			await user.keyboard("banana");
 			expect(inputbox).toHaveValue("banana");
 			// apple is removed in span
