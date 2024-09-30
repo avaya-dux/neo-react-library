@@ -31,6 +31,7 @@ export * from "./Select";
 export * from "./SelectNative";
 export * from "./Sheet";
 export * from "./Shimmer";
+export * from "./SideNavigation";
 export * from "./Spinner";
 export * from "./SplitButton";
 export * from "./Stepper";
