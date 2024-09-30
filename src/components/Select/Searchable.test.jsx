@@ -72,10 +72,15 @@ describe("Select", () => {
 			);
 			await user.tab();
 			expect(inputbox).toHaveFocus();
+			// empty input should not select any option
+			await user.keyboard("{Enter}");
+			expect(inputbox.closest("span")).toHaveTextContent("");
+
 			// select apple by typing in apple and pressing enter
 			await user.keyboard("apple{Enter}");
 			expect(inputbox.closest("span")).toHaveTextContent("Apple");
 			expect(inputbox).toHaveValue("");
+
 			// type in banana without pressing enter
 			await user.keyboard("banana");
 			expect(inputbox).toHaveValue("banana");
