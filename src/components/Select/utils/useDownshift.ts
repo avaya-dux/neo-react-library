@@ -88,7 +88,7 @@ const DownshiftWithComboboxProps = (
 				setSelectedItems([clickedItem]);
 			}
 		},
-		itemToString: (item) => item?.value || String(item),
+		itemToString: (item) => item?.value || "",
 		// BUG: items are not announced in screen reader when selected
 	});
 };

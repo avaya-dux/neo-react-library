@@ -94,7 +94,7 @@ export const SingleSelectSearchable = () => {
 								const firstEnableOption = filteredOptions.find(
 									(option) => !option.disabled,
 								);
-								if (firstEnableOption) {
+								if (firstEnableOption && inputValue) {
 									selectItem(firstEnableOption);
 								} else {
 									//  no options or only disabled options, clear selection
