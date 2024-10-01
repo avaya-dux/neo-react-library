@@ -166,7 +166,12 @@ const BasicDrawer = ({
 	title,
 	style,
 	actions,
-	translations,
+	translations = {
+		apply: "Apply",
+		back: "Go back",
+		cancel: "Cancel",
+		close: "Close drawer",
+	},
 	...rest
 }: {
 	children?: React.ReactNode;
@@ -215,7 +220,7 @@ const BasicDrawer = ({
 									onClick={onBack}
 									variant="tertiary"
 									shape="square"
-									aria-label={translations?.back || "Go back"}
+									aria-label={translations?.back}
 									icon="chevron-left"
 									className="neo-drawer-icon-chevron-left"
 								/>
@@ -229,7 +234,7 @@ const BasicDrawer = ({
 									onClick={onClose}
 									variant="tertiary"
 									shape="square"
-									aria-label={translations?.close || "Close drawer"}
+									aria-label={translations?.close}
 									icon="close"
 									className="neo-drawer-icon-close"
 								/>

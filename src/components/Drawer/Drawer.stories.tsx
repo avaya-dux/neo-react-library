@@ -47,13 +47,16 @@ export const BasicDrawer: Story = {
 				<Drawer
 					open={defaultDrawerOpen}
 					onClose={() => setDefaultDrawerOpen(false)}
-					title="Default Drawer"
+					title="Title of Drawer"
 				>
 					<div style={{ height: "100%", width: "100%" }}>
 						<p>This Drawer should only have the x close button</p>
 						<br />
 
-						<p>Drawer can be dismissed by clicking on background scrim</p>
+						<p>
+							Dismiss the Drawer by selecting the ‘Clear’ icon at the top right
+							next to the title or by clicking anywhere on the background scrim.
+						</p>
 						<br />
 
 						<p>24px padding enforced.</p>
@@ -114,7 +117,7 @@ export const ScrimOptions: Story = {
 				<Drawer
 					open={noDismissDrawerOpen}
 					onClose={() => toggleDrawerByName("no-dismiss")}
-					title="Dimiss on scrim click disabled"
+					title="Title of Drawer"
 					closeOnScrimClick={false}
 				>
 					<p>This Drawer will not close if you click on the scrim background</p>
@@ -123,7 +126,7 @@ export const ScrimOptions: Story = {
 				<Drawer
 					open={dismissEnabledDrawerOpen}
 					onClose={() => toggleDrawerByName("dismiss-on-click")}
-					title="Dismiss enabled"
+					title="Title of Drawer"
 				>
 					<p>This Drawer will close when you click on the scrim background</p>
 				</Drawer>
@@ -162,7 +165,7 @@ export const withDefaultButtons: Story = {
 					onCancel={() => setDrawerOpen(false)}
 					onApply={handleSubmit}
 					disableApplyButton={applyBtnDisabled}
-					title="App Settings"
+					title="Title of Drawer"
 					closeOnScrimClick={false}
 				>
 					<div className="drawer-container">
@@ -171,6 +174,7 @@ export const withDefaultButtons: Story = {
 							defaultChecked
 							name="autostart"
 							value="on"
+							autoFocus
 						>
 							Auto-start On
 						</Switch>
@@ -196,7 +200,14 @@ export const withDefaultButtons: Story = {
 						>
 							Animations On
 						</Switch>
-						<p> You can place any UI elements within this area of the Drawer</p>
+						<p>
+							Add UI elements like text, text inputs, radio buttons, and other
+							form fields in the middle section of the Drawer, between the title
+							and the bottom main actions.
+						</p>
+						<p>The Drawer can be dismissed by
+							selecting 'Cancel' or the primary action such as 'Apply.'
+						</p>
 					</div>
 				</Drawer>
 			</main>
@@ -225,7 +236,7 @@ export const WithForm: Story = {
 
 				<Drawer
 					open={formDrawerOpen}
-					title="Submission Form"
+					title="Title of Drawer"
 					closeOnScrimClick={false}
 					// Set form attribute to the corresponding Form id
 					actions={[
@@ -257,13 +268,15 @@ export const WithForm: Story = {
 						}}
 					>
 						<p style={{ paddingBottom: 20 }}>
-							Username with Terms of Service Example. User must accept ToS
-							before being allowed to proceed.
+							This is an example of a Drawer that has a username with terms. The
+							user must accept the Terms of Service before being allowed to
+							proceed. The user can also dismiss the Drawer by selecting
+							'Cancel.'
 						</p>
 						<TextInput
-							placeholder="username"
 							aria-label="Enter username"
-							key="usernam"
+							key="user-name"
+							label="Username"
 						/>
 						<Switch required name="ToS" value="accepted">
 							Do you accept the Terms of Service?
@@ -304,7 +317,7 @@ export const WithNote: Story = {
 				<Drawer
 					open={noteDrawerOpen}
 					onClose={() => setNoteDrawerOpen(false)}
-					title="General Notes"
+					title="Title of Drawer"
 					actions={[
 						<TextInput aria-label="Enter note" key={1} />,
 						<IconButton aria-label="send note" icon="send" key={2} />,
@@ -372,9 +385,10 @@ export const CustomWidth: Story = {
 				<Drawer
 					open={widthRemDrawerOpen}
 					onClose={() => toggleDrawerByName("rem-units")}
-					title="Drawer width = 30rem"
+					title="Title of Drawer"
 					width="30rem"
 				>
+					<div className="drawer-container">
 					<Note>
 						<Note.Title>Meeting notes</Note.Title>
 						<Note.Content author="Kathy" self={true}>
@@ -384,14 +398,16 @@ export const CustomWidth: Story = {
 					<Note>
 						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
 					</Note>
+					</div>
 				</Drawer>
 
 				<Drawer
 					open={widthPixelDrawerOpen}
 					onClose={() => toggleDrawerByName("pixel-units")}
-					title="Drawer width = 150px"
+					title="Title of Drawer"
 					width="350px"
 				>
+					<div className="drawer-container">
 					<Note>
 						<Note.Title>Meeting notes</Note.Title>
 						<Note.Content author="Kathy" self={true}>
@@ -401,6 +417,7 @@ export const CustomWidth: Story = {
 					<Note>
 						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
 					</Note>
+					</div>
 				</Drawer>
 			</main>
 		);
