@@ -68,10 +68,8 @@
 	top: 2px;
 }
 
-.neo-input-group--inline .neo-radio + label + .neo-tooltip label:before {
-	top: 0;
-}
-
+.neo-input-group--inline .neo-radio + label + .neo-tooltip label:before,
+.neo-radio.neo-radio--disabled:checked + label:before,
 .neo-radio + label:before {
 	top: 0;
 }
@@ -85,6 +83,10 @@
 	position: absolute;
 	top: 5px;
 	left: 3px;
+}
+
+.neo-input-group--inline .neo-radio + label + .neo-tooltip label:after {
+	top: 3px;
 }
 
 .neo-radio:checked + label:after {
@@ -142,8 +144,4 @@
 	display: block;
 	position: absolute;
 	top: 2px;
-}
-
-.neo-radio.neo-radio--disabled:checked + label:before {
-	top: 0;
 }
