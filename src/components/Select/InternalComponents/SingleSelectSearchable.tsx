@@ -81,14 +81,17 @@ export const SingleSelectSearchable = () => {
 								if (highlightedIndex > -1) {
 									selectItem(filteredOptions[highlightedIndex]);
 								} else {
-									const firstEnableOption = filteredOptions.find(
-										(option) => !option.disabled,
-									);
+									const firstEnableOption = filteredOptions.find((option) => {
+										const childSearchText =
+											option.searchText || option.children;
+
+										const matches = childSearchText
+											.toLowerCase()
+											.includes(inputValue.toLowerCase());
+										return !option.disabled && matches;
+									});
 									if (firstEnableOption && inputValue) {
 										selectItem(firstEnableOption);
-									} else {
-										//  no options or only disabled options, clear selection
-										reset();
 									}
 								}
 								closeMenu();

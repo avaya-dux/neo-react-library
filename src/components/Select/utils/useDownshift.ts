@@ -29,26 +29,42 @@ const DownshiftWithComboboxProps = (
 		stateReducer: (_, actionAndChanges) => {
 			const { changes, type } = actionAndChanges;
 			const isOpen = changes.isOpen ? !(disabled || loading) : false;
+			const highlightedIndex = changes.selectedItem
+				? options.indexOf(changes.selectedItem)
+				: -1;
 			logger.debug({ isOpen, type, changes });
 			switch (type) {
 				case useCombobox.stateChangeTypes.ToggleButtonClick:
+					setFilteredOptions([...options]);
 					return {
 						...changes,
+						highlightedIndex,
 						isOpen,
 					};
-				case useCombobox.stateChangeTypes.InputKeyDownEnter:
-					logger.debug({ location: "InputKeyDownEnter", changes });
-					if (changes.selectedItem?.created) {
-						logger.debug({
-							location: "InputKeyDownEnter",
-							action: "set filter options to all",
-						});
-						setFilteredOptions([...options]);
-					}
-					return {
-						...changes,
-						isOpen: false,
-					};
+				// case useCombobox.stateChangeTypes.InputKeyDownEnter:
+				// case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
+				// 	logger.debug({
+				// 		location: "InputKeyDownArrowDown",
+				// 		changes,
+				// 	});
+				// 	if (
+				// 		changes.inputValue?.toLocaleLowerCase ===
+				// 		changes.selectedItem?.value?.toLocaleLowerCase
+				// 	) {
+				// 		logger.debug(
+				// 			"inputValue === selectedItem.value, resetting filter options",
+				// 		);
+				// 		setFilteredOptions([...options]);
+				// 		return {
+				// 			...changes,
+				// 			highlightedIndex,
+				// 			isOpen,
+				// 		};
+				// 	}
+				// 	return {
+				// 		...changes,
+				// 		isOpen,
+				// 	};
 				case useCombobox.stateChangeTypes.InputFocus:
 					logger.debug({ location: "InputFocus", changes });
 					return {
@@ -59,8 +75,21 @@ const DownshiftWithComboboxProps = (
 					return changes;
 			}
 		},
-		onInputValueChange: ({ inputValue }) => {
-			logger.debug({ location: "onInputValueChange", inputValue });
+		onInputValueChange: ({ inputValue, selectedItem }) => {
+			logger.debug({
+				location: "onInputValueChange",
+				inputValue,
+				selectedItem,
+				filteredOptions,
+			});
+			// if this is called after select item, we do nothing
+			if (
+				selectedItem?.value?.toLocaleLowerCase() ===
+				inputValue?.toLocaleLowerCase()
+			) {
+				logger.debug("inputValue === selectedItem.value, do nothing");
+				return;
+			}
 			const trimmedValue = inputValue?.trim();
 			if (trimmedValue) {
 				const relatedOptions = options.filter((child) => {
@@ -88,7 +117,11 @@ const DownshiftWithComboboxProps = (
 			setInputText(trimmedValue || "");
 		},
 		onSelectedItemChange: ({ selectedItem: clickedItem }) => {
-			logger.debug({ location: "onSelectedItemChange", clickedItem });
+			logger.debug({
+				location: "onSelectedItemChange",
+				clickedItem,
+				selectedItems,
+			});
 			if (!clickedItem) {
 				setSelectedItems([]);
 			} else if (creatable && clickedItem.created) {
@@ -104,6 +137,11 @@ const DownshiftWithComboboxProps = (
 			) {
 				setSelectedItems([clickedItem]);
 			}
+			logger.debug({
+				location: "onSelectedItemChange",
+				action: "reset filters",
+			});
+			setFilteredOptions([...options]);
 		},
 		itemToString: (item) => (item?.created ? item.value : item?.children) || "",
 		// BUG: items are not announced in screen reader when selected
