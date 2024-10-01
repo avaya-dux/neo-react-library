@@ -205,8 +205,9 @@ export const withDefaultButtons: Story = {
 							form fields in the middle section of the Drawer, between the title
 							and the bottom main actions.
 						</p>
-						<p>The Drawer can be dismissed by
-							selecting 'Cancel' or the primary action such as 'Apply.'
+						<p>
+							The Drawer can be dismissed by selecting 'Cancel' or the primary
+							action such as 'Apply.'
 						</p>
 					</div>
 				</Drawer>
@@ -396,7 +397,9 @@ export const CustomWidth: Story = {
 							</Note.Content>
 						</Note>
 						<Note>
-							<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
 						</Note>
 					</div>
 				</Drawer>
@@ -415,7 +418,9 @@ export const CustomWidth: Story = {
 							</Note.Content>
 						</Note>
 						<Note>
-							<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
 						</Note>
 					</div>
 				</Drawer>
