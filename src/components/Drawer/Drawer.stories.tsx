@@ -389,15 +389,15 @@ export const CustomWidth: Story = {
 					width="30rem"
 				>
 					<div className="drawer-container">
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+						</Note>
 					</div>
 				</Drawer>
 
@@ -408,15 +408,15 @@ export const CustomWidth: Story = {
 					width="350px"
 				>
 					<div className="drawer-container">
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
+						</Note>
 					</div>
 				</Drawer>
 			</main>
