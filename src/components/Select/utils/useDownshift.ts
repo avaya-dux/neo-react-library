@@ -5,7 +5,7 @@ import { type Dispatch, type SetStateAction, useState } from "react";
 import type { SelectOptionProps } from "./SelectTypes";
 
 const logger = log.getLogger("use-downshfit");
-logger.disableAll();
+logger.enableAll();
 
 const createOptionValue = "neo-select-create-option";
 
@@ -37,6 +37,7 @@ const DownshiftWithComboboxProps = (
 						isOpen,
 					};
 				case useCombobox.stateChangeTypes.InputFocus:
+					logger.debug({ location: "InputFocus", changes });
 					return {
 						...changes,
 						isOpen: false,

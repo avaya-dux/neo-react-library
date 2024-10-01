@@ -10,7 +10,7 @@ import type { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
 const logger = log.getLogger("single-select-searchable");
-logger.disableAll();
+logger.enableAll();
 
 export const SingleSelectSearchable = () => {
 	const {
@@ -43,7 +43,10 @@ export const SingleSelectSearchable = () => {
 	const [highlighting, setHighlighting] = useState(false);
 	const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
 		getToggleButtonProps();
-	const { id, onKeyDown, ...restInputProps } = getInputProps();
+	const { id, onKeyDown, ...restInputProps } = getInputProps({
+		onFocus: () => setHighlighting(true),
+		onBlur: () => setHighlighting(false),
+	});
 	logger.debug({
 		value: restInputProps.value,
 		inputValue,
@@ -85,8 +88,6 @@ export const SingleSelectSearchable = () => {
 						className="neo-input"
 						disabled={disabled}
 						placeholder={selectedItems.length ? undefined : placeholder}
-						onFocus={() => setHighlighting(true)}
-						onBlur={() => setHighlighting(false)}
 						onKeyDown={(e) => {
 							logger.debug("keydown", e.key, highlightedIndex, filteredOptions);
 							if (e.key === Keys.ENTER) {
