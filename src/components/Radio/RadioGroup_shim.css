@@ -48,10 +48,6 @@
 	left: 3px;
 }
 
-.neo-radio + label:after {
-	top: 3px;
-}
-
 [dir="rtl"] .neo-radio + label + .neo-tooltip label:after {
 	left: auto;
 	right: 3px;
@@ -85,11 +81,9 @@
 	left: 3px;
 }
 
-.neo-input-group--inline .neo-radio + label + .neo-tooltip label:after {
-	top: 3px;
-}
-
-.neo-radio:checked + label:after {
+.neo-input-group--inline .neo-radio + label + .neo-tooltip label:after,
+.neo-radio:checked + label:after,
+.neo-radio + label:after {
 	top: 3px;
 }
 
