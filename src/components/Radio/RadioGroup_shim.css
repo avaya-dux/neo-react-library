@@ -16,10 +16,6 @@
 	margin-top: 0px;
 }
 
-.neo-input-group--inline label:not(.neo-switch):not(.neo-label) {
-	line-height: initial;
-}
-
 .neo-radio + label + .neo-tooltip {
 	width: fit-content;
 	margin-top: 8px;
@@ -56,10 +52,6 @@
 	top: 3px;
 }
 
-.neo-input-group--inline .neo-radio + label:after {
-	top: 5px;
-}
-
 [dir="rtl"] .neo-radio + label + .neo-tooltip label:after {
 	left: auto;
 	right: 3px;
@@ -76,12 +68,12 @@
 	top: 2px;
 }
 
-.neo-radio + label:before {
+.neo-input-group--inline .neo-radio + label + .neo-tooltip label:before {
 	top: 0;
 }
 
-.neo-input-group--inline .neo-radio + label:before {
-	top: 2px;
+.neo-radio + label:before {
+	top: 0;
 }
 
 .neo-radio:checked + label + .neo-tooltip label:after {
@@ -97,10 +89,6 @@
 
 .neo-radio:checked + label:after {
 	top: 3px;
-}
-
-.neo-input-group--inline .neo-radio:checked + label:after {
-	top: 5px;
 }
 
 .neo-tooltip .neo-radio[disabled] + label {
@@ -158,8 +146,4 @@
 
 .neo-radio.neo-radio--disabled:checked + label:before {
 	top: 0;
-}
-
-.neo-input-group--inline .neo-radio.neo-radio--disabled:checked + label:before {
-	top: 2px;
 }
