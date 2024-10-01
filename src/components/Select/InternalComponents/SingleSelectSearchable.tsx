@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { Keys } from "utils";
 
