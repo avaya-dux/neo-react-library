@@ -47,7 +47,7 @@ export const BasicModal = forwardRef(
 			console.error("onClose prop is required.");
 		}
 
-		const onKeyDown = useCallback(
+		const onKeyUp = useCallback(
 			(e: KeyboardEvent) => {
 				if (e.key === Keys.ESC && open) {
 					onClose();
@@ -57,11 +57,11 @@ export const BasicModal = forwardRef(
 		);
 
 		useEffect(() => {
-			document.addEventListener("keyup", onKeyDown, false);
+			document.addEventListener("keyup", onKeyUp, false);
 			return () => {
-				document.removeEventListener("keyup", onKeyDown, false);
+				document.removeEventListener("keyup", onKeyUp, false);
 			};
-		}, [onKeyDown]);
+		}, [onKeyUp]);
 
 		const modal = (
 			<FocusLock>
