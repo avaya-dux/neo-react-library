@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import { Keys } from "utils";
 
@@ -37,28 +37,16 @@ export const SingleSelectSearchable = () => {
 		isOpen,
 		reset,
 		selectItem,
-		setInputValue,
 		highlightedIndex,
 	} = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
-	const [highlighting, setHighlighting] = useState(false);
 	const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
 		getToggleButtonProps();
-	const { id, onKeyDown, ...restInputProps } = getInputProps({
-		onFocus: () => setHighlighting(true),
-		onBlur: () => setHighlighting(false),
-	});
+	const { id, onKeyDown, ref, ...restInputProps } = getInputProps();
 	logger.debug({
 		value: restInputProps.value,
 		inputValue,
 		selected: selectedItems[0]?.children,
 	});
-	// clear the search when dropdown closes (when the user selects an item or clicks away)
-	useEffect(() => {
-		if (isOpen === false) {
-			setInputValue("");
-		}
-	}, [isOpen, setInputValue]);
-
 	return (
 		<div
 			aria-describedby={helperText && helperId}
@@ -77,31 +65,32 @@ export const SingleSelectSearchable = () => {
 					isOpen && "neo-multiselect-combo__header--expanded",
 				)}
 			>
-				<span
-					className={clsx(
-						"neo-multiselect__padded-container",
-						highlighting && "highlighted",
-					)}
-				>
+				<span className="neo-multiselect__padded-container">
 					<input
 						{...restInputProps}
+						ref={ref}
 						className="neo-input"
 						disabled={disabled}
 						placeholder={selectedItems.length ? undefined : placeholder}
+						onBlur={() => closeMenu()}
 						onKeyDown={(e) => {
 							logger.debug("keydown", e.key, highlightedIndex, filteredOptions);
 							if (e.key === Keys.ENTER) {
 								e.preventDefault();
-								const firstEnableOption = filteredOptions.find(
-									(option) => !option.disabled,
-								);
-								if (firstEnableOption && inputValue) {
-									selectItem(firstEnableOption);
+
+								if (highlightedIndex > -1) {
+									selectItem(filteredOptions[highlightedIndex]);
 								} else {
-									//  no options or only disabled options, clear selection
-									reset();
+									const firstEnableOption = filteredOptions.find(
+										(option) => !option.disabled,
+									);
+									if (firstEnableOption && inputValue) {
+										selectItem(firstEnableOption);
+									} else {
+										//  no options or only disabled options, clear selection
+										reset();
+									}
 								}
-								setHighlighting(false);
 								closeMenu();
 							} else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
 								reset();
@@ -110,7 +99,6 @@ export const SingleSelectSearchable = () => {
 							onKeyDown(e);
 						}}
 					/>
-					{inputValue?.length > 0 ? "" : selectedItems[0]?.children}
 					<input
 						className="neo-display-none"
 						id={id}

@@ -198,7 +198,7 @@ span.neo-multiselect-combo__header .neo-multiselect__padded-container {
 	.neo-multiselect__padded-container.highlighted:not(
 		:has(.neo-multiselect-combo__buttons-container)
 	) {
-	background-color: #accef7;
+	/* background-color: #accef7; */
 }
 
 /* internal select option highlight styles */

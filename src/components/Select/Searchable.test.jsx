@@ -74,18 +74,22 @@ describe("Select", () => {
 			expect(inputbox).toHaveFocus();
 			// empty input should not select any option
 			await user.keyboard("{Enter}");
-			expect(inputbox.closest("span")).toHaveTextContent("");
+			expect(inputbox).toHaveValue("");
 
 			// typing in apple and pressing enter
 			await user.keyboard("apple{Enter}");
-			expect(inputbox.closest("span")).toHaveTextContent("Apple");
-			expect(inputbox).toHaveValue("");
+			expect(inputbox).toHaveValue("Apple");
+
+			await user.tab();
+			expect(inputbox).not.toHaveFocus();
+
+			// shift tab back
+			await user.keyboard("{Shift}{Tab}");
+			expect(inputbox).toHaveFocus();
 
 			// typing in banana without pressing enter
 			await user.keyboard("banana");
 			expect(inputbox).toHaveValue("banana");
-			// apple is removed in span
-			expect(inputbox.closest("span")).toHaveTextContent("");
 		});
 
 		it("passes basic axe compliance", async () => {
@@ -181,27 +185,25 @@ describe("Select", () => {
 			);
 
 			const comboboxBtn = screen.getAllByRole("textbox")[0].closest("span");
-			await act(async () => await user.click(comboboxBtn));
+			await user.click(comboboxBtn);
 
 			// pre search+add we have all options in the list
 			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
-			await act(async () => await user.keyboard(newOptionText));
+			await user.keyboard(newOptionText);
 			expect(screen.getAllByRole("option")).toHaveLength(1);
 			expect(screen.getByRole("option")).toHaveTextContent(newOptionText);
 
-			await act(async () => await user.keyboard(UserEventKeys.DOWN));
-			await act(async () => await user.keyboard(UserEventKeys.ENTER));
+			await user.keyboard(UserEventKeys.DOWN);
+			await user.keyboard(UserEventKeys.ENTER);
 
 			// now that we've added the new option, we can now see the full list, excluding
 			// the new option as we do not show that in the list
+			await user.keyboard(UserEventKeys.DOWN);
 			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 
 			// newly created text has been added
-			expect(screen.queryByText(newOptionText)).toBeInTheDocument();
-
-			await act(async () => await user.keyboard(UserEventKeys.BACKSPACE));
-			expect(screen.queryByText(newOptionText)).not.toBeInTheDocument(); // text removed
+			expect(screen.getAllByRole("textbox")[0]).toHaveValue(newOptionText);
 		});
 
 		it("`SingleSelectSearchable` allows a user to create exactly one custom option", async () => {
@@ -222,16 +224,19 @@ describe("Select", () => {
 			await user.keyboard(UserEventKeys.ENTER);
 
 			// first option text has been created
-			expect(screen.queryByText(firstOptionText)).toBeInTheDocument();
+			expect(screen.getAllByRole("textbox")[0]).toHaveValue(firstOptionText);
+
+			// erase first option
+			for (let i = 0; i < firstOptionText.length; i++) {
+				await user.keyboard("{Backspace}");
+			}
 
 			// add second option
 			await user.keyboard(secondOptionText);
 			await user.keyboard(UserEventKeys.DOWN);
 			await user.keyboard(UserEventKeys.ENTER);
 
-			// first option text has been removed in place of second option text
-			expect(screen.queryByText(firstOptionText)).not.toBeInTheDocument();
-			expect(screen.getByText(secondOptionText)).toBeInTheDocument();
+			expect(screen.getAllByRole("textbox")[0]).toHaveValue(secondOptionText);
 		});
 
 		it("`MultiSelectSearchable` allows a user to create and remove custom options if `creatable` prop is set", async () => {

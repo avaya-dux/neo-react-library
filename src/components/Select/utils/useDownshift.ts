@@ -36,6 +36,19 @@ const DownshiftWithComboboxProps = (
 						...changes,
 						isOpen,
 					};
+				case useCombobox.stateChangeTypes.InputKeyDownEnter:
+					logger.debug({ location: "InputKeyDownEnter", changes });
+					if (changes.selectedItem?.created) {
+						logger.debug({
+							location: "InputKeyDownEnter",
+							action: "set filter options to all",
+						});
+						setFilteredOptions([...options]);
+					}
+					return {
+						...changes,
+						isOpen: false,
+					};
 				case useCombobox.stateChangeTypes.InputFocus:
 					logger.debug({ location: "InputFocus", changes });
 					return {
@@ -61,7 +74,8 @@ const DownshiftWithComboboxProps = (
 				if (relatedOptions.length === 0 && creatable) {
 					const createdItem: SelectOptionProps = {
 						children: `${createMessage} '${trimmedValue}'`,
-						value: createOptionValue,
+						value: trimmedValue,
+						created: true,
 					};
 					setFilteredOptions([createdItem]);
 				} else {
@@ -74,12 +88,14 @@ const DownshiftWithComboboxProps = (
 			setInputText(trimmedValue || "");
 		},
 		onSelectedItemChange: ({ selectedItem: clickedItem }) => {
+			logger.debug({ location: "onSelectedItemChange", clickedItem });
 			if (!clickedItem) {
 				setSelectedItems([]);
-			} else if (creatable && clickedItem.value === createOptionValue) {
+			} else if (creatable && clickedItem.created) {
 				const createdItem: SelectOptionProps = {
 					children: inputText,
 					value: inputText,
+					created: true,
 				};
 				setSelectedItems([createdItem]);
 			} else if (
@@ -89,7 +105,7 @@ const DownshiftWithComboboxProps = (
 				setSelectedItems([clickedItem]);
 			}
 		},
-		itemToString: (item) => item?.value || "",
+		itemToString: (item) => (item?.created ? item.value : item?.children) || "",
 		// BUG: items are not announced in screen reader when selected
 	});
 };
