@@ -3,11 +3,11 @@ import { type FormEvent, useState } from "react";
 
 import {
 	Button,
+	Checkbox,
 	Form,
 	IconButton,
 	Note,
 	Switch,
-	TextArea,
 	TextInput,
 } from "components";
 
@@ -26,7 +26,7 @@ const meta: Meta<typeof Drawer> = {
 };
 export default meta;
 
-export const BasicDrawer: Story = {
+export const InformativeDrawer: Story = {
 	render: () => {
 		const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
 
@@ -47,16 +47,15 @@ export const BasicDrawer: Story = {
 				<Drawer
 					open={defaultDrawerOpen}
 					onClose={() => setDefaultDrawerOpen(false)}
-					title="Default Drawer"
+					title="Title of Drawer"
 				>
 					<div style={{ height: "100%", width: "100%" }}>
 						<p>This Drawer should only have the x close button</p>
 						<br />
-
-						<p>Drawer can be dismissed by clicking on background scrim</p>
-						<br />
-
-						<p>24px padding enforced.</p>
+						<p>
+							Dismiss the Drawer by selecting the ‘Clear’ icon at the top right
+							next to the title or by clicking anywhere on the background scrim.
+						</p>
 					</div>
 				</Drawer>
 			</main>
@@ -64,21 +63,15 @@ export const BasicDrawer: Story = {
 	},
 };
 
-export const BackButtonAndScrimOptions: Story = {
+// This story showcases how to use the default Cancel and Apply buttons.
+export const WithDefaultButtons: Story = {
 	render: () => {
-		const [noDismissDrawerOpen, setNoDismissDrawerOpen] = useState(false);
-		const [hasBackButtonDrawerOpen, sethasBackButtonDrawerOpen] =
-			useState(false);
-
-		const toggleDrawerByName = (drawerName: string) => {
-			switch (drawerName) {
-				case "no-dismiss":
-					setNoDismissDrawerOpen(!noDismissDrawerOpen);
-					break;
-				case "back-button":
-					sethasBackButtonDrawerOpen(!hasBackButtonDrawerOpen);
-					break;
-			}
+		const [drawerOpen, setDrawerOpen] = useState(false);
+		const [applyBtnDisabled, setApplyBtnDisabled] = useState(true);
+		const handleSubmit = () => {
+			alert("you successfully Applied");
+			setApplyBtnDisabled(true);
+			setDrawerOpen(false);
 		};
 
 		return (
@@ -90,45 +83,60 @@ export const BackButtonAndScrimOptions: Story = {
 						marginBottom: "1rem",
 					}}
 				>
-					<Button onClick={() => toggleDrawerByName("no-dismiss")}>
-						Open Drawer dismiss disabled
+					<Button onClick={() => setDrawerOpen(!drawerOpen)}>
+						Toggle Drawer Open
 					</Button>
-
-					<Button onClick={() => toggleDrawerByName("back-button")}>
-						Open Drawer with Back button
-					</Button>
-				</section>
-				<section>
-					<TextArea
-						helperText="Try typing here while scrim is on."
-						label="Test focus by typing here"
-						maxLength={10}
-						placeholder="Placeholder"
-						translations={{
-							over: "over",
-							remaining: "remaining",
-						}}
-					/>
 				</section>
 
 				<Drawer
-					open={noDismissDrawerOpen}
-					onClose={() => toggleDrawerByName("no-dismiss")}
-					title="Drawer with dimiss on scrim click disabled"
-					closeOnScrimClick={false}
+					open={drawerOpen}
+					onCancel={() => setDrawerOpen(false)}
+					onApply={handleSubmit}
+					disableApplyButton={applyBtnDisabled}
+					title="Title of Drawer"
 				>
-					<p>This Drawer will not close if you click on the scrim background</p>
-				</Drawer>
-
-				<Drawer
-					open={hasBackButtonDrawerOpen}
-					onClose={() => toggleDrawerByName("back-button")}
-					onBack={() => {
-						alert("Back button pressed");
-					}}
-					title="With back button"
-				>
-					<p>This Drawer both a Back button and the x close button</p>
+					<div className="drawer-container">
+						<Switch
+							onChange={() => setApplyBtnDisabled(false)}
+							defaultChecked
+							name="autostart"
+							value="on"
+							autoFocus
+						>
+							Auto-start On
+						</Switch>
+						<Switch
+							onChange={() => setApplyBtnDisabled(false)}
+							name="darkmode"
+							value="on"
+						>
+							Dark Mode On
+						</Switch>
+						<Switch
+							onChange={() => setApplyBtnDisabled(false)}
+							defaultChecked
+							name="powersave"
+							value="on"
+						>
+							Power Save Mode On
+						</Switch>
+						<Switch
+							onChange={() => setApplyBtnDisabled(false)}
+							name="animations"
+							value="on"
+						>
+							Animations On
+						</Switch>
+						<p>
+							Add UI elements like text, text inputs, radio buttons, and other
+							form fields in the middle section of the Drawer, between the title
+							and the bottom main actions.
+						</p>
+						<p>
+							The Drawer can be dismissed by selecting 'Cancel' or the primary
+							action such as 'Apply.'
+						</p>
+					</div>
 				</Drawer>
 			</main>
 		);
@@ -156,15 +164,23 @@ export const WithForm: Story = {
 
 				<Drawer
 					open={formDrawerOpen}
-					onClose={() => setFormDrawerOpen(false)}
-					title="Submission Form"
-					closeOnScrimClick={false}
+					title="Title of Drawer"
 					// Set form attribute to the corresponding Form id
 					actions={[
-						<Button form="the-form" key={1} type="reset" variant="secondary">
-							Reset
+						<Button
+							key="cancel-btn"
+							variant="secondary"
+							onClick={() => {
+								const myInput = document.getElementById(
+									"the-form",
+								) as HTMLFormElement;
+								myInput?.reset();
+								setFormDrawerOpen(false);
+							}}
+						>
+							Cancel
 						</Button>,
-						<Button form="the-form" key={2} type="submit">
+						<Button form="the-form" key="submit-btn" type="submit">
 							Submit
 						</Button>,
 					]}
@@ -175,16 +191,33 @@ export const WithForm: Story = {
 						onSubmit={(e: FormEvent<HTMLFormElement>) => {
 							e.preventDefault();
 							alert("you successfully submitted");
+							setFormDrawerOpen(false);
 						}}
 					>
 						<p style={{ paddingBottom: 20 }}>
-							Terms of Service Example. User must accept ToS before being
-							allowed to proceed.
+							This is an example of a Drawer that has a username with terms. The
+							user must accept the Terms of Service before being allowed to
+							proceed. The user can also dismiss the Drawer by selecting
+							'Cancel.'
 						</p>
-
-						<Switch required name="ToS" value="accepted">
-							Do you accept the Terms of Service?
-						</Switch>
+						<TextInput
+							aria-label="Enter username"
+							key="user-name"
+							label="Username"
+						/>
+						<div>
+							<Checkbox required name="ToS" value="accepted">
+								Do you accept the Terms of Service?
+							</Checkbox>
+						</div>
+						<Button
+							form="the-form"
+							key="reset-btn"
+							type="reset"
+							variant="tertiary"
+						>
+							Clear Fields
+						</Button>
 					</Form>
 				</Drawer>
 			</main>
@@ -213,21 +246,25 @@ export const WithNote: Story = {
 				<Drawer
 					open={noteDrawerOpen}
 					onClose={() => setNoteDrawerOpen(false)}
-					title="General Notes"
+					title="Title of Drawer"
 					actions={[
 						<TextInput aria-label="Enter note" key={1} />,
 						<IconButton aria-label="send note" icon="send" key={2} />,
 					]}
 				>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
+					<div className="drawer-container">
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+					</div>
 				</Drawer>
 			</main>
 		);
@@ -236,15 +273,11 @@ export const WithNote: Story = {
 
 export const CustomWidth: Story = {
 	render: () => {
-		const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
 		const [widthRemDrawerOpen, setWidthRemDrawerOpen] = useState(false);
 		const [widthPixelDrawerOpen, setWidthPixelDrawerOpen] = useState(false);
 
 		const toggleDrawerByName = (drawerName: string) => {
 			switch (drawerName) {
-				case "default":
-					setDefaultDrawerOpen(!defaultDrawerOpen);
-					break;
 				case "rem-units":
 					setWidthRemDrawerOpen(!widthRemDrawerOpen);
 					break;
@@ -263,79 +296,61 @@ export const CustomWidth: Story = {
 						marginBottom: "1rem",
 					}}
 				>
-					<Button onClick={() => toggleDrawerByName("default")}>
-						Open Default Width Drawer (20rem)
-					</Button>
-
 					<Button onClick={() => toggleDrawerByName("rem-units")}>
-						Open Drawer with 30rem width
+						Drawer using rem units (30rem width)
 					</Button>
 
 					<Button onClick={() => toggleDrawerByName("pixel-units")}>
-						Open Drawer with 150px width
+						Drawer using pixel units (350px width)
 					</Button>
 				</section>
 				<section>
-					<TextArea
-						helperText="Try typing here while scrim is on."
-						label="Test focus by typing here"
-						maxLength={10}
-						placeholder="Placeholder"
-						translations={{
-							over: "over",
-							remaining: "remaining",
-						}}
-					/>
+					<p>
+						These examples show how you can set custom widths for the Drawer
+						using either rem or pixel units
+					</p>
 				</section>
-
-				<Drawer
-					open={defaultDrawerOpen}
-					onClose={() => toggleDrawerByName("default")}
-					title="Drawer with default width"
-				>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
-				</Drawer>
 
 				<Drawer
 					open={widthRemDrawerOpen}
 					onClose={() => toggleDrawerByName("rem-units")}
-					title="Drawer width = 30rem"
+					title="Title of Drawer"
 					width="30rem"
 				>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
+					<div className="drawer-container">
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+					</div>
 				</Drawer>
 
 				<Drawer
 					open={widthPixelDrawerOpen}
 					onClose={() => toggleDrawerByName("pixel-units")}
-					title="Drawer width = 150px"
-					width="150px"
+					title="Title of Drawer"
+					width="350px"
 				>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
+					<div className="drawer-container">
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+					</div>
 				</Drawer>
 			</main>
 		);
@@ -373,78 +388,96 @@ export const WithScrollbar: Story = {
 						<IconButton aria-label="send note" icon="send" key={2} />,
 					]}
 				>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
-					<Note>
-						<Note.Title>Meeting notes</Note.Title>
-						<Note.Content author="Kathy" self={true}>
-							Hi, can we sync?
-						</Note.Content>
-					</Note>
-					<Note>
-						<Note.Content author="Cleo">Sure, give me 10 minutes.</Note.Content>
-					</Note>
+					<div className="drawer-container">
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Title>Meeting notes</Note.Title>
+							<Note.Content author="Kathy" self={true}>
+								Hi, can we sync?
+							</Note.Content>
+						</Note>
+						<Note>
+							<Note.Content author="Cleo">
+								Sure, give me 10 minutes.
+							</Note.Content>
+						</Note>
+					</div>
 				</Drawer>
 			</main>
 		);
