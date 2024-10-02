@@ -109,12 +109,7 @@ export const Drawer = ({
 	disableApplyButton = false,
 	width,
 	actions,
-	translations = {
-		apply: "Apply",
-		back: "Go back",
-		cancel: "Cancel",
-		close: "Close drawer",
-	},
+	translations,
 
 	...rest
 }: DrawerProps) => {

@@ -64,7 +64,7 @@ export const InformativeDrawer: Story = {
 };
 
 // This story showcases how to use the default Cancel and Apply buttons.
-export const withDefaultButtons: Story = {
+export const WithDefaultButtons: Story = {
 	render: () => {
 		const [drawerOpen, setDrawerOpen] = useState(false);
 		const [applyBtnDisabled, setApplyBtnDisabled] = useState(true);
