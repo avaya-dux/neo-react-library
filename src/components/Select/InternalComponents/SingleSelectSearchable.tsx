@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
-import { useContext } from "react";
+import { useContext, type FocusEvent } from "react";
 
 import { Keys } from "utils";
 
@@ -65,6 +65,10 @@ export const SingleSelectSearchable = () => {
 					"neo-multiselect-combo__header",
 					isOpen && "neo-multiselect-combo__header--expanded",
 				)}
+				onBlur={() => {
+					logger.debug("onBlur");
+					closeMenu();
+				}}
 			>
 				<span className="neo-multiselect__padded-container">
 					<input
@@ -73,7 +77,10 @@ export const SingleSelectSearchable = () => {
 						className="neo-input"
 						disabled={disabled}
 						placeholder={selectedItems.length ? undefined : placeholder}
-						onBlur={() => closeMenu()}
+						onFocus={(event: FocusEvent<HTMLInputElement>) => {
+							logger.debug("onFocus", event.target.value);
+							event.target.select();
+						}}
 						onKeyDown={(e) => {
 							logger.debug("keydown", e.key, highlightedIndex, filteredOptions);
 							if (e.key === Keys.ENTER) {
