@@ -1,5 +1,10 @@
+.drawer-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
 .form-drawer {
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 0rem;
 }

@@ -2,10 +2,14 @@ import clsx from "clsx";
 import {
 	type KeyboardEvent,
 	type KeyboardEventHandler,
+	type MouseEvent,
 	useEffect,
 	useId,
+	useMemo,
 	useState,
 } from "react";
+
+import { Button } from "components";
 
 import FocusLock from "react-focus-lock";
 import { handleAccessbilityError } from "utils";
@@ -59,14 +63,24 @@ export interface BaseDrawerProps
 	id?: string;
 	onBack?: () => void;
 	onClose?: () => void;
+	onCancel?: (e: MouseEvent<HTMLButtonElement>) => void;
+	onApply?: (e: MouseEvent<HTMLButtonElement>) => void;
+	disableApplyButton?: boolean;
 	closeOnScrimClick?: boolean;
 	ref?: React.Ref<HTMLDivElement>;
 	open?: boolean;
 	width?: string;
 	actions?: React.ReactNode[];
+	translations?: {
+		apply: string;
+		back: string;
+		cancel: string;
+		close: string;
+	};
 }
 
-export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
+export type DrawerProps = Omit<BaseDrawerProps, "closeOnScrimClick"> &
+	EnforcedAccessibleLabel;
 
 /**
  * The Drawer component is a panel that slides out from the edge of the screen.
@@ -90,9 +104,12 @@ export const Drawer = ({
 	title,
 	onBack,
 	onClose,
-	closeOnScrimClick = true,
+	onApply,
+	onCancel,
+	disableApplyButton = false,
 	width,
 	actions,
+	translations,
 
 	...rest
 }: DrawerProps) => {
@@ -108,17 +125,25 @@ export const Drawer = ({
 			open ? setWidthStyle(drawerOpenStyle) : setWidthStyle(drawerClosedStyle);
 		}, [open, width]);
 
+		const closeOnScrimClick = useMemo(() => {
+			return !onApply && !actions;
+		}, [actions, onApply]);
+
 		return (
 			<BasicDrawer
 				className={className}
 				onBack={onBack}
 				onClose={onClose}
+				onApply={onApply}
+				onCancel={onCancel}
+				disableApplyButton={disableApplyButton}
 				closeOnScrimClick={closeOnScrimClick}
 				open={open}
 				id={id}
 				title={title}
 				style={widthStyle}
 				actions={actions}
+				translations={translations}
 				{...rest}
 			>
 				{children}
@@ -133,11 +158,20 @@ const BasicDrawer = ({
 	id,
 	onBack,
 	onClose,
+	onCancel,
+	onApply,
+	disableApplyButton,
 	closeOnScrimClick,
 	open,
 	title,
 	style,
 	actions,
+	translations = {
+		apply: "Apply",
+		back: "Go back",
+		cancel: "Cancel",
+		close: "Close drawer",
+	},
 	...rest
 }: {
 	children?: React.ReactNode;
@@ -145,11 +179,20 @@ const BasicDrawer = ({
 	id?: string;
 	onBack?: () => void;
 	onClose?: () => void;
+	onCancel?: (e: MouseEvent<HTMLButtonElement>) => void;
+	onApply?: (e: MouseEvent<HTMLButtonElement>) => void;
+	disableApplyButton: boolean;
 	closeOnScrimClick: boolean;
 	open: boolean;
 	title?: string | JSX.Element;
 	style?: object | undefined;
 	actions?: React.ReactNode[];
+	translations?: {
+		apply: string;
+		back: string;
+		cancel: string;
+		close: string;
+	};
 }) => {
 	const onKeyDownScrimHandler: KeyboardEventHandler = (
 		e: KeyboardEvent<HTMLButtonElement>,
@@ -177,7 +220,7 @@ const BasicDrawer = ({
 									onClick={onBack}
 									variant="tertiary"
 									shape="square"
-									aria-label="back" // TODO: localize this aria-label
+									aria-label={translations?.back}
 									icon="chevron-left"
 									className="neo-drawer-icon-chevron-left"
 								/>
@@ -186,12 +229,12 @@ const BasicDrawer = ({
 						</div>
 
 						<div className="neo-drawer__header--right">
-							{onClose !== undefined && (
+							{onClose !== undefined && onCancel === undefined && (
 								<IconButton
 									onClick={onClose}
 									variant="tertiary"
 									shape="square"
-									aria-label="close" // TODO: localize this aria-label
+									aria-label={translations?.close}
 									icon="close"
 									className="neo-drawer-icon-close"
 								/>
@@ -200,6 +243,26 @@ const BasicDrawer = ({
 					</div>
 					<div className="neo-drawer__content">{children}</div>
 					{actions && <div className="neo-drawer__actions">{actions}</div>}
+					{/* The code below will render the default buttons in the footer section */}
+					{(onCancel || onApply) && (
+						<div className="neo-drawer__actions">
+							{onCancel && (
+								<Button onClick={onCancel} key="cancel-btn" variant="secondary">
+									{translations?.cancel}
+								</Button>
+							)}
+							{onApply && (
+								<Button
+									disabled={disableApplyButton}
+									onClick={onApply}
+									key="apply-btn"
+									type="submit"
+								>
+									{translations?.apply}
+								</Button>
+							)}
+						</div>
+					)}
 				</div>
 			</FocusLock>
 			{open && (
