@@ -3,11 +3,11 @@ import { type FormEvent, useState } from "react";
 
 import {
 	Button,
+	Checkbox,
 	Form,
 	IconButton,
 	Note,
 	Switch,
-	TextArea,
 	TextInput,
 } from "components";
 
@@ -26,7 +26,7 @@ const meta: Meta<typeof Drawer> = {
 };
 export default meta;
 
-export const BasicDrawer: Story = {
+export const InformativeDrawer: Story = {
 	render: () => {
 		const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
 
@@ -57,73 +57,6 @@ export const BasicDrawer: Story = {
 							next to the title or by clicking anywhere on the background scrim.
 						</p>
 					</div>
-				</Drawer>
-			</main>
-		);
-	},
-};
-
-export const ScrimOptions: Story = {
-	render: () => {
-		const [noDismissDrawerOpen, setNoDismissDrawerOpen] = useState(false);
-		const [dismissEnabledDrawerOpen, setDismissEnabledDrawerOpen] =
-			useState(false);
-
-		const toggleDrawerByName = (drawerName: string) => {
-			switch (drawerName) {
-				case "no-dismiss":
-					setNoDismissDrawerOpen(!noDismissDrawerOpen);
-					break;
-				case "dismiss-on-click":
-					setDismissEnabledDrawerOpen(!dismissEnabledDrawerOpen);
-					break;
-			}
-		};
-
-		return (
-			<main>
-				<section
-					style={{
-						display: "flex",
-						justifyContent: "space-between",
-						marginBottom: "1rem",
-					}}
-				>
-					<Button onClick={() => toggleDrawerByName("no-dismiss")}>
-						Click on Scrim dismiss disabled
-					</Button>
-
-					<Button onClick={() => toggleDrawerByName("dismiss-on-click")}>
-						Click on Scrim dismiss enabled
-					</Button>
-				</section>
-				<section>
-					<TextArea
-						helperText="Try typing here while scrim is on."
-						label="Test focus by typing here"
-						maxLength={10}
-						placeholder="Placeholder"
-						translations={{
-							over: "over",
-							remaining: "remaining",
-						}}
-					/>
-				</section>
-
-				<Drawer
-					open={noDismissDrawerOpen}
-					onClose={() => toggleDrawerByName("no-dismiss")}
-					title="Title of Drawer"
-				>
-					<p>This Drawer will not close if you click on the scrim background</p>
-				</Drawer>
-
-				<Drawer
-					open={dismissEnabledDrawerOpen}
-					onClose={() => toggleDrawerByName("dismiss-on-click")}
-					title="Title of Drawer"
-				>
-					<p>This Drawer will close when you click on the scrim background</p>
 				</Drawer>
 			</main>
 		);
@@ -272,9 +205,11 @@ export const WithForm: Story = {
 							key="user-name"
 							label="Username"
 						/>
-						<Switch required name="ToS" value="accepted">
-							Do you accept the Terms of Service?
-						</Switch>
+						<div>
+							<Checkbox required name="ToS" value="accepted">
+								Do you accept the Terms of Service?
+							</Checkbox>
+						</div>
 						<Button
 							form="the-form"
 							key="reset-btn"
