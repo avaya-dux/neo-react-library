@@ -52,14 +52,10 @@ export const BasicDrawer: Story = {
 					<div style={{ height: "100%", width: "100%" }}>
 						<p>This Drawer should only have the x close button</p>
 						<br />
-
 						<p>
 							Dismiss the Drawer by selecting the ‘Clear’ icon at the top right
 							next to the title or by clicking anywhere on the background scrim.
 						</p>
-						<br />
-
-						<p>24px padding enforced.</p>
 					</div>
 				</Drawer>
 			</main>
@@ -118,7 +114,6 @@ export const ScrimOptions: Story = {
 					open={noDismissDrawerOpen}
 					onClose={() => toggleDrawerByName("no-dismiss")}
 					title="Title of Drawer"
-					closeOnScrimClick={false}
 				>
 					<p>This Drawer will not close if you click on the scrim background</p>
 				</Drawer>
@@ -166,7 +161,6 @@ export const withDefaultButtons: Story = {
 					onApply={handleSubmit}
 					disableApplyButton={applyBtnDisabled}
 					title="Title of Drawer"
-					closeOnScrimClick={false}
 				>
 					<div className="drawer-container">
 						<Switch
@@ -238,7 +232,6 @@ export const WithForm: Story = {
 				<Drawer
 					open={formDrawerOpen}
 					title="Title of Drawer"
-					closeOnScrimClick={false}
 					// Set form attribute to the corresponding Form id
 					actions={[
 						<Button

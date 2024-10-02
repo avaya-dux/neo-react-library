@@ -5,6 +5,7 @@ import {
 	type MouseEvent,
 	useEffect,
 	useId,
+	useMemo,
 	useState,
 } from "react";
 
@@ -78,7 +79,8 @@ export interface BaseDrawerProps
 	};
 }
 
-export type DrawerProps = BaseDrawerProps & EnforcedAccessibleLabel;
+export type DrawerProps = Omit<BaseDrawerProps, "closeOnScrimClick"> &
+	EnforcedAccessibleLabel;
 
 /**
  * The Drawer component is a panel that slides out from the edge of the screen.
@@ -105,7 +107,6 @@ export const Drawer = ({
 	onApply,
 	onCancel,
 	disableApplyButton = false,
-	closeOnScrimClick = true,
 	width,
 	actions,
 	translations = {
@@ -128,6 +129,10 @@ export const Drawer = ({
 
 			open ? setWidthStyle(drawerOpenStyle) : setWidthStyle(drawerClosedStyle);
 		}, [open, width]);
+
+		const closeOnScrimClick = useMemo(() => {
+			return !onApply && !actions;
+		}, [actions, onApply]);
 
 		return (
 			<BasicDrawer
