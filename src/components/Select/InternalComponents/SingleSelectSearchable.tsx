@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
-import { useContext, type FocusEvent } from "react";
+import { type FocusEvent, useContext } from "react";
 
 import { Keys } from "utils";
 
