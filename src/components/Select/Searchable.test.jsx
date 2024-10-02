@@ -122,6 +122,9 @@ describe("Select", () => {
 			// typing in banana without pressing escape
 			await user.keyboard("banana{Escape}");
 			expect(inputbox).toHaveValue("Apple");
+			// showing all options
+			await user.keyboard("{ArrowDown}");
+			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 		});
 
 		it("passes basic axe compliance", async () => {
@@ -273,6 +276,9 @@ describe("Select", () => {
 			// escape should return to second option
 			await user.keyboard("somethingelse{Escape}");
 			expect(screen.getAllByRole("textbox")[0]).toHaveValue(secondOptionText);
+			// showing all options
+			await user.keyboard(UserEventKeys.DOWN);
+			expect(screen.getAllByRole("option")).toHaveLength(fruitOptions.length);
 		});
 
 		it("`MultiSelectSearchable` allows a user to create and remove custom options if `creatable` prop is set", async () => {

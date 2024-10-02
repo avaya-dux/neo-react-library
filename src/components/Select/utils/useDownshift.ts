@@ -52,6 +52,7 @@ const DownshiftWithComboboxProps = (
 						isOpen,
 					};
 				case useCombobox.stateChangeTypes.InputKeyDownEscape:
+					setFilteredOptions([...options]);
 					return {
 						...changes,
 						inputValue: changes.selectedItem
