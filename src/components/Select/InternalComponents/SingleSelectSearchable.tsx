@@ -65,10 +65,6 @@ export const SingleSelectSearchable = () => {
 					"neo-multiselect-combo__header",
 					isOpen && "neo-multiselect-combo__header--expanded",
 				)}
-				onBlur={() => {
-					logger.debug("onBlur");
-					closeMenu();
-				}}
 			>
 				<span className="neo-multiselect__padded-container">
 					<input
