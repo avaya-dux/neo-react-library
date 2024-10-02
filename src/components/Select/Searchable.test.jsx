@@ -65,7 +65,7 @@ describe("Select", () => {
 			expect(searchableElement).toHaveAttribute("aria-expanded", "false");
 		});
 
-		it("clears content before input box where there is input from user", async () => {
+		it("handles keyboard input", async () => {
 			const { container } = renderResult;
 			const inputbox = container.querySelector(
 				"span.neo-multiselect-combo__header input:first-child",
@@ -90,6 +90,38 @@ describe("Select", () => {
 			// typing in banana without pressing enter
 			await user.keyboard("banana");
 			expect(inputbox).toHaveValue("banana");
+
+			await user.keyboard("{Enter}");
+			expect(inputbox).toHaveValue("Banana");
+
+			await user.tab();
+			expect(inputbox).not.toHaveFocus();
+			// shift tab back
+			await user.keyboard("{Shift}{Tab}");
+			expect(inputbox).toHaveFocus();
+
+			await user.keyboard("xyz{Enter}");
+			expect(inputbox).toHaveValue("");
+		});
+
+		it("handles escape", async () => {
+			const { container } = renderResult;
+			const inputbox = container.querySelector(
+				"span.neo-multiselect-combo__header input:first-child",
+			);
+			await user.tab();
+			expect(inputbox).toHaveFocus();
+			// empty input should not select any option
+			await user.keyboard("{Enter}");
+			expect(inputbox).toHaveValue("");
+
+			// typing in apple and pressing enter
+			await user.keyboard("apple{Enter}");
+			expect(inputbox).toHaveValue("Apple");
+
+			// typing in banana without pressing escape
+			await user.keyboard("banana{Escape}");
+			expect(inputbox).toHaveValue("Apple");
 		});
 
 		it("passes basic axe compliance", async () => {
@@ -236,6 +268,10 @@ describe("Select", () => {
 			await user.keyboard(UserEventKeys.DOWN);
 			await user.keyboard(UserEventKeys.ENTER);
 
+			expect(screen.getAllByRole("textbox")[0]).toHaveValue(secondOptionText);
+
+			// escape should return to second option
+			await user.keyboard("somethingelse{Escape}");
 			expect(screen.getAllByRole("textbox")[0]).toHaveValue(secondOptionText);
 		});
 

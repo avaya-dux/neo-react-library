@@ -1,11 +1,16 @@
 import { useCombobox, useSelect } from "downshift";
 import log from "loglevel";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import {
+	type Dispatch,
+	type SetStateAction,
+	useCallback,
+	useState,
+} from "react";
 
 import type { SelectOptionProps } from "./SelectTypes";
 
 const logger = log.getLogger("use-downshfit");
-logger.enableAll();
+logger.disableAll();
 
 const createOptionValue = "neo-select-create-option";
 
@@ -22,6 +27,11 @@ const DownshiftWithComboboxProps = (
 	createMessage: string,
 ) => {
 	const [inputText, setInputText] = useState("");
+	const itemToString = useCallback(
+		(item: SelectOptionProps | null) =>
+			(item?.created ? item.value : item?.children) || "",
+		[],
+	);
 
 	return useCombobox({
 		items: filteredOptions,
@@ -41,30 +51,14 @@ const DownshiftWithComboboxProps = (
 						highlightedIndex,
 						isOpen,
 					};
-				// case useCombobox.stateChangeTypes.InputKeyDownEnter:
-				// case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-				// 	logger.debug({
-				// 		location: "InputKeyDownArrowDown",
-				// 		changes,
-				// 	});
-				// 	if (
-				// 		changes.inputValue?.toLocaleLowerCase ===
-				// 		changes.selectedItem?.value?.toLocaleLowerCase
-				// 	) {
-				// 		logger.debug(
-				// 			"inputValue === selectedItem.value, resetting filter options",
-				// 		);
-				// 		setFilteredOptions([...options]);
-				// 		return {
-				// 			...changes,
-				// 			highlightedIndex,
-				// 			isOpen,
-				// 		};
-				// 	}
-				// 	return {
-				// 		...changes,
-				// 		isOpen,
-				// 	};
+				case useCombobox.stateChangeTypes.InputKeyDownEscape:
+					return {
+						...changes,
+						inputValue: changes.selectedItem
+							? itemToString(changes.selectedItem)
+							: "",
+						isOpen,
+					};
 				case useCombobox.stateChangeTypes.InputFocus:
 					logger.debug({ location: "InputFocus", changes });
 					return {
@@ -143,7 +137,7 @@ const DownshiftWithComboboxProps = (
 			});
 			setFilteredOptions([...options]);
 		},
-		itemToString: (item) => (item?.created ? item.value : item?.children) || "",
+		itemToString,
 		// BUG: items are not announced in screen reader when selected
 	});
 };

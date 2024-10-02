@@ -26,6 +26,7 @@ export type SelectContextProps = {
 	optionProps: {
 		multiple: boolean;
 		collapse: boolean;
+		creatable: boolean;
 		noOptionsMessage: string;
 		options: SelectOptionProps[];
 		selectedItems: SelectOptionProps[];
@@ -48,6 +49,7 @@ export const SelectContext = createContext<SelectContextProps>({
 	optionProps: {
 		multiple: false,
 		collapse: false,
+		creatable: false,
 		noOptionsMessage: "",
 		options: [],
 		selectedItems: [],

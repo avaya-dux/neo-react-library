@@ -10,12 +10,12 @@ import type { SelectOptionProps } from "../utils/SelectTypes";
 import { OptionsWithEmptyMessageFallback } from "./OptionsWithEmptyMessageFallback";
 
 const logger = log.getLogger("single-select-searchable");
-logger.enableAll();
+logger.disableAll();
 
 export const SingleSelectSearchable = () => {
 	const {
 		downshiftProps,
-		optionProps: { selectedItems },
+		optionProps: { selectedItems, creatable },
 		selectProps: {
 			ariaLabel,
 			disabled,
@@ -46,6 +46,7 @@ export const SingleSelectSearchable = () => {
 		value: restInputProps.value,
 		inputValue,
 		selected: selectedItems[0]?.children,
+		creatable,
 	});
 	return (
 		<div
@@ -92,6 +93,8 @@ export const SingleSelectSearchable = () => {
 									});
 									if (firstEnableOption && inputValue) {
 										selectItem(firstEnableOption);
+									} else if (inputValue) {
+										reset();
 									}
 								}
 								closeMenu();
