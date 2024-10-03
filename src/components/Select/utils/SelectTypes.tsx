@@ -9,6 +9,7 @@ export interface SelectOptionProps {
 	searchText?: string;
 	selected?: boolean;
 	value?: string;
+	created?: boolean;
 }
 
 type LabelOrAriaLabelProps =

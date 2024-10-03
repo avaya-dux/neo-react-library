@@ -1,6 +1,11 @@
 import { useCombobox, useSelect } from "downshift";
 import log from "loglevel";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import {
+	type Dispatch,
+	type SetStateAction,
+	useCallback,
+	useState,
+} from "react";
 
 import type { SelectOptionProps } from "./SelectTypes";
 
@@ -22,6 +27,11 @@ const DownshiftWithComboboxProps = (
 	createMessage: string,
 ) => {
 	const [inputText, setInputText] = useState("");
+	const itemToString = useCallback(
+		(item: SelectOptionProps | null) =>
+			(item?.created ? item.value : item?.children) || "",
+		[],
+	);
 
 	return useCombobox({
 		items: filteredOptions,
@@ -29,24 +39,52 @@ const DownshiftWithComboboxProps = (
 		stateReducer: (_, actionAndChanges) => {
 			const { changes, type } = actionAndChanges;
 			const isOpen = changes.isOpen ? !(disabled || loading) : false;
+			const highlightedIndex = changes.selectedItem
+				? options.indexOf(changes.selectedItem)
+				: -1;
 			logger.debug({ isOpen, type, changes });
 			switch (type) {
 				case useCombobox.stateChangeTypes.ToggleButtonClick:
+					setFilteredOptions([...options]);
 					return {
 						...changes,
+						highlightedIndex,
+						isOpen,
+					};
+				case useCombobox.stateChangeTypes.InputKeyDownEscape:
+					setFilteredOptions([...options]);
+					return {
+						...changes,
+						inputValue: changes.selectedItem
+							? itemToString(changes.selectedItem)
+							: "",
 						isOpen,
 					};
 				case useCombobox.stateChangeTypes.InputFocus:
+					logger.debug({ location: "InputFocus", changes });
 					return {
 						...changes,
 						isOpen: false,
 					};
-
 				default:
 					return changes;
 			}
 		},
-		onInputValueChange: ({ inputValue }) => {
+		onInputValueChange: ({ inputValue, selectedItem }) => {
+			logger.debug({
+				location: "onInputValueChange",
+				inputValue,
+				selectedItem,
+				filteredOptions,
+			});
+			// if this is called after select item, we do nothing
+			if (
+				selectedItem?.value?.toLocaleLowerCase() ===
+				inputValue?.toLocaleLowerCase()
+			) {
+				logger.debug("inputValue === selectedItem.value, do nothing");
+				return;
+			}
 			const trimmedValue = inputValue?.trim();
 			if (trimmedValue) {
 				const relatedOptions = options.filter((child) => {
@@ -60,7 +98,8 @@ const DownshiftWithComboboxProps = (
 				if (relatedOptions.length === 0 && creatable) {
 					const createdItem: SelectOptionProps = {
 						children: `${createMessage} '${trimmedValue}'`,
-						value: createOptionValue,
+						value: trimmedValue,
+						created: true,
 					};
 					setFilteredOptions([createdItem]);
 				} else {
@@ -73,12 +112,18 @@ const DownshiftWithComboboxProps = (
 			setInputText(trimmedValue || "");
 		},
 		onSelectedItemChange: ({ selectedItem: clickedItem }) => {
+			logger.debug({
+				location: "onSelectedItemChange",
+				clickedItem,
+				selectedItems,
+			});
 			if (!clickedItem) {
 				setSelectedItems([]);
-			} else if (creatable && clickedItem.value === createOptionValue) {
+			} else if (creatable && clickedItem.created) {
 				const createdItem: SelectOptionProps = {
 					children: inputText,
 					value: inputText,
+					created: true,
 				};
 				setSelectedItems([createdItem]);
 			} else if (
@@ -87,7 +132,13 @@ const DownshiftWithComboboxProps = (
 			) {
 				setSelectedItems([clickedItem]);
 			}
+			logger.debug({
+				location: "onSelectedItemChange",
+				action: "reset filters",
+			});
+			setFilteredOptions([...options]);
 		},
+		itemToString,
 		// BUG: items are not announced in screen reader when selected
 	});
 };

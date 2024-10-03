@@ -22,7 +22,6 @@ export const TableFilterDrawer = forwardRef(
 			disableApply = false,
 			handleApply,
 			handleCancel,
-			closeOnScrimClick = false,
 			open = false,
 			title,
 			translations,
@@ -61,7 +60,6 @@ export const TableFilterDrawer = forwardRef(
 				id={id}
 				aria-label={ariaLabel}
 				onBack={onBack}
-				closeOnScrimClick={closeOnScrimClick}
 				open={open}
 				title={title}
 				actions={actionButtons}
