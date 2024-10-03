@@ -194,6 +194,7 @@ export const Select = (props: SelectProps) => {
 		optionProps: {
 			multiple,
 			collapse,
+			creatable,
 			noOptionsMessage,
 			options,
 			selectedItems,

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
-import { useContext, useEffect } from "react";
+import { type FocusEvent, useContext } from "react";
 
 import { Keys } from "utils";
 
@@ -15,7 +15,7 @@ logger.disableAll();
 export const SingleSelectSearchable = () => {
 	const {
 		downshiftProps,
-		optionProps: { selectedItems },
+		optionProps: { selectedItems, creatable },
 		selectProps: {
 			ariaLabel,
 			disabled,
@@ -37,22 +37,17 @@ export const SingleSelectSearchable = () => {
 		isOpen,
 		reset,
 		selectItem,
-		setInputValue,
+		highlightedIndex,
 	} = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
-
-	logger.debug(selectedItems[0]);
-
 	const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
 		getToggleButtonProps();
-	const { id, onKeyDown, ...restInputProps } = getInputProps();
-
-	// clear the search when dropdown closes (when the user selects an item or clicks away)
-	useEffect(() => {
-		if (isOpen === false) {
-			setInputValue("");
-		}
-	}, [isOpen, setInputValue]);
-
+	const { id, onKeyDown, ref, ...restInputProps } = getInputProps();
+	logger.debug({
+		value: restInputProps.value,
+		inputValue,
+		selected: selectedItems[0]?.children,
+		creatable,
+	});
 	return (
 		<div
 			aria-describedby={helperText && helperId}
@@ -74,17 +69,37 @@ export const SingleSelectSearchable = () => {
 				<span className="neo-multiselect__padded-container">
 					<input
 						{...restInputProps}
+						ref={ref}
 						className="neo-input"
 						disabled={disabled}
 						placeholder={selectedItems.length ? undefined : placeholder}
+						onFocus={(event: FocusEvent<HTMLInputElement>) => {
+							logger.debug("onFocus", event.target.value);
+							event.target.select();
+						}}
 						onKeyDown={(e) => {
-							if (
-								e.key === Keys.ENTER &&
-								filteredOptions.length === 1 &&
-								!filteredOptions[0].disabled
-							) {
+							logger.debug("keydown", e.key, highlightedIndex, filteredOptions);
+							if (e.key === Keys.ENTER) {
 								e.preventDefault();
-								selectItem(filteredOptions[0]);
+
+								if (highlightedIndex > -1) {
+									selectItem(filteredOptions[highlightedIndex]);
+								} else {
+									const firstEnableOption = filteredOptions.find((option) => {
+										const childSearchText =
+											option.searchText || option.children;
+
+										const matches = childSearchText
+											.toLowerCase()
+											.includes(inputValue.toLowerCase());
+										return !option.disabled && matches;
+									});
+									if (firstEnableOption && inputValue) {
+										selectItem(firstEnableOption);
+									} else if (inputValue) {
+										reset();
+									}
+								}
 								closeMenu();
 							} else if (e.key === Keys.BACKSPACE && inputValue.length === 0) {
 								reset();
@@ -93,9 +108,6 @@ export const SingleSelectSearchable = () => {
 							onKeyDown(e);
 						}}
 					/>
-
-					{selectedItems[0]?.children}
-
 					<input
 						className="neo-display-none"
 						id={id}
