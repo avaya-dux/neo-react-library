@@ -193,14 +193,6 @@ span.neo-multiselect-combo__header .neo-multiselect__padded-container {
 	cursor: not-allowed !important;
 }
 
-.neo-multiselect
-	.neo-multiselect-combo__header
-	.neo-multiselect__padded-container.highlighted:not(
-		:has(.neo-multiselect-combo__buttons-container)
-	) {
-	/* background-color: #accef7; */
-}
-
 /* internal select option highlight styles */
 .neo-multiselect__content
 	.neo-input-group
