@@ -22,7 +22,7 @@ import {
 } from "components";
 import { Button } from "components/Button";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Column, Row } from "react-table";
+import type { Column, Row, TableInstance } from "react-table";
 import { useDebouncedCallback } from "use-debounce";
 import type { IconNamesType } from "utils";
 
@@ -863,6 +863,18 @@ export const CustomBasicTableFilterDrawer = () => {
 	const closeFilterDrawer = () => {
 		setOpenColumnsFilterDrawer(false);
 	};
+
+	const [filtersToApply, setFiltersToApply] = useState([]);
+
+	const handleApply = () => {
+		const theFilters = [
+			{ id: "name", value: "Williams" },
+			{ id: "other", value: "Lorem" },
+		];
+		setFiltersToApply(theFilters);
+		closeFilterDrawer();
+	};
+
 	return (
 		<>
 			<Table
@@ -870,15 +882,16 @@ export const CustomBasicTableFilterDrawer = () => {
 				handleShowColumnsFilter={handleShowColumnsFilter}
 				allowToggleColumnVisibility
 				data={[...FilledFields.data]}
+				allFilters={filtersToApply}
 			/>
 			<TableFilterDrawer
 				title="Custom Table Filter Drawer"
 				open={openColumnsFilterDrawer}
 				handleCancel={closeFilterDrawer}
+				handleApply={handleApply}
 			>
-				<p>Custom content goes here</p>
-				<br />
-				<p> 'Cancel' and 'Apply' buttons are built-in</p>
+				<TextInput clearable label="Name" type="text" />
+				<TextInput clearable label="Goals" type="text" />
 			</TableFilterDrawer>
 		</>
 	);

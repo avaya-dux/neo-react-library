@@ -114,6 +114,7 @@ export const Table = <T extends Record<string, any>>({
 	handleShowColumnsFilter,
 	handleRowToggled,
 	handlePageChange = () => null,
+	allFilters = [],
 	readonly = false,
 	rowHeight = "large",
 	selectableRows = "none",
@@ -202,7 +203,13 @@ export const Table = <T extends Record<string, any>>({
 		prepareRow,
 		pageCount,
 		toggleAllRowsSelected,
+		setAllFilters,
 	} = instance;
+
+	useEffect(() => {
+		console.log(allFilters);
+		setAllFilters(allFilters);
+	}, [allFilters, setAllFilters]);
 
 	const handleSearchWrapper = useMemo(() => {
 		if (handleSearch) {
