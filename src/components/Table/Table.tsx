@@ -207,7 +207,8 @@ export const Table = <T extends Record<string, any>>({
 	} = instance;
 
 	useEffect(() => {
-		console.log(allFilters);
+		console.log("ping");
+
 		setAllFilters(allFilters);
 	}, [allFilters, setAllFilters]);
 

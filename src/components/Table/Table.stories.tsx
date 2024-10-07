@@ -22,7 +22,7 @@ import {
 } from "components";
 import { Button } from "components/Button";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Column, Row, TableInstance } from "react-table";
+import type { Column, Row } from "react-table";
 import { useDebouncedCallback } from "use-debounce";
 import type { IconNamesType } from "utils";
 
@@ -864,12 +864,14 @@ export const CustomBasicTableFilterDrawer = () => {
 		setOpenColumnsFilterDrawer(false);
 	};
 
-	const [filtersToApply, setFiltersToApply] = useState([]);
+	type ColumnFilter = {id: string | null , value: string | number | null };
+
+	const [filtersToApply, setFiltersToApply] = useState<ColumnFilter[]>([]);
 
 	const handleApply = () => {
 		const theFilters = [
 			{ id: "name", value: "Williams" },
-			{ id: "other", value: "Lorem" },
+			// { id: "other", value: "Lorem" },
 		];
 		setFiltersToApply(theFilters);
 		closeFilterDrawer();
@@ -883,6 +885,9 @@ export const CustomBasicTableFilterDrawer = () => {
 				allowToggleColumnVisibility
 				data={[...FilledFields.data]}
 				allFilters={filtersToApply}
+				// manualColumnFilters
+				// manualFilters
+				// manualGlobalFilter
 			/>
 			<TableFilterDrawer
 				title="Custom Table Filter Drawer"
