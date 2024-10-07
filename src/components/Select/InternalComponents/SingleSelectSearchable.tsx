@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
-import { type FocusEvent, useContext } from "react";
+import { type FocusEvent, useContext, useEffect } from "react";
 
 import { Keys } from "utils";
 
@@ -38,16 +38,27 @@ export const SingleSelectSearchable = () => {
 		reset,
 		selectItem,
 		highlightedIndex,
+		setInputValue,
 	} = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
 	const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
 		getToggleButtonProps();
 	const { id, onKeyDown, ref, ...restInputProps } = getInputProps();
+
 	logger.debug({
 		value: restInputProps.value,
 		inputValue,
 		selected: selectedItems[0]?.children,
 		creatable,
 	});
+
+	useEffect(() => {
+		const initValue = selectedItems[0]?.children;
+		if (initValue) {
+			logger.debug("isOpen", initValue);
+			setInputValue(initValue);
+		}
+	}, [selectedItems[0]?.children, setInputValue]);
+
 	return (
 		<div
 			aria-describedby={helperText && helperId}
