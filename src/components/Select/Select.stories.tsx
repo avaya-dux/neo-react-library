@@ -240,7 +240,7 @@ export const Localized = () => {
 };
 
 export const Searchable = () => {
-	const [favFood, setFavFood] = useState("");
+	const [favFood, setFavFood] = useState("apple");
 	const [foods, setFoods] = useState<string[]>([]);
 
 	return (
@@ -250,7 +250,7 @@ export const Searchable = () => {
 				label="Select a favorite food"
 				placeholder="Click to open"
 				searchable
-				value={"apple"}
+				value={favFood}
 				onChange={(value) => {
 					setFavFood(value as string);
 				}}
