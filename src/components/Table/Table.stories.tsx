@@ -864,16 +864,28 @@ export const CustomBasicTableFilterDrawer = () => {
 		setOpenColumnsFilterDrawer(false);
 	};
 
-	type ColumnFilter = {id: string | null , value: string | number | null };
-
+	type ColumnFilter = { id: string | null; value: string | number | null };
 	const [filtersToApply, setFiltersToApply] = useState<ColumnFilter[]>([]);
 
+	const [nameFilter, setNameFilter] = useState<string | null>(null);
+	const [otherFilter, setOtherFilter] = useState<string | null>(null);
+
 	const handleApply = () => {
-		const theFilters = [
-			{ id: "name", value: "Williams" },
-			// { id: "other", value: "Lorem" },
+		const filters: ColumnFilter[] = [
+			{
+				id: "name",
+				value: nameFilter || null,
+			},
+			{
+				id: "other",
+				value: otherFilter || null,
+			},
 		];
-		setFiltersToApply(theFilters);
+		setFiltersToApply(filters);
+
+		// const theFilters = [{ id: "name", value: "Williams" }];
+		// setFiltersToApply(theFilters);
+
 		closeFilterDrawer();
 	};
 
@@ -885,18 +897,27 @@ export const CustomBasicTableFilterDrawer = () => {
 				allowToggleColumnVisibility
 				data={[...FilledFields.data]}
 				allFilters={filtersToApply}
-				// manualColumnFilters
-				// manualFilters
-				// manualGlobalFilter
 			/>
+
 			<TableFilterDrawer
 				title="Custom Table Filter Drawer"
 				open={openColumnsFilterDrawer}
 				handleCancel={closeFilterDrawer}
 				handleApply={handleApply}
 			>
-				<TextInput clearable label="Name" type="text" />
-				<TextInput clearable label="Goals" type="text" />
+				<TextInput
+					clearable
+					label="Name"
+					type="text"
+					onChange={(e) => setNameFilter(e.currentTarget.value)}
+				/>
+
+				<TextInput
+					clearable
+					label="Other"
+					type="text"
+					onChange={(e) => setOtherFilter(e.currentTarget.value)}
+				/>
 			</TableFilterDrawer>
 		</>
 	);
