@@ -21,6 +21,12 @@ const meta: Meta<typeof Pagination> = {
 		// don't show the id prop
 		id: { table: { disable: true } },
 
+		backIconButtonText: { table: { category: "translations" } },
+		nextIconButtonText: { table: { category: "translations" } },
+		pagesText: { table: { category: "translations" } },
+		goToPageText: { table: { category: "translations" } },
+		itemsPerPageLabel: { table: { category: "translations" } },
+
 		// don't show JS/React specific props
 		onPageChange: { table: { disable: true } },
 		onItemsPerPageChange: { table: { disable: true } },
@@ -28,13 +34,6 @@ const meta: Meta<typeof Pagination> = {
 		leftNode: { table: { disable: true } },
 		centerNode: { table: { disable: true } },
 		rightNode: { table: { disable: true } },
-
-		// don't show translations
-		backIconButtonText: { table: { disable: true } },
-		nextIconButtonText: { table: { disable: true } },
-		pagesText: { table: { disable: true } },
-		goToPageText: { table: { disable: true } },
-		itemsPerPageLabel: { table: { disable: true } },
 	},
 };
 export default meta;
