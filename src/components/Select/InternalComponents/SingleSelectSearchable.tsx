@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
-import { type FocusEvent, useContext, useEffect } from "react";
+import { type FocusEvent, useContext, useEffect, useMemo } from "react";
 
 import { Keys } from "utils";
 
@@ -44,20 +44,21 @@ export const SingleSelectSearchable = () => {
 		getToggleButtonProps();
 	const { id, onKeyDown, ref, ...restInputProps } = getInputProps();
 
+	const selectedAsInputValue = useMemo(
+		() => selectedItems[0]?.children ?? "",
+		[selectedItems],
+	);
+
 	logger.debug({
 		value: restInputProps.value,
 		inputValue,
-		selected: selectedItems[0]?.children,
+		selected: selectedAsInputValue,
 		creatable,
 	});
 
 	useEffect(() => {
-		const initValue = selectedItems[0]?.children;
-		if (initValue) {
-			logger.debug("isOpen", initValue);
-			setInputValue(initValue);
-		}
-	}, [selectedItems[0]?.children, setInputValue]);
+		setInputValue(selectedAsInputValue);
+	}, [selectedAsInputValue, setInputValue]);
 
 	return (
 		<div
@@ -124,7 +125,7 @@ export const SingleSelectSearchable = () => {
 						id={id}
 						readOnly
 						tabIndex={-1}
-						value={selectedItems[0]?.value || ""}
+						value={selectedAsInputValue}
 					/>
 				</span>
 			</span>
