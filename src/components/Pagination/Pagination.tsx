@@ -43,7 +43,6 @@ export const Pagination = ({
 	currentPageIndex,
 	itemCount,
 	itemsPerPage,
-	itemsPerPageLabel,
 	itemsPerPageOptions = [20, 50, 100],
 
 	alwaysShowPagination,
@@ -58,6 +57,7 @@ export const Pagination = ({
 	nextIconButtonText = "next",
 	pagesText = "pages",
 	goToPageText = "Go to page",
+	itemsPerPageLabel = "Rows",
 
 	// default overrides
 	centerNode,
