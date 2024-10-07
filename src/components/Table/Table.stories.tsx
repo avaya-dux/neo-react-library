@@ -864,7 +864,7 @@ export const CustomBasicTableFilterDrawer = () => {
 		setOpenColumnsFilterDrawer(false);
 	};
 
-	type ColumnFilter = { id: string | null; value: string | number | null };
+	type ColumnFilter = { id: string | null, value: string | number | null };
 	const [filtersToApply, setFiltersToApply] = useState<ColumnFilter[]>([]);
 
 	const [nameFilter, setNameFilter] = useState<string | null>(null);
