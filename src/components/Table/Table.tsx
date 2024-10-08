@@ -206,11 +206,12 @@ export const Table = <T extends Record<string, any>>({
 		setAllFilters,
 	} = instance;
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: setAllFilters and filters don't need to be checked for perf reasons.
 	useEffect(() => {
 		logger.info(allFilters, filters);
 
 		setAllFilters(allFilters);
-	},[allFilters]);
+	}, [allFilters]);
 
 	const handleSearchWrapper = useMemo(() => {
 		if (handleSearch) {

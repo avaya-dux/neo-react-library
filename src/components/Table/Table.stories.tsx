@@ -882,10 +882,6 @@ export const CustomBasicTableFilterDrawer = () => {
 			},
 		];
 		setFiltersToApply(filters);
-
-		// const theFilters = [{ id: "name", value: "Williams" }];
-		// setFiltersToApply(theFilters);
-
 		closeFilterDrawer();
 	};
 
