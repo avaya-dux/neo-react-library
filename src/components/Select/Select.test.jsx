@@ -519,6 +519,16 @@ describe("Select", () => {
 				const results = await axe(container);
 				expect(results).toHaveNoViolations();
 			});
+
+			it("correctly sets the default value", () => {
+				const { container } = renderResult;
+
+				// only single searchable select has the padded-container class
+				const input = container.querySelector(
+					"span.neo-multiselect__padded-container input",
+				);
+				expect(input).toHaveValue("Craneberry");
+			});
 		});
 
 		describe("Required In Form", () => {

@@ -240,7 +240,7 @@ export const Localized = () => {
 };
 
 export const Searchable = () => {
-	const [favFood, setFavFood] = useState("");
+	const [favFood, setFavFood] = useState("apple");
 	const [foods, setFoods] = useState<string[]>([]);
 
 	return (
@@ -250,6 +250,7 @@ export const Searchable = () => {
 				label="Select a favorite food"
 				placeholder="Click to open"
 				searchable
+				value={favFood}
 				onChange={(value) => {
 					setFavFood(value as string);
 				}}
@@ -355,6 +356,12 @@ export const DefaultValues = () => (
 			defaultValue={fruitOptions[2].props.value}
 		>
 			{fruitOptions}
+		</Select>
+
+		<Select value={"C"} label="Select Fruit" searchable>
+			<SelectOption value="A">Apple</SelectOption>
+			<SelectOption value="B">Banana</SelectOption>
+			<SelectOption value="C">Craneberry</SelectOption>
 		</Select>
 	</section>
 );
