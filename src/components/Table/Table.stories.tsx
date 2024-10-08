@@ -895,7 +895,7 @@ export const CustomBasicTableFilterDrawer = () => {
 				columns={FilledFields.columns}
 				handleShowColumnsFilter={handleShowColumnsFilter}
 				allowToggleColumnVisibility
-				data={[...FilledFields.data]}
+				data={FilledFields.data}
 				allFilters={filtersToApply}
 			/>
 

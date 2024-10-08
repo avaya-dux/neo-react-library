@@ -197,7 +197,7 @@ export const Table = <T extends Record<string, any>>({
 	const {
 		rows,
 		getTableProps,
-		state: { pageIndex, pageSize },
+		state: { pageIndex, pageSize, filters },
 		gotoPage,
 		setPageSize,
 		prepareRow,
@@ -206,11 +206,12 @@ export const Table = <T extends Record<string, any>>({
 		setAllFilters,
 	} = instance;
 
+	console.log(allFilters, filters);
 	useEffect(() => {
-		console.log("ping");
+		console.log(allFilters);
 
 		setAllFilters(allFilters);
-	}, [allFilters, setAllFilters]);
+	},[allFilters]);
 
 	const handleSearchWrapper = useMemo(() => {
 		if (handleSearch) {
