@@ -41,7 +41,7 @@ const logger = log.getLogger("TableStories");
 logger.disableAll();
 
 import "./TableStories_shim.css";
-import type { SortType } from "./types";
+import type { ColumnFilter, SortType } from "./types";
 
 export default {
 	title: "Components/Table",
@@ -864,7 +864,6 @@ export const CustomBasicTableFilterDrawer = () => {
 		setOpenColumnsFilterDrawer(false);
 	};
 
-	type ColumnFilter = { id: string | null, value: string | number | null };
 	const [filtersToApply, setFiltersToApply] = useState<ColumnFilter[]>([]);
 
 	const [nameFilter, setNameFilter] = useState<string | null>(null);

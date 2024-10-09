@@ -210,6 +210,7 @@ export const Table = <T extends Record<string, any>>({
 	useEffect(() => {
 		logger.info(allFilters, filters);
 
+		// @ts-expect-error
 		setAllFilters(allFilters);
 	}, [allFilters]);
 
