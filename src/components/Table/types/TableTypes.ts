@@ -75,32 +75,35 @@ export interface IFilterContext<T extends AnyRecord = AnyRecord> {
 export type RowHeight = "compact" | "medium" | "large";
 export type SortType = "asc" | "desc" | "unsorted";
 
+// biome-ignore lint/suspicious/noExplicitAny: value should be any
+export type ColumnFilter = { id: string | null; value: any };
+
 export type TableProps<T extends AnyRecord> = {
-		caption?: string;
-		id?: string;
-		manualPagination?: boolean;
-		manualRowCount?: number;
-		manualColumnFilters?: boolean;
-		manualSortBy?: boolean;
-		onManualSortBy?: (columnId: string, sortType: SortType) => void;
-		showPagination?: boolean;
-		pushPaginationDown?: boolean;
-		draggableRows?: boolean;
-		handlePageChange?: (pageIndex: number, pageSize: number) => void;
-		allFilters?: any[];
-		itemsPerPageOptions?: number[];
-		initialStatePageIndex?: number;
-		initialStatePageSize?: number;
-		defaultSelectedRowIds?: string[];
-		showRowSeparator?: boolean;
-		showRowSelectionHelper?: boolean;
-		summary?: string;
-		containerClassName?: string;
-		translations?: ITableTranslations;
-	} & ToolbarSharedProps<T> &
-		TableOptions<T> &
-		Pick<TableColumnFilterProps, "onApplyFilterValue" | "onCancelFilterValue"> &
-		Pick<TableBodyProps<T>, "handleRowToggled"> &
-		Partial<
-			Pick<IFilterContext, "allowToggleColumnVisibility" | "renderInsetTable">
-		>;
+	caption?: string;
+	id?: string;
+	manualPagination?: boolean;
+	manualRowCount?: number;
+	manualColumnFilters?: boolean;
+	manualSortBy?: boolean;
+	onManualSortBy?: (columnId: string, sortType: SortType) => void;
+	showPagination?: boolean;
+	pushPaginationDown?: boolean;
+	draggableRows?: boolean;
+	handlePageChange?: (pageIndex: number, pageSize: number) => void;
+	allFilters?: ColumnFilter[];
+	itemsPerPageOptions?: number[];
+	initialStatePageIndex?: number;
+	initialStatePageSize?: number;
+	defaultSelectedRowIds?: string[];
+	showRowSeparator?: boolean;
+	showRowSelectionHelper?: boolean;
+	summary?: string;
+	containerClassName?: string;
+	translations?: ITableTranslations;
+} & ToolbarSharedProps<T> &
+	TableOptions<T> &
+	Pick<TableColumnFilterProps, "onApplyFilterValue" | "onCancelFilterValue"> &
+	Pick<TableBodyProps<T>, "handleRowToggled"> &
+	Partial<
+		Pick<IFilterContext, "allowToggleColumnVisibility" | "renderInsetTable">
+	>;
