@@ -210,8 +210,10 @@ export const Table = <T extends Record<string, any>>({
 	useEffect(() => {
 		logger.info(allFilters, filters);
 
-		// @ts-expect-error
-		setAllFilters(allFilters);
+		if (allFilters.length > 0) {
+			// @ts-expect-error
+			setAllFilters(allFilters);
+		}
 	}, [allFilters]);
 
 	const handleSearchWrapper = useMemo(() => {
