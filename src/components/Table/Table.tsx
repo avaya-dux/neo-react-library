@@ -211,7 +211,6 @@ export const Table = <T extends Record<string, any>>({
 		logger.info(allFilters, filters);
 
 		if (allFilters.length > 0) {
-			// @ts-expect-error
 			setAllFilters(allFilters);
 		}
 	}, [allFilters]);
