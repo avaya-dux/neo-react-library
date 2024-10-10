@@ -76,7 +76,7 @@ export type RowHeight = "compact" | "medium" | "large";
 export type SortType = "asc" | "desc" | "unsorted";
 
 // biome-ignore lint/suspicious/noExplicitAny: value should be any
-export type ColumnFilter = { id: string | null; value: any };
+export type ColumnFilter = { id: string; value: any };
 
 export type TableProps<T extends AnyRecord> = {
 	caption?: string;
