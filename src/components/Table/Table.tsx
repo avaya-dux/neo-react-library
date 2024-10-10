@@ -114,6 +114,7 @@ export const Table = <T extends Record<string, any>>({
 	handleShowColumnsFilter,
 	handleRowToggled,
 	handlePageChange = () => null,
+	allFilters = [],
 	readonly = false,
 	rowHeight = "large",
 	selectableRows = "none",
@@ -196,13 +197,23 @@ export const Table = <T extends Record<string, any>>({
 	const {
 		rows,
 		getTableProps,
-		state: { pageIndex, pageSize },
+		state: { pageIndex, pageSize, filters },
 		gotoPage,
 		setPageSize,
 		prepareRow,
 		pageCount,
 		toggleAllRowsSelected,
+		setAllFilters,
 	} = instance;
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: setAllFilters and filters don't need to be checked for perf reasons.
+	useEffect(() => {
+		logger.info(allFilters, filters);
+
+		if (allFilters.length > 0) {
+			setAllFilters(allFilters);
+		}
+	}, [allFilters]);
 
 	const handleSearchWrapper = useMemo(() => {
 		if (handleSearch) {
