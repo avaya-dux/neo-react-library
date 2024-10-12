@@ -41,7 +41,7 @@ const logger = log.getLogger("TableStories");
 logger.disableAll();
 
 import "./TableStories_shim.css";
-import type { SortType } from "./types";
+import type { ColumnFilter, SortType } from "./types";
 
 export default {
 	title: "Components/Table",
@@ -863,22 +863,56 @@ export const CustomBasicTableFilterDrawer = () => {
 	const closeFilterDrawer = () => {
 		setOpenColumnsFilterDrawer(false);
 	};
+
+	const [filtersToApply, setFiltersToApply] = useState<ColumnFilter[]>([]);
+
+	const [nameFilter, setNameFilter] = useState<string | null>(null);
+	const [otherFilter, setOtherFilter] = useState<string | null>(null);
+
+	const handleApply = () => {
+		const filters: ColumnFilter[] = [
+			{
+				id: "name",
+				value: nameFilter || null,
+			},
+			{
+				id: "other",
+				value: otherFilter || null,
+			},
+		];
+		setFiltersToApply(filters);
+		closeFilterDrawer();
+	};
+
 	return (
 		<>
 			<Table
 				columns={FilledFields.columns}
 				handleShowColumnsFilter={handleShowColumnsFilter}
 				allowToggleColumnVisibility
-				data={[...FilledFields.data]}
+				data={FilledFields.data}
+				allFilters={filtersToApply}
 			/>
+
 			<TableFilterDrawer
 				title="Custom Table Filter Drawer"
 				open={openColumnsFilterDrawer}
 				handleCancel={closeFilterDrawer}
+				handleApply={handleApply}
 			>
-				<p>Custom content goes here</p>
-				<br />
-				<p> 'Cancel' and 'Apply' buttons are built-in</p>
+				<TextInput
+					clearable
+					label="Name"
+					type="text"
+					onChange={(e) => setNameFilter(e.currentTarget.value)}
+				/>
+
+				<TextInput
+					clearable
+					label="Other"
+					type="text"
+					onChange={(e) => setOtherFilter(e.currentTarget.value)}
+				/>
 			</TableFilterDrawer>
 		</>
 	);

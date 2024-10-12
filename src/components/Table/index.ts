@@ -1,5 +1,5 @@
 export * from "./Table";
-export type { TableProps } from "./types";
+export type { ColumnFilter, TableProps } from "./types";
 export { TableFilterDrawer } from "./TableComponents/TableFilterDrawer";
 export type { TableFilterDrawerProps } from "./TableComponents/TableFilterDrawer";
 

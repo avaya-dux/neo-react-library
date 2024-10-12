@@ -75,6 +75,9 @@ export interface IFilterContext<T extends AnyRecord = AnyRecord> {
 export type RowHeight = "compact" | "medium" | "large";
 export type SortType = "asc" | "desc" | "unsorted";
 
+// biome-ignore lint/suspicious/noExplicitAny: value should be any
+export type ColumnFilter = { id: string; value: any };
+
 export type TableProps<T extends AnyRecord> = {
 	caption?: string;
 	id?: string;
@@ -87,6 +90,7 @@ export type TableProps<T extends AnyRecord> = {
 	pushPaginationDown?: boolean;
 	draggableRows?: boolean;
 	handlePageChange?: (pageIndex: number, pageSize: number) => void;
+	allFilters?: ColumnFilter[];
 	itemsPerPageOptions?: number[];
 	initialStatePageIndex?: number;
 	initialStatePageSize?: number;
