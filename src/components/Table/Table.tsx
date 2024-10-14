@@ -129,6 +129,7 @@ export const Table = <T extends Record<string, any>>({
 	onManualSortBy,
 	showPagination = true,
 	draggableRows = false,
+	resizableColumns = true,
 	pushPaginationDown = false,
 	showRowSeparator = true,
 	showRowHeightMenu = true,
@@ -407,6 +408,7 @@ export const Table = <T extends Record<string, any>>({
 	const filterContext: IFilterContext = {
 		allowToggleColumnVisibility,
 		draggableRows,
+		resizableColumns,
 		filterSheetVisible,
 		setFilterSheetVisible,
 		toggleFilterSheetVisible,

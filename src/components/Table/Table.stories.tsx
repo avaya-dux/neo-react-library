@@ -637,6 +637,7 @@ export const CustomActions = () => {
 	const [multiple, setMultiple] = useState(false);
 	const [expandable, setExpandable] = useState(false);
 	const [dark, setDark] = useState(false);
+	const [resizableColumns, setResizableColumns] = useState(true);
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const renderInsetTable = (row: any) => {
 		// inset table of 3 rows for name starting with "Sir"
@@ -683,6 +684,7 @@ export const CustomActions = () => {
 			<Table
 				{...FilledFields}
 				draggableRows={checked}
+				resizableColumns={resizableColumns}
 				selectableRows={multiple ? "multiple" : "none"}
 				caption="Custom Actions"
 				renderInsetTable={expandable ? renderInsetTable : undefined}
@@ -723,6 +725,14 @@ export const CustomActions = () => {
 							onChange={(_e, updatedChecked) => setExpandable(updatedChecked)}
 						>
 							Expandable Switch
+						</Switch>
+						<Switch
+							checked={resizableColumns}
+							onChange={(_e, updatedChecked) =>
+								setResizableColumns(updatedChecked)
+							}
+						>
+							Resizable Column Switch
 						</Switch>
 					</section>
 				}

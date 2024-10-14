@@ -49,6 +49,7 @@ export const TableHeader: TableHeaderComponentType = ({
 
 	const {
 		draggableRows,
+		resizableColumns,
 		setDataSyncOption,
 		clearSortByFuncRef,
 		hasInsetTable,
@@ -266,7 +267,7 @@ export const TableHeader: TableHeaderComponentType = ({
 									aria-sort={ariasort}
 								>
 									{content}
-									{column.canResize && (
+									{resizableColumns && column.canResize && (
 										<div
 											{...column.getResizerProps()}
 											className={`resizer ${column.isResizing ? "resizing" : ""}`}

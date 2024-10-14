@@ -60,6 +60,7 @@ export type DataSyncOptionType = "no" | "clear" | "asc" | "desc";
 export interface IFilterContext<T extends AnyRecord = AnyRecord> {
 	allowToggleColumnVisibility: boolean;
 	draggableRows: boolean;
+	resizableColumns: boolean;
 	filterSheetVisible: boolean;
 	setFilterSheetVisible: (visible: boolean) => void;
 	toggleFilterSheetVisible: () => void;
@@ -89,6 +90,7 @@ export type TableProps<T extends AnyRecord> = {
 	showPagination?: boolean;
 	pushPaginationDown?: boolean;
 	draggableRows?: boolean;
+	resizableColumns?: boolean;
 	handlePageChange?: (pageIndex: number, pageSize: number) => void;
 	allFilters?: ColumnFilter[];
 	itemsPerPageOptions?: number[];
