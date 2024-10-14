@@ -57,7 +57,7 @@ import { Checkbox } from "components/Checkbox";
 import log from "loglevel";
 const logger = log.getLogger("Table");
 export { logger as tableLogger };
-logger.setLevel("INFO");
+logger.disableAll();
 /**
  * The Table is used to organize and display data within rows and columns.
  * It comes with built in pagination. The `id` column in data is required.
@@ -162,7 +162,7 @@ export const Table = <T extends Record<string, any>>({
 			data,
 			manualPagination: overridePagination,
 			defaultColumn: {
-				maxWidth: 800, // 1200,
+				maxWidth: 800,
 				minWidth: 30,
 				width: 150,
 			},
@@ -212,10 +212,20 @@ export const Table = <T extends Record<string, any>>({
 		prepareRow,
 		pageCount,
 		toggleAllRowsSelected,
+		setAllFilters,
 		columns: visibleColumns,
 		headerGroups,
 		allColumns,
 	} = instance;
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: setAllFilters and filters don't need to be checked for perf reasons.
+	useEffect(() => {
+		logger.info(allFilters, filters);
+
+		if (allFilters.length > 0) {
+			setAllFilters(allFilters);
+		}
+	}, [allFilters]);
 
 	logger.info({
 		headerGroups: headerGroups[0].headers.length,
