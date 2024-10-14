@@ -89,7 +89,11 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 				{row.cells.map((cell) => {
 					const { key, ...restCellProps } = cell.getCellProps();
 					return (
-						<td {...restCellProps} key={key}>
+						<td
+							{...restCellProps}
+							key={key}
+							className={cell.column.isResizing ? "resizing" : ""}
+						>
 							{cell.render("Cell")}
 						</td>
 					);

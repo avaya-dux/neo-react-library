@@ -45,7 +45,7 @@ export const TableHeader: TableHeaderComponentType = ({
 	selectableRows,
 	translations,
 }) => {
-	const { headers, toggleSortBy } = instance;
+	const { headerGroups, toggleSortBy } = instance;
 
 	const {
 		draggableRows,
@@ -59,213 +59,220 @@ export const TableHeader: TableHeaderComponentType = ({
 
 	return (
 		<thead>
-			<tr>
-				{draggableRows && (
-					<th className="neo-table__dnd-th">
-						<div
-							role="button"
-							tabIndex={-1}
-							aria-label={translations.dragHandle}
-						>
-							&nbsp;
-						</div>
-					</th>
-				)}
+			{headerGroups.map((headerGroup) => (
+				// biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
+				<tr {...headerGroup.getHeaderGroupProps()}>
+					{draggableRows && (
+						<th className="neo-table__dnd-th">
+							<div
+								role="button"
+								tabIndex={-1}
+								aria-label={translations.dragHandle}
+							>
+								&nbsp;
+							</div>
+						</th>
+					)}
 
-				{shouldHaveCheckboxColumn && (
-					<CheckboxHeaderCell
-						handleRowToggled={handleRowToggled}
-						instance={instance}
-						selectableRows={selectableRows}
-						translations={translations}
-					/>
-				)}
+					{shouldHaveCheckboxColumn && (
+						<CheckboxHeaderCell
+							handleRowToggled={handleRowToggled}
+							instance={instance}
+							selectableRows={selectableRows}
+							translations={translations}
+						/>
+					)}
 
-				{headers.map((column) => {
-					const {
-						canFilter,
-						canSort,
-						clearSortBy,
-						getHeaderProps,
-						getSortByToggleProps,
-						isSorted,
-						isSortedDesc,
-						isVisible,
-						filterValue,
-						render,
-					} = column;
+					{headerGroup.headers.map((column) => {
+						const {
+							canFilter,
+							canSort,
+							clearSortBy,
+							getHeaderProps,
+							getSortByToggleProps,
+							isSorted,
+							isSortedDesc,
+							filterValue,
+							render,
+						} = column;
 
-					const sortedDir = isSortedDesc ? "descending" : "ascending";
-					const ariasort = calculateAriaSortValue(isSorted, sortedDir);
-					const isFiltering = filterValue && filterValue.length > 0;
-					let content = render("Header");
-					// canFilter is false when disableFilters is true on the column
-					// column.Filter is the renderer function for the filter UI
-					// The plan now is to not show filter ui on the header cell, but show it when filter column is clicked
-					if (canSort) {
-						const thDivProps = getSortByToggleProps({
-							// keep mouse-click from triggering sort
-							onClick: (e) => {
-								e.stopPropagation();
-								e.preventDefault();
-							},
-						});
+						const sortedDir = isSortedDesc ? "descending" : "ascending";
+						const ariasort = calculateAriaSortValue(isSorted, sortedDir);
+						const isFiltering = filterValue && filterValue.length > 0;
+						let content = render("Header");
+						// canFilter is false when disableFilters is true on the column
+						// column.Filter is the renderer function for the filter UI
+						// The plan now is to not show filter ui on the header cell, but show it when filter column is clicked
+						if (canSort) {
+							const thDivProps = getSortByToggleProps({
+								// keep mouse-click from triggering sort
+								onClick: (e) => {
+									e.stopPropagation();
+									e.preventDefault();
+								},
+							});
 
-						thDivProps.title = translations.toggleSortBy;
-						const sortIcon: IconNamesType =
-							ariasort === "descending" ? "arrow-up" : "arrow-down";
+							thDivProps.title = translations.toggleSortBy;
+							const sortIcon: IconNamesType =
+								ariasort === "descending" ? "arrow-up" : "arrow-down";
 
-						const handleClearSort = () => {
-							clearSortBy();
-							setDataSyncOption("clear");
-							clearSortByFuncRef.current = clearSortBy;
+							const handleClearSort = () => {
+								clearSortBy();
+								setDataSyncOption("clear");
+								clearSortByFuncRef.current = clearSortBy;
 
-							if (manualSortBy && onManualSortBy) {
-								onManualSortBy(column.id, "unsorted");
-							}
-						};
+								if (manualSortBy && onManualSortBy) {
+									onManualSortBy(column.id, "unsorted");
+								}
+							};
 
-						const handleAscSort = () => {
-							toggleSortBy(column.id, false, false);
-							setDataSyncOption("asc");
-							clearSortByFuncRef.current = clearSortBy;
-							if (manualSortBy && onManualSortBy) {
-								onManualSortBy(column.id, "asc");
-							}
-						};
+							const handleAscSort = () => {
+								toggleSortBy(column.id, false, false);
+								setDataSyncOption("asc");
+								clearSortByFuncRef.current = clearSortBy;
+								if (manualSortBy && onManualSortBy) {
+									onManualSortBy(column.id, "asc");
+								}
+							};
 
-						const handleDescSort = () => {
-							toggleSortBy(column.id, true, false);
-							setDataSyncOption("desc");
-							clearSortByFuncRef.current = clearSortBy;
-							if (manualSortBy && onManualSortBy) {
-								onManualSortBy(column.id, "desc");
-							}
-						};
+							const handleDescSort = () => {
+								toggleSortBy(column.id, true, false);
+								setDataSyncOption("desc");
+								clearSortByFuncRef.current = clearSortBy;
+								if (manualSortBy && onManualSortBy) {
+									onManualSortBy(column.id, "desc");
+								}
+							};
 
-						const onSpaceOrEnter = (
-							e: KeyboardEvent<HTMLDivElement>,
-							method: () => void,
-						) => {
-							switch (e.key) {
-								case Keys.ENTER:
-								case Keys.SPACE:
-									method();
-									break;
-							}
-						};
+							const onSpaceOrEnter = (
+								e: KeyboardEvent<HTMLDivElement>,
+								method: () => void,
+							) => {
+								switch (e.key) {
+									case Keys.ENTER:
+									case Keys.SPACE:
+										method();
+										break;
+								}
+							};
 
-						content = (
-							<Menu
-								menuRootElement={
-									<Tooltip label={render("Header") as string} position="top">
-										<MenuButton
-											variant="tertiary"
-											className="neo-multiselect"
-											onKeyDown={(e) => {
-												switch (e.key) {
-													case Keys.ENTER:
-													case Keys.SPACE:
-													case Keys.DOWN:
-														// keep keyboard from triggering sort inaproriately
-														e.stopPropagation();
-														e.preventDefault();
-														break;
-												}
-											}}
-										>
-											<span
-												style={{
-													maxWidth: column.maxWidth,
-													minWidth: column.minWidth,
-													width: column.width,
+							content = (
+								<Menu
+									menuRootElement={
+										<Tooltip label={render("Header") as string} position="top">
+											<MenuButton
+												variant="tertiary"
+												className="neo-multiselect"
+												onKeyDown={(e) => {
+													switch (e.key) {
+														case Keys.ENTER:
+														case Keys.SPACE:
+														case Keys.DOWN:
+															// keep keyboard from triggering sort inaproriately
+															e.stopPropagation();
+															e.preventDefault();
+															break;
+													}
 												}}
 											>
-												{render("Header")}
-											</span>
-											{isFiltering && (
-												<Icon
-													icon="filter"
-													aria-label={translations.filterApplied}
-												/>
-											)}
-											{isSorted && (
-												<Icon
-													icon={sortIcon}
-													aria-label={sortIcon.replace(/-/g, " ")}
-												/>
-											)}
-										</MenuButton>
-									</Tooltip>
-								}
-								{...thDivProps}
+												<span
+													style={{
+														maxWidth: column.maxWidth,
+														minWidth: column.minWidth,
+														width: column.width,
+													}}
+												>
+													{render("Header")}
+												</span>
+												{isFiltering && (
+													<Icon
+														icon="filter"
+														aria-label={translations.filterApplied}
+													/>
+												)}
+												{isSorted && (
+													<Icon
+														icon={sortIcon}
+														aria-label={sortIcon.replace(/-/g, " ")}
+													/>
+												)}
+											</MenuButton>
+										</Tooltip>
+									}
+									{...thDivProps}
+								>
+									<MenuItem
+										onClick={handleClearSort}
+										onKeyDown={(e) => onSpaceOrEnter(e, handleClearSort)}
+										disabled={!isSorted}
+									>
+										{translations.clearSort || "Clear Sort"}
+									</MenuItem>
+
+									<MenuItem
+										onClick={handleAscSort}
+										onKeyDown={(e) => onSpaceOrEnter(e, handleAscSort)}
+									>
+										{translations.sortAscending || "A - Z"}
+									</MenuItem>
+
+									<MenuItem
+										onClick={handleDescSort}
+										onKeyDown={(e) => onSpaceOrEnter(e, handleDescSort)}
+									>
+										{translations.sortDescending || "Z - A"}
+									</MenuItem>
+
+									{canFilter ? (
+										<>
+											<MenuSeparator />
+											<MenuItem
+												onClick={() =>
+													setFilterColumn(column as unknown as ColumnInstance)
+												}
+												onKeyDown={(e) =>
+													onSpaceOrEnter(e, () =>
+														setFilterColumn(
+															column as unknown as ColumnInstance,
+														),
+													)
+												}
+											>
+												{isFiltering && (
+													<Icon
+														icon="check"
+														aria-label={translations.filterApplied}
+													/>
+												)}
+												{translations.filterColumn}
+											</MenuItem>
+										</>
+									) : (
+										<></>
+									)}
+								</Menu>
+							);
+						}
+
+						return (
+							<th
+								{...getHeaderProps()}
+								key={column.id}
+								scope="col"
+								aria-sort={ariasort}
 							>
-								<MenuItem
-									onClick={handleClearSort}
-									onKeyDown={(e) => onSpaceOrEnter(e, handleClearSort)}
-									disabled={!isSorted}
-								>
-									{translations.clearSort || "Clear Sort"}
-								</MenuItem>
-
-								<MenuItem
-									onClick={handleAscSort}
-									onKeyDown={(e) => onSpaceOrEnter(e, handleAscSort)}
-								>
-									{translations.sortAscending || "A - Z"}
-								</MenuItem>
-
-								<MenuItem
-									onClick={handleDescSort}
-									onKeyDown={(e) => onSpaceOrEnter(e, handleDescSort)}
-								>
-									{translations.sortDescending || "Z - A"}
-								</MenuItem>
-
-								{canFilter ? (
-									<>
-										<MenuSeparator />
-										<MenuItem
-											onClick={() =>
-												setFilterColumn(column as unknown as ColumnInstance)
-											}
-											onKeyDown={(e) =>
-												onSpaceOrEnter(e, () =>
-													setFilterColumn(column as unknown as ColumnInstance),
-												)
-											}
-										>
-											{isFiltering && (
-												<Icon
-													icon="check"
-													aria-label={translations.filterApplied}
-												/>
-											)}
-											{translations.filterColumn}
-										</MenuItem>
-									</>
-								) : (
-									<></>
+								{content}
+								{column.canResize && (
+									<div
+										{...column.getResizerProps()}
+										className={`resizer ${column.isResizing ? "resizing" : ""}`}
+									/>
 								)}
-							</Menu>
+							</th>
 						);
-					}
-
-					return (
-						<th
-							style={{
-								display: isVisible ? undefined : "none",
-							}}
-							{...getHeaderProps()}
-							key={column.id}
-							scope="col"
-							aria-sort={ariasort}
-						>
-							{content}
-						</th>
-					);
-				})}
-			</tr>
+					})}
+				</tr>
+			))}
 		</thead>
 	);
 };

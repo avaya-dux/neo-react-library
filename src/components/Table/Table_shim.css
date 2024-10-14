@@ -1,14 +1,55 @@
 .neo-table {
 	table-layout: fixed;
 
+	thead tr {
+		th {
+			height: 61px;
+			align-items: center;
+			line-height: 35px;
+			/* This makes th height the same no matter its content is dropdown or plain text */
+
+			&.resizing {
+				user-select: none;
+			}
+
+			.resizer {
+				width: 10px;
+				height: 100%;
+				position: absolute;
+				right: 0;
+				top: 0;
+				transform: translateX(50%);
+				z-index: 1;
+				touch-action: none;
+
+				&:hover,
+				&.resizing {
+					background-color: blue;
+				}
+			}
+		}
+	}
+
 	tbody tr {
-		height: 100%;
+		display: flex;
+
+		td {
+			position: relative;
+
+			&.resizing {
+				border-inline-end: 2px solid blue;
+			}
+		}
+
+		&.resizing {
+			user-select: none;
+		}
 	}
 }
 
 .neo-table th button {
 	color: black;
-	display: flex;
+	display: inline-block;
 	font-weight: 600;
 	padding-left: 0px;
 	padding-right: 0px;
@@ -75,10 +116,11 @@
 
 .neo-table tr th.neo-table__dnd-th,
 .neo-table tr td.neo-table__dnd-td {
-	width: 24px;
-	display: table-cell;
-	vertical-align: middle;
-	padding: 6px 4px 0px 4px;
+	min-width: 24px;
+	display: flex;
+	align-items: center;
+	justify-items: center;
+	padding: 2px 0px;
 }
 
 .neo-table tr th.neo-table__dnd-td,
@@ -89,6 +131,7 @@
 .neo-table tr th.neo-table__dnd-th > div,
 .neo-table tr td.neo-table__dnd-td > div {
 	width: 16px;
+	padding-inline: 4px;
 	min-height: 16px;
 }
 
@@ -113,6 +156,8 @@
 }
 
 .neo-table th.neo-table-checkbox-th {
+	display: flex;
+	align-items: center;
 	padding: 0;
 	width: 60px;
 

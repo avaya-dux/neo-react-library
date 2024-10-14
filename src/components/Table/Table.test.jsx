@@ -1154,22 +1154,19 @@ describe("Table", () => {
 		});
 
 		it("allows user to predefine hidden rows", async () => {
-			// find the "Long Text" `<th>` element
-			const longTextElements = screen.queryAllByText("Long Text");
-			expect(longTextElements).toHaveLength(3);
-			const thDivLongTextElement = longTextElements[2];
-			const thLongTextElement = thDivLongTextElement.closest("th");
+			let longTextElements = screen.queryAllByText("Long Text");
+			expect(longTextElements).toHaveLength(1);
 
-			// assert "Long Text" column is not shown in the table
-			expect(thLongTextElement).not.toBeVisible();
-
-			// open filter dialog and show "Long Text" column
 			await user.click(screen.getAllByLabelText("Filter Columns")[0]);
 			expect(screen.getByLabelText("Long Text")).not.toBeChecked();
 			await user.click(screen.getByLabelText("Long Text"));
 			await user.click(screen.getAllByLabelText("Apply")[0]);
 
 			// assert "Long Text" column is now shown in the table
+			longTextElements = screen.queryAllByText("Long Text");
+			expect(longTextElements).toHaveLength(3);
+			const thDivLongTextElement = longTextElements[2];
+			const thLongTextElement = thDivLongTextElement.closest("th");
 			expect(thLongTextElement).toBeVisible();
 		});
 	});

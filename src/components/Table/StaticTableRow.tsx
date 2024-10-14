@@ -59,7 +59,11 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 				{row.cells.map((cell) => {
 					const { key, ...restCellProps } = cell.getCellProps();
 					return (
-						<td key={key} {...restCellProps}>
+						<td
+							key={key}
+							{...restCellProps}
+							className={cell.column.isResizing ? "resizing" : ""}
+						>
 							<span>{cell.render("Cell")}</span>
 						</td>
 					);

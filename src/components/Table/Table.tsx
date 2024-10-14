@@ -20,8 +20,10 @@ import {
 	type Row,
 	useExpanded,
 	useFilters,
+	useFlexLayout,
 	useGlobalFilter,
 	usePagination,
+	useResizeColumns,
 	useRowSelect,
 	useSortBy,
 	useTable,
@@ -55,7 +57,7 @@ import { Checkbox } from "components/Checkbox";
 import log from "loglevel";
 const logger = log.getLogger("Table");
 export { logger as tableLogger };
-logger.disableAll();
+logger.setLevel("INFO");
 /**
  * The Table is used to organize and display data within rows and columns.
  * It comes with built in pagination. The `id` column in data is required.
@@ -160,9 +162,9 @@ export const Table = <T extends Record<string, any>>({
 			data,
 			manualPagination: overridePagination,
 			defaultColumn: {
-				maxWidth: 300,
+				maxWidth: 800, // 1200,
 				minWidth: 30,
-				width: "auto",
+				width: 150,
 			},
 			getRowId: (row: T) => row.id, // set the row id to be the passed data's id
 			initialState: {
@@ -186,6 +188,8 @@ export const Table = <T extends Record<string, any>>({
 			autoResetFilters: !manualColumnFilters,
 			...rest,
 		},
+		useFlexLayout,
+		useResizeColumns,
 		useFilters,
 		useGlobalFilter,
 		useSortBy,
@@ -197,23 +201,27 @@ export const Table = <T extends Record<string, any>>({
 	const {
 		rows,
 		getTableProps,
-		state: { pageIndex, pageSize, filters },
+		state: {
+			pageIndex,
+			pageSize,
+			filters,
+			columnResizing: { isResizingColumn },
+		},
 		gotoPage,
 		setPageSize,
 		prepareRow,
 		pageCount,
 		toggleAllRowsSelected,
-		setAllFilters,
+		columns: visibleColumns,
+		headerGroups,
+		allColumns,
 	} = instance;
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: setAllFilters and filters don't need to be checked for perf reasons.
-	useEffect(() => {
-		logger.info(allFilters, filters);
-
-		if (allFilters.length > 0) {
-			setAllFilters(allFilters);
-		}
-	}, [allFilters]);
+	logger.info({
+		headerGroups: headerGroups[0].headers.length,
+		visibile: visibleColumns.length,
+		all: allColumns.length,
+	});
 
 	const handleSearchWrapper = useMemo(() => {
 		if (handleSearch) {
@@ -249,7 +257,12 @@ export const Table = <T extends Record<string, any>>({
 	}, [onManualSortBy, gotoPage]);
 	const rowCount = overridePagination ? manualRowCount : rows.length;
 
-	logger.info({ initialStatePageIndex, rootLevelPageIndex, pageIndex });
+	logger.info({
+		initialStatePageIndex,
+		rootLevelPageIndex,
+		pageIndex,
+		filters,
+	});
 
 	const [dataSyncOption, setDataSyncOption] =
 		useState<DataSyncOptionType>("no");
@@ -509,6 +522,7 @@ export const Table = <T extends Record<string, any>>({
 							rowHeightValue === "compact" && "neo-table--compact",
 							rowHeightValue === "medium" && "neo-table--medium",
 							showRowSeparator && "neo-table-separator",
+							isResizingColumn && "resizing",
 						)}
 						aria-labelledby={
 							caption && tableCaptionId ? tableCaptionId : undefined
