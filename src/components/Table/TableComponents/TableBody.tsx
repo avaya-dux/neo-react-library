@@ -67,6 +67,7 @@ export const TableBody: TableBodyComponentType = ({
 				<>
 					{showRowSelectionHelper && (
 						<ClearSelectionRow
+							handleRowToggled={handleRowToggled}
 							instance={instance}
 							selectableRows={selectableRows}
 							translations={translations}
