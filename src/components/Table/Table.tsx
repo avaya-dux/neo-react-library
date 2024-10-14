@@ -230,7 +230,7 @@ export const Table = <T extends Record<string, any>>({
 
 	logger.info({
 		headerGroups: headerGroups[0].headers.length,
-		visibile: visibleColumns.length,
+		visible: visibleColumns.length,
 		all: allColumns.length,
 	});
 
