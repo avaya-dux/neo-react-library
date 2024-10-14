@@ -129,7 +129,7 @@ export const Table = <T extends Record<string, any>>({
 	onManualSortBy,
 	showPagination = true,
 	draggableRows = false,
-	resizableColumns = true,
+	resizableColumns = false,
 	pushPaginationDown = false,
 	showRowSeparator = true,
 	showRowHeightMenu = true,

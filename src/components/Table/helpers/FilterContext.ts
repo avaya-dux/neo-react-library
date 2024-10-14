@@ -6,7 +6,7 @@ export const FilterContext = createContext<IFilterContext>({
 	allowToggleColumnVisibility: false,
 	filterSheetVisible: false,
 	draggableRows: false,
-	resizableColumns: true,
+	resizableColumns: false,
 	setFilterSheetVisible: () => null,
 	toggleFilterSheetVisible: () => null,
 	dataSyncOption: "no",

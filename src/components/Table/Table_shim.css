@@ -18,7 +18,7 @@
 				position: absolute;
 				right: 0;
 				top: 0;
-				transform: translateX(50%);
+				transform: translateX(35%); /* Center align the resizer and the td right border */
 				z-index: 1;
 				touch-action: none;
 
