@@ -24,7 +24,7 @@
 
 				&:hover,
 				&.resizing {
-					background-color: blue;
+					background-color: var(--neo-color-blue-500);
 				}
 			}
 		}
@@ -37,11 +37,12 @@
 			position: relative;
 
 			&.resizing {
-				border-inline-end: 2px solid blue;
+				border-inline-end: 2px solid var(--neo-color-blue-500);
 			}
 		}
 
-		&.resizing {
+		/* Make all elements within the row unselectable if any td has the resizing class */
+		&:has(td.resizing) * {
 			user-select: none;
 		}
 	}
