@@ -47,7 +47,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 	const cellCount =
 		row.cells.length + 1 + (checkboxTd || hasInsetTable ? 1 : 0);
 
-	useResizerHeight(row.id, row.isExpanded);
+	useResizerHeight(row.id);
 
 	return (
 		<tbody

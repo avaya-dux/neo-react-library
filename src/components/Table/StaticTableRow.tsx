@@ -28,7 +28,7 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 		(checkboxTd || hasInsetTable ? 1 : 0);
 	const { key: _, ...restProps } = row.getRowProps();
 
-	useResizerHeight(row.id, row.isExpanded);
+	useResizerHeight(row.id);
 
 	return (
 		<tbody
