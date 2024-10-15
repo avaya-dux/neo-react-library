@@ -80,8 +80,8 @@ export const useResizerHeight = (rowId: string) => {
 			}
 			const extendedRowHeight = extendedRow
 				? (extendedRow as HTMLElement).offsetHeight
-				: 2;
-			const totalHeight = parentRowHeight + extendedRowHeight;
+				: 0;
+			const totalHeight = parentRowHeight + extendedRowHeight + 2;
 			logger.debug({ rowId, parentRowHeight, extendedRowHeight, totalHeight });
 			(resizer as HTMLElement).style.height = `${totalHeight}px`;
 		},

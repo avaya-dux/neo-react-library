@@ -86,15 +86,17 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 						>
 							{cell.render("Cell")}
 
-							{resizableColumns && cell.column.canResize && (
-								<div
-									className={clsx(
-										"neo-table__resizer__td",
-										cell.column.isResizing && "neo-table--resizing",
-										cell.column.isResizing && `resizer-${row.id}`,
-									)}
-								/>
-							)}
+							{resizableColumns &&
+								cell.column.canResize &&
+								cell.column.isResizing && (
+									<div
+										className={clsx(
+											"neo-table__resizer__td",
+											"neo-table--resizing",
+											`resizer-${row.id}`,
+										)}
+									/>
+								)}
 						</td>
 					);
 				})}
