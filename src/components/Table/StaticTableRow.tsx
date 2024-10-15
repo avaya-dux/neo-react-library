@@ -62,7 +62,7 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 						<td
 							key={key}
 							{...restCellProps}
-							className={cell.column.isResizing ? "resizing" : ""}
+							className={cell.column.isResizing ? "neo-table--resizing" : ""}
 						>
 							<span>{cell.render("Cell")}</span>
 						</td>

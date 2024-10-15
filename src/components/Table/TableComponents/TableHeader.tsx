@@ -265,13 +265,15 @@ export const TableHeader: TableHeaderComponentType = ({
 									key={column.id}
 									scope="col"
 									aria-sort={ariasort}
-									className={`${column.isResizing ? "resizing" : ""}`}
 								>
 									{content}
 									{resizableColumns && column.canResize && (
 										<div
 											{...column.getResizerProps()}
-											className={`resizer ${column.isResizing ? "resizing" : ""}`}
+											className={clsx(
+												"neo-table__resizer",
+												column.isResizing && "neo-table--resizing",
+											)}
 										/>
 									)}
 								</th>

@@ -92,7 +92,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 						<td
 							{...restCellProps}
 							key={key}
-							className={cell.column.isResizing ? "resizing" : ""}
+							className={cell.column.isResizing ? "neo-table--resizing" : ""}
 						>
 							{cell.render("Cell")}
 						</td>

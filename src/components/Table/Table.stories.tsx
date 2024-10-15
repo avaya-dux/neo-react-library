@@ -21,7 +21,15 @@ import {
 	Tooltip,
 } from "components";
 import { Button } from "components/Button";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+	type ReactElement,
+	isValidElement,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import type { Column, Row } from "react-table";
 import { useDebouncedCallback } from "use-debounce";
 import type { IconNamesType } from "utils";
@@ -640,8 +648,16 @@ export const CustomActions = () => {
 	const [resizableColumns, setResizableColumns] = useState(true);
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const renderInsetTable = (row: any) => {
-		// inset table of 3 rows for name starting with "Sir"
-		if (row.original.name.startsWith("Sir"))
+		const name = row.original.name;
+		let nameValue = "";
+		if (isValidElement(name)) {
+			const element = name as ReactElement;
+			nameValue = element.props.children;
+		} else {
+			nameValue = name;
+		}
+		// inset table of 3 rows
+		if (row.index % 3 === 1)
 			return (
 				<Table
 					columns={FilledFields.columns}
@@ -649,18 +665,18 @@ export const CustomActions = () => {
 					readonly
 					showPagination={false}
 					pageCount={3}
-					data={[...FilledFields.data.slice(row.index, 3)]}
+					data={[...FilledFields.data.slice(row.index, row.index + 3)]}
 				/>
 			);
-		// inline form for name starting with "Madam"
-		if (row.original.name.startsWith("F"))
+		// inline form
+		if (row.index % 3 === 2)
 			return (
 				<Form aria-label="Playground form" inline>
 					<TextInput
 						clearable
 						label="Name"
 						placeholder="Type your name here."
-						defaultValue={row.original.name}
+						defaultValue={nameValue}
 						type="text"
 					/>
 					<TextInput
@@ -677,7 +693,7 @@ export const CustomActions = () => {
 					</Button>
 				</Form>
 			);
-		return <p>Name: {row.original.name}</p>;
+		return <p>Name: {nameValue}</p>;
 	};
 	return (
 		<div className={clsx(dark && "neo-dark")}>

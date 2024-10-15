@@ -534,7 +534,7 @@ export const Table = <T extends Record<string, any>>({
 							rowHeightValue === "compact" && "neo-table--compact",
 							rowHeightValue === "medium" && "neo-table--medium",
 							showRowSeparator && "neo-table-separator",
-							isResizingColumn && "resizing",
+							isResizingColumn && "neo-table--resizing",
 						)}
 						aria-labelledby={
 							caption && tableCaptionId ? tableCaptionId : undefined

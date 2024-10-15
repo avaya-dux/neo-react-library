@@ -1,6 +1,10 @@
 .neo-table {
 	table-layout: fixed;
 
+	&.neo-table--resizing * {
+		user-select: none;
+	}
+
 	thead tr {
 		th {
 			height: 61px;
@@ -8,11 +12,7 @@
 			line-height: 35px;
 			/* This makes th height the same no matter its content is dropdown or plain text */
 
-			&.resizing {
-				user-select: none;
-			}
-
-			.resizer {
+			.neo-table__resizer {
 				width: 10px;
 				height: 100%;
 				position: absolute;
@@ -23,7 +23,7 @@
 				touch-action: none;
 
 				&:hover,
-				&.resizing {
+				&.neo-table--resizing {
 					background-color: var(--neo-color-blue-500);
 				}
 			}
@@ -36,14 +36,9 @@
 		td {
 			position: relative;
 
-			&.resizing {
+			&.neo-table--resizing {
 				border-inline-end: 2px solid var(--neo-color-blue-500);
 			}
-		}
-
-		/* Make all elements within the row unselectable if any td has the resizing class */
-		&:has(td.resizing) * {
-			user-select: none;
 		}
 	}
 }
