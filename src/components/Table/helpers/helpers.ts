@@ -72,12 +72,22 @@ export const setPageRowsSelected = <T extends Record<string, unknown>>(
 	selected: boolean,
 	handleRowToggled: (rowIds: string[]) => void,
 ) => {
-	const { page, toggleRowSelected } = instance;
+	const {
+		page,
+		toggleRowSelected,
+		state: { selectedRowIds },
+	} = instance;
 
 	const enabledPageRowsIds = page
 		.filter((row) => !row.original.disabled)
 		.map((row) => row.id);
 	enabledPageRowsIds.forEach((id) => toggleRowSelected(id, selected));
 
-	handleRowToggled?.(selected ? enabledPageRowsIds : []);
+	const selectedRowIdsArray = Object.keys(selectedRowIds);
+
+	const adjustedSelectedRowIds = selected
+		? [...selectedRowIdsArray, ...enabledPageRowsIds]
+		: selectedRowIdsArray.filter((id) => !enabledPageRowsIds.includes(id));
+
+	handleRowToggled?.(adjustedSelectedRowIds);
 };
