@@ -512,6 +512,27 @@ describe("Table", () => {
 			expect(screen.queryAllByText(allRowsToggledOnText)).toHaveLength(2);
 			expect(screen.queryAllByText(allRowsToggledOffText)).toHaveLength(2);
 		});
+
+		it("when data is filtered, the 'clear' button returns accurate selection", async () => {
+			render(<PreSelectedRows />);
+
+			const codeElement = screen.getByRole("code");
+			expect(codeElement).toHaveTextContent('["10","40"]');
+
+			const selectAllItemsButton = screen.getByText(
+				FilledFields.translations.header.selectAll,
+			);
+			await user.click(selectAllItemsButton);
+			expect(codeElement).toHaveTextContent(
+				'["10","40","20","10","30","40","50","60","70","80","90","100"]',
+			);
+
+			const deselectAllItemsButton = screen.getByText(
+				FilledFields.translations.header.clearAll,
+			);
+			await user.click(deselectAllItemsButton);
+			expect(codeElement).toHaveTextContent("[]");
+		});
 	});
 
 	describe("toolbar functionality", () => {
