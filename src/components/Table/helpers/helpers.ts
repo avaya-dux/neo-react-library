@@ -1,5 +1,5 @@
 import type { AriaAttributes } from "react";
-import type { TableInstance } from "react-table";
+import type { Row, TableInstance } from "react-table";
 
 /**
  * If the table is sorted, return the aria-sort value.
@@ -38,6 +38,35 @@ export const convertRowIdsArrayToObject = (rowIds: string[]) => {
 	return result;
 };
 
+const setRowsSelected = <T extends Record<string, unknown>>(
+	instance: TableInstance<T>,
+	selected: boolean,
+	rows: Row<T>[],
+	handleRowToggled?: (rowIds: string[]) => void,
+) => {
+	const {
+		toggleRowSelected,
+		state: { selectedRowIds },
+	} = instance;
+
+	const enabledRowsIds = rows
+		.filter((row) => !row.original.disabled)
+		.map((row) => row.id);
+	enabledRowsIds.forEach((id) => toggleRowSelected(id, selected));
+
+	const selectedRowIdsSet = new Set(Object.keys(selectedRowIds));
+
+	if (selected) {
+		enabledRowsIds.forEach((id) => selectedRowIdsSet.add(id));
+	} else {
+		enabledRowsIds.forEach((id) => selectedRowIdsSet.delete(id));
+	}
+
+	const adjustedSelectedRowIds = Array.from(selectedRowIdsSet);
+
+	handleRowToggled?.(adjustedSelectedRowIds);
+};
+
 /**
  * Sets all table rows to selected or unselected based on the `selected` parameter and return toggled row ids.
  * @param instance - TableInstance
@@ -50,24 +79,7 @@ export const setTableRowsSelected = <T extends Record<string, unknown>>(
 	selected: boolean,
 	handleRowToggled?: (rowIds: string[]) => void,
 ) => {
-	const {
-		rows,
-		toggleRowSelected,
-		state: { selectedRowIds },
-	} = instance;
-
-	const enabledTableRowsIds = rows
-		.filter((row) => !row.original.disabled)
-		.map((row) => row.id);
-	enabledTableRowsIds.forEach((id) => toggleRowSelected(id, selected));
-
-	const selectedRowIdsArray = Object.keys(selectedRowIds);
-
-	const adjustedSelectedRowIds = selected
-		? [...selectedRowIdsArray, ...enabledTableRowsIds]
-		: selectedRowIdsArray.filter((id) => !enabledTableRowsIds.includes(id));
-
-	handleRowToggled?.(adjustedSelectedRowIds);
+	setRowsSelected(instance, selected, instance.rows, handleRowToggled);
 };
 
 /**
@@ -80,24 +92,7 @@ export const setTableRowsSelected = <T extends Record<string, unknown>>(
 export const setPageRowsSelected = <T extends Record<string, unknown>>(
 	instance: TableInstance<T>,
 	selected: boolean,
-	handleRowToggled: (rowIds: string[]) => void,
+	handleRowToggled?: (rowIds: string[]) => void,
 ) => {
-	const {
-		page,
-		toggleRowSelected,
-		state: { selectedRowIds },
-	} = instance;
-
-	const enabledPageRowsIds = page
-		.filter((row) => !row.original.disabled)
-		.map((row) => row.id);
-	enabledPageRowsIds.forEach((id) => toggleRowSelected(id, selected));
-
-	const selectedRowIdsArray = Object.keys(selectedRowIds);
-
-	const adjustedSelectedRowIds = selected
-		? [...selectedRowIdsArray, ...enabledPageRowsIds]
-		: selectedRowIdsArray.filter((id) => !enabledPageRowsIds.includes(id));
-
-	handleRowToggled?.(adjustedSelectedRowIds);
+	setRowsSelected(instance, selected, instance.page, handleRowToggled);
 };
