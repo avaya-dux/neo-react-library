@@ -50,14 +50,24 @@ export const setTableRowsSelected = <T extends Record<string, unknown>>(
 	selected: boolean,
 	handleRowToggled?: (rowIds: string[]) => void,
 ) => {
-	const { rows, toggleRowSelected } = instance;
+	const {
+		rows,
+		toggleRowSelected,
+		state: { selectedRowIds },
+	} = instance;
 
 	const enabledTableRowsIds = rows
 		.filter((row) => !row.original.disabled)
 		.map((row) => row.id);
 	enabledTableRowsIds.forEach((id) => toggleRowSelected(id, selected));
 
-	handleRowToggled?.(selected ? enabledTableRowsIds : []);
+	const selectedRowIdsArray = Object.keys(selectedRowIds);
+
+	const adjustedSelectedRowIds = selected
+		? [...selectedRowIdsArray, ...enabledTableRowsIds]
+		: selectedRowIdsArray.filter((id) => !enabledTableRowsIds.includes(id));
+
+	handleRowToggled?.(adjustedSelectedRowIds);
 };
 
 /**
