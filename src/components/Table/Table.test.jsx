@@ -519,19 +519,20 @@ describe("Table", () => {
 			const codeElement = screen.getByRole("code");
 			expect(codeElement).toHaveTextContent('["10","40"]');
 
+			const globalSearchInput = screen.getByLabelText("Search all");
+			await user.type(globalSearchInput, "da");
+
 			const selectAllItemsButton = screen.getByText(
 				FilledFields.translations.header.selectAll,
 			);
 			await user.click(selectAllItemsButton);
-			expect(codeElement).toHaveTextContent(
-				'["10","40","20","10","30","40","50","60","70","80","90","100"]',
-			);
+			expect(codeElement).toHaveTextContent('["10","40","20","90"]');
 
 			const deselectAllItemsButton = screen.getByText(
 				FilledFields.translations.header.clearAll,
 			);
 			await user.click(deselectAllItemsButton);
-			expect(codeElement).toHaveTextContent("[]");
+			expect(codeElement).toHaveTextContent('["10","40"]');
 		});
 	});
 
