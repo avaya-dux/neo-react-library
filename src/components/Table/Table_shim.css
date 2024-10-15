@@ -1,7 +1,7 @@
 .neo-table {
 	table-layout: fixed;
 
-	&.neo-table--resizing * {
+	&.neo-table--resizing {
 		user-select: none;
 	}
 
@@ -12,13 +12,14 @@
 			line-height: 35px;
 			/* This makes th height the same no matter its content is dropdown or plain text */
 
-			.neo-table__resizer {
+			.neo-table__resizer__tr {
 				width: 10px;
 				height: 100%;
 				position: absolute;
 				right: 0;
 				top: 0;
-				transform: translateX(35%); /* Center align the resizer and the td right border */
+				transform: translateX(40%);
+				/* Center align the resizer and the td right border */
 				z-index: 1;
 				touch-action: none;
 
@@ -36,8 +37,21 @@
 		td {
 			position: relative;
 
-			&.neo-table--resizing {
-				border-inline-end: 2px solid var(--neo-color-blue-500);
+			.neo-table__resizer__td {
+				width: 2px;
+				height: calc(100% + 2px); /* overcome the tr bottom border */
+
+				position: absolute;
+				right: 0;
+				top: 0;
+				transform: translateY(-1px);
+				z-index: 1;
+				touch-action: none;
+
+				&:hover,
+				&.neo-table--resizing {
+					background-color: var(--neo-color-blue-500);
+				}
 			}
 		}
 	}
@@ -91,7 +105,8 @@
 	}
 }
 
-.neo-table-separator td {
+.neo-table-separator td,
+tr.neo-table__inset {
 	border-bottom: 1px solid #f1f1f1;
 }
 

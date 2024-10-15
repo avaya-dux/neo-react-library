@@ -1,15 +1,19 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
-import type { Row } from "react-table";
-import { DragHandle } from "./DragHandle";
-
-import { IconButton } from "components";
 import log from "loglevel";
 import { useContext } from "react";
-import { FilterContext } from "./helpers";
-export const logger = log.getLogger("TableComponents/DraggableTableRow");
+import type { Row } from "react-table";
+import { DragHandle } from "./DragHandle";
+import {
+	FilterContext,
+	renderCheckboxAndExpand,
+	renderExtendedRow,
+	useResizerHeight,
+} from "./helpers";
+const logger = log.getLogger("TableComponents/DraggableTableRow");
 logger.disableAll();
+export { logger as draggableTableRowLogger };
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const DraggableTableRow = <T extends Record<string, any>>({
@@ -36,11 +40,14 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 	const preparedRowProps = row.getRowProps();
 	logger.debug("row.isSelected", row.isSelected);
 
-	const { hasInsetTable, renderInsetTable } = useContext(FilterContext);
+	const { hasInsetTable, renderInsetTable, resizableColumns } =
+		useContext(FilterContext);
 
 	// count dynamic columns
 	const cellCount =
 		row.cells.length + 1 + (checkboxTd || hasInsetTable ? 1 : 0);
+
+	useResizerHeight(row.id, row.isExpanded);
 
 	return (
 		<tbody
@@ -53,6 +60,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 				style={{ ...preparedRowProps.style }}
 				key={preparedRowProps.key || `table-row-${row.id}`}
 				className={clsx(
+					`parent-row-${row.id}`,
 					row.isSelected && "active",
 					preparedRowProps.className,
 					row.original.disabled && "disabled",
@@ -66,46 +74,32 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 						{...listeners}
 					/>
 				</td>
-				{(checkboxTd || hasInsetTable) && (
-					<td
-						className={clsx("checkbox-andor-expand", !checkboxTd && "narrow")}
-					>
-						<div>
-							{checkboxTd}
-							{hasInsetTable && (
-								<IconButton
-									icon={row.isExpanded ? "chevron-down" : "chevron-right"}
-									size="compact"
-									iconSize="sm"
-									status="event"
-									aria-label={row.isExpanded ? "expand" : "collapse"}
-									className="td-icon--expand"
-									{...row.getToggleRowExpandedProps({})}
-								/>
-							)}
-						</div>
-					</td>
-				)}
+				{renderCheckboxAndExpand({ checkboxTd, hasInsetTable, row })}
+
 				{row.cells.map((cell) => {
 					const { key, ...restCellProps } = cell.getCellProps();
 					return (
 						<td
-							{...restCellProps}
 							key={key}
+							{...restCellProps}
 							className={cell.column.isResizing ? "neo-table--resizing" : ""}
 						>
 							{cell.render("Cell")}
+
+							{resizableColumns && cell.column.canResize && (
+								<div
+									className={clsx(
+										`resizer-${row.id}`,
+										"neo-table__resizer__td",
+										cell.column.isResizing && "neo-table--resizing",
+									)}
+								/>
+							)}
 						</td>
 					);
 				})}
 			</tr>
-			{row.isExpanded ? (
-				<tr>
-					<td colSpan={cellCount}>
-						{renderInsetTable ? renderInsetTable(row) : null}
-					</td>
-				</tr>
-			) : null}
+			{renderExtendedRow({ row, cellCount, renderInsetTable })}
 		</tbody>
 	);
 };

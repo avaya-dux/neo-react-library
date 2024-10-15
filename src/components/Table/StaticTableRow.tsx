@@ -1,9 +1,13 @@
 import clsx from "clsx";
-import { IconButton } from "components";
 import { useContext } from "react";
 import type { Row } from "react-table";
 import { DragHandle } from "./DragHandle";
-import { FilterContext } from "./helpers";
+import {
+	FilterContext,
+	renderCheckboxAndExpand,
+	renderExtendedRow,
+	useResizerHeight,
+} from "./helpers";
 
 export const StaticTableRow = <T extends Record<string, unknown>>({
 	row,
@@ -14,7 +18,8 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 	checkboxTd: JSX.Element | null;
 	showDragHandle: boolean;
 }) => {
-	const { hasInsetTable, renderInsetTable } = useContext(FilterContext);
+	const { hasInsetTable, renderInsetTable, resizableColumns } =
+		useContext(FilterContext);
 
 	// count dynamic columns
 	const cellCount =
@@ -22,6 +27,9 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 		(showDragHandle ? 1 : 0) +
 		(checkboxTd || hasInsetTable ? 1 : 0);
 	const { key: _, ...restProps } = row.getRowProps();
+
+	useResizerHeight(row.id, row.isExpanded);
+
 	return (
 		<tbody
 			className={clsx(
@@ -29,33 +37,13 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 				row.original.disabled ? "disabled" : undefined,
 			)}
 		>
-			<tr {...restProps}>
+			<tr {...restProps} className={`parent-row-${row.id}`}>
 				{showDragHandle && (
 					<td className="neo-table__dnd-td">
 						<DragHandle />
 					</td>
 				)}
-				{(checkboxTd || hasInsetTable) && (
-					<td
-						className={clsx("checkbox-andor-expand", !checkboxTd && "narrow")}
-					>
-						<div>
-							{checkboxTd}
-							{hasInsetTable && (
-								<IconButton
-									icon={row.isExpanded ? "chevron-down" : "chevron-right"}
-									size="compact"
-									iconSize="sm"
-									status="event"
-									aria-label={row.isExpanded ? "expand" : "collapse"}
-									className="td-icon--expand"
-									{...row.getToggleRowExpandedProps({})}
-								/>
-							)}
-						</div>
-					</td>
-				)}
-
+				{renderCheckboxAndExpand({ checkboxTd, hasInsetTable, row })}
 				{row.cells.map((cell) => {
 					const { key, ...restCellProps } = cell.getCellProps();
 					return (
@@ -65,17 +53,20 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 							className={cell.column.isResizing ? "neo-table--resizing" : ""}
 						>
 							<span>{cell.render("Cell")}</span>
+							{resizableColumns && cell.column.canResize && (
+								<div
+									className={clsx(
+										"neo-table__resizer__td",
+										cell.column.isResizing && "neo-table--resizing",
+										`resizer-${row.id}`,
+									)}
+								/>
+							)}
 						</td>
 					);
 				})}
 			</tr>
-			{row.isExpanded ? (
-				<tr>
-					<td colSpan={cellCount}>
-						{renderInsetTable ? renderInsetTable(row) : null}
-					</td>
-				</tr>
-			) : null}
+			{renderExtendedRow({ row, cellCount, renderInsetTable })}
 		</tbody>
 	);
 };

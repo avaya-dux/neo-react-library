@@ -346,7 +346,9 @@ describe("Table", () => {
 			expect(alltrs.length).toBeTruthy();
 
 			const firstBodyRow = alltrs[1];
-			expect(firstBodyRow.classList.length).toBe(0);
+			console.log(firstBodyRow.classList.toString());
+			// parent-row-id
+			expect(firstBodyRow.classList.length).toBe(1);
 			expect(firstBodyRow).not.toHaveClass("active");
 
 			const firstRowCheckbox = firstBodyRow.querySelector("input");
