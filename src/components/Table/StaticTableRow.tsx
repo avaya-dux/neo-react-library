@@ -58,7 +58,7 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 									className={clsx(
 										"neo-table__resizer__td",
 										cell.column.isResizing && "neo-table--resizing",
-										`resizer-${row.id}`,
+										cell.column.isResizing && `resizer-${row.id}`,
 									)}
 								/>
 							)}
