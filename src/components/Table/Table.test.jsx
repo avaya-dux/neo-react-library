@@ -1375,6 +1375,7 @@ describe("Table", () => {
 						},
 					],
 					toggleRowSelected: mocktoggleRowSelected,
+					state: { selectedRowIds: {} },
 				};
 
 				setTableRowsSelected(mockInstance, false, mockHandleRowToggled);
@@ -1420,6 +1421,7 @@ describe("Table", () => {
 						},
 					],
 					toggleRowSelected: mocktoggleRowSelected,
+					state: { selectedRowIds: {} },
 				};
 
 				setPageRowsSelected(mockInstance, false, mockHandleRowToggled);
