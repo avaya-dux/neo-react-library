@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Image } from "components/Image";
+import { TopNav } from "components/TopNav";
 import { SideNavigation } from "./";
 
 const meta: Meta<typeof SideNavigation> = {
@@ -7,48 +9,80 @@ const meta: Meta<typeof SideNavigation> = {
 	title: "Components/Side Navigation",
 	args: {
 		"aria-label": "Side Navigation",
-		currentUrl: "#active",
+		currentUrl: "#home",
 	},
 	argTypes: {
-		// disable all but `currentUrl` prop
+		// no useful controls to add to stories
 		"aria-label": { table: { disable: true } },
+		currentUrl: { table: { disable: true } },
 		onNavigate: { table: { disable: true } },
 		isActiveOverride: { table: { disable: true } },
 	},
 };
 export default meta;
 
-type Story = StoryObj<{ currentUrl: string }>;
-const handleClick = (_id: string, url: string) => {
-	window.open(url);
-};
+type Story = StoryObj<{ ariaLabel: string; currentUrl: string }>;
 
 export const Default: Story = {
-	render: ({ currentUrl }) => (
-		<SideNavigation
-			aria-label="Main Navigation"
-			onNavigate={handleClick}
-			currentUrl={currentUrl}
-		>
-			<SideNavigation.TopLinkItem label="Active by default" href="#active" />
-			<SideNavigation.TopLinkItem label="Link 2" href="#test2" />
-			<SideNavigation.TopLinkItem
-				label="Link with Icon Example"
-				icon="address-book"
-				href="#address-book"
+	render: ({ ariaLabel, currentUrl }) => (
+		<main>
+			<h2>With and Without Icons</h2>
+
+			<p style={{ marginBottom: "1rem" }}>
+				Side Navigation is a vertical navigation component that allows users to
+				navigate between different sections of a website or application. The top
+				level items must either all have icons, or no icons.
+			</p>
+
+			<p style={{ marginBottom: "1rem" }}>
+				IMPORTANT: The links in the Side Nav are actual links. If you select one
+				it will take you to a new page.
+			</p>
+
+			<TopNav
+				logo={
+					<a href="/" title="Logo Link">
+						<Image
+							isDecorativeOrBranding
+							src="/src/components/TopNav/logo-full-light.svg"
+						/>
+					</a>
+				}
 			/>
-			<SideNavigation.TopLinkItem
-				label="Disabled Link"
-				disabled
-				href="#disabled"
-			/>
-			<SideNavigation.TopLinkItem
-				label="Disabled Link with Icon"
-				icon="address-book"
-				disabled
-				href="#disabledicon"
-			/>
-		</SideNavigation>
+
+			<section
+				style={{
+					display: "flex",
+					justifyContent: "space-between",
+				}}
+			>
+				<SideNavigation aria-label={ariaLabel} currentUrl={currentUrl}>
+					<SideNavigation.TopLinkItem label="Home" icon="home" href="#home" />
+					<SideNavigation.TopLinkItem
+						label="Dashboard"
+						icon="dashboard"
+						href="#dashboard"
+					/>
+					<SideNavigation.TopLinkItem
+						label="Advanced"
+						icon="settings"
+						href="#address-book"
+					/>
+					<SideNavigation.TopLinkItem label="Admin" icon="user" disabled />
+				</SideNavigation>
+
+				<SideNavigation
+					aria-label={ariaLabel}
+					currentUrl={currentUrl}
+					dir="rtl"
+				>
+					<SideNavigation.TopLinkItem label="Home" href="#home" />
+					<SideNavigation.TopLinkItem label="Dashboard" href="#dashboard" />
+					<SideNavigation.TopLinkItem label="Advanced" href="#address-book" />
+					<SideNavigation.TopLinkItem label="Admin" disabled />
+				</SideNavigation>
+			</section>
+		</main>
 	),
 };
 

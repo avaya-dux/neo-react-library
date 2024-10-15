@@ -4,7 +4,7 @@ import type { IconNamesType } from "utils";
 
 export interface SideNavigationTopLinkItemProps {
 	label: string;
-	href: string;
+	href?: string;
 	disabled?: boolean;
 	icon?: IconNamesType;
 	id?: string;
