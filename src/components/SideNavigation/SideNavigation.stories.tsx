@@ -24,7 +24,7 @@ export default meta;
 type Story = StoryObj<{ ariaLabel: string; currentUrl: string }>;
 
 export const Default: Story = {
-	render: ({ ariaLabel, currentUrl }) => (
+	render: ({ currentUrl }) => (
 		<main>
 			<h2>With and Without Icons</h2>
 
