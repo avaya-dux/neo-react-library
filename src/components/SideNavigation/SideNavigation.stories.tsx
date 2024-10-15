@@ -56,7 +56,10 @@ export const Default: Story = {
 					justifyContent: "space-between",
 				}}
 			>
-				<SideNavigation aria-label={ariaLabel} currentUrl={currentUrl}>
+				<SideNavigation
+					aria-label="left aligned side navigation"
+					currentUrl={currentUrl}
+				>
 					<SideNavigation.TopLinkItem label="Home" icon="home" href="#home" />
 					<SideNavigation.TopLinkItem
 						label="Dashboard"
@@ -72,7 +75,7 @@ export const Default: Story = {
 				</SideNavigation>
 
 				<SideNavigation
-					aria-label={ariaLabel}
+					aria-label="right aligned side navigation"
 					currentUrl={currentUrl}
 					dir="rtl"
 				>
