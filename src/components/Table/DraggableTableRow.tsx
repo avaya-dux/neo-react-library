@@ -47,11 +47,14 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 	const cellCount =
 		row.cells.length + 1 + (checkboxTd || hasInsetTable ? 1 : 0);
 
-	useResizerHeight(row.id);
+	const { parentRowRef, resizerRef } = useResizerHeight(row);
 
 	return (
 		<tbody
-			ref={setNodeRef}
+			ref={(node) => {
+				setNodeRef(node);
+				parentRowRef.current = node;
+			}}
 			style={{ ...style }}
 			className={clsx(isDragging && "neo-table__tbody--dragging")}
 		>
@@ -90,10 +93,12 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 								cell.column.canResize &&
 								cell.column.isResizing && (
 									<div
+										ref={(node) => {
+											resizerRef.current = node;
+										}}
 										className={clsx(
 											"neo-table__resizer__td",
 											"neo-table--resizing",
-											`resizer-${row.id}`,
 										)}
 									/>
 								)}
@@ -101,7 +106,11 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 					);
 				})}
 			</tr>
-			{renderExtendedRow({ row, cellCount, renderInsetTable })}
+			{renderExtendedRow({
+				row,
+				cellCount,
+				renderInsetTable,
+			})}
 		</tbody>
 	);
 };

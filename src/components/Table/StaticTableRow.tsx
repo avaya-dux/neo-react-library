@@ -28,16 +28,17 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 		(checkboxTd || hasInsetTable ? 1 : 0);
 	const { key: _, ...restProps } = row.getRowProps();
 
-	useResizerHeight(row.id);
+	const { parentRowRef, resizerRef } = useResizerHeight(row);
 
 	return (
 		<tbody
+			ref={parentRowRef}
 			className={clsx(
 				showDragHandle && "neo-set-keyboard-focus",
 				row.original.disabled ? "disabled" : undefined,
 			)}
 		>
-			<tr {...restProps} className={`parent-row-${row.id}`}>
+			<tr {...restProps}>
 				{showDragHandle && (
 					<td className="neo-table__dnd-td">
 						<DragHandle />
@@ -57,10 +58,10 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 								cell.column.canResize &&
 								cell.column.isResizing && (
 									<div
+										ref={resizerRef}
 										className={clsx(
 											"neo-table__resizer__td",
 											"neo-table--resizing",
-											`resizer-${row.id}`,
 										)}
 									/>
 								)}

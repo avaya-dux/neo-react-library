@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import clsx from "clsx";
 import { IconButton } from "components";
@@ -53,9 +53,8 @@ export const renderExtendedRow = ({
 	renderInsetTable,
 }: RenderExtendedRowProps) => {
 	if (!row.isExpanded) return null;
-	logger.debug({ id: row.id, isExpanded: row.isExpanded, cellCount });
 	return (
-		<tr className={clsx("neo-table__inset", `extended-row-${row.id}`)}>
+		<tr className="neo-table__inset">
 			<td colSpan={cellCount}>
 				{renderInsetTable ? renderInsetTable(row) : null}
 			</td>
@@ -63,28 +62,23 @@ export const renderExtendedRow = ({
 	);
 };
 
-export const useResizerHeight = (rowId: string) => {
-	useEffect(
-		() => {
-			const resizer = document.querySelector(`.resizer-${rowId}`);
-			if (!resizer) {
-				logger.debug("No resizer found");
-				return;
-			}
-			const parentRow = document.querySelector(`.parent-row-${rowId}`);
-			const extendedRow = document.querySelector(`.extended-row-${rowId}`);
+export const useResizerHeight = (row: AnyRecord) => {
+	const parentRowRef = useRef<HTMLTableSectionElement | null>(null);
+	const resizerRef = useRef<HTMLDivElement | null>(null);
 
-			const parentRowHeight = (parentRow as HTMLElement).offsetHeight;
-			if (extendedRow === null) {
-				logger.info("No extended row found", rowId);
-			}
-			const extendedRowHeight = extendedRow
-				? (extendedRow as HTMLElement).offsetHeight
-				: 0;
-			const totalHeight = parentRowHeight + extendedRowHeight + 2;
-			logger.debug({ rowId, parentRowHeight, extendedRowHeight, totalHeight });
-			(resizer as HTMLElement).style.height = `${totalHeight}px`;
-		},
-		// update heights in every render since row height can change while resizing
-	);
+	const [rowHeight, setRowHeight] = useState(0);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		if (parentRowRef.current) {
+			setRowHeight(parentRowRef.current.clientHeight);
+		}
+	}, [row.isExpanded]);
+
+	useEffect(() => {
+		if (resizerRef.current) {
+			resizerRef.current.style.height = `${rowHeight}px`;
+		}
+	});
+	return { parentRowRef, resizerRef };
 };
