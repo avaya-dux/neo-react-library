@@ -512,6 +512,28 @@ describe("Table", () => {
 			expect(screen.queryAllByText(allRowsToggledOnText)).toHaveLength(2);
 			expect(screen.queryAllByText(allRowsToggledOffText)).toHaveLength(2);
 		});
+
+		it("when data is filtered, the 'clear' button returns accurate selection", async () => {
+			render(<PreSelectedRows />);
+
+			const codeElement = screen.getByRole("code");
+			expect(codeElement).toHaveTextContent('["10","40"]');
+
+			const globalSearchInput = screen.getByLabelText("Search all");
+			await user.type(globalSearchInput, "da");
+
+			const selectAllItemsButton = screen.getByText(
+				FilledFields.translations.header.selectAll,
+			);
+			await user.click(selectAllItemsButton);
+			expect(codeElement).toHaveTextContent('["10","40","20","90"]');
+
+			const deselectAllItemsButton = screen.getByText(
+				FilledFields.translations.header.clearAll,
+			);
+			await user.click(deselectAllItemsButton);
+			expect(codeElement).toHaveTextContent('["10","40"]');
+		});
 	});
 
 	describe("toolbar functionality", () => {
@@ -1375,6 +1397,7 @@ describe("Table", () => {
 						},
 					],
 					toggleRowSelected: mocktoggleRowSelected,
+					state: { selectedRowIds: {} },
 				};
 
 				setTableRowsSelected(mockInstance, false, mockHandleRowToggled);
@@ -1420,6 +1443,7 @@ describe("Table", () => {
 						},
 					],
 					toggleRowSelected: mocktoggleRowSelected,
+					state: { selectedRowIds: {} },
 				};
 
 				setPageRowsSelected(mockInstance, false, mockHandleRowToggled);
