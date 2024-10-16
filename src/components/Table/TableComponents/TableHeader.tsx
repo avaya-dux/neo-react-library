@@ -271,7 +271,7 @@ export const TableHeader: TableHeaderComponentType = ({
 										<div
 											{...column.getResizerProps()}
 											className={clsx(
-												"neo-table__resizer__tr",
+												"neo-table__resizer__th",
 												column.isResizing && "neo-table--resizing",
 											)}
 										/>

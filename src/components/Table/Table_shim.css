@@ -12,7 +12,7 @@
 			line-height: 35px;
 			/* This makes th height the same no matter its content is dropdown or plain text */
 
-			.neo-table__resizer__tr {
+			.neo-table__resizer__th {
 				width: 10px;
 				height: 100%;
 				position: absolute;
