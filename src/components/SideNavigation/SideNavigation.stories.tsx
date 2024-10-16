@@ -8,9 +8,7 @@ import { SideNavigation } from "./";
 const meta: Meta<typeof SideNavigation> = {
 	component: SideNavigation,
 	title: "Components/Side Navigation",
-	args: {
-		currentUrl: "http://active.com",
-	},
+	args: {},
 	argTypes: {
 		// no useful controls to add to stories
 		"aria-label": { table: { disable: true } },
@@ -21,11 +19,13 @@ const meta: Meta<typeof SideNavigation> = {
 };
 export default meta;
 
-export const Default: StoryObj<{
+type Story = StoryObj<{
 	dir: "ltr" | "rtl";
 	mode: "neo-light" | "neo-dark";
 	showIcons: boolean;
-}> = {
+}>;
+
+export const Default: Story = {
 	args: {
 		dir: "ltr",
 		mode: "neo-light",
@@ -111,136 +111,87 @@ export const Default: StoryObj<{
 	},
 };
 
-type Story = StoryObj<{ currentUrl: string }>;
+export const MultipleLevels: Story = {
+	...Default,
+	render: ({ dir, mode, showIcons }) => {
+		return (
+			<main>
+				<h2>Multiple Levels Example</h2>
 
-export const CategoryGroups: Story = {
-	render: ({ currentUrl }) => (
-		<SideNavigation aria-label="Text only Nav" currentUrl={currentUrl}>
-			<SideNavigation.NavCategory expanded={true} label="Text Only Category">
-				<SideNavigation.LinkItem href="http://first.com">
-					First Item
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://active.com">
-					Active Item
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://third.com">
-					Third Item
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://avaya.com" disabled>
-					Disabled Item
-				</SideNavigation.LinkItem>
-			</SideNavigation.NavCategory>
-			<SideNavigation.NavCategory label="Collapsed">
-				<SideNavigation.LinkItem href="http://link.com">
-					Link1
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://dup.com">
-					Duplicate Link
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://dup.com">
-					Duplicate Link
-				</SideNavigation.LinkItem>
-			</SideNavigation.NavCategory>
-			<SideNavigation.NavCategory disabled label="Disabled Category">
-				<SideNavigation.LinkItem href="http://avaya.com">
-					First Item
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://avaya.com">
-					Second Item
-				</SideNavigation.LinkItem>
-			</SideNavigation.NavCategory>
-		</SideNavigation>
-	),
-};
+				<p style={{ marginBottom: "1rem" }}>
+					The Side Navigation supports up to three levels of navigation as well
+					as grouping links into categories. Note that you may only assign icons
+					to the top level items.
+				</p>
 
-export const CategoryGroupsWithIcons: Story = {
-	args: {
-		currentUrl: "http://active.com",
+				<p style={{ marginBottom: "1rem" }}>
+					<b>WIP</b>: grouping/categories
+				</p>
+
+				<p style={{ marginBottom: "1rem" }}>
+					<b>WIP</b>: third level
+				</p>
+
+				<TopNav
+					logo={
+						<a href="/" title="Logo Link">
+							<Image
+								isDecorativeOrBranding
+								src="/src/components/TopNav/logo-full-light.svg"
+							/>
+						</a>
+					}
+				/>
+
+				<section dir={dir} className={clsx("neo-global-colors", mode)}>
+					<SideNavigation aria-label="side navigation">
+						<SideNavigation.TopLinkItem
+							label="Home"
+							icon={showIcons ? "home" : undefined}
+							href="#home"
+						/>
+
+						<SideNavigation.TopLinkItem
+							label="Dashboard"
+							icon={showIcons ? "dashboard" : undefined}
+							href="#dashboard"
+						/>
+
+						<SideNavigation.NavCategory
+							label="Advanced"
+							icon={showIcons ? "settings" : undefined}
+						>
+							<SideNavigation.LinkItem href="#applications">
+								Applications
+							</SideNavigation.LinkItem>
+
+							<SideNavigation.LinkItem>
+								Actions (TODO: Sub Category)
+							</SideNavigation.LinkItem>
+
+							<SideNavigation.LinkItem href="#geography">
+								Geography
+							</SideNavigation.LinkItem>
+
+							<SideNavigation.LinkItem href="devices">
+								Devices
+							</SideNavigation.LinkItem>
+						</SideNavigation.NavCategory>
+
+						<SideNavigation.TopLinkItem
+							label="Contact Center"
+							icon={showIcons ? "address-book" : undefined}
+							href="#contact-center"
+						/>
+
+						<SideNavigation.TopLinkItem
+							label="Admin"
+							icon={showIcons ? "user" : undefined}
+							disabled
+						/>
+					</SideNavigation>
+				</section>
+			</main>
+		);
 	},
-	render: ({ currentUrl }) => (
-		<SideNavigation
-			aria-label="Integration Testing App Menu"
-			currentUrl={currentUrl}
-		>
-			<SideNavigation.NavCategory
-				icon="interaction-details"
-				label="Interactivity"
-			>
-				<SideNavigation.LinkItem href="http://first.com">
-					Address Book
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://dup.com">
-					Email Client
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://dup.com">
-					Manage Accounts
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://fourth.com">
-					Photo Gallery
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://fourth.com">
-					Notification Center
-				</SideNavigation.LinkItem>
-			</SideNavigation.NavCategory>
-			<SideNavigation.NavCategory icon="code-cloud" label="API Testing">
-				<SideNavigation.LinkItem href="http://item1.com">
-					Table
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://active.com">
-					Select / Menus
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://disabled.com">
-					Forms
-				</SideNavigation.LinkItem>
-			</SideNavigation.NavCategory>
-			<SideNavigation.NavCategory icon="layout-custom" label="Form Factor">
-				<SideNavigation.LinkItem href="http://link.com">
-					Desktop
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://link2.com">
-					Mobile
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://link2.com">
-					Layouts
-				</SideNavigation.LinkItem>
-			</SideNavigation.NavCategory>
-			<SideNavigation.NavCategory icon="chat-ready" label="Localization">
-				<SideNavigation.LinkItem href="http://strings.com">
-					Strings
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://dates.com">
-					Dates
-				</SideNavigation.LinkItem>
-				<SideNavigation.LinkItem href="http://bidi.com">
-					Bi-directional
-				</SideNavigation.LinkItem>
-			</SideNavigation.NavCategory>
-		</SideNavigation>
-	),
-};
-
-export const DoesNotConflictWithOtherNavs: Story = {
-	render: ({ currentUrl }) => (
-		<div>
-			<SideNavigation aria-label="Main Navigation" currentUrl={currentUrl}>
-				<SideNavigation.TopLinkItem label="Active by default" href="#active" />
-				<SideNavigation.TopLinkItem label="Link 2" href="#test2" />
-				<SideNavigation.TopLinkItem label="Link 3" href="#test3" />
-			</SideNavigation>
-
-			<nav>
-				<ul>
-					<li>
-						<a href="#test">Test</a>
-					</li>
-					<li>
-						<a href="#test2">Test2</a>
-					</li>
-					<li>
-						<a href="#test3">Test3</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	),
 };
