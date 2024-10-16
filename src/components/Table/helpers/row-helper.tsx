@@ -68,12 +68,12 @@ export const useResizerHeight = (row: AnyRecord) => {
 
 	const [rowHeight, setRowHeight] = useState(0);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (parentRowRef.current) {
+			logger.debug(row.id, parentRowRef.current.clientHeight);
 			setRowHeight(parentRowRef.current.clientHeight);
 		}
-	}, [row.isExpanded]);
+	});
 
 	useEffect(() => {
 		if (resizerRef.current) {
