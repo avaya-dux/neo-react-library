@@ -39,7 +39,8 @@
 
 			.neo-table__resizer__td {
 				width: 2px;
-				height: calc(100% + 2px); /* overcome the tr bottom border */
+				height: calc(100% + 2px);
+				/* overcome the tr bottom border */
 
 				position: absolute;
 				right: 0;
@@ -209,10 +210,12 @@ tr.neo-table__inset {
 
 .neo-table td.checkbox-andor-expand {
 	padding-inline: 0;
-	width: 60px;
+
+	min-width: 60px;
 
 	&.narrow {
 		width: 32px;
+		min-width: 32px;
 	}
 
 	div {
