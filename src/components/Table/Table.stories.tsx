@@ -21,7 +21,15 @@ import {
 	Tooltip,
 } from "components";
 import { Button } from "components/Button";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+	type ReactElement,
+	isValidElement,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import type { Column, Row } from "react-table";
 import { useDebouncedCallback } from "use-debounce";
 import type { IconNamesType } from "utils";
@@ -372,163 +380,166 @@ export const ServerSidePagination = () => {
 };
 
 export const AdvancedFilteringAndSorting = () => {
-	const columns: Array<Column<IDataTableMockData>> = [
-		...FilledFields.columns,
-		{
-			Header: "Level",
-			accessor: "level",
-			sortType: (rowA, rowB) => {
-				const {
-					original: { level: levelA },
-				} = rowA;
-				const {
-					original: { level: levelB },
-				} = rowB;
-				let result = 0;
+	const columns: Array<Column<IDataTableMockData>> = useMemo(
+		() => [
+			...FilledFields.columns,
+			{
+				Header: "Level",
+				accessor: "level",
+				sortType: (rowA, rowB) => {
+					const {
+						original: { level: levelA },
+					} = rowA;
+					const {
+						original: { level: levelB },
+					} = rowB;
+					let result = 0;
 
-				if (levelA === levelB) {
-					result = 0;
-				} else if (
-					(levelA === "high" && levelB !== "high") ||
-					(levelA === "medium" && levelB === "low")
-				) {
-					result = 1;
-				} else {
-					result = -1;
-				}
+					if (levelA === levelB) {
+						result = 0;
+					} else if (
+						(levelA === "high" && levelB !== "high") ||
+						(levelA === "medium" && levelB === "low")
+					) {
+						result = 1;
+					} else {
+						result = -1;
+					}
 
-				return result;
+					return result;
+				},
 			},
-		},
-		{
-			Cell: ({ value }: { value: IDataTableMockData["hasOnCallBeeper"] }) => {
-				let icon: IconNamesType = "undo";
-				let label = "unknown";
+			{
+				Cell: ({ value }: { value: IDataTableMockData["hasOnCallBeeper"] }) => {
+					let icon: IconNamesType = "undo";
+					let label = "unknown";
 
-				if (value === true) {
-					icon = "check";
-					label = "Yes";
-				} else if (value === false) {
-					icon = "close";
-					label = "No";
-				}
-
-				return <Icon icon={icon} aria-label={label} />;
-			},
-			Header: "Has On Call Beeper",
-			accessor: "hasOnCallBeeper",
-			sortType: (row) => (row.original.hasOnCallBeeper ? 1 : -1), // `boolean` is not supported by default
-			width: 75,
-			filter: "includesValue",
-		},
-		{
-			Cell: ({ value }: { value: IDataTableMockData["date"] }) => (
-				<>{value?.toLocaleDateString()}</>
-			),
-			Header: "Date",
-			accessor: "date",
-			sortType: "datetime",
-			filter: "includesValue",
-		},
-		{
-			Cell: ({ value }: { value: IDataTableMockData["status"] }) => {
-				let icon: IconNamesType = "add-circle";
-
-				switch (value) {
-					case "active":
+					if (value === true) {
 						icon = "check";
-						break;
-					case "inactive":
+						label = "Yes";
+					} else if (value === false) {
 						icon = "close";
-						break;
-					case "awc":
-						icon = "away";
-						break;
-					case "in call":
-						icon = "agents";
-						break;
-					default:
-						icon = "queue";
-						break;
-				}
+						label = "No";
+					}
 
-				return <Chip icon={icon}>{value?.toUpperCase() || ""}</Chip>;
+					return <Icon icon={icon} aria-label={label} />;
+				},
+				Header: "Has On Call Beeper",
+				accessor: "hasOnCallBeeper",
+				sortType: (row) => (row.original.hasOnCallBeeper ? 1 : -1), // `boolean` is not supported by default
+				width: 175, // set it to a value different from the default
+				filter: "includesValue",
 			},
-			Filter: ({
-				column: { preFilteredRows, id, filterValue },
-				onFilterValueChange,
-			}) => {
-				const options = useMemo(() => {
-					const optionSet = new Set();
-					preFilteredRows.forEach((row) => {
-						optionSet.add(row.values[id]);
-					});
-					return Array.from(optionSet.values());
-				}, [id, preFilteredRows]);
-
-				const all = useMemo(
-					() => (
-						<SelectOption key="All" value="All">
-							All
-						</SelectOption>
-					),
-					[],
-				);
-
-				const rest = useMemo(() => {
-					return options.map((option) => (
-						<SelectOption key={option as string} value={option as string}>
-							{(option as string).toUpperCase()}
-						</SelectOption>
-					));
-				}, [options]);
-
-				return (
-					<div style={{ margin: "0px 0px -8px 0px" }}>
-						<Select
-							aria-label="Status"
-							value={filterValue || ""}
-							onChange={(value) => {
-								logger.debug("Status Filter onChange", value);
-								if (onFilterValueChange) {
-									onFilterValueChange(value === "All" ? "" : value);
-								}
-							}}
-						>
-							{all}
-							{rest}
-						</Select>
-					</div>
-				);
-			},
-			Header: "Status",
-			accessor: "status",
-			filter: "exactText",
-		},
-		{
-			Cell: ({ value }: { value: IDataTableMockData["longText"] }) =>
-				value ? (
-					<Tooltip label={value}>
-						<div
-							style={{
-								whiteSpace: "nowrap",
-								width: 50,
-								overflow: "hidden",
-								textOverflow: "ellipsis",
-							}}
-						>
-							{value}
-						</div>
-					</Tooltip>
-				) : (
-					<>---</>
+			{
+				Cell: ({ value }: { value: IDataTableMockData["date"] }) => (
+					<>{value?.toLocaleDateString()}</>
 				),
-			Header: "Long Text",
-			accessor: "longText",
-			disableFilters: true,
-			show: false,
-		},
-	];
+				Header: "Date",
+				accessor: "date",
+				sortType: "datetime",
+				filter: "includesValue",
+			},
+			{
+				Cell: ({ value }: { value: IDataTableMockData["status"] }) => {
+					let icon: IconNamesType = "add-circle";
+
+					switch (value) {
+						case "active":
+							icon = "check";
+							break;
+						case "inactive":
+							icon = "close";
+							break;
+						case "awc":
+							icon = "away";
+							break;
+						case "in call":
+							icon = "agents";
+							break;
+						default:
+							icon = "queue";
+							break;
+					}
+
+					return <Chip icon={icon}>{value?.toUpperCase() || ""}</Chip>;
+				},
+				Filter: ({
+					column: { preFilteredRows, id, filterValue },
+					onFilterValueChange,
+				}) => {
+					const options = useMemo(() => {
+						const optionSet = new Set();
+						preFilteredRows.forEach((row) => {
+							optionSet.add(row.values[id]);
+						});
+						return Array.from(optionSet.values());
+					}, [id, preFilteredRows]);
+
+					const all = useMemo(
+						() => (
+							<SelectOption key="All" value="All">
+								All
+							</SelectOption>
+						),
+						[],
+					);
+
+					const rest = useMemo(() => {
+						return options.map((option) => (
+							<SelectOption key={option as string} value={option as string}>
+								{(option as string).toUpperCase()}
+							</SelectOption>
+						));
+					}, [options]);
+
+					return (
+						<div style={{ margin: "0px 0px -8px 0px" }}>
+							<Select
+								aria-label="Status"
+								value={filterValue || ""}
+								onChange={(value) => {
+									logger.debug("Status Filter onChange", value);
+									if (onFilterValueChange) {
+										onFilterValueChange(value === "All" ? "" : value);
+									}
+								}}
+							>
+								{all}
+								{rest}
+							</Select>
+						</div>
+					);
+				},
+				Header: "Status",
+				accessor: "status",
+				filter: "exactText",
+			},
+			{
+				Cell: ({ value }: { value: IDataTableMockData["longText"] }) =>
+					value ? (
+						<Tooltip label={value}>
+							<div
+								style={{
+									whiteSpace: "nowrap",
+									width: 50,
+									overflow: "hidden",
+									textOverflow: "ellipsis",
+								}}
+							>
+								{value}
+							</div>
+						</Tooltip>
+					) : (
+						<>---</>
+					),
+				Header: "Long Text",
+				accessor: "longText",
+				disableFilters: true,
+				show: false,
+			},
+		],
+		[],
+	);
 
 	return (
 		<section className="extra-spacing">
@@ -596,7 +607,7 @@ export const AdvancedFilteringAndSorting = () => {
 			<Table
 				allowToggleColumnVisibility
 				columns={columns}
-				data={[...FilledFields.data]}
+				data={FilledFields.data}
 			/>
 		</section>
 	);
@@ -620,8 +631,8 @@ export const TableInTabs = () => (
 				<TabPanel>
 					<Table
 						allowToggleColumnVisibility
-						columns={[...FilledFields.columns]}
-						data={[...FilledFields.data]}
+						columns={FilledFields.columns}
+						data={FilledFields.data}
 					/>
 				</TabPanel>
 			</TabPanels>
@@ -634,10 +645,19 @@ export const CustomActions = () => {
 	const [multiple, setMultiple] = useState(false);
 	const [expandable, setExpandable] = useState(false);
 	const [dark, setDark] = useState(false);
+	const [resizableColumns, setResizableColumns] = useState(true);
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const renderInsetTable = (row: any) => {
-		// inset table of 3 rows for name starting with "Sir"
-		if (row.original.name.startsWith("Sir"))
+		const name = row.original.name;
+		let nameValue = "";
+		if (isValidElement(name)) {
+			const element = name as ReactElement;
+			nameValue = element.props.children;
+		} else {
+			nameValue = name;
+		}
+		// inset table of 3 rows
+		if (row.index % 3 === 1)
 			return (
 				<Table
 					columns={FilledFields.columns}
@@ -645,18 +665,18 @@ export const CustomActions = () => {
 					readonly
 					showPagination={false}
 					pageCount={3}
-					data={[...FilledFields.data.slice(row.index, 3)]}
+					data={[...FilledFields.data.slice(row.index, row.index + 3)]}
 				/>
 			);
-		// inline form for name starting with "Madam"
-		if (row.original.name.startsWith("Madam"))
+		// inline form
+		if (row.index % 3 === 2)
 			return (
 				<Form aria-label="Playground form" inline>
 					<TextInput
 						clearable
 						label="Name"
 						placeholder="Type your name here."
-						defaultValue={row.original.name}
+						defaultValue={nameValue}
 						type="text"
 					/>
 					<TextInput
@@ -673,13 +693,14 @@ export const CustomActions = () => {
 					</Button>
 				</Form>
 			);
-		return <p>Name: {row.original.name}</p>;
+		return <p>Name: {nameValue}</p>;
 	};
 	return (
 		<div className={clsx(dark && "neo-dark")}>
 			<Table
 				{...FilledFields}
 				draggableRows={checked}
+				resizableColumns={resizableColumns}
 				selectableRows={multiple ? "multiple" : "none"}
 				caption="Custom Actions"
 				renderInsetTable={expandable ? renderInsetTable : undefined}
@@ -720,6 +741,14 @@ export const CustomActions = () => {
 							onChange={(_e, updatedChecked) => setExpandable(updatedChecked)}
 						>
 							Expandable Switch
+						</Switch>
+						<Switch
+							checked={resizableColumns}
+							onChange={(_e, updatedChecked) =>
+								setResizableColumns(updatedChecked)
+							}
+						>
+							Resizable Column Switch
 						</Switch>
 					</section>
 				}
