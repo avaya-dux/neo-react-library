@@ -70,8 +70,8 @@ export const useResizerHeight = (row: AnyRecord) => {
 
 	useEffect(() => {
 		if (parentRowRef.current) {
-			logger.debug(row.id, parentRowRef.current.clientHeight);
-			setRowHeight(parentRowRef.current.clientHeight);
+			logger.debug(row.id, parentRowRef.current.offsetHeight);
+			setRowHeight(parentRowRef.current.offsetHeight);
 		}
 	});
 

@@ -44,6 +44,7 @@ import {
 	FilterContext,
 	convertRowIdsArrayToObject,
 	translations as defaultTranslations,
+	useFullTableWidth,
 } from "./helpers";
 import type {
 	DataSyncOptionType,
@@ -158,21 +159,7 @@ export const Table = <T extends Record<string, any>>({
 		};
 	}, []);
 
-	const [columns, setColumns] = useState(originalColumns);
-	const tableRef = useRef<HTMLTableElement>(null);
-
-	useEffect(() => {
-		if (tableRef.current) {
-			const parentWidth = tableRef.current.offsetWidth;
-			const columnWidth = parentWidth / columns.length;
-			logger.debug("calculated width", columnWidth);
-			const newColoumns = originalColumns.map((column) => {
-				column.width = columnWidth;
-				return column;
-			});
-			setColumns(newColoumns);
-		}
-	}, [columns.length, originalColumns]);
+	const { columns, tableRef } = useFullTableWidth(originalColumns);
 
 	const instance = useTable<T>(
 		{
