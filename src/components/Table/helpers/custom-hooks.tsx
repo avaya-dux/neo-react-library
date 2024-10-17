@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
 import log from "loglevel";
+import { useEffect, useRef, useState } from "react";
 import type { Column } from "react-table";
 import type { AnyRecord } from "../types";
 
