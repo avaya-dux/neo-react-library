@@ -488,7 +488,6 @@ export const Table = <T extends Record<string, any>>({
 			/>
 		) : null;
 	};
-	const divRef = useRef<HTMLDivElement | null>(null);
 	return (
 		<DndContext
 			sensors={sensors}
@@ -500,10 +499,6 @@ export const Table = <T extends Record<string, any>>({
 		>
 			<FilterContext.Provider value={filterContext}>
 				<div
-					ref={(node) => {
-						divRef.current = node;
-						console.log("divRef assigned", node?.offsetWidth);
-					}}
 					id={id}
 					data-testid={id}
 					className={clsx(
@@ -542,10 +537,7 @@ export const Table = <T extends Record<string, any>>({
 						onCancelFilterValue={onCancelFilterValue}
 					/>
 					<table
-						ref={(node) => {
-							console.log("tableRef assigned", node?.offsetWidth);
-							tableRef.current = node;
-						}}
+						ref={tableRef}
 						{...getTableProps()}
 						className={clsx(
 							"neo-table",

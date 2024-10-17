@@ -1,10 +1,10 @@
 import log from "loglevel";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import type { Column } from "react-table";
 import type { AnyRecord } from "../types";
 
 const logger = log.getLogger("table-useFullTableWidth");
-logger.enableAll();
+logger.disableAll();
 export { logger as useFullTableWidthLogger };
 
 export const useFullTableWidth = <T extends AnyRecord>(
@@ -14,7 +14,7 @@ export const useFullTableWidth = <T extends AnyRecord>(
 	const tableRef = useRef<HTMLTableElement | null>(null);
 	const [tableWidth, setTableWidth] = useState(800);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (tableRef.current) {
 			const resizeObserver = new ResizeObserver((entries) => {
 				for (const entry of entries) {
@@ -39,7 +39,7 @@ export const useFullTableWidth = <T extends AnyRecord>(
 		}
 	}, []);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		logger.debug("update column width", tableWidth);
 		if (tableWidth === 0) {
 			logger.warn("tableWidth is 0");
