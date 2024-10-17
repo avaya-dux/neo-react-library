@@ -7,6 +7,7 @@ import { Tooltip } from "components/Tooltip";
 import { type IconNamesType, Keys } from "utils";
 
 import clsx from "clsx";
+import log from "loglevel";
 import type { ColumnInstance } from "react-table";
 import {
 	FilterContext,
@@ -15,7 +16,9 @@ import {
 	setTableRowsSelected,
 } from "../helpers";
 import type { TableHeaderProps } from "../types";
-
+const logger = log.getLogger("TableHeader");
+export { logger as tableHeaderLogger };
+logger.disableAll();
 // biome-ignore lint/suspicious/noExplicitAny: we require maximum flexibility here
 type TableHeaderComponentType = <T extends Record<string, any>>(
 	props: TableHeaderProps<T>,
@@ -54,6 +57,8 @@ export const TableHeader: TableHeaderComponentType = ({
 		clearSortByFuncRef,
 		hasInsetTable,
 		setFilterColumn,
+		tableWidth,
+		setLastColumnWidth,
 	} = useContext(FilterContext);
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none" || hasInsetTable;
@@ -61,9 +66,14 @@ export const TableHeader: TableHeaderComponentType = ({
 	return (
 		<thead>
 			{headerGroups.map((headerGroup) => {
-				const { key, ...restProps } = headerGroup.getHeaderGroupProps();
+				const {
+					key,
+					style = {},
+					...restProps
+				} = headerGroup.getHeaderGroupProps();
+				const newStyle = { ...style, width: tableWidth };
 				return (
-					<tr key={key} {...restProps}>
+					<tr key={key} style={newStyle} {...restProps}>
 						{draggableRows && (
 							<th className="neo-table__dnd-th">
 								<div
@@ -85,7 +95,7 @@ export const TableHeader: TableHeaderComponentType = ({
 							/>
 						)}
 
-						{headerGroup.headers.map((column) => {
+						{headerGroup.headers.map((column, index, columns) => {
 							const {
 								canFilter,
 								canSort,
@@ -97,6 +107,37 @@ export const TableHeader: TableHeaderComponentType = ({
 								filterValue,
 								render,
 							} = column;
+
+							const isLastColumn = columns.length - 1 === index;
+
+							const headerProps = getHeaderProps();
+							const originalStyle = headerProps.style || {};
+							let modifiedStyle = { ...originalStyle };
+
+							if (isLastColumn && tableWidth) {
+								const totalOtherColumnsWidth = columns
+									.slice(0, -1)
+									.reduce((total, col) => {
+										const colWidth = col.getHeaderProps().style?.width;
+										return (
+											total +
+											(colWidth ? Number.parseFloat(colWidth.toString()) : 0)
+										);
+									}, 0);
+
+								const lastColumnWidth = tableWidth - totalOtherColumnsWidth;
+								setLastColumnWidth(lastColumnWidth);
+								logger.log({
+									lastColumnWidthAdjusted: lastColumnWidth,
+									lastColumnWidthStart: originalStyle.width,
+									totalOtherColumnsWidth: totalOtherColumnsWidth,
+									tableWidth: tableWidth,
+								});
+								modifiedStyle = {
+									...originalStyle,
+									width: `${lastColumnWidth}px`,
+								};
+							}
 
 							const sortedDir = isSortedDesc ? "descending" : "ascending";
 							const ariasort = calculateAriaSortValue(isSorted, sortedDir);
@@ -261,13 +302,14 @@ export const TableHeader: TableHeaderComponentType = ({
 
 							return (
 								<th
-									{...getHeaderProps()}
+									{...headerProps}
+									style={modifiedStyle}
 									key={column.id}
 									scope="col"
 									aria-sort={ariasort}
 								>
 									{content}
-									{resizableColumns && column.canResize && (
+									{resizableColumns && column.canResize && !isLastColumn && (
 										<div
 											{...column.getResizerProps()}
 											className={clsx(

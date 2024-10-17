@@ -159,7 +159,7 @@ export const Table = <T extends Record<string, any>>({
 		};
 	}, []);
 
-	const { columns, tableRef } = useFullTableWidth(originalColumns);
+	const { columns, tableRef, tableWidth } = useFullTableWidth(originalColumns);
 
 	const instance = useTable<T>(
 		{
@@ -409,6 +409,8 @@ export const Table = <T extends Record<string, any>>({
 		return renderInsetTable && typeof renderInsetTable === "function";
 	}, [renderInsetTable]);
 
+	const [lastColumnWidth, setLastColumnWidth] = useState<number>(0);
+
 	const filterContext: IFilterContext = {
 		allowToggleColumnVisibility,
 		draggableRows,
@@ -423,6 +425,9 @@ export const Table = <T extends Record<string, any>>({
 		renderInsetTable,
 		filterColumn,
 		setFilterColumn,
+		tableWidth,
+		lastColumnWidth,
+		setLastColumnWidth,
 	};
 
 	const sensors = useSensors(
@@ -483,6 +488,7 @@ export const Table = <T extends Record<string, any>>({
 			/>
 		) : null;
 	};
+	const divRef = useRef<HTMLDivElement | null>(null);
 	return (
 		<DndContext
 			sensors={sensors}
@@ -494,6 +500,10 @@ export const Table = <T extends Record<string, any>>({
 		>
 			<FilterContext.Provider value={filterContext}>
 				<div
+					ref={(node) => {
+						divRef.current = node;
+						console.log("divRef assigned", node?.offsetWidth);
+					}}
 					id={id}
 					data-testid={id}
 					className={clsx(
@@ -532,7 +542,10 @@ export const Table = <T extends Record<string, any>>({
 						onCancelFilterValue={onCancelFilterValue}
 					/>
 					<table
-						ref={tableRef}
+						ref={(node) => {
+							console.log("tableRef assigned", node?.offsetWidth);
+							tableRef.current = node;
+						}}
 						{...getTableProps()}
 						className={clsx(
 							"neo-table",

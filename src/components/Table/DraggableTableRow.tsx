@@ -40,8 +40,13 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 	const preparedRowProps = row.getRowProps();
 	logger.debug("row.isSelected", row.isSelected);
 
-	const { hasInsetTable, renderInsetTable, resizableColumns } =
-		useContext(FilterContext);
+	const {
+		hasInsetTable,
+		renderInsetTable,
+		resizableColumns,
+		tableWidth,
+		lastColumnWidth,
+	} = useContext(FilterContext);
 
 	// count dynamic columns
 	const cellCount =
@@ -60,7 +65,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 		>
 			<tr
 				role={preparedRowProps.role}
-				style={{ ...preparedRowProps.style }}
+				style={{ ...preparedRowProps.style, width: tableWidth }}
 				key={preparedRowProps.key || `table-row-${row.id}`}
 				className={clsx(
 					`parent-row-${row.id}`,
@@ -79,19 +84,26 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 				</td>
 				{renderCheckboxAndExpand({ checkboxTd, hasInsetTable, row })}
 
-				{row.cells.map((cell) => {
-					const { key, ...restCellProps } = cell.getCellProps();
+				{row.cells.map((cell, index) => {
+					const { key, style, ...restCellProps } = cell.getCellProps();
+					const isLastIndex = row.cells.length - 1 === index;
+					const modifiedStyle = {
+						...style,
+						...(isLastIndex ? { width: `${lastColumnWidth}px` } : {}),
+					};
 					return (
 						<td
 							key={key}
 							{...restCellProps}
+							style={modifiedStyle}
 							className={cell.column.isResizing ? "neo-table--resizing" : ""}
 						>
 							{cell.render("Cell")}
 
 							{resizableColumns &&
 								cell.column.canResize &&
-								cell.column.isResizing && (
+								cell.column.isResizing &&
+								!isLastIndex && (
 									<div
 										ref={(node) => {
 											resizerRef.current = node;

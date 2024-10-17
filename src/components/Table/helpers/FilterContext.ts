@@ -14,4 +14,7 @@ export const FilterContext = createContext<IFilterContext>({
 	clearSortByFuncRef: null as unknown as MutableRefObject<(() => void) | null>,
 	filterColumn: undefined,
 	setFilterColumn: () => null,
+	tableWidth: 0,
+	lastColumnWidth: 0,
+	setLastColumnWidth: () => null,
 });

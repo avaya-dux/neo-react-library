@@ -18,15 +18,20 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 	checkboxTd: JSX.Element | null;
 	showDragHandle: boolean;
 }) => {
-	const { hasInsetTable, renderInsetTable, resizableColumns } =
-		useContext(FilterContext);
+	const {
+		hasInsetTable,
+		renderInsetTable,
+		resizableColumns,
+		tableWidth,
+		lastColumnWidth,
+	} = useContext(FilterContext);
 
 	// count dynamic columns
 	const cellCount =
 		row.cells.length +
 		(showDragHandle ? 1 : 0) +
 		(checkboxTd || hasInsetTable ? 1 : 0);
-	const { key: _, ...restProps } = row.getRowProps();
+	const { key: _, style, ...restProps } = row.getRowProps();
 
 	const { parentRowRef, resizerRef } = useResizerHeight(row);
 
@@ -38,25 +43,32 @@ export const StaticTableRow = <T extends Record<string, unknown>>({
 				row.original.disabled ? "disabled" : undefined,
 			)}
 		>
-			<tr {...restProps}>
+			<tr {...restProps} style={{ ...style, width: tableWidth }}>
 				{showDragHandle && (
 					<td className="neo-table__dnd-td">
 						<DragHandle />
 					</td>
 				)}
 				{renderCheckboxAndExpand({ checkboxTd, hasInsetTable, row })}
-				{row.cells.map((cell) => {
-					const { key, ...restCellProps } = cell.getCellProps();
+				{row.cells.map((cell, index) => {
+					const { key, style, ...restCellProps } = cell.getCellProps();
+					const isLastIndex = row.cells.length - 1 === index;
+					const modifiedStyle = {
+						...style,
+						...(isLastIndex ? { width: `${lastColumnWidth}px` } : {}),
+					};
 					return (
 						<td
 							key={key}
 							{...restCellProps}
+							style={modifiedStyle}
 							className={cell.column.isResizing ? "neo-table--resizing" : ""}
 						>
 							<span>{cell.render("Cell")}</span>
 							{resizableColumns &&
 								cell.column.canResize &&
-								cell.column.isResizing && (
+								cell.column.isResizing &&
+								!isLastIndex && (
 									<div
 										ref={resizerRef}
 										className={clsx(

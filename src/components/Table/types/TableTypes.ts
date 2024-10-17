@@ -71,6 +71,9 @@ export interface IFilterContext<T extends AnyRecord = AnyRecord> {
 	renderInsetTable?: (row: AnyRecord) => ReactNode;
 	filterColumn?: ColumnInstance<T>;
 	setFilterColumn: Dispatch<SetStateAction<ColumnInstance<T> | undefined>>;
+	tableWidth: number;
+	lastColumnWidth: number;
+	setLastColumnWidth: Dispatch<SetStateAction<number>>;
 }
 
 export type RowHeight = "compact" | "medium" | "large";
