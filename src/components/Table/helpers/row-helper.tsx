@@ -79,6 +79,26 @@ export const useResizerHeight = (row: AnyRecord) => {
 		if (resizerRef.current) {
 			resizerRef.current.style.height = `${rowHeight}px`;
 		}
+		if (
+			logger.getLevel() <= log.levels.DEBUG &&
+			parentRowRef.current &&
+			resizerRef.current
+		) {
+			const parentRect = parentRowRef.current.getBoundingClientRect();
+			const resizerRect = resizerRef.current.getBoundingClientRect();
+
+			const relativeTop = resizerRect.top - parentRect.top;
+			const relativeRight = resizerRect.right - parentRect.right;
+			const relativeLeft = resizerRect.left - parentRect.left;
+			const relativeHeight = resizerRect.height;
+
+			logger.debug("Resizer element relative properties:", {
+				top: relativeTop,
+				right: relativeRight,
+				left: relativeLeft,
+				height: relativeHeight,
+			});
+		}
 	});
 	return { parentRowRef, resizerRef };
 };

@@ -20,7 +20,7 @@ import {
 	type Row,
 	useExpanded,
 	useFilters,
-	useFlexLayout,
+	useBlockLayout,
 	useGlobalFilter,
 	usePagination,
 	useResizeColumns,
@@ -97,7 +97,7 @@ logger.disableAll();
 export const Table = <T extends Record<string, any>>({
 	id,
 	data: originalData,
-	columns,
+	columns: originalColumns,
 	caption,
 	summary,
 	itemsPerPageOptions,
@@ -157,6 +157,23 @@ export const Table = <T extends Record<string, any>>({
 			includesValue,
 		};
 	}, []);
+
+	const [columns, setColumns] = useState(originalColumns);
+	const tableRef = useRef<HTMLTableElement>(null);
+
+	useEffect(() => {
+		if (tableRef.current) {
+			const parentWidth = tableRef.current.offsetWidth;
+			const columnWidth = parentWidth / columns.length;
+			logger.debug("calculated width", columnWidth);
+			const newColoumns = originalColumns.map((column) => {
+				column.width = columnWidth;
+				return column;
+			});
+			setColumns(newColoumns);
+		}
+	}, [columns.length, originalColumns]);
+
 	const instance = useTable<T>(
 		{
 			columns,
@@ -164,7 +181,7 @@ export const Table = <T extends Record<string, any>>({
 			manualPagination: overridePagination,
 			defaultColumn: {
 				maxWidth: 800,
-				minWidth: 30,
+				minWidth: 50,
 				width: 150,
 			},
 			getRowId: (row: T) => row.id, // set the row id to be the passed data's id
@@ -189,7 +206,7 @@ export const Table = <T extends Record<string, any>>({
 			autoResetFilters: !manualColumnFilters,
 			...rest,
 		},
-		useFlexLayout,
+		useBlockLayout,
 		useResizeColumns,
 		useFilters,
 		useGlobalFilter,
@@ -528,6 +545,7 @@ export const Table = <T extends Record<string, any>>({
 						onCancelFilterValue={onCancelFilterValue}
 					/>
 					<table
+						ref={tableRef}
 						{...getTableProps()}
 						className={clsx(
 							"neo-table",
