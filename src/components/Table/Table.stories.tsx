@@ -631,8 +631,8 @@ export const TableInTabs = () => (
 				<TabPanel>
 					<Table
 						allowToggleColumnVisibility
-						columns={[...FilledFields.columns]}
-						data={[...FilledFields.data]}
+						columns={FilledFields.columns}
+						data={FilledFields.data}
 					/>
 				</TabPanel>
 			</TabPanels>

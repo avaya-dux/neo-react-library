@@ -1,5 +1,5 @@
 import log from "loglevel";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import type { Column } from "react-table";
 import type { AnyRecord } from "../types";
 
@@ -13,7 +13,7 @@ export const useFullTableWidth = <T extends AnyRecord>(
 	const [columns, setColumns] = useState(originalColumns);
 	const tableRef = useRef<HTMLTableElement>(null);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (tableRef.current) {
 			const parentWidth = tableRef.current.offsetWidth;
 			// exclude columns with width defined or not visible
