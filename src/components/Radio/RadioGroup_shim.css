@@ -16,10 +16,6 @@
 	margin-top: 0px;
 }
 
-.neo-input-group--inline label:not(.neo-switch):not(.neo-label) {
-	line-height: initial;
-}
-
 .neo-radio + label + .neo-tooltip {
 	width: fit-content;
 	margin-top: 8px;
@@ -68,6 +64,12 @@
 	top: 2px;
 }
 
+.neo-input-group--inline .neo-radio + label + .neo-tooltip label:before,
+.neo-radio.neo-radio--disabled:checked + label:before,
+.neo-radio + label:before {
+	top: 0;
+}
+
 .neo-radio:checked + label + .neo-tooltip label:after {
 	content: "";
 	height: 10px;
@@ -77,6 +79,12 @@
 	position: absolute;
 	top: 5px;
 	left: 3px;
+}
+
+.neo-input-group--inline .neo-radio + label + .neo-tooltip label:after,
+.neo-radio:checked + label:after,
+.neo-radio + label:after {
+	top: 3px;
 }
 
 .neo-tooltip .neo-radio[disabled] + label {
