@@ -965,6 +965,8 @@ export const PreSelectedRows = () => {
 				data={FilledFields.data}
 				handleRowToggled={handleToggle}
 				selectableRows="multiple"
+				initialStatePageSize={10}
+				itemsPerPageOptions={[5, 10, 50]}
 				defaultSelectedRowIds={defaultSelectedRowIds}
 			/>
 

@@ -472,6 +472,68 @@ describe("Table", () => {
 				0,
 			);
 		});
+
+		it("utilizes the same callback when selecting or deselecting rows via the header checkbox and the 'clear-row' button", async () => {
+			const allRowsToggledOnText = "All rows were toggled ON"; // from story
+			const allRowsToggledOffText = "All rows were toggled OFF"; // from story
+			render(<PreSelectedRows />);
+
+			const toggleItemsCheckbox = screen.getByLabelText(
+				FilledFields.translations.header.selectPage,
+			);
+
+			// no selections, no toggle messages
+			expect(screen.queryAllByText(allRowsToggledOnText)).toHaveLength(0);
+			expect(screen.queryAllByText(allRowsToggledOffText)).toHaveLength(0);
+
+			// select all, one "on" message
+			const selectAllItemsButton = screen.getByText(
+				FilledFields.translations.header.selectAll,
+			);
+			await user.click(selectAllItemsButton);
+			expect(screen.queryAllByText(allRowsToggledOnText)).toHaveLength(1);
+			expect(screen.queryAllByText(allRowsToggledOffText)).toHaveLength(0);
+
+			// deselect all rows, one "off" message
+			await user.click(toggleItemsCheckbox);
+			expect(screen.queryAllByText(allRowsToggledOnText)).toHaveLength(1);
+			expect(screen.queryAllByText(allRowsToggledOffText)).toHaveLength(1);
+
+			// select all rows, two "on" messages
+			await user.click(toggleItemsCheckbox);
+			expect(screen.queryAllByText(allRowsToggledOnText)).toHaveLength(2);
+			expect(screen.queryAllByText(allRowsToggledOffText)).toHaveLength(1);
+
+			// deselect all rows, two "off" messages
+			const deselectAllItemsButton = screen.getByText(
+				FilledFields.translations.header.clearAll,
+			);
+			await user.click(deselectAllItemsButton);
+			expect(screen.queryAllByText(allRowsToggledOnText)).toHaveLength(2);
+			expect(screen.queryAllByText(allRowsToggledOffText)).toHaveLength(2);
+		});
+
+		it("when data is filtered, the 'clear' button returns accurate selection", async () => {
+			render(<PreSelectedRows />);
+
+			const codeElement = screen.getByRole("code");
+			expect(codeElement).toHaveTextContent('["10","40"]');
+
+			const globalSearchInput = screen.getByLabelText("Search all");
+			await user.type(globalSearchInput, "da");
+
+			const selectAllItemsButton = screen.getByText(
+				FilledFields.translations.header.selectAll,
+			);
+			await user.click(selectAllItemsButton);
+			expect(codeElement).toHaveTextContent('["10","40","20","90"]');
+
+			const deselectAllItemsButton = screen.getByText(
+				FilledFields.translations.header.clearAll,
+			);
+			await user.click(deselectAllItemsButton);
+			expect(codeElement).toHaveTextContent('["10","40"]');
+		});
 	});
 
 	describe("toolbar functionality", () => {
@@ -948,6 +1010,7 @@ describe("Table", () => {
 			);
 		}, 10000);
 	});
+
 	describe("sort and filter functionality", () => {
 		let renderResult;
 
@@ -1334,6 +1397,7 @@ describe("Table", () => {
 						},
 					],
 					toggleRowSelected: mocktoggleRowSelected,
+					state: { selectedRowIds: {} },
 				};
 
 				setTableRowsSelected(mockInstance, false, mockHandleRowToggled);
@@ -1379,6 +1443,7 @@ describe("Table", () => {
 						},
 					],
 					toggleRowSelected: mocktoggleRowSelected,
+					state: { selectedRowIds: {} },
 				};
 
 				setPageRowsSelected(mockInstance, false, mockHandleRowToggled);
