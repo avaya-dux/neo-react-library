@@ -44,7 +44,7 @@ export const useFullTableWidth = <T extends AnyRecord>(
 			);
 			const adjustedColumns = originalColumns.map((column) => {
 				if (column.width === undefined && !column.show) {
-					column.width = columnWidth;
+					return { ...column, width: columnWidth };
 				}
 				return column;
 			});

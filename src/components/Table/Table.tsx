@@ -18,9 +18,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	type ColumnInstance,
 	type Row,
+	useBlockLayout,
 	useExpanded,
 	useFilters,
-	useBlockLayout,
 	useGlobalFilter,
 	usePagination,
 	useResizeColumns,
