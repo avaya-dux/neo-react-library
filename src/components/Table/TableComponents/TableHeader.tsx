@@ -58,7 +58,7 @@ export const TableHeader: TableHeaderComponentType = ({
 		hasInsetTable,
 		setFilterColumn,
 		tableWidth,
-		setLastColumnWidth,
+		lastColumnWidthRef,
 	} = useContext(FilterContext);
 
 	const shouldHaveCheckboxColumn = selectableRows !== "none" || hasInsetTable;
@@ -126,7 +126,7 @@ export const TableHeader: TableHeaderComponentType = ({
 									}, 0);
 
 								const lastColumnWidth = tableWidth - totalOtherColumnsWidth;
-								setLastColumnWidth(lastColumnWidth);
+								lastColumnWidthRef.current = lastColumnWidth;
 								logger.log({
 									lastColumnWidthAdjusted: lastColumnWidth,
 									lastColumnWidthStart: originalStyle.width,

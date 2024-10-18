@@ -14,6 +14,8 @@ export const useFullTableWidth = <T extends AnyRecord>(
 	const tableRef = useRef<HTMLTableElement | null>(null);
 	const [tableWidth, setTableWidth] = useState(800);
 
+	const [hiddenColumns, setHiddenColumns] = useState<string[]>();
+
 	useLayoutEffect(() => {
 		if (tableRef.current) {
 			const resizeObserver = new ResizeObserver((entries) => {
@@ -40,23 +42,62 @@ export const useFullTableWidth = <T extends AnyRecord>(
 	}, []);
 
 	useLayoutEffect(() => {
-		logger.debug("update column width", tableWidth);
+		logger.debug("update column width", tableWidth, hiddenColumns);
 		if (tableWidth === 0) {
 			logger.warn("tableWidth is 0");
 			return;
 		}
 		let availableTotalWidth = tableWidth;
 		const excludedColumns = originalColumns.filter((column) => {
+			// user determined what columns are hidden
+			if (hiddenColumns !== undefined) {
+				logger.debug(
+					"hiddenColumns defined, column",
+					column.id,
+					column.accessor,
+					column.width,
+				);
+				if (
+					column.accessor &&
+					hiddenColumns.includes(column.accessor as unknown as string)
+				) {
+					logger.debug("column hidden", column.id);
+					return true;
+				}
+				if (column.width) {
+					logger.debug(
+						"column width defined and not hidden by user",
+						column.width,
+						column.accessor,
+					);
+					if (typeof column.width === "number") {
+						availableTotalWidth -= column.width;
+					}
+					return true;
+				}
+				return false;
+			}
+			// initial render
 			if (column.width) {
-				logger.debug("column width defined", column.width, column.accessor);
+				logger.debug(
+					"column width defined initially",
+					column.width,
+					column.accessor,
+				);
 				if (typeof column.width === "number") {
 					availableTotalWidth -= column.width;
 				}
+				return true;
 			}
 			if (column.show === false) {
-				logger.debug("column not visible", column.width, column.accessor);
+				logger.debug(
+					"column not visible initially",
+					column.width,
+					column.accessor,
+				);
+				return true;
 			}
-			return column.width || column.show === false;
+			return false;
 		});
 
 		const numberOfIncludedColumns =
@@ -79,13 +120,39 @@ export const useFullTableWidth = <T extends AnyRecord>(
 			}),
 		);
 		const adjustedColumns = originalColumns.map((column) => {
-			if (column.width === undefined && !column.show) {
+			logger.debug(
+				"adjustColumns:",
+				column.accessor,
+				column.width,
+				column.show,
+			);
+			// user determined what columns are hidden
+			if (hiddenColumns !== undefined) {
+				if (
+					column.accessor &&
+					hiddenColumns.includes(column.accessor as unknown as string)
+				) {
+					logger.debug("column hidden in filter", column.id);
+					return { ...column, show: false };
+				}
+
+				if (column.width === undefined) {
+					return { ...column, width: columnWidth };
+				}
+				return { ...column };
+			}
+			// initial render
+			if (
+				column.width === undefined &&
+				(column.show || column.show === undefined)
+			) {
 				return { ...column, width: columnWidth };
 			}
-			return column;
+			return { ...column };
 		});
+		logger.debug("adjustedColumns length:", adjustedColumns.length);
 		setColumns(adjustedColumns);
-	}, [originalColumns, tableWidth]);
+	}, [originalColumns, tableWidth, hiddenColumns]);
 
-	return { columns, tableRef, tableWidth };
+	return { columns, tableRef, tableWidth, setHiddenColumns };
 };

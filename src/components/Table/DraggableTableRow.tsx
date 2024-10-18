@@ -45,7 +45,7 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 		renderInsetTable,
 		resizableColumns,
 		tableWidth,
-		lastColumnWidth,
+		lastColumnWidthRef,
 	} = useContext(FilterContext);
 
 	// count dynamic columns
@@ -89,7 +89,9 @@ export const DraggableTableRow = <T extends Record<string, any>>({
 					const isLastIndex = row.cells.length - 1 === index;
 					const modifiedStyle = {
 						...style,
-						...(isLastIndex ? { width: `${lastColumnWidth}px` } : {}),
+						...(isLastIndex
+							? { width: `${lastColumnWidthRef.current}px` }
+							: {}),
 					};
 					return (
 						<td

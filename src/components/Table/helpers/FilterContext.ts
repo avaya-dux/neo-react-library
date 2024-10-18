@@ -15,6 +15,6 @@ export const FilterContext = createContext<IFilterContext>({
 	filterColumn: undefined,
 	setFilterColumn: () => null,
 	tableWidth: 0,
-	lastColumnWidth: 0,
-	setLastColumnWidth: () => null,
+	lastColumnWidthRef: null as unknown as MutableRefObject<number>,
+	setHiddenColumns: () => null,
 });

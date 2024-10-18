@@ -159,7 +159,8 @@ export const Table = <T extends Record<string, any>>({
 		};
 	}, []);
 
-	const { columns, tableRef, tableWidth } = useFullTableWidth(originalColumns);
+	const { columns, tableRef, tableWidth, setHiddenColumns } =
+		useFullTableWidth(originalColumns);
 
 	const instance = useTable<T>(
 		{
@@ -409,7 +410,7 @@ export const Table = <T extends Record<string, any>>({
 		return renderInsetTable && typeof renderInsetTable === "function";
 	}, [renderInsetTable]);
 
-	const [lastColumnWidth, setLastColumnWidth] = useState<number>(0);
+	const lastColumnWidthRef = useRef<number>(0);
 
 	const filterContext: IFilterContext = {
 		allowToggleColumnVisibility,
@@ -426,8 +427,8 @@ export const Table = <T extends Record<string, any>>({
 		filterColumn,
 		setFilterColumn,
 		tableWidth,
-		lastColumnWidth,
-		setLastColumnWidth,
+		lastColumnWidthRef,
+		setHiddenColumns,
 	};
 
 	const sensors = useSensors(
