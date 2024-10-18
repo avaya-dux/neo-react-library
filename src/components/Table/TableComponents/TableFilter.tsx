@@ -38,7 +38,9 @@ export const TableFilter = <T extends Record<string, any>>({
 		defaultTranslations.toolbar.filterColumns ||
 		"Filter Columns";
 
-	const { allColumns, setHiddenColumns } = instance;
+	const { allColumns } = instance;
+
+	const { setHiddenColumns } = useContext(FilterContext);
 
 	const { filterSheetVisible, toggleFilterSheetVisible } =
 		useContext(FilterContext);
@@ -124,8 +126,8 @@ export const TableFilter = <T extends Record<string, any>>({
 				newHiddenColIds.push(col.id);
 			}
 		});
-
-		setHiddenColumns(newHiddenColIds); // Using Table api to hide unchecked columns.
+		// notifiy the parent component of the new hidden columns
+		setHiddenColumns(newHiddenColIds);
 		setApplyBtnEnabled(false);
 		toggleFilterSheetVisible();
 	}, [filteredColumns, setHiddenColumns, toggleFilterSheetVisible]);
