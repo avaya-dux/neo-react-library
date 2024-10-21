@@ -1,33 +1,12 @@
 .neo-table {
 	table-layout: fixed;
 
-	&.neo-table--resizing {
-		user-select: none;
-	}
-
 	thead tr {
 		th {
-			height: 61px;
 			align-items: center;
-			line-height: 35px;
+			line-height: 33px;
+			padding-block: 11px;
 			/* This makes th height the same no matter its content is dropdown or plain text */
-
-			.neo-table__resizer__th {
-				width: 10px;
-				height: 100%;
-				position: absolute;
-				right: 0;
-				top: 0;
-				transform: translateX(40%);
-				/* Center align the resizer and the td right border */
-				z-index: 1;
-				touch-action: none;
-
-				&:hover,
-				&.neo-table--resizing {
-					background-color: var(--neo-color-blue-500);
-				}
-			}
 		}
 	}
 
@@ -36,26 +15,26 @@
 
 		td {
 			position: relative;
-
-			.neo-table__resizer__td {
-				width: 2px;
-				height: calc(100% + 2px);
-				/* overcome the tr bottom border */
-
-				position: absolute;
-				right: 0;
-				top: 0;
-				transform: translateY(-1px);
-				z-index: 1;
-				touch-action: none;
-
-				&:hover,
-				&.neo-table--resizing {
-					background-color: var(--neo-color-blue-500);
-				}
-			}
+			padding: 12px 16px;
 		}
 	}
+}
+
+.neo-table--medium tr:not(.neo-table__nested--wrapper) td,
+.neo-table--medium .neo-table__nested.show td {
+	padding: 9px 16px;
+}
+
+.neo-table--medium thead tr th {
+	padding: 6px 16px;
+}
+
+.neo-table--compact tr:not(.neo-table__nested--wrapper) td,
+.neo-table--compact .neo-table__nested.show td {
+	padding: 7px 16px;
+}
+.neo-table--compact thead tr th {
+	padding: 6px 16px;
 }
 
 .neo-table th button {
@@ -174,6 +153,7 @@ tr.neo-table__inset {
 	width: 60px;
 
 	&.narrow {
+		min-width: 32px;
 		width: 32px;
 	}
 
@@ -208,8 +188,8 @@ tr.neo-table__inset {
 	background: var(--neo-color-blue-500);
 }
 
-.neo-table td.checkbox-andor-expand {
-	padding-inline: 0;
+.neo-table tbody tr td.checkbox-andor-expand {
+	padding-inline: 5px 14px;
 
 	min-width: 60px;
 
@@ -221,7 +201,6 @@ tr.neo-table__inset {
 	div {
 		display: flex;
 		align-items: center;
-		padding-inline-start: 5px;
 
 		button.td-icon--expand {
 			display: flex;
