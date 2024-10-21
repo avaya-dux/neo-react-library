@@ -30,7 +30,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 	error?: boolean;
 	helperText?: string;
 	inline?: boolean;
-	label?: string;
+	label?: ReactNode;
 	placeholder?: string;
 	readOnly?: boolean;
 	required?: boolean;

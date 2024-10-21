@@ -22,6 +22,20 @@ export const Default = () => {
 	);
 };
 
+export const LabelWithIcon = () => {
+	return (
+		<Form>
+			<TextInput
+				label={
+					<span style={{ display: "flex", alignItems: "flex-end", gap: "4px" }}>
+						Workflow ID
+						<Icon icon="info" aria-label="workflow id" size="sm" />
+					</span>
+				}
+			/>
+		</Form>
+	);
+};
 export const DifferentHTMLOutputExamples = () => {
 	return (
 		<section>
