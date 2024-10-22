@@ -1,14 +1,45 @@
 .neo-table {
 	table-layout: fixed;
 
-	tbody tr {
-		height: 100%;
+	thead tr {
+		th {
+			align-items: center;
+			line-height: 33px;
+			padding-block: 11px;
+			/* This makes th height the same no matter its content is dropdown or plain text */
+		}
 	}
+
+	tbody tr {
+		display: flex;
+
+		td {
+			position: relative;
+			padding: 12px 16px;
+		}
+	}
+}
+
+.neo-table--medium tr:not(.neo-table__nested--wrapper) td,
+.neo-table--medium .neo-table__nested.show td {
+	padding: 9px 16px;
+}
+
+.neo-table--medium thead tr th {
+	padding: 6px 16px;
+}
+
+.neo-table--compact tr:not(.neo-table__nested--wrapper) td,
+.neo-table--compact .neo-table__nested.show td {
+	padding: 7px 16px;
+}
+.neo-table--compact thead tr th {
+	padding: 6px 16px;
 }
 
 .neo-table th button {
 	color: black;
-	display: flex;
+	display: inline-block;
 	font-weight: 600;
 	padding-left: 0px;
 	padding-right: 0px;
@@ -54,7 +85,8 @@
 	}
 }
 
-.neo-table-separator td {
+.neo-table-separator td,
+tr.neo-table__inset {
 	border-bottom: 1px solid #f1f1f1;
 }
 
@@ -75,10 +107,11 @@
 
 .neo-table tr th.neo-table__dnd-th,
 .neo-table tr td.neo-table__dnd-td {
-	width: 24px;
-	display: table-cell;
-	vertical-align: middle;
-	padding: 6px 4px 0px 4px;
+	min-width: 24px;
+	display: flex;
+	align-items: center;
+	justify-items: center;
+	padding: 2px 0px;
 }
 
 .neo-table tr th.neo-table__dnd-td,
@@ -89,6 +122,7 @@
 .neo-table tr th.neo-table__dnd-th > div,
 .neo-table tr td.neo-table__dnd-td > div {
 	width: 16px;
+	padding-inline: 4px;
 	min-height: 16px;
 }
 
@@ -113,10 +147,13 @@
 }
 
 .neo-table th.neo-table-checkbox-th {
+	display: flex;
+	align-items: center;
 	padding: 0;
 	width: 60px;
 
 	&.narrow {
+		min-width: 32px;
 		width: 32px;
 	}
 
@@ -151,18 +188,19 @@
 	background: var(--neo-color-blue-500);
 }
 
-.neo-table td.checkbox-andor-expand {
-	padding-inline: 0;
-	width: 60px;
+.neo-table tbody tr td.checkbox-andor-expand {
+	padding-inline: 5px 14px;
+
+	min-width: 60px;
 
 	&.narrow {
 		width: 32px;
+		min-width: 32px;
 	}
 
 	div {
 		display: flex;
 		align-items: center;
-		padding-inline-start: 5px;
 
 		button.td-icon--expand {
 			display: flex;

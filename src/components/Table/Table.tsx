@@ -18,10 +18,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	type ColumnInstance,
 	type Row,
+	useBlockLayout,
 	useExpanded,
 	useFilters,
 	useGlobalFilter,
 	usePagination,
+	useResizeColumns,
 	useRowSelect,
 	useSortBy,
 	useTable,
@@ -42,6 +44,7 @@ import {
 	FilterContext,
 	convertRowIdsArrayToObject,
 	translations as defaultTranslations,
+	useFullTableWidth,
 } from "./helpers";
 import type {
 	DataSyncOptionType,
@@ -95,7 +98,7 @@ logger.disableAll();
 export const Table = <T extends Record<string, any>>({
 	id,
 	data: originalData,
-	columns,
+	columns: originalColumns,
 	caption,
 	summary,
 	itemsPerPageOptions,
@@ -127,6 +130,7 @@ export const Table = <T extends Record<string, any>>({
 	onManualSortBy,
 	showPagination = true,
 	draggableRows = false,
+	resizableColumns = false,
 	pushPaginationDown = false,
 	showRowSeparator = true,
 	showRowHeightMenu = true,
@@ -154,15 +158,19 @@ export const Table = <T extends Record<string, any>>({
 			includesValue,
 		};
 	}, []);
+
+	const { columns, tableRef, tableWidth, setHiddenColumns } =
+		useFullTableWidth(originalColumns);
+
 	const instance = useTable<T>(
 		{
 			columns,
 			data,
 			manualPagination: overridePagination,
 			defaultColumn: {
-				maxWidth: 300,
-				minWidth: 30,
-				width: "auto",
+				maxWidth: 800,
+				minWidth: 50,
+				width: 150,
 			},
 			getRowId: (row: T) => row.id, // set the row id to be the passed data's id
 			initialState: {
@@ -186,6 +194,8 @@ export const Table = <T extends Record<string, any>>({
 			autoResetFilters: !manualColumnFilters,
 			...rest,
 		},
+		useBlockLayout,
+		useResizeColumns,
 		useFilters,
 		useGlobalFilter,
 		useSortBy,
@@ -197,13 +207,21 @@ export const Table = <T extends Record<string, any>>({
 	const {
 		rows,
 		getTableProps,
-		state: { pageIndex, pageSize, filters },
+		state: {
+			pageIndex,
+			pageSize,
+			filters,
+			columnResizing: { isResizingColumn },
+		},
 		gotoPage,
 		setPageSize,
 		prepareRow,
 		pageCount,
 		toggleAllRowsSelected,
 		setAllFilters,
+		columns: visibleColumns,
+		headerGroups,
+		allColumns,
 	} = instance;
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: setAllFilters and filters don't need to be checked for perf reasons.
@@ -214,6 +232,12 @@ export const Table = <T extends Record<string, any>>({
 			setAllFilters(allFilters);
 		}
 	}, [allFilters]);
+
+	logger.info({
+		headerGroups: headerGroups[0].headers.length,
+		visible: visibleColumns.length,
+		all: allColumns.length,
+	});
 
 	const handleSearchWrapper = useMemo(() => {
 		if (handleSearch) {
@@ -249,7 +273,12 @@ export const Table = <T extends Record<string, any>>({
 	}, [onManualSortBy, gotoPage]);
 	const rowCount = overridePagination ? manualRowCount : rows.length;
 
-	logger.info({ initialStatePageIndex, rootLevelPageIndex, pageIndex });
+	logger.info({
+		initialStatePageIndex,
+		rootLevelPageIndex,
+		pageIndex,
+		filters,
+	});
 
 	const [dataSyncOption, setDataSyncOption] =
 		useState<DataSyncOptionType>("no");
@@ -381,9 +410,12 @@ export const Table = <T extends Record<string, any>>({
 		return renderInsetTable && typeof renderInsetTable === "function";
 	}, [renderInsetTable]);
 
+	const lastColumnWidthRef = useRef<number>(0);
+
 	const filterContext: IFilterContext = {
 		allowToggleColumnVisibility,
 		draggableRows,
+		resizableColumns,
 		filterSheetVisible,
 		setFilterSheetVisible,
 		toggleFilterSheetVisible,
@@ -394,6 +426,9 @@ export const Table = <T extends Record<string, any>>({
 		renderInsetTable,
 		filterColumn,
 		setFilterColumn,
+		tableWidth,
+		lastColumnWidthRef,
+		setHiddenColumns,
 	};
 
 	const sensors = useSensors(
@@ -503,12 +538,14 @@ export const Table = <T extends Record<string, any>>({
 						onCancelFilterValue={onCancelFilterValue}
 					/>
 					<table
+						ref={tableRef}
 						{...getTableProps()}
 						className={clsx(
 							"neo-table",
 							rowHeightValue === "compact" && "neo-table--compact",
 							rowHeightValue === "medium" && "neo-table--medium",
 							showRowSeparator && "neo-table-separator",
+							isResizingColumn && "neo-table--resizing",
 						)}
 						aria-labelledby={
 							caption && tableCaptionId ? tableCaptionId : undefined
