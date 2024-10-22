@@ -1,4 +1,5 @@
-import { type FC, useCallback, useId, useState } from "react";
+import type { FC } from "react";
+import { useCallback, useId, useState } from "react";
 import { RovingTabIndexProvider } from "react-roving-tabindex";
 
 import { handleAccessbilityError } from "utils";
@@ -11,7 +12,11 @@ import type {
 	SideNavigationProps,
 	SideNavigationSubComponents,
 } from "./SideNavigationTypes";
+import { SubCategory } from "./SubCategory";
+import { CategoryGroup } from "./CategoryGroup";
 import { TopLinkItem } from "./TopLinkItem";
+
+import "./SideNavigation_shim.css";
 
 /**
  * The side navigation bar is used to display the secondary navigation elements
@@ -94,5 +99,7 @@ export const SideNavigation: FC<SideNavigationProps> &
 
 SideNavigation.displayName = "SideNavigation";
 SideNavigation.LinkItem = LinkItem;
+SideNavigation.SubCategory = SubCategory;
+SideNavigation.CategoryGroup = CategoryGroup;
 SideNavigation.NavCategory = NavCategory;
 SideNavigation.TopLinkItem = TopLinkItem;

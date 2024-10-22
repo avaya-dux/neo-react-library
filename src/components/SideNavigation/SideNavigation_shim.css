@@ -1,0 +1,37 @@
+/* DO NOT CHECK IN */
+
+/* START: top level buttons */
+
+.neo-leftnav button.neo-btn {
+	border-left: 2px solid #0000;
+}
+
+[dir="rtl"] .neo-leftnav button.neo-btn {
+	border-right: 2px solid #0000;
+}
+
+.neo-leftnav button.neo-btn:not(:empty):before {
+	margin-right: 12px;
+}
+
+[dir="rtl"] .neo-leftnav button.neo-btn:not(:empty):before {
+	margin-left: 12px;
+	margin-right: 0;
+}
+
+/* END: top level buttons */
+
+/* START: nav category group */
+.neo-leftnav .neo-nav-category-group {
+	color: var(--neo-color-base-500);
+	margin-left: 52px;
+
+	/* children should be an additional 12px in */
+}
+/* END: nav category */
+
+/* START: sub category */
+.neo-leftnav .neo-nav-sub-category {
+	margin-left: 52px;
+}
+	/* END: sub category */

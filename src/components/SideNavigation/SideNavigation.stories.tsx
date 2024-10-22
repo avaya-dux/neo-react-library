@@ -161,21 +161,35 @@ export const MultipleLevels: Story = {
 							label="Advanced"
 							icon={showIcons ? "settings" : undefined}
 						>
-							<SideNavigation.LinkItem href="#applications">
-								Applications
-							</SideNavigation.LinkItem>
+							<SideNavigation.CategoryGroup label="Settings">
+								<SideNavigation.LinkItem href="#applications">
+									Applications
+								</SideNavigation.LinkItem>
 
-							<SideNavigation.LinkItem>
-								Actions (TODO: Sub Category)
-							</SideNavigation.LinkItem>
+								<SideNavigation.SubCategory label="Actions">
+									<SideNavigation.LinkItem href="#name">
+										Name
+									</SideNavigation.LinkItem>
 
-							<SideNavigation.LinkItem href="#geography">
-								Geography
-							</SideNavigation.LinkItem>
+									<SideNavigation.LinkItem href="#parameters">
+										Parameters
+									</SideNavigation.LinkItem>
+								</SideNavigation.SubCategory>
+							</SideNavigation.CategoryGroup>
 
-							<SideNavigation.LinkItem href="devices">
-								Devices
-							</SideNavigation.LinkItem>
+							<SideNavigation.CategoryGroup label="Reports">
+								<SideNavigation.LinkItem href="#geography">
+									Geography
+								</SideNavigation.LinkItem>
+
+								<SideNavigation.LinkItem href="#devices">
+									Devices
+								</SideNavigation.LinkItem>
+
+								<SideNavigation.LinkItem href="#depth-chart">
+									Depth Chart
+								</SideNavigation.LinkItem>
+							</SideNavigation.CategoryGroup>
 						</SideNavigation.NavCategory>
 
 						<SideNavigation.TopLinkItem

@@ -1,6 +1,8 @@
 import type { HTMLAttributes, ReactElement } from "react";
 
 import type { IconNamesType } from "utils";
+import type { SideNavigationSubCategoryProps } from "./SubCategory";
+import type { SideNavigationCategoryGroupProps } from "./CategoryGroup";
 
 export interface SideNavigationTopLinkItemProps {
 	label: string;
@@ -54,6 +56,8 @@ export interface SideNavigationSubComponents {
 	LinkItem: React.FC<SideNavigationLinkItemProps>;
 	NavCategory: React.FC<SideNavigationNavCategoryProps>;
 	TopLinkItem: React.FC<SideNavigationTopLinkItemProps>;
+	SubCategory: React.FC<SideNavigationSubCategoryProps>;
+	CategoryGroup: React.FC<SideNavigationCategoryGroupProps>;
 }
 
 export interface SideNavigationContextType {
