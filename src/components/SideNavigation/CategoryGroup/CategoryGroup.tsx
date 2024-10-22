@@ -13,11 +13,11 @@ export const CategoryGroup = ({
 	label,
 }: SideNavigationCategoryGroupProps) => {
 	return (
-		<div className={clsx("neo-nav-category-group", className)}>
+		<li className={clsx("neo-nav-category-group", className)}>
 			<div>{label}</div>
 
-			<div>{children}</div>
-		</div>
+			<ul>{children}</ul>
+		</li>
 	);
 };
 CategoryGroup.displayName = "CategoryGroup";

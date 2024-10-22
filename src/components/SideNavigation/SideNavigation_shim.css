@@ -1,5 +1,12 @@
 /* DO NOT CHECK IN */
 
+/* START: global side nav changes */
+.neo-leftnav * {
+	list-style: none;
+}
+
+/* END: global side nav changes */
+
 /* START: top level buttons */
 
 .neo-leftnav button.neo-btn {
@@ -28,10 +35,12 @@
 
 	/* children should be an additional 12px in */
 }
+
 /* END: nav category */
 
 /* START: sub category */
 .neo-leftnav .neo-nav-sub-category {
-	margin-left: 52px;
+	margin-left: 22px;
 }
-	/* END: sub category */
+
+/* END: sub category */

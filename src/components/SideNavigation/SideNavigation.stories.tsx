@@ -151,11 +151,18 @@ export const MultipleLevels: Story = {
 							href="#home"
 						/>
 
-						<SideNavigation.TopLinkItem
-							label="Dashboard"
+						<SideNavigation.NavCategory
+							label="Dashboards"
 							icon={showIcons ? "dashboard" : undefined}
-							href="#dashboard"
-						/>
+						>
+							<SideNavigation.LinkItem href="#my-dashboard">
+								My Dashboards
+							</SideNavigation.LinkItem>
+
+							<SideNavigation.LinkItem href="#team-dashboard">
+								Team Dashboards
+							</SideNavigation.LinkItem>
+						</SideNavigation.NavCategory>
 
 						<SideNavigation.NavCategory
 							label="Advanced"
