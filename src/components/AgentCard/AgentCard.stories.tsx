@@ -1,13 +1,21 @@
-import type { Meta, Story } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { Avatar } from "components/Avatar";
 
-import { AgentCard, type AgentCardProps } from "./AgentCard";
+import { AgentCard } from "./AgentCard";
 
-export default {
+const meta: Meta<typeof AgentCard> = {
 	title: "Components/AgentCard",
 	component: AgentCard,
-} as Meta<AgentCardProps>;
+	args: {
+		agentName: "Barbara Barberson",
+		agentStatus: "connected",
+	},
+};
+
+export default meta;
+
+type Story = StoryObj<typeof AgentCard>;
 
 const initialLetters = (name: string) => {
 	if (!name) {
@@ -23,96 +31,91 @@ const initialLetters = (name: string) => {
 	return "";
 };
 
-export const AgentCardStory = () => (
-	<>
+export const AgentCardStory: Story = {
+	render: () => (
+		<>
+			<div className="neo-nav">
+				<AgentCard
+					agentName={"Barbara Barberson"}
+					agentStatus={"connected"}
+					avatar={
+						<Avatar
+							variant="basic"
+							label={"Barbara Barberson"}
+							initials={initialLetters("Barbara Barberson")}
+						/>
+					}
+				/>
+			</div>
+			<br />
+			<div className="neo-nav">
+				<AgentCard
+					agentName={"Barbara Barberson"}
+					agentStatus={"ready"}
+					avatar={
+						<Avatar
+							variant="basic"
+							label={"Barbara Barberson"}
+							initials={initialLetters("Barbara Barberson")}
+						/>
+					}
+				/>
+			</div>
+			<br />
+			<div className="neo-nav">
+				<AgentCard
+					agentName={"Barbara Barberson"}
+					agentStatus={"not-ready"}
+					avatar={
+						<Avatar
+							variant="basic"
+							label={"Barbara Barberson"}
+							initials={initialLetters("Barbara Barberson")}
+						/>
+					}
+				/>
+			</div>
+			<br />
+			<div className="neo-nav">
+				<AgentCard
+					agentName={"Barbara Barberson"}
+					agentStatus={"ready"}
+					avatar={<Avatar variant="generic" label={"Barbara Barberson"} />}
+				/>
+			</div>
+			<br />
+			<div className="neo-nav">
+				<AgentCard
+					agentName={"Barbara Barberson"}
+					agentStatus={"ready"}
+					avatar={
+						<Avatar
+							variant="generic"
+							label={"Barbara Barberson"}
+							image="https://placekitten.com/g/200/300"
+						/>
+					}
+				/>
+			</div>
+		</>
+	),
+};
+
+export const TemplatedAgentCard: Story = {
+	render: ({ agentStatus, agentName }) => (
 		<div className="neo-nav">
 			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"connected"}
-				avatar={
-					<Avatar
-						variant="basic"
-						label={"Barbara Barberson"}
-						initials={initialLetters("Barbara Barberson")}
-					/>
-				}
-			/>
-		</div>
-		<br />
-		<div className="neo-nav">
-			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"ready"}
-				avatar={
-					<Avatar
-						variant="basic"
-						label={"Barbara Barberson"}
-						initials={initialLetters("Barbara Barberson")}
-					/>
-				}
-			/>
-		</div>
-		<br />
-		<div className="neo-nav">
-			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"not-ready"}
-				avatar={
-					<Avatar
-						variant="basic"
-						label={"Barbara Barberson"}
-						initials={initialLetters("Barbara Barberson")}
-					/>
-				}
-			/>
-		</div>
-		<br />
-		<div className="neo-nav">
-			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"ready"}
-				avatar={<Avatar variant="generic" label={"Barbara Barberson"} />}
-			/>
-		</div>
-		<br />
-		<div className="neo-nav">
-			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"ready"}
+				agentStatus={agentStatus}
+				agentName={agentName}
 				avatar={
 					<Avatar
 						variant="generic"
-						label={"Barbara Barberson"}
+						size="md"
 						image="https://placekitten.com/g/200/300"
+						label="image of a kitten"
 					/>
 				}
 			/>
 		</div>
-	</>
-);
-
-const Template: Story<AgentCardProps> = ({
-	agentName,
-	agentStatus,
-}: AgentCardProps) => (
-	<div className="neo-nav">
-		<AgentCard
-			agentStatus={agentStatus}
-			agentName={agentName}
-			avatar={
-				<Avatar
-					variant="generic"
-					size="md"
-					image="https://placekitten.com/g/200/300"
-					label="image of a kitten"
-				/>
-			}
-		/>
-	</div>
-);
-
-export const TemplatedAgentCard = Template.bind({});
-TemplatedAgentCard.args = {
-	agentName: "Barbara Barberson",
-	agentStatus: "connected",
+	),
 };
