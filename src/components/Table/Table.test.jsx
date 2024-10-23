@@ -1232,6 +1232,10 @@ describe("Table", () => {
 
 	describe("custom global filtering using drawer", () => {
 		const drawerTestId = "custom-filter-drawer-id";
+		const HEADER_ROW_COUNT = 1;
+		const EXPECTED_FILTERED_ROWS_WITH_D = 4;
+		const EXPECTED_FILTERED_ROWS_WITH_D_AND_L = 2;
+
 		let renderResult;
 		beforeEach(() => {
 			renderResult = render(<CustomBasicTableFilterDrawer />);
@@ -1267,7 +1271,9 @@ describe("Table", () => {
 			// 4 rows should be visible
 			await waitFor(() => expect(customFilterDrawer).toHaveClass("neo-drawer"));
 			const numberOfRows = screen.getAllByRole("row");
-			expect(numberOfRows).toHaveLength(5); // includes 1 row for header
+			expect(numberOfRows).toHaveLength(
+				EXPECTED_FILTERED_ROWS_WITH_D + HEADER_ROW_COUNT,
+			);
 
 			// Bring up Custom Filter drawer again and apply one more filter
 			await user.click(filterButton);
@@ -1282,7 +1288,9 @@ describe("Table", () => {
 			// 2 rows should be visible
 			await waitFor(() => expect(customFilterDrawer).toHaveClass("neo-drawer"));
 			const numberOfRows2 = screen.getAllByRole("row");
-			expect(numberOfRows2).toHaveLength(3); // includes 1 row for header
+			expect(numberOfRows2).toHaveLength(
+				EXPECTED_FILTERED_ROWS_WITH_D_AND_L + HEADER_ROW_COUNT,
+			);
 		});
 	});
 
