@@ -114,13 +114,13 @@ describe("Note", () => {
 
 			+it("correctly sets author when edit is made", async () => {
 				const { getByRole, getByText } = renderResult;
-				
-				await user.click(getByRole('button', { name: /menu actions/i }));
-				await user.click(getByRole('menuitem', { name: /edit Edit/i }));
-				const textarea = getByRole('textbox');
+
+				await user.click(getByRole("button", { name: /menu actions/i }));
+				await user.click(getByRole("menuitem", { name: /edit Edit/i }));
+				const textarea = getByRole("textbox");
 				await user.type(textarea, "aa");
-				await user.click(getByRole('button', { name: /save/i }));
-				
+				await user.click(getByRole("button", { name: /save/i }));
+
 				expect(getByText("Edited: Me")).toBeInTheDocument();
 			});
 
