@@ -76,11 +76,6 @@ describe("Note", () => {
 				renderResult = render(<SingleNote />);
 			});
 
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
 			it("passes basic axe compliance", async () => {
 				const { container } = renderResult;
 				const results = await axe(container);
@@ -93,11 +88,6 @@ describe("Note", () => {
 
 			beforeEach(() => {
 				renderResult = render(<NoteWithCustomAuthor />);
-			});
-
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
 			});
 
 			it("passes basic axe compliance", async () => {
@@ -114,35 +104,24 @@ describe("Note", () => {
 				renderResult = render(<Editable />);
 			});
 
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
 			it("toggles the textarea when edit is selected", async () => {
-				const { container } = renderResult;
-				await user.click(
-					container.querySelector("button") as HTMLButtonElement,
-				);
-				await user.click(container.getElementsByClassName("neo-icon-edit")[0]);
+				const { getByRole } = renderResult;
+				await user.click(getByRole("button", { name: /menu actions/i }));
+				await user.click(getByRole("menuitem", { name: /edit Edit/i }));
 
-				expect(
-					container.getElementsByTagName("textarea")[0],
-				).toBeInTheDocument();
+				expect(getByRole("textbox")).toBeInTheDocument();
 			});
 
-			it("correctly sets author when edit is made", async () => {
-				const { container } = renderResult;
-
-				await user.click(
-					container.querySelector("button") as HTMLButtonElement,
-				);
-				await user.click(container.getElementsByClassName("neo-icon-edit")[0]);
-				await user.click(container.getElementsByTagName("textarea")[0]);
-				await user.keyboard("aa");
-				await user.click(container.getElementsByTagName("button")[1]);
-
-				expect(screen.getByText("Edited: Me")).toBeInTheDocument();
+			+it("correctly sets author when edit is made", async () => {
+				const { getByRole, getByText } = renderResult;
+				
+				await user.click(getByRole('button', { name: /menu actions/i }));
+				await user.click(getByRole('menuitem', { name: /edit Edit/i }));
+				const textarea = getByRole('textbox');
+				await user.type(textarea, "aa");
+				await user.click(getByRole('button', { name: /save/i }));
+				
+				expect(getByText("Edited: Me")).toBeInTheDocument();
 			});
 
 			it("passes basic axe compliance", async () => {
