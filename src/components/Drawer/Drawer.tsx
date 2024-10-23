@@ -18,23 +18,12 @@ import "./Drawer_shim.css";
 import { IconButton } from "components/IconButton";
 import { Keys } from "utils";
 
-type EnforcedAccessibleLabel =
-	| {
-			title: string | JSX.Element;
-			actions?: React.ReactNode[];
-			"aria-label"?: string;
-			"aria-labelledby"?: string;
-	  }
-	| {
-			title?: string | JSX.Element;
-			"aria-label": string;
-			"aria-labelledby"?: string;
-	  }
-	| {
-			title?: string | JSX.Element;
-			"aria-label"?: string;
-			"aria-labelledby": string;
-	  };
+type EnforcedAccessibleLabel = {
+	title: string | JSX.Element;
+	actions?: React.ReactNode[];
+	"aria-label"?: string;
+	"aria-labelledby"?: string;
+};
 
 const propsAreAccessible = (
 	title: string | JSX.Element | undefined,
