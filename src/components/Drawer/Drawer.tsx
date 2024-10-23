@@ -197,6 +197,7 @@ const BasicDrawer = ({
 				<div
 					onKeyDown={onKeyDownScrimHandler}
 					role="dialog"
+					aria-modal="true"
 					style={style}
 					aria-labelledby={id}
 					className={clsx("neo-drawer", open && "neo-drawer--open", className)}
