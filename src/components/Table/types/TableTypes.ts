@@ -60,6 +60,7 @@ export type DataSyncOptionType = "no" | "clear" | "asc" | "desc";
 export interface IFilterContext<T extends AnyRecord = AnyRecord> {
 	allowToggleColumnVisibility: boolean;
 	draggableRows: boolean;
+	resizableColumns: boolean;
 	filterSheetVisible: boolean;
 	setFilterSheetVisible: (visible: boolean) => void;
 	toggleFilterSheetVisible: () => void;
@@ -70,6 +71,9 @@ export interface IFilterContext<T extends AnyRecord = AnyRecord> {
 	renderInsetTable?: (row: AnyRecord) => ReactNode;
 	filterColumn?: ColumnInstance<T>;
 	setFilterColumn: Dispatch<SetStateAction<ColumnInstance<T> | undefined>>;
+	tableWidth: number;
+	lastColumnWidthRef: React.MutableRefObject<number>;
+	setHiddenColumns: Dispatch<SetStateAction<string[] | undefined>>;
 }
 
 export type RowHeight = "compact" | "medium" | "large";
@@ -89,6 +93,7 @@ export type TableProps<T extends AnyRecord> = {
 	showPagination?: boolean;
 	pushPaginationDown?: boolean;
 	draggableRows?: boolean;
+	resizableColumns?: boolean;
 	handlePageChange?: (pageIndex: number, pageSize: number) => void;
 	allFilters?: ColumnFilter[];
 	itemsPerPageOptions?: number[];
