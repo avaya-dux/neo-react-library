@@ -1,0 +1,42 @@
+.neo-input-group .neo-form__label-with-icon {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	padding-bottom: 4px;
+
+	label {
+		letter-spacing: 0;
+		color: var(--input-label-color);
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 16px;
+	}
+}
+
+.neo-form .neo-form-control > .neo-input-group .neo-form__label-with-icon,
+.neo-form
+	.neo-form-control--required
+	> .neo-input-group
+	.neo-form__label-with-icon {
+	> label {
+		padding-bottom: unset;
+	}
+
+	div {
+		span {
+			display: flex;
+			align-items: center;
+		}
+	}
+}
+
+.neo-form
+	.neo-form-control--required
+	> .neo-input-group
+	.neo-form__label-with-icon
+	> label:after {
+	color: var(--input-asterix-color);
+	content: "*";
+	display: inline-block;
+	padding-inline-start: 2px;
+}

@@ -2,6 +2,7 @@ import type { Meta } from "@storybook/react";
 
 import { Checkbox, Form, Icon } from "components";
 
+import type { ExternalLabelProps } from "components/Label";
 import { useCallback, useState } from "react";
 import { TextInput, type TextInputProps } from "./TextInput";
 
@@ -22,6 +23,25 @@ export const Default = () => {
 	);
 };
 
+export const LabelWithIcon = () => {
+	const label = {
+		text: "Workflow ID",
+		icon: {
+			iconType: "info",
+			iconAriaLabel: "workflow id",
+			iconTooltipPosition: "auto",
+			iconTooltipText: "This is the ID of the workflow.",
+		},
+	} as ExternalLabelProps;
+	return (
+		<Form>
+			<TextInput label={label} required />
+			<TextInput label={label} />
+			<TextInput label={label} required isSmall />
+			<TextInput label={label} isSmall />
+		</Form>
+	);
+};
 export const DifferentHTMLOutputExamples = () => {
 	return (
 		<section>

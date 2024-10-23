@@ -18,6 +18,7 @@ import {
 } from "utils";
 
 import "./TextInput_shim.css";
+import { type ExternalLabelProps, useLabel } from "components/Label";
 
 export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 	ariaLabelPasswordHide?: string;
@@ -30,7 +31,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 	error?: boolean;
 	helperText?: string;
 	inline?: boolean;
-	label?: string;
+	label?: string | ExternalLabelProps;
 	placeholder?: string;
 	readOnly?: boolean;
 	required?: boolean;
@@ -123,7 +124,7 @@ export const TextInput = ({
 			required={required}
 			inline={inline}
 		>
-			{label && <label htmlFor={id}>{label}</label>}
+			{label && useLabel(label, id)}
 
 			{readOnly ? (
 				<InternalTextInputElement
