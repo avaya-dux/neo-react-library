@@ -5,7 +5,7 @@ import { Checkbox, Form, Icon } from "components";
 import type { ExternalLabelProps } from "components/Label";
 import { useCallback, useState } from "react";
 import { TextInput, type TextInputProps } from "./TextInput";
-
+import "./TextInput.stories_shim.css";
 export default {
 	title: "Components/Text Input",
 	component: TextInput,
@@ -35,10 +35,31 @@ export const LabelWithIcon = () => {
 	} as ExternalLabelProps;
 	return (
 		<Form>
-			<TextInput label={label} required />
-			<TextInput label={label} />
-			<TextInput label={label} required isSmall />
-			<TextInput label={label} isSmall />
+			<TextInput label={label} required placeholder="label: required, icon" />
+			<TextInput label={label} placeholder="label: icon" />
+
+			{/* small size variant */}
+			<TextInput
+				label={label}
+				required
+				isSmall
+				placeholder="input: small, label: required, icon"
+			/>
+			<TextInput
+				label={label}
+				isSmall
+				placeholder="input: small, label: icon"
+			/>
+
+			{/* custom rule */}
+			<div className="container--narrow">
+				<TextInput
+					label={label}
+					required
+					className="custom-rule--narrow"
+					placeholder="customized narrow input"
+				/>
+			</div>
 		</Form>
 	);
 };
