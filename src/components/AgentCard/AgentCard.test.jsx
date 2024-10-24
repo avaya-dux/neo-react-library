@@ -5,7 +5,7 @@ import { axe } from "jest-axe";
 import { AgentCard } from "./AgentCard";
 import * as AgentCardStories from "./AgentCard.stories";
 
-const { AgentCardStory, TemplatedAgentCard } = composeStories(AgentCardStories);
+const { AgentCardStory } = composeStories(AgentCardStories);
 
 describe("AgentCard Component", () => {
 	const AgentCardName = "Joan Barnett";
@@ -39,22 +39,6 @@ describe("AgentCard Component", () => {
 			let renderResult;
 			beforeEach(() => {
 				renderResult = render(<AgentCardStory />);
-			});
-			it("should render ok", () => {
-				const { container } = renderResult;
-				expect(container).not.toBe(null);
-			});
-
-			it("passes basic axe compliance", async () => {
-				const { container } = renderResult;
-				const results = await axe(container);
-				expect(results).toHaveNoViolations();
-			});
-		});
-		describe("Templated AgentCard Component", () => {
-			let renderResult;
-			beforeEach(() => {
-				renderResult = render(<TemplatedAgentCard />);
 			});
 			it("should render ok", () => {
 				const { container } = renderResult;

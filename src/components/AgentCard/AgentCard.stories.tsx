@@ -1,13 +1,21 @@
-import type { Meta, Story } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Avatar } from "components/Avatar";
+import { Avatar, type AvatarProps } from "components/Avatar";
 
-import { AgentCard, type AgentCardProps } from "./AgentCard";
+import { AgentCard } from "./AgentCard";
 
-export default {
+type PagePropsAndCustomArgs = React.ComponentProps<typeof AgentCard> & {
+	image?: boolean;
+};
+
+const meta: Meta<PagePropsAndCustomArgs> = {
 	title: "Components/AgentCard",
 	component: AgentCard,
-} as Meta<AgentCardProps>;
+};
+
+export default meta;
+
+type Story = StoryObj<PagePropsAndCustomArgs>;
 
 const initialLetters = (name: string) => {
 	if (!name) {
@@ -15,104 +23,90 @@ const initialLetters = (name: string) => {
 	}
 	const nameToArray = name.split(" ");
 	if (name.length > 1) {
-		const initialsOfFirstLast =
-			nameToArray[0].charAt(0).toUpperCase() +
-			nameToArray[1].charAt(0).toUpperCase();
-		return initialsOfFirstLast;
+		let initials = "";
+
+		if (nameToArray.length > 1) {
+			initials =
+				nameToArray[0].charAt(0).toUpperCase() +
+				nameToArray[nameToArray.length - 1].charAt(0).toUpperCase();
+		} else {
+			initials = nameToArray[0].charAt(0).toUpperCase();
+		}
+		return initials;
 	}
 	return "";
 };
 
-export const AgentCardStory = () => (
+const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
 	<>
-		<div className="neo-nav">
-			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"connected"}
-				avatar={
-					<Avatar
-						variant="basic"
-						label={"Barbara Barberson"}
-						initials={initialLetters("Barbara Barberson")}
-					/>
-				}
-			/>
-		</div>
+		<div className="neo-nav">{children}</div>
 		<br />
-		<div className="neo-nav">
-			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"ready"}
-				avatar={
-					<Avatar
-						variant="basic"
-						label={"Barbara Barberson"}
-						initials={initialLetters("Barbara Barberson")}
-					/>
-				}
-			/>
-		</div>
-		<br />
-		<div className="neo-nav">
-			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"not-ready"}
-				avatar={
-					<Avatar
-						variant="basic"
-						label={"Barbara Barberson"}
-						initials={initialLetters("Barbara Barberson")}
-					/>
-				}
-			/>
-		</div>
-		<br />
-		<div className="neo-nav">
-			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"ready"}
-				avatar={<Avatar variant="generic" label={"Barbara Barberson"} />}
-			/>
-		</div>
-		<br />
-		<div className="neo-nav">
-			<AgentCard
-				agentName={"Barbara Barberson"}
-				agentStatus={"ready"}
-				avatar={
-					<Avatar
-						variant="generic"
-						label={"Barbara Barberson"}
-						image="https://placekitten.com/g/200/300"
-					/>
-				}
-			/>
-		</div>
 	</>
 );
 
-const Template: Story<AgentCardProps> = ({
-	agentName,
-	agentStatus,
-}: AgentCardProps) => (
-	<div className="neo-nav">
-		<AgentCard
-			agentStatus={agentStatus}
-			agentName={agentName}
-			avatar={
-				<Avatar
-					variant="generic"
-					size="md"
-					image="https://placekitten.com/g/200/300"
-					label="image of a kitten"
-				/>
-			}
-		/>
-	</div>
-);
+export const AgentCardStory: Story = {
+	argTypes: {
+		agentName: {
+			control: "text",
+			defaultValue: "Barbara Barberson",
+		},
+		agentStatus: {
+			control: "select",
+			options: ["connected", "ready", "not-ready"],
+			defaultValue: "connected",
+		},
+		avatar: {
+			control: "select",
+			options: ["basic", "generic", "bot"],
+			defaultValue: "basic",
+		},
+		image: {
+			control: "boolean",
+		},
+	},
+	render: ({ agentName, agentStatus, avatar, image }) => (
+		<StoryWrapper>
+			<AgentCard
+				agentName={agentName}
+				agentStatus={agentStatus}
+				avatar={
+					<Avatar
+						variant={avatar as AvatarProps["variant"]}
+						label={agentName}
+						initials={
+							(avatar as AvatarProps["variant"]) === "generic" ||
+							(avatar as AvatarProps["variant"]) === "bot" ||
+							image
+								? ""
+								: initialLetters(agentName)
+						}
+						image={
+							image
+								? "https://fastly.picsum.photos/id/1027/200/300.jpg?hmac=WCxdERZ7sgk4jhwpfIZT0M48pctaaDcidOi3dKSHJYY"
+								: ""
+						}
+					/>
+				}
+			/>
+		</StoryWrapper>
+	),
+};
 
-export const TemplatedAgentCard = Template.bind({});
-TemplatedAgentCard.args = {
-	agentName: "Barbara Barberson",
-	agentStatus: "connected",
+export const TemplatedAgentCard: Story = {
+	render: ({ agentStatus, agentName }) => (
+		<div className="neo-nav">
+			<AgentCard
+				agentStatus={agentStatus}
+				agentName={agentName}
+				avatar={
+					<Avatar
+						variant="generic"
+						size="md"
+						image="https://placekitten.com/g/200/300"
+						label="image of a kitten"
+					/>
+				}
+			/>
+		</div>
+	),
 };
