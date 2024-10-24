@@ -4,7 +4,9 @@ import { Avatar, type AvatarProps } from "components/Avatar";
 
 import { AgentCard } from "./AgentCard";
 
-type PagePropsAndCustomArgs = React.ComponentProps<typeof AgentCard> & { image?: boolean };
+type PagePropsAndCustomArgs = React.ComponentProps<typeof AgentCard> & {
+	image?: boolean;
+};
 
 const meta: Meta<PagePropsAndCustomArgs> = {
 	title: "Components/AgentCard",
@@ -46,22 +48,21 @@ export const AgentCardStory: Story = {
 	argTypes: {
 		agentName: {
 			control: "text",
-			defaultValue: "Barbara Barberson"
+			defaultValue: "Barbara Barberson",
 		},
 		agentStatus: {
 			control: "select",
 			options: ["connected", "ready", "not-ready"],
-			defaultValue: "connected"
+			defaultValue: "connected",
 		},
 		avatar: {
 			control: "select",
 			options: ["basic", "generic", "bot"],
-			defaultValue: "basic"
+			defaultValue: "basic",
 		},
 		image: {
 			control: "boolean",
-		
-		}
+		},
 	},
 	render: ({ agentName, agentStatus, avatar, image }) => (
 		<StoryWrapper>
@@ -73,11 +74,17 @@ export const AgentCardStory: Story = {
 						variant={avatar as AvatarProps["variant"]}
 						label={agentName}
 						initials={
-							(avatar as AvatarProps["variant"]) === "generic" || (avatar as AvatarProps["variant"]) === "bot" || image
+							(avatar as AvatarProps["variant"]) === "generic" ||
+							(avatar as AvatarProps["variant"]) === "bot" ||
+							image
 								? ""
 								: initialLetters(agentName)
 						}
-						image={image ? "https://fastly.picsum.photos/id/1027/200/300.jpg?hmac=WCxdERZ7sgk4jhwpfIZT0M48pctaaDcidOi3dKSHJYY" : ""}
+						image={
+							image
+								? "https://fastly.picsum.photos/id/1027/200/300.jpg?hmac=WCxdERZ7sgk4jhwpfIZT0M48pctaaDcidOi3dKSHJYY"
+								: ""
+						}
 					/>
 				}
 			/>
