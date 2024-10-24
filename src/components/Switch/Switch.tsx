@@ -3,6 +3,7 @@ import { useId } from "react";
 
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 
+import { Label } from "components/Label";
 import type { SwitchProps } from "./SwitchTypes";
 
 /**
@@ -33,6 +34,7 @@ export const Switch = ({
 	multiline,
 	onChange,
 	dir,
+	labelIcon,
 	...rest
 }: SwitchProps) => {
 	const generatedId = useId();
@@ -50,13 +52,14 @@ export const Switch = ({
 			required={required}
 			dir={dir}
 		>
-			<label
+			<Label
 				className={clsx(
 					"neo-switch",
 					multiline && "neo-switch--multiline",
 					disabled && "neo-switch--disabled",
 				)}
 				htmlFor={id}
+				icon={labelIcon}
 			>
 				<input
 					id={id}
@@ -74,7 +77,7 @@ export const Switch = ({
 				) : (
 					children
 				)}
-			</label>
+			</Label>
 		</NeoInputWrapper>
 	);
 };

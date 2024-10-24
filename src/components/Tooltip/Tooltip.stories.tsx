@@ -3,6 +3,7 @@ import type { Meta, Story } from "@storybook/react";
 import { Avatar } from "components/Avatar";
 import { Button } from "components/Button";
 
+import { Icon } from "components/Icon";
 import { Tooltip, type TooltipProps } from "./";
 
 export default {
@@ -16,6 +17,17 @@ export const Default = () => (
 	</Tooltip>
 );
 
+export const IconTooltip = () => (
+	<Tooltip label="This is the ID of the workflow.">
+		<Icon
+			role="button"
+			tabIndex={0}
+			icon="info"
+			aria-label="workflow id"
+			size="sm"
+		/>
+	</Tooltip>
+);
 const Template: Story<TooltipProps> = ({ children, ...rest }: TooltipProps) => (
 	<Tooltip {...rest}>
 		{children || <Button variant="primary">button text</Button>}

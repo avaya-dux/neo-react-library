@@ -18,6 +18,7 @@ const {
 	Disabled,
 	BadAccessibility,
 	TypeSwitch,
+	LabelWithIcon,
 } = composeStories(TextInputStories);
 
 describe("TextInput", () => {
@@ -97,6 +98,25 @@ describe("TextInput", () => {
 
 			beforeEach(() => {
 				renderResult = render(<Default />);
+			});
+
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
+
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+
+		describe("LabelWithIcon", () => {
+			let renderResult;
+
+			beforeEach(() => {
+				renderResult = render(<LabelWithIcon />);
 			});
 
 			it("should render ok", () => {
