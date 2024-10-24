@@ -1,0 +1,7 @@
+.container--narrow {
+	max-width: 280px;
+}
+.custom-rule--narrow {
+	color: orange;
+	max-width: 250px;
+}

@@ -1,3 +1,4 @@
+import type { LabelIconProps } from "components/Label";
 import type {
 	ChangeEvent,
 	ChangeEventHandler,
@@ -20,4 +21,5 @@ export interface SwitchProps
 	multiline?: boolean;
 	onChange?: ChangeEventHandler<HTMLInputElement> | SwitchChangeHandler;
 	children?: ReactNode;
+	labelIcon?: LabelIconProps;
 }
