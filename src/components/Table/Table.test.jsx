@@ -1236,23 +1236,16 @@ describe("Table", () => {
 		const EXPECTED_FILTERED_ROWS_WITH_D = 4;
 		const EXPECTED_FILTERED_ROWS_WITH_D_AND_L = 2;
 
-		let renderResult;
 		beforeEach(() => {
-			renderResult = render(<CustomBasicTableFilterDrawer />);
+			render(<CustomBasicTableFilterDrawer />);
 		});
 
 		it("displays custom filter drawer if one is provided", async () => {
-			const { getByTestId } = renderResult;
-
-			// const filterButton = screen.getByLabelText(
-			// 	"Filter Columns",
-			// );
-
 			const filterButton = screen.getAllByLabelText("Filter Columns")[1];
 
 			await user.click(filterButton);
 
-			const customFilterDrawer = getByTestId(drawerTestId);
+			const customFilterDrawer = screen.getByTestId(drawerTestId);
 			await waitFor(() =>
 				expect(customFilterDrawer).toHaveClass("neo-drawer neo-drawer--open"),
 			);
