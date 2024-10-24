@@ -33,34 +33,54 @@ export const LabelWithIcon = () => {
 			iconTooltipText: "This is the ID of the workflow.",
 		},
 	} as ExternalLabelProps;
+	const [dir, setDir] = useState("ltr");
 	return (
-		<Form>
-			<TextInput label={label} required placeholder="label: required, icon" />
-			<TextInput label={label} placeholder="label: icon" />
+		<>
+			<h3>Direction</h3>
+			<Checkbox
+				onChange={() => setDir(dir === "ltr" ? "rtl" : "ltr")}
+				value={dir}
+			>
+				Check to make TextInput direction RTL
+			</Checkbox>
+			<h3>Label with Icon</h3>
+			<Form dir={dir}>
+				<TextInput label={label} placeholder="label: icon" />
+			</Form>
+			<Checkbox
+				onChange={() => setDir(dir === "ltr" ? "rtl" : "ltr")}
+				value={dir}
+			>
+				Right to Left?
+			</Checkbox>
+			<Form dir={dir}>
+				<TextInput label={label} required placeholder="label: required, icon" />
+				<TextInput label={label} placeholder="label: icon" />
 
-			{/* small size variant */}
-			<TextInput
-				label={label}
-				required
-				isSmall
-				placeholder="input: small, label: required, icon"
-			/>
-			<TextInput
-				label={label}
-				isSmall
-				placeholder="input: small, label: icon"
-			/>
-
-			{/* custom rule */}
-			<div className="container--narrow">
+				{/* small size variant */}
 				<TextInput
 					label={label}
 					required
-					className="custom-rule--narrow"
-					placeholder="customized narrow input"
+					isSmall
+					placeholder="input: small, label: required, icon"
 				/>
-			</div>
-		</Form>
+				<TextInput
+					label={label}
+					isSmall
+					placeholder="input: small, label: icon"
+				/>
+
+				{/* custom rule */}
+				<div className="container--narrow">
+					<TextInput
+						label={label}
+						required
+						className="custom-rule--narrow"
+						placeholder="customized narrow input"
+					/>
+				</div>
+			</Form>
+		</>
 	);
 };
 export const DifferentHTMLOutputExamples = () => {

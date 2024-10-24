@@ -1,7 +1,6 @@
 .neo-input-group .neo-form__label-with-icon {
 	display: flex;
 	align-items: center;
-	gap: 2px;
 	padding-bottom: 4px;
 
 	/* TextInput label */
@@ -11,6 +10,10 @@
 		font-size: 12px;
 		font-weight: 400;
 		line-height: 16px;
+	}
+
+	div.neo-tooltip {
+		padding-inline-start: 8px;
 	}
 
 	/* Switch label */
