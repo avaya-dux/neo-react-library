@@ -18,13 +18,6 @@ import "./Drawer_shim.css";
 import { IconButton } from "components/IconButton";
 import { Keys } from "utils";
 
-type EnforcedAccessibleLabel = {
-	title: string | JSX.Element;
-	actions?: React.ReactNode[];
-	"aria-label"?: string;
-	"aria-labelledby"?: string;
-};
-
 const propsAreAccessible = (
 	title: string | JSX.Element | undefined,
 	actionNodes: React.ReactNode[] | undefined,
@@ -45,6 +38,8 @@ const propsAreAccessible = (
 	}
 	return true;
 };
+
+type DrawerOverrideProps = { title: string | JSX.Element; "aria-label"?: never; "aria-labelledby"?: never };
 
 export interface BaseDrawerProps
 	extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
@@ -69,7 +64,7 @@ export interface BaseDrawerProps
 }
 
 export type DrawerProps = Omit<BaseDrawerProps, "closeOnScrimClick"> &
-	EnforcedAccessibleLabel;
+	DrawerOverrideProps;
 
 /**
  * The Drawer component is a panel that slides out from the edge of the screen.
