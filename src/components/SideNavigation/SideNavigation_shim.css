@@ -41,6 +41,26 @@
 /* START: sub category */
 .neo-leftnav .neo-nav-sub-category {
 	margin-left: 22px;
+
+	button.neo-btn {
+		/* width: 100%; */
+		justify-content: unset;
+
+		background-image: linear-gradient(50deg, var(--button-tertiary-hover-background-color) 0%, var(--button-tertiary-hover-background-color) 50%, var(--button-secondary-background-color) 50%, var(--button-secondary-background-color) 100%);
+		color: var(--neo-color-base-800);
+		background-position: 100% 0;
+		background-repeat: no-repeat;
+		background-size: 300%;
+		transition: background-position .4s;
+
+		&:hover,
+		&:focus {
+			color: var(--button-hover-color-default-info);
+			cursor: pointer;
+			background-position: 0 100%;
+			transition: background-position .4s, color .4s;
+		}
+	}
 }
 
 /* END: sub category */

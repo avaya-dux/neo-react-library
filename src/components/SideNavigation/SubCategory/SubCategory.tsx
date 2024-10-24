@@ -15,7 +15,7 @@ export const SubCategory: FC<SideNavigationSubCategoryProps> = ({
 }) => {
 	return (
 		<li className={clsx("neo-nav-sub-category", className)} {...rest}>
-			<button type="button" className="neo-btn neo-btn-secondary--info">
+			<button type="button" className="neo-btn">
 				{label}
 			</button>
 
