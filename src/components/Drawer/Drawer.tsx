@@ -20,19 +20,10 @@ import { Keys } from "utils";
 
 const propsAreAccessible = (
 	title: string | JSX.Element | undefined,
-	actionNodes: React.ReactNode[] | undefined,
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	rest: any,
 ): boolean => {
-	if (!(title || rest["aria-label"] || rest["aria-labelledby"])) {
+	if (!title) {
 		handleAccessbilityError(
-			"Drawer must have an have an accessible name. Please add a `title`, `aria-label`, or `aria-labelledby` prop.",
-		);
-		return false;
-	}
-	if (!title && actionNodes) {
-		handleAccessbilityError(
-			"If you add actions, you must also provide a title",
+			"Drawer must have a title prop to provide an accessible name.",
 		);
 		return false;
 	}
@@ -103,7 +94,7 @@ export const Drawer = ({
 }: DrawerProps) => {
 	id = id || useId();
 
-	if (propsAreAccessible(title, actions, rest)) {
+	if (propsAreAccessible(title)) {
 		const [widthStyle, setWidthStyle] = useState<object | undefined>({});
 
 		useEffect(() => {
