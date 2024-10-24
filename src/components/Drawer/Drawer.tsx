@@ -39,7 +39,11 @@ const propsAreAccessible = (
 	return true;
 };
 
-type DrawerOverrideProps = { title: string | JSX.Element; "aria-label"?: never; "aria-labelledby"?: never };
+type DrawerOverrideProps = {
+	title: string | JSX.Element;
+	"aria-label"?: never;
+	"aria-labelledby"?: never;
+};
 
 export interface BaseDrawerProps
 	extends Omit<React.HTMLAttributes<HTMLDialogElement>, "title"> {
