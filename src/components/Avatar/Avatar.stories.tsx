@@ -74,7 +74,4 @@ export const Template: Story = { render: () => <Avatar /> };
 
 export const SmallBot: Story = {
 	args: { label: "Small Bot", variant: "bot", size: "sm" },
-	render: ({ label, variant, size }) => (
-		<Avatar label={label} variant={variant} size={size} />
-	),
 };

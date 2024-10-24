@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Avatar } from "components/Avatar";
+import { Avatar, type AvatarProps } from "components/Avatar";
 
 import { AgentCard } from "./AgentCard";
 
-const meta: Meta<typeof AgentCard> = {
+type PagePropsAndCustomArgs = React.ComponentProps<typeof AgentCard> & {
+	image?: boolean;
+};
+
+const meta: Meta<PagePropsAndCustomArgs> = {
 	title: "Components/AgentCard",
 	component: AgentCard,
-	args: {
-		agentName: "Barbara Barberson",
-		agentStatus: "connected",
-	},
 };
 
 export default meta;
 
-type Story = StoryObj<typeof AgentCard>;
+type Story = StoryObj<PagePropsAndCustomArgs>;
 
 const initialLetters = (name: string) => {
 	if (!name) {
@@ -23,99 +23,68 @@ const initialLetters = (name: string) => {
 	}
 	const nameToArray = name.split(" ");
 	if (name.length > 1) {
-		const initialsOfFirstLast =
-			nameToArray[0].charAt(0).toUpperCase() +
-			nameToArray[1].charAt(0).toUpperCase();
-		return initialsOfFirstLast;
+		let initials = "";
+
+		if (nameToArray.length > 1) {
+			initials =
+				nameToArray[0].charAt(0).toUpperCase() +
+				nameToArray[nameToArray.length - 1].charAt(0).toUpperCase();
+		} else {
+			initials = nameToArray[0].charAt(0).toUpperCase();
+		}
+		return initials;
 	}
 	return "";
 };
 
-export const AgentCardStory: Story = {
-	render: () => (
-		<>
-			<div className="neo-nav">
-				<AgentCard
-					agentName={"Barbara Barberson"}
-					agentStatus={"connected"}
-					avatar={
-						<Avatar
-							variant="basic"
-							label={"Barbara Barberson"}
-							initials={initialLetters("Barbara Barberson")}
-						/>
-					}
-				/>
-			</div>
-			<br />
-			<div className="neo-nav">
-				<AgentCard
-					agentName={"Barbara Barberson"}
-					agentStatus={"ready"}
-					avatar={
-						<Avatar
-							variant="basic"
-							label={"Barbara Barberson"}
-							initials={initialLetters("Barbara Barberson")}
-						/>
-					}
-				/>
-			</div>
-			<br />
-			<div className="neo-nav">
-				<AgentCard
-					agentName={"Barbara Barberson"}
-					agentStatus={"not-ready"}
-					avatar={
-						<Avatar
-							variant="basic"
-							label={"Barbara Barberson"}
-							initials={initialLetters("Barbara Barberson")}
-						/>
-					}
-				/>
-			</div>
-			<br />
-			<div className="neo-nav">
-				<AgentCard
-					agentName={"Barbara Barberson"}
-					agentStatus={"ready"}
-					avatar={<Avatar variant="generic" label={"Barbara Barberson"} />}
-				/>
-			</div>
-			<br />
-			<div className="neo-nav">
-				<AgentCard
-					agentName={"Barbara Barberson"}
-					agentStatus={"ready"}
-					avatar={
-						<Avatar
-							variant="generic"
-							label={"Barbara Barberson"}
-							image="https://placekitten.com/g/200/300"
-						/>
-					}
-				/>
-			</div>
-		</>
-	),
-};
+const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
+	<>
+		<div className="neo-nav">{children}</div>
+		<br />
+	</>
+);
 
-export const TemplatedAgentCard: Story = {
-	render: ({ agentStatus, agentName }) => (
-		<div className="neo-nav">
+export const AgentCardStory: Story = {
+	argTypes: {
+		agentName: {
+			control: "text",
+		},
+		agentStatus: {
+			control: "select",
+			options: ["connected", "ready", "not-ready"],
+		},
+		avatar: {
+			control: "select",
+			options: ["basic", "generic", "bot"],
+		},
+		image: {
+			control: "boolean",
+		},
+	},
+	render: ({ agentName, agentStatus, avatar, image }) => (
+		<StoryWrapper>
 			<AgentCard
-				agentStatus={agentStatus}
 				agentName={agentName}
+				agentStatus={agentStatus}
 				avatar={
 					<Avatar
-						variant="generic"
-						size="md"
-						image="https://placekitten.com/g/200/300"
-						label="image of a kitten"
+						variant={avatar as AvatarProps["variant"]}
+						label={agentName}
+						initials={
+							(avatar as AvatarProps["variant"]) === "generic" ||
+							(avatar as AvatarProps["variant"]) === "bot" ||
+							image
+								? ""
+								: initialLetters(agentName)
+						}
+						image={
+							image
+								? "https://fastly.picsum.photos/id/1027/200/300.jpg?hmac=WCxdERZ7sgk4jhwpfIZT0M48pctaaDcidOi3dKSHJYY"
+								: ""
+						}
 					/>
 				}
 			/>
-		</div>
+		</StoryWrapper>
 	),
 };
