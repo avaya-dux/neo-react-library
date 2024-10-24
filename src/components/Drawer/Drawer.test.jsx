@@ -6,7 +6,7 @@ import { Drawer } from ".";
 
 describe("Drawer", () => {
 	it("fully renders without exploding", () => {
-		render(<Drawer aria-label="example drawer">content</Drawer>);
+		render(<Drawer title="example drawer">content</Drawer>);
 
 		const rootElement = screen.getByRole("dialog");
 		expect(rootElement).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe("Drawer", () => {
 	});
 
 	it("extends `<dialog>` props", () => {
-		render(<Drawer aria-label="basic drawer example" style={{ width: 100 }} />);
+		render(<Drawer title="basic drawer example" style={{ width: 100 }} />);
 		render(<Drawer title="full drawer" style={{ width: 100 }} />);
 
 		const [basicSheetRootElement, sheetRootElement] =
@@ -39,7 +39,7 @@ describe("Drawer", () => {
 		expect(sheetRootElement).toHaveStyle("width: 100px");
 	});
 
-	it("throws error if there is no `aria-label` or `title` passed", () => {
+	it("throws error if there is no `title` passed", () => {
 		const spy = vi.spyOn(console, "error").mockImplementation(() => null);
 		expect(() => render(<Drawer />)).toThrow();
 		expect(spy).toHaveBeenCalled();

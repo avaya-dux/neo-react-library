@@ -26,6 +26,7 @@ const {
 	AdvancedFilteringAndSorting,
 	BareBones,
 	CustomActions,
+	CustomBasicTableFilterDrawer,
 	Default,
 	EditableData,
 	EmptyDataSet,
@@ -1226,6 +1227,63 @@ describe("Table", () => {
 			await user.click(screen.getByLabelText("Long Text"));
 			await user.click(screen.getAllByLabelText("Apply")[0]);
 			// test stops here as rerender takes too long
+		});
+	});
+
+	describe("custom global filtering using drawer", () => {
+		const drawerTestId = "custom-filter-drawer-id";
+		const HEADER_ROW_COUNT = 1;
+		const EXPECTED_FILTERED_ROWS_WITH_D = 4;
+		const EXPECTED_FILTERED_ROWS_WITH_D_AND_L = 2;
+
+		beforeEach(() => {
+			render(<CustomBasicTableFilterDrawer />);
+		});
+
+		it("displays custom filter drawer if one is provided", async () => {
+			const filterButton = screen.getAllByLabelText("Filter Columns")[1];
+
+			await user.click(filterButton);
+
+			const customFilterDrawer = screen.getByTestId(drawerTestId);
+			await waitFor(() =>
+				expect(customFilterDrawer).toHaveClass("neo-drawer neo-drawer--open"),
+			);
+
+			// Wait for the drawer to appear and get first InputText
+			const nameInput = await waitFor(
+				() => within(customFilterDrawer).getAllByRole("textbox")[0],
+			);
+
+			// Filter all names that have the letter d
+			await user.type(nameInput, "d");
+
+			const applyButton = within(customFilterDrawer).getByLabelText("Apply");
+			await user.click(applyButton);
+
+			// 4 rows should be visible
+			await waitFor(() => expect(customFilterDrawer).toHaveClass("neo-drawer"));
+			const numberOfRows = screen.getAllByRole("row");
+			expect(numberOfRows).toHaveLength(
+				EXPECTED_FILTERED_ROWS_WITH_D + HEADER_ROW_COUNT,
+			);
+
+			// Bring up Custom Filter drawer again and apply one more filter
+			await user.click(filterButton);
+			const otherInput = await waitFor(
+				() => within(customFilterDrawer).getAllByRole("textbox")[1],
+			);
+
+			// Filter "other" column containing letter 'l'
+			await user.type(otherInput, "l");
+			await user.click(applyButton);
+
+			// 2 rows should be visible
+			await waitFor(() => expect(customFilterDrawer).toHaveClass("neo-drawer"));
+			const numberOfRows2 = screen.getAllByRole("row");
+			expect(numberOfRows2).toHaveLength(
+				EXPECTED_FILTERED_ROWS_WITH_D_AND_L + HEADER_ROW_COUNT,
+			);
 		});
 	});
 

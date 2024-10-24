@@ -18,43 +18,22 @@ import "./Drawer_shim.css";
 import { IconButton } from "components/IconButton";
 import { Keys } from "utils";
 
-type EnforcedAccessibleLabel =
-	| {
-			title: string | JSX.Element;
-			actions?: React.ReactNode[];
-			"aria-label"?: string;
-			"aria-labelledby"?: string;
-	  }
-	| {
-			title?: string | JSX.Element;
-			"aria-label": string;
-			"aria-labelledby"?: string;
-	  }
-	| {
-			title?: string | JSX.Element;
-			"aria-label"?: string;
-			"aria-labelledby": string;
-	  };
-
 const propsAreAccessible = (
 	title: string | JSX.Element | undefined,
-	actionNodes: React.ReactNode[] | undefined,
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	rest: any,
 ): boolean => {
-	if (!(title || rest["aria-label"] || rest["aria-labelledby"])) {
+	if (!title) {
 		handleAccessbilityError(
-			"Drawer must have an have an accessible name. Please add a `title`, `aria-label`, or `aria-labelledby` prop.",
-		);
-		return false;
-	}
-	if (!title && actionNodes) {
-		handleAccessbilityError(
-			"If you add actions, you must also provide a title",
+			"Drawer must have a title prop to provide an accessible name.",
 		);
 		return false;
 	}
 	return true;
+};
+
+type DrawerOverrideProps = {
+	title: string | JSX.Element;
+	"aria-label"?: never;
+	"aria-labelledby"?: never;
 };
 
 export interface BaseDrawerProps
@@ -80,7 +59,7 @@ export interface BaseDrawerProps
 }
 
 export type DrawerProps = Omit<BaseDrawerProps, "closeOnScrimClick"> &
-	EnforcedAccessibleLabel;
+	DrawerOverrideProps;
 
 /**
  * The Drawer component is a panel that slides out from the edge of the screen.
@@ -115,7 +94,7 @@ export const Drawer = ({
 }: DrawerProps) => {
 	id = id || useId();
 
-	if (propsAreAccessible(title, actions, rest)) {
+	if (propsAreAccessible(title)) {
 		const [widthStyle, setWidthStyle] = useState<object | undefined>({});
 
 		useEffect(() => {
@@ -208,6 +187,7 @@ const BasicDrawer = ({
 				<div
 					onKeyDown={onKeyDownScrimHandler}
 					role="dialog"
+					aria-modal={open}
 					style={style}
 					aria-labelledby={id}
 					className={clsx("neo-drawer", open && "neo-drawer--open", className)}
