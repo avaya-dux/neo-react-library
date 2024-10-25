@@ -16,7 +16,6 @@ export const TableFilterDrawer = forwardRef(
 		{
 			children,
 			className,
-			"aria-label": ariaLabel = "Filter",
 			id,
 			onBack,
 			disableApply = false,
@@ -58,7 +57,6 @@ export const TableFilterDrawer = forwardRef(
 				ref={ref}
 				className={className}
 				id={id}
-				aria-label={ariaLabel}
 				onBack={onBack}
 				open={open}
 				title={title}

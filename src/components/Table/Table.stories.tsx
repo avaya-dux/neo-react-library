@@ -928,6 +928,7 @@ export const CustomBasicTableFilterDrawer = () => {
 				open={openColumnsFilterDrawer}
 				handleCancel={closeFilterDrawer}
 				handleApply={handleApply}
+				data-testid="custom-filter-drawer-id"
 			>
 				<TextInput
 					clearable
