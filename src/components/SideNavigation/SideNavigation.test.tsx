@@ -7,12 +7,7 @@ import { vi } from "vitest";
 import { SideNavigation } from ".";
 
 import * as SideNavigationStories from "./SideNavigation.stories";
-const {
-	CategoryGroups,
-	CategoryGroupsWithIcons,
-	Default,
-	DoesNotConflictWithOtherNavs,
-} = composeStories(SideNavigationStories);
+const { Default, MultipleLevels } = composeStories(SideNavigationStories);
 
 describe("Side Navigation", () => {
 	// TODO: "Avoid mutating global prototypes directly; use setup and teardown methods" per CodeRabbit - https://github.com/avaya-dux/neo-react-library/pull/549#discussion_r1775919025
@@ -79,12 +74,7 @@ describe("Side Navigation", () => {
 	describe("storybook tests", () => {
 		const stories = [
 			{ name: "Default", Component: Default },
-			{ name: "CategoryGroups", Component: CategoryGroups },
-			{ name: "CategoryGroupsWithIcons", Component: CategoryGroupsWithIcons },
-			{
-				name: "DoesNotConflictWithOtherNavs",
-				Component: DoesNotConflictWithOtherNavs,
-			},
+			{ name: "MultipleLevels", Component: MultipleLevels },
 		];
 		stories.forEach(({ name, Component }) => {
 			describe(name, () => {
