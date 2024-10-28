@@ -1,61 +1,54 @@
-import type { Meta, Story } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Badge, type BadgeProps } from "./Badge";
+import { Badge } from "./Badge";
 
-export default {
+type PagePropsAndCustomArgs = React.ComponentProps<typeof Badge> & {
+	childType?: string;
+};
+
+const meta: Meta<PagePropsAndCustomArgs> = {
 	title: "Components/Badge",
 	component: Badge,
-} as Meta<BadgeProps>;
-
-const badgeData = "99";
-
-const defaultBadgeProps = {
-	data: badgeData,
-	"aria-label": `Badge representing ${badgeData}`,
+	parameters: {
+		controls: {
+			exclude: ["aria-label"],
+		},
+	},
 };
 
-const Template: Story<BadgeProps> = (props: BadgeProps) => <Badge {...props} />;
+export default meta;
 
-export const FreefloatingBadge = Template.bind({});
-FreefloatingBadge.args = {
-	...defaultBadgeProps,
-};
+type Story = StoryObj<PagePropsAndCustomArgs>;
 
-const WithString: Story<BadgeProps> = (props: BadgeProps) => (
-	<Badge {...props}>This is a badge on text</Badge>
-);
-
-export const BadgeWithString = WithString.bind({});
-BadgeWithString.args = {
-	...defaultBadgeProps,
-};
-
-const WithIcon: Story<BadgeProps> = (props: BadgeProps) => (
-	<Badge {...props}>
-		<span className="neo-icon-customer" />
-	</Badge>
-);
-
-export const BadgeWithIcon = WithIcon.bind({});
-BadgeWithIcon.args = {
-	...defaultBadgeProps,
-};
-
-const WithTabs: Story<BadgeProps> = (props: BadgeProps) => (
-	<div className="neo-tabs" role="tablist">
-		<ul className="neo-tabs__nav">
-			<Badge {...props}>
-				<li className="neo-tabs__item neo-tabs__item--active">
-					<a href="/#" role="tab" aria-selected="true">
-						Tab 1
-					</a>
-				</li>
+export const BadgeStory: Story = {
+	argTypes: {
+		data: {
+			control: "text",
+			defaultValue: "99",
+		},
+		childType: {
+			control: "select",
+			options: ["none", "icon", "tabs"],
+			defaultValue: "none",
+		},
+	},
+	render: ({ data, childType }) => {
+		return childType === "tabs" ? (
+			<div className="neo-tabs" role="tablist">
+				<ul className="neo-tabs__nav">
+					<Badge data={data} aria-label={`badge representing ${data}`}>
+						<li className="neo-tabs__item neo-tabs__item--active">
+							<a href="/#" role="tab" aria-selected="true">
+								Tab 1
+							</a>
+						</li>
+					</Badge>
+				</ul>
+			</div>
+		) : (
+			<Badge data={data} aria-label={`badge representing ${data}`}>
+				{childType === "icon" ? <span className="neo-icon-customer" /> : ""}
 			</Badge>
-		</ul>
-	</div>
-);
-
-export const BadgeWithTabs = WithTabs.bind({});
-BadgeWithTabs.args = {
-	...defaultBadgeProps,
+		);
+	},
 };
