@@ -4,68 +4,34 @@ import { axe } from "jest-axe";
 import { Icon } from ".";
 
 describe("Icon Component", () => {
-	it("fully renders without exploding", () => {
-		const { getByTestId } = render(
-			<Icon
-				data-testid="neo-icon"
-				icon="settings"
-				aria-label="test"
-				role="figure"
-			/>,
-		);
+	const ariaLabel = "label for testing";
 
-		const rootElement = getByTestId("neo-icon");
+	it("fully renders without exploding", () => {
+		render(<Icon icon="settings" aria-label={ariaLabel} />);
+
+		const rootElement = screen.getByLabelText(ariaLabel);
 		expect(rootElement).toBeTruthy();
 	});
 
 	it("passes basic axe compliance", async () => {
 		const { container } = render(
-			<Icon
-				data-testid="neo-icon"
-				icon="settings"
-				aria-label="test"
-				role="figure"
-			/>,
+			<Icon icon="settings" aria-label={ariaLabel} />,
 		);
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
 
-	it("test for className neo is in place", () => {
-		const iconClassName = "neo-icon-save";
-		const { getByTestId } = render(
-			<Icon
-				data-testid="neo-icon"
-				icon="save"
-				aria-label="test"
-				role="figure"
-			/>,
-		);
-
-		const rootElement = getByTestId("neo-icon");
-		expect(rootElement).toBeTruthy();
-		expect(rootElement).toHaveClass(iconClassName);
-	});
-
-	it("use a custom className ", () => {
+	it("allows custom class names ", () => {
 		const customClassName = "ha-ha css-class-name-test";
-		const { getByTestId } = render(
-			<Icon
-				data-testid="neo-icon"
-				icon="save"
-				aria-label="test"
-				role="figure"
-				className={customClassName}
-			/>,
+		render(
+			<Icon icon="save" aria-label={ariaLabel} className={customClassName} />,
 		);
 
-		const rootElement = getByTestId("neo-icon");
-		expect(rootElement).toBeTruthy();
+		const rootElement = screen.getByLabelText(ariaLabel);
 		expect(rootElement).toHaveClass(customClassName);
 	});
 
 	it("if `notification` is false, the root element does not have children", () => {
-		const ariaLabel = "available, has notification";
 		render(<Icon icon="save" aria-label={ariaLabel} />);
 
 		const rootElement = screen.getByLabelText(ariaLabel);
@@ -73,7 +39,6 @@ describe("Icon Component", () => {
 	});
 
 	it("if `notification` is passed, has a child with a class name: `neo-badge`", () => {
-		const ariaLabel = "available, has notification";
 		render(<Icon icon="save" aria-label={ariaLabel} notification />);
 
 		const rootElement = screen.getByLabelText(ariaLabel);

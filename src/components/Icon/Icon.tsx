@@ -44,6 +44,7 @@ export const Icon: React.FC<IconProps> = ({
 			"A descriptive label is required for screen readers to identify the button's purpose",
 		);
 	}
+
 	if (status !== undefined && size === "sm") {
 		console.error(
 			"Status icons are not supported in small size. Size set to medium.",
