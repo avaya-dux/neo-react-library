@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { IconButton } from "./IconButton";
 
@@ -34,7 +35,9 @@ describe("Button", () => {
 	});
 
 	it("throws an error if `aria-label` is not passed", () => {
+		const spy = vi.spyOn(console, "error").mockImplementation(() => null); // hide error from console
 		expect(() => render(<IconButton icon="save" shape="square" />)).toThrow();
+		spy.mockRestore();
 	});
 
 	it("should respect the 'badge' prop", () => {
