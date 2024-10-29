@@ -18,8 +18,8 @@ import {
 import type { TabsProps } from "./TabTypes";
 import { Tabs } from "./Tabs";
 
-tabMouseEventHandlerLogger.disableAll();
-tabKeyboardEventHandler.enableAll();
+tabMouseEventHandlerLogger.enableAll();
+tabKeyboardEventHandler.disableAll();
 
 export default {
 	title: "Components/Tab",
@@ -127,11 +127,11 @@ export const UncontrolledActiveTabStory = () => {
 		<div>
 			<Tabs defaultIndex={1} onTabChange={onTabChange} initialFocus={true}>
 				<TabList>
-					<Tab id="tab1">Tab1</Tab>
+					<Tab id="tab1">Tab1<span id="avartar1">Avartar</span></Tab>
 
 					{showTab2 ? (
 						<ClosableTab id="tab2" icon="check" onClose={onCloseTab2}>
-							Tab2
+							Tab2 <span id="avartar2">Avartar</span>
 						</ClosableTab>
 					) : (
 						<></>
