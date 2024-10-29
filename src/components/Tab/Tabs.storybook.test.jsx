@@ -132,7 +132,7 @@ describe("Tabs", () => {
 
 			it("tab2 should have focus", () => {
 				const tab2 = screen.getByText(/Tab2/);
-				expect(tab2).toHaveFocus();
+				expect(tab2.parentElement).toHaveFocus();
 			});
 		});
 
