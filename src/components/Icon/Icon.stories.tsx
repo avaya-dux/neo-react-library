@@ -1,86 +1,88 @@
-import type { ComponentStory } from "@storybook/react";
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Icon, type IconProps } from ".";
+import { Icon } from ".";
+import "./Icon.stories.css";
 
-export default {
-	title: "Components/Icon",
+const meta: Meta<typeof Icon> = {
 	component: Icon,
-} as Meta<IconProps>;
+	title: "Components/Icon",
+	args: {
+		icon: "info",
+		notification: false,
+		status: "available",
+	},
+	argTypes: {
+		icon: { control: { type: "select" } },
 
-const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />;
+		// hidden props
+		"aria-label": { table: { disable: true } },
+		className: { table: { disable: true } },
+		notification: { table: { disable: true } },
+		size: { table: { disable: true } },
+	},
+};
+export default meta;
 
-export const CustomClassName = Template.bind({});
-CustomClassName.args = {
-	icon: "save",
-	size: "sm",
-	"aria-label": "Testing size xs",
-	className: "btn-icon-test another-class",
+type Story = StoryObj<typeof Icon>;
+
+export const Default: Story = {
+	argTypes: {
+		notification: { table: { disable: true } },
+		status: { table: { disable: true } },
+	},
+	render: ({ icon }) => (
+		<div>
+			<h2>Default Icon</h2>
+
+			<p>The Icon component has three sizes.</p>
+			<p>
+				All Icons <i>must</i> have an <code>aria-label</code>.
+			</p>
+
+			<div className="icon-group">
+				<Icon icon={icon} size="sm" aria-label="small info" />
+				<Icon icon={icon} size="md" aria-label="medium info" />
+				<Icon icon={icon} size="lg" aria-label="large info" />
+			</div>
+		</div>
+	),
 };
 
-export const StandardIconSM = Template.bind({});
-StandardIconSM.args = {
-	icon: "info",
-	size: "sm",
-	"aria-label": "Testing size sm",
-};
+export const StatusIcon: Story = {
+	args: {
+		icon: "email",
+	},
+	render: ({ icon, status }) => (
+		<div>
+			<h2>Status Icon</h2>
 
-export const StandardIconMD = Template.bind({});
-StandardIconMD.args = {
-	icon: "info",
-	size: "md",
-	"aria-label": "Testing size md",
-};
+			<p>An Icon component that has a "status" can be shown in two sizes.</p>
 
-export const StandardIconLG = Template.bind({});
-StandardIconLG.args = {
-	icon: "info",
-	size: "lg",
-	"aria-label": "Testing size lg",
-};
+			<div className="icon-group">
+				<Icon icon={icon} status={status} aria-label="normal info" />
+				<Icon icon={icon} status={status} size="lg" aria-label="large info" />
+			</div>
 
-export const LargeChatIcon = Template.bind({});
-LargeChatIcon.args = {
-	icon: "chat",
-	size: "lg",
-	"aria-label": "Testing icon chat",
-};
+			<p>
+				An Icon with a status may have a "notification" badge. This is a small
+				red dot in the bottom corner.
+			</p>
 
-export const testBaseHTMLAttributes = Template.bind({});
-// TODO Bug https://jira.forge.avaya.com/browse/NEO-651
-testBaseHTMLAttributes.args = {
-	tabIndex: 0,
-	icon: "save",
-	"aria-label": "Testing icon chat",
-};
-
-export const AriaLabelMissing = Template.bind({});
-AriaLabelMissing.args = {
-	icon: "settings",
-	size: "lg",
-};
-
-export const AvailableStatus = Template.bind({});
-AvailableStatus.args = {
-	icon: "call",
-	status: "available",
-	size: "lg",
-	"aria-label": "Testing status available",
-};
-
-export const AwayStatus = Template.bind({});
-AwayStatus.args = {
-	icon: "call",
-	status: "away",
-	size: "lg",
-	"aria-label": "Testing status away",
-};
-
-export const AvailableWithNotification = Template.bind({});
-AvailableWithNotification.args = {
-	icon: "call",
-	status: "available",
-	size: "lg",
-	notification: true,
-	"aria-label": "Testing status away",
+			<div className="icon-group">
+				<Icon
+					icon={icon}
+					status={status}
+					notification
+					aria-label="normal info"
+				/>
+				<Icon
+					icon={icon}
+					status={status}
+					notification
+					size="lg"
+					aria-label="large info"
+				/>
+			</div>
+		</div>
+	),
 };
