@@ -128,13 +128,13 @@ export const UncontrolledActiveTabStory = () => {
 			<Tabs defaultIndex={1} onTabChange={onTabChange} initialFocus={true}>
 				<TabList>
 					<Tab id="tab1">
-						Tab1<span id="avartar1">Avartar</span>
+						Tab1<span id="avatar1">Avatar</span>
 					</Tab>
 
 					{showTab2 ? (
 						<ClosableTab id="tab2" icon="check" onClose={onCloseTab2}>
 							<span>
-								Tab2 <span id="avartar2">Avartar</span>
+								Tab2 <span id="avatar2">Avatar</span>
 							</span>
 						</ClosableTab>
 					) : (
