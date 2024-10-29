@@ -1,9 +1,9 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 
 import { Icon } from ".";
 
-describe("ExampleComponent", () => {
+describe("Icon Component", () => {
 	it("fully renders without exploding", () => {
 		const { getByTestId } = render(
 			<Icon
@@ -62,5 +62,21 @@ describe("ExampleComponent", () => {
 		const rootElement = getByTestId("neo-icon");
 		expect(rootElement).toBeTruthy();
 		expect(rootElement).toHaveClass(customClassName);
+	});
+
+	it("if `notification` is false, the root element does not have children", () => {
+		const ariaLabel = "available, has notification";
+		render(<Icon icon="save" aria-label={ariaLabel} />);
+
+		const rootElement = screen.getByLabelText(ariaLabel);
+		expect(rootElement.firstChild).toBeNull();
+	});
+
+	it("if `notification` is passed, has a child with a class name: `neo-badge`", () => {
+		const ariaLabel = "available, has notification";
+		render(<Icon icon="save" aria-label={ariaLabel} notification />);
+
+		const rootElement = screen.getByLabelText(ariaLabel);
+		expect(rootElement.firstChild).toHaveClass("neo-badge");
 	});
 });

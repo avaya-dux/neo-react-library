@@ -8,6 +8,7 @@ export interface IconProps extends React.BaseHTMLAttributes<HTMLElement> {
 	"aria-label": string;
 	className?: string;
 	icon: IconNamesType;
+	notification?: boolean;
 	size?: SizeType;
 	status?:
 		| "available"
@@ -33,6 +34,7 @@ export interface IconProps extends React.BaseHTMLAttributes<HTMLElement> {
 export const Icon: React.FC<IconProps> = ({
 	className,
 	icon,
+	notification = false,
 	size,
 	status,
 	...rest
@@ -69,7 +71,9 @@ export const Icon: React.FC<IconProps> = ({
 				status !== undefined && `neo-icon-state--${status}`,
 				className,
 			)}
-		/>
+		>
+			{notification && <span className="neo-badge" />}
+		</span>
 	);
 };
 
