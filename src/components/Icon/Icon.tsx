@@ -1,6 +1,9 @@
 import clsx from "clsx";
 
-import { type IconNamesType, getIconClass } from "utils/icons";
+import { handleAccessbilityError } from "utils";
+
+import type { IconNamesType } from "utils/icons";
+import { getIconClass } from "utils/icons";
 
 // import { SizeType } from "utils/size"; TODO https://jira.forge.avaya.com/browse/NEO-645
 type SizeType = "sm" | "md" | "lg";
@@ -40,7 +43,7 @@ export const Icon: React.FC<IconProps> = ({
 	...rest
 }: IconProps) => {
 	if (!rest["aria-label"]) {
-		console.error(
+		handleAccessbilityError(
 			"A descriptive label is required for screen readers to identify the button's purpose",
 		);
 	}
@@ -67,8 +70,8 @@ export const Icon: React.FC<IconProps> = ({
 			{...rest}
 			className={clsx(
 				icon && getIconClass(icon),
-				status !== undefined && "neo-icon-state",
 				sizing,
+				status !== undefined && "neo-icon-state",
 				status !== undefined && `neo-icon-state--${status}`,
 				className,
 			)}
