@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
+import { vi } from "vitest";
 
 import { Icon } from ".";
 
@@ -31,17 +32,77 @@ describe("Icon Component", () => {
 		expect(rootElement).toHaveClass(customClassName);
 	});
 
-	it("if `notification` is false, the root element does not have children", () => {
-		render(<Icon icon="save" aria-label={ariaLabel} />);
+	it("throws a `console.error` if `status` is passed with `size` as `sm`", () => {
+		const spy = vi.spyOn(console, "error").mockImplementation(() => null);
+		render(
+			<Icon
+				icon="settings"
+				aria-label={ariaLabel}
+				size="sm"
+				status="inbound"
+			/>,
+		);
 
-		const rootElement = screen.getByLabelText(ariaLabel);
-		expect(rootElement.firstChild).toBeNull();
+		expect(spy).toHaveBeenCalled();
+		spy.mockRestore();
 	});
 
-	it("if `notification` is passed, has a child with a class name: `neo-badge`", () => {
-		render(<Icon icon="save" aria-label={ariaLabel} notification />);
+	it("throws an error if `aria-label` is not passed", () => {
+		const spy = vi.spyOn(console, "error").mockImplementation(() => null); // hide error from console
+		expect(() =>
+			// biome-ignore lint/a11y/useValidAriaValues: testing an invalid value
+			render(<Icon icon="settings" aria-label="" />),
+		).toThrowError(
+			"A descriptive label is required for screen readers to identify the button's purpose",
+		);
+		spy.mockRestore();
+	});
 
-		const rootElement = screen.getByLabelText(ariaLabel);
-		expect(rootElement.firstChild).toHaveClass("neo-badge");
+	describe("renders the correct icon size", () => {
+		it("if `size` is `sm`, has a class name: `neo-icon--small`", () => {
+			render(<Icon icon="save" aria-label={ariaLabel} size="sm" />);
+
+			const rootElement = screen.getByLabelText(ariaLabel);
+			expect(rootElement).toHaveClass("neo-icon--small");
+		});
+
+		it("if `size` is `md`, has a class name: `neo-icon--medium`", () => {
+			render(<Icon icon="save" aria-label={ariaLabel} size="md" />);
+
+			const rootElement = screen.getByLabelText(ariaLabel);
+			expect(rootElement).toHaveClass("neo-icon--medium");
+		});
+
+		it("if `size` is `lg`, has a class name: `neo-icon--large`", () => {
+			render(<Icon icon="save" aria-label={ariaLabel} size="lg" />);
+
+			const rootElement = screen.getByLabelText(ariaLabel);
+			expect(rootElement).toHaveClass("neo-icon--large");
+		});
+
+		it("shows a large icon if `status` is passed with `size` as `lg`", () => {
+			render(
+				<Icon icon="save" aria-label={ariaLabel} size="lg" status="inbound" />,
+			);
+
+			const rootElement = screen.getByLabelText(ariaLabel);
+			expect(rootElement).toHaveClass("neo-icon-state--large");
+		});
+	});
+
+	describe("handles the `notification` prop appropriately", () => {
+		it("if `notification` is false, the root element does not have children", () => {
+			render(<Icon icon="save" aria-label={ariaLabel} />);
+
+			const rootElement = screen.getByLabelText(ariaLabel);
+			expect(rootElement.firstChild).toBeNull();
+		});
+
+		it("if `notification` is passed, has a child with a class name: `neo-badge`", () => {
+			render(<Icon icon="save" aria-label={ariaLabel} notification />);
+
+			const rootElement = screen.getByLabelText(ariaLabel);
+			expect(rootElement.firstChild).toHaveClass("neo-badge");
+		});
 	});
 });
