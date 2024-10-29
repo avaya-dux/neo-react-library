@@ -75,3 +75,12 @@ AwayStatus.args = {
 	size: "lg",
 	"aria-label": "Testing status away",
 };
+
+export const AvailableWithNotification = Template.bind({});
+AvailableWithNotification.args = {
+	icon: "call",
+	status: "available",
+	size: "lg",
+	notification: true,
+	"aria-label": "Testing status away",
+};
