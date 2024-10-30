@@ -65,6 +65,7 @@ export const Switch = ({
 				)}
 				htmlFor={id}
 				icon={labelIcon}
+				generateTooltip={false}
 			>
 				<input
 					id={id}

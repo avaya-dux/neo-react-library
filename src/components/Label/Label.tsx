@@ -17,6 +17,7 @@ export type LabelProps = {
 	className?: string;
 	children?: React.ReactNode;
 	icon?: LabelIconProps;
+	generateTooltip?: boolean;
 };
 
 export type ExternalLabelProps = Omit<LabelProps, "htmlFor">;
@@ -27,9 +28,8 @@ export const Label = ({
 	className,
 	children,
 	icon,
+	generateTooltip = true,
 }: LabelProps) => {
-	const tooltip = useTooltip(icon);
-
 	const justLabel = useMemo(() => {
 		return (
 			<label htmlFor={id} className={className}>
@@ -38,15 +38,12 @@ export const Label = ({
 		);
 	}, [id, label, className, children]);
 
-	// children is used by the Switch component only
-	// And switch already renders the tooltip itself
-	// so we don't need to render it below
 	return icon === undefined ? (
 		justLabel
 	) : (
 		<div className="neo-form__label-with-icon">
 			{justLabel}
-			{children ? null : tooltip}
+			{generateTooltip && useTooltip(icon)}
 		</div>
 	);
 };
