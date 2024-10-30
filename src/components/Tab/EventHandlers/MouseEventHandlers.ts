@@ -34,19 +34,16 @@ export const handleMouseClickEvent = (
 	const currentDisabled = isAriaDisabled(currentTarget);
 
 	const target = e.target as HTMLElement;
-	const id = target.getAttribute("id");
+	const classes = target.getAttribute("class");
 
-	logger.debug({ currentId, id, currentDisabled });
+	const isCloseButton = classes?.includes("neo-icon-end");
+	logger.debug({ currentId, classes, currentDisabled, isCloseButton });
 
 	if (currentDisabled) {
 		return;
 	}
-
-	if (currentId === id) {
-		logger.debug(`set ${id} to active`);
-		setActiveTabIndex(tabIndex);
-		setActivePanelIndex(tabIndex);
-	} else {
+	if (isCloseButton) {
+		logger.debug(`close button clicked on ${currentId}`);
 		handleCloseElementMouseClickEvent(
 			e,
 			tabs,
@@ -56,6 +53,10 @@ export const handleMouseClickEvent = (
 			setActivePanelIndex,
 		);
 		onClose(tabIndex);
+	} else {
+		logger.debug(`set ${currentId} to active`);
+		setActiveTabIndex(tabIndex);
+		setActivePanelIndex(tabIndex);
 	}
 };
 
