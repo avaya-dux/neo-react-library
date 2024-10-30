@@ -7,7 +7,8 @@ import { vi } from "vitest";
 import { Switch } from "./";
 import * as SwitchStories from "./Switch.stories";
 
-const { Default, LabelWithIcons, FormControl, Template } = composeStories(SwitchStories);
+const { Default, LabelWithIcons, FormControl, Template } =
+	composeStories(SwitchStories);
 
 describe("Switch Component", () => {
 	const user = userEvent.setup();

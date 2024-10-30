@@ -137,9 +137,6 @@ const DirectionTemplate: Story<DirectionTemplateProps> = ({
 					<br />
 					multiline 2 <br />
 					multiline 3
-					<Tooltip label="something" position="auto">
-						<Icon tabIndex={0} icon="info" aria-label="info" size="sm" />
-					</Tooltip>
 				</Switch>
 				<Switch labelIcon={labelIcon}>With Icon LTR</Switch>
 				<Switch labelIcon={labelIcon} dir="rtl">

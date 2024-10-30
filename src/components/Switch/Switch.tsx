@@ -3,7 +3,7 @@ import { useId } from "react";
 
 import { NeoInputWrapper } from "components/NeoInputWrapper";
 
-import { Label } from "components/Label";
+import { Label, useTooltip } from "components/Label";
 import type { SwitchProps } from "./SwitchTypes";
 
 /**
@@ -44,7 +44,12 @@ export const Switch = ({
 	}
 
 	const { disabled, required } = rest;
-
+	const childrenWithTooltip = (
+		<>
+			{children}
+			{useTooltip(labelIcon)}
+		</>
+	);
 	return (
 		<NeoInputWrapper
 			disabled={disabled}
@@ -73,9 +78,9 @@ export const Switch = ({
 				/>
 				<i className="neo-switch__icon" />
 				{multiline ? (
-					<span className="neo-switch-children">{children}</span>
+					<span className="neo-switch-children">{childrenWithTooltip}</span>
 				) : (
-					children
+					childrenWithTooltip
 				)}
 			</Label>
 		</NeoInputWrapper>

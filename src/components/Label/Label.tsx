@@ -3,6 +3,7 @@ import { Tooltip, type TooltipPosition } from "components";
 import type { IconNamesType } from "utils";
 // import "./Label_shim.css";
 import { useMemo } from "react";
+import { useTooltip } from "./useLabel";
 export type LabelIconProps = {
 	iconType: IconNamesType;
 	iconAriaLabel: string;
@@ -27,33 +28,25 @@ export const Label = ({
 	children,
 	icon,
 }: LabelProps) => {
-	const tooltip = useMemo(() => {
-		if (icon === undefined) return null;
-		return (
-			<Tooltip label={icon.iconTooltipText} position={icon.iconTooltipPosition}>
-				<Icon
-					tabIndex={0}
-					icon={icon.iconType}
-					aria-label={icon.iconAriaLabel}
-					size="sm"
-				/>
-			</Tooltip>
-		);
-	}, [icon]);
+	const tooltip = useTooltip(icon);
+
 	const justLabel = useMemo(() => {
 		return (
 			<label htmlFor={id} className={className}>
 				{label || children}
-				{tooltip}
 			</label>
 		);
-	}, [id, label, className, children, tooltip]);
+	}, [id, label, className, children]);
+
+	// children is used by the Switch component only
+	// And switch already renders the tooltip itself
+	// so we don't need to render it below
 	return icon === undefined ? (
 		justLabel
 	) : (
 		<div className="neo-form__label-with-icon">
 			{justLabel}
-			{tooltip}
+			{children ? null : tooltip}
 		</div>
 	);
 };
