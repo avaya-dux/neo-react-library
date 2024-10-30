@@ -135,6 +135,7 @@ export const TextInput = ({
 					placeholder={placeholder}
 					readOnly={readOnly}
 					value={value}
+					required={required}
 					{...rest}
 				/>
 			) : (
@@ -167,6 +168,7 @@ export const TextInput = ({
 								readOnly={readOnly}
 								type={inputType}
 								value={value}
+								required={required}
 								{...rest}
 							/>
 

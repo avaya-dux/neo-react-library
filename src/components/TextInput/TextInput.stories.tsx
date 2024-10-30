@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react";
 
-import { Checkbox, Form, Icon } from "components";
+import { Button, Checkbox, Form, Icon } from "components";
 
 import type { ExternalLabelProps } from "components/Label";
 import { useCallback, useState } from "react";
@@ -101,6 +101,8 @@ export const DifferentHTMLOutputExamples = () => {
 					label="Input type password"
 					placeholder="Placeholder password"
 					type="password"
+					minLength={8}
+					helperText="Password must be at least 8 characters."
 					required
 				/>
 
@@ -177,6 +179,8 @@ export const DifferentHTMLOutputExamples = () => {
 					type="password"
 					isSmall
 				/>
+
+				<Button type="submit">Submit</Button>
 			</Form>
 		</section>
 	);
