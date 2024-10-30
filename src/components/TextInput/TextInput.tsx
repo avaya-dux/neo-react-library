@@ -230,7 +230,13 @@ export const InternalTextInputElement = ({
 	...rest
 }: Pick<
 	TextInputProps,
-	"readOnly" | "disabled" | "placeholder" | "value" | "type" | "className"
+	| "readOnly"
+	| "disabled"
+	| "placeholder"
+	| "value"
+	| "type"
+	| "className"
+	| "required"
 > & {
 	id: string;
 	inputRef: RefObject<HTMLInputElement>;
