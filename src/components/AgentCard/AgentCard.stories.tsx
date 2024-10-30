@@ -91,22 +91,3 @@ export const AgentCardStory: Story = {
 		</StoryWrapper>
 	),
 };
-
-export const TemplatedAgentCard: Story = {
-	render: ({ agentStatus, agentName }) => (
-		<div className="neo-nav">
-			<AgentCard
-				agentStatus={agentStatus}
-				agentName={agentName}
-				avatar={
-					<Avatar
-						variant="generic"
-						size="md"
-						image="https://placekitten.com/g/200/300"
-						label="image of a kitten"
-					/>
-				}
-			/>
-		</div>
-	),
-};
