@@ -33,10 +33,10 @@
   resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.16.tgz#63ab62ae5d884f294e7939adb603ef32453ad637"
   integrity sha512-GZ9eR21i/IyYN17xQDaVdOEywGIfq8o+zOtips9mKCkqvUnumx5ZOqv+h+9UzIr1A9YFRBdqGiPz+fH9zBQPIw==
 
-"@avaya/neo@3.81.18":
-  version "3.81.18"
-  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.18.tgz#d493cba226af6cfa596e47b68464eff580fa4e23"
-  integrity sha512-OVOIjrHdMFdY89uL7zzQy4loi5cVej6Gw88PoRiY59lNoVt2ltRvZW0MvJLb83dZAYzE7LubdTXSMzQhVxCzGA==
+"@avaya/neo@3.81.19":
+  version "3.81.19"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.19.tgz#50c9a889df2ddb596d76681bad88a07e6e1f580e"
+  integrity sha512-ub5mTmyoaLOwk3wCjnkXyk6zKxa2CK9r3DxZU1+WVd50MWFZRds9UTOc81bwsBhnQW/D06/iCF2zYX3pcaJiCg==
 
 "@aw-web-design/x-default-browser@1.4.126":
   version "1.4.126"
@@ -7840,9 +7840,9 @@ electron-to-chromium@^1.5.28:
   integrity sha512-PF8n2AlIhCKXQ+gTpiJi0VhcHDb69kYX4MtCiivctc2QD3XuNZ/XIOlbGzt7WAjjEev0TtaH6Cu3arZExm5DOw==
 
 elliptic@^6.5.3, elliptic@^6.5.4:
-  version "6.5.7"
-  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.7.tgz#8ec4da2cb2939926a1b9a73619d768207e647c8b"
-  integrity sha512-ESVCtTwiA+XhY3wyh24QqRGBoP3rEdDUl3EDUUo9tft074fi19IrdpH7hLCMMP3CIj7jb3W96rn8lt/BqIlt5Q==
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.6.0.tgz#5919ec723286c1edf28685aa89261d4761afa210"
+  integrity sha512-dpwoQcLc/2WLQvJvLRHKZ+f9FgOdjnq11rurqwekGQygGPsYSK29OMMD2WalatiqQ+XGFDglTNixpPfI+lpaAA==
   dependencies:
     bn.js "^4.11.9"
     brorand "^1.1.0"

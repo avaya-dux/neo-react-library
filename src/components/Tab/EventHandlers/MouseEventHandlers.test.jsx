@@ -92,7 +92,7 @@ describe("Tab Mouse event handlers", () => {
 		});
 		it("should close tab when close icon is clicked", () => {
 			const currentTarget = { getAttribute: () => "tab1" };
-			const target = { getAttribute: () => "x" };
+			const target = { getAttribute: () => "neo-icon-end" };
 			const e = {
 				stopPropagation: vi.fn(),
 				preventDefault: vi.fn(),
