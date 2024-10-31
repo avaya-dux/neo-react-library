@@ -1,0 +1,12 @@
+.icon-story-container {
+	max-width: 50ch;
+}
+
+.icon-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+
+	padding-top: 0.5rem;
+	padding-bottom: 2rem;
+}
