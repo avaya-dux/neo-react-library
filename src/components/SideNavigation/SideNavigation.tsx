@@ -4,6 +4,7 @@ import { RovingTabIndexProvider } from "react-roving-tabindex";
 
 import { handleAccessbilityError } from "utils";
 
+import { CategoryGroup } from "./CategoryGroup";
 import { LinkItem } from "./LinkItem";
 import { NavCategory } from "./NavCategory";
 import { SideNavigationContext } from "./SideNavigationContext";
@@ -13,7 +14,6 @@ import type {
 	SideNavigationSubComponents,
 } from "./SideNavigationTypes";
 import { SubCategory } from "./SubCategory";
-import { CategoryGroup } from "./CategoryGroup";
 import { TopLinkItem } from "./TopLinkItem";
 
 import "./SideNavigation_shim.css";

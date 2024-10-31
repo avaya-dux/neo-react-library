@@ -1,8 +1,8 @@
 import type { HTMLAttributes, ReactElement } from "react";
 
 import type { IconNamesType } from "utils";
-import type { SideNavigationSubCategoryProps } from "./SubCategory";
 import type { SideNavigationCategoryGroupProps } from "./CategoryGroup";
+import type { SideNavigationSubCategoryProps } from "./SubCategory";
 
 export interface SideNavigationTopLinkItemProps {
 	label: string;

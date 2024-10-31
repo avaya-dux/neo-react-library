@@ -46,7 +46,13 @@
 		/* width: 100%; */
 		justify-content: unset;
 
-		background-image: linear-gradient(50deg, var(--button-tertiary-hover-background-color) 0%, var(--button-tertiary-hover-background-color) 50%, var(--button-secondary-background-color) 50%, var(--button-secondary-background-color) 100%);
+		background-image: linear-gradient(
+			50deg,
+			var(--button-tertiary-hover-background-color) 0%,
+			var(--button-tertiary-hover-background-color) 50%,
+			var(--button-secondary-background-color) 50%,
+			var(--button-secondary-background-color) 100%
+		);
 		color: var(--neo-color-base-800);
 		background-position: 100% 0;
 		background-repeat: no-repeat;
