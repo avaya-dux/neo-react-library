@@ -30,7 +30,7 @@ import "./TopLinkItem_shim.css";
  */
 export const TopLinkItem = ({
 	disabled,
-	href,
+	href = "",
 	icon,
 	id,
 	label,
@@ -71,7 +71,7 @@ export const TopLinkItem = ({
 				className,
 			)}
 		>
-			{disabled ? (
+			{disabled || !href ? (
 				<Button disabled={disabled} variant="tertiary" icon={icon}>
 					{label}
 				</Button>

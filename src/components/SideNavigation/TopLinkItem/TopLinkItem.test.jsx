@@ -91,7 +91,7 @@ describe("TopLinkItem", () => {
 				onNavigate={mockedFunction}
 				currentUrl=""
 			>
-				<SideNavigation.TopLinkItem label={TopLinkItemLabel} />
+				<SideNavigation.TopLinkItem label={TopLinkItemLabel} href="#home" />
 			</SideNavigation>,
 		);
 		const linkElement = getByText(TopLinkItemLabel);
