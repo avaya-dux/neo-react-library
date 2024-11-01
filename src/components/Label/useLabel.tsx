@@ -1,6 +1,6 @@
+import { Icon, Tooltip } from "components";
 import { useMemo } from "react";
 import { type ExternalLabelProps, Label, type LabelIconProps } from "./Label";
-import { Icon, Tooltip } from "components";
 
 export const useLabel = (
 	label: string | ExternalLabelProps,
@@ -22,14 +22,20 @@ export const useTooltip = (icon?: LabelIconProps) => {
 	return useMemo(() => {
 		if (icon === undefined) return null;
 		return (
-			<Tooltip label={icon.iconTooltipText} position={icon.iconTooltipPosition}>
-				<Icon
-					tabIndex={0}
-					icon={icon.iconType}
-					aria-label={icon.iconAriaLabel}
-					size="sm"
-				/>
-			</Tooltip>
+			<>
+				<span className="neo-form__label-with-icon__spacer" />
+				<Tooltip
+					label={icon.iconTooltipText}
+					position={icon.iconTooltipPosition}
+				>
+					<Icon
+						tabIndex={0}
+						icon={icon.iconType}
+						aria-label={icon.iconAriaLabel}
+						size="sm"
+					/>
+				</Tooltip>
+			</>
 		);
 	}, [icon]);
 };

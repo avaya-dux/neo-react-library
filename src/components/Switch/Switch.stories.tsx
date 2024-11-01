@@ -6,7 +6,6 @@ import { Form } from "components/Form";
 
 import type { LabelIconProps } from "components/Label";
 import { Switch, type SwitchProps } from "./";
-import { Icon, Tooltip } from "components";
 
 export default {
 	title: "Components/Switch",
