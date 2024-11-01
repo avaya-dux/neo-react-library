@@ -14,9 +14,11 @@ export default {
 
 interface DirectionTemplateProps {
 	dir: "ltr" | "rtl";
+	labelWithIcon: boolean;
 }
 const DirectionTemplate: Story<DirectionTemplateProps> = ({
 	dir = "ltr",
+	labelWithIcon = false,
 }: DirectionTemplateProps) => {
 	const [checked, setChecked] = useState(false);
 	const longText =
@@ -28,7 +30,7 @@ const DirectionTemplate: Story<DirectionTemplateProps> = ({
 		iconTooltipPosition: "auto",
 		iconTooltipText: "This is a tooltip",
 	} as LabelIconProps;
-	return (
+	return labelWithIcon === false ? (
 		<main>
 			<h3>Switches</h3>
 			<section style={{ width: 200 }} dir={dir}>
@@ -77,11 +79,67 @@ const DirectionTemplate: Story<DirectionTemplateProps> = ({
 					multiline 3
 				</Switch>
 			</section>
+		</main>
+	) : (
+		<main>
 			<h3>Switches with Icons</h3>
 			<section style={{ width: 200 }} dir={dir}>
-				<Switch labelIcon={labelIcon}>With Icon</Switch>
+				<Switch
+					labelIcon={labelIcon}
+					onChange={(_e, checked) => alert(`Checked -> ${checked}`)}
+				>
+					Alert on toggle
+				</Switch>
+
+				<Switch
+					labelIcon={labelIcon}
+					checked={checked}
+					onChange={(_e, updatedChecked) => setChecked(updatedChecked)}
+				>
+					Controlled Switch
+				</Switch>
+				<Switch
+					labelIcon={labelIcon}
+					checked={checked}
+					onChange={(_e, updatedChecked) => setChecked(updatedChecked)}
+				>
+					Controlled Switch
+				</Switch>
+
+				<Switch defaultChecked labelIcon={labelIcon}>
+					Default Checked
+				</Switch>
+
+				<Switch disabled labelIcon={labelIcon}>
+					Disabled Unchecked
+				</Switch>
+				<Switch disabled defaultChecked labelIcon={labelIcon}>
+					Disabled Checked
+				</Switch>
+				<Switch defaultChecked dir="rtl" labelIcon={labelIcon}>
+					Label fixed on left
+				</Switch>
+				<Switch multiline labelIcon={labelIcon}>
+					Long multiline text controlled by parent: {longText}
+				</Switch>
+				<Switch multiline dir="rtl" labelIcon={labelIcon}>
+					Long multiline text fixed on left: {longText}
+				</Switch>
+				<Switch multiline dir="rtl" labelIcon={labelIcon}>
+					multiline 1 text fixed on left
+					<br />
+					multiline 2 <br />
+					multiline 3
+				</Switch>
+				<Switch multiline labelIcon={labelIcon}>
+					multiline 1 text controlled by parent
+					<br />
+					multiline 2 <br />
+					multiline 3
+				</Switch>
+				<Switch labelIcon={labelIcon}>With Icon LTR</Switch>
 				<Switch labelIcon={labelIcon} dir="rtl">
-					With Icon
+					With Icon RTL
 				</Switch>
 			</section>
 		</main>
@@ -91,6 +149,13 @@ const DirectionTemplate: Story<DirectionTemplateProps> = ({
 export const Default = DirectionTemplate.bind({});
 Default.args = {
 	dir: "ltr",
+	labelWithIcon: false,
+};
+
+export const LabelWithIcons = DirectionTemplate.bind({});
+LabelWithIcons.args = {
+	dir: "ltr",
+	labelWithIcon: true,
 };
 export const FormControl = () => {
 	const [submitted, setSubmitted] = useState(false);

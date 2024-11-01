@@ -1,8 +1,7 @@
-import { Icon } from "components";
-import { Tooltip, type TooltipPosition } from "components";
-import type { IconNamesType } from "utils";
-import "./Label_shim.css";
+import type { TooltipPosition } from "components";
 import { useMemo } from "react";
+import type { IconNamesType } from "utils";
+import { useTooltip } from "./useLabel";
 export type LabelIconProps = {
 	iconType: IconNamesType;
 	iconAriaLabel: string;
@@ -16,6 +15,7 @@ export type LabelProps = {
 	className?: string;
 	children?: React.ReactNode;
 	icon?: LabelIconProps;
+	generateTooltip?: boolean;
 };
 
 export type ExternalLabelProps = Omit<LabelProps, "htmlFor">;
@@ -26,6 +26,7 @@ export const Label = ({
 	className,
 	children,
 	icon,
+	generateTooltip = true,
 }: LabelProps) => {
 	const justLabel = useMemo(() => {
 		return (
@@ -34,19 +35,13 @@ export const Label = ({
 			</label>
 		);
 	}, [id, label, className, children]);
+
 	return icon === undefined ? (
 		justLabel
 	) : (
 		<div className="neo-form__label-with-icon">
 			{justLabel}
-			<Tooltip label={icon.iconTooltipText} position={icon.iconTooltipPosition}>
-				<Icon
-					tabIndex={0}
-					icon={icon.iconType}
-					aria-label={icon.iconAriaLabel}
-					size="sm"
-				/>
-			</Tooltip>
+			{generateTooltip && useTooltip(icon)}
 		</div>
 	);
 };
