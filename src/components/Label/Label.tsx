@@ -1,5 +1,4 @@
 import type { TooltipPosition } from "components";
-// import "./Label_shim.css";
 import { useMemo } from "react";
 import type { IconNamesType } from "utils";
 import { useTooltip } from "./useLabel";
