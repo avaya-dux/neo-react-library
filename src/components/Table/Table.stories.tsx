@@ -77,42 +77,48 @@ export const MoreActionsMenu = () => (
 			...FilledFields.columns,
 			{
 				Header: "More Actions",
-				Cell: () => (
-					<Tooltip label="Show more actions for this item.">
-						<Menu
-							aria-label="More actions menu."
-							menuRootElement={<Button variant="tertiary">...</Button>}
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+				Cell: (cell: any) => {
+					return (
+						<Tooltip
+							label="Show more actions for this item."
+							position={cell.row.index === 9 ? "bottom" : "top"}
 						>
-							<MenuItem>
-								<Icon
-									style={{ marginRight: "8px" }}
-									icon="edit"
-									size="sm"
-									aria-label="Edits row"
-								/>
-								Edit
-							</MenuItem>
-							<MenuItem>
-								<Icon
-									style={{ marginRight: "8px" }}
-									icon="trash"
-									size="sm"
-									aria-label="Deletes row"
-								/>
-								Delete
-							</MenuItem>
-							<MenuItem>
-								<Icon
-									style={{ marginRight: "8px" }}
-									icon="copy"
-									size="sm"
-									aria-label="Copies row"
-								/>
-								Copy
-							</MenuItem>
-						</Menu>
-					</Tooltip>
-				),
+							<Menu
+								aria-label="More actions menu."
+								menuRootElement={<Button variant="tertiary">...</Button>}
+							>
+								<MenuItem>
+									<Icon
+										style={{ marginRight: "8px" }}
+										icon="edit"
+										size="sm"
+										aria-label="Edits row"
+									/>
+									Edit
+								</MenuItem>
+								<MenuItem>
+									<Icon
+										style={{ marginRight: "8px" }}
+										icon="trash"
+										size="sm"
+										aria-label="Deletes row"
+									/>
+									Delete
+								</MenuItem>
+								<MenuItem>
+									<Icon
+										style={{ marginRight: "8px" }}
+										icon="copy"
+										size="sm"
+										aria-label="Copies row"
+									/>
+									Copy
+								</MenuItem>
+							</Menu>
+						</Tooltip>
+					);
+				},
 			},
 		]}
 		data={[...FilledFields.data]}
