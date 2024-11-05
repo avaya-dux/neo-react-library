@@ -47,12 +47,6 @@ export const LabelWithIcon = () => {
 			<Form dir={dir}>
 				<TextInput label={label} placeholder="label: icon" />
 			</Form>
-			<Checkbox
-				onChange={() => setDir(dir === "ltr" ? "rtl" : "ltr")}
-				value={dir}
-			>
-				Right to Left?
-			</Checkbox>
 			<Form dir={dir}>
 				<TextInput label={label} required placeholder="label: required, icon" />
 				<TextInput label={label} placeholder="label: icon" />
@@ -70,6 +64,36 @@ export const LabelWithIcon = () => {
 					placeholder="input: small, label: icon"
 				/>
 
+				<TextInput defaultValue="Try To Change Me" disabled label={label} />
+
+				<TextInput
+					defaultValue="Try To Change Me"
+					label={label}
+					disabled
+					startIcon="do-not-disturb-filled"
+				/>
+
+				<TextInput
+					defaultValue="Try To Change Me"
+					disabled
+					label={label}
+					required
+				/>
+
+				<TextInput
+					defaultValue="Try To Change Me"
+					label={label}
+					disabled
+					required
+					startIcon="do-not-disturb-filled"
+				/>
+
+				<TextInput
+					defaultValue="readonly value"
+					label={label}
+					placeholder="Placeholder text"
+					readOnly
+				/>
 				{/* custom rule */}
 				<div className="container--narrow">
 					<TextInput

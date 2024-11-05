@@ -7,7 +7,8 @@ import { vi } from "vitest";
 import { Switch } from "./";
 import * as SwitchStories from "./Switch.stories";
 
-const { Default, FormControl, Template } = composeStories(SwitchStories);
+const { Default, LabelWithIcons, FormControl, Template } =
+	composeStories(SwitchStories);
 
 describe("Switch Component", () => {
 	const user = userEvent.setup();
@@ -92,6 +93,25 @@ describe("Switch Component", () => {
 
 			beforeEach(() => {
 				renderResult = render(<Default />);
+			});
+
+			it("should render ok", () => {
+				const { container } = renderResult;
+				expect(container).not.toBe(null);
+			});
+
+			it("passes basic axe compliance", async () => {
+				const { container } = renderResult;
+				const results = await axe(container);
+				expect(results).toHaveNoViolations();
+			});
+		});
+
+		describe("LabelWithIcons", () => {
+			let renderResult;
+
+			beforeEach(() => {
+				renderResult = render(<LabelWithIcons />);
 			});
 
 			it("should render ok", () => {
