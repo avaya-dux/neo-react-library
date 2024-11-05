@@ -135,6 +135,7 @@ export const TextInput = ({
 					placeholder={placeholder}
 					readOnly={readOnly}
 					value={value}
+					required={required}
 					{...rest}
 				/>
 			) : (
@@ -167,6 +168,7 @@ export const TextInput = ({
 								readOnly={readOnly}
 								type={inputType}
 								value={value}
+								required={required}
 								{...rest}
 							/>
 
@@ -230,7 +232,13 @@ export const InternalTextInputElement = ({
 	...rest
 }: Pick<
 	TextInputProps,
-	"readOnly" | "disabled" | "placeholder" | "value" | "type" | "className"
+	| "readOnly"
+	| "disabled"
+	| "placeholder"
+	| "value"
+	| "type"
+	| "className"
+	| "required"
 > & {
 	id: string;
 	inputRef: RefObject<HTMLInputElement>;
