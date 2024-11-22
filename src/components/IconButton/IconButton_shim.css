@@ -27,3 +27,7 @@
 	right: 6px;
 	top: 11px;
 }
+
+.neo-btn.neo-icon-btn > .neo-spinner {
+	margin: 0px;
+}
