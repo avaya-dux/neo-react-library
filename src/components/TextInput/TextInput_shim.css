@@ -31,3 +31,35 @@
 .neo-input-editable__wrapper .neo-input-editable__close:not(:disabled):focus {
 	margin: unset;
 }
+
+.neo-input-group .neo-input-group--addons .neo-input:focus {
+	box-shadow: none;
+	padding: 8px 0px 8px 11px;
+}
+
+.neo-input-group
+	.neo-input-group--addons:focus-within
+	.neo-input-editable__wrapper
+	.neo-input-edit__icon {
+	padding: 8px 12px;
+}
+
+.neo-input-group .neo-input-group--addons:focus-within {
+	border-color: var(--input-focus-border-color);
+	border-width: 2px;
+	margin: -1px 1px -1px -1px;
+}
+
+.neo-input-group
+	.neo-input-group--addons:focus-within
+	.neo-input-group__addon:last-child {
+	padding: 8px 11px;
+}
+
+.neo-input-group
+	.neo-input-group--addons
+	.neo-input-editable__wrapper:first-child
+	.neo-input:focus {
+	box-shadow: none;
+	padding: 8px 0px 8px 12px;
+}
