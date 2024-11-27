@@ -74,8 +74,8 @@
 		"react-table": "7.8.0"
 	},
 	"devDependencies": {
-		"@avaya/neo": "3.81.21",
-		"@avaya/neo-icons": "1.8.17",
+		"@avaya/neo": "3.81.23",
+		"@avaya/neo-icons": "1.8.18",
 		"@biomejs/biome": "1.9.4",
 		"@dnd-kit/core": "6.2.0",
 		"@dnd-kit/modifiers": "8.0.0",
