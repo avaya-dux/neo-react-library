@@ -32,6 +32,10 @@ export interface SideNavigationNavCategoryProps
 		| ReactElement<SideNavigationLinkItemProps>[];
 }
 
+export interface SideNavigationNavGroupProps {
+	groupName: string;
+}
+
 type EnforcedAccessibleLabel =
 	| { "aria-label": string }
 	| { "aria-labelledby": string };
