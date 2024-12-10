@@ -8,8 +8,6 @@ import {
 	useState,
 } from "react";
 
-import { Button } from "components/Button";
-
 import { SideNavigationContext } from "../SideNavigationContext";
 import type { SideNavigationTopLinkItemProps } from "../SideNavigationTypes";
 
@@ -64,24 +62,24 @@ export const TopLinkItem = ({
 	};
 
 	return (
-		<li
-			className={clsx(
-				"neo-leftnav__main",
-				isActive && "neo-leftnav__main--active",
-				className,
-			)}
-		>
+		<li className={className}>
 			{disabled || !href ? (
-				<Button disabled={disabled} variant="tertiary" icon={icon}>
+				<button
+					type="button"
+					disabled={disabled}
+					className="neo-sidenav-parent"
+				>
+					<span className={clsx(icon && `neo-icon-${icon}`)} />
 					{label}
-				</Button>
+				</button>
 			) : (
 				<a
 					href={href}
 					ref={anchorRef}
-					className={clsx(icon && `neo-icon-${icon}`)}
+					className={clsx("neo-sidenav-parent", isActive && "active")}
 					onClick={onClick}
 				>
+					<span className={clsx(icon && `neo-icon-${icon}`)} />
 					{label}
 				</a>
 			)}

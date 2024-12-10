@@ -61,7 +61,7 @@ describe("LinkItem", () => {
 			</ul>,
 		);
 
-		const linkElement = container.querySelector(".neo-leftnav__sub--active");
+		const linkElement = container.querySelector(".active");
 		const buttonElement = container.querySelector("button");
 		expect(linkElement).toBeInTheDocument();
 		expect(buttonElement).not.toBeInTheDocument();

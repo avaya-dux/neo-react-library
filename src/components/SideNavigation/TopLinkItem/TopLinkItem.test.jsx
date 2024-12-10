@@ -25,8 +25,8 @@ describe("TopLinkItem", () => {
 				<SideNavigation.TopLinkItem href="#test" label={TopLinkItemLabel} />
 			</SideNavigation>,
 		);
-		const linkElement = screen.getByRole("listitem");
-		expect(linkElement).toHaveClass("neo-leftnav__main--active");
+		const linkElement = screen.getByRole("link");
+		expect(linkElement).toHaveClass("active");
 		rerender(
 			<SideNavigation
 				currentUrl="#test"
@@ -36,7 +36,7 @@ describe("TopLinkItem", () => {
 				<SideNavigation.TopLinkItem href="#test" label={TopLinkItemLabel} />
 			</SideNavigation>,
 		);
-		expect(linkElement).not.toHaveClass("neo-leftnav__main--active");
+		expect(linkElement).not.toHaveClass("active");
 	});
 
 	it("passes basic axe compliance", async () => {

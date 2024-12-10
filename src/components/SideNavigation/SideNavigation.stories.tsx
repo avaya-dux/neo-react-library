@@ -125,10 +125,6 @@ export const MultipleLevels: Story = {
 				</p>
 
 				<p style={{ marginBottom: "1rem" }}>
-					<b>WIP</b>: grouping/categories
-				</p>
-
-				<p style={{ marginBottom: "1rem" }}>
 					<b>WIP</b>: third level
 				</p>
 
@@ -168,6 +164,8 @@ export const MultipleLevels: Story = {
 							label="Advanced"
 							icon={showIcons ? "settings" : undefined}
 						>
+							<SideNavigation.NavGroup groupName="Settings" />
+
 							<SideNavigation.LinkItem href="#applications">
 								Applications
 							</SideNavigation.LinkItem>
@@ -179,6 +177,8 @@ export const MultipleLevels: Story = {
 							<SideNavigation.LinkItem href="#parameters">
 								Parameters
 							</SideNavigation.LinkItem>
+
+							<SideNavigation.NavGroup groupName="Location Services" />
 
 							<SideNavigation.LinkItem href="#geography">
 								Geography

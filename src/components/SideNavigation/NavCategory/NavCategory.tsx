@@ -21,19 +21,10 @@ import { Keys, getIconClass } from "utils";
 import { SideNavigationContext } from "../SideNavigationContext";
 import type { SideNavigationNavCategoryProps } from "../SideNavigationTypes";
 
-const SIDENAV_CATEGORY_STYLE = "neo-leftnav__main";
+const SIDENAV_CATEGORY_STYLE = "neo-sidenav-parent";
 
-function getItemClassNames(
-	expanded: boolean,
-	active: boolean,
-	disabled: boolean,
-) {
-	const classNames = clsx(
-		SIDENAV_CATEGORY_STYLE,
-		expanded && "neo-leftnav__main--expand",
-		active && "neo-leftnav__main--active",
-		disabled && "neo-leftnav__disabled",
-	);
+function getItemClassNames(expanded: boolean) {
+	const classNames = clsx(SIDENAV_CATEGORY_STYLE, expanded && "expanded");
 
 	return classNames;
 }
@@ -57,7 +48,7 @@ export const NavCategory = ({
 	className,
 	expanded = false,
 	disabled = false,
-	// active = false, // BUG: definied by never used
+	// active = false, // BUG: defined by never used
 	...rest
 }: SideNavigationNavCategoryProps) => {
 	const generatedId = useId();
@@ -66,7 +57,6 @@ export const NavCategory = ({
 	const [isExpanded, setIsExpanded] = useState(expanded);
 	const [navItemClass, setNavItemClass] = useState(SIDENAV_CATEGORY_STYLE);
 	const [iconClass, setIconClass] = useState("");
-	const [childIsActive, setChildIsActive] = useState(false);
 
 	const ref = useRef(null);
 	const [tabIndex, isActive, handleKeyIndex, handleClick] = useRovingTabIndex(
@@ -78,23 +68,14 @@ export const NavCategory = ({
 	const ctx = useContext(SideNavigationContext);
 
 	useEffect(() => {
-		const active = childIsActive;
-		const itemStyle = getItemClassNames(isExpanded, active, disabled);
+		const itemStyle = getItemClassNames(isExpanded);
 		setNavItemClass(itemStyle);
-	}, [isExpanded, disabled, childIsActive]);
+	}, [isExpanded]);
 
 	useEffect(() => {
 		const iconStyles = getIconClass(icon);
 		setIconClass(iconStyles);
 	}, [icon]);
-
-	useEffect(() => {
-		let hasActiveLinks = false;
-		Children.map(children, (child) => {
-			hasActiveLinks = hasActiveLinks || child.props.href === ctx.currentUrl;
-		});
-		setChildIsActive(hasActiveLinks);
-	}, [ctx.currentUrl, children]);
 
 	const handleOnClick: MouseEventHandler = (event: MouseEvent) => {
 		event.stopPropagation();
@@ -145,15 +126,9 @@ export const NavCategory = ({
 	}, [isExpanded, disabled, ctx.currentUrl, children, icon]);
 
 	return (
-		<li id={id} className={navItemClass}>
+		<li id={id}>
 			<button
-				className={clsx(
-					"neo-leftnav__category expandable",
-					"neo-btn-secondary--info",
-					"neo-btn",
-					icon && iconClass,
-					className,
-				)}
+				className={clsx(className, navItemClass)}
 				ref={ref}
 				tabIndex={tabIndex}
 				disabled={disabled}
@@ -162,6 +137,7 @@ export const NavCategory = ({
 				aria-label={label}
 				{...rest}
 			>
+				<span className={clsx(icon && iconClass)} />
 				{label}
 			</button>
 			<ul className={listClass}>{linkItems}</ul>
