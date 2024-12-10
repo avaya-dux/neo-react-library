@@ -6,6 +6,7 @@ import { handleAccessbilityError } from "utils";
 
 import { LinkItem } from "./LinkItem";
 import { NavCategory } from "./NavCategory";
+import { NavGroup } from "./NavGroup";
 import { SideNavigationContext } from "./SideNavigationContext";
 import type {
 	SideNavigationContextType,
@@ -84,8 +85,8 @@ export const SideNavigation: FC<SideNavigationProps> &
 		>
 			<SideNavigationContext.Provider value={navContext}>
 				<div id={navId} className="neo-leftnav--wrapper">
-					<nav className="neo-leftnav" aria-label={ariaLabel} {...rest}>
-						<ul className="neo-leftnav__nav">{children}</ul>
+					<nav className="neo-sidenav" aria-label={ariaLabel} {...rest}>
+						<ul>{children}</ul>
 					</nav>
 				</div>
 			</SideNavigationContext.Provider>
@@ -96,4 +97,5 @@ export const SideNavigation: FC<SideNavigationProps> &
 SideNavigation.displayName = "SideNavigation";
 SideNavigation.LinkItem = LinkItem;
 SideNavigation.NavCategory = NavCategory;
+SideNavigation.NavGroup = NavGroup;
 SideNavigation.TopLinkItem = TopLinkItem;

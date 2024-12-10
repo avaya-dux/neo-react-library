@@ -34,6 +34,9 @@ export interface SideNavigationNavCategoryProps
 
 export interface SideNavigationNavGroupProps {
 	groupName: string;
+	children?:
+		| ReactElement<SideNavigationLinkItemProps>
+		| ReactElement<SideNavigationLinkItemProps>[];
 }
 
 type EnforcedAccessibleLabel =
@@ -57,6 +60,7 @@ export type SideNavigationProps = {
 export interface SideNavigationSubComponents {
 	LinkItem: React.FC<SideNavigationLinkItemProps>;
 	NavCategory: React.FC<SideNavigationNavCategoryProps>;
+	NavGroup: React.FC<SideNavigationNavGroupProps>;
 	TopLinkItem: React.FC<SideNavigationTopLinkItemProps>;
 }
 

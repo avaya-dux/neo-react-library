@@ -92,14 +92,7 @@ export const LinkItem = ({
 	};
 
 	return (
-		<li
-			{...rest}
-			className={clsx(
-				"neo-leftnav__sub",
-				active && "neo-leftnav__sub--active",
-				className,
-			)}
-		>
+		<li {...rest} className={className}>
 			{disabled ? (
 				<Button
 					disabled={disabled}
@@ -120,6 +113,7 @@ export const LinkItem = ({
 					ref={ref}
 					style={itemStyle}
 					tabIndex={tabIndex}
+					className={clsx("neo-sidenav-granchild", active && "active")}
 				>
 					{children}
 				</a>
