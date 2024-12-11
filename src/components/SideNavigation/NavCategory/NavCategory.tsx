@@ -59,7 +59,7 @@ export const NavCategory = ({
 	const [iconClass, setIconClass] = useState("");
 
 	const ref = useRef(null);
-	const [tabIndex, isActive, handleKeyIndex, handleClick] = useRovingTabIndex(
+	const [_tabIndex, isActive, handleKeyIndex, handleClick] = useRovingTabIndex(
 		ref,
 		disabled,
 	);
@@ -83,7 +83,7 @@ export const NavCategory = ({
 		setIsExpanded(!isExpanded);
 	};
 
-	const handleKeyDown: KeyboardEventHandler = (
+	const _handleKeyDown: KeyboardEventHandler = (
 		event: KeyboardEvent<HTMLButtonElement>,
 	) => {
 		handleKeyIndex(event);
@@ -130,10 +130,10 @@ export const NavCategory = ({
 			<button
 				className={clsx(className, navItemClass)}
 				ref={ref}
-				tabIndex={tabIndex}
+				// tabIndex={tabIndex}
 				disabled={disabled}
 				onClick={handleOnClick}
-				onKeyDown={handleKeyDown}
+				// onKeyDown={handleKeyDown}
 				aria-label={label}
 				{...rest}
 			>
