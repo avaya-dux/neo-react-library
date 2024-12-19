@@ -71,7 +71,7 @@ export const LinkItem = ({
 		ctx?.onSelectedLink?.(id as string, href);
 	};
 
-	const handleKeyDown: KeyboardEventHandler = (
+	const _handleKeyDown: KeyboardEventHandler = (
 		event: KeyboardEvent<HTMLButtonElement>,
 	) => {
 		if (event.key !== Keys.TAB) {
@@ -92,14 +92,7 @@ export const LinkItem = ({
 	};
 
 	return (
-		<li
-			{...rest}
-			className={clsx(
-				"neo-leftnav__sub",
-				active && "neo-leftnav__sub--active",
-				className,
-			)}
-		>
+		<li {...rest} className={className}>
 			{disabled ? (
 				<Button
 					disabled={disabled}
@@ -116,10 +109,11 @@ export const LinkItem = ({
 					onClick={handleOnClick}
 					onFocus={onFocus}
 					onMouseOver={onMouseOver}
-					onKeyDown={handleKeyDown}
+					// onKeyDown={handleKeyDown}
 					ref={ref}
 					style={itemStyle}
-					tabIndex={tabIndex}
+					// tabIndex={tabIndex}
+					className={clsx("neo-sidenav-granchild", active && "active")}
 				>
 					{children}
 				</a>

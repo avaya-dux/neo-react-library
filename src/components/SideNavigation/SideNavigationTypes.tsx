@@ -32,6 +32,13 @@ export interface SideNavigationNavCategoryProps
 		| ReactElement<SideNavigationLinkItemProps>[];
 }
 
+export interface SideNavigationNavGroupProps {
+	groupName: string;
+	children?:
+		| ReactElement<SideNavigationLinkItemProps>
+		| ReactElement<SideNavigationLinkItemProps>[];
+}
+
 type EnforcedAccessibleLabel =
 	| { "aria-label": string }
 	| { "aria-labelledby": string };
@@ -53,6 +60,7 @@ export type SideNavigationProps = {
 export interface SideNavigationSubComponents {
 	LinkItem: React.FC<SideNavigationLinkItemProps>;
 	NavCategory: React.FC<SideNavigationNavCategoryProps>;
+	NavGroup: React.FC<SideNavigationNavGroupProps>;
 	TopLinkItem: React.FC<SideNavigationTopLinkItemProps>;
 }
 
