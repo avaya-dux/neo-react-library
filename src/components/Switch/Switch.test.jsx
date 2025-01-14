@@ -65,6 +65,15 @@ describe("Switch Component", () => {
 		});
 	});
 
+	describe("applies `readonly` classname appropriately", () => {
+		it("applies the `readonly` class when that prop is passed", async () => {
+			render(<Switch readonly>{labelText}</Switch>);
+
+			const inputLabel = screen.getByText(labelText);
+			expect(inputLabel).toHaveClass("neo-switch--readonly");
+		});
+	});
+
 	describe("applies the `multiline` and `disabled` classes appropriately", () => {
 		it("applies the `multiline` and `disabled` classes when those props are passed", () => {
 			const { container } = render(

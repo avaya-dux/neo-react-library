@@ -35,6 +35,7 @@ export const Switch = ({
 	onChange,
 	dir,
 	labelIcon,
+	readonly,
 	...rest
 }: SwitchProps) => {
 	const generatedId = useId();
@@ -62,6 +63,7 @@ export const Switch = ({
 					"neo-switch",
 					multiline && "neo-switch--multiline",
 					disabled && "neo-switch--disabled",
+					readonly && "neo-switch--readonly",
 				)}
 				htmlFor={id}
 				icon={labelIcon}

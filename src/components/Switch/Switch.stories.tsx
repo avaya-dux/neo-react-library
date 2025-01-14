@@ -57,6 +57,10 @@ const DirectionTemplate: Story<DirectionTemplateProps> = ({
 				<Switch disabled defaultChecked>
 					Disabled Checked
 				</Switch>
+				<Switch readonly>Readonly Unchecked</Switch>
+				<Switch readonly defaultChecked>
+					Readonly Checked
+				</Switch>
 				<Switch defaultChecked dir="rtl">
 					Label fixed on left
 				</Switch>
