@@ -65,12 +65,20 @@ describe("Switch Component", () => {
 		});
 	});
 
-	describe("applies `readonly` classname appropriately", () => {
-		it("applies the `readonly` class when that prop is passed", async () => {
+	describe("applies `readonly` classname and behavior appropriately", () => {
+		it("applies the `readonly` class & prevents state change when that prop is passed", async () => {
 			render(<Switch readonly>{labelText}</Switch>);
 
 			const inputLabel = screen.getByText(labelText);
 			expect(inputLabel).toHaveClass("neo-switch--readonly");
+
+			const input = screen.getByRole("switch");
+			expect(input).toHaveAttribute("readonly", "");
+			expect(input).not.toBeChecked();
+
+			await user.click(input);
+			expect(input).toHaveAttribute("readonly", "");
+			expect(input).not.toBeChecked();
 		});
 	});
 

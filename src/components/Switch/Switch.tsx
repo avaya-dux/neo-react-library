@@ -74,8 +74,14 @@ export const Switch = ({
 					type="checkbox"
 					role="switch"
 					aria-checked={rest.checked}
+					aria-readonly={readonly}
+					readOnly={readonly}
 					onChange={(event) => {
-						onChange?.(event, event.target.checked);
+						if (!readonly) {
+							onChange?.(event, event.target.checked);
+						} else {
+							event.preventDefault();
+						}
 					}}
 					{...rest}
 				/>
