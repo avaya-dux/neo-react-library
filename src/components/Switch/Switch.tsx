@@ -35,6 +35,7 @@ export const Switch = ({
 	onChange,
 	dir,
 	labelIcon,
+	readonly,
 	...rest
 }: SwitchProps) => {
 	const generatedId = useId();
@@ -62,6 +63,7 @@ export const Switch = ({
 					"neo-switch",
 					multiline && "neo-switch--multiline",
 					disabled && "neo-switch--disabled",
+					readonly && "neo-switch--readonly",
 				)}
 				htmlFor={id}
 				icon={labelIcon}
@@ -72,8 +74,14 @@ export const Switch = ({
 					type="checkbox"
 					role="switch"
 					aria-checked={rest.checked}
+					aria-readonly={readonly}
+					readOnly={readonly}
 					onChange={(event) => {
-						onChange?.(event, event.target.checked);
+						if (!readonly) {
+							onChange?.(event, event.target.checked);
+						} else {
+							event.preventDefault();
+						}
 					}}
 					{...rest}
 				/>

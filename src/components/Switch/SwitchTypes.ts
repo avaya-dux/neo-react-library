@@ -22,4 +22,5 @@ export interface SwitchProps
 	onChange?: ChangeEventHandler<HTMLInputElement> | SwitchChangeHandler;
 	children?: ReactNode;
 	labelIcon?: LabelIconProps;
+	readonly?: boolean;
 }
