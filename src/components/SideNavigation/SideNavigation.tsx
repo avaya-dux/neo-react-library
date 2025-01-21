@@ -86,7 +86,7 @@ export const SideNavigation: FC<SideNavigationProps> &
 			<SideNavigationContext.Provider value={navContext}>
 				<div id={navId} className="neo-leftnav--wrapper">
 					<nav className="neo-sidenav" aria-label={ariaLabel} {...rest}>
-						<ul>{children}</ul>
+						<ul role="menu">{children}</ul>
 					</nav>
 				</div>
 			</SideNavigationContext.Provider>

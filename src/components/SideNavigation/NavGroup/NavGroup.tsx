@@ -23,7 +23,12 @@ import type { SideNavigationNavGroupProps } from "../SideNavigationTypes";
  */
 
 export const NavGroup = ({ groupName }: SideNavigationNavGroupProps) => {
-	return <li className="neo-sidenav-category">{groupName}</li>;
+	return (
+		// biome-ignore lint/a11y/useValidAriaRole: using role="none" here removes the implied listitem role
+		<li className="neo-sidenav-category" role="none">
+			{groupName}
+		</li>
+	);
 };
 
 NavGroup.displayName = "NavGroup";

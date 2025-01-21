@@ -126,21 +126,24 @@ export const NavCategory = ({
 	}, [isExpanded, disabled, ctx.currentUrl, children, icon]);
 
 	return (
-		<li id={id}>
+		// biome-ignore lint/a11y/useValidAriaRole: using role="none" here removes the implied listitem role
+		<li id={id} role="none">
 			<button
 				className={clsx(className, navItemClass)}
 				ref={ref}
-				// tabIndex={tabIndex}
 				disabled={disabled}
 				onClick={handleOnClick}
-				// onKeyDown={handleKeyDown}
 				aria-label={label}
+				aria-expanded={!isExpanded}
+				role="menuitem"
 				{...rest}
 			>
 				<span className={clsx(icon && iconClass)} />
 				{label}
 			</button>
-			<ul className={listClass}>{linkItems}</ul>
+			<ul className={listClass} role="menu">
+				{linkItems}
+			</ul>
 		</li>
 	);
 };

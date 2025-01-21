@@ -9,7 +9,7 @@ describe("LinkItem", () => {
 
 	it("fully renders without exploding", () => {
 		const { getByText } = render(
-			<ul>
+			<ul role="menu">
 				<LinkItem>{linkItemText}</LinkItem>
 			</ul>,
 		);
@@ -20,7 +20,7 @@ describe("LinkItem", () => {
 
 	it("passes basic axe compliance", async () => {
 		const { container } = render(
-			<ul>
+			<ul role="menu">
 				<LinkItem>{linkItemText}</LinkItem>
 			</ul>,
 		);
@@ -30,7 +30,7 @@ describe("LinkItem", () => {
 
 	it("uses an `<a>` when _not_ disabled", () => {
 		const { container } = render(
-			<ul>
+			<ul role="menu">
 				<LinkItem>{linkItemText}</LinkItem>
 			</ul>,
 		);
@@ -43,7 +43,7 @@ describe("LinkItem", () => {
 
 	it("uses an `<button>` when it _is_ disabled", () => {
 		const { container } = render(
-			<ul>
+			<ul role="menu">
 				<LinkItem disabled>{linkItemText}</LinkItem>
 			</ul>,
 		);
@@ -56,7 +56,7 @@ describe("LinkItem", () => {
 
 	it("active state of link item", () => {
 		const { container } = render(
-			<ul>
+			<ul role="menu">
 				<LinkItem active>{linkItemText}</LinkItem>
 			</ul>,
 		);
@@ -70,7 +70,7 @@ describe("LinkItem", () => {
 	it("should simulate onclick function", () => {
 		const mockedFunction = vi.fn();
 		const { getByText } = render(
-			<ul>
+			<ul role="menu">
 				<LinkItem onClick={mockedFunction}>{linkItemText}</LinkItem>
 			</ul>,
 		);
