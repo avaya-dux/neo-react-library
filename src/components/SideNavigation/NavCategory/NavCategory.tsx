@@ -130,11 +130,10 @@ export const NavCategory = ({
 			<button
 				className={clsx(className, navItemClass)}
 				ref={ref}
-				// tabIndex={tabIndex}
 				disabled={disabled}
 				onClick={handleOnClick}
-				// onKeyDown={handleKeyDown}
 				aria-label={label}
+				aria-expanded={isExpanded}
 				{...rest}
 			>
 				<span className={clsx(icon && iconClass)} />

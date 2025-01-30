@@ -106,13 +106,12 @@ export const LinkItem = ({
 			) : (
 				<a
 					href={href}
+					aria-current={active}
 					onClick={handleOnClick}
 					onFocus={onFocus}
 					onMouseOver={onMouseOver}
-					// onKeyDown={handleKeyDown}
 					ref={ref}
 					style={itemStyle}
-					// tabIndex={tabIndex}
 					className={clsx("neo-sidenav-granchild", active && "active")}
 				>
 					{children}

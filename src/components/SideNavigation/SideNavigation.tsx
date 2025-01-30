@@ -15,6 +15,8 @@ import type {
 } from "./SideNavigationTypes";
 import { TopLinkItem } from "./TopLinkItem";
 
+import "./SideNavigation_shim.css";
+
 /**
  * The side navigation bar is used to display the secondary navigation elements
  * of an application. These include a list of links that can be used to move
@@ -85,9 +87,14 @@ export const SideNavigation: FC<SideNavigationProps> &
 		>
 			<SideNavigationContext.Provider value={navContext}>
 				<div id={navId} className="neo-leftnav--wrapper">
-					<nav className="neo-sidenav" aria-label={ariaLabel} {...rest}>
+					<div
+						role="navigation"
+						className="neo-sidenav"
+						aria-label={ariaLabel}
+						{...rest}
+					>
 						<ul>{children}</ul>
-					</nav>
+					</div>
 				</div>
 			</SideNavigationContext.Provider>
 		</RovingTabIndexProvider>
