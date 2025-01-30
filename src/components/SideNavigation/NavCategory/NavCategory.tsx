@@ -133,7 +133,7 @@ export const NavCategory = ({
 				disabled={disabled}
 				onClick={handleOnClick}
 				aria-label={label}
-				aria-expanded={!isExpanded}
+				aria-expanded={isExpanded}
 				{...rest}
 			>
 				<span className={clsx(icon && iconClass)} />
