@@ -1,0 +1,219 @@
+:root div.neo-sidenav,
+:root .neo-light div.neo-sidenav {
+	--disabled-font-color: var(--neo-color-base-500);
+	--trail-font-color: var(--neo-color-blue-600);
+	--chevron-color: var(--neo-color-base-900);
+	--active-font-color: var(--neo-color-blue-600);
+	--active-border-color: var(--neo-color-blue-600);
+	--active-background-color: var(--neo-color-blue-100);
+}
+:root .neo-dark div.neo-sidenav {
+	--disabled-font-color: var(--neo-color-base-400);
+	--trail-font-color: var(--neo-color-blue-300);
+	--chevron-color: var(--neo-color-base-0);
+	--active-font-color: var(--neo-color-blue-300);
+	--active-border-color: var(--neo-color-blue-300);
+	--active-background-color: var(--neo-color-blue-800);
+}
+@media (prefers-color-scheme: light) {
+	:root .neo-dynamic div.neo-sidenav {
+		--disabled-font-color: var(--neo-color-base-500);
+		--trail-font-color: var(--neo-color-blue-600);
+		--chevron-color: var(--neo-color-base-900);
+		--active-font-color: var(--neo-color-blue-600);
+		--active-border-color: var(--neo-color-blue-600);
+		--active-background-color: var(--neo-color-blue-100);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	:root .neo-dynamic div.neo-sidenav {
+		--disabled-font-color: var(--neo-color-base-400);
+		--trail-font-color: var(--neo-color-blue-300);
+		--chevron-color: var(--neo-color-base-0);
+		--active-font-color: var(--neo-color-blue-300);
+		--active-border-color: var(--neo-color-blue-300);
+		--active-background-color: var(--neo-color-blue-800);
+	}
+}
+div.neo-sidenav {
+	--category-left-padding: 48px;
+	--child-left-padding: 56px;
+	--grandchild-left-padding: 68px;
+	width: 240px;
+}
+div.neo-sidenav a,
+div.neo-sidenav button {
+	align-items: center;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 24px;
+	display: flex;
+}
+div.neo-sidenav a span[class^="neo-icon-"],
+div.neo-sidenav button span[class^="neo-icon-"] {
+	line-height: 20px;
+}
+div.neo-sidenav a span[class^="neo-icon-"]:before,
+div.neo-sidenav button span[class^="neo-icon-"]:before {
+	margin-right: 8px;
+	font-size: 24px;
+}
+[dir="rtl"] div.neo-sidenav a span[class^="neo-icon-"]:before,
+[dir="rtl"] div.neo-sidenav button span[class^="neo-icon-"]:before {
+	margin-left: 8px;
+	margin-right: unset;
+}
+div.neo-sidenav a .neo-sidenav-text-truncation,
+div.neo-sidenav button .neo-sidenav-text-truncation {
+	line-clamp: 2;
+	-webkit-line-clamp: 2;
+	text-overflow: ellipsis;
+	text-align: left;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	overflow: hidden;
+}
+[dir="rtl"] div.neo-sidenav a .neo-sidenav-text-truncation,
+[dir="rtl"] div.neo-sidenav button .neo-sidenav-text-truncation {
+	text-align: right;
+}
+div.neo-sidenav a {
+	color: var(--leftnav-default-color);
+	text-decoration: none;
+}
+div.neo-sidenav a:hover {
+	color: var(--leftnav-default-color);
+	background-color: var(--leftnav-hover-background-color);
+	text-decoration: none;
+}
+div.neo-sidenav a.active {
+	color: var(--active-font-color);
+	background-color: var(--active-background-color);
+	font-weight: 600;
+}
+div.neo-sidenav a.active:before {
+	content: "";
+	background-color: var(--active-border-color);
+	width: 2px;
+	position: absolute;
+	top: 2px;
+	bottom: 2px;
+	left: 2px;
+}
+[dir="rtl"] div.neo-sidenav a.active:before {
+	left: unset;
+	right: 2px;
+}
+div.neo-sidenav button {
+	cursor: pointer;
+	color: var(--leftnav-default-color);
+	background: 0 0;
+	border: none;
+	width: 100%;
+	font-family: noto-sans, sans-serif;
+}
+div.neo-sidenav button:hover:not(:disabled) {
+	background-color: var(--leftnav-hover-background-color);
+}
+div.neo-sidenav button:disabled {
+	cursor: not-allowed;
+	color: var(--disabled-font-color);
+}
+div.neo-sidenav button:disabled:before {
+	color: var(--disabled-font-color);
+}
+div.neo-sidenav button:disabled + ul,
+div.neo-sidenav button:not(.expanded) + ul {
+	display: none;
+}
+div.neo-sidenav button.neo-sidenav-parent:not(:disabled),
+div.neo-sidenav button.neo-sidenav-child:not(:disabled) {
+	--chevron-spacing: 12px;
+	--chevron-plus-ellipsis-spacing: 24px;
+}
+div.neo-sidenav
+	button.neo-sidenav-parent:not(:disabled)
+	.neo-sidenav-text-truncation,
+div.neo-sidenav
+	button.neo-sidenav-child:not(:disabled)
+	.neo-sidenav-text-truncation {
+	padding-right: var(--chevron-plus-ellipsis-spacing);
+}
+[dir="rtl"]
+	div.neo-sidenav
+	button.neo-sidenav-parent:not(:disabled)
+	.neo-sidenav-text-truncation,
+[dir="rtl"]
+	div.neo-sidenav
+	button.neo-sidenav-child:not(:disabled)
+	.neo-sidenav-text-truncation {
+	padding-right: unset;
+	padding-left: var(--chevron-plus-ellipsis-spacing);
+}
+div.neo-sidenav button.neo-sidenav-parent:not(:disabled):after,
+div.neo-sidenav button.neo-sidenav-child:not(:disabled):after {
+	color: var(--chevron-color);
+	content: "";
+	right: var(--chevron-spacing);
+	font-family: updated-neo-icons, sans-serif;
+	position: absolute;
+}
+[dir="rtl"] div.neo-sidenav button.neo-sidenav-parent:not(:disabled):after,
+[dir="rtl"] div.neo-sidenav button.neo-sidenav-child:not(:disabled):after {
+	left: var(--chevron-spacing);
+	right: unset;
+}
+div.neo-sidenav button.neo-sidenav-parent:not(:disabled).expanded:after,
+div.neo-sidenav button.neo-sidenav-child:not(:disabled).expanded:after {
+	content: "";
+	transition: transform 0.4s;
+}
+div.neo-sidenav ul {
+	margin: 0;
+	list-style-type: none;
+}
+div.neo-sidenav li {
+	position: relative;
+}
+div.neo-sidenav li:has(a.active) > button {
+	color: var(--trail-font-color);
+	font-weight: 600;
+}
+div.neo-sidenav .neo-sidenav-parent {
+	padding: 8px 12px;
+}
+div.neo-sidenav .neo-sidenav-category,
+div.neo-sidenav .neo-sidenav-child,
+div.neo-sidenav .neo-sidenav-grandchild {
+	padding: 4px 12px;
+}
+div.neo-sidenav.no-icons {
+	--category-left-padding: 16px;
+	--child-left-padding: 24px;
+	--grandchild-left-padding: 36px;
+}
+div.neo-sidenav .neo-sidenav-category {
+	padding-left: var(--category-left-padding);
+	color: var(--disabled-font-color);
+	font-size: 12px;
+	line-height: 24px;
+}
+[dir="rtl"] div.neo-sidenav .neo-sidenav-category {
+	padding-left: inherit;
+	padding-right: var(--category-left-padding);
+}
+div.neo-sidenav .neo-sidenav-child {
+	padding-left: var(--child-left-padding);
+}
+[dir="rtl"] div.neo-sidenav .neo-sidenav-child {
+	padding-left: inherit;
+	padding-right: var(--child-left-padding);
+}
+div.neo-sidenav .neo-sidenav-grandchild {
+	padding-left: var(--grandchild-left-padding);
+}
+[dir="rtl"] div.neo-sidenav .neo-sidenav-grandchild {
+	padding-left: inherit;
+	padding-right: var(--grandchild-left-padding);
+}
