@@ -28,15 +28,15 @@
   resolved "https://registry.yarnpkg.com/@atomic-layout/core/-/core-0.14.1.tgz#3d69be5f79775f11b8008f18bc603b04a2141ccd"
   integrity sha512-o5nhk/1djuKzB20C2LSOuetTDytsbGg4c0UfxXkq1pqoaN3hKJcHPYF9nV+p6+P5CWqNBaaJddZ32OsFSppULQ==
 
-"@avaya/neo-icons@1.8.18":
-  version "1.8.18"
-  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.18.tgz#f7befd1ea9ebb34e466f951820bca46e9b76a8e0"
-  integrity sha512-tl5dEdtqQdvDc3bNkoIzhwMqMQH5nuOam9h3LkiSLgOyDOPr2BfAwVQtD8dALmxDcLBe//o+a+1WRhyTX7u5aA==
+"@avaya/neo-icons@1.8.19":
+  version "1.8.19"
+  resolved "https://registry.yarnpkg.com/@avaya/neo-icons/-/neo-icons-1.8.19.tgz#ca56f63f720d19aa465b074e373b1ee2d21f3e26"
+  integrity sha512-cxx2nO7gs8LtVauV0FoW9wzoeUlX0SlkI5tDZr0o2/PtqaYSx7nHngkGU88TBe8x7ha0irdRIJbtvzByJy5SFw==
 
-"@avaya/neo@3.81.23":
-  version "3.81.23"
-  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.81.23.tgz#1a4364aee4e075d80b87c72e9ecd90f443c96627"
-  integrity sha512-E2yhYZ0Egz5FtrjviNAS1IVwib/GCAW0GZ097QpQjHG+Op9mhhXEw2BDsoVeccn6zVv9Zw/FC5485f2c7sQHzg==
+"@avaya/neo@3.83.0":
+  version "3.83.0"
+  resolved "https://registry.yarnpkg.com/@avaya/neo/-/neo-3.83.0.tgz#08bf3ad516554f392e845dd5c49cde80afab1212"
+  integrity sha512-G89HCbMz7/wi3Up8+VkvA65sPGCJxV+Ei7cS+QDF1pU/ROH3TaPu0+08ipkZMSfQKu3/TEcJENq8RbG0QZeZqA==
 
 "@aw-web-design/x-default-browser@1.4.126":
   version "1.4.126"
@@ -7544,10 +7544,10 @@ cypress-real-events@1.13.0:
   resolved "https://registry.yarnpkg.com/cypress-real-events/-/cypress-real-events-1.13.0.tgz#6b7cd32dcac172db1493608f97a2576c7d0bd5af"
   integrity sha512-LoejtK+dyZ1jaT8wGT5oASTPfsNV8/ClRp99ruN60oPj8cBJYod80iJDyNwfPAu4GCxTXOhhAv9FO65Hpwt6Hg==
 
-cypress@13.17.0:
-  version "13.17.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-13.17.0.tgz#34c3d68080c4497eace0f353bd1629587a5f600d"
-  integrity sha512-5xWkaPurwkIljojFidhw8lFScyxhtiFHl/i/3zov+1Z5CmY4t9tjIdvSXfu82Y3w7wt0uR9KkucbhkVvJZLQSA==
+cypress@14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-14.0.0.tgz#a71cb0a243a0bfeb97b6973ab9c5291ca5288e93"
+  integrity sha512-kEGqQr23so5IpKeg/dp6GVi7RlHx1NmW66o2a2Q4wk9gRaAblLZQSiZJuDI8UMC4LlG5OJ7Q6joAiqTrfRNbTw==
   dependencies:
     "@cypress/request" "^3.0.6"
     "@cypress/xvfb" "^1.2.4"
