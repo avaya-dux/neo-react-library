@@ -25,7 +25,7 @@ describe("TopLinkItem", () => {
 				<SideNavigation.TopLinkItem href="#test" label={TopLinkItemLabel} />
 			</SideNavigation>,
 		);
-		const linkElement = screen.getByRole("menuitem");
+		const linkElement = screen.getByRole("link");
 		expect(linkElement).toHaveClass("active");
 		rerender(
 			<SideNavigation
@@ -41,7 +41,7 @@ describe("TopLinkItem", () => {
 
 	it("passes basic axe compliance", async () => {
 		const { container } = render(
-			<ul role="menu">
+			<ul>
 				<SideNavigation.TopLinkItem label={TopLinkItemLabel} />
 			</ul>,
 		);

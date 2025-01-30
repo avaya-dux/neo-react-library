@@ -62,12 +62,10 @@ export const TopLinkItem = ({
 	};
 
 	return (
-		// biome-ignore lint/a11y/useValidAriaRole: using role="none" here removes the implied listitem role
-		<li className={className} role="none">
+		<li className={className}>
 			{disabled || !href ? (
 				<button
 					type="button"
-					role="menuitem"
 					disabled={disabled}
 					className="neo-sidenav-parent"
 				>
@@ -78,7 +76,6 @@ export const TopLinkItem = ({
 				<a
 					href={href}
 					aria-current={isActive}
-					role="menuitem"
 					ref={anchorRef}
 					className={clsx("neo-sidenav-parent", isActive && "active")}
 					onClick={onClick}

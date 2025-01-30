@@ -92,12 +92,10 @@ export const LinkItem = ({
 	};
 
 	return (
-		// biome-ignore lint/a11y/useValidAriaRole: using role="none" here removes the implied listitem role
-		<li {...rest} className={className} role="none">
+		<li {...rest} className={className}>
 			{disabled ? (
 				<Button
 					disabled={disabled}
-					role="menuitem"
 					ref={ref}
 					variant="tertiary"
 					style={itemStyle}
@@ -109,7 +107,6 @@ export const LinkItem = ({
 				<a
 					href={href}
 					aria-current={active}
-					role="menuitem"
 					onClick={handleOnClick}
 					onFocus={onFocus}
 					onMouseOver={onMouseOver}
