@@ -85,14 +85,13 @@ export const SideNavigation: FC<SideNavigationProps> &
 		>
 			<SideNavigationContext.Provider value={navContext}>
 				<div id={navId} className="neo-leftnav--wrapper">
-					<div
-						role="navigation"
+					<nav
 						className="neo-sidenav"
 						aria-label={ariaLabel}
 						{...rest}
 					>
 						<ul>{children}</ul>
-					</div>
+					</nav>
 				</div>
 			</SideNavigationContext.Provider>
 		</RovingTabIndexProvider>
