@@ -45,6 +45,7 @@ export interface BaseDrawerProps
 	onCancel?: (e: MouseEvent<HTMLButtonElement>) => void;
 	onApply?: (e: MouseEvent<HTMLButtonElement>) => void;
 	disableApplyButton?: boolean;
+	hasScrim?: boolean;
 	closeOnScrimClick?: boolean;
 	ref?: React.Ref<HTMLDivElement>;
 	open?: boolean;
@@ -140,6 +141,7 @@ const BasicDrawer = ({
 	onCancel,
 	onApply,
 	disableApplyButton,
+	hasScrim = true,
 	closeOnScrimClick,
 	open,
 	title,
@@ -161,6 +163,7 @@ const BasicDrawer = ({
 	onCancel?: (e: MouseEvent<HTMLButtonElement>) => void;
 	onApply?: (e: MouseEvent<HTMLButtonElement>) => void;
 	disableApplyButton: boolean;
+	hasScrim?: boolean;
 	closeOnScrimClick: boolean;
 	open: boolean;
 	title?: string | JSX.Element;
@@ -197,6 +200,7 @@ const BasicDrawer = ({
 						<div className="neo-drawer__header--left">
 							{onBack !== undefined && (
 								<IconButton
+									type="button"
 									onClick={onBack}
 									variant="tertiary"
 									shape="square"
@@ -211,6 +215,7 @@ const BasicDrawer = ({
 						<div className="neo-drawer__header--right">
 							{onClose !== undefined && onCancel === undefined && (
 								<IconButton
+									type="button"
 									onClick={onClose}
 									variant="tertiary"
 									shape="square"
@@ -227,7 +232,7 @@ const BasicDrawer = ({
 					{(onCancel || onApply) && (
 						<div className="neo-drawer__actions">
 							{onCancel && (
-								<Button onClick={onCancel} key="cancel-btn" variant="secondary">
+								<Button type="button" onClick={onCancel} key="cancel-btn" variant="secondary">
 									{translations?.cancel}
 								</Button>
 							)}
@@ -245,11 +250,12 @@ const BasicDrawer = ({
 					)}
 				</div>
 			</FocusLock>
-			{open && (
+			{hasScrim && open && (
 				<div
 					onKeyDown={onKeyDownScrimHandler}
 					onClick={closeOnScrimClick ? onClose : undefined}
 					className="neo-drawer__scrim"
+					data-testid="scrim"
 				/>
 			)}
 		</div>
