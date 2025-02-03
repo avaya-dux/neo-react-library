@@ -232,7 +232,12 @@ const BasicDrawer = ({
 					{(onCancel || onApply) && (
 						<div className="neo-drawer__actions">
 							{onCancel && (
-								<Button type="button" onClick={onCancel} key="cancel-btn" variant="secondary">
+								<Button
+									type="button"
+									onClick={onCancel}
+									key="cancel-btn"
+									variant="secondary"
+								>
 									{translations?.cancel}
 								</Button>
 							)}
