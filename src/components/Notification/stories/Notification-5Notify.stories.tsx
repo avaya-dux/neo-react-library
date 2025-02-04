@@ -34,6 +34,7 @@ export const Notify = () => {
 								type="alert"
 								header="Alert"
 								description="This is an alert."
+								ariaLive="assertive"
 							/>
 						),
 						width: "375px",
