@@ -19,6 +19,7 @@ type AtLeastOneProps =
 	| { header?: string; description: string };
 
 type CommonProps = {
+	ariaLive?: React.AriaAttributes["aria-live"];
 	showTimestamp?: boolean;
 	isElevated?: boolean;
 	isInline?: boolean;
