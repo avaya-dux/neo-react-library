@@ -11,13 +11,33 @@ export default {
 } as Meta<NonEventNotificationProps>;
 
 export const Notify = () => {
-	const { mounted, notify } = usePopup("notify-me");
+	const { mounted, notify, remove } = usePopup("notify-me");
 
 	useEffect(() => {
 		return () => {
 			removePopupManagerContainer();
 		};
 	}, []);
+
+	function renderNotification() {
+		const { id, position } = notify({
+			node: (
+				<Notification
+					actions={{
+						closable: {
+							onClick: () => remove(id, position),
+							"aria-label": "Click this button will close this notification",
+						},
+					}}
+					type="alert"
+					header="Alert"
+					description="This is an alert."
+					ariaLive="assertive"
+				/>
+			),
+			width: "375px",
+		});
+	}
 
 	return !mounted ? (
 		<div>not ready</div>
@@ -28,17 +48,7 @@ export const Notify = () => {
 				id="btn-notify"
 				variant="primary"
 				onClick={() => {
-					notify({
-						node: (
-							<Notification
-								type="alert"
-								header="Alert"
-								description="This is an alert."
-								ariaLive="assertive"
-							/>
-						),
-						width: "375px",
-					});
+					renderNotification();
 				}}
 			>
 				Notify Me
@@ -46,23 +56,3 @@ export const Notify = () => {
 		</div>
 	);
 };
-
-// notify = (options: NotificationOptions) => {
-//     logger.debug("notify in popup manager called with ", options.id);
-//     PopupManager.counter += 1;
-//     const id = options.id ?? PopupManager.counter;
-//     const position = options.position ?? "top";
-//     const notification = {
-//         id,
-//         node: options.node,
-//         position,
-//         width: options.width,
-//     };
-//     logger.debug(
-//         `notify: state before update at ${position} is `,
-//         this.state.positions[position],
-//     );
-//     this.addPopup(position, notification);
-//     logger.debug("notify returns ", { id, position });
-//     return { id, position };
-// };
