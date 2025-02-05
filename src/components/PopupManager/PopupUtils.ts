@@ -27,7 +27,7 @@ export const getContainerStyle = (
 		display: "flex",
 		flexDirection: "column",
 		flexWrap: position.includes("right") ? "wrap-reverse" : "wrap",
-		maxHeight: "25vh",
+		width: "fit-content",
 		margin,
 		top,
 		bottom,
