@@ -51,6 +51,12 @@ describe("Drawer", () => {
 		expect(results).toHaveNoViolations();
 	});
 
+	it("does not render scrim when hasScrim prop is set to false", async () => {
+		render(<Drawer title="drawer title" />);
+		render(<Drawer title="drawer title" hasScrim={false} />);
+		expect(screen.queryAllByTestId("scrim")).toHaveLength(1);
+	});
+
 	describe("`open` functionality", () => {
 		it("when `open={true}`, a Drawer's contents _are_ visible", () => {
 			render(<Drawer open={true} title="drawer title" />);

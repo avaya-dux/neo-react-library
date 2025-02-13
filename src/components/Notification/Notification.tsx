@@ -87,6 +87,7 @@ export const Notification = ({
 	showTimestamp = true,
 	isElevated = false,
 	isInline = false,
+	ariaLive = "polite",
 	occurences = 0,
 	locale = "en-US",
 	translations,
@@ -177,7 +178,7 @@ export const Notification = ({
 				isElevated && "neo-notification__elevated",
 			)}
 			role="alert"
-			aria-live="polite"
+			aria-live={ariaLive}
 		>
 			<div
 				role="img"

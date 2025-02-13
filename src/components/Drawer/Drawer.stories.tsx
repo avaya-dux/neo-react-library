@@ -63,6 +63,44 @@ export const InformativeDrawer: Story = {
 	},
 };
 
+export const DrawerWithoutScrim: Story = {
+	render: () => {
+		const [defaultDrawerOpen, setDefaultDrawerOpen] = useState(false);
+
+		return (
+			<main>
+				<section
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						marginBottom: "1rem",
+					}}
+				>
+					<Button onClick={() => setDefaultDrawerOpen(!defaultDrawerOpen)}>
+						Open Drawer Without Scrim
+					</Button>
+				</section>
+
+				<Drawer
+					open={defaultDrawerOpen}
+					onClose={() => setDefaultDrawerOpen(false)}
+					title="Title of Drawer"
+					hasScrim={false}
+				>
+					<div style={{ height: "100%", width: "100%" }}>
+						<p>This Drawer does not have a scrim</p>
+						<br />
+						<p>
+							Dismiss the Drawer by selecting the ‘Clear’ icon at the top right
+							next to the title.
+						</p>
+					</div>
+				</Drawer>
+			</main>
+		);
+	},
+};
+
 // This story showcases how to use the default Cancel and Apply buttons.
 export const WithDefaultButtons: Story = {
 	render: () => {
