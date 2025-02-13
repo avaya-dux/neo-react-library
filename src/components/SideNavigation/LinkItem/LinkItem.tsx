@@ -36,6 +36,7 @@ export const LinkItem = ({
 	onFocus,
 	onMouseOver,
 	parentHasIcon,
+	groupName,
 
 	...rest
 }: SideNavigationLinkItemProps) => {
@@ -91,6 +92,8 @@ export const LinkItem = ({
 		}
 	};
 
+	const formattedGroupName = groupName ? `${groupName} group` : "";
+
 	return (
 		<li {...rest} className={className}>
 			{disabled ? (
@@ -100,6 +103,7 @@ export const LinkItem = ({
 					variant="tertiary"
 					style={itemStyle}
 					tabIndex={tabIndex}
+					aria-label={`${formattedGroupName}-group ${children}`}
 				>
 					{children}
 				</Button>
@@ -107,6 +111,7 @@ export const LinkItem = ({
 				<a
 					href={href}
 					aria-current={active}
+					aria-label={`${formattedGroupName} ${children}`}
 					onClick={handleOnClick}
 					onFocus={onFocus}
 					onMouseOver={onMouseOver}
