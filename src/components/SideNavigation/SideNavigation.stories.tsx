@@ -166,29 +166,41 @@ export const MultipleLevels: Story = {
 						>
 							<SideNavigation.NavGroup groupName="Settings" />
 
-							<SideNavigation.LinkItem href="#applications">
+							<SideNavigation.LinkItem
+								href="#applications"
+								groupName="Settings"
+							>
 								Applications
 							</SideNavigation.LinkItem>
 
-							<SideNavigation.LinkItem href="#name">
+							<SideNavigation.LinkItem href="#name" groupName="Settings">
 								Name
 							</SideNavigation.LinkItem>
 
-							<SideNavigation.LinkItem href="#parameters">
+							<SideNavigation.LinkItem href="#parameters" groupName="Settings">
 								Parameters
 							</SideNavigation.LinkItem>
 
 							<SideNavigation.NavGroup groupName="Location Services" />
 
-							<SideNavigation.LinkItem href="#geography">
+							<SideNavigation.LinkItem
+								href="#geography"
+								groupName="Location Services"
+							>
 								Geography
 							</SideNavigation.LinkItem>
 
-							<SideNavigation.LinkItem href="#devices">
+							<SideNavigation.LinkItem
+								href="#devices"
+								groupName="Location Services"
+							>
 								Devices
 							</SideNavigation.LinkItem>
 
-							<SideNavigation.LinkItem href="#depth-chart">
+							<SideNavigation.LinkItem
+								href="#depth-chart"
+								groupName="Location Services"
+							>
 								Depth Chart
 							</SideNavigation.LinkItem>
 						</SideNavigation.NavCategory>

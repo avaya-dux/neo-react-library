@@ -18,6 +18,7 @@ export interface SideNavigationLinkItemProps
 	disabled?: boolean;
 	href: string;
 	parentHasIcon?: boolean;
+	groupName?: string;
 }
 
 export interface SideNavigationNavCategoryProps
