@@ -1,7 +1,8 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { vi } from "vitest";
+import { propsNotToForwardToDOM } from "./AppLayout";
 
 import * as AppLayoutStories from "./AppLayout.stories";
 
@@ -10,7 +11,7 @@ import * as AppLayoutStories from "./AppLayout.stories";
 Object.defineProperty(window, "matchMedia", {
 	writable: true,
 	value: vi.fn().mockImplementation((query) => ({
-		matches: false,
+		matches: true,
 		media: query,
 		onchange: null,
 		addListener: vi.fn(),
@@ -25,13 +26,30 @@ describe("AppLayout: ", () => {
 		let renderResult;
 
 		beforeEach(() => {
-			vi.spyOn(console, "warn").mockImplementation(() => null);
 			renderResult = render(<Default />);
 		});
 
 		it("renders ok", () => {
 			const { container } = renderResult;
 			expect(container).not.toBe(null);
+		});
+
+		it("does not forward invalid props to the DOM", () => {
+			const testIdStrings = ["header", "main", "footer"];
+
+			const appLayoutTopElement = screen.getByTestId("applayout-test-id");
+
+			propsNotToForwardToDOM.forEach((prop) => {
+				expect(appLayoutTopElement).not.toHaveAttribute(prop);
+
+				testIdStrings.forEach((testIdString) => {
+					expect(
+						within(appLayoutTopElement).getByTestId(
+							`applayout-${testIdString}-test-id`,
+						),
+					).not.toHaveAttribute(prop);
+				});
+			});
 		});
 
 		it("passes basic axe compliance", async () => {
@@ -44,7 +62,6 @@ describe("AppLayout: ", () => {
 		let renderResult;
 
 		beforeEach(() => {
-			vi.spyOn(console, "warn").mockImplementation(() => null);
 			renderResult = render(<HeaderAndContent />);
 		});
 
@@ -63,13 +80,51 @@ describe("AppLayout: ", () => {
 		let renderResult;
 
 		beforeEach(() => {
-			vi.spyOn(console, "warn").mockImplementation(() => null);
 			renderResult = render(<LeftPanelAndContent />);
 		});
 
 		it("renders ok", () => {
 			const { container } = renderResult;
 			expect(container).not.toBe(null);
+		});
+
+		it("does not forward invalid props to the DOM", () => {
+			const { getByTestId } = renderResult;
+
+			const appLayoutLeftPanelElement = getByTestId(
+				"applayout-leftpanel-test-id",
+			);
+			propsNotToForwardToDOM.forEach((prop) => {
+				expect(appLayoutLeftPanelElement).not.toHaveAttribute(prop);
+			});
+		});
+
+		it("passes basic axe compliance", async () => {
+			await axeTest(renderResult);
+		});
+	});
+
+	describe("Render RightPane and Content only example ", () => {
+		const { RightPanelAndContent } = composeStories(AppLayoutStories);
+		let renderResult;
+
+		beforeEach(() => {
+			renderResult = render(<RightPanelAndContent />);
+		});
+
+		it("renders ok", () => {
+			const { container } = renderResult;
+			expect(container).not.toBe(null);
+		});
+
+		it("does not forward invalid props to the DOM", () => {
+			const appLayoutRightPanelElement = screen.getByTestId(
+				"applayout-rightpanel-test-id",
+			);
+
+			propsNotToForwardToDOM.forEach((prop) => {
+				expect(appLayoutRightPanelElement).not.toHaveAttribute(prop);
+			});
 		});
 
 		it("passes basic axe compliance", async () => {
