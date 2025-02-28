@@ -63,5 +63,5 @@ function numberOfMenus(count: number) {
 }
 
 function twoGroups() {
-	cy.get("[role='group']").should("have.length", 2);
+	cy.get("[data-testid='dropdown-button']").should("have.length", 2);
 }

@@ -73,11 +73,11 @@ describe("Menu", () => {
 		});
 
 		it("menu can be opened and closed via keyboard functionality", async () => {
-			const { getByRole } = renderResult;
+			const { getByRole, getByTestId } = renderResult;
 			const button = getByRole("button");
 
 			// menu is hidden before tabbing to menu button and pressing key "space"
-			expect(getByRole("group")).not.toBeNull();
+			expect(getByTestId("dropdown-button")).not.toBeNull();
 			expect(button).not.toBeNull();
 			expect(() => getByRole("menu")).toThrow();
 
@@ -93,11 +93,11 @@ describe("Menu", () => {
 		});
 
 		it("menu can be opened and closed via mouse functionality", async () => {
-			const { getByRole } = renderResult;
+			const { getByRole, getByTestId } = renderResult;
 			const button = getByRole("button");
 
 			// menu is hidden before clicking menu button
-			expect(getByRole("group")).not.toBeNull();
+			expect(getByTestId("dropdown-button")).not.toBeNull();
 			expect(button).not.toBeNull();
 			expect(() => getByRole("menu")).toThrow();
 
@@ -266,7 +266,7 @@ describe("Menu", () => {
 					{defaultChildren}
 				</SimpleMenuTemplated>,
 			);
-			const menuRoot = screen.getByRole("group");
+			const menuRoot = screen.getByTestId("dropdown-button");
 			const menuButton = screen.getByRole("button");
 
 			expect(menuRoot).not.toHaveClass(activeClassName);
@@ -287,7 +287,7 @@ describe("Menu", () => {
 					{defaultChildren}
 				</SimpleMenuTemplated>,
 			);
-			const menuRoot = screen.getByRole("group");
+			const menuRoot = screen.getByTestId("dropdown-button");
 			const menuButton = screen.getByRole("button");
 
 			expect(menuRoot).not.toHaveClass(activeClassName);
