@@ -246,7 +246,6 @@ export const Searchable = () => {
 	return (
 		<Sheet title="Searchable Single and Multi Select" style={{ width: 400 }}>
 			<Select
-				className=""
 				helperText="Please select one"
 				label="Select a favorite food"
 				placeholder="Click to open"
