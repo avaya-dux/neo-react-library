@@ -129,7 +129,10 @@ export const SubMenu: FC<SubMenuProps> = ({
 
 	return (
 		<div id={id} {...rest} className={getClassNames(action)}>
-			{cloneElement(menuRootElement, buttonProps)}
+			{cloneElement(menuRootElement, {
+				...buttonProps,
+				"aria-expanded": isOpen,
+			})}
 			{isOpen &&
 				layoutChildren(
 					clonedChildren,

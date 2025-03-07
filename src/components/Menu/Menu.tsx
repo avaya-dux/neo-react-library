@@ -270,8 +270,8 @@ export const Menu = forwardRef(
 		const content = (
 			<div
 				className={getClassNames(isOpen, itemAlignment, className, openOnHover)}
-				role="group"
 				{...rest}
+				data-testid="dropdown-button"
 			>
 				<MenuContext.Provider value={menuContext}>
 					{menuButton}
