@@ -66,7 +66,7 @@ export const SubMenu: FC<SubMenuProps> = ({
 	const { children: btnChildren, isActive, hasFocus } = menuRootElement.props;
 	const subMenuButtonLabel = btnChildren?.toString() || "";
 	log.debug(
-		`debugging SubMenu: '${subMenuButtonLabel}' isActive=${isActive}, hasFocus=${hasFocus}, action = ${action}, counter=${counter}`,
+		`debugging SubMenu: '${subMenuButtonLabel}' isActive=${isActive}, hasFocus=${hasFocus}, action = ${action}, counter=${counter}`
 	);
 	const [isOpen, setOpen] = useState(false);
 	const [enterCounter, setEnterCounter] = useState(1);
@@ -81,13 +81,13 @@ export const SubMenu: FC<SubMenuProps> = ({
 
 	const menuIndexes: MenuIndexesType = useMemo(
 		() => buildMenuIndexes(clonedChildren),
-		[clonedChildren],
+		[clonedChildren]
 	);
 	const [cursor, setCursor] = useState(0);
 	const [cursorAction, setCursorAction] = useState<ActionType>("");
 
 	const handleSubMenuKeyDown: KeyboardEventHandler = (
-		e: React.KeyboardEvent<HTMLDivElement>,
+		e: React.KeyboardEvent<HTMLDivElement>
 	) => {
 		return handleKeyDownEvent(
 			e,
@@ -100,7 +100,7 @@ export const SubMenu: FC<SubMenuProps> = ({
 			setEnterCounter,
 			setOpen,
 			closeOnSelect,
-			subMenuButtonLabel,
+			subMenuButtonLabel
 		);
 	};
 	const handleSubMenuMouseMove: MouseEventHandler = (e: MouseEvent) => {
@@ -112,11 +112,11 @@ export const SubMenu: FC<SubMenuProps> = ({
 			cursorAction,
 			setCursorAction,
 			enterCounter,
-			setEnterCounter,
+			setEnterCounter
 		);
 	};
 	const handleSubMenuBlur: FocusEventHandler = (
-		e: FocusEvent<HTMLDivElement>,
+		e: FocusEvent<HTMLDivElement>
 	) => {
 		log.debug("handling submenu blur event");
 		return handleBlurEvent(e, true, setOpen);
@@ -129,7 +129,10 @@ export const SubMenu: FC<SubMenuProps> = ({
 
 	return (
 		<div id={id} {...rest} className={getClassNames(action)}>
-			{cloneElement(menuRootElement, buttonProps)}
+			{cloneElement(menuRootElement, {
+				...buttonProps,
+				"aria-expanded": isOpen,
+			})}
 			{isOpen &&
 				layoutChildren(
 					clonedChildren,
@@ -144,7 +147,7 @@ export const SubMenu: FC<SubMenuProps> = ({
 					setRootMenuOpen,
 					menuRef,
 					"submenu",
-					upwards,
+					upwards
 				)}
 		</div>
 	);
