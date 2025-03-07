@@ -301,3 +301,12 @@ div.neo-multiselect
 	margin-top: 0px;
 	margin-bottom: 4px;
 }
+
+div.neo-form-control
+	> div.neo-input-group
+	> div.neo-multiselect
+	> span.neo-multiselect-combo__header
+	> span.neo-multiselect__padded-container
+	> input:first-child {
+	width: 100%;
+}
