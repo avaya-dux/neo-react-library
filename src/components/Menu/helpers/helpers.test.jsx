@@ -340,6 +340,7 @@ describe("Menu helper methods", () => {
 			const subMenu = getByTestId(testId);
 			expect(subMenu).toMatchInlineSnapshot(`
         <div
+          aria-expanded="true"
           class="neo-dropdown__link neo-dropdown__link-active"
           data-testid="submenu-test-id"
           id="20"
@@ -369,6 +370,7 @@ describe("Menu helper methods", () => {
               id="2"
             >
               <div
+                aria-expanded="true"
                 class="neo-dropdown__link neo-dropdown__link-active"
                 data-testid="submenu-test-id"
                 id="20"
@@ -483,6 +485,7 @@ describe("Menu helper methods", () => {
 			const subMenu = getByTestId(testId);
 			expect(subMenu).toMatchInlineSnapshot(`
         <div
+          aria-expanded="false"
           class="neo-dropdown__link"
           data-testid="submenu-test-id"
           id="20"

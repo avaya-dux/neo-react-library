@@ -254,6 +254,7 @@ export const Searchable = () => {
 				onChange={(value) => {
 					setFavFood(value as string);
 				}}
+				style={{ width: "150px" }}
 			>
 				{fruitOptions}
 			</Select>

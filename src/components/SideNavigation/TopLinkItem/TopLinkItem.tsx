@@ -75,6 +75,7 @@ export const TopLinkItem = ({
 			) : (
 				<a
 					href={href}
+					aria-current={isActive}
 					ref={anchorRef}
 					className={clsx("neo-sidenav-parent", isActive && "active")}
 					onClick={onClick}
