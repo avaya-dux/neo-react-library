@@ -69,7 +69,7 @@ describe("Single Select Searchable Scrolling Tests", () => {
 		cy.get("span")
 			.first()
 			.type(
-				"{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}",
+				"{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}{downArrow}",
 			);
 		cy.get("[role='listbox']")
 			.first()

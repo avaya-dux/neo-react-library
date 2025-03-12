@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { UseComboboxReturnValue } from "downshift";
 import log from "loglevel";
-import { type FocusEvent, useContext, useEffect, useMemo } from "react";
+import { type FocusEvent, useContext } from "react";
 
 import { Keys } from "utils";
 
@@ -38,27 +38,16 @@ export const SingleSelectSearchable = () => {
 		reset,
 		selectItem,
 		highlightedIndex,
-		setInputValue,
 	} = downshiftProps as UseComboboxReturnValue<SelectOptionProps>;
 	const { "aria-expanded": toggleAriaExpanded, ...restToggleProps } =
 		getToggleButtonProps();
-	const { id, onKeyDown, ref, ...restInputProps } = getInputProps();
-
-	const selectedAsInputValue = useMemo(
-		() => selectedItems[0]?.children ?? "",
-		[selectedItems],
-	);
+	const { id, onKeyDown, ref, value, ...restInputProps } = getInputProps();
 
 	logger.debug({
 		value: restInputProps.value,
 		inputValue,
-		selected: selectedAsInputValue,
 		creatable,
 	});
-
-	useEffect(() => {
-		setInputValue(selectedAsInputValue);
-	}, [selectedAsInputValue, setInputValue]);
 
 	return (
 		<div
@@ -81,6 +70,7 @@ export const SingleSelectSearchable = () => {
 				<span className="neo-multiselect__padded-container">
 					<input
 						{...restInputProps}
+						value={value}
 						ref={ref}
 						className="neo-input"
 						disabled={disabled}
@@ -125,7 +115,7 @@ export const SingleSelectSearchable = () => {
 						id={id}
 						readOnly
 						tabIndex={-1}
-						value={selectedAsInputValue}
+						value={value}
 					/>
 				</span>
 			</span>
