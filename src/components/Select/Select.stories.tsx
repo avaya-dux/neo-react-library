@@ -605,6 +605,33 @@ export const SmallSelects = () => {
 	);
 };
 
+export const FlickerTest = () => {
+	const [isEditing, setIsEditing] = useState(false);
+
+	const numberOfSelects = [1, 2, 3, 4, 5];
+
+	return (
+		<div>
+			<Button onClick={() => setIsEditing(!isEditing)}>Toggle</Button>
+
+			{numberOfSelects.map((_, index) =>
+				isEditing ? (
+					<Select key={index} aria-label="df" searchable>
+						<SelectOption selected value={"Hello"}>
+							Hello
+						</SelectOption>
+						<SelectOption value={"Goodbye"}>Goodbye</SelectOption>
+					</Select>
+				) : (
+					<p key={index} style={{ height: 28, margin: "8px 13px" }}>
+						Hello View mode
+					</p>
+				),
+			)}
+		</div>
+	);
+};
+
 export const InlineCustomWidths = () => {
 	return (
 		<>

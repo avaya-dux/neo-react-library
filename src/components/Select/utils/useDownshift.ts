@@ -36,13 +36,16 @@ const DownshiftWithComboboxProps = (
 	return useCombobox({
 		items: filteredOptions,
 		id: selectId,
-		stateReducer: (_, actionAndChanges) => {
+		initialSelectedItem: selectedItems[0],
+		stateReducer: (state, actionAndChanges) => {
 			const { changes, type } = actionAndChanges;
 			const isOpen = changes.isOpen ? !(disabled || loading) : false;
 			const highlightedIndex = changes.selectedItem
 				? options.indexOf(changes.selectedItem)
 				: -1;
 			logger.debug({ isOpen, type, changes });
+			console.log(type, state);
+			console.log(changes);
 			switch (type) {
 				case useCombobox.stateChangeTypes.ToggleButtonClick:
 					setFilteredOptions([...options]);
