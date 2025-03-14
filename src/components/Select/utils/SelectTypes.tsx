@@ -39,5 +39,6 @@ export type SelectProps = {
 	collapse?: boolean;
 	value?: string | string[];
 	size?: SizeTypeSelect;
+	fitToContentWidth?: boolean;
 	style?: React.CSSProperties;
 } & LabelOrAriaLabelProps;

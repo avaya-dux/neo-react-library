@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import {
 	Children,
 	type ReactElement,
@@ -82,6 +83,7 @@ export const Select = (props: SelectProps) => {
 		value,
 		size = "md",
 		style,
+		fitToContentWidth,
 	} = props;
 
 	const generatedId = useId();
@@ -205,7 +207,10 @@ export const Select = (props: SelectProps) => {
 
 	return (
 		<NeoInputWrapper
-			wrapperClassName={className}
+			wrapperClassName={clsx(
+				fitToContentWidth && "neo--fit-content-width",
+				className,
+			)}
 			disabled={disabled || loading}
 			error={errorList.length > 0}
 			required={required}
