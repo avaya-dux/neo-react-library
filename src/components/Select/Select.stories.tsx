@@ -632,6 +632,27 @@ export const FlickerTest = () => {
 	);
 };
 
+export const FitToContentWidths = () => {
+	return (
+		<>
+			<Sheet
+				title="Width set to 'fit-content' via 'FitToContentWidth' prop"
+				style={{ width: 1000 }}
+			>
+				<Form inline>
+					<Select label="Select a favorite food" fitToContentWidth>
+						{fruitOptions}
+					</Select>
+
+					<Select label="Select a few nice foods" multiple fitToContentWidth>
+						{fruitOptions}
+					</Select>
+				</Form>
+			</Sheet>
+		</>
+	);
+};
+
 export const InlineCustomWidths = () => {
 	return (
 		<>
