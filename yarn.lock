@@ -5011,10 +5011,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.3.1.tgz#e8a83f1aa8b649377bb1fb5d7bac5cb90e784dfe"
   integrity sha512-EhcH/wvidPy1WeML3TtYFGR83UzjxeWRen9V402T8aUGYsCHOmfoisV3ZSg03gAFIbLq8TnWOJ0f4cALtnSEUg==
 
-"@types/node@22.13.9":
-  version "22.13.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.9.tgz#5d9a8f7a975a5bd3ef267352deb96fb13ec02eca"
-  integrity sha512-acBjXdRJ3A6Pb3tqnw9HZmyR3Fiol3aGxRCK1x3d+6CDAMjl7I649wpSd+yNURCjbOUGu9tqtLKnTGxmK6CyGw==
+"@types/node@22.13.10":
+  version "22.13.10"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.10.tgz#df9ea358c5ed991266becc3109dc2dc9125d77e4"
+  integrity sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==
   dependencies:
     undici-types "~6.20.0"
 
@@ -6929,10 +6929,19 @@ cli-spinners@^2.5.0:
   resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-2.9.0.tgz#5881d0ad96381e117bbe07ad91f2008fe6ffd8db"
   integrity sha512-4/aL9X3Wh0yiMQlE+eeRhWP6vclO3QRtw1JHKIT0FFUs5FjpFmESqtMvYZ0+lbzBw900b95mS0hohy+qn2VK/g==
 
-cli-table3@^0.6.1, cli-table3@~0.6.1:
+cli-table3@^0.6.1:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/cli-table3/-/cli-table3-0.6.3.tgz#61ab765aac156b52f222954ffc607a6f01dbeeb2"
   integrity sha512-w5Jac5SykAeZJKntOxJCrm63Eg5/4dhMWIcuTbo9rpE+brgaSZo0RuNJZeOyMgsUdhDeojvgyQLmjI+K50ZGyg==
+  dependencies:
+    string-width "^4.2.0"
+  optionalDependencies:
+    "@colors/colors" "1.5.0"
+
+cli-table3@~0.6.5:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/cli-table3/-/cli-table3-0.6.5.tgz#013b91351762739c16a9567c21a04632e449bf2f"
+  integrity sha512-+W/5efTR7y5HRD7gACw9yQjqMVvEMLBHmboM/kPWam+H+Hmyrgjh6YncVKK122YZkXrLudzTuAukUw9FnMf7IQ==
   dependencies:
     string-width "^4.2.0"
   optionalDependencies:
@@ -7389,10 +7398,10 @@ cypress-real-events@1.14.0:
   resolved "https://registry.yarnpkg.com/cypress-real-events/-/cypress-real-events-1.14.0.tgz#c5495db50a2bd247f4accde983af7153566945d3"
   integrity sha512-XmI8y3OZLh6cjRroPalzzS++iv+pGCaD9G9kfIbtspgv7GVsDt30dkZvSXfgZb4rAN+3pOkMVB7e0j4oXydW7Q==
 
-cypress@14.1.0:
-  version "14.1.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-14.1.0.tgz#b2dbe7bbc529dc0c93ffd4e0e9fa59763afba0b8"
-  integrity sha512-pPPj8Uu9NwjaaiXAEcjYZZmgsq6v9Zs1Nw6a+zRF+ANgYSNhH4S32SjFRsvMcuOHR/8dp4GBJhBPqIPSs+TxaA==
+cypress@14.2.0:
+  version "14.2.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-14.2.0.tgz#cd1a846385d4aae13b009dcaa2d88f5156cafcb1"
+  integrity sha512-u7fuc9JEpSYLOdu8mzZDZ/JWsHUzR5pc8i1TeSqMz/bafXp+6IweMAeyphsEJ6/13qbB6nwTEY1m+GUAp6GqCQ==
   dependencies:
     "@cypress/request" "^3.0.7"
     "@cypress/xvfb" "^1.2.4"
@@ -7407,7 +7416,7 @@ cypress@14.1.0:
     check-more-types "^2.24.0"
     ci-info "^4.1.0"
     cli-cursor "^3.1.0"
-    cli-table3 "~0.6.1"
+    cli-table3 "~0.6.5"
     commander "^6.2.1"
     common-tags "^1.8.0"
     dayjs "^1.10.4"
@@ -14070,10 +14079,10 @@ vite-plugin-dts@4.5.3:
     local-pkg "^1.0.0"
     magic-string "^0.30.17"
 
-vite@6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-6.2.1.tgz#ae865d4bb93a11844be1bc647c8b2dd1856ea180"
-  integrity sha512-n2GnqDb6XPhlt9B8olZPrgMD/es/Nd1RdChF6CBD/fHW6pUyUTt2sQW2fPRX5GiD9XEa6+8A6A4f2vT6pSsE7Q==
+vite@6.2.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-6.2.2.tgz#8098b12a6bfd95abe39399aa7d5faa56545d7a1a"
+  integrity sha512-yW7PeMM+LkDzc7CgJuRLMW2Jz0FxMOsVJ8Lv3gpgW9WLcb9cTW+121UEr1hvmfR7w3SegR5ItvYyzVz1vxNJgQ==
   dependencies:
     esbuild "^0.25.0"
     postcss "^8.5.3"
